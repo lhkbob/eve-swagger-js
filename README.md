@@ -22,7 +22,7 @@ However, it can still be depended on in NodeJS projects by including a dependenc
 
 ```json
 "dependencies": {
-   "eve_swagger_interface": "git://github.com/lhkbob/eve-swagger-js.git",
+   "eve_swagger_interface": "git://github.com/lhkbob/eve-swagger-js.git#v0.3.2",
 }
 ```
 
