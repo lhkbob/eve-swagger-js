@@ -1,5 +1,4 @@
 // Hand-written Promisified wrapper around generated ESI code.
-// FIXME make this export a function that takes a swagger URL base and a datasource.
 
 const Promise = require('bluebird');
 const Moment = require('moment');
@@ -25,17 +24,23 @@ module.exports = function(datasource, baseURL) {
      *
      * @param {Constructor} apiCtor One of the ESI.xyzApi constructor functions
      * @param {String} accessToken Optional Eve SSO access token for 
-     *  authentication 
+     *   authentication 
+     * @return A new Api instance
      */
     var newApi = function(apiCtor, accessToken) {
-        // FIXME take into account baseURL
+        var api;
         if (accessToken === undefined) {
-            return new apiCtor();
+            api = new apiCtor();
         } else {
-            var api = new apiCtor(new ESI.ApiClient());
+            api = new apiCtor(new ESI.ApiClient());
             api.apiClient.authentications['evesso'].accessToken = accessToken;
-            return api;
         }
+
+        // Hack in a new baseURL, which is hardcoded by the swagger-codegen
+        if (baseURL) {
+            api.apiClient.basePath = baseURL;
+        }
+        return api;
     };
 
     /**
@@ -46,6 +51,28 @@ module.exports = function(datasource, baseURL) {
         return { 'datasource': datasource };
     };
 
+    /**
+     * Invoke the function, `functionName`, on an Api instance to be created by
+     * `apiCtor` if an http request must actually be made. The function will be
+     * invoked with `args`, which must be an array of arguments as you'd pass
+     * to `Function.apply()`. If `accessToken` is not undefined it will be used
+     * as the EVE SSO token for authentication.
+     * 
+     * This will cache data and error responses, where the cache time is 
+     * based on the "expires" header in the http response. 
+     *
+     * `resolve` and `reject` must be Promise handler functions, as provided by
+     * the Promise constructor.
+     *
+     * @param {Constructor} apiCtor One of the ESI.xyzApi constructor functions
+     * @param {String} functionName The name of a function callable on the 
+     *   Api instance created by `apiCtor`.
+     * @param {Array} args Array of arguments to pass to ESI Api function call
+     * @param {String} accessToken Optional access token to use for 
+     *   authentication, pass `undefined` if not needed
+     * @param {Function} resolve Promise resolve handler
+     * @param {Function} reject Promise error resolution handler
+     */
     var getCachedRequest = function(apiCtor, functionName, args, accessToken, 
                                     resolve, reject) {
         var api = newApi(apiCtor, accessToken);
@@ -128,56 +155,56 @@ module.exports = function(datasource, baseURL) {
         }
     };
 
-    exports.getCorporation = function(id) {
+    /**
+     * Create a new Promise for invoking the ESI request described by the
+     * Api constructor, `apiCtor`, the function `functionName`, and arguments
+     * stored in the array, `args`. If `accessToken` is defined then it will
+     * be used for SSO authentication.
+     *
+     * @param {Constructor} apiCtor One of the ESI.xyzApi constructor functions
+     * @param {String} functionName The name of a function callable on the 
+     *   Api instance created by `apiCtor`.
+     * @param {Array} args Array of arguments to pass to ESI Api function call
+     * @param {String} accessToken Optional access token to use for 
+     *   authentication, pass `undefined` if not needed
+     * @return A new promise that resolves to the data returned by the request
+     */
+    var newRequest = function(apiCtor, functionName, args, accessToken) {
         return new Promise(function(resolve, reject) {
-            getCachedRequest(ESI.CorporationApi, 'getCorporationsCorporationId', 
-                             [id], undefined, resolve, reject);
+            getCachedRequest(apiCtor, functionName, args, accessToken, resolve, 
+                             reject);
         });
+    };
+
+    exports.getCorporation = function(id) {
+        return newRequest(ESI.CorporationApi, 
+                          'getCorporationsCorporationId', [id]);
     };
 
     exports.getCorporationAllianceHistory = function(id) {
-        return new Promise(function(resolve, reject) {
-            getCachedRequest(ESI.CorporationApi, 
-                             'getCorporationsCorporationIdAllianceHistory',
-                             [id], undefined, resolve, reject);
-        });
+        return newRequest(ESI.CorporationApi, 
+                          'getCorporationsCorporationIdAllianceHistory', [id]);
     };
 
     exports.getCorporationIcons = function(id) {
-        return new Promise(function(resolve, reject) {
-            getCachedRequest(ESI.CorporationApi, 
-                             'getCorporationsCorporationIdIcons',
-                             [id], undefined, resolve, reject);
-        });
+        return newRequest(ESI.CorporationApi, 
+                          'getCorporationsCorporationIdIcons', [id]);
     };
 
     exports.getCorporationMembers = function(id, accessToken) {
-        return new Promise(function(resolve, reject) {
-            getCachedRequest(ESI.CorporationApi, 
-                             'getCorporationsCorporationIdMembers',
-                             [id], accessToken, resolve, reject);
-        });
+        return newRequest(ESI.CorporationApi, 
+                          'getCorporationsCorporationIdMembers', 
+                          [id], accessToken);
     };
 
     exports.getCorporationRoles = function(id, accessToken) {
-        return new Promise(function(resolve, reject) {
-            getCachedRequest(ESI.CorporationApi, 
+        return newRequest(ESI.CorporationApi, 
                              'getCorporationsCorporationIdRoles',
-                             [id], accessToken, resolve, reject);
-        });
+                             [id], accessToken);
     };
 
     exports.getCorporationNames = function(ids) {
-        return new Promise(function(resolve, reject) {
-            // The ESI generated code just makes sure ids is not null/undefined,
-            // but the actual request mandates at least one ID so we add this
-            // pre-check to save time.
-            if (ids && !ids.length) {
-                throw "At least one corporation id must be provided";
-            }
-            getCachedRequest(ESI.CorporationApi, 'getCorporationsNames', [ids], 
-                             undefined, resolve, reject);
-        });
+        return newRequest(ESI.CorporationApi, 'getCorporationsNames', [ids]);
     };
 
     return exports;
