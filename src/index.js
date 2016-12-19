@@ -75,7 +75,6 @@ module.exports = function(datasource, baseURL) {
      */
     var getCachedRequest = function(apiCtor, functionName, args, accessToken, 
                                     resolve, reject) {
-        var api = newApi(apiCtor, accessToken);
         var _this = this;
         var key = functionName + '/' + args.join(',');
         if (accessToken) {
@@ -131,6 +130,7 @@ module.exports = function(datasource, baseURL) {
                 }
             });
             // Invoke ESI function
+            var api = newApi(apiCtor, accessToken);
             api[functionName].apply(api, fullArgs);
 
             // Set in cache after API call, in the event that the API function
