@@ -4,7 +4,7 @@
 const Promise = require('bluebird');
 const Moment = require('moment');
 const Cache = require('node-cache');
-const ESI = require('../gen/src');
+const ESI = require('../generated/src');
 
 module.exports = function(datasource, baseURL) {
     var exports = {};
