@@ -2,11 +2,12 @@
   "name": "eve_swagger_interface",
   "version": "0.3.2",
   "private": true,
-  "description": "An_OpenAPI_for_EVE_Online",
+  "description": "An OpenAPI for EVE Online",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --recursive gen/test"
+    "test": "mocha --recursive ./generated/test",
+    "gen-docs": "jsdoc --configure ./jsdoc.json"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -15,8 +16,9 @@
     "superagent": "1.7.1"
   },
   "devDependencies": {
+    "expect.js": "~0.3.1",
+    "jsdoc": "^3.4.3",
     "mocha": "~2.3.4",
-    "sinon": "1.17.3",
-    "expect.js": "~0.3.1"
+    "sinon": "1.17.3"
   }
 }
