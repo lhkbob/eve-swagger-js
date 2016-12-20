@@ -187,8 +187,8 @@ module.exports = function(datasource, baseURL) {
      */
     exports.newRequest = function(apiCtor, functionName, args, accessToken) {
         return new Promise(function(resolve, reject) {
-            getCachedRequest(apiCtor, functionName, args, accessToken, resolve, 
-                             reject);
+            getCachedRequest.apply(this, [apiCtor, functionName, args, 
+                                   accessToken, resolve, reject]);
         });
     };
 
