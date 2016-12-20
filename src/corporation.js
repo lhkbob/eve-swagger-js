@@ -23,11 +23,11 @@ module.exports = function(api) {
      *
      * ```
      * {
-     *   alliance_id: 434243723,
-     *   ceo_id: 180548812,
-     *   corporation_name: "C C P",
-     *   member_count: 656,
-     *   ticker: "-CCP-"
+     *   "alliance_id": 434243723,
+     *   "ceo_id": 180548812,
+     *   "corporation_name": "C C P",
+     *   "member_count": 656,
+     *   "ticker": "-CCP-"
      * }
      * ```
      *
