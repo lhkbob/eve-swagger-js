@@ -200,7 +200,7 @@ is automatically exposed when the
 
 <div class="description">
     <p>Get a corporation's public info from the ESI endpoint. This makes 
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id">`corporations/{id}/</a>.
+an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id"><code>corporations/{id}/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
 an object parsed from the response JSON model. An example value looks 
 like:</p>
@@ -372,7 +372,7 @@ like:</p>
 
 <div class="description">
     <p>Get a corporation's alliance history from the ESI endpoint. This 
-makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory">`corporations/{id}/alliancehistory/</a>.
+makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>corporations/{id}/alliancehistory/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
 an array parsed from the response JSON model. An example value looks 
 like:</p>
@@ -551,7 +551,7 @@ like:</p>
 
 <div class="description">
     <p>Get a corporation's icon URLs from the ESI endpoint. This makes 
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons">`corporations/{id}/icons/</a>.
+an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons"><code>corporations/{id}/icons/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
 an object parsed from the response JSON model. An example value looks 
 like:</p>
@@ -721,7 +721,7 @@ like:</p>
 
 <div class="description">
     <p>Get a corporation's member list from the ESI endpoint. This 
-makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members">`corporations/{id}/members/</a>.
+makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members"><code>corporations/{id}/members/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
 an array parsed from the response JSON model. An example value looks 
 like:</p>
@@ -910,7 +910,7 @@ like:</p>
 
     
 
-    <h4 class="name" id=".getNamesOf"><span class="type-signature">(static) </span>getNamesOf<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".getNamesOf"><span class="type-signature">(static) </span>getNamesOf<span class="signature">(ids)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
@@ -918,7 +918,7 @@ like:</p>
 
 <div class="description">
     <p>Get the names for a list of corporation ids from the ESI endpoint. 
-This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names">`corporations/names/</a>.
+This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names"><code>corporations/names/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
 an array parsed from the response JSON model. An example value looks 
 like:</p>
@@ -963,13 +963,13 @@ like:</p>
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>ids</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Integer</span>
+<span class="param-type">Array.&lt;Integer></span>
 
 
             
@@ -979,7 +979,7 @@ like:</p>
 
             
 
-            <td class="description last"><p>The corporation id</p></td>
+            <td class="description last"><p>The corporation ids to lookup</p></td>
         </tr>
 
     
@@ -1090,7 +1090,7 @@ like:</p>
 <div class="description">
     <p>Get a corporation's member list with roles for each character from 
 the ESI endpoint. This makes an HTTP GET request to 
-<a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles">`corporations/{id}/members/</a>.
+<a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles"><code>corporations/{id}/roles/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
 an array parsed from the response JSON model. An example value looks 
 like:</p>
@@ -1292,13 +1292,13 @@ like:</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 13:51:33 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 14:26:36 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>
