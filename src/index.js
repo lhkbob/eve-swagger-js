@@ -34,5 +34,14 @@ module.exports = function(datasource, baseURL) {
      */
     exports.corporation = require('./corporation')(internal);
 
+    /**
+     * This is an instance of `incursions` module configured to use the
+     * datasource and baseURL provided to the factory. This instance 
+     * uses a cache shared by the other exposed APIs members.
+     *
+     * @constant {module:incursions}
+     */
+    exports.incursions = require('./incursions')(internal);
+
     return exports;
 };
