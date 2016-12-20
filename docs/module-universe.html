@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: corporation</title>
+    <title>JSDoc: Module: universe</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: corporation</h1>
+    <h1 class="page-title">Module: universe</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Corporation">corporation</a>
+            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Universe">universe</a>
 ESI endpoints. You should not require this module directly, as it technically
 returns a factory function that requires an internal API. Instead an instance
 is automatically exposed when the 
@@ -135,7 +135,7 @@ is automatically exposed when the
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line1">line 1</a>
+        <a href="universe.js.html">universe.js</a>, <a href="universe.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -145,7 +145,9 @@ is automatically exposed when the
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#/Corporation">https://esi.tech.ccp.is/latest/#/Corporation</a></li>
+            <li><a href="https://esi.tech.ccp.is/latest/#/Universe">https://esi.tech.ccp.is/latest/#/Universe</a></li>
+        
+            <li><a href="https://esi.tech.ccp.is/latest/#/Planetary_Interaction">https://esi.tech.ccp.is/latest/#/Planetary_Interaction</a></li>
         </ul>
     </dd>
     
@@ -192,204 +194,32 @@ is automatically exposed when the
 
     
 
-    <h4 class="name" id=".get"><span class="type-signature">(static) </span>get<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".getNamesOf"><span class="type-signature">(static) </span>getNamesOf<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Get a corporation's public info from the ESI endpoint. This makes 
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id"><code>corporations/{id}/</code></a>.
+    <p>Look up the name and type of the list of ids the ESI endpoint. The ids 
+can correspond to characters, corporations, alliances, stations, solar 
+systems, constellations, regions, and types. This makes an
+HTTP POST request to <a href="https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names"><code>/universe/names/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
 an object parsed from the response JSON model. An example value looks 
 like:</p>
-<pre class="prettyprint source"><code>{
-  &quot;alliance_id&quot;: 434243723,
-  &quot;ceo_id&quot;: 180548812,
-  &quot;corporation_name&quot;: &quot;C C P&quot;,
-  &quot;member_count&quot;: 656,
-  &quot;ticker&quot;: &quot;-CCP-&quot;
-}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/CorporationApi.md#getCorporationsCorporationId">CorporationApi.getCorporationsCorporationId</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Integer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The corporation id</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line40">line 40</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id">https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>A Promise that resolves to the response of
-  the request</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".getAllianceHistory"><span class="type-signature">(static) </span>getAllianceHistory<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Get a corporation's alliance history from the ESI endpoint. This 
-makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>corporations/{id}/alliancehistory/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
 <pre class="prettyprint source"><code>[
   {
-    &quot;alliance&quot;: {
-      &quot;alliance_id&quot;: 99000006,
-      &quot;is_deleted&quot;: false
-    },
-    &quot;record_id&quot;: 23,
-    &quot;start_date&quot;: &quot;2016-10-25T14:46:00Z&quot;
+    &quot;category&quot;: &quot;character&quot;,
+    &quot;id&quot;: 95465499,
+    &quot;name&quot;: &quot;CCP Bartender&quot;
   },
   {
-    &quot;record_id&quot;: 1,
-    &quot;start_date&quot;: &quot;2015-07-06T20:56:00Z&quot;
+    &quot;category&quot;: &quot;solar_system&quot;,
+    &quot;id&quot;: 30000142,
+    &quot;name&quot;: &quot;Jita&quot;
   }
-]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/CorporationApi.md#getCorporationsCorporationIdAllianceHistory">CorporationApi.getCorporationsCorporationIdAllianceHistory</a>.</p>
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#postUniverseNames">UniverseApi.postUniverseNames</a>.</p>
 </div>
 
 
@@ -426,544 +256,6 @@ like:</p>
         <tr>
             
                 <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Integer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The corporation id</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line75">line 75</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory">https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>A Promise that resolves to the response of
-  the request</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".getIcons"><span class="type-signature">(static) </span>getIcons<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Get a corporation's icon URLs from the ESI endpoint. This makes 
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons"><code>corporations/{id}/icons/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an object parsed from the response JSON model. An example value looks 
-like:</p>
-<pre class="prettyprint source"><code>{
-  &quot;px128x128&quot;: &quot;https://imageserver.eveonline.com/Corporation/1000010_128.png&quot;,
-  &quot;px256x256&quot;: &quot;https://imageserver.eveonline.com/Corporation/1000010_256.png&quot;,
-  &quot;px64x64&quot;: &quot;https://imageserver.eveonline.com/Corporation/1000010_64.png&quot;
-}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/CorporationApi.md#getCorporationsCorporationIdIcons">CorporationApi.getCorporationsCorporationIdIcons</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Integer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The corporation id</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line101">line 101</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons">https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>A Promise that resolves to the response of
-  the request</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".getMembers"><span class="type-signature">(static) </span>getMembers<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Get a corporation's member list from the ESI endpoint. This 
-makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members"><code>corporations/{id}/members/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
-<pre class="prettyprint source"><code>[
-  {
-    &quot;character_id&quot;: 90000001
-  },
-  {
-    &quot;character_id&quot;: 90000002
-  }
-]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/CorporationApi.md#getCorporationsCorporationIdMembers">CorporationApi.getCorporationsCorporationIdMembers</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Integer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The corporation id</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>accessToken</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The SSO access token of a member of the
-  corporation, used to authenticate the request</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line132">line 132</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members">https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>A Promise that resolves to the response of
-  the request</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".getNamesOf"><span class="type-signature">(static) </span>getNamesOf<span class="signature">(ids)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Get the names for a list of corporation ids from the ESI endpoint. 
-This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names"><code>corporations/names/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
-<pre class="prettyprint source"><code>[
-  {
-    &quot;corporation_id&quot;: 1000171,
-    &quot;corporation_name&quot;: &quot;Republic University&quot;
-  }
-]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/CorporationApi.md#getCorporationsNames">CorporationApi.getCorporationsNames</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>ids</code></td>
             
 
             <td class="type">
@@ -979,7 +271,7 @@ like:</p>
 
             
 
-            <td class="description last"><p>The corporation ids to lookup</p></td>
+            <td class="description last"><p>The ids to look up</p></td>
         </tr>
 
     
@@ -1020,7 +312,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line195">line 195</a>
+        <a href="universe.js.html">universe.js</a>, <a href="universe.js.html#line182">line 182</a>
     </li></ul></dd>
     
 
@@ -1030,7 +322,7 @@ like:</p>
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names">https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names</a></li>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names">https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names</a></li>
         </ul>
     </dd>
     
@@ -1081,28 +373,23 @@ like:</p>
 
     
 
-    <h4 class="name" id=".getRoles"><span class="type-signature">(static) </span>getRoles<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".getSchematic"><span class="type-signature">(static) </span>getSchematic<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Get a corporation's member list with roles for each character from 
-the ESI endpoint. This makes an HTTP GET request to 
-<a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles"><code>corporations/{id}/roles/</code></a>.
+    <p>Get a planetary interaction schematic's public info from the ESI 
+endpoint. This makes an HTTP GET request to 
+<a href="https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_universe_schematics_schematic_id"><code>/universe/schematics/{id}/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
+an object parsed from the response JSON model. An example value looks 
 like:</p>
-<pre class="prettyprint source"><code>[
-  {
-    &quot;character_id&quot;: 1000171,
-    &quot;roles&quot;: [
-      &quot;Director&quot;,
-      &quot;Station_Manager&quot;
-    ]
-  }
-]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/CorporationApi.md#getCorporationsCorporationIdRoles">CorporationApi.getCorporationsCorporationIdRoles</a>.</p>
+<pre class="prettyprint source"><code>{
+  &quot;cycle_time&quot;: 1800,
+  &quot;schematic_name&quot;: &quot;Bacteria&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/PlanetaryInteractionApi.md#getUniverseSchematicsSchematicId">PlanetaryInteractionApi.getUniverseSchematicsSchematicId</a>.</p>
 </div>
 
 
@@ -1154,32 +441,7 @@ like:</p>
 
             
 
-            <td class="description last"><p>The corporation id</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>accessToken</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The SSO access token of a member of the
-  corporation that has the personnel manager or any other grantable
-  role, used to authenticate the request</p></td>
+            <td class="description last"><p>The schematic id to look up</p></td>
         </tr>
 
     
@@ -1220,7 +482,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line167">line 167</a>
+        <a href="universe.js.html">universe.js</a>, <a href="universe.js.html#line149">line 149</a>
     </li></ul></dd>
     
 
@@ -1230,7 +492,805 @@ like:</p>
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles">https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles</a></li>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_universe_schematics_schematic_id">https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_universe_schematics_schematic_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getStation"><span class="type-signature">(static) </span>getStation<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get station public info from the ESI endpoint. This makes an
+HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_stations_station_id"><code>/universe/stations/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;solar_system_id&quot;: 30000142,
+  &quot;station_name&quot;: &quot;Jita IV Moon IV - Caldari Navy Assembly Plant&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniverseStationsStationId">UniverseApi.getUniverseStationsStationId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The station id to look up</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="universe.js.html">universe.js</a>, <a href="universe.js.html#line80">line 80</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_stations_station_id">https://esi.tech.ccp.is/latest/#!/Universe/get_universe_stations_station_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getStructure"><span class="type-signature">(static) </span>getStructure<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get structure public info from the ESI endpoint. This makes an
+HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures_structure_id"><code>/universe/structures/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;name&quot;: &quot;V-3YG7 VI - The Capital&quot;,
+  &quot;solar_system_id&quot;: 30000142
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniverseStructuresStructureId">UniverseApi.getUniverseStructuresStructureId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The structure id to look up</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="universe.js.html">universe.js</a>, <a href="universe.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures_structure_id">https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures_structure_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getStructures"><span class="type-signature">(static) </span>getStructures<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get all structures in the universe from the ESI endpoint. This makes an
+HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures"><code>/universe/structures/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an array parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>[
+  1000000017013,
+  1000000025062
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniverseStructures">UniverseApi.getUniverseStructures</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="universe.js.html">universe.js</a>, <a href="universe.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures">https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getSystem"><span class="type-signature">(static) </span>getSystem<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get solar system public info from the ESI endpoint. This makes an
+HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_systems_system_id"><code>/universe/systems/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;solar_system_name&quot;: &quot;Jita&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniverseSystemsSystemId">UniverseApi.getUniverseSystemsSystemId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The solar system id to look up</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="universe.js.html">universe.js</a>, <a href="universe.js.html#line101">line 101</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_systems_system_id">https://esi.tech.ccp.is/latest/#!/Universe/get_universe_systems_system_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getType"><span class="type-signature">(static) </span>getType<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get a type's public info from the ESI endpoint. This makes an
+HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types_type_id"><code>/universe/types/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;category_id&quot;: 6,
+  &quot;graphic_id&quot;: 46,
+  &quot;group_id&quot;: 25,
+  &quot;type_description&quot;: &quot;The Rifter is a very powerful combat frigate and can easily tackle the best frigates out there. It has gone through many radical design phases since its inauguration during the Minmatar Rebellion. The Rifter has a wide variety of offensive capabilities, making it an unpredictable and deadly adversary.&quot;,
+  &quot;type_name&quot;: &quot;Rifter&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniverseTypesTypeId">UniverseApi.getUniverseTypesTypeId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type id to look up</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="universe.js.html">universe.js</a>, <a href="universe.js.html#line126">line 126</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types_type_id">https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types_type_id</a></li>
         </ul>
     </dd>
     

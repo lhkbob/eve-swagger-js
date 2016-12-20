@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: market.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: market.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A container for the [market](https://esi.tech.ccp.is/latest/#/Market)
+ * ESI endpoints. You should not require this module directly, as it technically
+ * returns a factory function that requires an internal API. Instead an instance
+ * is automatically exposed when the 
+ * {@link module:eve_swagger_interface} is loaded and configured.
+ *
+ * @see https://esi.tech.ccp.is/latest/#/Market
+ * @param api The internal API instance configured by the root module
+ * @module market
+ */
+ module.exports = function(api) {
+    var newRequest = api.newRequest;
+    var ESI = api.esi;
+
+    var exports = {};
+
+    /**
+     * Get prices for all items from the ESI endpoint. This makes an HTTP GET
+     * request to [`/markets/prices`](https://esi.tech.ccp.is/latest/#!/Market/get_markets_prices).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     * ```
+     * [
+     *   {
+     *     "adjusted_price": 306988.09,
+     *     "average_price": 306292.67,
+     *     "type_id": 32772
+     *   }
+     * ]
+     * ```
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Market/get_markets_prices
+     * @esi_link MarketApi.getMarketsPrices
+     */
+    exports.getPrices = function() {
+        return newRequest(ESI.MarketApi, 'getMarketsPrices', []);
+    };
+
+    /**
+     * Get historical market statistics for the given region from the ESI 
+     * endpoint. This makes an HTTP GET request to 
+     * [`/markets/{regionId}/history/`](https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_history).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     * ```
+     * [
+     *   {
+     *     "average": 5.25,
+     *     "date": "2015-05-01",
+     *     "highest": 5.27,
+     *     "lowest": 5.11,
+     *     "order_count": 2267,
+     *     "volume": 16276782035
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} regionId The region id to query
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_history
+     * @esi_link MarketApi.getMarketsRegionIdHistory
+     */
+    exports.getHistory = function(regionId) {
+        return newRequest(ESI.MarketApi, 'getMarketsRegionIdHistory', 
+                          [regionId]);
+    };
+
+    /**
+     * Get a list of market orders for the given region from the ESI 
+     * endpoint. This makes an HTTP GET request to 
+     * [`/markets/{regionId}/orders/`](https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     * ```
+     * [
+     *   {
+     *     "duration": 90,
+     *     "is_buy_order": false,
+     *     "issued": "2016-09-03T05:12:25Z",
+     *     "location_id": 60005599,
+     *     "min_volume": 1,
+     *     "order_id": 4623824223,
+     *     "price": 9.9,
+     *     "range": "region",
+     *     "type_id": 34,
+     *     "volume_remain": 1296000,
+     *     "volume_total": 2000000
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} regionId The region id to query
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders
+     * @esi_link MarketApi.getMarketsRegionIdOrders
+     */
+    exports.getHistory = function(regionId) {
+        return newRequest(ESI.MarketApi, 'getMarketsRegionIdOrders', 
+                          [regionId]);
+    };
+
+    return exports;
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 17:51:44 GMT-0600 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
