@@ -17,13 +17,22 @@ module.exports = function(datasource, baseURL) {
     var internal = require('./internal')(datasource, baseURL);
 
     /**
-     * This is an instance of Corporation module configured to use the
-     * datasource and baseURL provided to the factory. This module uses a
-     * cache shared by the other APIs exposed by the factory function.
+     * This is an instance of `alliance` module configured to use the
+     * datasource and baseURL provided to the factory. This instance 
+     * uses a cache shared by the other exposed APIs members.
      *
-     * @see module:corporation
+     * @constant {module:alliance}
      */
-    exports.Corporation = require('./corporation')(internal);
+    exports.alliance = require('./alliance')(internal);
+
+    /**
+     * This is an instance of `corporation` module configured to use the
+     * datasource and baseURL provided to the factory. This instance 
+     * uses a cache shared by the other exposed APIs members.
+     *
+     * @constant {module:corporation}
+     */
+    exports.corporation = require('./corporation')(internal);
 
     return exports;
 };
