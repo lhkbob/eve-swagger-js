@@ -15,7 +15,7 @@ exports.defineTags = function(dictionary) {
             var value = tag.value;
             var period = value.indexOf('.');
 
-            var url = '../generated/docs/';
+            var url = 'https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/';
             if (period >= 0) {
                 // Class and method name provided
                 var base = value.substring(0, period);
