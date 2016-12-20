@@ -16,7 +16,7 @@ module.exports = function(api) {
     var exports = {};
     /**
      * Get a corporation's public info from the ESI endpoint. This makes 
-     * an HTTP GET request to [`corporations/{id}/](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id).
+     * an HTTP GET request to [`corporations/{id}/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id).
      * The request is returned as an asynchronous Promise that resolves to 
      * an object parsed from the response JSON model. An example value looks 
      * like:
@@ -44,7 +44,7 @@ module.exports = function(api) {
 
     /**
      * Get a corporation's alliance history from the ESI endpoint. This 
-     * makes an HTTP GET request to [`corporations/{id}/alliancehistory/](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory).
+     * makes an HTTP GET request to [`corporations/{id}/alliancehistory/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory).
      * The request is returned as an asynchronous Promise that resolves to 
      * an array parsed from the response JSON model. An example value looks 
      * like:
@@ -79,7 +79,7 @@ module.exports = function(api) {
 
     /**
      * Get a corporation's icon URLs from the ESI endpoint. This makes 
-     * an HTTP GET request to [`corporations/{id}/icons/](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons).
+     * an HTTP GET request to [`corporations/{id}/icons/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons).
      * The request is returned as an asynchronous Promise that resolves to 
      * an object parsed from the response JSON model. An example value looks 
      * like:
@@ -105,7 +105,7 @@ module.exports = function(api) {
 
     /**
      * Get a corporation's member list from the ESI endpoint. This 
-     * makes an HTTP GET request to [`corporations/{id}/members/](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members).
+     * makes an HTTP GET request to [`corporations/{id}/members/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members).
      * The request is returned as an asynchronous Promise that resolves to 
      * an array parsed from the response JSON model. An example value looks 
      * like:
@@ -138,7 +138,7 @@ module.exports = function(api) {
     /**
      * Get a corporation's member list with roles for each character from 
      * the ESI endpoint. This makes an HTTP GET request to 
-     * [`corporations/{id}/members/](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles).
+     * [`corporations/{id}/roles/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles).
      * The request is returned as an asynchronous Promise that resolves to 
      * an array parsed from the response JSON model. An example value looks 
      * like:
@@ -172,7 +172,7 @@ module.exports = function(api) {
 
     /**
      * Get the names for a list of corporation ids from the ESI endpoint. 
-     * This makes an HTTP GET request to [`corporations/names/](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names).
+     * This makes an HTTP GET request to [`corporations/names/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names).
      * The request is returned as an asynchronous Promise that resolves to 
      * an array parsed from the response JSON model. An example value looks 
      * like:
@@ -186,7 +186,7 @@ module.exports = function(api) {
      * ]
      * ```
      *
-     * @param {Integer} id The corporation id
+     * @param {Array.<Integer>} ids The corporation ids to lookup
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names
