@@ -17,6 +17,14 @@ module.exports = function(datasource, baseURL) {
     var internal = require('./internal')(datasource, baseURL);
 
     /**
+     * The enumeration of language codes that functions that provide 
+     * localization support.
+     *
+     * @constant {Array.<String>}
+     */
+    exports.languages = [ 'de', 'en', 'fr', 'ja', 'ru', 'zh' ];
+
+    /**
      * This is an instance of `alliance` module configured to use the
      * options provided to the factory. This instance uses a cache shared by the 
      * other exposed APIs members.
