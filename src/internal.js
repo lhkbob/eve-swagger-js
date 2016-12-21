@@ -15,6 +15,9 @@ const Moment = require('moment');
 const Cache = require('node-cache');
 const ESI = require('../generated/src');
 
+// FIXME replace multiple parameters with an opts object, where we also have
+// additional options -> datasource, baseURL, defaultAccessToken, and 
+// language for the requests that support a particular localization
 module.exports = function(datasource, baseURL) {
     var exports = {};
     var cache = new Cache({useClones: false});
@@ -84,15 +87,19 @@ module.exports = function(datasource, baseURL) {
      * @param {String} functionName The name of a function callable on the 
      *   Api instance created by `apiCtor`.
      * @param {Array} args Array of arguments to pass to ESI Api function call
+     * @param {Object} opts Optional parameter object to pass to the ESI call
      * @param {String} accessToken Optional access token to use for 
      *   authentication, pass `undefined` if not needed
      * @param {Function} resolve Promise resolve handler
      * @param {Function} reject Promise error resolution handler
      */
-    var getCachedRequest = function(apiCtor, functionName, args, accessToken, 
-                                    resolve, reject) {
+    var getCachedRequest = function(apiCtor, functionName, args, opts, 
+                                    accessToken, resolve, reject) {
+        // Make options not null
+        opts = opts || {};
+
         var _this = this;
-        var key = functionName + '/' + args.join(',');
+        var key = functionName + '/' + args.join(',') + '+' + opts.toString();
         if (accessToken) {
             key = key + '@' + accessToken;
         }
@@ -103,7 +110,7 @@ module.exports = function(datasource, baseURL) {
 
             // Append the ESI callback function to the arguments array
             var fullArgs = args.slice(0);
-            fullArgs.push(defaultOpts());
+            fullArgs.push(Object.assign(defaultOpts(), opts));
             fullArgs.push(function(error, data, response) {
                 // Look up all collected resolve/reject handlers in the cache
                 var toNotify = cache.get(key);
@@ -124,6 +131,8 @@ module.exports = function(datasource, baseURL) {
                                                        [error.response.error]);
                         }
                     } else {
+                        // Make sure data isn't null
+                        data = data || {};
                         cache.set(key, {data: data}, timeout);
                         for (r in toNotify.onResolve) {
                             toNotify.onResolve[r].apply(_this, [data]);
@@ -187,7 +196,32 @@ module.exports = function(datasource, baseURL) {
      */
     exports.newRequest = function(apiCtor, functionName, args, accessToken) {
         return new Promise(function(resolve, reject) {
-            getCachedRequest.apply(this, [apiCtor, functionName, args, 
+            getCachedRequest.apply(this, [apiCtor, functionName, args, null,
+                                   accessToken, resolve, reject]);
+        });
+    };
+
+    /**
+     * Create a new Promise for invoking the ESI request described by the
+     * Api constructor, `apiCtor`, the function `functionName`, and arguments
+     * stored in the array, `args`. If `accessToken` is defined then it will
+     * be used for SSO authentication. The `opts` argument is presumed to be
+     * an object suitable for the API request, and will be modified to include
+     * additional default properties configured by the factory.
+     *
+     * @param {Constructor} apiCtor One of the ESI.xyzApi constructor functions
+     * @param {String} functionName The name of a function callable on the 
+     *   Api instance created by `apiCtor`.
+     * @param {Array} args Array of arguments to pass to ESI Api function call
+     * @param {Object} opts Optional parameters object to pass to the ESI call
+     * @param {String} accessToken Optional access token to use for 
+     *   authentication, pass `undefined` if not needed
+     * @return A new promise that resolves to the data returned by the request
+     */
+    exports.newRequestOpt = function(apiCtor, functionName, args, opts, 
+                                     accessToken) {
+        return new Promise(function(resolve, reject) {
+            getCachedRequest.apply(this, [apiCtor, functionName, args, opts,
                                    accessToken, resolve, reject]);
         });
     };
