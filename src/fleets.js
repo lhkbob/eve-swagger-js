@@ -11,6 +11,7 @@
  */
  module.exports = function(api) {
     var newRequest = api.newRequest;
+    var newRequestOpt = api.newRequestOpt;
     var ESI = api.esi;
 
     var exports = {};
@@ -243,14 +244,21 @@
      *
      * @param {Integer} id The fleet id to query
      * @param {String} accessToken The access token to authenticate the request
+     * @param {String} language Localization code for the response, which will
+     *   override the default configured localization
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
+     * @see module:eve_swagger_interface.languages
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_wings
      * @esi_link FleetsApi.getFleetsFleetIdWings
      */
-    exports.getWings = function(id, accessToken) {
-        return newRequest(ESI.FleetsApi, 'getFleetsFleetIdWings', 
-                          [id], accessToken);
+    exports.getWings = function(id, accessToken, language) {
+        var opts = {};
+        if (language) {
+            opts.acceptLanguage = language;
+        }
+        return newRequestOpt(ESI.FleetsApi, 'getFleetsFleetIdWings', 
+                             [id], opts, accessToken);
     };
 
     /**

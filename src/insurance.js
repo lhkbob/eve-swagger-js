@@ -11,6 +11,7 @@
  */
  module.exports = function(api) {
     var newRequest = api.newRequest;
+    var newRequestOpt = api.newRequestOpt;
     var ESI = api.esi;
 
     var exports = {};
@@ -35,13 +36,20 @@
      *   }
      * ]
      * ```
+     * @param {String} language Optional localization code for the response,
+     *   which overrides the default language.
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
+     * @see module:eve_swagger_interface.languages
      * @see https://esi.tech.ccp.is/latest/#!/Incursions/get_insurance_prices
      * @esi_link InsuranceApi.getInsurancePrices
      */
-    exports.getPrices = function() {
-        return newRequest(ESI.InsuranceApi, 'getInsurancePrices', []);
+    exports.getPrices = function(language) {
+        var opts = {};
+        if (language) {
+            opts.acceptLanguage = language;
+        }
+        return newRequestOpt(ESI.InsuranceApi, 'getInsurancePrices', [], opts);
     };
 
     return exports;
