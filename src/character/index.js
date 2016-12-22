@@ -12,6 +12,7 @@
  * @see https://esi.tech.ccp.is/latest/#/Character
  * @see https://esi.tech.cpp.is/latest/#/Assets
  * @see https://esi.tech.cpp.is/latest/#/Bookmarks
+ * @see https://esi.tech.cpp.is/latest/#/Clones
  * @param api The internal API instance configured by the root module
  * @module character
  */
@@ -251,8 +252,53 @@
      * @see https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks_folders
      * @esi_link BookmarksApi.getCharactersCharacterIdBookmarksFolders
      */
-    exports.getBookmarks = function(id, accessToken) {
-        return newRequest(ESI.BookmarksApi, 'getCharactersCharacterIdBookmarks', 
+    exports.getBookmarkFolders = function(id, accessToken) {
+        return newRequest(ESI.BookmarksApi, 
+                          'getCharactersCharacterIdBookmarksFolders', 
+                          [id], accessToken);
+    };
+
+    /**
+     * Get a character's clones state from the ESI endpoint. This makes 
+     * an HTTP GET request to [`characters/{id}/clones/`](https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_clones).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "home_location": {
+     *     "location_id": 1021348135816,
+     *    "location_type": "structure"
+     *   },
+     *   "jump_clones": [
+     *     {
+     *       "implants": [
+     *         22118
+     *       ],
+     *       "location_id": 60003463,
+     *       "location_type": "station"
+     *     },
+     *     {
+     *       "implants": [],
+     *      "location_id": 1021348135816,
+     *      "location_type": "structure"
+     *     }
+     *   ]
+     * }
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optiona; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_clones
+     * @esi_link ClonesApi.getCharactersCharacterIdClones
+     */
+    exports.getClones = function(id, accessToken) {
+        return newRequest(ESI.ClonesApi, 'getCharactersCharacterIdClones', 
                           [id], accessToken);
     };
 
