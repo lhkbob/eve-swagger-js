@@ -15,7 +15,7 @@
  * @param {String} opts.datasource The datasource for the ESI endpoint, defaults 
  *   to `'tranquility'`
  * @param {String} opts.language The default language locale code, defaults to
- *   `null`, but can be set to one of {@link eve_swagger_interface:languages languages}.
+ *   `en`, but can be set to one of {@link eve_swagger_interface:languages languages}.
  *   Requests that support localization provide a language parameter so it can 
  *   be overridden per request.
  * 
@@ -28,7 +28,14 @@ module.exports = function(opts) {
 
     /**
      * The enumeration of language codes that functions that provide 
-     * localization support.
+     * localization support. Supported language codes are:
+     *
+     * 1. `'de'`
+     * 2. `'en'`
+     * 3. `'fr'`
+     * 4. `'ja'`
+     * 5. `'ru'`
+     * 6. `'zh'`
      *
      * @constant {Array.<String>}
      */
