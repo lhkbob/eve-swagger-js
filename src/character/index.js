@@ -21,6 +21,15 @@
     var exports = {};
 
     /**
+     * This is an instance of `mail` module configured to use the
+     * options provided to the factory. This instance uses a cache shared by the
+     * other exposed APIs members.
+     *
+     * @constant {module:character/mail}
+     */
+    exports.mail = require('./mail')(api);
+
+    /**
      * Get the names for a list of character ids from the ESI endpoint. 
      * This makes an HTTP GET request to [`characters/names/`](https://esi.tech.ccp.is/latest/#!/Character/get_characters_names).
      * The request is returned as an asynchronous Promise that resolves to 
