@@ -7,7 +7,7 @@
  *
  * @see https://esi.tech.ccp.is/latest/#/Fleets
  * @param api The internal API instance configured by the root module
- * @module insurance
+ * @module fleets
  */
  module.exports = function(api) {
     var newRequest = api.newRequest;
