@@ -1,0 +1,2784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: fleets</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: fleets</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Fleets">fleets</a>
+ESI endpoints. You should not require this module directly, as it technically
+returns a factory function that requires an internal API. Instead an instance
+is automatically exposed when the 
+<a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is loaded and configured.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>api</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The internal API instance configured by the root module</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#/Fleets">https://esi.tech.ccp.is/latest/#/Fleets</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".addSquad"><span class="type-signature">(static) </span>addSquad<span class="signature">(fleetId, wingId, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Add a new sequad to a fleet's wing with the ESI endpoint. This makes
+an HTTP POST request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads"><code>/fleets/{fleetId}/wings/{wingId}/squads</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;squad_id&quot;: 123
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#postFleetsFleetIdWingsWingIdSquads">FleetsApi.postFleetsFleetIdWingsWingIdSquads</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fleetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id to modify</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>wingId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The wing id the squad is added to</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line370">line 370</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads">https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".addWing"><span class="type-signature">(static) </span>addWing<span class="signature">(fleetId, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Add a new wing to a fleet with the ESI endpoint. This makes
+an HTTP POST request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings"><code>/fleets/{id}/wings/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;wing_id&quot;: 123
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#postFleetsFleetIdWings">FleetsApi.postFleetsFleetIdWings</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fleetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id to modify</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line295">line 295</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings">https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".get"><span class="type-signature">(static) </span>get<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get fleet details from the ESI endpoint. This makes
+an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id"><code>/fleets/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;is_free_move&quot;: false,
+  &quot;is_registered&quot;: false,
+  &quot;is_voice_enabled&quot;: false,
+  &quot;motd&quot;: &quot;This is an &lt;b>awesome&lt;/b> fleet!&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#getFleetsFleetId">FleetsApi.getFleetsFleetId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id to look up</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id">https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getMembers"><span class="type-signature">(static) </span>getMembers<span class="signature">(id, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get fleet members from the ESI endpoint. This makes
+an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_members"><code>/fleets/{id}/members/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an array parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;character_id&quot;: 93265215,
+    &quot;join_time&quot;: &quot;2016-04-29T12:34:56Z&quot;,
+    &quot;role&quot;: &quot;squad_commander&quot;,
+    &quot;role_name&quot;: &quot;Squad Commander (Boss)&quot;,
+    &quot;ship_type_id&quot;: 33328,
+    &quot;solar_system_id&quot;: 30003729,
+    &quot;squad_id&quot;: 3129411261968,
+    &quot;station_id&quot;: 61000180,
+    &quot;takes_fleet_warp&quot;: true,
+    &quot;wing_id&quot;: 2073711261968
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#getFleetsFleetIdMembers">FleetsApi.getFleetsFleetIdMembers</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id to look up</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line102">line 102</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_members">https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_members</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getWings"><span class="type-signature">(static) </span>getWings<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get information on all wings in a fleet with the ESI endpoint. This makes
+an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_wings"><code>/fleets/{id}/wings/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an array parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;id&quot;: 2073711261968,
+    &quot;name&quot;: &quot;Wing 1&quot;,
+    &quot;squads&quot;: [
+      {
+        &quot;id&quot;: 3129411261968,
+       &quot;name&quot;: &quot;Squad 1&quot;
+      }
+    ]
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#getFleetsFleetIdWings">FleetsApi.getFleetsFleetIdWings</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id to query</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @param {String} language Localization code for the response, which will
+  override the default configured localization</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line265">line 265</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="module-eve_swagger_interface.html#.languages">module:eve_swagger_interface.languages</a></li>
+        
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_wings">https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_wings</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".inviteMember"><span class="type-signature">(static) </span>inviteMember<span class="signature">(id, invitation, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Send a fleet invite to a character with the ESI endpoint. This makes
+an HTTP POST request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_members"><code>/fleets/{id}/members/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an empty object on success. An example <code>invitation</code> value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;character_id&quot;: 0,
+  &quot;role&quot;: &quot;fleet_commander&quot;,
+  &quot;squad_id&quot;: 0,
+  &quot;wing_id&quot;: 0
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#postFleetsFleetIdMembers">FleetsApi.postFleetsFleetIdMembers</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id the character is invited to</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>invitation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Simple object specifying character to invite,
+  and their fleet position on accept</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line131">line 131</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_members">https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_members</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".kickMember"><span class="type-signature">(static) </span>kickMember<span class="signature">(fleetId, memberId, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Remove a member from a fleet with the ESI endpoint. This makes
+an HTTP DELETE request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_members_member_id"><code>/fleets/{fleetId}/members/{memberId}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an empty object on success.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#deleteFleetsFleetIdMembersMemberId">FleetsApi.deleteFleetsFleetIdMembersMemberId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fleetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id the member is removed from</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>memberId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The member character id to kick</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line151">line 151</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_members_member_id">https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_members_member_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".removeSquad"><span class="type-signature">(static) </span>removeSquad<span class="signature">(fleetId, squadId, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Delete a squad from a fleet with the ESI endpoint. This makes
+an HTTP DELETE request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_squads_squad_id"><code>/fleets/{fleetId}/squads/{squadId}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an empty object on success.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#deleteFleetsFleetIdSquadsSquadId">FleetsApi.deleteFleetsFleetIdSquadsSquadId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fleetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id the squad is removed from</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>squadId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The squad to remove</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line199">line 199</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_squads_squad_id">https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_squads_squad_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".removeWing"><span class="type-signature">(static) </span>removeWing<span class="signature">(fleetId, wingId, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Remove a wing from a fleet with the ESI endpoint. This makes
+an HTTP DELETE request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_wings_wing_id"><code>/fleets/{fleetId}/wings/{wingId}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an empty object on success.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#deleteFleetsFleetIdWingsWingId">FleetsApi.deleteFleetsFleetIdWingsWingId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fleetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id to modify</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>wingId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The wing id to remove from the fleet</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line315">line 315</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_wings_wing_id">https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_wings_wing_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".update"><span class="type-signature">(static) </span>update<span class="signature">(id, newSettings, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Update fleet details with the ESI endpoint. This makes
+an HTTP PUT request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id"><code>/fleets/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an empty object on success. An example <code>newSettings</code> value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;is_free_move&quot;: true,
+  &quot;motd&quot;: &quot;string&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#putFleetsFleetId">FleetsApi.putFleetsFleetId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id to modify</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>newSettings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Simple object of properties to modify</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line67">line 67</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id">https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".updateMember"><span class="type-signature">(static) </span>updateMember<span class="signature">(fleetId, memberId, moveOrder, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Move or update a member in a fleet with the ESI endpoint. This makes
+an HTTP PUT request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_members_member_id"><code>/fleets/{fleetId}/members/{memberId}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an empty object on success. An example move order looks like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;role&quot;: &quot;fleet_commander&quot;,
+  &quot;squad_id&quot;: 0,
+  &quot;wing_id&quot;: 0
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#putFleetsFleetIdMembersMemberId">FleetsApi.putFleetsFleetIdMembersMemberId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fleetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id the member is in</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>memberId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The member character id to update</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>moveOrder</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A simple object describing the move or update</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line179">line 179</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_members_member_id">https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_members_member_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".updateSquad"><span class="type-signature">(static) </span>updateSquad<span class="signature">(fleetId, squadId, updates, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Rename a squad in a fleet with the ESI endpoint. This makes
+an HTTP PUT request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_squads_squad_id"><code>/fleets/{fleetId}/squads/{squadId}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an empty object on success. The update parameters are stored in an 
+object like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;name&quot;: &quot;string&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#putFleetsFleetIdSquadsSquadId">FleetsApi.putFleetsFleetIdSquadsSquadId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fleetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id the squad is in</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>squadId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The squad to update</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>updates</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The update options for the squad</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line227">line 227</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_squads_squad_id">https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_squads_squad_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".updateWing"><span class="type-signature">(static) </span>updateWing<span class="signature">(fleetId, swingId, updates, accessToken)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Rename a wing in a fleet with the ESI endpoint. This makes
+an HTTP PUT request to <a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_wings_wing_id"><code>/fleets/{fleetId}/wings/{wingId}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an empty object on success. The update parameters are stored in an 
+object like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;name&quot;: &quot;string&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#putFleetsFleetIdWingsWingId">FleetsApi.putFleetsFleetIdWingsWingId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fleetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id the wing is in</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>swingId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The wing to update</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>updates</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The update options for the wing</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate 
+  the request. If not provided, the default access token provided to the 
+  factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
+  the request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fleets.js.html">fleets.js</a>, <a href="fleets.js.html#line343">line 343</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_wings_wing_id">https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_wings_wing_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 22 2016 17:48:34 GMT-0600 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

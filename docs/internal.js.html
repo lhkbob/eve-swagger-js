@@ -43,13 +43,30 @@ const Moment = require('moment');
 const Cache = require('node-cache');
 const ESI = require('../generated/src');
 
-module.exports = function(datasource, baseURL) {
-    var exports = {};
+module.exports = function(opts) {
     var cache = new Cache({useClones: false});
+    var defaultBaseURL = 'https://esi.tech.ccp.is/latest';
 
-    if (datasource === undefined) {
-        datasource = 'tranquility';
+    opts = opts || {};
+    if (opts.datasource === undefined) {
+        opts.datasource = 'tranquility';
     }
+    if (opts.language === undefined) {
+        opts.language = 'en';
+    }
+    if (opts.baseURL === undefined) {
+        opts.baseURL = defaultBaseURL;
+    }
+    if (opts.accessToken === undefined) {
+        opts.accessToken = null;
+    }
+
+    var exports = {};
+
+    /**
+     * The options provided to the factory function.
+     */
+    exports.opts = opts;
 
     /**
      * The swagger-codegen ESI module.
@@ -72,27 +89,31 @@ module.exports = function(datasource, baseURL) {
      */
     var newApi = function(apiCtor, accessToken) {
         var api;
-        if (accessToken === undefined) {
-            api = new apiCtor();
-        } else {
+        accessToken = accessToken || opts.accessToken;
+        if (accessToken) {
             api = new apiCtor(new ESI.ApiClient());
             api.apiClient.authentications['evesso'].accessToken = accessToken;
+        } else {
+            api = new apiCtor();
         }
 
-        // Hack in a new baseURL, which is hardcoded by the swagger-codegen
-        if (baseURL) {
-            api.apiClient.basePath = baseURL;
+        // Hack in a new baseURL, which is hardcoded in the swagger-codegen lib
+        if (opts.baseURL != defaultBaseURL) {
+            api.apiClient.basePath = opts.baseURL.replace(/\/+$/, '');
         }
         return api;
     };
 
     /**
      * Create a new object holding the default options/parameters for an ESI 
-     * request. Currently this configures the data source to tranquility.
+     * request. Currently this configures the data source to tranquility and 
+     * sets the default accept language.
+     *
      * @return {Object} The default options
      */
     var defaultOpts = function() {
-        return { 'datasource': datasource };
+        return { 'datasource': opts.datasource, 
+                 'acceptLanguage': opts.language };
     };
 
     /**
@@ -112,15 +133,19 @@ module.exports = function(datasource, baseURL) {
      * @param {String} functionName The name of a function callable on the 
      *   Api instance created by `apiCtor`.
      * @param {Array} args Array of arguments to pass to ESI Api function call
+     * @param {Object} opts Optional parameter object to pass to the ESI call
      * @param {String} accessToken Optional access token to use for 
      *   authentication, pass `undefined` if not needed
      * @param {Function} resolve Promise resolve handler
      * @param {Function} reject Promise error resolution handler
      */
-    var getCachedRequest = function(apiCtor, functionName, args, accessToken, 
-                                    resolve, reject) {
+    var getCachedRequest = function(apiCtor, functionName, args, opts, 
+                                    accessToken, resolve, reject) {
+        // Make options not null
+        opts = opts || {};
+
         var _this = this;
-        var key = functionName + '/' + args.join(',');
+        var key = functionName + '/' + args.join(',') + '+' + opts.toString();
         if (accessToken) {
             key = key + '@' + accessToken;
         }
@@ -131,7 +156,7 @@ module.exports = function(datasource, baseURL) {
 
             // Append the ESI callback function to the arguments array
             var fullArgs = args.slice(0);
-            fullArgs.push(defaultOpts());
+            fullArgs.push(Object.assign(defaultOpts(), opts));
             fullArgs.push(function(error, data, response) {
                 // Look up all collected resolve/reject handlers in the cache
                 var toNotify = cache.get(key);
@@ -217,7 +242,32 @@ module.exports = function(datasource, baseURL) {
      */
     exports.newRequest = function(apiCtor, functionName, args, accessToken) {
         return new Promise(function(resolve, reject) {
-            getCachedRequest.apply(this, [apiCtor, functionName, args, 
+            getCachedRequest.apply(this, [apiCtor, functionName, args, null,
+                                   accessToken, resolve, reject]);
+        });
+    };
+
+    /**
+     * Create a new Promise for invoking the ESI request described by the
+     * Api constructor, `apiCtor`, the function `functionName`, and arguments
+     * stored in the array, `args`. If `accessToken` is defined then it will
+     * be used for SSO authentication. The `opts` argument is presumed to be
+     * an object suitable for the API request, and will be modified to include
+     * additional default properties configured by the factory.
+     *
+     * @param {Constructor} apiCtor One of the ESI.xyzApi constructor functions
+     * @param {String} functionName The name of a function callable on the 
+     *   Api instance created by `apiCtor`.
+     * @param {Array} args Array of arguments to pass to ESI Api function call
+     * @param {Object} opts Optional parameters object to pass to the ESI call
+     * @param {String} accessToken Optional access token to use for 
+     *   authentication, pass `undefined` if not needed
+     * @return A new promise that resolves to the data returned by the request
+     */
+    exports.newRequestOpt = function(apiCtor, functionName, args, opts, 
+                                     accessToken) {
+        return new Promise(function(resolve, reject) {
+            getCachedRequest.apply(this, [apiCtor, functionName, args, opts,
                                    accessToken, resolve, reject]);
         });
     };
@@ -234,13 +284,13 @@ module.exports = function(datasource, baseURL) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 17:51:44 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 22 2016 17:48:34 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -199,133 +199,6 @@ is automatically exposed when the
 
 
 <div class="description">
-    <p>Get sovereignty structure information from the ESI endpoint. This makes an 
-HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures"><code>/sovereignty/structures</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
-<pre class="prettyprint source"><code>[
-  {
-    &quot;alliance_id&quot;: 498125261,
-    &quot;solar_system_id&quot;: 30000570,
-    &quot;structure_id&quot;: 1018253388776,
-    &quot;structure_type_id&quot;: 32226,
-    &quot;vulnerability_occupancy_level&quot;: 2,
-    &quot;vulnerable_end_time&quot;: &quot;2016-10-29T05:30:00Z&quot;,
-    &quot;vulnerable_start_time&quot;: &quot;2016-10-28T20:30:00Z&quot;
-  }
-]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/SovereigntyApi.md#getSovereigntyStructures">SovereigntyApi.getSovereigntyStructures</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sovereignty.js.html">sovereignty.js</a>, <a href="sovereignty.js.html#line72">line 72</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures">https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>A Promise that resolves to the response of
-  the request</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".getCampaigns"><span class="type-signature">(static) </span>getCampaigns<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
     <p>Get sovereignty campaign information from the ESI endpoint. This makes an 
 HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_campaigns"><code>/sovereignty/campaigns</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
@@ -444,6 +317,133 @@ like:</p>
 
 
         
+            
+
+    
+
+    <h4 class="name" id=".getCampaigns"><span class="type-signature">(static) </span>getCampaigns<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get sovereignty structure information from the ESI endpoint. This makes an 
+HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures"><code>/sovereignty/structures</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an array parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;alliance_id&quot;: 498125261,
+    &quot;solar_system_id&quot;: 30000570,
+    &quot;structure_id&quot;: 1018253388776,
+    &quot;structure_type_id&quot;: 32226,
+    &quot;vulnerability_occupancy_level&quot;: 2,
+    &quot;vulnerable_end_time&quot;: &quot;2016-10-29T05:30:00Z&quot;,
+    &quot;vulnerable_start_time&quot;: &quot;2016-10-28T20:30:00Z&quot;
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/SovereigntyApi.md#getSovereigntyStructures">SovereigntyApi.getSovereigntyStructures</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="sovereignty.js.html">sovereignty.js</a>, <a href="sovereignty.js.html#line72">line 72</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures">https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
     
 
     
@@ -459,13 +459,13 @@ like:</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 17:51:44 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 22 2016 17:48:34 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

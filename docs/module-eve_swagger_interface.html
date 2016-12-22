@@ -83,7 +83,7 @@ instantiations of each sub-module for the ESI groups.</p></div>
 
         <tr>
             
-                <td class="name"><code>datasource</code></td>
+                <td class="name"><code>opts.accessToken</code></td>
             
 
             <td class="type">
@@ -99,14 +99,16 @@ instantiations of each sub-module for the ESI groups.</p></div>
 
             
 
-            <td class="description last"><p>The datasource string, defaults to <code>'tranquility'</code></p></td>
+            <td class="description last"><p>The default access token to provide on all
+  requests; methods that require authentication provide an optional access 
+  token argument so that it can be overridden per request. Defaults to <code>null</code></p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>baseURL</code></td>
+                <td class="name"><code>opts.baseURL</code></td>
             
 
             <td class="type">
@@ -122,8 +124,58 @@ instantiations of each sub-module for the ESI groups.</p></div>
 
             
 
-            <td class="description last"><p>The base URL of the ESI Swagger endpoint, which
-  defaults to <code>'https://esi.tech.ccp.is/latest'</code></p></td>
+            <td class="description last"><p>The base URL of the ESI endpoint, which defaults
+  to <code>'https://esi.tech.ccp.is/latest'</code></p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.datasource</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The datasource for the ESI endpoint, defaults 
+  to <code>'tranquility'</code></p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.language</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The default language locale code, defaults to
+  <code>en</code>, but can be set to one of <code>languages</code>.
+  Requests that support localization provide a language parameter so it can 
+  be overridden per request.</p></td>
         </tr>
 
     
@@ -265,7 +317,81 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line26">line 26</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".character"><span class="type-signature">(static, constant) </span>character<span class="type-signature"> :<a href="module-character.html">module:character</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>This is an instance of <code>character</code> module configured to use the
+options provided to the factory. This instance uses a cache shared by the 
+other exposed APIs members.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="module-character.html">module:character</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line60">line 60</a>
     </li></ul></dd>
     
 
@@ -339,7 +465,7 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line35">line 35</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line69">line 69</a>
     </li></ul></dd>
     
 
@@ -357,7 +483,7 @@ other exposed APIs members.</p>
 
         
             
-<h4 class="name" id=".fleets"><span class="type-signature">(static, constant) </span>fleets<span class="type-signature"> :module:fleets</span></h4>
+<h4 class="name" id=".fleets"><span class="type-signature">(static, constant) </span>fleets<span class="type-signature"> :<a href="module-fleets.html">module:fleets</a></span></h4>
 
 
 
@@ -374,7 +500,7 @@ other exposed APIs members.</p>
     <ul>
         <li>
             
-<span class="param-type">module:fleets</span>
+<span class="param-type"><a href="module-fleets.html">module:fleets</a></span>
 
 
         </li>
@@ -413,7 +539,7 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line44">line 44</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -487,7 +613,7 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line53">line 53</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -561,7 +687,7 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line62">line 62</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -635,7 +761,162 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line71">line 71</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line105">line 105</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".killmails"><span class="type-signature">(static, constant) </span>killmails<span class="type-signature"> :<a href="module-killmails.html">module:killmails</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>This is an instance of <code>killmails</code> module configured to use the
+options provided to the factory. This instance uses a cache shared by the
+other exposed APIs members.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="module-killmails.html">module:killmails</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line114">line 114</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".languages"><span class="type-signature">(static, constant) </span>languages<span class="type-signature"> :Array.&lt;String></span></h4>
+
+
+
+
+<div class="description">
+    <p>The enumeration of language codes that functions that provide 
+localization support. Supported language codes are:</p>
+<ol>
+<li><code>'de'</code></li>
+<li><code>'en'</code></li>
+<li><code>'fr'</code></li>
+<li><code>'ja'</code></li>
+<li><code>'ru'</code></li>
+<li><code>'zh'</code></li>
+</ol>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;String></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -709,7 +990,81 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line80">line 80</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line123">line 123</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".search"><span class="type-signature">(static, constant) </span>search<span class="type-signature"> :<a href="module-search.html">module:search</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>This is an instance of <code>search</code> module configured to use the
+options provided to the factory. This instance uses a cache shared by the
+other exposed APIs members.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="module-search.html">module:search</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line132">line 132</a>
     </li></ul></dd>
     
 
@@ -783,7 +1138,7 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line89">line 89</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line141">line 141</a>
     </li></ul></dd>
     
 
@@ -857,7 +1212,7 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line98">line 98</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line150">line 150</a>
     </li></ul></dd>
     
 
@@ -931,7 +1286,7 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line107">line 107</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line159">line 159</a>
     </li></ul></dd>
     
 
@@ -965,13 +1320,13 @@ other exposed APIs members.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 17:51:44 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 22 2016 17:48:34 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

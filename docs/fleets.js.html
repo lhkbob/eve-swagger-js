@@ -35,10 +35,11 @@
  *
  * @see https://esi.tech.ccp.is/latest/#/Fleets
  * @param api The internal API instance configured by the root module
- * @module insurance
+ * @module fleets
  */
  module.exports = function(api) {
     var newRequest = api.newRequest;
+    var newRequestOpt = api.newRequestOpt;
     var ESI = api.esi;
 
     var exports = {};
@@ -58,7 +59,9 @@
      * }
      * ```
      * @param {Integer} id The fleet id to look up
-     * @param {String} accessToken The access token to authenticate the request
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id
@@ -82,8 +85,9 @@
      * ```
      * @param {Integer} id The fleet id to modify
      * @param {Object} newSettings Simple object of properties to modify
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id
      * @esi_link FleetsApi.putFleetsFleetId
@@ -116,8 +120,9 @@
      * ]
      * ```
      * @param {Integer} id The fleet id to look up
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_members
      * @esi_link FleetsApi.getFleetsFleetIdMembers
@@ -144,8 +149,9 @@
      * @param {Integer} id The fleet id the character is invited to
      * @param {Object} invitation Simple object specifying character to invite,
      *   and their fleet position on accept
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_members
      * @esi_link FleetsApi.postFleetsFleetIdMembers
@@ -163,8 +169,9 @@
      *
      * @param {Integer} fleetId The fleet id the member is removed from
      * @param {Integer} memberId The member character id to kick
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_members_member_id
      * @esi_link FleetsApi.deleteFleetsFleetIdMembersMemberId
@@ -190,8 +197,9 @@
      * @param {Integer} fleetId The fleet id the member is in
      * @param {Integer} memberId The member character id to update
      * @param {Object} moveOrder A simple object describing the move or update
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_members_member_id
      * @esi_link FleetsApi.putFleetsFleetIdMembersMemberId
@@ -209,8 +217,9 @@
      *
      * @param {Integer} fleetId The fleet id the squad is removed from
      * @param {Integer} squadId The squad to remove
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_squads_squad_id
      * @esi_link FleetsApi.deleteFleetsFleetIdSquadsSquadId
@@ -236,8 +245,9 @@
      * @param {Integer} fleetId The fleet id the squad is in
      * @param {Integer} squadId The squad to update
      * @param {Object} updates The update options for the squad
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_squads_squad_id
      * @esi_link FleetsApi.putFleetsFleetIdSquadsSquadId
@@ -270,15 +280,23 @@
      * ```
      *
      * @param {Integer} id The fleet id to query
-     * @param {String} accessToken The access token to authenticate the request
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @param {String} language Localization code for the response, which will
+     *   override the default configured localization
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
+     * @see module:eve_swagger_interface.languages
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_wings
      * @esi_link FleetsApi.getFleetsFleetIdWings
      */
-    exports.getWings = function(id, accessToken) {
-        return newRequest(ESI.FleetsApi, 'getFleetsFleetIdWings', 
-                          [id], accessToken);
+    exports.getWings = function(id, accessToken, language) {
+        var opts = {};
+        if (language) {
+            opts.acceptLanguage = language;
+        }
+        return newRequestOpt(ESI.FleetsApi, 'getFleetsFleetIdWings', 
+                             [id], opts, accessToken);
     };
 
     /**
@@ -295,8 +313,9 @@
      * ```
      *
      * @param {Integer} fleetId The fleet id to modify
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings
      * @esi_link FleetsApi.postFleetsFleetIdWings
@@ -314,8 +333,9 @@
      *
      * @param {Integer} fleetId The fleet id to modify
      * @param {Integer} wingId The wing id to remove from the fleet
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_wings_wing_id
      * @esi_link FleetsApi.deleteFleetsFleetIdWingsWingId
@@ -341,8 +361,9 @@
      * @param {Integer} fleetId The fleet id the wing is in
      * @param {Integer} swingId The wing to update
      * @param {Object} updates The update options for the wing
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_wings_wing_id
      * @esi_link FleetsApi.putFleetsFleetIdWingsWingId
@@ -367,8 +388,9 @@
      *
      * @param {Integer} fleetId The fleet id to modify
      * @param {Integer} wingId The wing id the squad is added to
-     * @param {String} accessToken The access token to authenticate the request
-     * @return {external:Promise} A Promise that resolves to the response of
+     * @param {String} accessToken Optional; the access token to authenticate 
+     *   the request. If not provided, the default access token provided to the 
+     *   factory is used; if that was not set then this request will fail.     * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads
      * @esi_link FleetsApi.postFleetsFleetIdWingsWingIdSquads
@@ -390,13 +412,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 17:51:44 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 22 2016 17:48:34 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

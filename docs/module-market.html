@@ -192,15 +192,202 @@ is automatically exposed when the
 
     
 
-    <h4 class="name" id=".getHistory"><span class="type-signature">(static) </span>getHistory<span class="signature">(regionId)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".getBuyOrdersFor"><span class="type-signature">(static) </span>getBuyOrdersFor<span class="signature">(regionId, typeId)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Get historical market statistics for the given region from the ESI 
-endpoint. This makes an HTTP GET request to 
+    <p>Get all buy market orders in the given region for the particular item
+type. This is equivalent to <a href="module-market.html#.getOrdersFor"><code>getOrdersFor</code></a> 
+except that the returned orders are limited to the <code>'buy'</code> type.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsRegionIdOrders">MarketApi.getMarketsRegionIdOrders</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>regionId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The region id to query</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>typeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type id to query from the market</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line170">line 170</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders">https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getHistory"><span class="type-signature">(static) </span>getHistory<span class="signature">(regionId, typeId)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get historical market statistics for the given region and item from the
+ESI endpoint. This makes an HTTP GET request to 
 <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_history"><code>/markets/{regionId}/history/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
 an array parsed from the response JSON model. An example value looks 
@@ -270,6 +457,30 @@ like:</p>
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>typeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type of item on the market the statistics
+  refer to</p></td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -307,7 +518,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="market.js.html">market.js</a>, <a href="market.js.html#line68">line 68</a>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -368,15 +579,16 @@ like:</p>
 
     
 
-    <h4 class="name" id=".getHistory"><span class="type-signature">(static) </span>getHistory<span class="signature">(regionId)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".getOrders"><span class="type-signature">(static) </span>getOrders<span class="signature">(regionId, page)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Get a list of market orders for the given region from the ESI 
-endpoint. This makes an HTTP GET request to 
+    <p>Get a page of market orders in the given region from the ESI 
+endpoint. Orders include buy and sell, and are for any item type. 
+This makes an HTTP GET request to 
 <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>/markets/{regionId}/orders/</code></a>.
 The request is returned as an asynchronous Promise that resolves to 
 an array parsed from the response JSON model. An example value looks 
@@ -395,7 +607,11 @@ like:</p>
     &quot;volume_remain&quot;: 1296000,
     &quot;volume_total&quot;: 2000000
   }
-]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsRegionIdOrders">MarketApi.getMarketsRegionIdOrders</a>.</p>
+]</code></pre><p>This orders request is paginated, with <code>page</code> starting at 1 for the first
+page of data. If <code>page</code> is not provided, it defaults to 1. Per the 
+ESI documentation, both buy and sell orders are reported with this 
+request.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsRegionIdOrders">MarketApi.getMarketsRegionIdOrders</a>.</p>
 </div>
 
 
@@ -451,6 +667,29 @@ like:</p>
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>page</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The page of orders that is requested</p></td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -488,7 +727,213 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="market.js.html">market.js</a>, <a href="market.js.html#line104">line 104</a>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line113">line 113</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders">https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getOrdersFor"><span class="type-signature">(static) </span>getOrdersFor<span class="signature">(regionId, typeId)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get all market orders in the given region for the given item type from 
+the ESI endpoint. Orders include buy and sell, but are restricted to the
+selected type id. This makes an HTTP GET request to 
+<a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>/markets/{regionId}/orders/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an array parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;duration&quot;: 90,
+    &quot;is_buy_order&quot;: false,
+    &quot;issued&quot;: &quot;2016-09-03T05:12:25Z&quot;,
+    &quot;location_id&quot;: 60005599,
+    &quot;min_volume&quot;: 1,
+    &quot;order_id&quot;: 4623824223,
+    &quot;price&quot;: 9.9,
+    &quot;range&quot;: &quot;region&quot;,
+    &quot;type_id&quot;: 34,
+    &quot;volume_remain&quot;: 1296000,
+    &quot;volume_total&quot;: 2000000
+  }
+]</code></pre><p>This orders request is not paginated because it is restricted to a type.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsRegionIdOrders">MarketApi.getMarketsRegionIdOrders</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>regionId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The region id to query</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>typeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type id to query from the market</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line153">line 153</a>
     </li></ul></dd>
     
 
@@ -611,7 +1056,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="market.js.html">market.js</a>, <a href="market.js.html#line38">line 38</a>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -622,6 +1067,193 @@ like:</p>
     <dd class="tag-see">
         <ul>
             <li><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_prices">https://esi.tech.ccp.is/latest/#!/Market/get_markets_prices</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getSellOrdersFor"><span class="type-signature">(static) </span>getSellOrdersFor<span class="signature">(regionId, typeId)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get all sell market orders in the given region for the particular item
+type. This is equivalent to <a href="module-market.html#.getOrdersFor"><code>getOrdersFor</code></a> 
+except that the returned orders are limited to the <code>'sell'</code> type.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsRegionIdOrders">MarketApi.getMarketsRegionIdOrders</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>regionId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The region id to query</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>typeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type id to query from the market</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line187">line 187</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders">https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders</a></li>
         </ul>
     </dd>
     
@@ -683,13 +1315,13 @@ like:</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 17:51:44 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 22 2016 17:48:34 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -34,15 +34,40 @@
  *
  * The factory function returns an object with properties that expose 
  * instantiations of each sub-module for the ESI groups.
- *
- * @param {String} datasource The datasource string, defaults to `'tranquility'`
- * @param {String} baseURL The base URL of the ESI Swagger endpoint, which
- *   defaults to `'https://esi.tech.ccp.is/latest'`
+ * 
+ * @param {String} opts.accessToken The default access token to provide on all
+ *   requests; methods that require authentication provide an optional access 
+ *   token argument so that it can be overridden per request. Defaults to `null`
+ * @param {String} opts.baseURL The base URL of the ESI endpoint, which defaults
+ *   to `'https://esi.tech.ccp.is/latest'`
+ * @param {String} opts.datasource The datasource for the ESI endpoint, defaults 
+ *   to `'tranquility'`
+ * @param {String} opts.language The default language locale code, defaults to
+ *   `en`, but can be set to one of {@link eve_swagger_interface:languages languages}.
+ *   Requests that support localization provide a language parameter so it can 
+ *   be overridden per request.
+ * 
  * @module eve_swagger_interface
  */
-module.exports = function(datasource, baseURL) {
+module.exports = function(opts) {
+    var internal = require('./internal')(opts);
+
     var exports = {};
-    var internal = require('./internal')(datasource, baseURL);
+
+    /**
+     * The enumeration of language codes that functions that provide 
+     * localization support. Supported language codes are:
+     *
+     * 1. `'de'`
+     * 2. `'en'`
+     * 3. `'fr'`
+     * 4. `'ja'`
+     * 5. `'ru'`
+     * 6. `'zh'`
+     *
+     * @constant {Array.&lt;String>}
+     */
+    exports.languages = [ 'de', 'en', 'fr', 'ja', 'ru', 'zh' ];
 
     /**
      * This is an instance of `alliance` module configured to use the
@@ -52,6 +77,15 @@ module.exports = function(datasource, baseURL) {
      * @constant {module:alliance}
      */
     exports.alliance = require('./alliance')(internal);
+
+    /**
+     * This is an instance of `character` module configured to use the
+     * options provided to the factory. This instance uses a cache shared by the 
+     * other exposed APIs members.
+     *
+     * @constant {module:character}
+     */
+    exports.character = require('./character')(internal);
 
     /**
      * This is an instance of `corporation` module configured to use the
@@ -99,6 +133,15 @@ module.exports = function(datasource, baseURL) {
     exports.insurance = require('./insurance')(internal);
 
     /**
+     * This is an instance of `killmails` module configured to use the
+     * options provided to the factory. This instance uses a cache shared by the
+     * other exposed APIs members.
+     *
+     * @constant {module:killmails}
+     */
+    exports.killmails = require('./killmails')(internal);
+
+    /**
      * This is an instance of `market` module configured to use the
      * options provided to the factory. This instance uses a cache shared by the
      * other exposed APIs members.
@@ -106,6 +149,15 @@ module.exports = function(datasource, baseURL) {
      * @constant {module:market}
      */
     exports.market = require('./market')(internal);
+
+    /**
+     * This is an instance of `search` module configured to use the
+     * options provided to the factory. This instance uses a cache shared by the
+     * other exposed APIs members.
+     *
+     * @constant {module:search}
+     */
+    exports.search = require('./search')(internal);
 
     /**
      * This is an instance of `sovereignty` module configured to use the
@@ -146,13 +198,13 @@ module.exports = function(datasource, baseURL) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 17:51:44 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 22 2016 17:48:34 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>
