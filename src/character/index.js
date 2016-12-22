@@ -11,6 +11,7 @@
  *
  * @see https://esi.tech.ccp.is/latest/#/Character
  * @see https://esi.tech.cpp.is/latest/#/Assets
+ * @see https://esi.tech.cpp.is/latest/#/Bookmarks
  * @param api The internal API instance configured by the root module
  * @module character
  */
@@ -179,6 +180,79 @@
      */
     exports.getAssets = function(id, accessToken) {
         return newRequest(ESI.AssetsApi, 'getCharactersCharacterIdAssets', 
+                          [id], accessToken);
+    };
+
+    /**
+     * Get a character's personal bookmarks from the ESI endpoint. This makes 
+     * an HTTP GET request to [`characters/{id}/bookmarks/`](https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "bookmark_id": 32,
+     *     "create_date": "2016-08-09T11:57:47Z",
+     *     "creator_id": 90000001,
+     *     "folder_id": 5,
+     *     "memo": "aoeu ( Citadel )",
+     *     "note": "",
+     *     "owner_id": 90000001,
+     *     "target": {
+     *       "item": {
+     *         "item_id": 1000000012668,
+     *        "type_id": 35832
+     *       },
+     *       "location_id": 30000005
+     *     }
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optiona; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks
+     * @esi_link BookmarksApi.getCharactersCharacterIdBookmarks
+     */
+    exports.getBookmarks = function(id, accessToken) {
+        return newRequest(ESI.BookmarksApi, 'getCharactersCharacterIdBookmarks', 
+                          [id], accessToken);
+    };
+
+    /**
+     * Get a character's bookmark folders from the ESI endpoint. This makes 
+     * an HTTP GET request to [`characters/{id}/bookmarks/folders/`](https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks_folders).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "folder_id": 5,
+     *     "name": "Icecream",
+     *     "owner_id": 90000001
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optiona; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks_folders
+     * @esi_link BookmarksApi.getCharactersCharacterIdBookmarksFolders
+     */
+    exports.getBookmarks = function(id, accessToken) {
+        return newRequest(ESI.BookmarksApi, 'getCharactersCharacterIdBookmarks', 
                           [id], accessToken);
     };
 
