@@ -6,15 +6,25 @@
  *
  * The factory function returns an object with properties that expose 
  * instantiations of each sub-module for the ESI groups.
- *
- * @param {String} datasource The datasource string, defaults to `'tranquility'`
- * @param {String} baseURL The base URL of the ESI Swagger endpoint, which
- *   defaults to `'https://esi.tech.ccp.is/latest'`
+ * 
+ * @param {String} opts.accessToken The default access token to provide on all
+ *   requests; methods that require authentication provide an optional access 
+ *   token argument so that it can be overridden per request. Defaults to `null`
+ * @param {String} opts.baseURL The base URL of the ESI endpoint, which defaults
+ *   to `'https://esi.tech.ccp.is/latest'`
+ * @param {String} opts.datasource The datasource for the ESI endpoint, defaults 
+ *   to `'tranquility'`
+ * @param {String} opts.language The default language locale code, defaults to
+ *   `null`, but can be set to one of {@link eve_swagger_interface:languages languages}.
+ *   Requests that support localization provide a language parameter so it can 
+ *   be overridden per request.
+ * 
  * @module eve_swagger_interface
  */
-module.exports = function(datasource, baseURL) {
+module.exports = function(opts) {
+    var internal = require('./internal')(opts);
+
     var exports = {};
-    var internal = require('./internal')(datasource, baseURL);
 
     /**
      * The enumeration of language codes that functions that provide 

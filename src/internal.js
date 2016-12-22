@@ -15,16 +15,30 @@ const Moment = require('moment');
 const Cache = require('node-cache');
 const ESI = require('../generated/src');
 
-// FIXME replace multiple parameters with an opts object, where we also have
-// additional options -> datasource, baseURL, defaultAccessToken, and 
-// language for the requests that support a particular localization
-module.exports = function(datasource, baseURL) {
-    var exports = {};
+module.exports = function(opts) {
     var cache = new Cache({useClones: false});
+    var defaultBaseURL = 'https://esi.tech.ccp.is/latest';
 
-    if (datasource === undefined) {
-        datasource = 'tranquility';
+    opts = opts || {};
+    if (opts.datasource === undefined) {
+        opts.datasource = 'tranquility';
     }
+    if (opts.language === undefined) {
+        opts.language = 'en';
+    }
+    if (opts.baseURL === undefined) {
+        opts.baseURL = defaultBaseURL;
+    }
+    if (opts.accessToken === undefined) {
+        opts.accessToken = null;
+    }
+
+    var exports = {};
+
+    /**
+     * The options provided to the factory function.
+     */
+    exports.opts = opts;
 
     /**
      * The swagger-codegen ESI module.
@@ -47,27 +61,31 @@ module.exports = function(datasource, baseURL) {
      */
     var newApi = function(apiCtor, accessToken) {
         var api;
-        if (accessToken === undefined) {
-            api = new apiCtor();
-        } else {
+        accessToken = accessToken || opts.accessToken;
+        if (accessToken) {
             api = new apiCtor(new ESI.ApiClient());
             api.apiClient.authentications['evesso'].accessToken = accessToken;
+        } else {
+            api = new apiCtor();
         }
 
-        // Hack in a new baseURL, which is hardcoded by the swagger-codegen
-        if (baseURL) {
-            api.apiClient.basePath = baseURL;
+        // Hack in a new baseURL, which is hardcoded in the swagger-codegen lib
+        if (opts.baseURL != defaultBaseURL) {
+            api.apiClient.basePath = opts.baseURL.replace(/\/+$/, '');
         }
         return api;
     };
 
     /**
      * Create a new object holding the default options/parameters for an ESI 
-     * request. Currently this configures the data source to tranquility.
+     * request. Currently this configures the data source to tranquility and 
+     * sets the default accept language.
+     *
      * @return {Object} The default options
      */
     var defaultOpts = function() {
-        return { 'datasource': datasource };
+        return { 'datasource': opts.datasource, 
+                 'acceptLanguage': opts.language };
     };
 
     /**

@@ -122,8 +122,10 @@ module.exports = function(api) {
      * ```
      *
      * @param {Integer} id The corporation id
-     * @param {String} accessToken The SSO access token of a member of the
-     *   corporation, used to authenticate the request
+     * @param {String} accessToken Optional; the SSO access token of a member of
+     *   the corporation, used to authenticate the request. If not provided, the 
+     *   default access token provided to the factory is used; if that was not 
+     *   set then this request will fail.
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members
@@ -156,9 +158,11 @@ module.exports = function(api) {
      * ```
      *
      * @param {Integer} id The corporation id
-     * @param {String} accessToken The SSO access token of a member of the
-     *   corporation that has the personnel manager or any other grantable
-     *   role, used to authenticate the request
+     * @param {String} accessToken Optional; the SSO access token of a member of 
+     *   the corporation that has the personnel manager or any other grantable
+     *   role, used to authenticate the request. If not provided, the default 
+     *   access token provided to the factory is used; if that was not set then 
+     *   this request will fail.
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles
