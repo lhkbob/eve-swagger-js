@@ -51,6 +51,15 @@ module.exports = function(opts) {
     exports.alliance = require('./alliance')(internal);
 
     /**
+     * This is an instance of `character` module configured to use the
+     * options provided to the factory. This instance uses a cache shared by the 
+     * other exposed APIs members.
+     *
+     * @constant {module:character}
+     */
+    exports.character = require('./character')(internal);
+
+    /**
      * This is an instance of `corporation` module configured to use the
      * options provided to the factory. This instance uses a cache shared by the 
      * other exposed APIs members.
