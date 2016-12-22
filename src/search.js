@@ -19,11 +19,15 @@
      * query requests it makes via ESI.
      * 
      * @param {boolean} strict True if the search terms are strict
+     * @param {Integer} characterId Optional id to switch to character search
+     * @param {String} accessToken Optional access token for use with the id
      * @return A new Search instance
      * @private
      */
-    var Search = function(strict) {
+    var Search = function(strict, characterId, accessToken) {
         this.strict = strict;
+        this.characterId = characterId;
+        this.accessToken = accessToken;
 
         /**
          * The enumeration of categories that can be searched through. Valid 
@@ -48,6 +52,30 @@
         this.categories = [ 'agent', 'alliance', 'character', 'constellation', 
                            'corporation', 'faction', 'inventoryType', 'region', 
                            'solarsystem', 'station', 'wormhole' ];
+    };
+
+    /**
+     * Return a search module configured to search within the context of the
+     * given character (requiring an access token). The returned module provides
+     * the same methods and functionality as the base {@link module:search}
+     * instance. If this was called on {@link module:search.strict search.strict}
+     * then the returned instance will also make strict queries.
+     *
+     * All search queries will be routed through [`/character/{id}/search/`](https://esi.tech.ccp.is/latest/#!/Search/get_characters_character_id_search)
+     * instead of the regular `/search/` URL that the non-character enabled
+     * search queries are directed to.
+     *
+     * @param {Integer} id The character id that will be searched with
+     * @param {String} accessToken Optional; The access token used to 
+     *   authenticate the search requests. If not provided, the default access
+     *   token will be used. If that is undefined search requests will fail with
+     *   the returned instance.
+     * @return {module:search} A character enabled search instance
+     * @alias forCharacter
+     * @memberof module:search
+     */
+    Search.prototype.forCharacter = function(id, accessToken) {
+        return new Search(this.strict, id, accessToken);
     };
 
     /**
@@ -116,8 +144,16 @@
 
         // The search ESI call looks at language property, not acceptLanguage
         // like which is used in other localized calls.
-        return newRequestOpt(ESI.SearchApi, 'getSearch', [text, categories],
-                             {strict: this.strict, language: language});
+        var opts = {strict: this.strict, language: language};
+        if (this.characterId) {
+            return newRequestOpt(ESI.SearchApi, 
+                                 'getCharactersCharacterIdSearch', 
+                                 [this.characterId, text], opts, 
+                                 this.accessToken);
+        } else {
+            return newRequestOpt(ESI.SearchApi, 'getSearch', [text, categories],
+                                 opts);
+        }
     };
 
     /**
