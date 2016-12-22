@@ -114,6 +114,15 @@ module.exports = function(opts) {
     exports.market = require('./market')(internal);
 
     /**
+     * This is an instance of `search` module configured to use the
+     * options provided to the factory. This instance uses a cache shared by the
+     * other exposed APIs members.
+     *
+     * @constant {module:search}
+     */
+    exports.search = require('./search')(internal);
+
+    /**
      * This is an instance of `sovereignty` module configured to use the
      * options provided to the factory. This instance uses a cache shared by the
      * other exposed APIs members.
