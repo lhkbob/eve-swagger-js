@@ -10,6 +10,7 @@
  * these larger end points, such as `assets` and `mail`.
  *
  * @see https://esi.tech.ccp.is/latest/#/Character
+ * @see https://esi.tech.cpp.is/latest/#/Assets
  * @param api The internal API instance configured by the root module
  * @module character
  */
@@ -113,7 +114,7 @@
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_corporationhistory
-     * @esi_link CorporationApi.getCharactersCharacterIdCorporationHistory
+     * @esi_link CharacterApi.getCharactersCharacterIdCorporationHistory
      */
     exports.getCorporationHistory = function(id) {
         return newRequest(ESI.CharacterApi, 
@@ -140,11 +141,45 @@
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_portraits
-     * @esi_link CorporationApi.getCharactersCharacterIdPortraits
+     * @esi_link CharacterApi.getCharactersCharacterIdPortraits
      */
     exports.getPortraits = function(id) {
         return newRequest(ESI.CharacterApi, 
                           'getCharactersCharacterIdPortraits', [id]);
+    };
+
+    /**
+     * Get a character's assets from the ESI endpoint. This makes 
+     * an HTTP GET request to [`characters/{id}/assets/`](https://esi.tech.ccp.is/latest/#!/Assets/get_characters_character_id_assets).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "is_singleton": true,
+     *     "item_id": 1000000016835,
+     *     "location_flag": "Hangar",
+     *     "location_id": 60002959,
+     *     "location_type": "station",
+     *     "type_id": 3516
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optiona; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Assets/get_characters_character_id_portraits
+     * @esi_link AssetsApi.getCharactersCharacterIdPortraits
+     */
+    exports.getAssets = function(id, accessToken) {
+        return newRequest(ESI.AssetsApi, 'getCharactersCharacterIdAssets', 
+                          [id], accessToken);
     };
 
     return exports;
