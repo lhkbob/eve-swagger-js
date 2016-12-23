@@ -13,6 +13,7 @@
  * @see https://esi.tech.cpp.is/latest/#/Assets
  * @see https://esi.tech.cpp.is/latest/#/Bookmarks
  * @see https://esi.tech.cpp.is/latest/#/Clones
+ * @see https://esi.tech.cpp.is/latest/#/Killmails
  * @param api The internal API instance configured by the root module
  * @module character
  */
@@ -171,7 +172,7 @@
      * ```
      *
      * @param {Integer} id The character id
-     * @param {String} accessToken Optiona; the access token to authenticate
+     * @param {String} accessToken Optional; the access token to authenticate
      *   contact access of the sending character. If not provided, the default
      *   access token is used. This will fail if neither is available.
      * @return {external:Promise} A Promise that resolves to the response of
@@ -213,7 +214,7 @@
      * ```
      *
      * @param {Integer} id The character id
-     * @param {String} accessToken Optiona; the access token to authenticate
+     * @param {String} accessToken Optional; the access token to authenticate
      *   contact access of the sending character. If not provided, the default
      *   access token is used. This will fail if neither is available.
      * @return {external:Promise} A Promise that resolves to the response of
@@ -244,7 +245,7 @@
      * ```
      *
      * @param {Integer} id The character id
-     * @param {String} accessToken Optiona; the access token to authenticate
+     * @param {String} accessToken Optional; the access token to authenticate
      *   contact access of the sending character. If not provided, the default
      *   access token is used. This will fail if neither is available.
      * @return {external:Promise} A Promise that resolves to the response of
@@ -289,7 +290,7 @@
      * ```
      *
      * @param {Integer} id The character id
-     * @param {String} accessToken Optiona; the access token to authenticate
+     * @param {String} accessToken Optional; the access token to authenticate
      *   contact access of the sending character. If not provided, the default
      *   access token is used. This will fail if neither is available.
      * @return {external:Promise} A Promise that resolves to the response of
@@ -300,6 +301,61 @@
     exports.getClones = function(id, accessToken) {
         return newRequest(ESI.ClonesApi, 'getCharactersCharacterIdClones', 
                           [id], accessToken);
+    };
+
+    /**
+     * Get recent kill mails for the given character via the ESI end point.
+     * Up to `maxCount` mail ids and hashes will be returned, or up to 50 if
+     * the count is not provided. Pagination is supported by specifying
+     * `maxKillId`, in which case the most recent mails prior to the max id will
+     * be returned.
+     *
+     * This makes an HTTP GET request to [`/characters/{characterId}/killmails/recent`](https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "killmail_hash": "8eef5e8fb6b88fe3407c489df33822b2e3b57a5e",
+     *     "killmail_id": 2
+     *   },
+     *   {
+     *     "killmail_hash": "b41ccb498ece33d64019f64c0db392aa3aa701fb",
+     *     "killmail_id": 1
+     *   }
+     * ]
+     * ```
+     * 
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @param {Integer} maxKillId Optional; the mail id that limits which mails
+     *   can be returned. If provided recent mails older than the id are returned
+     * @param {Integer} maxCount Optional; the maximum number of mails to return,
+     *   defaulting to 50.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_killmails_recent
+     * @esi_link KillmailsApi.getCharactersCharacterIdKillmailsRecent
+     */
+    exports.getKillmails = function(characterId, accessToken, maxKillId, 
+                                    maxCount) {
+        var opts = {};
+        if (maxCount) {
+            opts.maxCount = maxCount;
+        } else {
+            opts.maxCount = 50;
+        }
+
+        if (maxKillId) {
+            opts.maxKillId = maxKillId;
+        }
+        return newRequestOpt(ESI.KillmailsApi, 
+                             'getCharactersCharacterIdKillmailsRecent',
+                             [characterId], opts, accessToken);
     };
 
     return exports;
