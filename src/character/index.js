@@ -14,6 +14,7 @@
  * @see https://esi.tech.cpp.is/latest/#/Bookmarks
  * @see https://esi.tech.cpp.is/latest/#/Clones
  * @see https://esi.tech.cpp.is/latest/#/Killmails
+ * @see https://esi.tech.cpp.is/latest/#/Location
  * @param api The internal API instance configured by the root module
  * @module character
  */
@@ -328,7 +329,7 @@
      * ]
      * ```
      * 
-     * @param {Integer} id The character id
+     * @param {Integer} characterId The character id
      * @param {String} accessToken Optional; the access token to authenticate
      *   contact access of the sending character. If not provided, the default
      *   access token is used. This will fail if neither is available.
@@ -339,6 +340,7 @@
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_killmails_recent
+     * @see module:killmails.get
      * @esi_link KillmailsApi.getCharactersCharacterIdKillmailsRecent
      */
     exports.getKillmails = function(characterId, accessToken, maxKillId, 
@@ -356,6 +358,63 @@
         return newRequestOpt(ESI.KillmailsApi, 
                              'getCharactersCharacterIdKillmailsRecent',
                              [characterId], opts, accessToken);
+    };
+
+    /**
+     * Get a character's location from the ESI endpoint. This makes 
+     * an HTTP GET request to [`characters/{id}/location/`](https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "solar_system_id": 30002505,
+     *   "structure_id": 1000000016989
+     * }
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location
+     * @esi_link LocationApi.getCharactersCharacterIdLocation
+     */
+    exports.getLocation = function(id, accessToken) {
+        return newRequest(ESI.LocationApi, 'getCharactersCharacterIdLocation',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get a character's current ship from the ESI endpoint. This makes 
+     * an HTTP GET request to [`characters/{id}/ship/`](https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "ship_item_id": 1000000016991,
+     *   "ship_name": "SPACESHIPS!!!",
+     *   "ship_type_id": 1233
+     * }
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship
+     * @esi_link LocationApi.getCharactersCharacterIdShip
+     */
+    exports.getShip = function(id, accessToken) {
+        return newRequest(ESI.LocationApi, 'getCharactersCharacterIdShip',
+                          [id], accessToken);
     };
 
     return exports;
