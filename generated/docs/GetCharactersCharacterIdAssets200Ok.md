@@ -26,6 +26,10 @@ Name | Type | Description | Notes
 
 * `FleetHangar` (value: `"FleetHangar"`)
 
+* `Deliveries` (value: `"Deliveries"`)
+
+* `HiddenModifiers` (value: `"HiddenModifiers"`)
+
 * `Hangar` (value: `"Hangar"`)
 
 * `HangarAll` (value: `"HangarAll"`)
