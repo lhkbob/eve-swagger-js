@@ -7,7 +7,7 @@
  *
  * This module also folds in smaller character-related end points that are not
  * large enough to warrant their own sub-module. It also exports sub-modules for
- * these larger end points, such as `assets` and `mail`.
+ * these larger end points, such as `calendar` and `mail`.
  *
  * @see https://esi.tech.ccp.is/latest/#/Character
  * @see https://esi.tech.cpp.is/latest/#/Assets
@@ -27,6 +27,15 @@
     var ESI = api.esi;
 
     var exports = {};
+
+    /**
+     * This is an instance of `calendar` module configured to use the
+     * options provided to the factory. This instance uses a cache shared by the
+     * other exposed APIs members.
+     *
+     * @constant {module:character/calendar}
+     */
+    exports.calendar = require('./calendar')(api);
 
     /**
      * This is an instance of `mail` module configured to use the
@@ -314,7 +323,7 @@
      * `maxKillId`, in which case the most recent mails prior to the max id will
      * be returned.
      *
-     * This makes an HTTP GET request to [`/characters/{characterId}/killmails/recent`](https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent).
+     * This makes an HTTP GET request to [`/characters/{characterId}/killmails/recent/`](https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent).
      * The request is returned as an asynchronous Promise that resolves to 
      * an array parsed from the response JSON model. An example value looks 
      * like:
@@ -342,7 +351,7 @@
      *   defaulting to 50.
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
-     * @see https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_killmails_recent
+     * @see https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent
      * @see module:killmails.get
      * @esi_link KillmailsApi.getCharactersCharacterIdKillmailsRecent
      */
