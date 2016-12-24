@@ -158,5 +158,14 @@ module.exports = function(opts) {
      */
     exports.wars = require('./wars')(internal);
 
+    /**
+     * This is an instance of `ui` module configured to use the
+     * options provided to the factory. This instance uses a cache shared by the
+     * other exposed APIs members.
+     *
+     * @constant {module:ui}
+     */
+    exports.ui = require('./ui')(internal);
+
     return exports;
 };
