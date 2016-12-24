@@ -35,12 +35,17 @@
  *
  * This module also folds in smaller character-related end points that are not
  * large enough to warrant their own sub-module. It also exports sub-modules for
- * these larger end points, such as `assets` and `mail`.
+ * these larger end points, such as `calendar` and `mail`.
  *
  * @see https://esi.tech.ccp.is/latest/#/Character
  * @see https://esi.tech.cpp.is/latest/#/Assets
  * @see https://esi.tech.cpp.is/latest/#/Bookmarks
  * @see https://esi.tech.cpp.is/latest/#/Clones
+ * @see https://esi.tech.cpp.is/latest/#/Killmails
+ * @see https://esi.tech.cpp.is/latest/#/Location
+ * @see https://esi.tech.ccp.is/latest/#/Planetary_Interaction
+ * @see https://esi.tech.ccp.is/latest/#/Skills
+ * @see https://esi.tech.ccp.is/latest/#/Wallet
  * @param api The internal API instance configured by the root module
  * @module character
  */
@@ -50,6 +55,15 @@
     var ESI = api.esi;
 
     var exports = {};
+
+    /**
+     * This is an instance of `calendar` module configured to use the
+     * options provided to the factory. This instance uses a cache shared by the
+     * other exposed APIs members.
+     *
+     * @constant {module:character/calendar}
+     */
+    exports.calendar = require('./calendar')(api);
 
     /**
      * This is an instance of `mail` module configured to use the
@@ -199,7 +213,7 @@
      * ```
      *
      * @param {Integer} id The character id
-     * @param {String} accessToken Optiona; the access token to authenticate
+     * @param {String} accessToken Optional; the access token to authenticate
      *   contact access of the sending character. If not provided, the default
      *   access token is used. This will fail if neither is available.
      * @return {external:Promise} A Promise that resolves to the response of
@@ -241,7 +255,7 @@
      * ```
      *
      * @param {Integer} id The character id
-     * @param {String} accessToken Optiona; the access token to authenticate
+     * @param {String} accessToken Optional; the access token to authenticate
      *   contact access of the sending character. If not provided, the default
      *   access token is used. This will fail if neither is available.
      * @return {external:Promise} A Promise that resolves to the response of
@@ -272,7 +286,7 @@
      * ```
      *
      * @param {Integer} id The character id
-     * @param {String} accessToken Optiona; the access token to authenticate
+     * @param {String} accessToken Optional; the access token to authenticate
      *   contact access of the sending character. If not provided, the default
      *   access token is used. This will fail if neither is available.
      * @return {external:Promise} A Promise that resolves to the response of
@@ -317,7 +331,7 @@
      * ```
      *
      * @param {Integer} id The character id
-     * @param {String} accessToken Optiona; the access token to authenticate
+     * @param {String} accessToken Optional; the access token to authenticate
      *   contact access of the sending character. If not provided, the default
      *   access token is used. This will fail if neither is available.
      * @return {external:Promise} A Promise that resolves to the response of
@@ -327,6 +341,345 @@
      */
     exports.getClones = function(id, accessToken) {
         return newRequest(ESI.ClonesApi, 'getCharactersCharacterIdClones', 
+                          [id], accessToken);
+    };
+
+    /**
+     * Get recent kill mails for the given character via the ESI end point.
+     * Up to `maxCount` mail ids and hashes will be returned, or up to 50 if
+     * the count is not provided. Pagination is supported by specifying
+     * `maxKillId`, in which case the most recent mails prior to the max id will
+     * be returned.
+     *
+     * This makes an HTTP GET request to [`/characters/{characterId}/killmails/recent/`](https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "killmail_hash": "8eef5e8fb6b88fe3407c489df33822b2e3b57a5e",
+     *     "killmail_id": 2
+     *   },
+     *   {
+     *     "killmail_hash": "b41ccb498ece33d64019f64c0db392aa3aa701fb",
+     *     "killmail_id": 1
+     *   }
+     * ]
+     * ```
+     * 
+     * @param {Integer} characterId The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @param {Integer} maxKillId Optional; the mail id that limits which mails
+     *   can be returned. If provided recent mails older than the id are returned
+     * @param {Integer} maxCount Optional; the maximum number of mails to return,
+     *   defaulting to 50.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent
+     * @see module:killmails.get
+     * @esi_link KillmailsApi.getCharactersCharacterIdKillmailsRecent
+     */
+    exports.getKillmails = function(characterId, accessToken, maxKillId, 
+                                    maxCount) {
+        var opts = {};
+        if (maxCount) {
+            opts.maxCount = maxCount;
+        } else {
+            opts.maxCount = 50;
+        }
+
+        if (maxKillId) {
+            opts.maxKillId = maxKillId;
+        }
+        return newRequestOpt(ESI.KillmailsApi, 
+                             'getCharactersCharacterIdKillmailsRecent',
+                             [characterId], opts, accessToken);
+    };
+
+    /**
+     * Get a character's location from the ESI endpoint. This makes 
+     * an HTTP GET request to [`characters/{id}/location/`](https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "solar_system_id": 30002505,
+     *   "structure_id": 1000000016989
+     * }
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location
+     * @esi_link LocationApi.getCharactersCharacterIdLocation
+     */
+    exports.getLocation = function(id, accessToken) {
+        return newRequest(ESI.LocationApi, 'getCharactersCharacterIdLocation',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get a character's current ship from the ESI endpoint. This makes 
+     * an HTTP GET request to [`characters/{id}/ship/`](https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "ship_item_id": 1000000016991,
+     *   "ship_name": "SPACESHIPS!!!",
+     *   "ship_type_id": 1233
+     * }
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship
+     * @esi_link LocationApi.getCharactersCharacterIdShip
+     */
+    exports.getShip = function(id, accessToken) {
+        return newRequest(ESI.LocationApi, 'getCharactersCharacterIdShip',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get a list of all planetary colonies owned by the character from the ESI 
+     * endpoint. This makes an HTTP GET request to 
+     * [`characters/{id}/planets/`](https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "last_update": "2016-11-28T16:42:51Z",
+     *     "num_pins": 1,
+     *     "owner_id": 90000001,
+     *     "planet_id": 40023691,
+     *     "planet_type": "plasma",
+     *     "solar_system_id": 30000379,
+     *     "upgrade_level": 0
+     *   },
+     *   {
+     *     "last_update": "2016-11-28T16:41:54Z",
+     *     "num_pins": 1,
+     *     "owner_id": 90000001,
+     *     "planet_id": 40023697,
+     *     "planet_type": "barren",
+     *     "solar_system_id": 30000379,
+     *     "upgrade_level": 0
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets
+     * @esi_link PlanetaryInteractionApi.getCharactersCharacterIdPlanets
+     */
+    exports.getColonies = function(id, accessToken) {
+        return newRequest(ESI.PlanetaryInteractionApi, 
+                          'getCharactersCharacterIdPlanets',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get the full layout of a planetary colony owned by the character from the
+     * ESI endpoint. This makes an HTTP GET request to 
+     * [`characters/{characterId}/planets/{planetId}`](https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets_planet_id).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "links": [
+     *     {
+     *       "destination_pin_id": 1000000017022,
+     *       "link_level": 0,
+     *       "source_pin_id": 1000000017021
+     *     }
+     *   ],
+     *   "pins": [
+     *     {
+     *       "is_running": true,
+     *       "latitude": 1.55087844973,
+     *       "longitude": 0.717145933308,
+     *       "pin_id": 1000000017021,
+     *       "type_id": 2254
+     *     },
+     *     {
+     *       "is_running": true,
+     *       "latitude": 1.53360639935,
+     *       "longitude": 0.709775584394,
+     *       "pin_id": 1000000017022,
+     *       "type_id": 2256
+     *     }
+     *   ],
+     *   "routes": [
+     *     {
+     *       "content_type_id": 2393,
+     *       "destination_pin_id": 1000000017030,
+     *       "quantity": 20,
+     *       "route_id": 4,
+     *       "source_pin_id": 1000000017029
+     *     }
+     *   ]
+     * }
+     * ```
+     *
+     * @param {Integer} characterId The character id
+     * @param {Integer} planetId The planet id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets_planet_id
+     * @esi_link PlanetaryInteractionApi.getCharactersCharacterIdPlanetsPlanetId
+     */
+    exports.getColonyLayout = function(characterId, planetId, accessToken) {
+        return newRequest(ESI.PlanetaryInteractionApi, 
+                          'getCharactersCharacterIdPlanetsPlanetId',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get the character's skill queue, sorted ascending by finishing time, from
+     * the ESI endpoint. This makes an HTTP GET request to 
+     * [`characters/{id}/skillqueue/`](https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "finish_date": "2016-06-29T10:47:00Z",
+     *     "finished_level": 3,
+     *     "queue_position": 0,
+     *     "skill_id": 1,
+     *     "start_date": "2016-06-29T10:46:00Z"
+     *   },
+     *   {
+     *     "finish_date": "2016-07-15T10:47:00Z",
+     *     "finished_level": 4,
+     *     "queue_position": 1,
+     *     "skill_id": 1,
+     *     "start_date": "2016-06-29T10:47:00Z"
+     *   },
+     *   {
+     *     "finish_date": "2016-08-30T10:47:00Z",
+     *     "finished_level": 2,
+     *     "queue_position": 2,
+     *     "skill_id": 2,
+     *     "start_date": "2016-07-15T10:47:00Z"
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue
+     * @esi_link SkillsApi.getCharactersCharacterIdSkillqueue
+     */
+    exports.getSkillQueue = function(id, accessToken) {
+        return newRequest(ESI.SkillsApi, 'getCharactersCharacterIdSkillqueue',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get the character's trained skills, sorted ascending by finishing time, 
+     * from the ESI endpoint. This makes an HTTP GET request to 
+     * [`characters/{id}/skills/`](https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "skills": [
+     *     {
+     *       "current_skill_level": 1,
+     *       "skill_id": 1,
+     *       "skillpoints_in_skill": 10000
+     *     },
+     *     {
+     *       "current_skill_level": 1,
+     *       "skill_id": 2,
+     *       "skillpoints_in_skill": 10000
+     *     }
+     *   ],
+     *   "total_sp": 20000
+     * }
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills
+     * @esi_link SkillsApi.getCharactersCharacterIdSkills
+     */
+    exports.getSkills = function(id, accessToken) {
+        return newRequest(ESI.SkillsApi, 'getCharactersCharacterIdSkills',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get the character's wallets' balances from the ESI endpoint. This makes 
+     * an HTTP GET request to 
+     * [`characters/{id}/wallets/`](https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "balance": 295000,
+     *     "wallet_id": 1000
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets
+     * @esi_link WalletApi.getCharactersCharacterIdWallets
+     */
+    exports.getWallets = function(id, accessToken) {
+        return newRequest(ESI.WalletApi, 'getCharactersCharacterIdWallets',
                           [id], accessToken);
     };
 
@@ -342,13 +695,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 22 2016 17:48:34 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 23 2016 23:11:37 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

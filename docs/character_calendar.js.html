@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: character/calendar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: character/calendar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A container for the [calendar](https://esi.tech.ccp.is/latest/#/Calendar)
+ * ESI endpoints. You should not require this module directly, as it technically
+ * returns a factory function that requires an internal API. Instead an instance
+ * is automatically exposed when the 
+ * {@link module:character} is loaded and configured.
+ *
+ * @see https://esi.tech.ccp.is/latest/#/Calendar
+ * @param api The internal API instance configured by the root module
+ * @module character/calendar
+ */
+ module.exports = function(api) {
+    var newRequest = api.newRequest;
+    var newRequestOpt = api.newRequestOpt;
+    var ESI = api.esi;
+
+    var exports = {};
+
+    /**
+     * Get up to 50 future calendar event summaries for the given character via 
+     * the ESI end point. If `fromEventId` is provided, the returned events will
+     * be the next 50 events chronologically beyond the event.
+     *
+     * This makes an HTTP GET request to [`/characters/{characterId}/calendar`](https://esi.tech.ccp.is/latest/#!/Calendar/get_characters_character_id_calendar).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "event_date": "2016-06-26T20:00:00Z",
+     *     "event_id": 1386435,
+     *     "event_response": "accepted",
+     *     "importance": 0,
+     *     "title": "o7 The EVE Online Show"
+     *   }
+     * ]
+     * ```
+     * 
+     * @param {Integer} characterId The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @param {Integer} fromEventId Optional; the event id that returned events
+     *   will be chronologically later than.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Calendar/get_characters_character_id_calendar
+     * @esi_link CalendarApi.getCharactersCharacterIdCalendar
+     */
+    exports.get = function(characterId, accessToken, fromEventId) {
+        var opts = {};
+        if (fromEventId) {
+            opts.fromEvent = fromEventId;
+        }
+        return newRequestOpt(ESI.CalendarApi, 
+                             'getCharactersCharacterIdCalendar',
+                             [characterId], opts, accessToken);
+    };
+
+    /**
+     * Get all information for a specific event via the ESI end point.
+     * This makes an HTTP GET request to [`/characters/{characterId}/calendar/{eventId}`](https://esi.tech.ccp.is/latest/#!/Calendar/get_characters_character_id_calendar_event_id).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "date": "2016-06-26T21:00:00Z",
+     *   "duration": 60,
+     *   "event_id": 1386435,
+     *   "importance": 1,
+     *   "owner_id": 1,
+     *   "owner_name": "EVE System",
+     *   "owner_type": "eve_server",
+     *   "response": "Undecided",
+     *   "text": "o7: The EVE Online Show features latest developer news, fast paced action, community overviews and a lot more with CCP Guard and CCP Mimic. Join the thrilling o7 live broadcast at 20:00 EVE time (=UTC) on &lt;a href=\"http://www.twitch.tv/ccp\">EVE TV&lt;/a>. Don't miss it!",
+     *   "title": "o7 The EVE Online Show"
+     * }
+     * ```
+     * 
+     * @param {Integer} characterId The character id
+     * @param {Integer} eventId The event id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Calendar/get_characters_character_id_calendar_event_id
+     * @esi_link CalendarApi.getCharactersCharacterIdCalendarEventId
+     */
+    exports.getEvent = function(characterId, eventId, accessToken) {
+        return newRequest(ESI.CalendarApi, 
+                          'getCharactersCharacterIdCalendarEventId',
+                          [characterId, eventId], accessToken);
+    };
+
+    /**
+     * Update response for a specific event via the ESI end point.
+     * This makes an HTTP PUT request to [`/characters/{characterId}/calendar/{eventId}`](https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an empty object on success. Allowed response values can be
+     *
+     * 1. `'rejected'`
+     * 2. `'accepted'`
+     * 3. `'undecided'`
+     * 
+     * @param {Integer} characterId The character id
+     * @param {Integer} eventId The event id
+     * @param {String} response The response to the event invitation
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id
+     * @esi_link CalendarApi.putCharactersCharacterIdCalendarEventId
+     */
+    exports.updateResponse = function(characterId, eventId, response, 
+                                      accessToken) {
+        return newRequest(ESI.CalendarApi, 
+                          'putCharactersCharacterIdCalendarEventId',
+                          [characterId, eventId, {response: response}], 
+                          accessToken);
+    };
+
+    return exports;
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 23 2016 23:11:37 GMT-0600 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

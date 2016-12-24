@@ -45,7 +45,7 @@ is automatically exposed when the
 <a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is loaded and configured.</p>
 <p>This module also folds in smaller character-related end points that are not
 large enough to warrant their own sub-module. It also exports sub-modules for
-these larger end points, such as <code>assets</code> and <code>mail</code>.</p></div>
+these larger end points, such as <code>calendar</code> and <code>mail</code>.</p></div>
         
 
         
@@ -155,6 +155,16 @@ these larger end points, such as <code>assets</code> and <code>mail</code>.</p><
             <li><a href="https://esi.tech.cpp.is/latest/#/Bookmarks">https://esi.tech.cpp.is/latest/#/Bookmarks</a></li>
         
             <li><a href="https://esi.tech.cpp.is/latest/#/Clones">https://esi.tech.cpp.is/latest/#/Clones</a></li>
+        
+            <li><a href="https://esi.tech.cpp.is/latest/#/Killmails">https://esi.tech.cpp.is/latest/#/Killmails</a></li>
+        
+            <li><a href="https://esi.tech.cpp.is/latest/#/Location">https://esi.tech.cpp.is/latest/#/Location</a></li>
+        
+            <li><a href="https://esi.tech.ccp.is/latest/#/Planetary_Interaction">https://esi.tech.ccp.is/latest/#/Planetary_Interaction</a></li>
+        
+            <li><a href="https://esi.tech.ccp.is/latest/#/Skills">https://esi.tech.ccp.is/latest/#/Skills</a></li>
+        
+            <li><a href="https://esi.tech.ccp.is/latest/#/Wallet">https://esi.tech.ccp.is/latest/#/Wallet</a></li>
         </ul>
     </dd>
     
@@ -193,6 +203,80 @@ these larger end points, such as <code>assets</code> and <code>mail</code>.</p><
 
     
         <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".calendar"><span class="type-signature">(static, constant) </span>calendar<span class="type-signature"> :<a href="module-character_calendar.html">module:character/calendar</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>This is an instance of <code>calendar</code> module configured to use the
+options provided to the factory. This instance uses a cache shared by the
+other exposed APIs members.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="module-character_calendar.html">module:character/calendar</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
 
         
             
@@ -252,7 +336,7 @@ other exposed APIs members.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line33">line 33</a>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -393,7 +477,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line87">line 87</a>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line101">line 101</a>
     </li></ul></dd>
     
 
@@ -550,7 +634,7 @@ like:</p>
 
             
 
-            <td class="description last"><p>Optiona; the access token to authenticate
+            <td class="description last"><p>Optional; the access token to authenticate
   contact access of the sending character. If not provided, the default
   access token is used. This will fail if neither is available.</p></td>
         </tr>
@@ -593,7 +677,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line182">line 182</a>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line196">line 196</a>
     </li></ul></dd>
     
 
@@ -747,7 +831,7 @@ like:</p>
 
             
 
-            <td class="description last"><p>Optiona; the access token to authenticate
+            <td class="description last"><p>Optional; the access token to authenticate
   contact access of the sending character. If not provided, the default
   access token is used. This will fail if neither is available.</p></td>
         </tr>
@@ -790,7 +874,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line255">line 255</a>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line269">line 269</a>
     </li></ul></dd>
     
 
@@ -955,7 +1039,7 @@ like:</p>
 
             
 
-            <td class="description last"><p>Optiona; the access token to authenticate
+            <td class="description last"><p>Optional; the access token to authenticate
   contact access of the sending character. If not provided, the default
   access token is used. This will fail if neither is available.</p></td>
         </tr>
@@ -998,7 +1082,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line224">line 224</a>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line238">line 238</a>
     </li></ul></dd>
     
 
@@ -1165,7 +1249,7 @@ like:</p>
 
             
 
-            <td class="description last"><p>Optiona; the access token to authenticate
+            <td class="description last"><p>Optional; the access token to authenticate
   contact access of the sending character. If not provided, the default
   access token is used. This will fail if neither is available.</p></td>
         </tr>
@@ -1208,7 +1292,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line300">line 300</a>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line314">line 314</a>
     </li></ul></dd>
     
 
@@ -1219,6 +1303,465 @@ like:</p>
     <dd class="tag-see">
         <ul>
             <li><a href="https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_clones">https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_clones</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getColonies"><span class="type-signature">(static) </span>getColonies<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get a list of all planetary colonies owned by the character from the ESI 
+endpoint. This makes an HTTP GET request to 
+<a href="https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets"><code>characters/{id}/planets/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an array parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;last_update&quot;: &quot;2016-11-28T16:42:51Z&quot;,
+    &quot;num_pins&quot;: 1,
+    &quot;owner_id&quot;: 90000001,
+    &quot;planet_id&quot;: 40023691,
+    &quot;planet_type&quot;: &quot;plasma&quot;,
+    &quot;solar_system_id&quot;: 30000379,
+    &quot;upgrade_level&quot;: 0
+  },
+  {
+    &quot;last_update&quot;: &quot;2016-11-28T16:41:54Z&quot;,
+    &quot;num_pins&quot;: 1,
+    &quot;owner_id&quot;: 90000001,
+    &quot;planet_id&quot;: 40023697,
+    &quot;planet_type&quot;: &quot;barren&quot;,
+    &quot;solar_system_id&quot;: 30000379,
+    &quot;upgrade_level&quot;: 0
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/PlanetaryInteractionApi.md#getCharactersCharacterIdPlanets">PlanetaryInteractionApi.getCharactersCharacterIdPlanets</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line472">line 472</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets">https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getColonyLayout"><span class="type-signature">(static) </span>getColonyLayout<span class="signature">(characterId, planetId, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get the full layout of a planetary colony owned by the character from the
+ESI endpoint. This makes an HTTP GET request to 
+<a href="https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets_planet_id"><code>characters/{characterId}/planets/{planetId}</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;links&quot;: [
+    {
+      &quot;destination_pin_id&quot;: 1000000017022,
+      &quot;link_level&quot;: 0,
+      &quot;source_pin_id&quot;: 1000000017021
+    }
+  ],
+  &quot;pins&quot;: [
+    {
+      &quot;is_running&quot;: true,
+      &quot;latitude&quot;: 1.55087844973,
+      &quot;longitude&quot;: 0.717145933308,
+      &quot;pin_id&quot;: 1000000017021,
+      &quot;type_id&quot;: 2254
+    },
+    {
+      &quot;is_running&quot;: true,
+      &quot;latitude&quot;: 1.53360639935,
+      &quot;longitude&quot;: 0.709775584394,
+      &quot;pin_id&quot;: 1000000017022,
+      &quot;type_id&quot;: 2256
+    }
+  ],
+  &quot;routes&quot;: [
+    {
+      &quot;content_type_id&quot;: 2393,
+      &quot;destination_pin_id&quot;: 1000000017030,
+      &quot;quantity&quot;: 20,
+      &quot;route_id&quot;: 4,
+      &quot;source_pin_id&quot;: 1000000017029
+    }
+  ]
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/PlanetaryInteractionApi.md#getCharactersCharacterIdPlanetsPlanetId">PlanetaryInteractionApi.getCharactersCharacterIdPlanetsPlanetId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>characterId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>planetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The planet id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line533">line 533</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets_planet_id">https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets_planet_id</a></li>
         </ul>
     </dd>
     
@@ -1387,7 +1930,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line121">line 121</a>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line135">line 135</a>
     </li></ul></dd>
     
 
@@ -1398,6 +1941,454 @@ like:</p>
     <dd class="tag-see">
         <ul>
             <li><a href="https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_corporationhistory">https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_corporationhistory</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getKillmails"><span class="type-signature">(static) </span>getKillmails<span class="signature">(characterId, accessToken, maxKillId, maxCount)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get recent kill mails for the given character via the ESI end point.
+Up to <code>maxCount</code> mail ids and hashes will be returned, or up to 50 if
+the count is not provided. Pagination is supported by specifying
+<code>maxKillId</code>, in which case the most recent mails prior to the max id will
+be returned.</p>
+<p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent"><code>/characters/{characterId}/killmails/recent/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an array parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;killmail_hash&quot;: &quot;8eef5e8fb6b88fe3407c489df33822b2e3b57a5e&quot;,
+    &quot;killmail_id&quot;: 2
+  },
+  {
+    &quot;killmail_hash&quot;: &quot;b41ccb498ece33d64019f64c0db392aa3aa701fb&quot;,
+    &quot;killmail_id&quot;: 1
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/KillmailsApi.md#getCharactersCharacterIdKillmailsRecent">KillmailsApi.getCharactersCharacterIdKillmailsRecent</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>characterId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxKillId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the mail id that limits which mails
+  can be returned. If provided recent mails older than the id are returned</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the maximum number of mails to return,
+  defaulting to 50.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line358">line 358</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent">https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent</a></li>
+        
+            <li><a href="module-killmails.html#.get">module:killmails.get</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getLocation"><span class="type-signature">(static) </span>getLocation<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get a character's location from the ESI endpoint. This makes 
+an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location"><code>characters/{id}/location/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;solar_system_id&quot;: 30002505,
+  &quot;structure_id&quot;: 1000000016989
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/LocationApi.md#getCharactersCharacterIdLocation">LocationApi.getCharactersCharacterIdLocation</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line398">line 398</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location">https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location</a></li>
         </ul>
     </dd>
     
@@ -1558,7 +2549,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line57">line 57</a>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -1729,7 +2720,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line148">line 148</a>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -1740,6 +2731,818 @@ like:</p>
     <dd class="tag-see">
         <ul>
             <li><a href="https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_portraits">https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_portraits</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getShip"><span class="type-signature">(static) </span>getShip<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get a character's current ship from the ESI endpoint. This makes 
+an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship"><code>characters/{id}/ship/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;ship_item_id&quot;: 1000000016991,
+  &quot;ship_name&quot;: &quot;SPACESHIPS!!!&quot;,
+  &quot;ship_type_id&quot;: 1233
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/LocationApi.md#getCharactersCharacterIdShip">LocationApi.getCharactersCharacterIdShip</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line427">line 427</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship">https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getSkillQueue"><span class="type-signature">(static) </span>getSkillQueue<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get the character's skill queue, sorted ascending by finishing time, from
+the ESI endpoint. This makes an HTTP GET request to 
+<a href="https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue"><code>characters/{id}/skillqueue/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an array parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;finish_date&quot;: &quot;2016-06-29T10:47:00Z&quot;,
+    &quot;finished_level&quot;: 3,
+    &quot;queue_position&quot;: 0,
+    &quot;skill_id&quot;: 1,
+    &quot;start_date&quot;: &quot;2016-06-29T10:46:00Z&quot;
+  },
+  {
+    &quot;finish_date&quot;: &quot;2016-07-15T10:47:00Z&quot;,
+    &quot;finished_level&quot;: 4,
+    &quot;queue_position&quot;: 1,
+    &quot;skill_id&quot;: 1,
+    &quot;start_date&quot;: &quot;2016-06-29T10:47:00Z&quot;
+  },
+  {
+    &quot;finish_date&quot;: &quot;2016-08-30T10:47:00Z&quot;,
+    &quot;finished_level&quot;: 2,
+    &quot;queue_position&quot;: 2,
+    &quot;skill_id&quot;: 2,
+    &quot;start_date&quot;: &quot;2016-07-15T10:47:00Z&quot;
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/SkillsApi.md#getCharactersCharacterIdSkillqueue">SkillsApi.getCharactersCharacterIdSkillqueue</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line582">line 582</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue">https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getSkills"><span class="type-signature">(static) </span>getSkills<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get the character's trained skills, sorted ascending by finishing time, 
+from the ESI endpoint. This makes an HTTP GET request to 
+<a href="https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills"><code>characters/{id}/skills/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an object parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;skills&quot;: [
+    {
+      &quot;current_skill_level&quot;: 1,
+      &quot;skill_id&quot;: 1,
+      &quot;skillpoints_in_skill&quot;: 10000
+    },
+    {
+      &quot;current_skill_level&quot;: 1,
+      &quot;skill_id&quot;: 2,
+      &quot;skillpoints_in_skill&quot;: 10000
+    }
+  ],
+  &quot;total_sp&quot;: 20000
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/SkillsApi.md#getCharactersCharacterIdSkills">SkillsApi.getCharactersCharacterIdSkills</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line622">line 622</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills">https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getWallets"><span class="type-signature">(static) </span>getWallets<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get the character's wallets' balances from the ESI endpoint. This makes 
+an HTTP GET request to 
+<a href="https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets"><code>characters/{id}/wallets/</code></a>.
+The request is returned as an asynchronous Promise that resolves to 
+an array parsed from the response JSON model. An example value looks 
+like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;balance&quot;: 295000,
+    &quot;wallet_id&quot;: 1000
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/WalletApi.md#getCharactersCharacterIdWallets">WalletApi.getCharactersCharacterIdWallets</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_index.js.html">character/index.js</a>, <a href="character_index.js.html#line653">line 653</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets">https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets</a></li>
         </ul>
     </dd>
     
@@ -1801,13 +3604,13 @@ like:</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 22 2016 17:48:34 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 23 2016 23:11:37 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>
