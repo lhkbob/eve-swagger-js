@@ -15,6 +15,7 @@
  * @see https://esi.tech.cpp.is/latest/#/Clones
  * @see https://esi.tech.cpp.is/latest/#/Killmails
  * @see https://esi.tech.cpp.is/latest/#/Location
+ * @see https://esi.tech.ccp.is/latest/#/Planetary_Interaction
  * @param api The internal API instance configured by the root module
  * @module character
  */
@@ -414,6 +415,156 @@
      */
     exports.getShip = function(id, accessToken) {
         return newRequest(ESI.LocationApi, 'getCharactersCharacterIdShip',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get a list of all planetary colonies owned by the character from the ESI 
+     * endpoint. This makes an HTTP GET request to 
+     * [`characters/{id}/planets/`](https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "last_update": "2016-11-28T16:42:51Z",
+     *     "num_pins": 1,
+     *     "owner_id": 90000001,
+     *     "planet_id": 40023691,
+     *     "planet_type": "plasma",
+     *     "solar_system_id": 30000379,
+     *     "upgrade_level": 0
+     *   },
+     *   {
+     *     "last_update": "2016-11-28T16:41:54Z",
+     *     "num_pins": 1,
+     *     "owner_id": 90000001,
+     *     "planet_id": 40023697,
+     *     "planet_type": "barren",
+     *     "solar_system_id": 30000379,
+     *     "upgrade_level": 0
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets
+     * @esi_link PlanetaryInteractionApi.getCharactersCharacterIdPlanets
+     */
+    exports.getShip = function(id, accessToken) {
+        return newRequest(ESI.PlanetaryInteractionApi, 'getCharactersCharacterIdPlanets',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get a list of all planetary colonies owned by the character from the ESI 
+     * endpoint. This makes an HTTP GET request to 
+     * [`characters/{id}/planets/`](https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "last_update": "2016-11-28T16:42:51Z",
+     *     "num_pins": 1,
+     *     "owner_id": 90000001,
+     *     "planet_id": 40023691,
+     *     "planet_type": "plasma",
+     *     "solar_system_id": 30000379,
+     *     "upgrade_level": 0
+     *   },
+     *   {
+     *     "last_update": "2016-11-28T16:41:54Z",
+     *     "num_pins": 1,
+     *     "owner_id": 90000001,
+     *     "planet_id": 40023697,
+     *     "planet_type": "barren",
+     *     "solar_system_id": 30000379,
+     *     "upgrade_level": 0
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets
+     * @esi_link PlanetaryInteractionApi.getCharactersCharacterIdPlanets
+     */
+    exports.getColonies = function(id, accessToken) {
+        return newRequest(ESI.PlanetaryInteractionApi, 'getCharactersCharacterIdPlanets',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get the full layout of a planetary colony owned by the character from the
+     * ESI endpoint. This makes an HTTP GET request to 
+     * [`characters/{characterId}/planets/{planetId}`](https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets_planet_id).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "links": [
+     *     {
+     *       "destination_pin_id": 1000000017022,
+     *       "link_level": 0,
+     *       "source_pin_id": 1000000017021
+     *     }
+     *   ],
+     *   "pins": [
+     *     {
+     *       "is_running": true,
+     *       "latitude": 1.55087844973,
+     *       "longitude": 0.717145933308,
+     *       "pin_id": 1000000017021,
+     *       "type_id": 2254
+     *     },
+     *     {
+     *       "is_running": true,
+     *       "latitude": 1.53360639935,
+     *       "longitude": 0.709775584394,
+     *       "pin_id": 1000000017022,
+     *       "type_id": 2256
+     *     }
+     *   ],
+     *   "routes": [
+     *     {
+     *       "content_type_id": 2393,
+     *       "destination_pin_id": 1000000017030,
+     *       "quantity": 20,
+     *       "route_id": 4,
+     *       "source_pin_id": 1000000017029
+     *     }
+     *   ]
+     * }
+     * ```
+     *
+     * @param {Integer} characterId The character id
+     * @param {Integer} planetId The planet id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_characters_character_id_planets_planet_id
+     * @esi_link PlanetaryInteractionApi.getCharactersCharacterIdPlanetsPlanetId
+     */
+    exports.getColonyLayout = function(characterId, planetId, accessToken) {
+        return newRequest(ESI.PlanetaryInteractionApi, 'getCharactersCharacterIdPlanetsPlanetId',
                           [id], accessToken);
     };
 
