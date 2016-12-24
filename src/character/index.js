@@ -16,6 +16,7 @@
  * @see https://esi.tech.cpp.is/latest/#/Killmails
  * @see https://esi.tech.cpp.is/latest/#/Location
  * @see https://esi.tech.ccp.is/latest/#/Planetary_Interaction
+ * @see https://esi.tech.ccp.is/latest/#/Skills
  * @param api The internal API instance configured by the root module
  * @module character
  */
@@ -565,6 +566,94 @@
      */
     exports.getColonyLayout = function(characterId, planetId, accessToken) {
         return newRequest(ESI.PlanetaryInteractionApi, 'getCharactersCharacterIdPlanetsPlanetId',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get the character's skill queue, sorted ascending by finishing time, from
+     * the ESI endpoint. This makes an HTTP GET request to 
+     * [`characters/{id}/skillqueue/`](https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "finish_date": "2016-06-29T10:47:00Z",
+     *     "finished_level": 3,
+     *     "queue_position": 0,
+     *     "skill_id": 1,
+     *     "start_date": "2016-06-29T10:46:00Z"
+     *   },
+     *   {
+     *     "finish_date": "2016-07-15T10:47:00Z",
+     *     "finished_level": 4,
+     *     "queue_position": 1,
+     *     "skill_id": 1,
+     *     "start_date": "2016-06-29T10:47:00Z"
+     *   },
+     *   {
+     *     "finish_date": "2016-08-30T10:47:00Z",
+     *     "finished_level": 2,
+     *     "queue_position": 2,
+     *     "skill_id": 2,
+     *     "start_date": "2016-07-15T10:47:00Z"
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue
+     * @esi_link SkillsApi.getCharactersCharacterIdSkillqueue
+     */
+    exports.getSkillQueue = function(id, accessToken) {
+        return newRequest(ESI.SkillsApi, 'getCharactersCharacterIdSkillqueue',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get the character's trained skills, sorted ascending by finishing time, 
+     * from the ESI endpoint. This makes an HTTP GET request to 
+     * [`characters/{id}/skills/`](https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an object parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * {
+     *   "skills": [
+     *     {
+     *       "current_skill_level": 1,
+     *       "skill_id": 1,
+     *       "skillpoints_in_skill": 10000
+     *     },
+     *     {
+     *       "current_skill_level": 1,
+     *       "skill_id": 2,
+     *       "skillpoints_in_skill": 10000
+     *     }
+     *   ],
+     *   "total_sp": 20000
+     * }
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills
+     * @esi_link SkillsApi.getCharactersCharacterIdSkills
+     */
+    exports.getSkillQueue = function(id, accessToken) {
+        return newRequest(ESI.SkillsApi, 'getCharactersCharacterIdSkills',
                           [id], accessToken);
     };
 
