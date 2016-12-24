@@ -17,6 +17,7 @@
  * @see https://esi.tech.cpp.is/latest/#/Location
  * @see https://esi.tech.ccp.is/latest/#/Planetary_Interaction
  * @see https://esi.tech.ccp.is/latest/#/Skills
+ * @see https://esi.tech.ccp.is/latest/#/Wallet
  * @param api The internal API instance configured by the root module
  * @module character
  */
@@ -652,8 +653,39 @@
      * @see https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills
      * @esi_link SkillsApi.getCharactersCharacterIdSkills
      */
-    exports.getSkillQueue = function(id, accessToken) {
+    exports.getSkills = function(id, accessToken) {
         return newRequest(ESI.SkillsApi, 'getCharactersCharacterIdSkills',
+                          [id], accessToken);
+    };
+
+    /**
+     * Get the character's wallets' balances from the ESI endpoint. This makes 
+     * an HTTP GET request to 
+     * [`characters/{id}/wallets/`](https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets).
+     * The request is returned as an asynchronous Promise that resolves to 
+     * an array parsed from the response JSON model. An example value looks 
+     * like:
+     *
+     * ```
+     * [
+     *   {
+     *     "balance": 295000,
+     *     "wallet_id": 1000
+     *   }
+     * ]
+     * ```
+     *
+     * @param {Integer} id The character id
+     * @param {String} accessToken Optional; the access token to authenticate
+     *   contact access of the sending character. If not provided, the default
+     *   access token is used. This will fail if neither is available.
+     * @return {external:Promise} A Promise that resolves to the response of
+     *   the request
+     * @see https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets
+     * @esi_link WalletApi.getCharactersCharacterIdWallets
+     */
+    exports.getWallets = function(id, accessToken) {
+        return newRequest(ESI.WalletApi, 'getCharactersCharacterIdWallets',
                           [id], accessToken);
     };
 
