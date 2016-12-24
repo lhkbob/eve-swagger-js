@@ -9,7 +9,7 @@ Its documentation can be found [here](https://github.com/lhkbob/eve-swagger-js/b
 
 - API version: 0.3.4 (The ESI version)
 - Package version: 0.1.0 (The NodeJS dependency version)
-- Source: [https://github.com/lhkbob/eve-swagger-js/]
+- Source: [https://github.com/lhkbob/eve-swagger-js/](https://github.com/lhkbob/eve-swagger-js/)
 
 ## Installation
 
@@ -47,6 +47,6 @@ ESI.alliance.getAll().then(function(alliances) {
 
 ## Documentation for API Endpoints
 
-Documentation for the library can be found here: [https://lhkbob.github.io/eve-swagger-js].
+Documentation for the library can be found here: [https://lhkbob.github.io/eve-swagger-js](https://lhkbob.github.io/eve-swagger-js).
 
 
