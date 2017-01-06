@@ -256,7 +256,7 @@ evesso.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new EveSwaggerInterface.UserInterfaceApi();
 
-var newMail = new EveSwaggerInterface.PostUiOpenwindowNewmailNewMail(); // PostUiOpenwindowNewmailNewMail | The item type to open in market window
+var newMail = new EveSwaggerInterface.PostUiOpenwindowNewmailNewMail(); // PostUiOpenwindowNewmailNewMail | The details of mail to create
 
 var opts = { 
   'datasource': "tranquility" // String | The server name you would like data from
@@ -276,7 +276,7 @@ apiInstance.postUiOpenwindowNewmail(newMail, opts, callback);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **newMail** | [**PostUiOpenwindowNewmailNewMail**](PostUiOpenwindowNewmailNewMail.md)| The item type to open in market window | 
+ **newMail** | [**PostUiOpenwindowNewmailNewMail**](PostUiOpenwindowNewmailNewMail.md)| The details of mail to create | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
 
 ### Return type

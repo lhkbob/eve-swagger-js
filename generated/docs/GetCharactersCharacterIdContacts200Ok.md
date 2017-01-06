@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 
 * `alliance` (value: `"alliance"`)
 
+* `faction` (value: `"faction"`)
+
 
 
 

@@ -4,6 +4,7 @@ All URIs are relative to *https://esi.tech.ccp.is/latest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**deleteCharactersCharacterIdMailLabelsLabelId**](MailApi.md#deleteCharactersCharacterIdMailLabelsLabelId) | **DELETE** /characters/{character_id}/mail/labels/{label_id}/ | Delete a mail label
 [**deleteCharactersCharacterIdMailMailId**](MailApi.md#deleteCharactersCharacterIdMailMailId) | **DELETE** /characters/{character_id}/mail/{mail_id}/ | Delete a mail
 [**getCharactersCharacterIdMail**](MailApi.md#getCharactersCharacterIdMail) | **GET** /characters/{character_id}/mail/ | Return mail headers
 [**getCharactersCharacterIdMailLabels**](MailApi.md#getCharactersCharacterIdMailLabels) | **GET** /characters/{character_id}/mail/labels/ | Get mail labels and unread counts
@@ -13,6 +14,64 @@ Method | HTTP request | Description
 [**postCharactersCharacterIdMailLabels**](MailApi.md#postCharactersCharacterIdMailLabels) | **POST** /characters/{character_id}/mail/labels/ | Create a mail label
 [**putCharactersCharacterIdMailMailId**](MailApi.md#putCharactersCharacterIdMailMailId) | **PUT** /characters/{character_id}/mail/{mail_id}/ | Update metadata about a mail
 
+
+<a name="deleteCharactersCharacterIdMailLabelsLabelId"></a>
+# **deleteCharactersCharacterIdMailLabelsLabelId**
+> deleteCharactersCharacterIdMailLabelsLabelId(characterId, labelId, opts)
+
+Delete a mail label
+
+Delete a mail label  ---  Alternate route: &#x60;/v1/characters/{character_id}/mail/labels/{label_id}/&#x60;  Alternate route: &#x60;/legacy/characters/{character_id}/mail/labels/{label_id}/&#x60;  Alternate route: &#x60;/dev/characters/{character_id}/mail/labels/{label_id}/&#x60; 
+
+### Example
+```javascript
+var EveSwaggerInterface = require('eve_swagger_interface');
+var defaultClient = EveSwaggerInterface.ApiClient.default;
+
+// Configure OAuth2 access token for authorization: evesso
+var evesso = defaultClient.authentications['evesso'];
+evesso.accessToken = 'YOUR ACCESS TOKEN';
+
+var apiInstance = new EveSwaggerInterface.MailApi();
+
+var characterId = 56; // Integer | An EVE character ID
+
+var labelId = 56; // Integer | An EVE label id
+
+var opts = { 
+  'datasource': "tranquility" // String | The server name you would like data from
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+apiInstance.deleteCharactersCharacterIdMailLabelsLabelId(characterId, labelId, opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **characterId** | **Integer**| An EVE character ID | 
+ **labelId** | **Integer**| An EVE label id | 
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[evesso](../README.md#evesso)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 <a name="deleteCharactersCharacterIdMailMailId"></a>
 # **deleteCharactersCharacterIdMailMailId**

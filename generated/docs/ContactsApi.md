@@ -248,7 +248,7 @@ Name | Type | Description  | Notes
 
 <a name="putCharactersCharacterIdContacts"></a>
 # **putCharactersCharacterIdContacts**
-> putCharactersCharacterIdContacts(characterId, standing, watched, labelId, contactIds, opts)
+> putCharactersCharacterIdContacts(characterId, standing, contactIds, opts)
 
 Edit contacts
 
@@ -269,13 +269,11 @@ var characterId = 56; // Integer | ID for a character
 
 var standing = 3.4; // Number | Standing for the contact
 
-var watched = false; // Boolean | Whether the contact should be watched, note this is only effective on characters
-
-var labelId = 0; // Integer | Add a custom label to the contact, use 0 for clearing label
-
 var contactIds = [new EveSwaggerInterface.[Integer]()]; // [Integer] | A list of contacts to edit
 
 var opts = { 
+  'watched': false, // Boolean | Whether the contact should be watched, note this is only effective on characters
+  'labelId': 0, // Integer | Add a custom label to the contact, use 0 for clearing label
   'datasource': "tranquility" // String | The server name you would like data from
 };
 
@@ -286,7 +284,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.putCharactersCharacterIdContacts(characterId, standing, watched, labelId, contactIds, opts, callback);
+apiInstance.putCharactersCharacterIdContacts(characterId, standing, contactIds, opts, callback);
 ```
 
 ### Parameters
@@ -295,9 +293,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| ID for a character | 
  **standing** | **Number**| Standing for the contact | 
- **watched** | **Boolean**| Whether the contact should be watched, note this is only effective on characters | [default to false]
- **labelId** | **Integer**| Add a custom label to the contact, use 0 for clearing label | [default to 0]
  **contactIds** | **[Integer]**| A list of contacts to edit | 
+ **watched** | **Boolean**| Whether the contact should be watched, note this is only effective on characters | [optional] [default to false]
+ **labelId** | **Integer**| Add a custom label to the contact, use 0 for clearing label | [optional] [default to 0]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
 
 ### Return type

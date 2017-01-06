@@ -166,6 +166,8 @@ Name | Type | Description | Notes
 
 * `FighterTube4` (value: `"FighterTube4"`)
 
+* `Module` (value: `"Module"`)
+
 
 
 
