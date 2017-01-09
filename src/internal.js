@@ -117,7 +117,7 @@ module.exports = function(opts) {
         opts = opts || {};
 
         var _this = this;
-        var key = functionName + '/' + args.join(',') + '+' + opts.toString();
+        var key = functionName + '/' + JSON.stringify(args) + '+' + JSON.stringify(opts);
         if (accessToken) {
             key = key + '@' + accessToken;
         }
