@@ -206,7 +206,7 @@
     };
 
    /**
-    * Delete the label identified by `labelId` for the given `characterId`. This makes an HTTP DELETE request to
+    * Remove the label identified by `labelId` for the given `characterId`. This makes an HTTP DELETE request to
     * [`/characters/{characterId}/mail/labels/{labelId}`](https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_labels_label_id).
     * The request is returned as an asynchronous Promise that resolves to
     * an empty object on success representing the new label's id.
@@ -221,7 +221,7 @@
     * @see https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_labels_label_id
     * @esi_link MailApi.deleteCharactersCharacterIdMailLabelsLabelId
     */
-   exports.deleteInboxLabel = function(characterId, labelId, accessToken) {
+   exports.removeInboxLabel = function(characterId, labelId, accessToken) {
      return newRequestOpt(ESI.MailApi, 'deleteCharactersCharacterIdMailLabelsLabelId',
        [id], {label: label}, accessToken);
    };
