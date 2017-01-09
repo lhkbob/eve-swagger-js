@@ -173,14 +173,14 @@
      *   }
      * ]
      * ```
-     * @param {Array.<Integer>} id The ids to look up
+     * @param {Array.<Integer>} ids The ids to look up
      * @return {external:Promise} A Promise that resolves to the response of
      *   the request
      * @see https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names
      * @esi_link UniverseApi.postUniverseNames
      */
     exports.getNamesOf = function(ids) {
-        return newRequest(ESI.UniverseApi, 'postUniverseNames', [ids]);
+        return newRequest(ESI.UniverseApi, 'postUniverseNames', [{ids: ids}]);
     };
 
     return exports;
