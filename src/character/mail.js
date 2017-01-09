@@ -178,8 +178,7 @@
     };
 
     /**
-     * Create a new inbox label for the given character `id`, where the label
-     * is described by `mail`. This makes an HTTP POST request to
+     * Create a new inbox label for the given character `id`. This makes an HTTP POST request to
      * [`/characters/{id}/mail/labels`](https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail_labels).
      * The request is returned as an asynchronous Promise that resolves to 
      * an Integer on success representing the new label's id. An example `label` 
@@ -205,6 +204,27 @@
         return newRequestOpt(ESI.MailApi, 'postCharactersCharacterIdMailLabels',
                           [id], {label: label}, accessToken);
     };
+
+   /**
+    * Delete the label identified by `labelId` for the given `characterId`. This makes an HTTP DELETE request to
+    * [`/characters/{characterId}/mail/labels/{labelId}`](https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_labels_label_id).
+    * The request is returned as an asynchronous Promise that resolves to
+    * an empty object on success representing the new label's id.
+    *
+    * @param {Integer} characterId The character id the whose mailbox has the label deleted from
+    * @param {Object} labelId The label's id
+    * @param {String} accessToken Optional access token to authenticate the
+    *   request, which overrides any default access token of the factory. If
+    *   neither this nor the default token are provided, this will fail.
+    * @return {external:Promise} A Promise that resolves to the response of
+    *   the request
+    * @see https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_labels_label_id
+    * @esi_link MailApi.deleteCharactersCharacterIdMailLabelsLabelId
+    */
+   exports.deleteInboxLabel = function(characterId, labelId, accessToken) {
+     return newRequestOpt(ESI.MailApi, 'deleteCharactersCharacterIdMailLabelsLabelId',
+       [id], {label: label}, accessToken);
+   };
 
     /**
      * Get all of the the character's mailing list memberships from the ESI 
