@@ -133,30 +133,18 @@ module.exports = function(api) {
    * @memberof module:search
    */
   Search.prototype.get = function(text, categories, language) {
-    var opt = { strict: this.strict };
-    if (!language) {
-      // Take language from default language setting
-      if (api.opts.language) {
-        language = api.opts.language;
-      } else {
-        language = 'en-us';
-      }
-    }
-    if (language == 'en') {
-      // Rewrite 'en' to 'en-us' since the search enum is a little
-      // different in the codes it supports.
-      language = 'en-us';
-    }
-
     categories = categories || [];
     if (categories.length == 0) {
       categories = this.categories;
     }
 
     var opts = {
-      strict: this.strict,
-      language: language
+      strict: this.strict
     };
+    if (language) {
+      opts.language = language;
+    }
+
     if (this.characterId) {
       return newRequestOpt(ESI.SearchApi, 'getCharactersCharacterIdSearch',
           [this.characterId, text], opts, this.accessToken);
