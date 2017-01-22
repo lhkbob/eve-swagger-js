@@ -7,12 +7,13 @@
  *
  * This module also folds in smaller character-related end points that are not
  * large enough to warrant their own sub-module. It also exports sub-modules for
- * these larger end points, such as `calendar` and `mail`.
+ * these larger end points, such as `calendar`, `fittings`, and `mail`.
  *
  * @see https://esi.tech.ccp.is/latest/#/Character
  * @see https://esi.tech.cpp.is/latest/#/Assets
  * @see https://esi.tech.cpp.is/latest/#/Bookmarks
  * @see https://esi.tech.cpp.is/latest/#/Clones
+ * @see https://esi.tech.cpp.is/latest/#/Fittings
  * @see https://esi.tech.cpp.is/latest/#/Killmails
  * @see https://esi.tech.cpp.is/latest/#/Location
  * @see https://esi.tech.ccp.is/latest/#/Planetary_Interaction
@@ -36,6 +37,15 @@ module.exports = function(api) {
    * @constant {module:character/calendar}
    */
   exports.calendar = require('./calendar')(api);
+
+  /**
+   * This is an instance of `fittings` module configured to use the options
+   * provided to the factory. This instance uses a cache shared by the other
+   * exposed APIs members.
+   *
+   * @constant {module:character/fittings}
+   */
+  exports.fittings = require('./fittings')(api);
 
   /**
    * This is an instance of `mail` module configured to use the options provided
