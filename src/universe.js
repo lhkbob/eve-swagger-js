@@ -12,6 +12,7 @@
  */
 module.exports = function(api) {
   var newRequest = api.newRequest;
+  var newRequestOpt = api.newRequestOpt;
   var ESI = api.esi;
 
   var exports = {};
