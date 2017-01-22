@@ -16,11 +16,12 @@ Its documentation can be found [here](https://github.com/lhkbob/eve-swagger-js/b
 ### For [Node.js](https://nodejs.org/)
 
 Currently, this library has not been published to the `npm` repository.
-However, it can still be depended on in NodeJS projects by including a dependency in `package.json` using a GitHub URL:
+However, it can still be depended on in NodeJS projects by including a dependency in `package.json` using a GitHub URL.
+A specific release can be requested by appending, e.g. `#0.1.3`, to the end of the URL:
 
 ```json
 "dependencies": {
-   "eve_swagger_interface": "git://github.com/lhkbob/eve-swagger-js.git",
+   "eve_swagger_interface": "git://github.com/lhkbob/eve-swagger-js.git#0.1.3",
 }
 ```
 
