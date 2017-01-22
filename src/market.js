@@ -80,7 +80,7 @@ module.exports = function(api) {
    * Get a page of market orders in the given structure from the ESI endpoint.
    * Orders include buy and sell, and are for any item type. This makes an HTTP
    * GET request to
-   * [`/markets/structures/{structureId}`](https://esi.tech.ccp.is/latest/#!/Market/get_market_structures_structure_id).
+   * [`/markets/structures/{structureId}/`](https://esi.tech.ccp.is/latest/#!/Market/get_market_structures_structure_id).
    * The request is returned as an asynchronous Promise that resolves to an
    * array parsed from the response JSON model. An example value looks like:
    *
