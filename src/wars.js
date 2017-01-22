@@ -16,29 +16,6 @@ module.exports = function(api) {
   var exports = {};
 
   /**
-   * Get ids of all wars from the ESI endpoint. This makes an HTTP GET request
-   * to [`/wars/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars). The request
-   * is returned as an asynchronous Promise that resolves to an array parsed
-   * from the response JSON model. An example value looks like:
-   *
-   * ```
-   * [
-   *   3,
-   *   2,
-   *   1
-   * ]
-   * ```
-   *
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Wars/get_wars
-   * @esi_link WarsApi.getWars
-   */
-  exports.getAll = function() {
-    return newRequest(ESI.WarsApi, 'getWars', []);
-  };
-
-  /**
    * Get information on a war from the ESI endpoint. This makes an HTTP GET
    * request to
    * [`/wars/{id}/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id).
