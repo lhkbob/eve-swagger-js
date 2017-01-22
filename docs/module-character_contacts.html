@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: ui</title>
+    <title>JSDoc: Module: character/contacts</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: ui</h1>
+    <h1 class="page-title">Module: character/contacts</h1>
 
     
 
@@ -38,12 +38,11 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/User_Interface">user
-interface</a> ESI endpoints.
-You should not require this module directly, as it technically returns a
-factory function that requires an internal API. Instead an instance is
-automatically exposed when the <a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is loaded
-and configured.</p></div>
+            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Contacts">contacts</a> ESI
+endpoints. You should not require this module directly, as it technically
+returns a factory function that requires an internal API. Instead an instance
+is automatically exposed when the <a href="module-character.html"><code>module:character</code></a> is loaded and
+configured.</p></div>
         
 
         
@@ -136,7 +135,7 @@ and configured.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui.js.html">ui.js</a>, <a href="ui.js.html#line1">line 1</a>
+        <a href="character_contacts.js.html">character/contacts.js</a>, <a href="character_contacts.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -146,7 +145,7 @@ and configured.</p></div>
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#/User_Interface">https://esi.tech.ccp.is/latest/#/User_Interface</a></li>
+            <li><a href="https://esi.tech.ccp.is/latest/#/Contacts">https://esi.tech.ccp.is/latest/#/Contacts</a></li>
         </ul>
     </dd>
     
@@ -193,21 +192,23 @@ and configured.</p></div>
 
     
 
-    <h4 class="name" id=".appendWaypoint"><span class="type-signature">(static) </span>appendWaypoint<span class="signature">(destinationId, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".add"><span class="type-signature">(static) </span>add<span class="signature">(characterId, contacts, standing, label, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Add a waypoint to the in-game autopilot with the ESI endpoint. This makes
-an  HTTP POST request to
-<a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint"><code>/ui/autopilot/waypoint/</code></a>.
+    <p>Bulk add contacts with the same settings to the given character's contact
+list via the ESI end point. This makes an HTTP POST request to
+<a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts"><code>/characters/{characterId}/contacts</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
-empty object on success.</p>
-<p>This does not remove other waypoints and the new waypoint is added to the
-end of the path.
-This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UserInterfaceApi.md#postUiAutopilotWaypoint">UserInterfaceApi.postUiAutopilotWaypoint</a>.</p>
+array from the response JSON model. An example return value looks like:</p>
+<pre class="prettyprint source"><code>[
+  123,
+  456
+]</code></pre><p>The added contacts are unwatched.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/ContactsApi.md#postCharactersCharacterIdContacts">ContactsApi.postCharactersCharacterIdContacts</a>.</p>
 </div>
 
 
@@ -243,7 +244,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
         <tr>
             
-                <td class="name"><code>destinationId</code></td>
+                <td class="name"><code>characterId</code></td>
             
 
             <td class="type">
@@ -259,7 +260,76 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
             
 
-            <td class="description last"><p>The id of the destination system or object</p></td>
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contacts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Integer></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of contact character ids to add</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>standing</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The standing for all contacts</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; custom label id to add contacts to</p></td>
         </tr>
 
     
@@ -325,7 +395,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui.js.html">ui.js</a>, <a href="ui.js.html#line65">line 65</a>
+        <a href="character_contacts.js.html">character/contacts.js</a>, <a href="character_contacts.js.html#line115">line 115</a>
     </li></ul></dd>
     
 
@@ -335,7 +405,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint">https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint</a></li>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts">https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts</a></li>
         </ul>
     </dd>
     
@@ -386,19 +456,23 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
     
 
-    <h4 class="name" id=".openContract"><span class="type-signature">(static) </span>openContract<span class="signature">(contractId, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".addWatched"><span class="type-signature">(static) </span>addWatched<span class="signature">(characterId, contacts, standing, label, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Open the in-game contracts window to the specified contract via the ESI
-endpoint. This makes an  HTTP POST request to
-<a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_contract"><code>/ui/openwindow/contract/</code></a>.
+    <p>Bulk add contacts with the same settings to the given character's contact
+list via the ESI end point. This makes an HTTP POST request to
+<a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts"><code>/characters/{characterId}/contacts</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
-empty object on success.
-This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UserInterfaceApi.md#postUiOpenwindowContract">UserInterfaceApi.postUiOpenwindowContract</a>.</p>
+array from the response JSON model. An example return value looks like:</p>
+<pre class="prettyprint source"><code>[
+  123,
+  456
+]</code></pre><p>The added contacts are watched.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/ContactsApi.md#postCharactersCharacterIdContacts">ContactsApi.postCharactersCharacterIdContacts</a>.</p>
 </div>
 
 
@@ -434,7 +508,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
         <tr>
             
-                <td class="name"><code>contractId</code></td>
+                <td class="name"><code>characterId</code></td>
             
 
             <td class="type">
@@ -450,7 +524,76 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
             
 
-            <td class="description last"><p>The id of the contract</p></td>
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contacts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Integer></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of contact character ids to add</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>standing</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The standing for all contacts</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; custom label id to add contacts to</p></td>
         </tr>
 
     
@@ -516,7 +659,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui.js.html">ui.js</a>, <a href="ui.js.html#line118">line 118</a>
+        <a href="character_contacts.js.html">character/contacts.js</a>, <a href="character_contacts.js.html#line148">line 148</a>
     </li></ul></dd>
     
 
@@ -526,7 +669,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_contract">https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_contract</a></li>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts">https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts</a></li>
         </ul>
     </dd>
     
@@ -577,19 +720,28 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
     
 
-    <h4 class="name" id=".openInfo"><span class="type-signature">(static) </span>openInfo<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".get"><span class="type-signature">(static) </span>get<span class="signature">(id, page, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Open the in-game information window on the specific entity via the ESI
-endpoint. This makes an  HTTP POST request to
-<a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_information"><code>/ui/openwindow/information/</code></a>.
+    <p>Get a page of contacts for the given character via the ESI end point. The
+<code>page</code> parameter controls which page is selected. This makes an HTTP GET
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts"><code>/characters/{id}/contacts</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
-empty object on success.
-This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UserInterfaceApi.md#postUiOpenwindowContract">UserInterfaceApi.postUiOpenwindowContract</a>.</p>
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;contact_id&quot;: 123,
+    &quot;contact_type&quot;: &quot;character&quot;,
+    &quot;is_blocked&quot;: false,
+    &quot;is_watched&quot;: true,
+    &quot;standing&quot;: 10
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/ContactsApi.md#getCharactersCharacterIdContacts">ContactsApi.getCharactersCharacterIdContacts</a>.</p>
 </div>
 
 
@@ -641,182 +793,14 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
             
 
-            <td class="description last"><p>The id of the entity to look up</p></td>
+            <td class="description last"><p>The character id</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>accessToken</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Optional; the access token to authenticate
-  contact access of the sending character. If not provided, the default
-  access token is used. This will fail if neither is available.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui.js.html">ui.js</a>, <a href="ui.js.html#line139">line 139</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_information">https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_information</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>A Promise that resolves to the response of
-  the request</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".openMarket"><span class="type-signature">(static) </span>openMarket<span class="signature">(typeId, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Open the in-game market window to the specified type via the ESI endpoint.
-This makes an  HTTP POST request to
-<a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_marketdetails"><code>/ui/openwindow/marketdetails/</code></a>.
-The request is returned as an asynchronous Promise that resolves to an
-empty object on success.
-This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UserInterfaceApi.md#postUiOpenwindowMarketdetails">UserInterfaceApi.postUiOpenwindowMarketdetails</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>typeId</code></td>
+                <td class="name"><code>page</code></td>
             
 
             <td class="type">
@@ -832,7 +816,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
             
 
-            <td class="description last"><p>The id of the type on the market to pull up</p></td>
+            <td class="description last"><p>The page to fetch, defaults to 1</p></td>
         </tr>
 
     
@@ -898,7 +882,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui.js.html">ui.js</a>, <a href="ui.js.html#line160">line 160</a>
+        <a href="character_contacts.js.html">character/contacts.js</a>, <a href="character_contacts.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -908,7 +892,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_marketdetails">https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_marketdetails</a></li>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts">https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts</a></li>
         </ul>
     </dd>
     
@@ -959,28 +943,24 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
     
 
-    <h4 class="name" id=".openNewMail"><span class="type-signature">(static) </span>openNewMail<span class="signature">(mail, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".getLabels"><span class="type-signature">(static) </span>getLabels<span class="signature">(id, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Open the in-game mail window to send a new mail via the ESI endpoint. This
-makes an  HTTP POST request to
-<a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_newmail"><code>/ui/openwindow/contract/</code></a>.
+    <p>Get a list of custom labels for the given character's contacts via the ESI
+end point. This makes an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts_labels"><code>/characters/{id}/contacts/labels</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
-empty object on success. The new mail dialog is initialized based on the
-mail configuration passed in, an example of which looks like:</p>
-<pre class="prettyprint source"><code>{
-  &quot;body&quot;: &quot;string&quot;,
-  &quot;recipients&quot;: [
-    0
-  ],
-  &quot;subject&quot;: &quot;string&quot;,
-  &quot;to_corp_or_alliance_id&quot;: 0,
-  &quot;to_mailing_list_id&quot;: 0
-}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UserInterfaceApi.md#postUiOpenwindowNewmail">UserInterfaceApi.postUiOpenwindowNewmail</a>.</p>
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;label_id&quot;: 123,
+    &quot;label_name&quot;: &quot;Friends&quot;
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/ContactsApi.md#getCharactersCharacterIdContactsLabels">ContactsApi.getCharactersCharacterIdContactsLabels</a>.</p>
 </div>
 
 
@@ -1016,200 +996,7 @@ mail configuration passed in, an example of which looks like:</p>
 
         <tr>
             
-                <td class="name"><code>mail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The initial state of the new mail</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>accessToken</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Optional; the access token to authenticate
-  contact access of the sending character. If not provided, the default
-  access token is used. This will fail if neither is available.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui.js.html">ui.js</a>, <a href="ui.js.html#line194">line 194</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_newmail">https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_newmail</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>A Promise that resolves to the response of
-  the request</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".prependWaypoint"><span class="type-signature">(static) </span>prependWaypoint<span class="signature">(destinationId, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Insert a waypoint to the in-game autopilot with the ESI endpoint. This
-makes an  HTTP POST request to
-<a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint"><code>/ui/autopilot/waypoint/</code></a>.
-The request is returned as an asynchronous Promise that resolves to an
-empty object on success.</p>
-<p>This does not remove other waypoints and the new waypoint is added to the
-start of the path.
-This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UserInterfaceApi.md#postUiAutopilotWaypoint">UserInterfaceApi.postUiAutopilotWaypoint</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>destinationId</code></td>
+                <td class="name"><code>id</code></td>
             
 
             <td class="type">
@@ -1225,7 +1012,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
             
 
-            <td class="description last"><p>The id of the destination system or object</p></td>
+            <td class="description last"><p>The character id</p></td>
         </tr>
 
     
@@ -1291,7 +1078,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui.js.html">ui.js</a>, <a href="ui.js.html#line93">line 93</a>
+        <a href="character_contacts.js.html">character/contacts.js</a>, <a href="character_contacts.js.html#line244">line 244</a>
     </li></ul></dd>
     
 
@@ -1301,7 +1088,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint">https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint</a></li>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts_labels">https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts_labels</a></li>
         </ul>
     </dd>
     
@@ -1352,20 +1139,19 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
     
 
-    <h4 class="name" id=".setWaypoint"><span class="type-signature">(static) </span>setWaypoint<span class="signature">(destinationId, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+    <h4 class="name" id=".remove"><span class="type-signature">(static) </span>remove<span class="signature">(characterId, contacts, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Set the in-game autopilot waypoint with the ESI endpoint. This makes an
-HTTP POST request to
-<a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint"><code>/ui/autopilot/waypoint/</code></a>.
+    <p>Remove contacts by their id from the given character's contact list via the
+ESI end point. This makes an HTTP DELETE request to
+<a href="https://esi.tech.ccp.is/latest/#!/Contacts/delete_characters_character_id_contacts"><code>/characters/{characterId}/contacts</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
-empty object on success.</p>
-<p>This clears all other waypoints.
-This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UserInterfaceApi.md#postUiAutopilotWaypoint">UserInterfaceApi.postUiAutopilotWaypoint</a>.</p>
+empty object from the response JSON model.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/ContactsApi.md#deleteCharactersCharacterIdContacts">ContactsApi.deleteCharactersCharacterIdContacts</a>.</p>
 </div>
 
 
@@ -1401,7 +1187,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
         <tr>
             
-                <td class="name"><code>destinationId</code></td>
+                <td class="name"><code>characterId</code></td>
             
 
             <td class="type">
@@ -1417,7 +1203,30 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
             
 
-            <td class="description last"><p>The id of the destination system or object</p></td>
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contacts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Integer></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of contact ids</p></td>
         </tr>
 
     
@@ -1483,7 +1292,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui.js.html">ui.js</a>, <a href="ui.js.html#line37">line 37</a>
+        <a href="character_contacts.js.html">character/contacts.js</a>, <a href="character_contacts.js.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -1493,7 +1302,529 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint">https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint</a></li>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Contacts/delete_characters_character_id_contacts">https://esi.tech.ccp.is/latest/#!/Contacts/delete_characters_character_id_contacts</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".update"><span class="type-signature">(static) </span>update<span class="signature">(characterId, contacts, standing, label, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Bulk update contacts to the same settings in the given character's contact
+list via the ESI end point. This makes an HTTP PUT request to
+<a href="https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts"><code>/characters/{characterId}/contacts</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+empty object on success. The updated contacts are set to unwatched.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/ContactsApi.md#putCharactersCharacterIdContacts">ContactsApi.putCharactersCharacterIdContacts</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>characterId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contacts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Integer></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of contact character ids to add</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>standing</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The standing for all contacts</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; custom label id to add contacts to. If
+    not provided, the contact has its previous label removed</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_contacts.js.html">character/contacts.js</a>, <a href="character_contacts.js.html#line187">line 187</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts">https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".updateWatched"><span class="type-signature">(static) </span>updateWatched<span class="signature">(characterId, contacts, standing, label, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Bulk update contacts to the same settings in the given character's contact
+list via the ESI end point. This makes an HTTP PUT request to
+<a href="https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts"><code>/characters/{characterId}/contacts</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+empty object on success. The updated contacts are set to watched.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/ContactsApi.md#putCharactersCharacterIdContacts">ContactsApi.putCharactersCharacterIdContacts</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>characterId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contacts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Integer></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of contact character ids to add</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>standing</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The standing for all contacts</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; custom label id to add contacts to. If
+    not provided, the contact has its previous label removed</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the access token to authenticate
+  contact access of the sending character. If not provided, the default
+  access token is used. This will fail if neither is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_contacts.js.html">character/contacts.js</a>, <a href="character_contacts.js.html#line213">line 213</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts">https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts</a></li>
         </ul>
     </dd>
     

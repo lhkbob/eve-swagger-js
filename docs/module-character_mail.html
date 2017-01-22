@@ -38,11 +38,11 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Mail">mail</a>
-ESI endpoints. You should not require this module directly, as it technically
+            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Mail">mail</a> ESI
+endpoints. You should not require this module directly, as it technically
 returns a factory function that requires an internal API. Instead an instance
-is automatically exposed when the 
-<a href="module-character.html"><code>module:character</code></a> is loaded and configured.</p></div>
+is automatically exposed when the <a href="module-character.html"><code>module:character</code></a> is loaded and
+configured.</p></div>
         
 
         
@@ -199,11 +199,11 @@ is automatically exposed when the
 
 
 <div class="description">
-    <p>Create a new inbox label for the given character <code>id</code>, where the label
-is described by <code>mail</code>. This makes an HTTP POST request to
+    <p>Create a new inbox label for the given character <code>id</code>. This makes an HTTP
+POST request to
 <a href="https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail_labels"><code>/characters/{id}/mail/labels</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an Integer on success representing the new label's id. An example <code>label</code> 
+The request is returned as an asynchronous Promise that resolves to an
+Integer on success representing the new label's id. An example <code>label</code>
 value looks like:</p>
 <pre class="prettyprint source"><code>{
   &quot;color&quot;: &quot;#ffffff&quot;,
@@ -349,7 +349,7 @@ value looks like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line204">line 204</a>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line210">line 210</a>
     </li></ul></dd>
     
 
@@ -383,7 +383,7 @@ value looks like:</p>
 
         
 <div class="param-desc">
-    <p>A Promise that resolves to the response of 
+    <p>A Promise that resolves to the response of
   the request</p>
 </div>
 
@@ -417,8 +417,8 @@ value looks like:</p>
 
 
 <div class="description">
-    <p>Delete the given mail from the character's inbox via the ESI endpoint.
-This makes an HTTP DELETE request to 
+    <p>Delete the given mail from the character's inbox via the ESI endpoint. This
+makes an HTTP DELETE request to
 <a href="https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_mail_id"><code>/characters/{characterId}/mail/{mailId}/</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
 empty object on success.
@@ -563,7 +563,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line255">line 255</a>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line286">line 286</a>
     </li></ul></dd>
     
 
@@ -597,7 +597,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
         
 <div class="param-desc">
-    <p>A Promise that resolves to the response of 
+    <p>A Promise that resolves to the response of
   the request</p>
 </div>
 
@@ -631,8 +631,8 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
 
 <div class="description">
-    <p>Get the full mail message from the character's inbox via the ESI 
-endpoint. This makes an HTTP GET request to 
+    <p>Get the full mail message from the character's inbox via the ESI endpoint.
+This makes an HTTP GET request to
 <a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_mail_id"><code>/characters/{characterId}/mail/{mailId}/</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
 object parsed from the JSON model of the response. An example value is:</p>
@@ -787,7 +787,7 @@ object parsed from the JSON model of the response. An example value is:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line291">line 291</a>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line322">line 322</a>
     </li></ul></dd>
     
 
@@ -821,7 +821,7 @@ object parsed from the JSON model of the response. An example value is:</p>
 
         
 <div class="param-desc">
-    <p>A Promise that resolves to the response of 
+    <p>A Promise that resolves to the response of
   the request</p>
 </div>
 
@@ -855,12 +855,12 @@ object parsed from the JSON model of the response. An example value is:</p>
 
 
 <div class="description">
-    <p>Calculate the CSPA mail prices for sending mail from the character 
-<code>fromId</code> to the characters in <code>toIds</code>, via the ESI endpoint. This makes
-an HTTP POST request to <a href="https://esi.tech.ccp.is/latest/#!/Character/post_characters_character_id_cspa"><code>/character/{fromId}/cspa/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an object parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Calculate the CSPA mail prices for sending mail from the character <code>fromId</code>
+to the characters in <code>toIds</code>, via the ESI endpoint. This makes an HTTP POST
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Character/post_characters_character_id_cspa"><code>/character/{fromId}/cspa/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>{
   &quot;cost&quot;: 295000
 }</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/CharacterApi.md#postCharactersCharacterIdCspa">CharacterApi.postCharactersCharacterIdCspa</a>.</p>
@@ -938,7 +938,7 @@ like:</p>
 
             
 
-            <td class="description last"><p>The list of character ids receiving the 
+            <td class="description last"><p>The list of character ids receiving the
   mail</p></td>
         </tr>
 
@@ -1005,7 +1005,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line43">line 43</a>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -1073,11 +1073,12 @@ like:</p>
 
 
 <div class="description">
-    <p>Get the 50 most recent mail headers in the characters inbox. If
-<code>labelIds</code> is present, then only mail within those labels are returned.
-If <code>lastMailId</code> is provided, up to the 50 mails just prior to that 
-mail id will be returned, allowing you to paginate backwards.</p>
-<p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail"><code>/characters/{id}/mail/</code></a>.
+    <p>Get the 50 most recent mail headers in the characters inbox. If <code>labelIds</code>
+is present, then only mail within those labels are returned. If
+<code>lastMailId</code> is provided, up to the 50 mails just prior to that mail id
+will be returned, allowing you to paginate backwards.</p>
+<p>This makes an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail"><code>/characters/{id}/mail/</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
 array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
@@ -1172,7 +1173,7 @@ array parsed from the response JSON model. An example value looks like:</p>
 
             
 
-            <td class="description last"><p>The label ids to restrict returned 
+            <td class="description last"><p>The label ids to restrict returned
   mail to, or <code>[]|null|undefined</code> for no restriction</p></td>
         </tr>
 
@@ -1263,7 +1264,7 @@ array parsed from the response JSON model. An example value looks like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line92">line 92</a>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line94">line 94</a>
     </li></ul></dd>
     
 
@@ -1297,7 +1298,7 @@ array parsed from the response JSON model. An example value looks like:</p>
 
         
 <div class="param-desc">
-    <p>A Promise that resolves to the response of 
+    <p>A Promise that resolves to the response of
   the request</p>
 </div>
 
@@ -1333,7 +1334,8 @@ array parsed from the response JSON model. An example value looks like:</p>
 <div class="description">
     <p>Get the character's inbox labels along with unread counts for each label
 and their total unread count for all mail. This makes an HTTP GET request
-to <a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_labels"><code>/characters/{id}/mail/labels/</code></a>.
+to
+<a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_labels"><code>/characters/{id}/mail/labels/</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
 object parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>{
@@ -1470,7 +1472,7 @@ object parsed from the response JSON model. An example value looks like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line175">line 175</a>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line180">line 180</a>
     </li></ul></dd>
     
 
@@ -1504,7 +1506,7 @@ object parsed from the response JSON model. An example value looks like:</p>
 
         
 <div class="param-desc">
-    <p>A Promise that resolves to the response of 
+    <p>A Promise that resolves to the response of
   the request</p>
 </div>
 
@@ -1538,8 +1540,8 @@ object parsed from the response JSON model. An example value looks like:</p>
 
 
 <div class="description">
-    <p>Get all of the the character's mailing list memberships from the ESI 
-end point. This makes an HTTP GET request to
+    <p>Get all of the the character's mailing list memberships from the ESI end
+point. This makes an HTTP GET request to
 <a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_lists"><code>/characters/{id}/mail/lists/</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
 array parsed from the response JSON model. An example value looks like:</p>
@@ -1666,7 +1668,7 @@ array parsed from the response JSON model. An example value looks like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line233">line 233</a>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line264">line 264</a>
     </li></ul></dd>
     
 
@@ -1700,7 +1702,222 @@ array parsed from the response JSON model. An example value looks like:</p>
 
         
 <div class="param-desc">
-    <p>A Promise that resolves to the response of 
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".removeInboxLabel"><span class="type-signature">(static) </span>removeInboxLabel<span class="signature">(characterId, labelId, accessToken)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Remove the label identified by <code>labelId</code> for the given <code>characterId</code>. This
+makes an HTTP DELETE request to
+<a href="https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_labels_label_id"><code>/characters/{characterId}/mail/labels/{labelId}</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+empty object on success representing the new label's id.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MailApi.md#deleteCharactersCharacterIdMailLabelsLabelId">MailApi.deleteCharactersCharacterIdMailLabelsLabelId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>characterId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The character id the whose mailbox has the
+    label deleted from</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>labelId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The label's id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional access token to authenticate the
+  request, which overrides any default access token of the factory. If
+  neither this nor the default token are provided, this will fail.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line233">line 233</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_labels_label_id">https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_labels_label_id</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
   the request</p>
 </div>
 
@@ -1734,12 +1951,12 @@ array parsed from the response JSON model. An example value looks like:</p>
 
 
 <div class="description">
-    <p>Send a mail from the given character <code>id</code>, where the mail contents
-and destination are described by <code>mail</code>. This makes an HTTP POST request
-to <a href="https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail"><code>/characters/{id}/mail/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an Integer holding the new mail id on success. An example <code>mail</code> value 
-looks like:</p>
+    <p>Send a mail from the given character <code>id</code>, where the mail contents and
+destination are described by <code>mail</code>. This makes an HTTP POST request to
+<a href="https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail"><code>/characters/{id}/mail/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+Integer holding the new mail id on success. An example <code>mail</code> value looks
+like:</p>
 <pre class="prettyprint source"><code>{
   &quot;approved_cost&quot;: 0,
   &quot;body&quot;: &quot;string&quot;,
@@ -1891,7 +2108,7 @@ looks like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line135">line 135</a>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line138">line 138</a>
     </li></ul></dd>
     
 
@@ -1925,7 +2142,7 @@ looks like:</p>
 
         
 <div class="param-desc">
-    <p>A Promise that resolves to the response of 
+    <p>A Promise that resolves to the response of
   the request</p>
 </div>
 
@@ -1959,8 +2176,8 @@ looks like:</p>
 
 
 <div class="description">
-    <p>Update the metadata of a mail in the character's inbox via the ESI 
-endpoint. This makes an HTTP PUT request to 
+    <p>Update the metadata of a mail in the character's inbox via the ESI
+endpoint. This makes an HTTP PUT request to
 <a href="https://esi.tech.ccp.is/latest/#!/Mail/put_characters_character_id_mail_mail_id"><code>/characters/{characterId}/mail/{mailId}/</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
 empty object on success. An example <code>updates</code> object looks like:</p>
@@ -2133,7 +2350,7 @@ empty object on success. An example <code>updates</code> object looks like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line323">line 323</a>
+        <a href="character_mail.js.html">character/mail.js</a>, <a href="character_mail.js.html#line354">line 354</a>
     </li></ul></dd>
     
 
@@ -2167,7 +2384,7 @@ empty object on success. An example <code>updates</code> object looks like:</p>
 
         
 <div class="param-desc">
-    <p>A Promise that resolves to the response of 
+    <p>A Promise that resolves to the response of
   the request</p>
 </div>
 
@@ -2205,13 +2422,13 @@ empty object on success. An example <code>updates</code> object looks like:</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_contacts.html">character/contacts</a></li><li><a href="module-character_fittings.html">character/fittings</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 23 2016 23:11:37 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Jan 22 2017 13:08:37 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

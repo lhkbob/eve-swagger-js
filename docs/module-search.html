@@ -38,11 +38,11 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Search">search</a>
-ESI endpoints. You should not require this module directly, as it technically
+            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Search">search</a> ESI
+endpoints. You should not require this module directly, as it technically
 returns a factory function that requires an internal API. Instead an instance
-is automatically exposed when the 
-<a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is loaded and configured.</p></div>
+is automatically exposed when the <a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is
+loaded and configured.</p></div>
         
 
         
@@ -193,7 +193,7 @@ is automatically exposed when the
 
 
 <div class="description">
-    <p>The enumeration of categories that can be searched through. Valid 
+    <p>The enumeration of categories that can be searched through. Valid
 categories are:</p>
 <ol>
 <li><code>'agent'</code></li>
@@ -328,7 +328,7 @@ non-strict queries.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line376">line 376</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line374">line 374</a>
     </li></ul></dd>
     
 
@@ -362,14 +362,15 @@ non-strict queries.</p>
 
 
 <div class="description">
-    <p>Return a search module configured to search within the context of the
-given character (requiring an access token). The returned module provides
-the same methods and functionality as the base <a href="module-search.html"><code>module:search</code></a>
-instance. If this was called on <a href="module-search.html#.strict"><code>search.strict</code></a>
-then the returned instance will also make strict queries.</p>
-<p>All search queries will be routed through <a href="https://esi.tech.ccp.is/latest/#!/Search/get_characters_character_id_search"><code>/character/{id}/search/</code></a>
-instead of the regular <code>/search/</code> URL that the non-character enabled
-search queries are directed to.</p>
+    <p>Return a search module configured to search within the context of the given
+character (requiring an access token). The returned module provides the
+same methods and functionality as the base <a href="module-search.html"><code>module:search</code></a> instance.
+If this was called on <a href="module-search.html#.strict"><code>search.strict</code></a> then the
+returned instance will also make strict queries.</p>
+<p>All search queries will be routed through
+<a href="https://esi.tech.ccp.is/latest/#!/Search/get_characters_character_id_search"><code>/character/{id}/search/</code></a>
+instead of the regular <code>/search/</code> URL that the non-character enabled search
+queries are directed to.</p>
 </div>
 
 
@@ -444,7 +445,7 @@ search queries are directed to.</p>
 
             
 
-            <td class="description last"><p>Optional; The access token used to 
+            <td class="description last"><p>Optional; The access token used to
   authenticate the search requests. If not provided, the default access
   token will be used. If that is undefined search requests will fail with
   the returned instance.</p></td>
@@ -488,7 +489,7 @@ search queries are directed to.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line77">line 77</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -548,15 +549,15 @@ search queries are directed to.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint that match the given
-query <code>text</code>, restricted to the <code>categories</code> set (stored as an
-array). The optional <code>language</code> parameter can be used to define the
-language and locale of the query's text. If <code>categories</code> is <code>null</code>,
-<code>undefined</code>, or empty then all categories are queried.</p>
-<p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>/search/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an object parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Get the search results from the ESI endpoint that match the given query
+<code>text</code>, restricted to the <code>categories</code> set (stored as an array). The
+optional <code>language</code> parameter can be used to define the language and locale
+of the query's text. If <code>categories</code> is <code>null</code>, <code>undefined</code>, or empty then
+all categories are queried.</p>
+<p>This makes an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>/search/</code></a>. The
+request is returned as an asynchronous Promise that resolves to an object
+parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>{
   &quot;solarsystem&quot;: [
     30002510
@@ -669,8 +670,8 @@ like:</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -712,7 +713,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line124">line 124</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line135">line 135</a>
     </li></ul></dd>
     
 
@@ -782,9 +783,8 @@ like:</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all agents in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['agent']</code>. Note that the resolved response 
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+agents in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['agent']</code>. Note that the resolved response
 object still includes the type specifier.</p>
 </div>
 
@@ -860,8 +860,8 @@ object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -903,7 +903,7 @@ object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line174">line 174</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -964,10 +964,9 @@ object still includes the type specifier.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all alliances in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['alliance']</code>. Note that the resolved response 
-object still includes the type specifier.</p>
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+alliances in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['alliance']</code>. Note that the resolved
+response object still includes the type specifier.</p>
 </div>
 
 
@@ -1042,8 +1041,8 @@ object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -1085,7 +1084,7 @@ object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line193">line 193</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line191">line 191</a>
     </li></ul></dd>
     
 
@@ -1146,10 +1145,9 @@ object still includes the type specifier.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all characters in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['character']</code>. Note that the resolved response 
-object still includes the type specifier.</p>
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+characters in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['character']</code>. Note that the resolved
+response object still includes the type specifier.</p>
 </div>
 
 
@@ -1224,8 +1222,8 @@ object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -1267,7 +1265,7 @@ object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line212">line 212</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line210">line 210</a>
     </li></ul></dd>
     
 
@@ -1328,10 +1326,9 @@ object still includes the type specifier.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all constellations in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['constellation']</code>. Note that the resolved 
-response object still includes the type specifier.</p>
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+constellations in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['constellation']</code>. Note
+that the resolved response object still includes the type specifier.</p>
 </div>
 
 
@@ -1406,8 +1403,8 @@ response object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -1449,7 +1446,7 @@ response object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line231">line 231</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line229">line 229</a>
     </li></ul></dd>
     
 
@@ -1510,10 +1507,9 @@ response object still includes the type specifier.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all corporations in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['corporation']</code>. Note that the resolved 
-response object still includes the type specifier.</p>
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+corporations in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['corporation']</code>. Note
+that the resolved response object still includes the type specifier.</p>
 </div>
 
 
@@ -1588,8 +1584,8 @@ response object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -1631,7 +1627,7 @@ response object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line250">line 250</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line248">line 248</a>
     </li></ul></dd>
     
 
@@ -1692,10 +1688,9 @@ response object still includes the type specifier.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all factions in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['faction']</code>. Note that the resolved response 
-object still includes the type specifier.</p>
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+factions in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['faction']</code>. Note that the resolved
+response object still includes the type specifier.</p>
 </div>
 
 
@@ -1770,8 +1765,8 @@ object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -1813,7 +1808,7 @@ object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line269">line 269</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line267">line 267</a>
     </li></ul></dd>
     
 
@@ -1874,9 +1869,8 @@ object still includes the type specifier.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all item types in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['inventoryType']</code>. Note that the resolved 
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+item types in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['inventoryType']</code>. Note that the resolved
 response object still includes the type specifier.</p>
 </div>
 
@@ -1952,8 +1946,8 @@ response object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -1995,7 +1989,7 @@ response object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line288">line 288</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line286">line 286</a>
     </li></ul></dd>
     
 
@@ -2056,9 +2050,8 @@ response object still includes the type specifier.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all regions in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['region']</code>. Note that the resolved response 
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+regions in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['region']</code>. Note that the resolved response
 object still includes the type specifier.</p>
 </div>
 
@@ -2134,8 +2127,8 @@ object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -2177,7 +2170,7 @@ object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line307">line 307</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line305">line 305</a>
     </li></ul></dd>
     
 
@@ -2238,9 +2231,189 @@ object still includes the type specifier.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all solar systems in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['solarsystem']</code>. Note that the resolved 
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+solar systems in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['solarsystem']</code>. Note
+that the resolved response object still includes the type specifier.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The search terms of the query</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>language</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
+  <code>'en-us'</code>.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line324">line 324</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getStations"><span class="type-signature">(static) </span>getStations<span class="signature">(text, language)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+stations in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['station']</code>. Note that the resolved
 response object still includes the type specifier.</p>
 </div>
 
@@ -2316,8 +2489,8 @@ response object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -2359,189 +2532,7 @@ response object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line326">line 326</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>A Promise that resolves to the response of
-  the request</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".getStations"><span class="type-signature">(static) </span>getStations<span class="signature">(text, language)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all stations in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> 
-with the category set to <code>['station']</code>. Note that the resolved response 
-object still includes the type specifier.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>text</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The search terms of the query</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>language</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
-  <code>'en-us'</code>.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line345">line 345</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line343">line 343</a>
     </li></ul></dd>
     
 
@@ -2602,10 +2593,9 @@ object still includes the type specifier.</p>
 
 
 <div class="description">
-    <p>Get the search results from the ESI endpoint for the query <code>text</code> over
-all wormhole categories in EVE. This is equivalent to a call to
-<a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['wormhole']</code>. 
-Note that the resolved response object still includes the type specifier.</p>
+    <p>Get the search results from the ESI endpoint for the query <code>text</code> over all
+wormhole categories in EVE. This is equivalent to a call to <a href="module-search.html#.get"><code>get</code></a> with the category set to <code>['wormhole']</code>. Note that
+the resolved response object still includes the type specifier.</p>
 </div>
 
 
@@ -2680,8 +2670,8 @@ Note that the resolved response object still includes the type specifier.</p>
 
             
 
-            <td class="description last"><p>Optional language code of the query. If not 
-  provided it defaults to the language specified in the factory or 
+            <td class="description last"><p>Optional language code of the query. If not
+  provided it defaults to the language specified in the factory or
   <code>'en-us'</code>.</p></td>
         </tr>
 
@@ -2723,7 +2713,7 @@ Note that the resolved response object still includes the type specifier.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="search.js.html">search.js</a>, <a href="search.js.html#line364">line 364</a>
+        <a href="search.js.html">search.js</a>, <a href="search.js.html#line362">line 362</a>
     </li></ul></dd>
     
 
@@ -2788,13 +2778,13 @@ Note that the resolved response object still includes the type specifier.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_contacts.html">character/contacts</a></li><li><a href="module-character_fittings.html">character/fittings</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 23 2016 23:11:37 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Jan 22 2017 13:08:37 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -38,11 +38,11 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Market">market</a>
-ESI endpoints. You should not require this module directly, as it technically
+            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Market">market</a> ESI
+endpoints. You should not require this module directly, as it technically
 returns a factory function that requires an internal API. Instead an instance
-is automatically exposed when the 
-<a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is loaded and configured.</p></div>
+is automatically exposed when the <a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is
+loaded and configured.</p></div>
         
 
         
@@ -199,8 +199,8 @@ is automatically exposed when the
 
 
 <div class="description">
-    <p>Get all buy market orders in the given region for the particular item
-type. This is equivalent to <a href="module-market.html#.getOrdersFor"><code>getOrdersFor</code></a> 
+    <p>Get all buy market orders in the given region for the particular item type.
+This is equivalent to <a href="module-market.html#.getOrdersFor"><code>getOrdersFor</code></a>
 except that the returned orders are limited to the <code>'buy'</code> type.
 This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsRegionIdOrders">MarketApi.getMarketsRegionIdOrders</a>.</p>
 </div>
@@ -318,7 +318,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="market.js.html">market.js</a>, <a href="market.js.html#line170">line 170</a>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line217">line 217</a>
     </li></ul></dd>
     
 
@@ -387,11 +387,11 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
 <div class="description">
     <p>Get historical market statistics for the given region and item from the
-ESI endpoint. This makes an HTTP GET request to 
+ESI
+endpoint. This makes an HTTP GET request to
 <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_history"><code>/markets/{regionId}/history/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;average&quot;: 5.25,
@@ -518,7 +518,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="market.js.html">market.js</a>, <a href="market.js.html#line71">line 71</a>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line74">line 74</a>
     </li></ul></dd>
     
 
@@ -586,13 +586,12 @@ like:</p>
 
 
 <div class="description">
-    <p>Get a page of market orders in the given region from the ESI 
-endpoint. Orders include buy and sell, and are for any item type. 
-This makes an HTTP GET request to 
+    <p>Get a page of market orders in the given region from the ESI endpoint.
+Orders include buy and sell, and are for any item type. This makes an HTTP
+GET request to
 <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>/markets/{regionId}/orders/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;duration&quot;: 90,
@@ -608,9 +607,8 @@ like:</p>
     &quot;volume_total&quot;: 2000000
   }
 ]</code></pre><p>This orders request is paginated, with <code>page</code> starting at 1 for the first
-page of data. If <code>page</code> is not provided, it defaults to 1. Per the 
-ESI documentation, both buy and sell orders are reported with this 
-request.
+page of data. If <code>page</code> is not provided, it defaults to 1. Per the ESI
+documentation, both buy and sell orders are reported with this request.
 This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsRegionIdOrders">MarketApi.getMarketsRegionIdOrders</a>.</p>
 </div>
 
@@ -686,7 +684,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
             
 
-            <td class="description last"><p>The page of orders that is requested</p></td>
+            <td class="description last"><p>Optional; the page of orders that is requested, or 1.</p></td>
         </tr>
 
     
@@ -727,7 +725,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="market.js.html">market.js</a>, <a href="market.js.html#line113">line 113</a>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line159">line 159</a>
     </li></ul></dd>
     
 
@@ -795,13 +793,12 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
 
 <div class="description">
-    <p>Get all market orders in the given region for the given item type from 
-the ESI endpoint. Orders include buy and sell, but are restricted to the
-selected type id. This makes an HTTP GET request to 
+    <p>Get all market orders in the given region for the given item type from the
+ESI endpoint. Orders include buy and sell, but are restricted to the
+selected type id. This makes an HTTP GET request to
 <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>/markets/{regionId}/orders/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;duration&quot;: 90,
@@ -933,7 +930,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="market.js.html">market.js</a>, <a href="market.js.html#line153">line 153</a>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line200">line 200</a>
     </li></ul></dd>
     
 
@@ -1002,10 +999,10 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 
 <div class="description">
     <p>Get prices for all items from the ESI endpoint. This makes an HTTP GET
-request to <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_prices"><code>/markets/prices</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_prices"><code>/markets/prices</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;adjusted_price&quot;: 306988.09,
@@ -1056,7 +1053,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="market.js.html">market.js</a>, <a href="market.js.html#line39">line 39</a>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -1125,7 +1122,7 @@ like:</p>
 
 <div class="description">
     <p>Get all sell market orders in the given region for the particular item
-type. This is equivalent to <a href="module-market.html#.getOrdersFor"><code>getOrdersFor</code></a> 
+type. This is equivalent to <a href="module-market.html#.getOrdersFor"><code>getOrdersFor</code></a>
 except that the returned orders are limited to the <code>'sell'</code> type.
 This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsRegionIdOrders">MarketApi.getMarketsRegionIdOrders</a>.</p>
 </div>
@@ -1243,7 +1240,7 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="market.js.html">market.js</a>, <a href="market.js.html#line187">line 187</a>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line234">line 234</a>
     </li></ul></dd>
     
 
@@ -1254,6 +1251,213 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
     <dd class="tag-see">
         <ul>
             <li><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders">https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getStructureOrders"><span class="type-signature">(static) </span>getStructureOrders<span class="signature">(structureId, page)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Get a page of market orders in the given structure from the ESI endpoint.
+Orders include buy and sell, and are for any item type. This makes an HTTP
+GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Market/get_market_structures_structure_id"><code>/markets/structures/{structureId}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;duration&quot;: 90,
+    &quot;is_buy_order&quot;: false,
+    &quot;issued&quot;: &quot;2016-09-03T05:12:25Z&quot;,
+    &quot;location_id&quot;: 60005599,
+    &quot;min_volume&quot;: 1,
+    &quot;order_id&quot;: 4623824223,
+    &quot;price&quot;: 9.9,
+    &quot;range&quot;: &quot;region&quot;,
+    &quot;type_id&quot;: 34,
+    &quot;volume_remain&quot;: 1296000,
+    &quot;volume_total&quot;: 2000000
+  }
+]</code></pre><p>This orders request is paginated, with <code>page</code> starting at 1 for the first
+page of data. If <code>page</code> is not provided, it defaults to 1. Per the ESI
+documentation, both buy and sell orders are reported with this request.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsStructuresStructureId">MarketApi.getMarketsStructuresStructureId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>structureId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The region id to query</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>page</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optional; the page of orders that is requested, or 1.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="market.js.html">market.js</a>, <a href="market.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_structures_structure_id">https://esi.tech.ccp.is/latest/#!/Market/get_markets_structures_structure_id</a></li>
         </ul>
     </dd>
     
@@ -1315,13 +1519,13 @@ This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_contacts.html">character/contacts</a></li><li><a href="module-character_fittings.html">character/fittings</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 23 2016 23:11:37 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Jan 22 2017 13:08:37 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

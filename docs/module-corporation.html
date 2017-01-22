@@ -38,11 +38,12 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Corporation">corporation</a>
-ESI endpoints. You should not require this module directly, as it technically
-returns a factory function that requires an internal API. Instead an instance
-is automatically exposed when the 
-<a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is loaded and configured.</p></div>
+            <div class="description"><p>A container for the
+<a href="https://esi.tech.ccp.is/latest/#/Corporation">corporation</a> ESI endpoints.
+You should not require this module directly, as it technically returns a
+factory function that requires an internal API. Instead an instance is
+automatically exposed when the <a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is loaded
+and configured.</p></div>
         
 
         
@@ -199,11 +200,11 @@ is automatically exposed when the
 
 
 <div class="description">
-    <p>Get a corporation's public info from the ESI endpoint. This makes 
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id"><code>corporations/{id}/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an object parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Get a corporation's public info from the ESI endpoint. This makes an HTTP
+GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id"><code>corporations/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>{
   &quot;alliance_id&quot;: 434243723,
   &quot;ceo_id&quot;: 180548812,
@@ -303,7 +304,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line40">line 40</a>
+        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -371,11 +372,11 @@ like:</p>
 
 
 <div class="description">
-    <p>Get a corporation's alliance history from the ESI endpoint. This 
-makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>corporations/{id}/alliancehistory/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Get a corporation's alliance history from the ESI endpoint. This makes an
+HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>corporations/{id}/alliancehistory/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;alliance&quot;: {
@@ -550,15 +551,18 @@ like:</p>
 
 
 <div class="description">
-    <p>Get a corporation's icon URLs from the ESI endpoint. This makes 
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons"><code>corporations/{id}/icons/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an object parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Get a corporation's icon URLs from the ESI endpoint. This makes an HTTP GET
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons"><code>corporations/{id}/icons/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>{
-  &quot;px128x128&quot;: &quot;https://imageserver.eveonline.com/Corporation/1000010_128.png&quot;,
-  &quot;px256x256&quot;: &quot;https://imageserver.eveonline.com/Corporation/1000010_256.png&quot;,
-  &quot;px64x64&quot;: &quot;https://imageserver.eveonline.com/Corporation/1000010_64.png&quot;
+  &quot;px128x128&quot;:
+&quot;https://imageserver.eveonline.com/Corporation/1000010_128.png&quot;,
+  &quot;px256x256&quot;:
+&quot;https://imageserver.eveonline.com/Corporation/1000010_256.png&quot;,
+  &quot;px64x64&quot;:
+&quot;https://imageserver.eveonline.com/Corporation/1000010_64.png&quot;
 }</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/CorporationApi.md#getCorporationsCorporationIdIcons">CorporationApi.getCorporationsCorporationIdIcons</a>.</p>
 </div>
 
@@ -652,7 +656,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line101">line 101</a>
+        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line104">line 104</a>
     </li></ul></dd>
     
 
@@ -720,11 +724,11 @@ like:</p>
 
 
 <div class="description">
-    <p>Get a corporation's member list from the ESI endpoint. This 
-makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members"><code>corporations/{id}/members/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Get a corporation's member list from the ESI endpoint. This makes an HTTP
+GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members"><code>corporations/{id}/members/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;character_id&quot;: 90000001
@@ -808,8 +812,8 @@ like:</p>
             
 
             <td class="description last"><p>Optional; the SSO access token of a member of
-  the corporation, used to authenticate the request. If not provided, the 
-  default access token provided to the factory is used; if that was not 
+  the corporation, used to authenticate the request. If not provided, the
+  default access token provided to the factory is used; if that was not
   set then this request will fail.</p></td>
         </tr>
 
@@ -851,7 +855,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line134">line 134</a>
+        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line137">line 137</a>
     </li></ul></dd>
     
 
@@ -919,11 +923,11 @@ like:</p>
 
 
 <div class="description">
-    <p>Get the names for a list of corporation ids from the ESI endpoint. 
-This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names"><code>corporations/names/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Get the names for a list of corporation ids from the ESI endpoint. This
+makes an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names"><code>corporations/names/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;corporation_id&quot;: 1000171,
@@ -1090,12 +1094,11 @@ like:</p>
 
 
 <div class="description">
-    <p>Get a corporation's member list with roles for each character from 
-the ESI endpoint. This makes an HTTP GET request to 
+    <p>Get a corporation's member list with roles for each character from the ESI
+endpoint. This makes an HTTP GET request to
 <a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles"><code>corporations/{id}/roles/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;character_id&quot;: 1000171,
@@ -1179,10 +1182,10 @@ like:</p>
 
             
 
-            <td class="description last"><p>Optional; the SSO access token of a member of 
+            <td class="description last"><p>Optional; the SSO access token of a member of
   the corporation that has the personnel manager or any other grantable
-  role, used to authenticate the request. If not provided, the default 
-  access token provided to the factory is used; if that was not set then 
+  role, used to authenticate the request. If not provided, the default
+  access token provided to the factory is used; if that was not set then
   this request will fail.</p></td>
         </tr>
 
@@ -1224,7 +1227,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line171">line 171</a>
+        <a href="corporation.js.html">corporation.js</a>, <a href="corporation.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -1296,13 +1299,13 @@ like:</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_contacts.html">character/contacts</a></li><li><a href="module-character_fittings.html">character/fittings</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 23 2016 23:11:37 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Jan 22 2017 13:08:37 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

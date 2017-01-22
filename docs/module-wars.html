@@ -38,11 +38,11 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Wars">wars</a>
-ESI endpoints. You should not require this module directly, as it technically
+            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Wars">wars</a> ESI
+endpoints. You should not require this module directly, as it technically
 returns a factory function that requires an internal API. Instead an instance
-is automatically exposed when the 
-<a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is loaded and configured.</p></div>
+is automatically exposed when the <a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is
+loaded and configured.</p></div>
         
 
         
@@ -199,11 +199,11 @@ is automatically exposed when the
 
 
 <div class="description">
-    <p>Get information on a war from the ESI endpoint. This makes
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id"><code>/wars/{id}/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Get information on a war from the ESI endpoint. This makes an HTTP GET
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id"><code>/wars/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>{
   &quot;aggressor&quot;: {
     &quot;corporation_id&quot;: 986665792,
@@ -312,7 +312,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wars.js.html">wars.js</a>, <a href="wars.js.html#line70">line 70</a>
+        <a href="wars.js.html">wars.js</a>, <a href="wars.js.html#line50">line 50</a>
     </li></ul></dd>
     
 
@@ -373,127 +373,6 @@ like:</p>
 
     
 
-    <h4 class="name" id=".getAll"><span class="type-signature">(static) </span>getAll<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Get ids of all wars from the ESI endpoint. This makes
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars"><code>/wars/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
-<pre class="prettyprint source"><code>[
-  3,
-  2,
-  1
-]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/WarsApi.md#getWars">WarsApi.getWars</a>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wars.js.html">wars.js</a>, <a href="wars.js.html#line36">line 36</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars">https://esi.tech.ccp.is/latest/#!/Wars/get_wars</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>A Promise that resolves to the response of
-  the request</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="external-Promise.html">external:Promise</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
     <h4 class="name" id=".getKillmails"><span class="type-signature">(static) </span>getKillmails<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="external-Promise.html">external:Promise</a>}</span></h4>
 
     
@@ -501,11 +380,11 @@ like:</p>
 
 
 <div class="description">
-    <p>Get killmail ids from a war from the ESI endpoint. This makes
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails"><code>/wars/{id}/killmails/</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Get killmail ids from a war from the ESI endpoint. This makes an HTTP GET
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails"><code>/wars/{id}/killmails/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;killmail_hash&quot;: &quot;8eef5e8fb6b88fe3407c489df33822b2e3b57a5e&quot;,
@@ -608,7 +487,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wars.js.html">wars.js</a>, <a href="wars.js.html#line99">line 99</a>
+        <a href="wars.js.html">wars.js</a>, <a href="wars.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -682,13 +561,13 @@ like:</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_contacts.html">character/contacts</a></li><li><a href="module-character_fittings.html">character/fittings</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 23 2016 23:11:37 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Jan 22 2017 13:08:37 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

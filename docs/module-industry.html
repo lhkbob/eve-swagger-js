@@ -38,11 +38,11 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Industry">industry</a>
-ESI endpoints. You should not require this module directly, as it technically
+            <div class="description"><p>A container for the <a href="https://esi.tech.ccp.is/latest/#/Industry">industry</a> ESI
+endpoints. You should not require this module directly, as it technically
 returns a factory function that requires an internal API. Instead an instance
-is automatically exposed when the 
-<a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is loaded and configured.</p></div>
+is automatically exposed when the <a href="module-eve_swagger_interface.html"><code>module:eve_swagger_interface</code></a> is
+loaded and configured.</p></div>
         
 
         
@@ -200,10 +200,10 @@ is automatically exposed when the
 
 <div class="description">
     <p>Get all industry facilities from the ESI endpoint. This makes an HTTP GET
-request to <a href="https://esi.tech.ccp.is/latest/#!/Industry/get_industry_facilities"><code>/industry/facilities</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Industry/get_industry_facilities"><code>/industry/facilities</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;facility_id&quot;: 60012544,
@@ -257,7 +257,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="industry.js.html">industry.js</a>, <a href="industry.js.html#line41">line 41</a>
+        <a href="industry.js.html">industry.js</a>, <a href="industry.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -325,11 +325,11 @@ like:</p>
 
 
 <div class="description">
-    <p>Get cost indices for each solar system from the ESI endpoint. This makes 
-an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Industry/get_industry_systems"><code>/industry/systems</code></a>.
-The request is returned as an asynchronous Promise that resolves to 
-an array parsed from the response JSON model. An example value looks 
-like:</p>
+    <p>Get cost indices for each solar system from the ESI endpoint. This makes an
+HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Industry/get_industry_systems"><code>/industry/systems</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
 <pre class="prettyprint source"><code>[
   {
     &quot;cost_indices&quot;: [
@@ -384,7 +384,7 @@ like:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="industry.js.html">industry.js</a>, <a href="industry.js.html#line69">line 69</a>
+        <a href="industry.js.html">industry.js</a>, <a href="industry.js.html#line73">line 73</a>
     </li></ul></dd>
     
 
@@ -456,13 +456,13 @@ like:</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-alliance.html">alliance</a></li><li><a href="module-character.html">character</a></li><li><a href="module-character_calendar.html">character/calendar</a></li><li><a href="module-character_contacts.html">character/contacts</a></li><li><a href="module-character_fittings.html">character/fittings</a></li><li><a href="module-character_mail.html">character/mail</a></li><li><a href="module-corporation.html">corporation</a></li><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li><li><a href="module-fleets.html">fleets</a></li><li><a href="module-incursions.html">incursions</a></li><li><a href="module-industry.html">industry</a></li><li><a href="module-insurance.html">insurance</a></li><li><a href="module-killmails.html">killmails</a></li><li><a href="module-market.html">market</a></li><li><a href="module-search.html">search</a></li><li><a href="module-sovereignty.html">sovereignty</a></li><li><a href="module-ui.html">ui</a></li><li><a href="module-universe.html">universe</a></li><li><a href="module-wars.html">wars</a></li></ul><h3>Externals</h3><ul><li><a href="external-Promise.html">Promise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 23 2016 23:11:37 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Jan 22 2017 13:08:37 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>
