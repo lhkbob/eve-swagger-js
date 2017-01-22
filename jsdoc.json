@@ -1,26 +1,36 @@
 {
-    "tags": {
-        "allowUnknownTags": true,
-        "dictionaries": ["jsdoc"]
-    },
-    "source": {
-        "include": ["src", "home.md"],
-        "includePattern": ".js$",
-        "excludePattern": "(node_modules/|docs)"
-    },
-    "plugins": [
-        "plugins/markdown",
-        "src/esi_link"
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": [
+      "jsdoc"
+    ]
+  },
+  "source": {
+    "include": [
+      "src",
+      "home.md"
     ],
-    "templates": {
-        "cleverLinks": false,
-        "monospaceLinks": true,
-        "useLongnameInNav": false
-    },
-    "opts": {
-        "destination": "./docs/",
-        "encoding": "utf8",
-        "private": false,
-        "recurse": true
-    }
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules/|docs)"
+  },
+  "plugins": [
+    "plugins/markdown",
+    "src/esi_link"
+  ],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": true,
+    "useLongnameInNav": false
+  },
+  "opts": {
+    "template": "node_modules/docdash",
+    "destination": "./docs/",
+    "encoding": "utf8",
+    "private": false,
+    "recurse": true
+  },
+  "docdash": {
+    "static": true,
+    "sort": true
+  }
 }

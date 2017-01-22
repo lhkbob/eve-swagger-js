@@ -16,6 +16,7 @@
     "superagent": "1.7.1"
   },
   "devDependencies": {
+    "docdash": "^0.4.0",
     "expect.js": "~0.3.1",
     "jsdoc": "^3.4.3",
     "mocha": "~2.3.4",
