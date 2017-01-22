@@ -9,8 +9,8 @@ Its documentation can be found [here](https://github.com/lhkbob/eve-swagger-js/b
 
 While ESI does report incremental versions, Swagger primarily imposes the three available versions: legacy, latest, and dev. Due to this, this library's versioning will be independent of the ESI version. It is entirely possible that as the ESI endpoints are updated, this library's code will not need to be changed. On the other hand, the new ESI versions could add new end points or change the data in a response, etc. in which case this will be updated ASAP.
 
-- API version: 0.3.6.dev9 (The ESI version)
-- Package version: 0.1.2 (The NodeJS dependency version)
+- API version: 0.3.8 (The ESI version)
+- Package version: 0.1.3 (The NodeJS dependency version)
 - Source: [https://github.com/lhkbob/eve-swagger-js/](https://github.com/lhkbob/eve-swagger-js/)
 
 ## Installation
