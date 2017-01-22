@@ -86,7 +86,7 @@ module.exports = function(opts) {
   var defaultOpts = function() {
     return {
       'datasource': opts.datasource,
-      'acceptLanguage': opts.language
+      'language': opts.language
     };
   };
 

@@ -135,7 +135,7 @@ module.exports = function(api) {
   Search.prototype.get = function(text, categories, language) {
     var opt = { strict: this.strict };
     if (!language) {
-      // Take language from default acceptLanguage setting
+      // Take language from default language setting
       if (api.opts.language) {
         language = api.opts.language;
       } else {
@@ -150,11 +150,9 @@ module.exports = function(api) {
 
     categories = categories || [];
     if (categories.length == 0) {
-      this.categories;
+      categories = this.categories;
     }
 
-    // The search ESI call looks at language property, not acceptLanguage
-    // like which is used in other localized calls.
     var opts = {
       strict: this.strict,
       language: language

@@ -284,7 +284,7 @@ module.exports = function(api) {
   exports.getWings = function(id, accessToken, language) {
     var opts = {};
     if (language) {
-      opts.acceptLanguage = language;
+      opts.language = language;
     }
     return newRequestOpt(ESI.FleetsApi, 'getFleetsFleetIdWings', [id], opts,
         accessToken);

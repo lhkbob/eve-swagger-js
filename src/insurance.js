@@ -49,7 +49,7 @@ module.exports = function(api) {
   exports.getPrices = function(language) {
     var opts = {};
     if (language) {
-      opts.acceptLanguage = language;
+      opts.language = language;
     }
     return newRequestOpt(ESI.InsuranceApi, 'getInsurancePrices', [], opts);
   };
