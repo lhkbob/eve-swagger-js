@@ -22,7 +22,7 @@ var EveSwaggerInterface = require('eve_swagger_interface');
 var apiInstance = new EveSwaggerInterface.InsuranceApi();
 
 var opts = { 
-  'acceptLanguage': "en", // String | Language to use in the response
+  'language': "en-us", // String | Language to use in the response
   'datasource': "tranquility" // String | The server name you would like data from
 };
 
@@ -40,7 +40,7 @@ apiInstance.getInsurancePrices(opts, callback);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **acceptLanguage** | **String**| Language to use in the response | [optional] [default to en]
+ **language** | **String**| Language to use in the response | [optional] [default to en-us]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
 
 ### Return type

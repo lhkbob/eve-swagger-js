@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**getMarketsPrices**](MarketApi.md#getMarketsPrices) | **GET** /markets/prices/ | List market prices
 [**getMarketsRegionIdHistory**](MarketApi.md#getMarketsRegionIdHistory) | **GET** /markets/{region_id}/history/ | List historical market statistics in a region
 [**getMarketsRegionIdOrders**](MarketApi.md#getMarketsRegionIdOrders) | **GET** /markets/{region_id}/orders/ | List orders in a region
+[**getMarketsStructuresStructureId**](MarketApi.md#getMarketsStructuresStructureId) | **GET** /markets/structures/{structure_id}/ | List orders in a structure
 
 
 <a name="getMarketsPrices"></a>
@@ -62,7 +63,7 @@ No authorization required
 
 List historical market statistics in a region
 
-Return a list of historical market statistics for the specified type in a region  ---  Alternate route: &#x60;/v1/markets/{region_id}/history/&#x60;  Alternate route: &#x60;/legacy/markets/{region_id}/history/&#x60;  Alternate route: &#x60;/dev/markets/{region_id}/history/&#x60;   ---  This route is cached for up to 300 seconds
+Return a list of historical market statistics for the specified type in a region  ---  Alternate route: &#x60;/v1/markets/{region_id}/history/&#x60;  Alternate route: &#x60;/legacy/markets/{region_id}/history/&#x60;  Alternate route: &#x60;/dev/markets/{region_id}/history/&#x60;   ---  This route is cached for up to 3600 seconds
 
 ### Example
 ```javascript
@@ -160,6 +161,63 @@ Name | Type | Description  | Notes
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getMarketsStructuresStructureId"></a>
+# **getMarketsStructuresStructureId**
+> [GetMarketsStructuresStructureId200Ok] getMarketsStructuresStructureId(structureId, opts)
+
+List orders in a structure
+
+Return all orders in a structure  ---  Alternate route: &#x60;/v1/markets/structures/{structure_id}/&#x60;  Alternate route: &#x60;/legacy/markets/structures/{structure_id}/&#x60;  Alternate route: &#x60;/dev/markets/structures/{structure_id}/&#x60;   ---  This route is cached for up to 300 seconds
+
+### Example
+```javascript
+var EveSwaggerInterface = require('eve_swagger_interface');
+var defaultClient = EveSwaggerInterface.ApiClient.default;
+
+// Configure OAuth2 access token for authorization: evesso
+var evesso = defaultClient.authentications['evesso'];
+evesso.accessToken = 'YOUR ACCESS TOKEN';
+
+var apiInstance = new EveSwaggerInterface.MarketApi();
+
+var structureId = 789; // Integer | Return orders in this region
+
+var opts = { 
+  'page': 1, // Integer | Which page to query, only used for querying without type_id. Starting at 1 
+  'datasource': "tranquility" // String | The server name you would like data from
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.getMarketsStructuresStructureId(structureId, opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **structureId** | **Integer**| Return orders in this region | 
+ **page** | **Integer**| Which page to query, only used for querying without type_id. Starting at 1  | [optional] [default to 1]
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+
+### Return type
+
+[**[GetMarketsStructuresStructureId200Ok]**](GetMarketsStructuresStructureId200Ok.md)
+
+### Authorization
+
+[evesso](../README.md#evesso)
 
 ### HTTP request headers
 

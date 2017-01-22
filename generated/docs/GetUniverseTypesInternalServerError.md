@@ -1,4 +1,4 @@
-# EveSwaggerInterface.GetWarsInternalServerError
+# EveSwaggerInterface.GetUniverseTypesInternalServerError
 
 ## Properties
 Name | Type | Description | Notes

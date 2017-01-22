@@ -270,7 +270,7 @@ var apiInstance = new EveSwaggerInterface.FleetsApi();
 var fleetId = 789; // Integer | ID for a fleet
 
 var opts = { 
-  'acceptLanguage': "en", // String | Language to use in the response
+  'language': "en-us", // String | Language to use in the response
   'datasource': "tranquility" // String | The server name you would like data from
 };
 
@@ -289,7 +289,7 @@ apiInstance.getFleetsFleetIdMembers(fleetId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetId** | **Integer**| ID for a fleet | 
- **acceptLanguage** | **String**| Language to use in the response | [optional] [default to en]
+ **language** | **String**| Language to use in the response | [optional] [default to en-us]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
 
 ### Return type
@@ -327,7 +327,7 @@ var apiInstance = new EveSwaggerInterface.FleetsApi();
 var fleetId = 789; // Integer | ID for a fleet
 
 var opts = { 
-  'acceptLanguage': "en", // String | Language to use in the response
+  'language': "en-us", // String | Language to use in the response
   'datasource': "tranquility" // String | The server name you would like data from
 };
 
@@ -346,7 +346,7 @@ apiInstance.getFleetsFleetIdWings(fleetId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetId** | **Integer**| ID for a fleet | 
- **acceptLanguage** | **String**| Language to use in the response | [optional] [default to en]
+ **language** | **String**| Language to use in the response | [optional] [default to en-us]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
 
 ### Return type

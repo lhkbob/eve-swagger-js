@@ -28,7 +28,7 @@ evesso.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new EveSwaggerInterface.CalendarApi();
 
-var characterId = 789; // Integer | The character to retrieve events from
+var characterId = 56; // Integer | The character to retrieve events from
 
 var opts = { 
   'fromEvent': 56, // Integer | The event ID to retrieve events from
@@ -85,7 +85,7 @@ evesso.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new EveSwaggerInterface.CalendarApi();
 
-var characterId = 789; // Integer | The character id requesting the event
+var characterId = 56; // Integer | The character id requesting the event
 
 var eventId = 56; // Integer | The id of the event requested
 
