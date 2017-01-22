@@ -17,6 +17,130 @@ module.exports = function(api) {
   var exports = {};
 
   /**
+   * Get all item categories in the universe from the ESI endpoint. This makes
+   * an HTTP GET request to
+   * [`/universe/categories/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   1,
+   *   2,
+   *   3
+   * ]
+   * ```
+   *
+   * @return {external:Promise} A Promise that resolves to the response of
+   *   the request
+   * @see https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories
+   * @esi_link UniverseApi.getUniverseCategories
+   */
+  exports.getCategories = function() {
+    return newRequest(ESI.UniverseApi, 'getUniverseCategories', []);
+  };
+
+  /**
+   * Get an item category's details from the ESI endpoint. This makes an HTTP
+   * GET request to
+   * [`/universe/categories/{id}`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories_category_id).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * object parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * {
+   *   "category_id": 6,
+   *    "groups": [
+   *      25,
+   *      26,
+   *      27
+   *    ],
+   *    "name": "Ship",
+   *    "published": true
+   * }
+   * ```
+   *
+   * @param {Integer} id The category id to look up
+   * @param {String} language Optional localization code for the response,
+   *   which overrides the default language.
+   * @return {external:Promise} A Promise that resolves to the response of
+   *   the request
+   * @see https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories_category_id
+   * @esi_link UniverseApi.getUniverseCategoriesCategoryId
+   */
+  exports.getCategory = function(id, language) {
+    var opts = {};
+    if (language) {
+      opts.language = language;
+    }
+
+    return newRequestOpt(ESI.UniverseApi, 'getUniverseCategoriesCategoryId',
+        [id], opts);
+  };
+
+  /**
+   * Get all item groups in the universe from the ESI endpoint. This makes an
+   * HTTP GET request to
+   * [`/universe/groups/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   1,
+   *   2,
+   *   3
+   * ]
+   * ```
+   *
+   * @return {external:Promise} A Promise that resolves to the response of
+   *   the request
+   * @see https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups
+   * @esi_link UniverseApi.getUniverseGroups
+   */
+  exports.getGroups = function() {
+    return newRequest(ESI.UniverseApi, 'getUniverseGroups', []);
+  };
+
+  /**
+   * Get an item category's details from the ESI endpoint. This makes an HTTP
+   * GET request to
+   * [`/universe/groups/{id}`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups_group_id).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * object parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * {
+   *   "category_id": 6,
+   *   "group_id": 25,
+   *   "name": "Frigate",
+   *   "published": true,
+   *   "types": [
+   *     587,
+   *     586,
+   *     585
+   *   ]
+   * }
+   * ```
+   *
+   * @param {Integer} id The group id to look up
+   * @param {String} language Optional localization code for the response,
+   *   which overrides the default language.
+   * @return {external:Promise} A Promise that resolves to the response of
+   *   the request
+   * @see https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups_group_id
+   * @esi_link UniverseApi.getUniverseGroupsGroupId
+   */
+  exports.getGroup = function(id, language) {
+    var opts = {};
+    if (language) {
+      opts.language = language;
+    }
+
+    return newRequestOpt(ESI.UniverseApi, 'getUniverseGroupsGroupId',
+        [id], opts);
+  };
+  /**
    * Get all structures in the universe from the ESI endpoint. This makes an
    * HTTP GET request to
    * [`/universe/structures/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures).
@@ -169,7 +293,8 @@ module.exports = function(api) {
 
   /**
    * Look up the name and type of the list of ids the ESI endpoint. The ids can
-   * correspond to characters, corporations, alliances, stations, solar systems,
+   * correspond to characters, corporations, alliances, stations, solar
+   * systems,
    * constellations, regions, and types. This makes an HTTP POST request to
    * [`/universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
    * The request is returned as an asynchronous Promise that resolves to an
