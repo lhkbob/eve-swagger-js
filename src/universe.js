@@ -244,26 +244,46 @@ module.exports = function(api) {
    *
    * ```
    * {
-   *   "category_id": 6,
-   *   "graphic_id": 46,
+   *   "type_id": 587,
+   *   "name": "Rifter",
+   *   "description": "The Rifter is a ...",
+   *   "published": true,
    *   "group_id": 25,
-   *   "type_description": "The Rifter is a very powerful combat frigate and
-   * can easily tackle the best frigates out there. It has gone through many
-   * radical design phases since its inauguration during the Minmatar
-   * Rebellion. The Rifter has a wide variety of offensive capabilities,
-   * making it an unpredictable and deadly adversary.",
-   *   "type_name": "Rifter"
+   *   "radius": 31,
+   *   "volume": 27289,
+   *   "capacity": 140,
+   *   "portion_size": 1,
+   *   "mass": 1067000,
+   *   "graphic_id": 46,
+   *   "dogma_attributes": [
+   *     {
+   *       "attribute_id": 3,
+   *       "value": 0
+   *     }
+   *   ],
+   *   "dogma_effects": [
+   *     {
+   *       "effect_id": 508,
+   *       "is_default": false
+   *     }
+   *   ]
    * }
    * ```
    *
    * @param {Integer} id The type id to look up
+   * @param {String} language Optional localization code for the response,
+   *   which overrides the default language.
    * @return {external:Promise} A Promise that resolves to the response of
    *   the request
    * @see https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types_type_id
    * @esi_link UniverseApi.getUniverseTypesTypeId
    */
-  exports.getType = function(id) {
-    return newRequest(ESI.UniverseApi, 'getUniverseTypesTypeId', [id]);
+  exports.getType = function(id, language) {
+    var opts = {};
+    if (language) {
+      opts.language = language;
+    }
+    return newRequestOpt(ESI.UniverseApi, 'getUniverseTypesTypeId', [id], opts);
   };
 
   /**
