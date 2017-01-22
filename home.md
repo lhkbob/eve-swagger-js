@@ -73,8 +73,11 @@ The available scopes for an access token are described below.
   - esi-calendar.read_calendar_events.v1: EVE SSO scope esi-calendar.read_calendar_events.v1
   - esi-calendar.respond_calendar_events.v1: EVE SSO scope esi-calendar.respond_calendar_events.v1
   - esi-characters.read_contacts.v1: EVE SSO scope esi-characters.read_contacts.v1
+  - esi-characters.write_contacts.v1: EVE SSO scope esi-characters.write_contacts.v1
   - esi-clones.read_clones.v1: EVE SSO scope esi-clones.read_clones.v1
   - esi-corporations.read_corporation_membership.v1: EVE SSO scope esi-corporations.read_corporation_membership.v1
+  - esi-fittings.read_fittings.v1: EVE SSO scope esi-fittings.read_fittings.v1
+  - esi-fittings.write_fittings.v1: EVE SSO scope esi-fittings.write_fittings.v1
   - esi-fleets.read_fleet.v1: EVE SSO scope esi-fleets.read_fleet.v1
   - esi-fleets.write_fleet.v1: EVE SSO scope esi-fleets.write_fleet.v1
   - esi-killmails.read_killmails.v1: EVE SSO scope esi-killmails.read_killmails.v1
@@ -83,10 +86,12 @@ The available scopes for an access token are described below.
   - esi-mail.organize_mail.v1: EVE SSO scope esi-mail.organize_mail.v1
   - esi-mail.read_mail.v1: EVE SSO scope esi-mail.read_mail.v1
   - esi-mail.send_mail.v1: EVE SSO scope esi-mail.send_mail.v1
+  - esi-markets.structure_markets.v1: EVE SSO scope esi-markets.structure_markets.v1
   - esi-planets.manage_planets.v1: EVE SSO scope esi-planets.manage_planets.v1
   - esi-search.search_structures.v1: EVE SSO scope esi-search.search_structures.v1
   - esi-skills.read_skillqueue.v1: EVE SSO scope esi-skills.read_skillqueue.v1
   - esi-skills.read_skills.v1: EVE SSO scope esi-skills.read_skills.v1
+  - esi-ui.open_window.v1: EVE SSO scope esi-ui.open_window.v1
+  - esi-ui.write_waypoint.v1: EVE SSO scope esi-ui.write_waypoint.v1
   - esi-universe.read_structures.v1: EVE SSO scope esi-universe.read_structures.v1
   - esi-wallet.read_character_wallet.v1: EVE SSO scope esi-wallet.read_character_wallet.v1
-
