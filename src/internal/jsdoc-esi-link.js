@@ -17,19 +17,21 @@ exports.defineTags = function(dictionary) {
       let value = tag.value;
       let period = value.indexOf('.');
 
+      let linkText;
       let url = 'https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/';
       if (period >= 0) {
         // Class and method name provided
         let base = value.substring(0, period);
         let method = value.substring(period + 1);
         url = url + base + '.md#' + method;
+        linkText = '\nThis promisifies a call to the generated [' + value
+            + '](' + url + ').';
       } else {
         // Assume it's just a class
         url = url + value + '.md';
+        linkText = '\nThis wraps the generated [' + value + '](' + url + ').';
       }
 
-      let linkText = '\nThis promisifies a call to the generated [' + value
-          + '](' + url + ').';
       doclet.description = doclet.description + linkText;
     }
   });
