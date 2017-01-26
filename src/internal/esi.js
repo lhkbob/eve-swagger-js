@@ -4,6 +4,7 @@
  * a {@link ApiProvider} constructor function.
  *
  * @module internal/esi
+ * @private
  */
 
 const Cache = require('node-cache');
@@ -190,6 +191,7 @@ function getCachedRequest(api, functionName, args, opts, resolve, reject) {
  * @param provider {ApiProvider} The api configuration and cache provider
  * @param accessToken {String} The optional SSO access token
  * @constructor
+ * @private
  */
 function PromiseApi(apiType, provider, accessToken) {
   this._apiType = apiType;
@@ -234,6 +236,7 @@ PromiseApi.prototype.newRequest = function(method, args, opts = {}) {
  * @param language {String} Language character code, defaults to `en-us`
  * @param timeout {Number} Request timeout in milliseconds, defaults to `6000`
  * @constructor
+ * @private
  */
 // TODO: add cache control options here (disabling and changing timeouts for
 // the request and the api caches)

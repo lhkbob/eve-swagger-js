@@ -3,6 +3,7 @@
  * other methods to be added to the instance like a regular object while still
  * being callable as a regular function. The default function that is executed
  * when called as a function is passed to the constructor.
+ * @private
  */
 class ExtensibleFunction extends Function {
   /**
