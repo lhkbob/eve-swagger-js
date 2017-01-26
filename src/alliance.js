@@ -6,62 +6,28 @@
  * loaded and configured.
  *
  * @see https://esi.tech.ccp.is/latest/#/Alliance
- * @param api The internal API instance configured by the root module
  * @module alliance
  */
-module.exports = function(api) {
-  var newRequest = api.newRequest;
-  var ESI = api.esi;
 
-  var exports = {};
+const ExtendableFunction = require('./internal/ExtendableFunction');
 
+/**
+ * An api adaptor that provides functions for accessing various details for an
+ * alliance specified by id.
+ */
+class Alliance {
   /**
-   * Get all alliance id's the ESI endpoint. This makes an HTTP GET request to
-   * [`alliances/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * Create a new Alliance for the given `api` provider and specific
+   * `allianceId`.
    *
-   * ```
-   * [
-   *   99000001,
-   *   99000002
-   * ]
-   * ```
-   *
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances
-   * @esi_link AllianceApi.getAlliances
+   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param allianceId {Number} The alliance id that is used for all requests
+   * @constructor
    */
-  exports.getAll = function() {
-    return newRequest(ESI.AllianceApi, 'getAlliances', []);
-  };
-
-  /**
-   * Get the names for a list of alliance ids from the ESI endpoint. This makes
-   * an HTTP GET request to
-   * [`alliances/names/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_names).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
-   *
-   * ```
-   * [
-   *   {
-   *     "alliance_id": 1000171,
-   *     "alliance_name": "Republic University"
-   *   }
-   * ]
-   * ```
-   *
-   * @param {Array.<Integer>} ids The alliance ids to look up
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_names
-   * @esi_link AllianceApi.getAlliancesNames
-   */
-  exports.getNamesOf = function(ids) {
-    return newRequest(ESI.AllianceApi, 'getAlliancesNames', [ids]);
-  };
+  constructor(api, allianceId) {
+    this._api = api;
+    this._id = allianceId;
+  }
 
   /**
    * Get the public info of the alliance from the ESI endpoint. This makes an
@@ -79,15 +45,14 @@ module.exports = function(api) {
    * }
    * ```
    *
-   * @param {Integer} id The alliance id to look up
-   * @return {external:Promise} A Promise that resolves to the response of
+   * @return {Promise} A Promise that resolves to the response of
    *   the request
    * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id
    * @esi_link AllianceApi.getAlliancesAllianceId
    */
-  exports.get = function(id) {
-    return newRequest(ESI.AllianceApi, 'getAlliancesAllianceId', [id]);
-  };
+  info() {
+    return this._api.alliance().newRequest('getAlliancesAllianceId', [this._id]);
+  }
 
   /**
    * Get the corporations of the alliance from the ESI endpoint. This makes an
@@ -102,16 +67,16 @@ module.exports = function(api) {
    * ]
    * ```
    *
-   * @param {Integer} id The alliance id to look up
-   * @return {external:Promise} A Promise that resolves to the response of
+   * @return {Promise} A Promise that resolves to the response of
    *   the request
    * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_corporations
    * @esi_link AllianceApi.getAlliancesAllianceIdCorporations
    */
-  exports.getCorporations = function(id) {
-    return newRequest(ESI.AllianceApi, 'getAlliancesAllianceIdCorporations',
-        [id]);
-  };
+  corporations() {
+    return this._api.alliance()
+    .newRequest('getAlliancesAllianceIdCorporations', [this._id]);
+  }
+
 
   /**
    * Get the icon URLs the alliance from the ESI endpoint. This makes an HTTP
@@ -123,21 +88,156 @@ module.exports = function(api) {
    * ```
    * {
    *   "px128x128":
-   * "https://imageserver.eveonline.com/Alliance/503818424_128.png",
+   *      "https://imageserver.eveonline.com/Alliance/503818424_128.png",
    *   "px64x64":
-   * "https://imageserver.eveonline.com/Alliance/503818424_64.png"
+   *      "https://imageserver.eveonline.com/Alliance/503818424_64.png"
    * }
    * ```
    *
-   * @param {Integer} id The alliance id to look up
-   * @return {external:Promise} A Promise that resolves to the response of
+   * @return {Promise} A Promise that resolves to the response of
    *   the request
    * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_icons
    * @esi_link AllianceApi.getAlliancesAllianceIdIcons
    */
-  exports.getIcons = function(id) {
-    return newRequest(ESI.AllianceApi, 'getAlliancesAllianceIdIcons', [id]);
-  };
+  icon() {
+  return this._api.alliance()
+    .newRequest('getAlliancesAllianceIdIcons', [this._id]);
+  }
+}
 
-  return exports;
+/**
+ * An api adaptor over the end points handling multiple alliances. Its default
+ * function action is equivalent to {@link module:alliance~Alliances#ids #ids}.
+ */
+class Alliances extends ExtendableFunction {
+  /**
+   * Create a new Alliances function using the given `api`.
+   *
+   * @param api {ApiProvider} The api provider
+   * @constructor
+   */
+  constructor(api) {
+    super(() => { return this.ids() });
+    this._api = api;
+  }
+
+  /**
+   * Get all alliance id's the ESI endpoint. This makes an HTTP GET request to
+   * [`alliances/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   99000001,
+   *   99000002
+   * ]
+   * ```
+   *
+   * @return {Promise} A Promise that resolves to the response of
+   *   the request
+   * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances
+   * @esi_link AllianceApi.getAlliances
+   */
+  ids() {
+    return this._api.alliance().newRequest('getAlliances', []);
+  }
+
+  /**
+   * Get the names for a list of alliance ids from the ESI endpoint. This makes
+   * an HTTP GET request to
+   * [`alliances/names/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_names).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   {
+   *     "id": 1000171,
+   *     "name": "Republic University"
+   *   }
+   * ]
+   * ```
+   *
+   * Note that this has the id and name fields simplified compared to what the
+   * actual ESI end point reports ('alliance_id' and 'alliance_name'). For very
+   * long arrays, this will fall back to making an HTTP POST request to
+   * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names),
+   * which does not have a URL length limitation. In this case the response
+   * format will be as above.
+   *
+   * @param {Array.<Number>} ids Optional; the alliance ids to look up. If not
+   *   provided then the names of all alliances will be returned.
+   * @return {Promise} A Promise that resolves to the response of
+   *   the request
+   * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_names
+   * @esi_link AllianceApi.getAlliancesNames
+   */
+  names(ids = []) {
+    if (!ids || ids.length == 0) {
+      return this.ids().then(allIds => this.names(allIds));
+    } else {
+      if (ids.length > 20) {
+        // Use universe/names end point since the /alliances one breaks if
+        // the URL gets too long.
+        return this._api.universe()
+        .newRequest('postUniverseNames', [{ ids: ids }])
+        .then(result => {
+          // Filter by category == 'alliance' and remove category field
+          return result.filter(r => r.category == 'alliance').map(r => {
+            return {
+              id: r.id,
+              name: r.name
+            };
+          });
+        });
+      } else {
+        // Use alliance/names end point and
+        return this._api.alliance().newRequest('getAlliancesNames', [ids])
+        .then(result => {
+          // Rename alliance_id and alliance_name
+          return result.map(r => {
+            return {
+              id: r.alliance_id,
+              name: r.alliance_name
+            };
+          });
+        });
+      }
+    }
+  }
+}
+
+/**
+ * Factory function to create an Alliance and Alliances api wrapper with the
+ * given api provider.
+ *
+ * @param api {ApiProvider} The api provider
+ * @returns {Object}
+ */
+module.exports = function(api) {
+  return {
+    /**
+     * Create an Alliance api wrapper. This member is exposed on the object
+     * returned by the module's factory function.
+     *
+     * @param allianceId {Number} The alliance id
+     * @returns {Alliance}
+     * @alias alliance
+     * @memberOf module:alliance
+     */
+    alliance: function(allianceId) {
+      return new Alliance(api, allianceId);
+    },
+
+    /**
+     * An Alliances instance/function. This member is exposed on the object
+     * returned by the module's factory function.
+     *
+     * @type {Alliances}
+     * @alias alliances
+     * @memberOf module:alliance
+     */
+    alliances: new Alliances(api)
+  }
 };
