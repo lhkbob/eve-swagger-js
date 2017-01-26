@@ -15,7 +15,7 @@
   },
   "plugins": [
     "plugins/markdown",
-    "src/esi_link"
+    "src/internal/jsdoc-esi-link"
   ],
   "templates": {
     "cleverLinks": false,
