@@ -1,19 +1,27 @@
 /**
  * A container for the [industry](https://esi.tech.ccp.is/latest/#/Industry) ESI
- * endpoints. You should not require this module directly, as it technically
- * returns a factory function that requires an internal API. Instead an instance
- * is automatically exposed when the {@link module:eve_swagger_interface} is
- * loaded and configured.
+ * endpoints. You should not usually require this module directly, as it
+ * technically returns a constructor that requires an internal API. The
+ * module exports the {@link module:industry~Industry Industry} constructor.
  *
  * @see https://esi.tech.ccp.is/latest/#/Industry
  * @param api The internal API instance configured by the root module
  * @module industry
  */
-module.exports = function(api) {
-  var newRequest = api.newRequest;
-  var ESI = api.esi;
 
-  var exports = {};
+/**
+ * An api adaptor over the end points handling industry.
+ */
+class Industry {
+  /**
+   * Create a new Industry function using the given `api`.
+   *
+   * @param api {ApiProvider} The api provider
+   * @constructor
+   */
+  constructor(api) {
+    this._api = api;
+  }
 
   /**
    * Get all industry facilities from the ESI endpoint. This makes an HTTP GET
@@ -35,14 +43,13 @@ module.exports = function(api) {
    * ]
    * ```
    *
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
+   * @return {Promise} A Promise that resolves to the response of the request
    * @see https://esi.tech.ccp.is/latest/#!/Industry/get_industry_facilities
    * @esi_link IndustryApi.getIndustryFacilities
    */
-  exports.getFacilities = function() {
-    return newRequest(ESI.IndustryApi, 'getIndustryFacilities', []);
-  };
+  facilities() {
+    return this._api.industry().newRequest('getIndustryFacilities', []);
+  }
 
   /**
    * Get cost indices for each solar system from the ESI endpoint. This makes an
@@ -65,14 +72,13 @@ module.exports = function(api) {
    * ]
    * ```
    *
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
+   * @return {Promise} A Promise that resolves to the response of the request
    * @see https://esi.tech.ccp.is/latest/#!/Industry/get_industry_facilities
    * @esi_link IndustryApi.getIndustryFacilities
    */
-  exports.getSystemCostIndices = function() {
-    return newRequest(ESI.IndustryApi, 'getIndustrySystems', []);
-  };
+  systemCosts() {
+    return this._api.industry().newRequest('getIndustrySystems', []);
+  }
+}
 
-  return exports;
-};
+module.exports = Industry;
