@@ -1,20 +1,37 @@
 /**
  * A container for the
  * [corporation](https://esi.tech.ccp.is/latest/#/Corporation) ESI endpoints.
- * You should not require this module directly, as it technically returns a
- * factory function that requires an internal API. Instead an instance is
- * automatically exposed when the {@link module:eve_swagger_interface} is loaded
- * and configured.
+ * You should not usually require this module directly, as it technically
+ * returns a factory function that requires an internal API. The module exports
+ * the {@link module:corporation~Corporations Corporations} constructor.
  *
  * @see https://esi.tech.ccp.is/latest/#/Corporation
  * @param api The internal API instance configured by the root module
  * @module corporation
  */
-module.exports = function(api) {
-  var newRequest = api.newRequest;
-  var ESI = api.esi;
 
-  var exports = {};
+const ExtendableFunction = require('./internal/ExtendableFunction');
+
+/**
+ * An api adaptor that provides functions for accessing various details for a
+ * corporation specified by id. This does include information that requires
+ * a character's authorization.
+ */
+class Corporation {
+  /**
+   * Create a new Corporation for the given `api` provider and specific
+   * `corporationId`.
+   *
+   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param corporationId {Number} The corporation id that is used for all
+   *     requests
+   * @constructor
+   */
+  constructor(api, corporationId) {
+    this._api = api;
+    this._id = corporationId;
+  }
+
   /**
    * Get a corporation's public info from the ESI endpoint. This makes an HTTP
    * GET request to
@@ -32,15 +49,14 @@ module.exports = function(api) {
    * }
    * ```
    *
-   * @param {Integer} id The corporation id
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
+   * @return {Promise} A Promise that resolves to the response of the request
    * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id
    * @esi_link CorporationApi.getCorporationsCorporationId
    */
-  exports.get = function(id) {
-    return newRequest(ESI.CorporationApi, 'getCorporationsCorporationId', [id]);
-  };
+  info() {
+    return this._api.corporation()
+    .newRequest('getCorporationsCorporationId', [this._id]);
+  }
 
   /**
    * Get a corporation's alliance history from the ESI endpoint. This makes an
@@ -66,19 +82,18 @@ module.exports = function(api) {
    * ]
    * ```
    *
-   * @param {Integer} id The corporation id
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
+   * @return {Promise} A Promise that resolves to the response of the request
    * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory
    * @esi_link CorporationApi.getCorporationsCorporationIdAllianceHistory
    */
-  exports.getAllianceHistory = function(id) {
-    return newRequest(ESI.CorporationApi,
-        'getCorporationsCorporationIdAllianceHistory', [id]);
-  };
+  history() {
+    return this._api.corporation()
+    .newRequest('getCorporationsCorporationIdAllianceHistory', [this._id]);
+  }
 
   /**
-   * Get a corporation's icon URLs from the ESI endpoint. This makes an HTTP GET
+   * Get a corporation's icon URLs from the ESI endpoint. This makes an HTTP
+   * GET
    * request to
    * [`corporations/{id}/icons/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons).
    * The request is returned as an asynchronous Promise that resolves to an
@@ -95,84 +110,44 @@ module.exports = function(api) {
    * }
    * ```
    *
-   * @param {Integer} id The corporation id
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
+   * @return {Promise} A Promise that resolves to the response of  the request
    * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons
    * @esi_link CorporationApi.getCorporationsCorporationIdIcons
    */
-  exports.getIcons = function(id) {
-    return newRequest(ESI.CorporationApi, 'getCorporationsCorporationIdIcons',
-        [id]);
-  };
+  icon() {
+    return this._api.corporation()
+    .newRequest('getCorporationsCorporationIdIcons', [this._id]);
+  }
+}
+
+/**
+ * An api adaptor over the end points handling multiple corporations. This is a
+ * function class so instances of `Corporations` are functions and can be
+ * invoked directly, besides accessing its members. Its default function action
+ * is equivalent to {@link module:corporation~Corporations#get get}.
+ */
+class Corporations extends ExtendableFunction {
+  /**
+   * Create a new Corporations function using the given `api`.
+   *
+   * @param api {ApiProvider} The api provider
+   * @constructor
+   */
+  constructor(api) {
+    super(id => this.get(id));
+    this._api = api;
+  }
 
   /**
-   * Get a corporation's member list from the ESI endpoint. This makes an HTTP
-   * GET request to
-   * [`corporations/{id}/members/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * Create a new Corporation end point targeting the particular corporation by
+   * `id`.
    *
-   * ```
-   * [
-   *   {
-   *     "character_id": 90000001
-   *   },
-   *   {
-   *     "character_id": 90000002
-   *   }
-   * ]
-   * ```
-   *
-   * @param {Integer} id The corporation id
-   * @param {String} accessToken Optional; the SSO access token of a member of
-   *   the corporation, used to authenticate the request. If not provided, the
-   *   default access token provided to the factory is used; if that was not
-   *   set then this request will fail.
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members
-   * @esi_link CorporationApi.getCorporationsCorporationIdMembers
+   * @param id {Number} The corporation id
+   * @returns {Corporation}
    */
-  exports.getMembers = function(id, accessToken) {
-    return newRequest(ESI.CorporationApi, 'getCorporationsCorporationIdMembers',
-        [id], accessToken);
-  };
-
-  /**
-   * Get a corporation's member list with roles for each character from the ESI
-   * endpoint. This makes an HTTP GET request to
-   * [`corporations/{id}/roles/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
-   *
-   * ```
-   * [
-   *   {
-   *     "character_id": 1000171,
-   *     "roles": [
-   *       "Director",
-   *       "Station_Manager"
-   *     ]
-   *   }
-   * ]
-   * ```
-   *
-   * @param {Integer} id The corporation id
-   * @param {String} accessToken Optional; the SSO access token of a member of
-   *   the corporation that has the personnel manager or any other grantable
-   *   role, used to authenticate the request. If not provided, the default
-   *   access token provided to the factory is used; if that was not set then
-   *   this request will fail.
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles
-   * @esi_link CorporationApi.getCorporationsCorporationIdRoles
-   */
-  exports.getRoles = function(id, accessToken) {
-    return newRequest(ESI.CorporationApi, 'getCorporationsCorporationIdRoles',
-        [id], accessToken);
-  };
+  get(id) {
+    return new Corporation(this._api, id);
+  }
 
   /**
    * Get the names for a list of corporation ids from the ESI endpoint. This
@@ -184,21 +159,55 @@ module.exports = function(api) {
    * ```
    * [
    *   {
-   *     "corporation_id": 1000171,
-   *     "corporation_name": "Republic University"
+   *     "id": 1000171,
+   *     "name": "Republic University"
    *   }
    * ]
    * ```
    *
-   * @param {Array.<Integer>} ids The corporation ids to lookup
-   * @return {external:Promise} A Promise that resolves to the response of
+   * Note that this has the id and name fields simplified compared to what the
+   * actual ESI end point reports ('corporation_id' and 'corporation_name').
+   * For
+   * very long arrays, this will fall back to making an HTTP POST request to
+   * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names),
+   * which does not have a URL length limitation. In this case the response
+   * format will be as above.
+   *
+   * @param {Array.<Number>} ids The corporation ids to look up.
+   * @return {Promise} A Promise that resolves to the response of
    *   the request
    * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names
    * @esi_link CorporationApi.getCorporationsNames
    */
-  exports.getNamesOf = function(ids) {
-    return newRequest(ESI.CorporationApi, 'getCorporationsNames', [ids]);
-  };
+  names(ids) {
+    if (ids.length > 20) {
+      // Use universe/names end point since the /alliances one breaks if
+      // the URL gets too long.
+      return this._api.universe()
+      .newRequest('postUniverseNames', [{ ids: ids }])
+      .then(result => {
+        // Filter by category == 'corporation' and remove category field
+        return result.filter(r => r.category == 'corporation').map(r => {
+          return {
+            id: r.id,
+            name: r.name
+          };
+        });
+      });
+    } else {
+      // Use alliance/names end point and
+      return this._api.corporation().newRequest('getCorporationsNames', [ids])
+      .then(result => {
+        // Rename corporation_id and corporation_name
+        return result.map(r => {
+          return {
+            id: r.corporation_id,
+            name: r.corporation_name
+          };
+        });
+      });
+    }
+  }
+}
 
-  return exports;
-};
+module.exports = Corporations;
