@@ -119,7 +119,7 @@ class Alliances extends ExtendableFunction {
    * @constructor
    */
   constructor(api) {
-    super((id) => { return this.get(id) });
+    super(id => this.get(id));
     this._api = api;
   }
 
