@@ -184,357 +184,395 @@ function getCachedRequest(api, functionName, args, opts, resolve, reject) {
 }
 
 /**
- * Create a new PromiseApi that wraps the given ESI `apiType`, configured
- * via `provider` and with optional auth from `accessToken`.
- *
- * @param apiType {String} The ESI Api class to instantiate
- * @param provider {ApiProvider} The api configuration and cache provider
- * @param accessToken {String} The optional SSO access token
- * @constructor
+ * Primary access point to invoking specific ESI Api's with the Promise-wrapping
+ * `newRequest` function.
  * @private
  */
-function PromiseApi(apiType, provider, accessToken) {
-  this._apiType = apiType;
-  this._provider = provider;
-  this._accessToken = accessToken;
+class PromiseApi {
+  /**
+   * Create a new PromiseApi that wraps the given ESI `apiType`, configured
+   * via `provider` and with optional auth from `accessToken`.
+   *
+   * @param apiType {String} The ESI Api class to instantiate
+   * @param provider {ApiProvider} The api configuration and cache provider
+   * @param accessToken {String} The optional SSO access token
+   * @constructor
+   */
+  constructor(apiType, provider, accessToken) {
+    this._apiType = apiType;
+    this._provider = provider;
+    this._accessToken = accessToken;
+  }
+
+  /**
+   * Create a new Promise for invoking the ESI request represented by `method`,
+   * which must be a function on the underlying Api instance. The function is
+   * called with arguments in the array, `args`. The `opts` argument is
+   * presumed
+   * to be an object used as the last argument to the API request, and will be
+   * modified to include additional default properties configured by the
+   * factory.
+   *
+   * @param {String} method The name of a function callable on the Api
+   *     instance.
+   * @param {Array} args Array of arguments to pass to ESI Api function call
+   * @param {Object} opts Optional parameters object to pass to the ESI call
+   * @return {Promise} A new promise that resolves to the data returned
+   *     by the request
+   */
+  newRequest(method, args, opts = {}) {
+    let _this = this;
+    return new Promise(function(resolve, reject) {
+      // Get an ESi.XApi instance, possibly cached, that is configured to use
+      // the provider's config and given access token
+      let api = getApi(_this._provider, _this._apiType, _this._accessToken);
+      // Form full opts object based on the provider's default options
+      opts = Object.assign({}, opts, _this._provider._defaultOpts);
+      getCachedRequest(api, method, args, opts, resolve, reject);
+    });
+  }
 }
 
 /**
- * Create a new Promise for invoking the ESI request represented by `method`,
- * which must be a function on the underlying Api instance. The function is
- * called with arguments in the array, `args`. The `opts` argument is presumed
- * to be an object used as the last argument to the API request, and will be
- * modified to include additional default properties configured by the factory.
- *
- * @param {String} method The name of a function callable on the Api instance.
- * @param {Array} args Array of arguments to pass to ESI Api function call
- * @param {Object} opts Optional parameters object to pass to the ESI call
- * @return {Promise} A new promise that resolves to the data returned
- *     by the request
- */
-PromiseApi.prototype.newRequest = function(method, args, opts = {}) {
-  let _this = this;
-  return new Promise(function(resolve, reject) {
-    // Get an ESi.XApi instance, possibly cached, that is configured to use
-    // the provider's config and given access token
-    let api = getApi(_this._provider, _this._apiType, _this._accessToken);
-    // Form full opts object based on the provider's default options
-    opts = Object.assign({}, opts, _this._provider._defaultOpts);
-    getCachedRequest(api, method, args, opts, resolve, reject);
-  });
-};
-
-/**
- * Create a new ApiProvider with the given configuration provided in a single
- * object map. If no argument is provided, the defaults are used.
- *
- * @param service {String} URL to the ESI service, defaults to
- *     `https://esi.tech.ccp.is/latest`.
- * @param source {String} Data source used, defaults to `tranquility`.
- * @param agent {String} Custom user agent string to send with each request,
- *     which defaults to this project but really should be set for your app
- * @param language {String} Language character code, defaults to `en-us`
- * @param timeout {Number} Request timeout in milliseconds, defaults to `6000`
- * @constructor
+ * Configuration and factory function for getting Promise-wrapping `PromiseApi`
+ * instances for each of the generated ESI Api's.
  * @private
  */
-// TODO: add cache control options here (disabling and changing timeouts for
-// the request and the api caches)
-function ApiProvider({
-    service: service = 'https://esi.tech.ccp.is/latest',
-    source: source = 'tranquility',
-    agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js',
-    language: language = 'en-us',
-    timeout: timeout = 6000
-} = {}) {
-  // Save URL, agent, and timeout for later as they configure the ApiClient
-  this._eveURL = service;
-  this._userAgent = agent;
-  this._timeout = timeout;
+class ApiProvider {
+  /**
+   * Create a new ApiProvider with the given configuration provided in a single
+   * object map. If no argument is provided, the defaults are used.
+   *
+   * @param service {String} URL to the ESI service, defaults to
+   *     `https://esi.tech.ccp.is/latest`.
+   * @param source {String} Data source used, defaults to `tranquility`.
+   * @param agent {String} Custom user agent string to send with each request,
+   *     which defaults to this project but really should be set for your app
+   * @param language {String} Language character code, defaults to `en-us`
+   * @param timeout {Number} Request timeout in milliseconds, defaults to `6000`
+   * @constructor
+   */
+  constructor({
+      service: service = 'https://esi.tech.ccp.is/latest',
+      source: source = 'tranquility',
+      agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js',
+      language: language = 'en-us',
+      timeout: timeout = 6000
+  } = {}) {
+    // Save URL, agent, and timeout for later as they configure the ApiClient
+    this._eveURL = service;
+    this._userAgent = agent;
+    this._timeout = timeout;
 
-  this._defaultOpts = {
-    'datasource': source,
-    'language': language,
-    'acceptLanguage': language
-  };
+    this._defaultOpts = {
+      'datasource': source,
+      'language': language,
+      'acceptLanguage': language
+    };
 
-  // Keyed on access token, returns an ApiClient instance
-  this._apiCache = new Cache({ useClones: false });
+    // Keyed on access token, returns an ApiClient instance
+    this._apiCache = new Cache({ useClones: false });
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link AllianceApi
+   */
+  alliance(accessToken = '') {
+    return new PromiseApi('AllianceApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link AssetsApi
+   */
+  assets(accessToken = '') {
+    return new PromiseApi('AssetsApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link BookmarksApi
+   */
+  bookmarks(accessToken = '') {
+    return new PromiseApi('BookmarksApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link CalendarApi
+   */
+  calendar(accessToken = '') {
+    return new PromiseApi('CalendarApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link CharacterApi
+   */
+  character(accessToken = '') {
+    return new PromiseApi('CharacterApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link ClonesApi
+   */
+  clones(accessToken = '') {
+    return new PromiseApi('ClonesApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link ContactsApi
+   */
+  contacts(accessToken = '') {
+    return new PromiseApi('ContactsApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link CorporationApi
+   */
+  corporation(accessToken = '') {
+    return new PromiseApi('CorporationApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link FittingsApi
+   */
+  fittings(accessToken = '') {
+    return new PromiseApi('FittingsApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link FleetsApi
+   */
+  fleets(accessToken = '') {
+    return new PromiseApi('FleetsApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link IncursionsApi
+   */
+  incursions(accessToken = '') {
+    return new PromiseApi('IncursionsApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link IndustryApi
+   */
+  industry(accessToken = '') {
+    return new PromiseApi('IndustryApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link InsuranceApi
+   */
+  insurance(accessToken = '') {
+    return new PromiseApi('InsuranceApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link KillmailsApi
+   */
+  killmails(accessToken = '') {
+    return new PromiseApi('AssetsApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link LocationApi
+   */
+  location(accessToken = '') {
+    return new PromiseApi('LocationApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link MailApi
+   */
+  mail(accessToken = '') {
+    return new PromiseApi('MailApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link MarketApi
+   */
+  market(accessToken = '') {
+    return new PromiseApi('MarketApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link PlanetaryInteractionApi
+   */
+  planetaryInteraction(accessToken = '') {
+    return new PromiseApi('PlanetaryInteractionApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link SearchApi
+   */
+  search(accessToken = '') {
+    return new PromiseApi('SearchApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link SkillsApi
+   */
+  skills(accessToken = '') {
+    return new PromiseApi('SkillsApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link SovereigntyApi
+   */
+  sovereignty(accessToken = '') {
+    return new PromiseApi('SovereigntyApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link UniverseApi
+   */
+  universe(accessToken = '') {
+    return new PromiseApi('UniverseApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link UserInterfaceApi
+   */
+  userInterface(accessToken = '') {
+    return new PromiseApi('UserInterfaceApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link WalletApi
+   */
+  wallet(accessToken = '') {
+    return new PromiseApi('WalletApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
+   * @esi_link WarsApi
+   */
+  wars(accessToken = '') {
+    return new PromiseApi('WarsApi', this, accessToken);
+  }
 }
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link AllianceApi
- */
-ApiProvider.prototype.alliance = function(accessToken = '') {
-  return new PromiseApi('AllianceApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link AssetsApi
- */
-ApiProvider.prototype.assets = function(accessToken = '') {
-  return new PromiseApi('AssetsApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link BookmarksApi
- */
-ApiProvider.prototype.bookmarks = function(accessToken = '') {
-  return new PromiseApi('BookmarksApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link CalendarApi
- */
-ApiProvider.prototype.calendar = function(accessToken = '') {
-  return new PromiseApi('CalendarApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link CharacterApi
- */
-ApiProvider.prototype.character = function(accessToken = '') {
-  return new PromiseApi('CharacterApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link ClonesApi
- */
-ApiProvider.prototype.clones = function(accessToken = '') {
-  return new PromiseApi('ClonesApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link ContactsApi
- */
-ApiProvider.prototype.contacts = function(accessToken = '') {
-  return new PromiseApi('ContactsApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link CorporationApi
- */
-ApiProvider.prototype.corporation = function(accessToken = '') {
-  return new PromiseApi('CorporationApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link FittingsApi
- */
-ApiProvider.prototype.fittings = function(accessToken = '') {
-  return new PromiseApi('FittingsApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link FleetsApi
- */
-ApiProvider.prototype.fleets = function(accessToken = '') {
-  return new PromiseApi('FleetsApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link IncursionsApi
- */
-ApiProvider.prototype.incursions = function(accessToken = '') {
-  return new PromiseApi('IncursionsApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link IndustryApi
- */
-ApiProvider.prototype.industry = function(accessToken = '') {
-  return new PromiseApi('IndustryApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link InsuranceApi
- */
-ApiProvider.prototype.insurance = function(accessToken = '') {
-  return new PromiseApi('InsuranceApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link KillmailsApi
- */
-ApiProvider.prototype.killmails = function(accessToken = '') {
-  return new PromiseApi('AssetsApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link LocationApi
- */
-ApiProvider.prototype.location = function(accessToken = '') {
-  return new PromiseApi('LocationApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link MailApi
- */
-ApiProvider.prototype.mail = function(accessToken = '') {
-  return new PromiseApi('MailApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link MarketApi
- */
-ApiProvider.prototype.market = function(accessToken = '') {
-  return new PromiseApi('MarketApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link PlanetaryInteractionApi
- */
-ApiProvider.prototype.planetaryInteraction = function(accessToken = '') {
-  return new PromiseApi('PlanetaryInteractionApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link SearchApi
- */
-ApiProvider.prototype.search = function(accessToken = '') {
-  return new PromiseApi('SearchApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link SkillsApi
- */
-ApiProvider.prototype.skills = function(accessToken = '') {
-  return new PromiseApi('SkillsApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link SovereigntyApi
- */
-ApiProvider.prototype.sovereignty = function(accessToken = '') {
-  return new PromiseApi('SovereigntyApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link UniverseApi
- */
-ApiProvider.prototype.universe = function(accessToken = '') {
-  return new PromiseApi('UniverseApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link UserInterfaceApi
- */
-ApiProvider.prototype.userInterface = function(accessToken = '') {
-  return new PromiseApi('UserInterfaceApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link WalletApi
- */
-ApiProvider.prototype.wallet = function(accessToken = '') {
-  return new PromiseApi('WalletApi', this, accessToken);
-};
-
-/**
- * Create a new PromiseApi.
- *
- * @param accessToken {String} Optional character access token for all requests.
- * @returns {PromiseApi}
- * @esi_link WarsApi
- */
-ApiProvider.prototype.wars = function(accessToken = '') {
-  return new PromiseApi('WarsApi', this, accessToken);
-};
 
 module.exports = ApiProvider;
