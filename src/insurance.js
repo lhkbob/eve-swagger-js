@@ -1,20 +1,24 @@
 /**
  * A container for the [insurance](https://esi.tech.ccp.is/latest/#/Insurance)
- * ESI endpoints. You should not require this module directly, as it technically
- * returns a factory function that requires an internal API. Instead an instance
- * is automatically exposed when the {@link module:eve_swagger_interface} is
- * loaded and configured.
+ * ESI endpoints. You should not usually require this module directly, as it
+ * technically returns a constructor that requires an internal API. The module
+ * exports the {@link module:insurance~Insurance Insurance} constructor.
  *
  * @see https://esi.tech.ccp.is/latest/#/Insurance
  * @param api The internal API instance configured by the root module
  * @module insurance
  */
-module.exports = function(api) {
-  var newRequest = api.newRequest;
-  var newRequestOpt = api.newRequestOpt;
-  var ESI = api.esi;
 
-  var exports = {};
+class Insurance {
+  /**
+   * Create a new Insurance instance using the given `api`.
+   *
+   * @param api {ApiProvider} The api provider
+   * @constructor
+   */
+  constructor(api) {
+    this._api = api;
+  }
 
   /**
    * Get insurance prices for all ship types from the ESI endpoint. This makes
@@ -38,21 +42,15 @@ module.exports = function(api) {
    * ]
    * ```
    *
-   * @param {String} language Optional localization code for the response,
-   *   which overrides the default language.
-   * @return {external:Promise} A Promise that resolves to the response of
-   *   the request
+
+   * @return {Promise} A Promise that resolves to the response of the request
    * @see module:eve_swagger_interface.languages
    * @see https://esi.tech.ccp.is/latest/#!/Incursions/get_insurance_prices
    * @esi_link InsuranceApi.getInsurancePrices
    */
-  exports.getPrices = function(language) {
-    var opts = {};
-    if (language) {
-      opts.language = language;
-    }
-    return newRequestOpt(ESI.InsuranceApi, 'getInsurancePrices', [], opts);
-  };
+  prices() {
+    return this._api.insurance().newRequest('getInsurancePrices', []);
+  }
+}
 
-  return exports;
-};
+module.exports = Insurance;

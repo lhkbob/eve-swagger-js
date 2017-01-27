@@ -14,7 +14,7 @@
  */
 class Industry {
   /**
-   * Create a new Industry function using the given `api`.
+   * Create a new Industry instance using the given `api`.
    *
    * @param api {ApiProvider} The api provider
    * @constructor

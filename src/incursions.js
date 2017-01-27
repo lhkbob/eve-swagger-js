@@ -19,7 +19,7 @@ const ExtendableFunction = require('./internal/ExtendableFunction');
  */
 class Incursions extends ExtendableFunction {
   /**
-   * Create a new Incursions function using the given `api`.
+   * Create a new Incursions instance using the given `api`.
    *
    * @param api {ApiProvider} The api provider
    * @constructor
