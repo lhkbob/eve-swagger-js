@@ -1,19 +1,33 @@
 /**
  * A container for the [incursions](https://esi.tech.ccp.is/latest/#/Incursions)
- * ESI endpoints. You should not require this module directly, as it technically
- * returns a factory function that requires an internal API. Instead an instance
- * is automatically exposed when the {@link module:eve_swagger_interface} is
- * loaded and configured.
+ * ESI endpoints. You should not usually require this module directly, as it
+ * technically returns a constructor that requires an internal API. The module
+ * exports the {@link module:incursions~Incursions Incursions} constructor.
  *
  * @see https://esi.tech.ccp.is/latest/#/Incursions
  * @param api The internal API instance configured by the root module
  * @module incursions
  */
-module.exports = function(api) {
-  var newRequest = api.newRequest;
-  var ESI = api.esi;
 
-  var exports = {};
+const ExtendableFunction = require('./internal/ExtendableFunction');
+
+/**
+ * An api adaptor over the end points handling incursions. This is a function
+ * class so instances of `Incursions` are functions and can be invoked directly,
+ * besides accessing its members. Its default function action is equivalent to
+ * {@link module:incursions~Incursions#all all}.
+ */
+class Incursions extends ExtendableFunction {
+  /**
+   * Create a new Incursions function using the given `api`.
+   *
+   * @param api {ApiProvider} The api provider
+   * @constructor
+   */
+  constructor(api) {
+    super(() => this.all());
+    this._api = api;
+  }
 
   /**
    * Get all incursions from the ESI endpoint. This makes an HTTP GET request to
@@ -44,14 +58,14 @@ module.exports = function(api) {
    * ]
    * ```
    *
-   * @return {external:Promise} A Promise that resolves to the response of
+   * @return {Promise} A Promise that resolves to the response of
    *   the request
    * @see https://esi.tech.ccp.is/latest/#!/Incursions/get_incursions
    * @esi_link IncursionsApi.getIncursions
    */
-  exports.getAll = function() {
-    return newRequest(ESI.IncursionsApi, 'getIncursions', []);
-  };
+  all() {
+    return this._api.incursions().newRequest('getIncursions', []);
+  }
+}
 
-  return exports;
-};
+module.exports = Incursions;
