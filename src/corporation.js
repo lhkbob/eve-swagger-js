@@ -2,7 +2,7 @@
  * A container for the
  * [corporation](https://esi.tech.ccp.is/latest/#/Corporation) ESI endpoints.
  * You should not usually require this module directly, as it technically
- * returns a factory function that requires an internal API. The module exports
+ * returns a constructor that requires an internal API. The module exports
  * the {@link module:corporation~Corporations Corporations} constructor.
  *
  * @see https://esi.tech.ccp.is/latest/#/Corporation
