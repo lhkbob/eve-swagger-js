@@ -1,9 +1,8 @@
 /**
  * A container for the [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI
- * endpoints. You should not require this module directly, as it technically
- * returns a factory function that requires an internal API. Instead an instance
- * is automatically exposed when the {@link module:eve_swagger_interface} is
- * loaded and configured.
+ * endpoints. You should not usually require this module directly, as it
+ * technically returns a factory function that requires an internal API. The
+ * module exports the {@link module:alliance~Alliances Alliances} constructor.
  *
  * @see https://esi.tech.ccp.is/latest/#/Alliance
  * @module alliance
@@ -51,7 +50,8 @@ class Alliance {
    * @esi_link AllianceApi.getAlliancesAllianceId
    */
   info() {
-    return this._api.alliance().newRequest('getAlliancesAllianceId', [this._id]);
+    return this._api.alliance()
+    .newRequest('getAlliancesAllianceId', [this._id]);
   }
 
   /**
@@ -100,14 +100,16 @@ class Alliance {
    * @esi_link AllianceApi.getAlliancesAllianceIdIcons
    */
   icon() {
-  return this._api.alliance()
+    return this._api.alliance()
     .newRequest('getAlliancesAllianceIdIcons', [this._id]);
   }
 }
 
 /**
- * An api adaptor over the end points handling multiple alliances. Its default
- * function action is equivalent to {@link module:alliance~Alliances#ids #ids}.
+ * An api adaptor over the end points handling multiple alliances. This is a
+ * function class so instances of `Alliances` are functions and can be invoked
+ * directly, besides accessing its members. Its default function action is
+ * equivalent to {@link module:alliance~Alliances#get get}.
  */
 class Alliances extends ExtendableFunction {
   /**
@@ -117,12 +119,23 @@ class Alliances extends ExtendableFunction {
    * @constructor
    */
   constructor(api) {
-    super(() => { return this.ids() });
+    super((id) => { return this.get(id) });
     this._api = api;
   }
 
   /**
-   * Get all alliance id's the ESI endpoint. This makes an HTTP GET request to
+   * Create a new Alliance end point targeting the particular alliance by `id`.
+   *
+   * @param id {Number} The alliance id
+   * @returns {Alliance}
+   */
+  get(id) {
+    return new Alliance(this._api, id);
+  }
+
+  /**
+   * Get all active alliance id's the ESI endpoint. This makes an HTTP GET
+   * request to
    * [`alliances/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances).
    * The request is returned as an asynchronous Promise that resolves to an
    * array parsed from the response JSON model. An example value looks like:
@@ -139,7 +152,7 @@ class Alliances extends ExtendableFunction {
    * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances
    * @esi_link AllianceApi.getAlliances
    */
-  ids() {
+  all() {
     return this._api.alliance().newRequest('getAlliances', []);
   }
 
@@ -175,7 +188,7 @@ class Alliances extends ExtendableFunction {
    */
   names(ids = []) {
     if (!ids || ids.length == 0) {
-      return this.ids().then(allIds => this.names(allIds));
+      return this.all().then(allIds => this.names(allIds));
     } else {
       if (ids.length > 20) {
         // Use universe/names end point since the /alliances one breaks if
@@ -208,36 +221,4 @@ class Alliances extends ExtendableFunction {
   }
 }
 
-/**
- * Factory function to create an Alliance and Alliances api wrapper with the
- * given api provider.
- *
- * @param api {ApiProvider} The api provider
- * @returns {Object}
- */
-module.exports = function(api) {
-  return {
-    /**
-     * Create an Alliance api wrapper. This member is exposed on the object
-     * returned by the module's factory function.
-     *
-     * @param allianceId {Number} The alliance id
-     * @returns {Alliance}
-     * @alias alliance
-     * @memberOf module:alliance
-     */
-    alliance: function(allianceId) {
-      return new Alliance(api, allianceId);
-    },
-
-    /**
-     * An Alliances instance/function. This member is exposed on the object
-     * returned by the module's factory function.
-     *
-     * @type {Alliances}
-     * @alias alliances
-     * @memberOf module:alliance
-     */
-    alliances: new Alliances(api)
-  }
-};
+module.exports = Alliances;
