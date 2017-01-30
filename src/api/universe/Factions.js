@@ -3,7 +3,8 @@ const Search = require('../Search');
 
 /**
  * An api adaptor over the end points handling factions via functions in the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints. You
+ * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
+ * [search](https://esi.tech.ccp.is/latest/#/Search) ESI endpoints. You
  * should not usually instantiate this directly as its constructor requires an
  * internal api instance.
  *

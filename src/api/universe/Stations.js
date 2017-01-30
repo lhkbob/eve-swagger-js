@@ -100,11 +100,10 @@ class Stations extends ExtendableFunction {
    * ```
    *
    * Note that this has the category field stripped from the response and will
-   * only include matches with the solar system category.
+   * only include matches with the station category.
    *
    * @param {Array.<Number>} ids The station ids to look up.
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
+   * @return {Promise} A Promise that resolves to the response of the request
    * @esi_link UniverseApi.postUniverseNames
    */
   names(ids) {
