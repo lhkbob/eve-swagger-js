@@ -3,6 +3,10 @@ const Search = require('../Search');
 
 const _names = require('../../internal/names');
 
+/**
+ * An api adaptor for dealing with single solar systems, currently only
+ * supporting fetching simple information.
+ */
 class SolarSystem {
   /**
    * Create a new SolarSystem for the given `api` provider and specific
@@ -71,8 +75,7 @@ class SolarSystems extends ExtendableFunction {
   }
 
   /**
-   * Create a new SolarSystem end point targeting the particular system by
-   * `id`.
+   * Create a new SolarSystem end point targeting the particular system by `id`.
    *
    * @param id {Number} The solar system id
    * @returns {SolarSystem}
@@ -100,7 +103,7 @@ class SolarSystems extends ExtendableFunction {
    * Note that this has the category field stripped from the response and will
    * only include matches with the solar system category.
    *
-   * @param {Array.<Number>} ids The constellation ids to look up.
+   * @param {Array.<Number>} ids The solar system ids to look up.
    * @return {Promise} A Promise that resolves to the response of
    *   the request
    * @esi_link UniverseApi.postUniverseNames

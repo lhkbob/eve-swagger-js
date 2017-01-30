@@ -1,7 +1,7 @@
 const ExtendableFunction = require('../internal/ExtendableFunction');
 const Search = require('../internal/Search');
 
-const names = require('../internal/names');
+const _names = require('../internal/names');
 
 /**
  * An api adaptor that provides functions for accessing various details for a
@@ -190,7 +190,7 @@ class Corporations extends ExtendableFunction {
     if (ids.length > 20) {
       // Use universe/names end point since the /corporations one breaks if
       // the URL gets too long.
-      return names(this._api, 'corporation', ids);
+      return _names(this._api, 'corporation', ids);
     } else {
       // Use alliance/names end point and
       return this._api.corporation().newRequest('getCorporationsNames', [ids])

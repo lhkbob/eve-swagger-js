@@ -1,7 +1,7 @@
 const ExtendableFunction = require('../internal/ExtendableFunction');
 const Search = require('./Search');
 
-const names = require('../internal/Names');
+const _names = require('../internal/Names');
 
 /**
  * An api adaptor that provides functions for accessing various details for an
@@ -156,9 +156,7 @@ class Alliances extends ExtendableFunction {
    * ]
    * ```
    *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances
+   * @return {Promise} A Promise that resolves to the response of the request
    * @esi_link AllianceApi.getAlliances
    */
   all() {
@@ -190,9 +188,7 @@ class Alliances extends ExtendableFunction {
    *
    * @param {Array.<Number>} ids Optional; the alliance ids to look up. If not
    *   provided then the names of all alliances will be returned.
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_names
+   * @return {Promise} A Promise that resolves to the response of the request
    * @esi_link AllianceApi.getAlliancesNames
    */
   names(ids = []) {
@@ -202,7 +198,7 @@ class Alliances extends ExtendableFunction {
       if (ids.length > 20) {
         // Use universe/names end point since the /alliances one breaks if
         // the URL gets too long.
-        return names(this._api, 'alliance', ids);
+        return _names(this._api, 'alliance', ids);
       } else {
         // Use alliance/names end point and
         return this._api.alliance().newRequest('getAlliancesNames', [ids])
