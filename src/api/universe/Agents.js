@@ -1,7 +1,7 @@
 const Search = require('../Search');
 
 /**
- * An api adaptor that provides functions for accessing agent information
+ * An api adapter that provides functions for accessing agent information
  * via the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
  * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.

@@ -4,7 +4,7 @@ const Search = require('../Search');
 const _names = require('../../internal/names');
 
 /**
- * An api adaptor for dealing with a single solar system, currently only
+ * An api adapter for dealing with a single solar system, currently only
  * supporting fetching simple information.
  */
 class SolarSystem {
@@ -43,7 +43,7 @@ class SolarSystem {
 }
 
 /**
- * An api adaptor that provides functions for accessing solar system information
+ * An api adapter that provides functions for accessing solar system information
  * via the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
  * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.

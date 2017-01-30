@@ -1,5 +1,5 @@
 /**
- * An api adaptor that provides functions for accessing the non-authenticated
+ * An api adapter that provides functions for accessing the non-authenticated
  * [planetary
  * interaction](https://esi.tech.ccp.is/latest/#/Planetary_Interaction) ESI end
  *  points. You should not usually instantiate this directly as its constructor

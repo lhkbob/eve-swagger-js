@@ -4,7 +4,7 @@ const Search = require('./Search');
 const _names = require('../internal/Names');
 
 /**
- * An api adaptor that provides functions for accessing various details for an
+ * An api adapter that provides functions for accessing various details for an
  * alliance specified by id, via functions in the
  * [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI endpoints. You
  * should not usually instantiate this directly as its constructor requires an
@@ -102,7 +102,7 @@ class Alliance {
 }
 
 /**
- * An api adaptor over the end points handling multiple alliances via functions
+ * An api adapter over the end points handling multiple alliances via functions
  * in the [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI endpoints.
  * You should not usually instantiate this directly as its constructor requires
  * an internal api instance.

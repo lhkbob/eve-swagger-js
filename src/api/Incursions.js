@@ -1,7 +1,7 @@
 const ExtendableFunction = require('../internal/ExtendableFunction');
 
 /**
- * An api adaptor over the end points handling incursions  via functions in the
+ * An api adapter over the end points handling incursions  via functions in the
  * [incursions](https://esi.tech.ccp.is/latest/#/Incursions) ESI endpoints. You
  * should not usually instantiate this directly as its constructor requires an
  * internal api instance.

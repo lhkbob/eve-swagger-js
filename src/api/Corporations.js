@@ -4,9 +4,10 @@ const Search = require('../internal/Search');
 const _names = require('../internal/names');
 
 /**
- * An api adaptor that provides functions for accessing various details for a
+ * An api adapter that provides functions for accessing various details for a
  * corporation specified by id via functions in the
  * [corporation](https://esi.tech.ccp.is/latest/#/Corporation) ESI endpoints.
+ * This only includes the non-authenticated corporation end points.
  *
  * You should not usually instantiate this directly as its constructor requires
  * an internal api instance. This does not include functions that require a
@@ -116,7 +117,7 @@ class Corporation {
 }
 
 /**
- * An api adaptor over the end points handling multiple corporations  via
+ * An api adapter over the end points handling multiple corporations  via
  * functions in the [corporation](https://esi.tech.ccp.is/latest/#/Corporation)
  * ESI endpoints. You should not usually instantiate this directly as its
  * constructor requires an internal api instance.

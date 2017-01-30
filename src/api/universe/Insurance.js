@@ -1,5 +1,5 @@
 /**
- * An api adaptor that provides functions for accessing the
+ * An api adapter that provides functions for accessing the
  * [insurance](https://esi.tech.ccp.is/latest/#/Insurance) ESI end points.
  * You should not usually instantiate this directly as its constructor requires
  * an internal api instance.

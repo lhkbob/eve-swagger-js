@@ -1,7 +1,7 @@
 const ExtendableFunction = require('../internal/ExtendableFunction');
 
 /**
- * An api adaptor over the end points handling killmail details via functions in
+ * An api adapter over the end points handling killmail details via functions in
  * the [killmails](https://esi.tech.ccp.is/latest/#/Killmails) ESI endpoints.
  * You should not usually instantiate this directly as its constructor requires
  * an internal api instance.

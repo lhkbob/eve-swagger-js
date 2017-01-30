@@ -2,7 +2,7 @@ const ExtendableFunction = require('../../internal/ExtendableFunction');
 const Search = require('../Search');
 
 /**
- * An api adaptor over the end points handling factions via functions in the
+ * An api adapter over the end points handling factions via functions in the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
  * [search](https://esi.tech.ccp.is/latest/#/Search) ESI endpoints. You
  * should not usually instantiate this directly as its constructor requires an

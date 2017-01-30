@@ -4,7 +4,7 @@ const ExtendableFunction = require('./internal/ExtendableFunction');
 const Killmail = require('./Killmail');
 
 /**
- * An api adaptor that provides functions for accessing various details for an
+ * An api adapter that provides functions for accessing various details for an
  * war specified by id, via functions in the
  * [wars](https://esi.tech.ccp.is/latest/#/Wars) ESI endpoints. You should not
  * usually instantiate this directly as its constructor requires an internal api
@@ -158,7 +158,7 @@ class War {
 }
 
 /**
- * An api adaptor over the end points handling multiple wars via functions in
+ * An api adapter over the end points handling multiple wars via functions in
  * the [wars](https://esi.tech.ccp.is/latest/#/Wars) ESI endpoints. You should
  * not usually instantiate this directly as its constructor requires an internal
  * api instance.

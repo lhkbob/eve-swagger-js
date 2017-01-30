@@ -4,7 +4,7 @@ const Search = require('../Search');
 const _names = require('../../internal/names');
 
 /**
- * An api adaptor for dealing with a single station, currently only supporting
+ * An api adapter for dealing with a single station, currently only supporting
  * fetching simple information.
  */
 class Station {
@@ -44,7 +44,7 @@ class Station {
 }
 
 /**
- * An api adaptor that provides functions for accessing station information via
+ * An api adapter that provides functions for accessing station information via
  * the [universe](https://esi.tech.ccp.is/latest/#/Universe) and
  * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points. You should
  * not usually instantiate this directly as its constructor requires an internal

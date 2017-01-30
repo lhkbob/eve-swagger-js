@@ -3,7 +3,7 @@ const Search = require('../Search');
 const _names = require('../../internal/names');
 
 /**
- * An api adaptor that provides functions for accessing constellation information
+ * An api adapter that provides functions for accessing constellation information
  * via the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
  * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.

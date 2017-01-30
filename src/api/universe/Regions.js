@@ -4,7 +4,7 @@ const Search = require('../Search');
 const _names = require('../../internal/names');
 
 /**
- * An api adaptor that provides functions for accessing various details for a
+ * An api adapter that provides functions for accessing various details for a
  * region specified by id, via functions in the
  * [market](https://esi.tech.ccp.is/latest/#/Market) ESI endpoints. You should
  * not usually instantiate this directly as its constructor requires an internal
@@ -162,7 +162,7 @@ class Region {
 }
 
 /**
- * An api adaptor over the end points handling regions via functions in the
+ * An api adapter over the end points handling regions via functions in the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
  * [search](https://esi.tech.ccp.is/latest/#/Search) ESI endpoints. You
  * should not usually instantiate this directly as its constructor requires an

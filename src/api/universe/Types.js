@@ -4,7 +4,7 @@ const Search = require('../Search');
 const _names = require('../../internal/names');
 
 /**
- * An api adaptor for dealing with a single item group, currently only
+ * An api adapter for dealing with a single item group, currently only
  * supporting fetching simple information.
  */
 class Group {
@@ -51,7 +51,7 @@ class Group {
 }
 
 /**
- * An api adaptor that provides functions for accessing item group information
+ * An api adapter that provides functions for accessing item group information
  * via the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI end points.
  * You should not usually instantiate this directly as its constructor requires
  * an internal api instance.
@@ -108,7 +108,7 @@ class Groups {
 }
 
 /**
- * An api adaptor for dealing with a single item category, currently only
+ * An api adapter for dealing with a single item category, currently only
  * supporting fetching simple information.
  */
 class Category {
@@ -155,7 +155,7 @@ class Category {
 }
 
 /**
- * An api adaptor that provides functions for accessing item category
+ * An api adapter that provides functions for accessing item category
  * information via the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI
  * end points. You should not usually instantiate this directly as its
  * constructor requires an internal api instance.
@@ -212,7 +212,7 @@ class Categories {
 }
 
 /**
- * An api adaptor for dealing with a single item type, currently only supporting
+ * An api adapter for dealing with a single item type, currently only supporting
  * fetching simple information.
  */
 class Type {
@@ -274,7 +274,7 @@ class Type {
 }
 
 /**
- * An api adaptor that provides functions for accessing item type information
+ * An api adapter that provides functions for accessing item type information
  * via the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
  * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.
