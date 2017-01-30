@@ -191,10 +191,10 @@ class Wars extends ExtendableFunction {
   }
 
   /**
-   * Get war ids from the ESI endpoint. This makes an HTTP GET request to
-   * [`/wars/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars). The request is
-   * returned as an asynchronous Promise that resolves to an array parsed from
-   * the response JSON model. An example value looks like:
+   * Get the latest war ids from the ESI endpoint. This makes an HTTP GET
+   * request to [`/wars/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars). The
+   * request is returned as an asynchronous Promise that resolves to an array
+   * parsed from the response JSON model. An example value looks like:
    *
    * ```
    * [
@@ -211,9 +211,8 @@ class Wars extends ExtendableFunction {
    *     are returned
    * @return {Promise} A Promise that resolves to the response of
    *     the request
-   * @see https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails
-   * @see module:killmails
-   * @esi_link WarsApi.getWarsWarIdKillmails
+   * @see https://esi.tech.ccp.is/latest/#!/Wars/get_wars
+   * @esi_link WarsApi.getWars
    */
   recent(maxId = 0) {
     let opts = {};
