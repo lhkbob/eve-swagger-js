@@ -404,7 +404,7 @@ class Types extends ExtendableFunction {
     if (!ids || ids.length == 0) {
       return this.all().then(allIds => this.names(allIds));
     } else {
-      return _names(this._api, 'type', ids);
+      return _names(this._api, 'inventory_type', ids);
     }
   }
 }
