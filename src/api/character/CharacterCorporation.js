@@ -10,8 +10,7 @@ const Promise = require('bluebird');
  * character's corporation.
  *
  * You should not usually instantiate this directly as its constructor requires
- * an internal api instance. This does not include functions that require a
- * character's authorization.
+ * an internal api instance.
  */
 class CharacterCorporation {
   /**
