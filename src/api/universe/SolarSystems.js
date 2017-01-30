@@ -4,7 +4,7 @@ const Search = require('../Search');
 const _names = require('../../internal/names');
 
 /**
- * An api adaptor for dealing with single solar systems, currently only
+ * An api adaptor for dealing with a single solar system, currently only
  * supporting fetching simple information.
  */
 class SolarSystem {
