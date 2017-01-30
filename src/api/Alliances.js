@@ -1,18 +1,13 @@
-/**
- * A container for the [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI
- * endpoints. You should not usually require this module directly, as it
- * technically returns a constructor that requires an internal API. The
- * module exports the {@link module:alliance~Alliances Alliances} constructor.
- *
- * @see https://esi.tech.ccp.is/latest/#/Alliance
- * @module alliance
- */
+const ExtendableFunction = require('../internal/ExtendableFunction');
 
-const ExtendableFunction = require('./internal/ExtendableFunction');
+const names = require('../internal/Names');
 
 /**
  * An api adaptor that provides functions for accessing various details for an
- * alliance specified by id.
+ * alliance specified by id, via functions in the
+ * [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI endpoints. You
+ * should not usually instantiate this directly as its constructor requires an
+ * internal api instance.
  */
 class Alliance {
   /**
@@ -106,10 +101,15 @@ class Alliance {
 }
 
 /**
- * An api adaptor over the end points handling multiple alliances. This is a
- * function class so instances of `Alliances` are functions and can be invoked
- * directly, besides accessing its members. Its default function action is
- * equivalent to {@link module:alliance~Alliances#get get}.
+ * An api adaptor over the end points handling multiple alliances via functions
+ * in the [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI endpoints.
+ * You should not usually instantiate this directly as its constructor requires
+ * an internal api instance.
+ *
+ * This is a function class so instances of `Alliances` are functions and can be
+ * invoked directly, besides accessing its members. Its default function action
+ * is equivalent to {@link Alliances#get get} or {@link Alliances#all all} if
+ * no id is provided.
  */
 class Alliances extends ExtendableFunction {
   /**
@@ -119,8 +119,16 @@ class Alliances extends ExtendableFunction {
    * @constructor
    */
   constructor(api) {
-    super(id => this.get(id));
+    super(id => (id ? this.get(id) : this.all()));
     this._api = api;
+
+    /**
+     * A Search module instance configured to search over the `'alliance'`
+     * type.
+     *
+     * @type {Search}
+     */
+    this.search = new Search(api, ['alliance']);
   }
 
   /**
@@ -193,17 +201,7 @@ class Alliances extends ExtendableFunction {
       if (ids.length > 20) {
         // Use universe/names end point since the /alliances one breaks if
         // the URL gets too long.
-        return this._api.universe()
-        .newRequest('postUniverseNames', [{ ids: ids }])
-        .then(result => {
-          // Filter by category == 'alliance' and remove category field
-          return result.filter(r => r.category == 'alliance').map(r => {
-            return {
-              id: r.id,
-              name: r.name
-            };
-          });
-        });
+        return names(this._api, 'alliance', ids);
       } else {
         // Use alliance/names end point and
         return this._api.alliance().newRequest('getAlliancesNames', [ids])

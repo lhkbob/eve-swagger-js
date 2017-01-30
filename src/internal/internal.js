@@ -13,7 +13,7 @@
 const Promise = require('bluebird');
 const Moment = require('moment');
 const Cache = require('node-cache');
-const ESI = require('../generated/src');
+const ESI = require('../../generated/src/index');
 
 module.exports = function(opts) {
   var cache = new Cache({ useClones: false });

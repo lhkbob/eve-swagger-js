@@ -1,20 +1,19 @@
 /**
- * A container for the
- * [sovereignty](https://esi.tech.ccp.is/latest/#/Sovereignty) ESI endpoints.
- * You should not require this module directly, as it technically returns a
- * factory function that requires an internal API. Instead an instance is
- * automatically exposed when the {@link module:eve_swagger_interface} is loaded
- * and configured.
- *
- * @see https://esi.tech.ccp.is/latest/#/Sovereignty
- * @param api The internal API instance configured by the root module
- * @module sovereignty
+ * An api adaptor that provides functions for accessing the
+ * [sovereignty](https://esi.tech.ccp.is/latest/#/Sovereignty) ESI end points.
+ * You should not usually instantiate this directly as its constructor requires
+ * an internal api instance.
  */
-module.exports = function(api) {
-  var newRequest = api.newRequest;
-  var ESI = api.esi;
-
-  var exports = {};
+class Sovereignty {
+  /**
+   * Create a new Sovereignty instance using the given `api`.
+   *
+   * @param api {ApiProvider} The api provider
+   * @constructor
+   */
+  constructor(api) {
+    this._api = api;
+  }
 
   /**
    * Get sovereignty campaign information from the ESI endpoint. This makes an
@@ -39,14 +38,14 @@ module.exports = function(api) {
    * ]
    * ```
    *
-   * @return {external:Promise} A Promise that resolves to the response of
+   * @return {Promise} A Promise that resolves to the response of
    *   the request
    * @see https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_campaigns
    * @esi_link SovereigntyApi.getSovereigntyCampaigns
    */
-  exports.getCampaigns = function() {
-    return newRequest(ESI.SovereigntyApi, 'getSovereigntyCampaigns', []);
-  };
+  campaigns() {
+    return this._api.sovereignty().newRequest('getSovereigntyCampaigns', []);
+  }
 
   /**
    * Get sovereignty structure information from the ESI endpoint. This makes an
@@ -69,14 +68,16 @@ module.exports = function(api) {
    * ]
    * ```
    *
-   * @return {external:Promise} A Promise that resolves to the response of
+   * @return {Promise} A Promise that resolves to the response of
    *   the request
    * @see https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures
    * @esi_link SovereigntyApi.getSovereigntyStructures
    */
-  exports.getCampaigns = function() {
-    return newRequest(ESI.SovereigntyApi, 'getSovereigntyStructures', []);
-  };
+  structures() {
+    return this._api.sovereignty().newRequest('getSovereigntyStructures', []);
+  }
+}
 
-  return exports;
-};
+
+
+module.exports = Sovereignty;

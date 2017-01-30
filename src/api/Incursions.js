@@ -1,21 +1,14 @@
+const ExtendableFunction = require('../internal/ExtendableFunction');
+
 /**
- * A container for the [incursions](https://esi.tech.ccp.is/latest/#/Incursions)
- * ESI endpoints. You should not usually require this module directly, as it
- * technically returns a constructor that requires an internal API. The module
- * exports the {@link module:incursions~Incursions Incursions} constructor.
+ * An api adaptor over the end points handling incursions  via functions in the
+ * [incursions](https://esi.tech.ccp.is/latest/#/Incursions) ESI endpoints. You
+ * should not usually instantiate this directly as its constructor requires an
+ * internal api instance.
  *
- * @see https://esi.tech.ccp.is/latest/#/Incursions
- * @param api The internal API instance configured by the root module
- * @module incursions
- */
-
-const ExtendableFunction = require('./internal/ExtendableFunction');
-
-/**
- * An api adaptor over the end points handling incursions. This is a function
- * class so instances of `Incursions` are functions and can be invoked directly,
- * besides accessing its members. Its default function action is equivalent to
- * {@link module:incursions~Incursions#all all}.
+ * This is a function class so instances of `Incursions` are functions and can
+ * be invoked directly, besides accessing its members. Its default function
+ * action is equivalent to {@link Incursions#all all}.
  */
 class Incursions extends ExtendableFunction {
   /**

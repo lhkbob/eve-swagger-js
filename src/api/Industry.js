@@ -1,16 +1,8 @@
 /**
- * A container for the [industry](https://esi.tech.ccp.is/latest/#/Industry) ESI
- * endpoints. You should not usually require this module directly, as it
- * technically returns a constructor that requires an internal API. The
- * module exports the {@link module:industry~Industry Industry} constructor.
- *
- * @see https://esi.tech.ccp.is/latest/#/Industry
- * @param api The internal API instance configured by the root module
- * @module industry
- */
-
-/**
- * An api adaptor over the end points handling industry.
+ * An api adaptor over the end points handling industry  via functions in the
+ * [industry](https://esi.tech.ccp.is/latest/#/Industry) ESI endpoints. You
+ * should not usually instantiate this directly as its constructor requires an
+ * internal api instance.
  */
 class Industry {
   /**

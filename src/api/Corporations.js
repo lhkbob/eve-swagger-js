@@ -1,21 +1,16 @@
-/**
- * A container for the
- * [corporation](https://esi.tech.ccp.is/latest/#/Corporation) ESI endpoints.
- * You should not usually require this module directly, as it technically
- * returns a constructor that requires an internal API. The module exports
- * the {@link module:corporation~Corporations Corporations} constructor.
- *
- * @see https://esi.tech.ccp.is/latest/#/Corporation
- * @param api The internal API instance configured by the root module
- * @module corporation
- */
+const ExtendableFunction = require('../internal/ExtendableFunction');
+const Search = require('../internal/Search');
 
-const ExtendableFunction = require('./internal/ExtendableFunction');
+const names = require('../internal/names');
 
 /**
  * An api adaptor that provides functions for accessing various details for a
- * corporation specified by id. This does include information that requires
- * a character's authorization.
+ * corporation specified by id via functions in the
+ * [corporation](https://esi.tech.ccp.is/latest/#/Corporation) ESI endpoints.
+ *
+ * You should not usually instantiate this directly as its constructor requires
+ * an internal api instance. This does not include functions that require a
+ * character's authorization.
  */
 class Corporation {
   /**
@@ -121,10 +116,14 @@ class Corporation {
 }
 
 /**
- * An api adaptor over the end points handling multiple corporations. This is a
- * function class so instances of `Corporations` are functions and can be
- * invoked directly, besides accessing its members. Its default function action
- * is equivalent to {@link module:corporation~Corporations#get get}.
+ * An api adaptor over the end points handling multiple corporations  via
+ * functions in the [corporation](https://esi.tech.ccp.is/latest/#/Corporation)
+ * ESI endpoints. You should not usually instantiate this directly as its
+ * constructor requires an internal api instance.
+ *
+ * This is a function class so instances of `Corporations` are functions and can
+ * be invoked directly, besides accessing its members. Its default function
+ * action is equivalent to {@link Corporations#get get}.
  */
 class Corporations extends ExtendableFunction {
   /**
@@ -136,6 +135,14 @@ class Corporations extends ExtendableFunction {
   constructor(api) {
     super(id => this.get(id));
     this._api = api;
+
+    /**
+     * A Search module instance configured to search over the `'corporation'`
+     * type.
+     *
+     * @type {Search}
+     */
+    this.search = new Search(api, ['corporation']);
   }
 
   /**
@@ -181,19 +188,9 @@ class Corporations extends ExtendableFunction {
    */
   names(ids) {
     if (ids.length > 20) {
-      // Use universe/names end point since the /alliances one breaks if
+      // Use universe/names end point since the /corporations one breaks if
       // the URL gets too long.
-      return this._api.universe()
-      .newRequest('postUniverseNames', [{ ids: ids }])
-      .then(result => {
-        // Filter by category == 'corporation' and remove category field
-        return result.filter(r => r.category == 'corporation').map(r => {
-          return {
-            id: r.id,
-            name: r.name
-          };
-        });
-      });
+      return names(this._api, 'corporation', ids);
     } else {
       // Use alliance/names end point and
       return this._api.corporation().newRequest('getCorporationsNames', [ids])

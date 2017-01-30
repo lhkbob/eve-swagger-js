@@ -1,14 +1,9 @@
 /**
- * A container for the [insurance](https://esi.tech.ccp.is/latest/#/Insurance)
- * ESI endpoints. You should not usually require this module directly, as it
- * technically returns a constructor that requires an internal API. The module
- * exports the {@link module:insurance~Insurance Insurance} constructor.
- *
- * @see https://esi.tech.ccp.is/latest/#/Insurance
- * @param api The internal API instance configured by the root module
- * @module insurance
+ * An api adaptor that provides functions for accessing the
+ * [insurance](https://esi.tech.ccp.is/latest/#/Insurance) ESI end points.
+ * You should not usually instantiate this directly as its constructor requires
+ * an internal api instance.
  */
-
 class Insurance {
   /**
    * Create a new Insurance instance using the given `api`.
@@ -42,7 +37,6 @@ class Insurance {
    * ]
    * ```
    *
-
    * @return {Promise} A Promise that resolves to the response of the request
    * @see module:eve_swagger_interface.languages
    * @see https://esi.tech.ccp.is/latest/#!/Incursions/get_insurance_prices

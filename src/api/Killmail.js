@@ -1,19 +1,26 @@
-/**
- * A container for the [killmails](https://esi.tech.ccp.is/latest/#/Killmails)
- * ESI endpoints. You should not require this module directly, as it technically
- * returns a factory function that requires an internal API. Instead an instance
- * is automatically exposed when the {@link module:eve_swagger_interface} is
- * loaded and configured.
- *
- * @see https://esi.tech.ccp.is/latest/#/Killmails
- * @param api The internal API instance configured by the root module
- * @module killmails
- */
-module.exports = function(api) {
-  var newRequest = api.newRequest;
-  var ESI = api.esi;
+const ExtendableFunction = require('../internal/ExtendableFunction');
 
-  var exports = {};
+/**
+ * An api adaptor over the end points handling killmail details via functions in
+ * the [killmails](https://esi.tech.ccp.is/latest/#/Killmails) ESI endpoints.
+ * You should not usually instantiate this directly as its constructor requires
+ * an internal api instance.
+ *
+ * This is a function class so instances of `Killmail` are functions and can be
+ * invoked directly, besides accessing its members. Its default function action
+ * is equivalent to {@link Killmail#get get}.
+ */
+class Killmail extends ExtendableFunction {
+  /**
+   * Create a new Killmail function using the given `api`.
+   *
+   * @param api {ApiProvider} The api provider
+   * @constructor
+   */
+  constructor(api) {
+    super((id, hash) => this.get(id, hash));
+    this._api = api;
+  }
 
   /**
    * Get the details from a killmail with the ESI endpoint. This makes an HTTP
@@ -53,26 +60,26 @@ module.exports = function(api) {
    *       }
    *     ],
    *     "position": {
-   *     "x": 452186600569.4748,
-   *     "y": 146704961490.90222,
-   *     "z": 109514596532.54477
-   *   },
-   *   "ship_type_id": 17812
+   *       "x": 452186600569.4748,
+   *       "y": 146704961490.90222,
+   *       "z": 109514596532.54477
+   *     },
+   *     "ship_type_id": 17812
+   *   }
    * }
    * ```
    *
-   * @param {Integer} id The killmail id
+   * @param {Number} id The killmail id
    * @param {String} hash The killmail hash
-   * @return {external:Promise} A Promise that resolves to the response of
+   * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see module:wars.getKillmails
+   * @see War.killmails()
    * @see https://esi.tech.ccp.is/latest/#!/Killmails/get_killmails_killmail_id_killmail_hash
    * @esi_link KillmailsApi.getKillmailsKillmailIdKillmailHash
    */
-  exports.get = function(id, hash) {
-    return newRequest(ESI.KillmailsApi, 'getKillmailsKillmailIdKillmailHash',
-        [id, hash]);
-  };
+  get(id, hash) {
+    return this._api.killmails().newRequest('getKillmailsKillmailIdKillmailHash', [id, hash]);
+  }
+}
 
-  return exports;
-};
+module.exports = Killmail;
