@@ -1,12 +1,3 @@
-/**
- * Internal module that handles wrapping the generated ESI client. Provides the
- * primary promisification and caching relied on by the public API. Exports
- * a {@link ApiProvider} constructor function.
- *
- * @module internal/esi
- * @private
- */
-
 const Cache = require('node-cache');
 const Moment = require('moment');
 const Promise = require('bluebird');
