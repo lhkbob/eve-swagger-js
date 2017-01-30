@@ -1,4 +1,5 @@
 const ExtendableFunction = require('../internal/ExtendableFunction');
+const Search = require('./Search');
 
 const names = require('../internal/Names');
 
