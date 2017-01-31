@@ -1,4 +1,5 @@
 const ExtendableFunction = require('../../internal/ExtendableFunction');
+const [PageHandler,] = require('../../internal/PageHandler');
 const Search = require('../Search');
 
 const _names = require('../../internal/names');
@@ -71,6 +72,7 @@ class Groups {
   constructor(api) {
     super(id => (id ? this.get(id) : this.all()));
     this._api = api;
+    this._all = new PageHandler(page => this.all(page));
   }
 
   /**
@@ -98,12 +100,22 @@ class Groups {
    * ]
    * ```
    *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
+   * Technically, this end point is paginated by ESI. If invoked without a page
+   * argument, the end point will be queried multiple times to fetch the
+   * entirety of groups.
+   *
+   * @param page {Number} Optional; the page of groups to return, starting with
+   *     page 1. If not provided, all groups are returned.
+   * @return {Promise} A Promise that resolves to the response of the request
    * @esi_link UniverseApi.getUniverseGroups
    */
-  all() {
-    return this._api.universe().newRequest('getUniverseGroups', []);
+  all(page = 0) {
+    if (page == 0) {
+      return this._all.getAll();
+    } else {
+      return this._api.universe()
+      .newRequest('getUniverseGroups', [], { page: page });
+    }
   };
 }
 
@@ -296,6 +308,7 @@ class Types extends ExtendableFunction {
   constructor(api) {
     super(id => (id ? this.get(id) : this.all()));
     this._api = api;
+    this._all = new PageHandler(page => this.all(page));
 
     /**
      * A Search module instance configured to search over the `'inventoryType'`
@@ -369,11 +382,21 @@ class Types extends ExtendableFunction {
    * ]
    * ```
    *
+   * Technically, this end point is paginated by ESI. If invoked without a page
+   * argument, the end point will be queried multiple times to fetch the
+   * entirety of groups.
+   *
+   * @param page {Number} Optional; the page of groups to return, starting with
+   *     page 1. If not provided, all groups are returned.
    * @return {Promise} A Promise that resolves to the response of the request
    * @esi_link UniverseApi.getUniverseTypes
    */
-  all() {
-    return this._api.universe().newRequest('getUniverseTypes', []);
+  all(page = 0) {
+    if (page == 0) {
+      return this._all.getAll();
+    } else {
+      return this._api.universe().newRequest('getUniverseTypes', []);
+    }
   }
 
   /**

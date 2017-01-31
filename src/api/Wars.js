@@ -1,6 +1,7 @@
 const Promise = require('bluebird');
 
-const ExtendableFunction = require('./internal/ExtendableFunction');
+const ExtendableFunction = require('../internal/ExtendableFunction');
+const [PageHandler, MaxIdHandler] = require('../internal/PageHandler');
 const Killmail = require('./Killmail');
 
 /**
@@ -23,6 +24,8 @@ class War {
     this._api = api;
     this._id = warId;
     this._kills = null;
+    this._allKills = new PageHandler(page => this._fetchKills(page), 2000);
+    this._allMails = new PageHandler(page => this._fetchMails(page), 2000);
   }
 
   /**
@@ -107,24 +110,31 @@ class War {
    * ]
    * ```
    *
-   * @param page {Number} Optional; the page of killmails to fetch
+   * @param page {Number} Optional; the page of killmails to fetch, starting
+   *     with page 1. If not provided then all kills are returned.
    * @returns {Promise}
    */
-  kills(page = 1) {
+  kills(page = 0) {
+    if (page == 0) {
+      return this._allKills.getAll();
+    } else {
+      return this._fetchKills(page);
+    }
+  }
+
+  _fetchKills(page) {
     if (this._kills == null) {
       this._kills = new Killmail(this._api);
     }
 
-    let kills = this._kills;
     return this.killmails(page).then(kms => {
       return Promise.map(kms,
-          km => kills.get(km.killmail_id, km.killmail_hash));
+          km => this._kills.get(km.killmail_id, km.killmail_hash));
     });
   }
 
   /**
-   * Get killmail ids and hashes from a war from the ESI endpoint. This makes
-   * an
+   * Get killmail ids and hashes from a war from the ESI endpoint. This makes an
    * HTTP GET request to
    * [`/wars/{id}/killmails/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails).
    * The request is returned as an asynchronous Promise that resolves to an
@@ -143,15 +153,23 @@ class War {
    * ]
    * ```
    *
-   * @param page {Number} The page of killmails to fetch, defaulting to page 1.
-   *   2000 mails are returned per page.
+   * @param page {Number} Optional; the page of killmails to fetch, starting
+   *     with page 1. If not provided then all mails are returned.
    * @return {Promise} A Promise that resolves to the response of
    *   the request
    * @see https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails
    * @see module:killmails
    * @esi_link WarsApi.getWarsWarIdKillmails
    */
-  killmails(page = 1) {
+  killmails(page = 0) {
+    if (page == 0) {
+      return this._allMails.getAll();
+    } else {
+      return this._fetchMails(page);
+    }
+  }
+
+  _fetchMails(page) {
     return this._api.wars()
     .newRequest('getWarsWarIdKillmails', [this._id], { page: page });
   }
@@ -176,8 +194,10 @@ class Wars extends ExtendableFunction {
    * @constructor
    */
   constructor(api) {
-    super(id => (id ? this.get(id) : this.all()));
+    super(id => (id ? this.get(id) : this.recent()));
     this._api = api;
+    this._allWars = new MaxIdHandler(maxId => this.recent(maxId),
+        war => war.war_id, 2000);
   }
 
   /**
@@ -209,9 +229,7 @@ class Wars extends ExtendableFunction {
    * @param maxId {Number} Optional; the maximum war id for the request, only
    *     wars smaller than this are returned. If not provided, the newest wars
    *     are returned
-   * @return {Promise} A Promise that resolves to the response of
-   *     the request
-   * @see https://esi.tech.ccp.is/latest/#!/Wars/get_wars
+   * @return {Promise} A Promise that resolves to the response of the request
    * @esi_link WarsApi.getWars
    */
   recent(maxId = 0) {
@@ -220,6 +238,27 @@ class Wars extends ExtendableFunction {
       opts.max_war_id = maxId;
     }
     return this._api.wars().newRequest('getWars', [], opts);
+  }
+
+  /**
+   * Get all war ids, making repeated HTTP GET requests to
+   * [`/wars/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   3,
+   *   2,
+   *   1
+   * ]
+   * ```
+   *
+   * @return {Promise} A Promise that resolves to the response of the request
+   * @esi_link WarsApi.getWars
+   */
+  all() {
+    return this._allWars.getAll();
   }
 }
 
