@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 
 const ExtendableFunction = require('../internal/ExtendableFunction');
-const [PageHandler, MaxIdHandler] = require('../internal/PageHandler');
+const [PageHandler, ] = require('../internal/PageHandler');
 const Killmail = require('./Killmail');
 
 /**
@@ -196,8 +196,6 @@ class Wars extends ExtendableFunction {
   constructor(api) {
     super(id => (id ? this.get(id) : this.recent()));
     this._api = api;
-    this._allWars = new MaxIdHandler(maxId => this.recent(maxId),
-        war => war.war_id, 2000);
   }
 
   /**
@@ -238,27 +236,6 @@ class Wars extends ExtendableFunction {
       opts.max_war_id = maxId;
     }
     return this._api.wars().newRequest('getWars', [], opts);
-  }
-
-  /**
-   * Get all war ids, making repeated HTTP GET requests to
-   * [`/wars/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
-   *
-   * ```
-   * [
-   *   3,
-   *   2,
-   *   1
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link WarsApi.getWars
-   */
-  all() {
-    return this._allWars.getAll();
   }
 }
 
