@@ -2,17 +2,35 @@ const ExtendableFunction = require('../internal/ExtendableFunction');
 
 function defaultSearch(api, categories, strict, text) {
   return api.search()
-  .newRequest('getSearch', [text, categories], { strict: strict });
+  .newRequest('getSearch', [text, categories], { strict: strict })
+  .then(result => {
+    if (categories.length == 1) {
+      // Return array for that category
+      return result[categories[0]];
+    } else {
+      // Return everything
+      return result;
+    }
+  });
 }
 
 function characterSearch(api, categories, strict, character, token, text) {
   return api.search(token)
   .newRequest('getCharacterCharacterIdSearch', [character, text, categories],
-      { strict: strict });
+      { strict: strict })
+  .then(result => {
+    if (categories.length == 1) {
+      // Return array for that category
+      return result[categories[0]];
+    } else {
+      // Return everything
+      return result;
+    }
+  });
 }
 
 /**
- * An api adaptor over the end points handling search and character search via
+ * An api adapter over the end points handling search and character search via
  * functions in the [search](https://esi.tech.ccp.is/latest/#/Search) ESI
  * endpoints. You should not usually instantiate this directly as its
  * constructor requires an internal api instance.
@@ -94,6 +112,10 @@ class Search extends ExtendableFunction {
    *   ]
    * }
    * ```
+   *
+   * However, if the Search instance is configured to search over only a single
+   * category then the Promise simply resolves to the array of ids (e.g. the
+   * category was fetched from the response dictionary of category to array).
    *
    * @param {String} text The search terms of the query
    * @return {Promise} A Promise that resolves to the response of
