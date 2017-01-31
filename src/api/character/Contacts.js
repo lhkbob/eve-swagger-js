@@ -106,7 +106,7 @@ class Contacts extends ExtendableFunction {
    * character described by `characterId` with SSO access from `token`.
    *
    * @param api {ApiProvider} The api provider
-   * @param characterId {Number} The character id whose calendar is accessed
+   * @param characterId {Number} The character id whose contacts are accessed
    * @param token {String} The SSO access token for the character
    * @constructor
    */
@@ -234,8 +234,15 @@ class Contacts extends ExtendableFunction {
     return this._createContacts(contacts, standing, label, true);
   }
 
+  /**
+   * Create a new Contact end point targeting the particular contact by
+   * `id`.
+   *
+   * @param id {Number} The contact id
+   * @returns {Contact}
+   */
   get(id) {
-
+    return new Contact(this, id);
   }
 }
 
