@@ -8,7 +8,7 @@ function respondToEvent(calendar, eventId, response) {
 
 /**
  * An api adapter that provides functions for accessing various details for a
- * specific event  specified by id via functions in the
+ * specific event specified by id via functions in the
  * [calendar](https://esi.tech.ccp.is/latest/#/Calendar) ESI endpoints.
  *
  * You should not usually instantiate this directly as its constructor requires
