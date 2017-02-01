@@ -62,7 +62,7 @@ class Group {
  * is equivalent to {@link Groups#get get} or {@link Groups#all all} if no id is
  * provided.
  */
-class Groups {
+class Groups extends ExtendableFunction {
   /**
    * Create a new Groups instance using the given `api`.
    *
@@ -177,7 +177,7 @@ class Category {
  * action is equivalent to {@link Categories#get get} or {@link Categories#all
  * all} if no id is provided.
  */
-class Categories {
+class Categories extends ExtendableFunction {
   /**
    * Create a new Categories instance using the given `api`.
    *
