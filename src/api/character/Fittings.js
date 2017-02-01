@@ -22,7 +22,7 @@ class Fitting {
   }
 
   /**
-   * Remove the fitting from the given character's list via the ESI end point.
+   * Delete the fitting from the given character's list via the ESI end point.
    * This makes an HTTP DELETE request to
    * [`/characters/{characterId}/fittings/{fittingId}/`](https://esi.tech.ccp.is/latest/#!/Fittings/delete_characters_character_id_fittings_fitting_id).
    * The request is returned as an asynchronous Promise that resolves to an
@@ -31,7 +31,7 @@ class Fitting {
    * @return {Promise} A Promise that resolves to the response of the request
    * @esi_link FittingsApi.deleteCharactersCharacterIdFittingsFittingId
    */
-  remove() {
+  del() {
     return this._fit._api.fittings(this._fit._token)
     .newRequest('deleteCharactersCharacterIdFittingsFittingId',
         [this._fit._id, this._id]);
