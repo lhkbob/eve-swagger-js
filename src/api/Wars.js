@@ -157,8 +157,7 @@ class War {
    *     with page 1. If not provided then all mails are returned.
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails
-   * @see module:killmails
+   * @see Killmail
    * @esi_link WarsApi.getWarsWarIdKillmails
    */
   killmails(page = 0) {
