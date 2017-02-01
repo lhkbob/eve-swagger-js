@@ -50,11 +50,11 @@ class Search extends ExtendableFunction {
    *
    * @param api {ApiProvider} The api provider
    * @param categories {Array.<String>} Optional; the categories search through
-   * @param characterId {String} Optional; the character id of the search
+   * @param characterId {Number} Optional; the character id of the search
    * @param accessToken {String} Optional; SSO token for the provided character,
    *    must be provided if `characterId` is given
    */
-  constructor(api, categories = [], characterId = '', accessToken = '') {
+  constructor(api, categories = [], characterId = 0, accessToken = '') {
     super(text => this.search(text));
 
     this._api = api;
@@ -79,7 +79,7 @@ class Search extends ExtendableFunction {
         'wormhole'
       ];
 
-      if (this._character != '' && this._token != '') {
+      if (this._character != 0 && this._token != '') {
         this._categories.push('structure');
       }
     }

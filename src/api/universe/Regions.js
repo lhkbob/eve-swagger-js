@@ -23,7 +23,7 @@ class Region {
   constructor(api, regionId) {
     this._api = api;
     this._id = regionId;
-    this._all = new PageHandler(page => this.orders(page),)
+    this._all = new PageHandler(page => this.orders(page))
   }
 
   /**
