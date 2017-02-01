@@ -70,7 +70,7 @@ class Squad {
  *
  * This is a function class so instances of `Squads` are functions and can be
  * invoked directly, besides accessing its members. Its default function action
- * is equivalent to {@link Squads#get get};
+ * is equivalent to {@link Squads#get get}.
  */
 class Squads extends ExtendableFunction {
   /**
