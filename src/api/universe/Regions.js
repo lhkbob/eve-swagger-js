@@ -1,4 +1,5 @@
 const ExtendableFunction = require('../../internal/ExtendableFunction');
+const [PageHandler,] = require('../../internal/PageHandler');
 const Search = require('../Search');
 
 const _names = require('../../internal/names');
@@ -22,6 +23,7 @@ class Region {
   constructor(api, regionId) {
     this._api = api;
     this._id = regionId;
+    this._all = new PageHandler(page => this.orders(page),)
   }
 
   /**
@@ -81,15 +83,21 @@ class Region {
    * ```
    *
    * This orders request is paginated, with `page` starting at 1 for the first
-   * page of data. If `page` is not provided, it defaults to 1.
+   * page of data. If `page` is not provided, then all orders are returned
+   * (making multiple calls and concatenating the results).
    *
-   * @param {Number} page Optional; the page of orders that is requested, or 1.
+   * @param {Number} page Optional; the page of orders that is requested.
    * @return {Promise} A Promise that resolves to the response of the request
    * @esi_link MarketApi.getMarketsRegionIdOrders
    */
-  orders(page = 1) {
-    return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', [this._id, 'all'], { page: page });
+  orders(page = 0) {
+    if (page == 0) {
+      return this._all.getAll();
+    } else {
+      return this._api.market()
+      .newRequest('getMarketsRegionIdOrders', [this._id, 'all'],
+          { page: page });
+    }
   }
 
   /**
