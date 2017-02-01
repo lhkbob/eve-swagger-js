@@ -120,3 +120,5 @@ class Colonies extends ExtendableFunction {
     .newRequest('getCharactersCharacterIdPlanets', [this._id]);
   }
 }
+
+module.exports = Colonies;
