@@ -31,7 +31,6 @@ class Contact {
    *
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Contacts/delete_characters_character_id_contacts
    * @esi_link ContactsApi.deleteCharactersCharacterIdContacts
    */
   remove() {

@@ -473,7 +473,7 @@ class Character extends CharacterInfo {
    * @param {Number} maxKillId Optional; the mail id that limits which mails
    *   can be returned. If provided recent mails older than the id are returned
    * @return {Promise} A Promise that resolves to the response of the request
-   * @see Killmail
+   * @see Killmail#get
    * @esi_link KillmailsApi.getCharactersCharacterIdKillmailsRecent
    */
   recentKillmails(maxKillId = 0) {

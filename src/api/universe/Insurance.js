@@ -38,8 +38,6 @@ class Insurance {
    * ```
    *
    * @return {Promise} A Promise that resolves to the response of the request
-   * @see module:eve_swagger_interface.languages
-   * @see https://esi.tech.ccp.is/latest/#!/Incursions/get_insurance_prices
    * @esi_link InsuranceApi.getInsurancePrices
    */
   prices() {

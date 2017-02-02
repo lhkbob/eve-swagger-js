@@ -438,7 +438,6 @@ class Fleet {
    *
    * @param {Object} newSettings Simple object of properties to modify
    * @return {Promise} A Promise that resolves to the response of the request
-   * @see https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id
    * @esi_link FleetsApi.putFleetsFleetId
    */
   update(newSettings) {

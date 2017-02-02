@@ -36,7 +36,6 @@ class Industry {
    * ```
    *
    * @return {Promise} A Promise that resolves to the response of the request
-   * @see https://esi.tech.ccp.is/latest/#!/Industry/get_industry_facilities
    * @esi_link IndustryApi.getIndustryFacilities
    */
   facilities() {
@@ -65,7 +64,6 @@ class Industry {
    * ```
    *
    * @return {Promise} A Promise that resolves to the response of the request
-   * @see https://esi.tech.ccp.is/latest/#!/Industry/get_industry_facilities
    * @esi_link IndustryApi.getIndustryFacilities
    */
   systemCosts() {
