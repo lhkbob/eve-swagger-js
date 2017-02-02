@@ -65,12 +65,20 @@ class Stations extends ExtendableFunction {
     super(id => this.get(id));
     this._api = api;
 
-    /**
-     * A Search module instance configured to search over the `'station' type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['station']);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'station'`
+   * type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['station']);
+    }
+    return this._search;
   }
 
   /**

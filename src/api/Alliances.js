@@ -123,13 +123,20 @@ class Alliances extends ExtendableFunction {
     super(id => (id ? this.get(id) : this.all()));
     this._api = api;
 
-    /**
-     * A Search module instance configured to search over the `'alliance'`
-     * type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['alliance']);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'alliance'`
+   * type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['alliance']);
+    }
+    return this._search;
   }
 
   /**

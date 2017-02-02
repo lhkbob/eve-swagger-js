@@ -169,15 +169,23 @@ class Structures extends ExtendableFunction {
   constructor(api, characterId, token) {
     super(id => this.get(id));
     this._api = api;
+    this._id = characterId;
     this._token = token;
 
-    /**
-     * A Search module instance configured to search over the `'structure'`
-     * type and linked to the character.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['structure'], characterId, token);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'structure'`
+   * type and linked to the character.
+   *
+   * @type {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['structure'], this._id, this._token);
+    }
+    return this._search;
   }
 
   /**

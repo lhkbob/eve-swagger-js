@@ -663,13 +663,20 @@ class Characters extends ExtendableFunction {
     super((id, token) => this.get(id, token));
     this._api = api;
 
-    /**
-     * A Search module instance configured to search over the `'character'`
-     * type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['character']);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'character'`
+   * type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['character']);
+    }
+    return this._search;
   }
 
   /**

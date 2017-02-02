@@ -18,13 +18,20 @@ class Agents {
   constructor(api) {
     this._api = api;
 
-    /**
-     * A Search module instance configured to search over the `'agent'`
-     * type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['agent']);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'agent'`
+   * type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['agent']);
+    }
+    return this._search;
   }
 }
 

@@ -23,13 +23,20 @@ class Factions extends ExtendableFunction {
     super(() => this.all());
     this._api = api;
 
-    /**
-     * A Search module instance configured to search over the `'faction'`
-     * type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['faction']);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'faction'`
+   * type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['faction']);
+    }
+    return this._search;
   }
 
   /**

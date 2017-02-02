@@ -310,27 +310,46 @@ class Types extends ExtendableFunction {
     this._api = api;
     this._all = new PageHandler(page => this.all(page));
 
-    /**
-     * A Search module instance configured to search over the `'inventoryType'`
-     * type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['inventoryType']);
+    this._search = null;
+    this._cats = null;
+    this._groups = null;
+  }
 
-    /**
-     * A Categories instance configured with the same api.
-     *
-     * @type {Categories}
-     */
-    this.categories = new Categories(api);
+  /**
+   * A Categories instance configured with the same api.
+   *
+   * @returns {Categories}
+   */
+  get categories() {
+    if (!this._cats) {
+      this._cats = new Categories(this._api);
+    }
+    return this._cats;
+  }
 
-    /**
-     * A Groups instance configured with the same api.
-     *
-     * @type {Groups}
-     */
-    this.groups = new Groups(api);
+  /**
+   * A Groups instance configured with the same api.
+   *
+   * @returns {Groups}
+   */
+  get groups() {
+    if (!this._groups) {
+      this._groups = new Groups(this._api);
+    }
+    return this._groups;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'inventoryType'`
+   * type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['inventoryType']);
+    }
+    return this._search;
   }
 
   /**

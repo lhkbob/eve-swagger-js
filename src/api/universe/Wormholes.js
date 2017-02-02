@@ -18,13 +18,19 @@ class Wormholes {
   constructor(api) {
     this._api = api;
 
-    /**
-     * A Search module instance configured to search over the `'wormhole'`
-     * type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['wormhole']);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'wormhole'`  type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['wormhole']);
+    }
+    return this._search;
   }
 }
 

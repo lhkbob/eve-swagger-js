@@ -137,13 +137,20 @@ class Corporations extends ExtendableFunction {
     super(id => this.get(id));
     this._api = api;
 
-    /**
-     * A Search module instance configured to search over the `'corporation'`
-     * type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['corporation']);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'corporation'`
+   * type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['corporation']);
+    }
+    return this._search;
   }
 
   /**

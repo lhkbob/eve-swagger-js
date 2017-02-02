@@ -65,13 +65,20 @@ class SolarSystems extends ExtendableFunction {
     super(id => this.get(id));
     this._api = api;
 
-    /**
-     * A Search module instance configured to search over the `'solarsystem'`
-     * type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['solarsystem']);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'solarsystem'`
+   * type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['solarsystem']);
+    }
+    return this._search;
   }
 
   /**

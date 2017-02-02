@@ -20,13 +20,20 @@ class Constellations {
   constructor(api) {
     this._api = api;
 
-    /**
-     * A Search module instance configured to search over the `'constellation'`
-     * type.
-     *
-     * @type {Search}
-     */
-    this.search = new Search(api, ['constellation']);
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'constellation'`
+   * type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['constellation']);
+    }
+    return this._search;
   }
 
   /**
