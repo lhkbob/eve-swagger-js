@@ -64,7 +64,7 @@ class Message {
    * @esi_link MailApi.deleteCharactersCharacterIdMailMailId
    */
   del() {
-    return this._mail._api._mail(this._mail._token)
+    return this._mail._api.mail(this._mail._token)
     .newRequest('deleteCharactersCharacterIdMailMailId',
         [this._mail._id, this._id]);
   }
@@ -370,7 +370,7 @@ class Mail extends ExtendableFunction {
    * @esi_link MailApi.getCharactersCharacterIdMail
    */
   inbox(labelIds = [], lastMailId = 0) {
-    opts = {};
+    let opts = {};
     if (labelIds) {
       opts['labels'] = labelIds;
     }

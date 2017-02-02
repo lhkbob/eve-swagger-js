@@ -1,3 +1,5 @@
+const Promise = require('bluebird');
+
 const ExtendableFunction = require('../../internal/ExtendableFunction');
 const [, MaxIdHandler] = require('../../internal/PageHandler');
 const Search = require('../Search');
