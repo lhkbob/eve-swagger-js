@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>index.js - Documentation</title>
+    <title>Wings - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,28 +27,537 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">Wings</h1>
     
 
     
 
 
 
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const Api = require('./Api');
 
-/**
- * Exports an instance of {@link Api} with default settings.
- *
- * @module eve_swagger_interface
- * @type {Api}
- */
-module.exports = new Api();
-</code></pre>
-        </article>
-    </section>
+<section>
+
+<header>
+    
+        <h2>
+        Wings
+        </h2>
+        
+            <div class="class-description"><p>An api adapter over the end points handling the wings in the character's
+fleet via functions in the <a href="https://esi.tech.ccp.is/latest/#/Fleets">fleets</a>
+ESI endpoints. You should not usually instantiate this directly as its
+constructor requires an internal api instance.</p>
+<p>This is a function class so instances of <code>Wings</code> are functions and can be
+invoked directly, besides accessing its members. Its default function action
+is equivalent to <a href="Wings.html#get"><code>get</code></a> or <a href="Wings.html#all"><code>all</code></a> if no id is
+provided.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="Wings"><span class="type-signature"></span>new Wings<span class="signature">(fleet)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Fleet.js.html">api/character/Fleet.js</a>, <a href="api_character_Fleet.js.html#line194">line 194</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Create a new Wings function owned by the given <code>fleet</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fleet</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Fleet.html">Fleet</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The owning fleet</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Fleet.js.html">api/character/Fleet.js</a>, <a href="api_character_Fleet.js.html#line253">line 253</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Add a new wing to a fleet with the ESI endpoint. This makes an HTTP POST
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings"><code>/fleets/{id}/wings/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;wing_id&quot;: 123
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#postFleetsFleetIdWings">FleetsApi.postFleetsFleetIdWings</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of  the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="all"><span class="type-signature"></span>all<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Fleet.js.html">api/character/Fleet.js</a>, <a href="api_character_Fleet.js.html#line232">line 232</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get information on all wings in a fleet with the ESI endpoint. This makes
+an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_wings"><code>/fleets/{id}/wings/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;id&quot;: 2073711261968,
+    &quot;name&quot;: &quot;Wing 1&quot;,
+    &quot;squads&quot;: [
+      {
+        &quot;id&quot;: 3129411261968,
+       &quot;name&quot;: &quot;Squad 1&quot;
+      }
+    ]
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/FleetsApi.md#getFleetsFleetIdWings">FleetsApi.getFleetsFleetIdWings</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Wing.html">Wing</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Fleet.js.html">api/character/Fleet.js</a>, <a href="api_character_Fleet.js.html#line264">line 264</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>The Wing api adapter for accessing and modifying the specific wing of a
+fleet.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Wing.html">Wing</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
@@ -58,7 +567,7 @@ module.exports = new Api();
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Feb 02 2017 12:42:01 GMT-0600 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Feb 02 2017 12:42:02 GMT-0600 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

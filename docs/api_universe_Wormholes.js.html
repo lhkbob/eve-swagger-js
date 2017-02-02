@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>index.js - Documentation</title>
+    <title>api/universe/Wormholes.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">api/universe/Wormholes.js</h1>
     
 
     
@@ -37,15 +37,43 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Api = require('./Api');
+            <pre class="prettyprint source linenums"><code>const Search = require('../Search');
 
 /**
- * Exports an instance of {@link Api} with default settings.
- *
- * @module eve_swagger_interface
- * @type {Api}
+ * An api adapter that provides functions for accessing wormhole information
+ * via the
+ * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
+ * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.
+ * You should not usually instantiate this directly as its constructor requires
+ * an internal api instance.
  */
-module.exports = new Api();
+class Wormholes {
+  /**
+   * Create a new Wormholes instance using the given `api`.
+   *
+   * @param api {ApiProvider} The api provider
+   * @constructor
+   */
+  constructor(api) {
+    this._api = api;
+
+    this._search = null;
+  }
+
+  /**
+   * A Search module instance configured to search over the `'wormhole'`  type.
+   *
+   * @returns {Search}
+   */
+  get search() {
+    if (!this._search) {
+      this._search = new Search(this._api, ['wormhole']);
+    }
+    return this._search;
+  }
+}
+
+module.exports = Wormholes;
 </code></pre>
         </article>
     </section>

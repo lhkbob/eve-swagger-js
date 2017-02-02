@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>eve_swagger_interface - Documentation</title>
+    <title>Structure - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">eve_swagger_interface</h1>
+    <h1 class="page-title">Structure</h1>
     
 
     
@@ -39,8 +39,15 @@
 
 <header>
     
+        <h2>
+        Structure
+        </h2>
         
-            
+            <div class="class-description"><p>An api adapter that provides functions for accessing various details for a
+structure accessible by the character, specified by id, via functions in the
+<a href="https://esi.tech.ccp.is/latest/#/Universe">universe</a> ESI endpoints. You
+should not usually instantiate this directly as its constructor requires an
+internal api instance.</p></div>
         
     
 </header>
@@ -49,11 +56,14 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Exports an instance of <a href="Api.html"><code>Api</code></a> with default settings.</p></div>
-        
 
-        
-            
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="Structure"><span class="type-signature"></span>new Structure<span class="signature">(api, structureId, token)</span><span class="type-signature"></span></h4>
+
+    
 
 
 
@@ -63,7 +73,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line3">line 3</a>
+        <a href="api_character_Structures.js.html">api/character/Structures.js</a>, <a href="api_character_Structures.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -102,6 +112,11 @@
 
 
 
+<div class="description">
+    <p>Create a new Structure for the given <code>api</code> provider and specific
+<code>structureId</code>. Requires an access token for a character with access to the
+structure.</p>
+</div>
 
 
 
@@ -113,20 +128,116 @@
 
 
 
+    <h5>Parameters:</h5>
+    
 
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-
-
-
-
-
-
-
-
-
-
+        <th>Type</th>
 
         
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>api</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ApiProvider.html">ApiProvider</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The api provider used to generate web requests</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>structureId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The structure id that is used for all requests</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Access token of a character with on the ACL list of
+    the structure</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     </div>
 
@@ -142,6 +253,785 @@
 
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="buyOrdersFor"><span class="type-signature"></span>buyOrdersFor<span class="signature">(typeId)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Structures.js.html">api/character/Structures.js</a>, <a href="api_character_Structures.js.html#line107">line 107</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get all buy market orders in the region for the particular item type. This
+is equivalent to <a href="Structure.html#ordersFor"><code>ordersFor</code></a> except that it
+additionally filters orders to have <code>is_buy_order</code> set to <code>true</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>typeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type id to query from the market</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="info"><span class="type-signature"></span>info<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Structures.js.html">api/character/Structures.js</a>, <a href="api_character_Structures.js.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get structure info from the ESI endpoint. This makes an
+HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures_structure_id"><code>/universe/structures/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;name&quot;: &quot;V-3YG7 VI - The Capital&quot;,
+  &quot;solar_system_id&quot;: 30000142
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniverseStructuresStructureId">UniverseApi.getUniverseStructuresStructureId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="orders"><span class="type-signature"></span>orders<span class="signature">(page)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Structures.js.html">api/character/Structures.js</a>, <a href="api_character_Structures.js.html#line89">line 89</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get a page of market orders in the structure from the ESI endpoint. Orders
+include buy and sell, and are for any item type. This makes an HTTP GET
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Market/get_market_structures_structure_id"><code>/markets/structures/{structureId}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;duration&quot;: 90,
+    &quot;is_buy_order&quot;: false,
+    &quot;issued&quot;: &quot;2016-09-03T05:12:25Z&quot;,
+    &quot;location_id&quot;: 60005599,
+    &quot;min_volume&quot;: 1,
+    &quot;order_id&quot;: 4623824223,
+    &quot;price&quot;: 9.9,
+    &quot;range&quot;: &quot;region&quot;,
+    &quot;type_id&quot;: 34,
+    &quot;volume_remain&quot;: 1296000,
+    &quot;volume_total&quot;: 2000000
+  }
+]</code></pre><p>This orders request is paginated, with <code>page</code> starting at 1 for the first
+page of data. If <code>page</code> is not provided, then all orders are returned
+(making multiple calls and concatenating the results).
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MarketApi.md#getMarketsStructuresStructureId">MarketApi.getMarketsStructuresStructureId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>page</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>0</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Optional; the page of orders that is requested.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="ordersFor"><span class="type-signature"></span>ordersFor<span class="signature">(typeId)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Structures.js.html">api/character/Structures.js</a>, <a href="api_character_Structures.js.html#line141">line 141</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get all market orders in the region for the given item type from the
+ESI endpoint. Orders include buy and sell, but are restricted to the
+selected type id.</p>
+<p>While the ESI endpoints support native type filtering for regions, this
+type filtering is implemented in-library for structures. This means that
+all orders for the structure are requested via <code>orders</code> and then filtered.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>typeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type id to query from the market</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="sellOrdersFor"><span class="type-signature"></span>sellOrdersFor<span class="signature">(typeId)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Structures.js.html">api/character/Structures.js</a>, <a href="api_character_Structures.js.html#line122">line 122</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get all sell market orders in the region for the particular item type.
+This
+is equivalent to <a href="Structure.html#ordersFor"><code>ordersFor</code></a> except that it
+additionally filters orders to have <code>is_buy_order</code> set to <code>false</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>typeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type id to query from the market</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
     
 
     

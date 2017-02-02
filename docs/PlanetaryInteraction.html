@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>index.js - Documentation</title>
+    <title>PlanetaryInteraction - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,28 +27,359 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">PlanetaryInteraction</h1>
     
 
     
 
 
 
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const Api = require('./Api');
 
-/**
- * Exports an instance of {@link Api} with default settings.
- *
- * @module eve_swagger_interface
- * @type {Api}
- */
-module.exports = new Api();
-</code></pre>
-        </article>
-    </section>
+<section>
+
+<header>
+    
+        <h2>
+        PlanetaryInteraction
+        </h2>
+        
+            <div class="class-description"><p>An api adapter that provides functions for accessing the non-authenticated
+<a href="https://esi.tech.ccp.is/latest/#/Planetary_Interaction">planetary
+interaction</a> ESI end
+ points. You should not usually instantiate this directly as its constructor
+requires an internal api instance.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="PlanetaryInteraction"><span class="type-signature"></span>new PlanetaryInteraction<span class="signature">(api)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_universe_PlanetaryInteraction.js.html">api/universe/PlanetaryInteraction.js</a>, <a href="api_universe_PlanetaryInteraction.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Create a new PlanetaryInteraction instance using the given <code>api</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>api</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ApiProvider.html">ApiProvider</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The api provider</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="schematic"><span class="type-signature"></span>schematic<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_universe_PlanetaryInteraction.js.html">api/universe/PlanetaryInteraction.js</a>, <a href="api_universe_PlanetaryInteraction.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get a planetary interaction schematic's public info from the ESI endpoint.
+This makes an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_universe_schematics_schematic_id"><code>/universe/schematics/{id}/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;cycle_time&quot;: 1800,
+  &quot;schematic_name&quot;: &quot;Bacteria&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/PlanetaryInteractionApi.md#getUniverseSchematicsSchematicId">PlanetaryInteractionApi.getUniverseSchematicsSchematicId</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The schematic id to look up</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
@@ -58,7 +389,7 @@ module.exports = new Api();
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Feb 02 2017 12:42:01 GMT-0600 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Feb 02 2017 12:42:02 GMT-0600 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

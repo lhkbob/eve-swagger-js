@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>index.js - Documentation</title>
+    <title>Labels - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,28 +27,661 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">Labels</h1>
     
 
     
 
 
 
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const Api = require('./Api');
 
-/**
- * Exports an instance of {@link Api} with default settings.
- *
- * @module eve_swagger_interface
- * @type {Api}
- */
-module.exports = new Api();
-</code></pre>
-        </article>
-    </section>
+<section>
+
+<header>
+    
+        <h2>
+        Labels
+        </h2>
+        
+            <div class="class-description"><p>An api adapter over the end points handling all labels in the character's
+inbox via functions in the <a href="https://esi.tech.ccp.is/latest/#/Mail">mail</a> ESI
+endpoints. You should not usually instantiate this directly as its
+constructor requires an internal api instance.</p>
+<p>This is a function class so instances of <code>Labels</code> are functions and can be
+invoked directly, besides accessing its members. Its default function action
+is equivalent to <a href="Labels.html#get"><code>get</code></a> or <a href="Labels.html#all"><code>all</code></a> if no id is
+given.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="Labels"><span class="type-signature"></span>new Labels<span class="signature">(mail)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Mail.js.html">api/character/Mail.js</a>, <a href="api_character_Mail.js.html#line146">line 146</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Create a new Labels function owned by the given <code>mail</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Mail.html">Mail</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The owning mail</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="all"><span class="type-signature"></span>all<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Mail.js.html">api/character/Mail.js</a>, <a href="api_character_Mail.js.html#line199">line 199</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get the character's inbox labels along with unread counts for each label
+and their total unread count for all mail. This makes an HTTP GET request
+to
+<a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_labels"><code>/characters/{id}/mail/labels/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;color_hex&quot;: &quot;#660066&quot;,
+    &quot;label_id&quot;: 16,
+    &quot;name&quot;: &quot;PINK&quot;,
+    &quot;unread_count&quot;: 4
+  },
+  {
+    &quot;color_hex&quot;: &quot;#ffffff&quot;,
+    &quot;label_id&quot;: 17,
+    &quot;name&quot;: &quot;WHITE&quot;,
+    &quot;unread_count&quot;: 1
+  }
+]</code></pre><p>Note that the resolved array is the <code>labels</code> member of the actual ESI
+response, stripping off the total unread count for simplicity.
+This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MailApi.md#getCharactersCharacterIdMailLabels">MailApi.getCharactersCharacterIdMailLabels</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="create"><span class="type-signature"></span>create<span class="signature">(name, color)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Mail.js.html">api/character/Mail.js</a>, <a href="api_character_Mail.js.html#line229">line 229</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Create a new inbox label for the character. This makes an HTTP POST
+request
+to
+<a href="https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail_labels"><code>/characters/{id}/mail/labels</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+Integer on success representing the new label's id. The parameters to this
+function are specified in a single object map.</p>
+<pre class="prettyprint source"><code>{
+  &quot;color&quot;: &quot;#ffffff&quot;,
+  &quot;name&quot;: &quot;string&quot;
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/MailApi.md#postCharactersCharacterIdMailLabels">MailApi.postCharactersCharacterIdMailLabels</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The name of the new label</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Optiona; a hex-encoded color, starting with <code>#</code>.
+    Defaults to white.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="Label.html">Label</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Mail.js.html">api/character/Mail.js</a>, <a href="api_character_Mail.js.html#line163">line 163</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get a Label instance corresponding to the given label <code>id</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The label id</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Label.html">Label</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
@@ -58,7 +691,7 @@ module.exports = new Api();
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Feb 02 2017 12:42:01 GMT-0600 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Feb 02 2017 12:42:02 GMT-0600 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

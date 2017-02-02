@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>index.js - Documentation</title>
+    <title>api/universe/PlanetaryInteraction.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">api/universe/PlanetaryInteraction.js</h1>
     
 
     
@@ -37,16 +37,50 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Api = require('./Api');
-
-/**
- * Exports an instance of {@link Api} with default settings.
- *
- * @module eve_swagger_interface
- * @type {Api}
+            <pre class="prettyprint source linenums"><code>/**
+ * An api adapter that provides functions for accessing the non-authenticated
+ * [planetary
+ * interaction](https://esi.tech.ccp.is/latest/#/Planetary_Interaction) ESI end
+ *  points. You should not usually instantiate this directly as its constructor
+ * requires an internal api instance.
  */
-module.exports = new Api();
-</code></pre>
+class PlanetaryInteraction {
+  /**
+   * Create a new PlanetaryInteraction instance using the given `api`.
+   *
+   * @param api {ApiProvider} The api provider
+   * @constructor
+   */
+  constructor(api) {
+    this._api = api;
+  }
+
+  /**
+   * Get a planetary interaction schematic's public info from the ESI endpoint.
+   * This makes an HTTP GET request to
+   * [`/universe/schematics/{id}/`](https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_universe_schematics_schematic_id).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * object parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * {
+   *   "cycle_time": 1800,
+   *   "schematic_name": "Bacteria"
+   * }
+   * ```
+   *
+   * @param {Number} id The schematic id to look up
+   * @return {Promise} A Promise that resolves to the response of
+   *   the request
+   * @esi_link PlanetaryInteractionApi.getUniverseSchematicsSchematicId
+   */
+  schematic(id) {
+    return this._api.planetaryInteraction()
+    .newRequest('getUniverseSchematicsSchematicId', [id]);
+  }
+}
+
+module.exports = PlanetaryInteraction;</code></pre>
         </article>
     </section>
 
