@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SolarSystem - Documentation</title>
+    <title>Bloodlines - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">SolarSystem</h1>
+    <h1 class="page-title">Bloodlines</h1>
     
 
     
@@ -40,11 +40,16 @@
 <header>
     
         <h2>
-        SolarSystem
+        Bloodlines
         </h2>
         
-            <div class="class-description"><p>An api adapter for dealing with a single solar system, currently only
-supporting fetching simple information.</p></div>
+            <div class="class-description"><p>An api adapter over the end points handling bloodlines via functions in the
+<a href="https://esi.tech.ccp.is/latest/#/Universe">universe</a> ESI endpoints. You
+should not usually instantiate this directly as its constructor requires an
+internal api instance.</p>
+<p>This is a function class so instances of <code>Bloodlines</code> are functions and can
+be invoked directly, besides accessing its members. Its default function
+action is equivalent to <a href="Bloodlines.html#all"><code>all</code></a>.</p></div>
         
     
 </header>
@@ -58,7 +63,7 @@ supporting fetching simple information.</p></div>
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="SolarSystem"><span class="type-signature"></span>new SolarSystem<span class="signature">(api, solarSystemId)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Bloodlines"><span class="type-signature"></span>new Bloodlines<span class="signature">(api)</span><span class="type-signature"></span></h4>
 
     
 
@@ -70,7 +75,7 @@ supporting fetching simple information.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_SolarSystems.js.html">api/universe/SolarSystems.js</a>, <a href="api_universe_SolarSystems.js.html#line10">line 10</a>
+        <a href="api_universe_Bloodlines.js.html">api/universe/Bloodlines.js</a>, <a href="api_universe_Bloodlines.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -110,8 +115,7 @@ supporting fetching simple information.</p></div>
 
 
 <div class="description">
-    <p>Create a new SolarSystem for the given <code>api</code> provider and specific
-<code>solarSystemId</code>.</p>
+    <p>Create a new Bloodlines function using the given <code>api</code>.</p>
 </div>
 
 
@@ -165,30 +169,7 @@ supporting fetching simple information.</p></div>
 
             
 
-            <td class="description last"><p>The api provider used to generate web requests</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>solarSystemId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The system id that is used for all requests</p></td>
+            <td class="description last"><p>The api provider</p></td>
         </tr>
 
     
@@ -233,7 +214,7 @@ supporting fetching simple information.</p></div>
 
     
 
-    <h4 class="name" id="info"><span class="type-signature"></span>info<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id="all"><span class="type-signature"></span>all<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -245,7 +226,7 @@ supporting fetching simple information.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_SolarSystems.js.html">api/universe/SolarSystems.js</a>, <a href="api_universe_SolarSystems.js.html#line40">line 40</a>
+        <a href="api_universe_Bloodlines.js.html">api/universe/Bloodlines.js</a>, <a href="api_universe_Bloodlines.js.html#line53">line 53</a>
     </li></ul></dd>
     
 
@@ -285,14 +266,26 @@ supporting fetching simple information.</p></div>
 
 
 <div class="description">
-    <p>Get solar system public info from the ESI endpoint. This makes an HTTP GET
-request to
-<a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_systems_system_id"><code>/universe/systems/{id}/</code></a>.
+    <p>Get all bloodlines and their information from the ESI endpoints. This makes
+an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_bloodlines"><code>universe/bloodlines/</code></a>
 The request is returned as an asynchronous Promise that resolves to an
-object parsed from the response JSON model. An example value looks like:</p>
-<pre class="prettyprint source"><code>{
-  &quot;solar_system_name&quot;: &quot;Jita&quot;
-}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniverseSystemsSystemId">UniverseApi.getUniverseSystemsSystemId</a>.</p>
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;bloodline_id&quot;: 1,
+    &quot;charisma&quot;: 6,
+    &quot;corporation_id&quot;: 1000006,
+    &quot;description&quot;: &quot;The Deteis are regarded as ...&quot;,
+    &quot;intelligence&quot;: 7,
+    &quot;memory&quot;: 7,
+    &quot;name&quot;: &quot;Deteis&quot;,
+    &quot;perception&quot;: 5,
+    &quot;race_id&quot;: 1,
+    &quot;ship_type_id&quot;: 601,
+    &quot;willpower&quot;: 5
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniverseBloodlines">UniverseApi.getUniverseBloodlines</a>.</p>
 </div>
 
 
