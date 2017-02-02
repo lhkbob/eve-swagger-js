@@ -40,7 +40,6 @@ class Sovereignty {
    *
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_campaigns
    * @esi_link SovereigntyApi.getSovereigntyCampaigns
    */
   campaigns() {
@@ -70,7 +69,6 @@ class Sovereignty {
    *
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures
    * @esi_link SovereigntyApi.getSovereigntyStructures
    */
   structures() {

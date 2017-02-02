@@ -73,8 +73,8 @@ class Killmail extends ExtendableFunction {
    * @param {String} hash The killmail hash
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see War.killmails()
-   * @see https://esi.tech.ccp.is/latest/#!/Killmails/get_killmails_killmail_id_killmail_hash
+   * @see War#killmails
+   * @see Character#killmails
    * @esi_link KillmailsApi.getKillmailsKillmailIdKillmailHash
    */
   get(id, hash) {

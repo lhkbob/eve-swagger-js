@@ -53,7 +53,6 @@ class Incursions extends ExtendableFunction {
    *
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Incursions/get_incursions
    * @esi_link IncursionsApi.getIncursions
    */
   all() {

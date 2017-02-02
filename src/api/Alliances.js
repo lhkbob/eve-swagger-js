@@ -42,7 +42,6 @@ class Alliance {
    *
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id
    * @esi_link AllianceApi.getAlliancesAllianceId
    */
   info() {
@@ -65,7 +64,6 @@ class Alliance {
    *
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_corporations
    * @esi_link AllianceApi.getAlliancesAllianceIdCorporations
    */
   corporations() {
@@ -92,7 +90,6 @@ class Alliance {
    *
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_icons
    * @esi_link AllianceApi.getAlliancesAllianceIdIcons
    */
   icon() {

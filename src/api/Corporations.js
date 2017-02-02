@@ -46,7 +46,6 @@ class Corporation {
    * ```
    *
    * @return {Promise} A Promise that resolves to the response of the request
-   * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id
    * @esi_link CorporationApi.getCorporationsCorporationId
    */
   info() {
@@ -79,7 +78,6 @@ class Corporation {
    * ```
    *
    * @return {Promise} A Promise that resolves to the response of the request
-   * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory
    * @esi_link CorporationApi.getCorporationsCorporationIdAllianceHistory
    */
   history() {
@@ -107,7 +105,6 @@ class Corporation {
    * ```
    *
    * @return {Promise} A Promise that resolves to the response of  the request
-   * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons
    * @esi_link CorporationApi.getCorporationsCorporationIdIcons
    */
   icon() {
@@ -191,7 +188,6 @@ class Corporations extends ExtendableFunction {
    * @param {Array.<Number>} ids The corporation ids to look up.
    * @return {Promise} A Promise that resolves to the response of
    *   the request
-   * @see https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names
    * @esi_link CorporationApi.getCorporationsNames
    */
   names(ids) {
