@@ -1,9 +1,11 @@
 const ApiProvider = require('./internal/ApiProvider');
 const ExtendableFunction = require('./internal/ExtendableFunction');
+const _names = require('./internal/names');
 
 const Characters = require('./api/character/Characters');
 
 const Agents = require('./api/universe/Agents');
+const Bloodlines = require('./api/universe/Bloodlines');
 const Constellations = require('./api/universe/Constellations');
 const Factions = require('./api/universe/Factions');
 const Freeports = require('./api/universe/Freeports');
@@ -61,6 +63,7 @@ class Api extends ExtendableFunction {
     this._char = null;
 
     this._agent = null;
+    this._blood = null;
     this._const = null;
     this._faction = null;
     this._freeport = null;
@@ -107,6 +110,19 @@ class Api extends ExtendableFunction {
       this._agent = new Agents(this._api);
     }
     return this._agent;
+  }
+
+  /**
+   * An instance of Bloodlines using a shared ApiProvider configured based on
+   * the Api's initialization options.
+   *
+   * @returns {Bloodlines}
+   */
+  get bloodlines() {
+    if (!this._blood) {
+      this._blood = new Bloodlines(this._api);
+    }
+    return this._blood;
   }
 
   /**
@@ -385,8 +401,7 @@ class Api extends ExtendableFunction {
    * @private
    */
   names(ids) {
-    return this._api.universe()
-    .newRequest('postUniverseNames', [{ ids: ids }]);
+    return _names(this._api, 'all', ids);
   }
 }
 

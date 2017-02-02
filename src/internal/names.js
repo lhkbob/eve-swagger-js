@@ -1,3 +1,38 @@
+const Promise = require('bluebird');
+
+function splitIds(ids) {
+  let groups = [];
+
+  while (ids.length > 500) {
+    groups.push(ids.splice(0, 500));
+  }
+
+  if (ids.length > 0) {
+    groups.push(ids);
+  }
+
+  return groups;
+}
+
+function getFilteredNames(api, ids, category) {
+  return api.universe().newRequest('postUniverseNames', [ids])
+  .then(result => {
+    if (category != 'all') {
+      // Filter by category and remove the category field
+      return result.filter(r => r.category == category).map(r => {
+        return {
+          id: r.id,
+          name: r.name
+        };
+      });
+    } else {
+      return result;
+    }
+  })
+}
+
+
+
 /**
  * Internal utility function to query names of a given set of `ids`. Although
  * the ESI end point allows returning mixed types, this returns names
@@ -32,6 +67,8 @@
  * # `'constellation'`
  * # `'region'`
  * # `'type'`
+ * # `'all'` to disable category filtering (in which case `category` is
+ * included` in each result element
  *
  * @param api {ApiProvider} Internal api
  * @param category {String} Category to filter names to
@@ -40,15 +77,15 @@
  * @private
  */
 module.exports = function(api, category, ids) {
-  return api.universe()
-  .newRequest('postUniverseNames', [{ ids: ids }])
-  .then(result => {
-    // Filter by category and remove the category field
-    return result.filter(r => r.category == category).map(r => {
-      return {
-        id: r.id,
-        name: r.name
-      };
-    });
+  let groups = splitIds(ids);
+  return Promise.map(groups, idSet => getFilteredNames(api, idSet, category))
+  .then(nameSets => {
+    // Join each group of names into a single array
+    let combined = [];
+    for (let set of nameSets) {
+      combined = combined.concat(set);
+    }
+
+    return combined;
   });
 };

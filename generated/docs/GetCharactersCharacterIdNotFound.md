@@ -1,8 +1,8 @@
-# EveSwaggerInterface.PostUniverseNamesIds
+# EveSwaggerInterface.GetCharactersCharacterIdNotFound
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ids** | **[Integer]** | ids array | 
+**error** | **String** | Not found message | [optional] 
 
 

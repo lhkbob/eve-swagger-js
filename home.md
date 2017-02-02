@@ -21,7 +21,7 @@ code will not need to be changed. On the other hand, the new ESI
 versions could add new end points or change the data in a response, etc.
 in which case this will be updated ASAP.
 
-- ESI version: 0.3.8
+- ESI version: 0.3.10.dev12
 - Module version: 0.2.0
 - Source: https://github.com/lhkbob/eve-swagger-js/
 
@@ -167,7 +167,7 @@ esi.alliances().then(result => {
 | [`GET /sovereignty/campaigns/`](https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_campaigns) | [`Sovereignty.campaigns()`](Sovereignty.html#campaigns) | `esi.sovereignty.campaigns()` |
 | [`GET /sovereignty/structures/`](https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures) | [`Sovereignty.structures()`](Sovereignty.html#structures) | `esi.sovereignty.structures()` |
 | [**Universe**](https://esi.tech.ccp.is/latest/#/Universe)
-| [`GET /universe/bloodlines/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_bloodlines) | N/A | N/A |
+| [`GET /universe/bloodlines/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_bloodlines) | [`Bloodlines.all()`](Bloodlines.html#all) | `esi.bloodlines()` |
 | [`GET /universe/categories/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories) | [`Categories.all()`](Categories.html#all) | `esi.types.categories()` |
 | [`GET /universe/categories/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories_category_id) | [`Category.info()`](Category.html#info) | `esi.types.categories(id).info()` |
 | [`GET /universe/factions/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_factions) | [`Factions.all()`](Factions.html#all) | `esi.factions()` |

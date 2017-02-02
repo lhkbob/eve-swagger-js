@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**error** | **String** | Error message | [optional] 
+**error** | **String** | Not found message | [optional] 
 
 
