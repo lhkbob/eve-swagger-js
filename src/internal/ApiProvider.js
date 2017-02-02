@@ -1,9 +1,16 @@
 const Cache = require('node-cache');
 const Moment = require('moment');
 const Promise = require('bluebird');
+const VError = require('verror');
 
 const ESI = require('../../generated/src');
 
+
+const CLIENT_ERROR = 'ClientError';
+const FORBIDDEN_ERROR = 'ForbiddenError';
+const NOT_FOUND_ERROR = 'NotFoundError';
+const INTERNAL_SERVER_ERROR = 'InternalServerError';
+const GENERIC_ERROR = 'ESIError';
 
 /**
  * Get a cached ApiClient instance configured via `provider` and use the
@@ -107,16 +114,47 @@ function getCachedRequest(api, functionName, args, opts, resolve, reject) {
         // Set state of cache to received data before resolving
         // promises, with a timeout based on expires header.
         let timeout = 0;
-        if (response.header.expires) {
-          let expires = Moment.utc(response.header.expires,
+        if (response && response.header && response.header['expires']) {
+          let expires = Moment.utc(response.header['expires'],
               'ddd, DD MMM YYYY HH:mm:ss GMT');
           timeout = expires.diff(Moment.utc([]), 'seconds', true);
         }
 
         if (error) {
-          cache.set(key, { error: error.response.error }, timeout);
+          let type = GENERIC_ERROR;
+          if (error.status == 400) {
+            type = CLIENT_ERROR;
+          } else if (error.status == 404) {
+            type = NOT_FOUND_ERROR;
+          } else if (error.status == 403 || error.status == 401) {
+            type = FORBIDDEN_ERROR;
+          } else if (error.status == 500) {
+            type = INTERNAL_SERVER_ERROR;
+          }
+
+          let err;
+          if (error.response && error.response.error) {
+            if (error.response.text) {
+              err = new VError({
+                name: type,
+                cause: error.response.error
+              }, 'Error from ESI service for %s: %s', functionName, error.response.text);
+            } else {
+              err = new VError({
+                name: type,
+                cause: error.response.error
+              }, 'Error response code from ESI service for %s', functionName);
+            }
+          } else {
+            err = new VError({
+              name: type,
+              cause: error
+            }, 'Error contacting ESI service for %s', functionName);
+          }
+
+          cache.set(key, { error: err }, timeout);
           for (let r of toNotify.onReject) {
-            r(error.response.error);
+            r(err);
           }
         } else {
           // Make sure data isn't null
@@ -130,24 +168,38 @@ function getCachedRequest(api, functionName, args, opts, resolve, reject) {
         // Clear cache so that it can be tried again
         cache.set(key, null);
 
+        // Wrap error
+        let err = new VError({
+          name: GENERIC_ERROR,
+          cause: e
+        }, 'Unexpected exception in callback to %s', functionName);
+
         // Push the exception caught in the ESI callback to all the
         // registered rejects.
         if (toNotify && toNotify.onReject) {
           for (let r of toNotify.onReject) {
-            r(e);
+            r(err);
           }
         } else {
           // In this worst case scenario, at least notify the
           // reject handler that was provided initially (will not
           // reject any subsequently cached handlers but that
           // shouldn't happen).
-          reject(e);
+          reject(err);
         }
       }
     });
 
     // Invoke ESI function
-    api[functionName].apply(api, fullArgs);
+    try {
+      api[functionName].apply(api, fullArgs);
+    } catch (err) {
+      // Wrap in a VError with associated type
+      throw new VError({
+        name: CLIENT_ERROR,
+        cause: err
+      }, 'Failed to call %s', functionName);
+    }
 
     // Set in cache after API call, in the event that the API function
     // fails on validation before it gets to the point where it handles
