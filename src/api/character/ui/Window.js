@@ -32,7 +32,7 @@ class Window {
    */
   info(id) {
     return this._api.userInterface(this._token)
-    .newRequest('postOpenwindowInformation', [id]);
+    .newRequest('postUiOpenwindowInformation', [id]);
   }
 
   /**
@@ -48,7 +48,7 @@ class Window {
    */
   market(typeId) {
     return this._api.userInterface(this._token)
-    .newRequest('postOpenwindowMarketdetails', [typeId]);
+    .newRequest('postUiOpenwindowMarketdetails', [typeId]);
   }
 
   /**
@@ -64,7 +64,7 @@ class Window {
    */
   contract(contractId) {
     return this._api.userInterface(this._token)
-    .newRequest('postOpenwindowContract', [contractId]);
+    .newRequest('postUiOpenwindowContract', [contractId]);
   }
 
   /**
