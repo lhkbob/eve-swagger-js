@@ -234,22 +234,20 @@ class ApiProvider {
    * Create a new ApiProvider with the given configuration provided in a single
    * object map. If no argument is provided, the defaults are used.
    *
-   * @param service {String} URL to the ESI service, defaults to
-   *     `https://esi.tech.ccp.is/latest`.
-   * @param source {String} Data source used, defaults to `tranquility`.
-   * @param agent {String} Custom user agent string to send with each request,
-   *     which defaults to this project but really should be set for your app
-   * @param language {String} Language character code, defaults to `en-us`
-   * @param timeout {Number} Request timeout in milliseconds, defaults to `6000`
+   * @param service {String} URL to the ESI service
+   * @param source {String} Data source used
+   * @param agent {String} Custom user agent string to send with each request
+   * @param language {String} Language character code
+   * @param timeout {Number} Request timeout in milliseconds
    * @constructor
    */
   constructor({
-      service: service = 'https://esi.tech.ccp.is/latest',
-      source: source = 'tranquility',
-      agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js',
-      language: language = 'en-us',
-      timeout: timeout = 6000
-  } = {}) {
+      service: service,
+      source: source,
+      agent: agent,
+      language: language,
+      timeout: timeout
+  }) {
     // Save URL, agent, and timeout for later as they configure the ApiClient
     this._eveURL = service;
     this._userAgent = agent;
