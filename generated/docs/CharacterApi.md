@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 Get character&#39;s public information
 
-Public information about a character  ---  Alternate route: &#x60;/v3/characters/{character_id}/&#x60;  Alternate route: &#x60;/legacy/characters/{character_id}/&#x60;  Alternate route: &#x60;/dev/characters/{character_id}/&#x60;   ---  This route is cached for up to 3600 seconds
+Public information about a character  ---  Alternate route: &#x60;/v4/characters/{character_id}/&#x60;  Alternate route: &#x60;/dev/characters/{character_id}/&#x60;   ---  This route is cached for up to 3600 seconds
 
 ### Example
 ```javascript

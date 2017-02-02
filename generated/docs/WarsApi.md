@@ -4,9 +4,59 @@ All URIs are relative to *https://esi.tech.ccp.is/latest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getWars**](WarsApi.md#getWars) | **GET** /wars/ | List wars
 [**getWarsWarId**](WarsApi.md#getWarsWarId) | **GET** /wars/{war_id}/ | Get war information
 [**getWarsWarIdKillmails**](WarsApi.md#getWarsWarIdKillmails) | **GET** /wars/{war_id}/killmails/ | List kills for a war
 
+
+<a name="getWars"></a>
+# **getWars**
+> [&#39;Integer&#39;] getWars(opts)
+
+List wars
+
+Return a list of wars  ---  Alternate route: &#x60;/v1/wars/&#x60;  Alternate route: &#x60;/legacy/wars/&#x60;  Alternate route: &#x60;/dev/wars/&#x60;   ---  This route is cached for up to 3600 seconds
+
+### Example
+```javascript
+var EveSwaggerInterface = require('eve_swagger_interface');
+
+var apiInstance = new EveSwaggerInterface.WarsApi();
+
+var opts = { 
+  'maxWarId': 56, // Integer | Only return wars with ID smaller than this.
+  'datasource': "tranquility" // String | The server name you would like data from
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.getWars(opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **maxWarId** | **Integer**| Only return wars with ID smaller than this. | [optional] 
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+
+### Return type
+
+**[&#39;Integer&#39;]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 <a name="getWarsWarId"></a>
 # **getWarsWarId**

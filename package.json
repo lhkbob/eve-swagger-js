@@ -1,6 +1,6 @@
 {
   "name": "eve_swagger_interface",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "private": true,
   "description": "An OpenAPI for EVE Online",
   "license": "Apache-2.0",
@@ -16,6 +16,8 @@
     "superagent": "1.7.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2015": "^6.22.0",
     "docdash": "^0.4.0",
     "expect.js": "~0.3.1",
     "jsdoc": "^3.4.3",

@@ -1,0 +1,2537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Character - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agents.html">Agents</a></li><li><a href="Alliance.html">Alliance</a><ul class='methods'><li data-type='method'><a href="Alliance.html#corporations">corporations</a></li><li data-type='method'><a href="Alliance.html#icon">icon</a></li><li data-type='method'><a href="Alliance.html#info">info</a></li></ul></li><li><a href="Alliances.html">Alliances</a><ul class='methods'><li data-type='method'><a href="Alliances.html#all">all</a></li><li data-type='method'><a href="Alliances.html#get">get</a></li><li data-type='method'><a href="Alliances.html#names">names</a></li></ul></li><li><a href="Api.html">Api</a></li><li><a href="Autopilot.html">Autopilot</a><ul class='methods'><li data-type='method'><a href="Autopilot.html#append">append</a></li><li data-type='method'><a href="Autopilot.html#destination">destination</a></li><li data-type='method'><a href="Autopilot.html#prepend">prepend</a></li></ul></li><li><a href="Bookmarks.html">Bookmarks</a><ul class='methods'><li data-type='method'><a href="Bookmarks.html#all">all</a></li><li data-type='method'><a href="Bookmarks.html#folders">folders</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#event">event</a></li><li data-type='method'><a href="Calendar.html#recent">recent</a></li></ul></li><li><a href="Categories.html">Categories</a><ul class='methods'><li data-type='method'><a href="Categories.html#all">all</a></li><li data-type='method'><a href="Categories.html#get">get</a></li></ul></li><li><a href="Category.html">Category</a><ul class='methods'><li data-type='method'><a href="Category.html#info">info</a></li></ul></li><li><a href="Character.html">Character</a><ul class='methods'><li data-type='method'><a href="Character.html#assets">assets</a></li><li data-type='method'><a href="Character.html#clones">clones</a></li><li data-type='method'><a href="Character.html#fleet">fleet</a></li><li data-type='method'><a href="Character.html#killmails">killmails</a></li><li data-type='method'><a href="Character.html#kills">kills</a></li><li data-type='method'><a href="Character.html#location">location</a></li><li data-type='method'><a href="Character.html#recentKillmails">recentKillmails</a></li><li data-type='method'><a href="Character.html#recentKills">recentKills</a></li><li data-type='method'><a href="Character.html#ship">ship</a></li><li data-type='method'><a href="Character.html#skillqueue">skillqueue</a></li><li data-type='method'><a href="Character.html#skills">skills</a></li><li data-type='method'><a href="Character.html#wallets">wallets</a></li></ul></li><li><a href="CharacterCorporation.html">CharacterCorporation</a><ul class='methods'><li data-type='method'><a href="CharacterCorporation.html#history">history</a></li><li data-type='method'><a href="CharacterCorporation.html#icon">icon</a></li><li data-type='method'><a href="CharacterCorporation.html#id">id</a></li><li data-type='method'><a href="CharacterCorporation.html#info">info</a></li><li data-type='method'><a href="CharacterCorporation.html#members">members</a></li><li data-type='method'><a href="CharacterCorporation.html#roles">roles</a></li></ul></li><li><a href="CharacterInfo.html">CharacterInfo</a><ul class='methods'><li data-type='method'><a href="CharacterInfo.html#history">history</a></li><li data-type='method'><a href="CharacterInfo.html#info">info</a></li><li data-type='method'><a href="CharacterInfo.html#portrait">portrait</a></li></ul></li><li><a href="Characters.html">Characters</a><ul class='methods'><li data-type='method'><a href="Characters.html#get">get</a></li><li data-type='method'><a href="Characters.html#names">names</a></li></ul></li><li><a href="Colonies.html">Colonies</a><ul class='methods'><li data-type='method'><a href="Colonies.html#all">all</a></li><li data-type='method'><a href="Colonies.html#layout">layout</a></li></ul></li><li><a href="Constellations.html">Constellations</a><ul class='methods'><li data-type='method'><a href="Constellations.html#names">names</a></li></ul></li><li><a href="Contact.html">Contact</a><ul class='methods'><li data-type='method'><a href="Contact.html#remove">remove</a></li><li data-type='method'><a href="Contact.html#update">update</a></li><li data-type='method'><a href="Contact.html#updateWatched">updateWatched</a></li></ul></li><li><a href="Contacts.html">Contacts</a><ul class='methods'><li data-type='method'><a href="Contacts.html#add">add</a></li><li data-type='method'><a href="Contacts.html#addWatched">addWatched</a></li><li data-type='method'><a href="Contacts.html#all">all</a></li><li data-type='method'><a href="Contacts.html#get">get</a></li><li data-type='method'><a href="Contacts.html#labels">labels</a></li></ul></li><li><a href="Corporation.html">Corporation</a><ul class='methods'><li data-type='method'><a href="Corporation.html#history">history</a></li><li data-type='method'><a href="Corporation.html#icon">icon</a></li><li data-type='method'><a href="Corporation.html#info">info</a></li></ul></li><li><a href="Corporations.html">Corporations</a><ul class='methods'><li data-type='method'><a href="Corporations.html#get">get</a></li><li data-type='method'><a href="Corporations.html#names">names</a></li></ul></li><li><a href="Event.html">Event</a><ul class='methods'><li data-type='method'><a href="Event.html#accept">accept</a></li><li data-type='method'><a href="Event.html#info">info</a></li><li data-type='method'><a href="Event.html#reject">reject</a></li><li data-type='method'><a href="Event.html#undecided">undecided</a></li></ul></li><li><a href="Factions.html">Factions</a><ul class='methods'><li data-type='method'><a href="Factions.html#all">all</a></li></ul></li><li><a href="Fitting.html">Fitting</a><ul class='methods'><li data-type='method'><a href="Fitting.html#del">del</a></li></ul></li><li><a href="Fittings.html">Fittings</a><ul class='methods'><li data-type='method'><a href="Fittings.html#add">add</a></li><li data-type='method'><a href="Fittings.html#all">all</a></li><li data-type='method'><a href="Fittings.html#get">get</a></li></ul></li><li><a href="Fleet.html">Fleet</a><ul class='methods'><li data-type='method'><a href="Fleet.html#info">info</a></li><li data-type='method'><a href="Fleet.html#invite">invite</a></li><li data-type='method'><a href="Fleet.html#kick">kick</a></li><li data-type='method'><a href="Fleet.html#members">members</a></li><li data-type='method'><a href="Fleet.html#move">move</a></li><li data-type='method'><a href="Fleet.html#update">update</a></li></ul></li><li><a href="Freeports.html">Freeports</a><ul class='methods'><li data-type='method'><a href="Freeports.html#all">all</a></li></ul></li><li><a href="Group.html">Group</a><ul class='methods'><li data-type='method'><a href="Group.html#info">info</a></li></ul></li><li><a href="Groups.html">Groups</a><ul class='methods'><li data-type='method'><a href="Groups.html#all">all</a></li><li data-type='method'><a href="Groups.html#get">get</a></li></ul></li><li><a href="Incursions.html">Incursions</a><ul class='methods'><li data-type='method'><a href="Incursions.html#all">all</a></li></ul></li><li><a href="Industry.html">Industry</a><ul class='methods'><li data-type='method'><a href="Industry.html#facilities">facilities</a></li><li data-type='method'><a href="Industry.html#systemCosts">systemCosts</a></li></ul></li><li><a href="Insurance.html">Insurance</a><ul class='methods'><li data-type='method'><a href="Insurance.html#prices">prices</a></li></ul></li><li><a href="Killmail.html">Killmail</a><ul class='methods'><li data-type='method'><a href="Killmail.html#get">get</a></li></ul></li><li><a href="Label.html">Label</a><ul class='methods'><li data-type='method'><a href="Label.html#del">del</a></li></ul></li><li><a href="Labels.html">Labels</a><ul class='methods'><li data-type='method'><a href="Labels.html#all">all</a></li><li data-type='method'><a href="Labels.html#create">create</a></li><li data-type='method'><a href="Labels.html#get">get</a></li></ul></li><li><a href="Mail.html">Mail</a><ul class='methods'><li data-type='method'><a href="Mail.html#all">all</a></li><li data-type='method'><a href="Mail.html#cspaCost">cspaCost</a></li><li data-type='method'><a href="Mail.html#get">get</a></li><li data-type='method'><a href="Mail.html#inbox">inbox</a></li><li data-type='method'><a href="Mail.html#lists">lists</a></li><li data-type='method'><a href="Mail.html#send">send</a></li><li data-type='method'><a href="Mail.html#unreadCount">unreadCount</a></li></ul></li><li><a href="Message.html">Message</a><ul class='methods'><li data-type='method'><a href="Message.html#del">del</a></li><li data-type='method'><a href="Message.html#info">info</a></li><li data-type='method'><a href="Message.html#update">update</a></li></ul></li><li><a href="PlanetaryInteraction.html">PlanetaryInteraction</a><ul class='methods'><li data-type='method'><a href="PlanetaryInteraction.html#schematic">schematic</a></li></ul></li><li><a href="Races.html">Races</a><ul class='methods'><li data-type='method'><a href="Races.html#all">all</a></li></ul></li><li><a href="Region.html">Region</a><ul class='methods'><li data-type='method'><a href="Region.html#buyOrdersFor">buyOrdersFor</a></li><li data-type='method'><a href="Region.html#history">history</a></li><li data-type='method'><a href="Region.html#orders">orders</a></li><li data-type='method'><a href="Region.html#ordersFor">ordersFor</a></li><li data-type='method'><a href="Region.html#sellOrdersFor">sellOrdersFor</a></li></ul></li><li><a href="Regions.html">Regions</a><ul class='methods'><li data-type='method'><a href="Regions.html#get">get</a></li><li data-type='method'><a href="Regions.html#names">names</a></li></ul></li><li><a href="Search.html">Search</a><ul class='methods'><li data-type='method'><a href="Search.html#get">get</a></li><li data-type='method'><a href="Search.html#strict">strict</a></li></ul></li><li><a href="SolarSystem.html">SolarSystem</a><ul class='methods'><li data-type='method'><a href="SolarSystem.html#info">info</a></li></ul></li><li><a href="SolarSystems.html">SolarSystems</a><ul class='methods'><li data-type='method'><a href="SolarSystems.html#get">get</a></li><li data-type='method'><a href="SolarSystems.html#names">names</a></li></ul></li><li><a href="Sovereignty.html">Sovereignty</a><ul class='methods'><li data-type='method'><a href="Sovereignty.html#campaigns">campaigns</a></li><li data-type='method'><a href="Sovereignty.html#structures">structures</a></li></ul></li><li><a href="Squad.html">Squad</a><ul class='methods'><li data-type='method'><a href="Squad.html#remove">remove</a></li><li data-type='method'><a href="Squad.html#rename">rename</a></li></ul></li><li><a href="Squads.html">Squads</a><ul class='methods'><li data-type='method'><a href="Squads.html#add">add</a></li><li data-type='method'><a href="Squads.html#get">get</a></li></ul></li><li><a href="Station.html">Station</a><ul class='methods'><li data-type='method'><a href="Station.html#info">info</a></li></ul></li><li><a href="Stations.html">Stations</a><ul class='methods'><li data-type='method'><a href="Stations.html#get">get</a></li><li data-type='method'><a href="Stations.html#names">names</a></li></ul></li><li><a href="Structure.html">Structure</a><ul class='methods'><li data-type='method'><a href="Structure.html#buyOrdersFor">buyOrdersFor</a></li><li data-type='method'><a href="Structure.html#info">info</a></li><li data-type='method'><a href="Structure.html#orders">orders</a></li><li data-type='method'><a href="Structure.html#ordersFor">ordersFor</a></li><li data-type='method'><a href="Structure.html#sellOrdersFor">sellOrdersFor</a></li></ul></li><li><a href="Structures.html">Structures</a><ul class='methods'><li data-type='method'><a href="Structures.html#get">get</a></li></ul></li><li><a href="Type.html">Type</a><ul class='methods'><li data-type='method'><a href="Type.html#info">info</a></li></ul></li><li><a href="Types.html">Types</a><ul class='methods'><li data-type='method'><a href="Types.html#all">all</a></li><li data-type='method'><a href="Types.html#get">get</a></li><li data-type='method'><a href="Types.html#names">names</a></li><li data-type='method'><a href="Types.html#prices">prices</a></li></ul></li><li><a href="War.html">War</a><ul class='methods'><li data-type='method'><a href="War.html#info">info</a></li><li data-type='method'><a href="War.html#killmails">killmails</a></li><li data-type='method'><a href="War.html#kills">kills</a></li></ul></li><li><a href="Wars.html">Wars</a><ul class='methods'><li data-type='method'><a href="Wars.html#get">get</a></li><li data-type='method'><a href="Wars.html#recent">recent</a></li></ul></li><li><a href="Window.html">Window</a><ul class='methods'><li data-type='method'><a href="Window.html#contract">contract</a></li><li data-type='method'><a href="Window.html#info">info</a></li><li data-type='method'><a href="Window.html#market">market</a></li><li data-type='method'><a href="Window.html#newMail">newMail</a></li></ul></li><li><a href="Wing.html">Wing</a><ul class='methods'><li data-type='method'><a href="Wing.html#remove">remove</a></li><li data-type='method'><a href="Wing.html#rename">rename</a></li></ul></li><li><a href="Wings.html">Wings</a><ul class='methods'><li data-type='method'><a href="Wings.html#add">add</a></li><li data-type='method'><a href="Wings.html#all">all</a></li><li data-type='method'><a href="Wings.html#get">get</a></li></ul></li><li><a href="Wormholes.html">Wormholes</a></li></ul><h3>Modules</h3><ul><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Character</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        Character
+        </h2>
+        
+            <div class="class-description"><p>An extension of <a href="CharacterInfo.html"><code>CharacterInfo</code></a> that adds the remaining
+character-linked, authenticated from the
+<a href="https://esi.tech.ccp.is/latest/#/Character">character</a> and related ESI end
+points.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="Character"><span class="type-signature"></span>new Character<span class="signature">(api, characterId, token)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line149">line 149</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://esi.tech.ccp.is/latest/#/Character">https://esi.tech.ccp.is/latest/#/Character</a></li>
+        
+            <li><a href="https://esi.tech.cpp.is/latest/#/Assets">https://esi.tech.cpp.is/latest/#/Assets</a></li>
+        
+            <li><a href="https://esi.tech.cpp.is/latest/#/Bookmarks">https://esi.tech.cpp.is/latest/#/Bookmarks</a></li>
+        
+            <li><a href="https://esi.tech.cpp.is/latest/#/Clones">https://esi.tech.cpp.is/latest/#/Clones</a></li>
+        
+            <li><a href="https://esi.tech.cpp.is/latest/#/Fittings">https://esi.tech.cpp.is/latest/#/Fittings</a></li>
+        
+            <li><a href="https://esi.tech.cpp.is/latest/#/Killmails">https://esi.tech.cpp.is/latest/#/Killmails</a></li>
+        
+            <li><a href="https://esi.tech.cpp.is/latest/#/Location">https://esi.tech.cpp.is/latest/#/Location</a></li>
+        
+            <li><a href="https://esi.tech.ccp.is/latest/#/Planetary_Interaction">https://esi.tech.ccp.is/latest/#/Planetary_Interaction</a></li>
+        
+            <li><a href="https://esi.tech.ccp.is/latest/#/Skills">https://esi.tech.ccp.is/latest/#/Skills</a></li>
+        
+            <li><a href="https://esi.tech.ccp.is/latest/#/Wallet">https://esi.tech.ccp.is/latest/#/Wallet</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Create a new CharacterInfo for the given <code>api</code> provider targeting the
+specific <code>characterId</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>api</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ApiProvider.html">ApiProvider</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The api provider used to generate web requests</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>characterId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The id used for all character requests</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The SSO access token for the character</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="autopilot"><span class="type-signature"></span>autopilot<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line186">line 186</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>An Autopilot instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="bookmarks"><span class="type-signature"></span>bookmarks<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line198">line 198</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A Bookmarks instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="calendar"><span class="type-signature"></span>calendar<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line210">line 210</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A Calendar instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="colonies"><span class="type-signature"></span>colonies<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line222">line 222</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A Colonies instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="contacts"><span class="type-signature"></span>contacts<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line234">line 234</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A Contacts instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="corporation"><span class="type-signature"></span>corporation<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line246">line 246</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A CharacterCorporation instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="fittings"><span class="type-signature"></span>fittings<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line258">line 258</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A Fittings instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="mail"><span class="type-signature"></span>mail<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line270">line 270</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A Mail instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="structures"><span class="type-signature"></span>structures<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line282">line 282</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A Structures instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="window"><span class="type-signature"></span>window<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line294">line 294</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A Window instance linked to this Character.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="assets"><span class="type-signature"></span>assets<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line334">line 334</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get a character's assets from the ESI endpoint. This makes an HTTP GET
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Assets/get_characters_character_id_assets"><code>characters/{id}/assets/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;is_singleton&quot;: true,
+    &quot;item_id&quot;: 1000000016835,
+    &quot;location_flag&quot;: &quot;Hangar&quot;,
+    &quot;location_id&quot;: 60002959,
+    &quot;location_type&quot;: &quot;station&quot;,
+    &quot;type_id&quot;: 3516
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/AssetsApi.md#getCharactersCharacterIdPortraits">AssetsApi.getCharactersCharacterIdPortraits</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="clones"><span class="type-signature"></span>clones<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line372">line 372</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get a character's clones state from the ESI endpoint. This makes an HTTP
+GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_clones"><code>characters/{id}/clones/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;home_location&quot;: {
+    &quot;location_id&quot;: 1021348135816,
+   &quot;location_type&quot;: &quot;structure&quot;
+  },
+  &quot;jump_clones&quot;: [
+    {
+      &quot;implants&quot;: [
+        22118
+      ],
+      &quot;location_id&quot;: 60003463,
+      &quot;location_type&quot;: &quot;station&quot;
+    },
+    {
+      &quot;implants&quot;: [],
+     &quot;location_id&quot;: 1021348135816,
+     &quot;location_type&quot;: &quot;structure&quot;
+    }
+  ]
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/ClonesApi.md#getCharactersCharacterIdClones">ClonesApi.getCharactersCharacterIdClones</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="fleet"><span class="type-signature"></span>fleet<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="Fleet.html">Fleet</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line307">line 307</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get a Fleet instance for the given fleet <code>id</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The fleet id this character belongs to.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Fleet.html">Fleet</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="killmails"><span class="type-signature"></span>killmails<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line498">line 498</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get all killmails, over all of history, for the given character. This makes
+multiple calls to <code>recentKillmails</code>. This
+should be used with caution as some characters may have a very large number
+of kills.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="kills"><span class="type-signature"></span>kills<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line447">line 447</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get all kill, over all of history, for the given character. This makes
+multiple calls to <code>recentKills</code>. This
+should be used with caution as some characters may have a very large number
+of kills.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="location"><span class="type-signature"></span>location<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line543">line 543</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get the character's location from the ESI endpoint. This makes an HTTP GET
+request to
+<a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location"><code>characters/{id}/location/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;solar_system_id&quot;: 30002505,
+  &quot;structure_id&quot;: 1000000016989
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/LocationApi.md#getCharactersCharacterIdLocation">LocationApi.getCharactersCharacterIdLocation</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of
+  the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="recentKillmails"><span class="type-signature"></span>recentKillmails<span class="signature">(maxKillId)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line481">line 481</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Killmail.html#get">Killmail#get</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get recent kill mails for the given character via the ESI end point. Up to
+to 50 mails are provided at a time. Pagination is supported by specifying
+<code>maxKillId</code>, in which case the most recent mails prior to the max id will
+be returned.</p>
+<p>This makes an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent"><code>/characters/{characterId}/killmails/recent/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;killmail_hash&quot;: &quot;8eef5e8fb6b88fe3407c489df33822b2e3b57a5e&quot;,
+    &quot;killmail_id&quot;: 2
+  },
+  {
+    &quot;killmail_hash&quot;: &quot;b41ccb498ece33d64019f64c0db392aa3aa701fb&quot;,
+    &quot;killmail_id&quot;: 1
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/KillmailsApi.md#getCharactersCharacterIdKillmailsRecent">KillmailsApi.getCharactersCharacterIdKillmailsRecent</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>maxKillId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>0</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Optional; the mail id that limits which mails
+  can be returned. If provided recent mails older than the id are returned</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="recentKills"><span class="type-signature"></span>recentKills<span class="signature">(maxKillId)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line428">line 428</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get the kill details for the recent <code>recentKillmails</code> and then uses <code>Killmail.get</code> to map the details.
+The request resolves to an array, each containing a killmail detail:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;attackers&quot;: [
+      {
+        &quot;character_id&quot;: 95810944,
+        &quot;corporation_id&quot;: 1000179,
+        &quot;damage_done&quot;: 5745,
+        &quot;faction_id&quot;: 500003,
+        &quot;final_blow&quot;: true,
+        &quot;security_status&quot;: -0.3,
+        &quot;ship_type_id&quot;: 17841,
+        &quot;weapon_type_id&quot;: 3074
+      }
+    ],
+    &quot;killmail_id&quot;: 56733821,
+    &quot;killmail_time&quot;: &quot;2016-10-22T17:13:36Z&quot;,
+    &quot;solar_system_id&quot;: 30002976,
+    &quot;victim&quot;: {
+      &quot;alliance_id&quot;: 621338554,
+      &quot;character_id&quot;: 92796241,
+      &quot;corporation_id&quot;: 841363671,
+      &quot;damage_taken&quot;: 5745,
+      &quot;items&quot;: [
+        {
+          &quot;flag&quot;: 20,
+          &quot;item_type_id&quot;: 5973,
+          &quot;quantity_dropped&quot;: 1,
+          &quot;singleton&quot;: 0
+        }
+      ],
+      &quot;position&quot;: {
+        &quot;x&quot;: 452186600569.4748,
+        &quot;y&quot;: 146704961490.90222,
+        &quot;z&quot;: 109514596532.54477
+      },
+      &quot;ship_type_id&quot;: 17812
+    }
+  }
+]</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>maxKillId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>0</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Optional; the mail id that limits which mails
+  can be returned. If provided recent mails older than the id are returned</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="ship"><span class="type-signature"></span>ship<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line520">line 520</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get a character's current ship from the ESI endpoint. This makes an HTTP
+GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship"><code>characters/{id}/ship/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;ship_item_id&quot;: 1000000016991,
+  &quot;ship_name&quot;: &quot;SPACESHIPS!!!&quot;,
+  &quot;ship_type_id&quot;: 1233
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/LocationApi.md#getCharactersCharacterIdShip">LocationApi.getCharactersCharacterIdShip</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="skillqueue"><span class="type-signature"></span>skillqueue<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line641">line 641</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get the character's skill queue, sorted ascending by finishing time, from
+the ESI endpoint. This makes an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue"><code>characters/{id}/skillqueue/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;finish_date&quot;: &quot;2016-06-29T10:47:00Z&quot;,
+    &quot;finished_level&quot;: 3,
+    &quot;queue_position&quot;: 0,
+    &quot;skill_id&quot;: 1,
+    &quot;start_date&quot;: &quot;2016-06-29T10:46:00Z&quot;
+  },
+  {
+    &quot;finish_date&quot;: &quot;2016-07-15T10:47:00Z&quot;,
+    &quot;finished_level&quot;: 4,
+    &quot;queue_position&quot;: 1,
+    &quot;skill_id&quot;: 1,
+    &quot;start_date&quot;: &quot;2016-06-29T10:47:00Z&quot;
+  },
+  {
+    &quot;finish_date&quot;: &quot;2016-08-30T10:47:00Z&quot;,
+    &quot;finished_level&quot;: 2,
+    &quot;queue_position&quot;: 2,
+    &quot;skill_id&quot;: 2,
+    &quot;start_date&quot;: &quot;2016-07-15T10:47:00Z&quot;
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/SkillsApi.md#getCharactersCharacterIdSkillqueue">SkillsApi.getCharactersCharacterIdSkillqueue</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="skills"><span class="type-signature"></span>skills<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line600">line 600</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get the character's trained skills, sorted ascending by finishing time,
+from the ESI endpoint. This makes an HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills"><code>characters/{id}/skills/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+object parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;skills&quot;: [
+    {
+      &quot;current_skill_level&quot;: 1,
+      &quot;skill_id&quot;: 1,
+      &quot;skillpoints_in_skill&quot;: 10000
+    },
+    {
+      &quot;current_skill_level&quot;: 1,
+      &quot;skill_id&quot;: 2,
+      &quot;skillpoints_in_skill&quot;: 10000
+    }
+  ],
+  &quot;total_sp&quot;: 20000
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/SkillsApi.md#getCharactersCharacterIdSkills">SkillsApi.getCharactersCharacterIdSkills</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="wallets"><span class="type-signature"></span>wallets<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_character_Characters.js.html">api/character/Characters.js</a>, <a href="api_character_Characters.js.html#line567">line 567</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get the character's wallets' balances from the ESI endpoint. This makes an
+HTTP GET request to
+<a href="https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets"><code>characters/{id}/wallets/</code></a>.
+The request is returned as an asynchronous Promise that resolves to an
+array parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>[
+  {
+    &quot;balance&quot;: 295000,
+    &quot;wallet_id&quot;: 1000
+  }
+]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/WalletApi.md#getCharactersCharacterIdWallets">WalletApi.getCharactersCharacterIdWallets</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Promise that resolves to the response of the request</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Feb 02 2017 12:42:02 GMT-0600 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

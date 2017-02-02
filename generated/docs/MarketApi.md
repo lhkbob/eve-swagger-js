@@ -186,10 +186,10 @@ evesso.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new EveSwaggerInterface.MarketApi();
 
-var structureId = 789; // Integer | Return orders in this region
+var structureId = 789; // Integer | Return orders in this structure
 
 var opts = { 
-  'page': 1, // Integer | Which page to query, only used for querying without type_id. Starting at 1 
+  'page': 1, // Integer | Which page to query, starting at 1
   'datasource': "tranquility" // String | The server name you would like data from
 };
 
@@ -207,8 +207,8 @@ apiInstance.getMarketsStructuresStructureId(structureId, opts, callback);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **structureId** | **Integer**| Return orders in this region | 
- **page** | **Integer**| Which page to query, only used for querying without type_id. Starting at 1  | [optional] [default to 1]
+ **structureId** | **Integer**| Return orders in this structure | 
+ **page** | **Integer**| Which page to query, starting at 1 | [optional] [default to 1]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
 
 ### Return type

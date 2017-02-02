@@ -4,10 +4,13 @@ All URIs are relative to *https://esi.tech.ccp.is/latest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getUniverseBloodlines**](UniverseApi.md#getUniverseBloodlines) | **GET** /universe/bloodlines/ | Get bloodlines
 [**getUniverseCategories**](UniverseApi.md#getUniverseCategories) | **GET** /universe/categories/ | Get item categories
 [**getUniverseCategoriesCategoryId**](UniverseApi.md#getUniverseCategoriesCategoryId) | **GET** /universe/categories/{category_id}/ | Get item category information
+[**getUniverseFactions**](UniverseApi.md#getUniverseFactions) | **GET** /universe/factions/ | Get factions
 [**getUniverseGroups**](UniverseApi.md#getUniverseGroups) | **GET** /universe/groups/ | Get item groups
 [**getUniverseGroupsGroupId**](UniverseApi.md#getUniverseGroupsGroupId) | **GET** /universe/groups/{group_id}/ | Get item group information
+[**getUniverseRaces**](UniverseApi.md#getUniverseRaces) | **GET** /universe/races/ | Get character races
 [**getUniverseStationsStationId**](UniverseApi.md#getUniverseStationsStationId) | **GET** /universe/stations/{station_id}/ | Get station information
 [**getUniverseStructures**](UniverseApi.md#getUniverseStructures) | **GET** /universe/structures/ | List all public structures
 [**getUniverseStructuresStructureId**](UniverseApi.md#getUniverseStructuresStructureId) | **GET** /universe/structures/{structure_id}/ | Get structure information
@@ -16,6 +19,55 @@ Method | HTTP request | Description
 [**getUniverseTypesTypeId**](UniverseApi.md#getUniverseTypesTypeId) | **GET** /universe/types/{type_id}/ | Get type information
 [**postUniverseNames**](UniverseApi.md#postUniverseNames) | **POST** /universe/names/ | Get names and categories for a set of ID&#39;s
 
+
+<a name="getUniverseBloodlines"></a>
+# **getUniverseBloodlines**
+> [GetUniverseBloodlines200Ok] getUniverseBloodlines(opts)
+
+Get bloodlines
+
+Get a list of bloodlines  ---  Alternate route: &#x60;/v1/universe/bloodlines/&#x60;  Alternate route: &#x60;/legacy/universe/bloodlines/&#x60;  Alternate route: &#x60;/dev/universe/bloodlines/&#x60;   ---  This route is cached for up to 3600 seconds
+
+### Example
+```javascript
+var EveSwaggerInterface = require('eve_swagger_interface');
+
+var apiInstance = new EveSwaggerInterface.UniverseApi();
+
+var opts = { 
+  'language': "en-us", // String | Language to use in the response
+  'datasource': "tranquility" // String | The server name you would like data from
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.getUniverseBloodlines(opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **language** | **String**| Language to use in the response | [optional] [default to en-us]
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+
+### Return type
+
+[**[GetUniverseBloodlines200Ok]**](GetUniverseBloodlines200Ok.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 <a name="getUniverseCategories"></a>
 # **getUniverseCategories**
@@ -106,6 +158,55 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetUniverseCategoriesCategoryIdOk**](GetUniverseCategoriesCategoryIdOk.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getUniverseFactions"></a>
+# **getUniverseFactions**
+> [GetUniverseFactions200Ok] getUniverseFactions(opts)
+
+Get factions
+
+Get a list of factions  ---  Alternate route: &#x60;/v1/universe/factions/&#x60;  Alternate route: &#x60;/legacy/universe/factions/&#x60;  Alternate route: &#x60;/dev/universe/factions/&#x60;   ---  This route is cached for up to 3600 seconds
+
+### Example
+```javascript
+var EveSwaggerInterface = require('eve_swagger_interface');
+
+var apiInstance = new EveSwaggerInterface.UniverseApi();
+
+var opts = { 
+  'language': "en-us", // String | Language to use in the response
+  'datasource': "tranquility" // String | The server name you would like data from
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.getUniverseFactions(opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **language** | **String**| Language to use in the response | [optional] [default to en-us]
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+
+### Return type
+
+[**[GetUniverseFactions200Ok]**](GetUniverseFactions200Ok.md)
 
 ### Authorization
 
@@ -207,6 +308,55 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetUniverseGroupsGroupIdOk**](GetUniverseGroupsGroupIdOk.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getUniverseRaces"></a>
+# **getUniverseRaces**
+> [GetUniverseRaces200Ok] getUniverseRaces(opts)
+
+Get character races
+
+Get a list of character races  ---  Alternate route: &#x60;/v1/universe/races/&#x60;  Alternate route: &#x60;/legacy/universe/races/&#x60;  Alternate route: &#x60;/dev/universe/races/&#x60;   ---  This route is cached for up to 3600 seconds
+
+### Example
+```javascript
+var EveSwaggerInterface = require('eve_swagger_interface');
+
+var apiInstance = new EveSwaggerInterface.UniverseApi();
+
+var opts = { 
+  'language': "en-us", // String | Language to use in the response
+  'datasource': "tranquility" // String | The server name you would like data from
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.getUniverseRaces(opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **language** | **String**| Language to use in the response | [optional] [default to en-us]
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+
+### Return type
+
+[**[GetUniverseRaces200Ok]**](GetUniverseRaces200Ok.md)
 
 ### Authorization
 
@@ -526,7 +676,7 @@ No authorization required
 
 Get names and categories for a set of ID&#39;s
 
-Resolve a set of IDs to names and categories. Supported ID&#39;s for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types.  ---  Alternate route: &#x60;/v1/universe/names/&#x60;  Alternate route: &#x60;/legacy/universe/names/&#x60; 
+Resolve a set of IDs to names and categories. Supported ID&#39;s for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types.  ---  Alternate route: &#x60;/v2/universe/names/&#x60;  Alternate route: &#x60;/dev/universe/names/&#x60; 
 
 ### Example
 ```javascript
@@ -534,7 +684,7 @@ var EveSwaggerInterface = require('eve_swagger_interface');
 
 var apiInstance = new EveSwaggerInterface.UniverseApi();
 
-var ids = new EveSwaggerInterface.PostUniverseNamesIds(); // PostUniverseNamesIds | The ids to resolve
+var ids = [new EveSwaggerInterface.[Integer]()]; // [Integer] | The ids to resolve
 
 var opts = { 
   'datasource': "tranquility" // String | The server name you would like data from
@@ -554,7 +704,7 @@ apiInstance.postUniverseNames(ids, opts, callback);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ids** | [**PostUniverseNamesIds**](PostUniverseNamesIds.md)| The ids to resolve | 
+ **ids** | **[Integer]**| The ids to resolve | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
 
 ### Return type
