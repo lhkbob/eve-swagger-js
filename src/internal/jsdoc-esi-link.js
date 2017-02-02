@@ -24,8 +24,8 @@ exports.defineTags = function(dictionary) {
         let base = value.substring(0, period);
         let method = value.substring(period + 1);
         url = url + base + '.md#' + method;
-        linkText = '\nThis promisifies a call to the generated [' + value
-            + '](' + url + ').';
+        linkText = '\nThis promisifies a call to the generated [' + value + ']('
+            + url + ').';
       } else {
         // Assume it's just a class
         url = url + value + '.md';

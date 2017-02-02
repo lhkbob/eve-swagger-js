@@ -43,7 +43,8 @@ class Industry {
   }
 
   /**
-   * Get cost indices for each solar system from the ESI endpoint. This makes an
+   * Get cost indices for each solar system from the ESI endpoint. This makes
+   * an
    * HTTP GET request to
    * [`/industry/systems`](https://esi.tech.ccp.is/latest/#!/Industry/get_industry_systems).
    * The request is returned as an asynchronous Promise that resolves to an

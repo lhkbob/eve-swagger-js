@@ -699,7 +699,8 @@ class Characters extends ExtendableFunction {
   }
 
   /**
-   * Get the names for a list of character ids from the ESI endpoint. This makes
+   * Get the names for a list of character ids from the ESI endpoint. This
+   * makes
    * an HTTP GET request to
    * [`characters/names/`](https://esi.tech.ccp.is/latest/#!/Character/get_characters_names).
    * The request is returned as an asynchronous Promise that resolves to an

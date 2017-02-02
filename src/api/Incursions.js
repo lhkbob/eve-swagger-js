@@ -23,7 +23,8 @@ class Incursions extends ExtendableFunction {
   }
 
   /**
-   * Get all incursions from the ESI endpoint. This makes an HTTP GET request to
+   * Get all incursions from the ESI endpoint. This makes an HTTP GET request
+   * to
    * [`/incursions`](https://esi.tech.ccp.is/latest/#!/Incursions/get_incursions).
    * The request is returned as an asynchronous Promise that resolves to an
    * array parsed from the response JSON model. An example value looks like:

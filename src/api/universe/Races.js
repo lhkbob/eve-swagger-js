@@ -24,7 +24,8 @@ class Races extends ExtendableFunction {
 
   /**
    * Get all races and their information from the ESI endpoints. This makes
-   * an HTTP GET request to [`universe/races/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_races)
+   * an HTTP GET request to
+   * [`universe/races/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_races)
    * The request is returned as an asynchronous Promise that resolves to an
    * array parsed from the response JSON model. An example value looks like:
    *

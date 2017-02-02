@@ -38,7 +38,8 @@ class SolarSystem {
    * @esi_link UniverseApi.getUniverseSystemsSystemId
    */
   info() {
-    return this._api.universe().newRequest('getUniverseSystemsSystemId', [this._id]);
+    return this._api.universe()
+    .newRequest('getUniverseSystemsSystemId', [this._id]);
   }
 }
 

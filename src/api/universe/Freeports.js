@@ -23,8 +23,9 @@ class Freeports extends ExtendableFunction {
   }
 
   /**
-   * Get all public structure ids (or freeports) from the ESI endpoint. This makes
-   * an HTTP GET request to [`universe/structures/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures)
+   * Get all public structure ids (or freeports) from the ESI endpoint. This
+   * makes an HTTP GET request to
+   * [`universe/structures/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures)
    * The request is returned as an asynchronous Promise that resolves to an
    * array parsed from the response JSON model. An example value looks like:
    *

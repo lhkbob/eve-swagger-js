@@ -47,14 +47,16 @@ class Api extends ExtendableFunction {
    * @constructor
    */
   constructor({
-      service: service = 'https://esi.tech.ccp.is/latest',
-      source: source = 'tranquility',
-      agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js',
-      language: language = 'en-us',
-      timeout: timeout = 6000
+      service: service = 'https://esi.tech.ccp.is/latest', source: source = 'tranquility', agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js', language: language = 'en-us', timeout: timeout = 6000
   } = {}) {
     super(config => new Api(config));
-    this._api = new ApiProvider({service: service, source: source, agent: agent, language: language, timeout: timeout});
+    this._api = new ApiProvider({
+      service: service,
+      source: source,
+      agent: agent,
+      language: language,
+      timeout: timeout
+    });
 
     this._char = null;
 
@@ -173,8 +175,8 @@ class Api extends ExtendableFunction {
   }
 
   /**
-   * An instance of PlanetaryInteraction using a shared ApiProvider configured based on
-   * the Api's initialization options.
+   * An instance of PlanetaryInteraction using a shared ApiProvider configured
+   * based on the Api's initialization options.
    *
    * @returns {PlanetaryInteraction}
    */
@@ -360,8 +362,8 @@ class Api extends ExtendableFunction {
    * each entry has its category reported. This makes an HTTP POST request to
    * [`/universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
    *
-   * The request is returned as an asynchronous Promise that resolves to an object
-   * parsed from the response JSON model. An example value looks like:
+   * The request is returned as an asynchronous Promise that resolves to an
+   * object parsed from the response JSON model. An example value looks like:
    *
    * ```
    * [

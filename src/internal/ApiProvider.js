@@ -242,11 +242,7 @@ class ApiProvider {
    * @constructor
    */
   constructor({
-      service: service,
-      source: source,
-      agent: agent,
-      language: language,
-      timeout: timeout
+      service: service, source: source, agent: agent, language: language, timeout: timeout
   }) {
     // Save URL, agent, and timeout for later as they configure the ApiClient
     this._eveURL = service;

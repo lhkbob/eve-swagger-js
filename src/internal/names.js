@@ -5,7 +5,8 @@
  * HTTP POST request to
  * [`/universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
  *
- * The request is returned as an asynchronous Promise that resolves to an object
+ * The request is returned as an asynchronous Promise that resolves to an
+ * object
  * parsed from the response JSON model. An example value looks like:
  *
  * ```

@@ -39,7 +39,8 @@ class Station {
    * @esi_link UniverseApi.getUniverseStationsStationId
    */
   info() {
-    return this._api.universe().newRequest('getUniverseStationsStationId', [this._id]);
+    return this._api.universe()
+    .newRequest('getUniverseStationsStationId', [this._id]);
   }
 }
 

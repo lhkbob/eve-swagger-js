@@ -77,5 +77,4 @@ class Sovereignty {
 }
 
 
-
 module.exports = Sovereignty;

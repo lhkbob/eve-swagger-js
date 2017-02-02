@@ -41,7 +41,8 @@ class Factions extends ExtendableFunction {
 
   /**
    * Get all factions and their information from the ESI endpoints. This makes
-   * an HTTP GET request to [`universe/factions/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_factions)
+   * an HTTP GET request to
+   * [`universe/factions/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_factions)
    * The request is returned as an asynchronous Promise that resolves to an
    * array parsed from the response JSON model. An example value looks like:
    *

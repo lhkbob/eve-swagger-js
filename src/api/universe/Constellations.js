@@ -3,8 +3,8 @@ const Search = require('../Search');
 const _names = require('../../internal/names');
 
 /**
- * An api adapter that provides functions for accessing constellation information
- * via the
+ * An api adapter that provides functions for accessing constellation
+ * information via the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
  * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.
  * You should not usually instantiate this directly as its constructor requires

@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 
 const ExtendableFunction = require('../internal/ExtendableFunction');
-const [PageHandler, ] = require('../internal/PageHandler');
+const [PageHandler,] = require('../internal/PageHandler');
 const Killmail = require('./Killmail');
 
 /**
@@ -133,7 +133,8 @@ class War {
   }
 
   /**
-   * Get killmail ids and hashes from a war from the ESI endpoint. This makes an
+   * Get killmail ids and hashes from a war from the ESI endpoint. This makes
+   * an
    * HTTP GET request to
    * [`/wars/{id}/killmails/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails).
    * The request is returned as an asynchronous Promise that resolves to an
