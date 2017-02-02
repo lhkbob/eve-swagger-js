@@ -1,4 +1,5 @@
 const ApiProvider = require('./internal/ApiProvider');
+const ExtendableFunction = require('./internal/ExtendableFunction');
 
 const Characters = require('./api/character/Characters');
 
@@ -26,11 +27,12 @@ const Wars = require('./api/Wars');
 
 /**
  * Api creates a shared, internal ApiProvider and then lazily instantiates all
- * specific modules as needed.
+ * specific modules as needed. The Api instance is also a function that can
+ * be invoked to create a new Api instance with a different configuration.
  *
  * @see https://esi.tech.ccp.is/latest
  */
-class Api {
+class Api extends ExtendableFunction {
   /**
    * Create a new Api with the given configuration provided in a single
    * object map. If no argument is provided, the defaults are used.
@@ -51,6 +53,7 @@ class Api {
       language: language = 'en-us',
       timeout: timeout = 6000
   } = {}) {
+    super(config => new Api(config));
     this._api = new ApiProvider({service: service, source: source, agent: agent, language: language, timeout: timeout});
 
     this._char = null;
