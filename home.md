@@ -22,7 +22,7 @@ versions could add new end points or change the data in a response, etc.
 in which case this will be updated ASAP.
 
 - ESI version: 0.3.10.dev12
-- Module version: 0.2.0
+- Module version: 0.2.1
 - Source: https://github.com/lhkbob/eve-swagger-js/
 
 
@@ -33,11 +33,11 @@ in which case this will be updated ASAP.
 Currently, this library has not been published to the `npm` repository.
 However, it can still be depended on in NodeJS projects by including a
 dependency in `package.json` using a GitHub URL. A specific release can
-be requested by appending, e.g. `#0.2.0`, to the end of the URL:
+be requested by appending, e.g. `#0.2.1`, to the end of the URL:
 
 ```json
 "dependencies": {
-   "eve_swagger_interface": "git://github.com/lhkbob/eve-swagger-js.git#0.2.0",
+   "eve_swagger_interface": "git://github.com/lhkbob/eve-swagger-js.git#0.2.1",
 }
 ```
 
