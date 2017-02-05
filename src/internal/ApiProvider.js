@@ -6,11 +6,11 @@ const VError = require('verror');
 const ESI = require('../../generated/src');
 
 
-const CLIENT_ERROR = 'ClientError';
-const FORBIDDEN_ERROR = 'ForbiddenError';
-const NOT_FOUND_ERROR = 'NotFoundError';
-const INTERNAL_SERVER_ERROR = 'InternalServerError';
-const GENERIC_ERROR = 'ESIError';
+const CLIENT_ERROR = 'esi:ClientError';
+const FORBIDDEN_ERROR = 'esi:ForbiddenError';
+const NOT_FOUND_ERROR = 'esi:NotFoundError';
+const INTERNAL_SERVER_ERROR = 'esi:InternalServerError';
+const GENERIC_ERROR = 'esi:Error';
 
 /**
  * Get a cached ApiClient instance configured via `provider` and use the
@@ -128,7 +128,7 @@ function getCachedRequest(api, functionName, args, opts, resolve, reject) {
             type = NOT_FOUND_ERROR;
           } else if (error.status == 403 || error.status == 401) {
             type = FORBIDDEN_ERROR;
-          } else if (error.status == 500) {
+          } else if (error.status >= 500) {
             type = INTERNAL_SERVER_ERROR;
           }
 
@@ -476,7 +476,7 @@ class ApiProvider {
    * @esi_link KillmailsApi
    */
   killmails(accessToken = '') {
-    return new PromiseApi('AssetsApi', this, accessToken);
+    return new PromiseApi('KillmailsApi', this, accessToken);
   }
 
   /**
