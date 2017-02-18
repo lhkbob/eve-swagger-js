@@ -1,7 +1,7 @@
 const ExtendableFunction = require('../internal/ExtendableFunction');
 const Search = require('./Search');
 
-const _names = require('../internal/Names');
+const _names = require('../internal/names');
 
 /**
  * An api adapter that provides functions for accessing various details for an
