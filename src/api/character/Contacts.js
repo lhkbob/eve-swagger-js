@@ -46,7 +46,7 @@ class Contact {
     };
     return this._contacts._api.contacts(this._contacts._token)
     .newRequest('putCharactersCharacterIdContacts',
-        [this._contacts._id, standing, [this._id]], opts);
+        [this._contacts._id, [this._id], standing], opts);
   }
 
   /**
@@ -190,7 +190,7 @@ class Contacts extends ExtendableFunction {
 
     return this._api.contacts(this._token)
     .newRequest('postCharactersCharacterIdContacts',
-        [this._id, standing, contacts], opts);
+        [this._id, contacts, standing], opts);
   };
 
   /**
