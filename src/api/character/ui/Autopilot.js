@@ -22,7 +22,7 @@ class Autopilot {
   _waypoint(dest, clearWaypoints, prependWaypoint) {
     return this._api.userInterface(this._token)
     .newRequest('postUiAutopilotWaypoint',
-        [dest, clearWaypoints, prependWaypoint]);
+        [prependWaypoint, clearWaypoints, dest]);
   }
 
   /**
