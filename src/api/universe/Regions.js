@@ -95,7 +95,7 @@ class Region {
       return this._all.getAll();
     } else {
       return this._api.market()
-      .newRequest('getMarketsRegionIdOrders', [this._id, 'all'],
+      .newRequest('getMarketsRegionIdOrders', ['all', this._id],
           { page: page });
     }
   }
@@ -111,7 +111,7 @@ class Region {
    */
   buyOrdersFor(typeId) {
     return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', [this._id, 'buy'],
+    .newRequest('getMarketsRegionIdOrders', ['buy', this._id],
         { typeId: typeId });
   }
 
@@ -126,7 +126,7 @@ class Region {
    */
   sellOrdersFor(typeId) {
     return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', [this._id, 'sell'],
+    .newRequest('getMarketsRegionIdOrders', ['sell', this._id],
         { typeId: typeId });
   }
 
@@ -164,7 +164,7 @@ class Region {
    */
   ordersFor(typeId) {
     return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', [this._id, 'all'],
+    .newRequest('getMarketsRegionIdOrders', ['all', this._id],
         { typeId: typeId });
   }
 }
