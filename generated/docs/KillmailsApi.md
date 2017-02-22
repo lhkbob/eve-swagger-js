@@ -30,9 +30,12 @@ var apiInstance = new EveSwaggerInterface.KillmailsApi();
 var characterId = 56; // Integer | An EVE character ID
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'maxCount': 50, // Integer | How many killmails to return at maximum
   'maxKillId': 56, // Integer | Only return killmails with ID smaller than this. 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -50,9 +53,12 @@ apiInstance.getCharactersCharacterIdKillmailsRecent(characterId, opts, callback)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| An EVE character ID | 
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
  **maxCount** | **Integer**| How many killmails to return at maximum | [optional] [default to 50]
  **maxKillId** | **Integer**| Only return killmails with ID smaller than this.  | [optional] 
- **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -69,7 +75,7 @@ Name | Type | Description  | Notes
 
 <a name="getKillmailsKillmailIdKillmailHash"></a>
 # **getKillmailsKillmailIdKillmailHash**
-> GetKillmailsKillmailIdKillmailHashOk getKillmailsKillmailIdKillmailHash(killmailId, killmailHash, opts)
+> GetKillmailsKillmailIdKillmailHashOk getKillmailsKillmailIdKillmailHash(killmailHash, killmailId, opts)
 
 Get a single killmail
 
@@ -81,12 +87,14 @@ var EveSwaggerInterface = require('eve_swagger_interface');
 
 var apiInstance = new EveSwaggerInterface.KillmailsApi();
 
-var killmailId = 56; // Integer | The killmail ID to be queried
-
 var killmailHash = "killmailHash_example"; // String | The killmail hash for verification
 
+var killmailId = 56; // Integer | The killmail ID to be queried
+
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -96,16 +104,18 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getKillmailsKillmailIdKillmailHash(killmailId, killmailHash, opts, callback);
+apiInstance.getKillmailsKillmailIdKillmailHash(killmailHash, killmailId, opts, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **killmailId** | **Integer**| The killmail ID to be queried | 
  **killmailHash** | **String**| The killmail hash for verification | 
+ **killmailId** | **Integer**| The killmail ID to be queried | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
