@@ -2,7 +2,7 @@ const ExtendableFunction = require('../internal/ExtendableFunction');
 
 function defaultSearch(api, categories, strict, text) {
   return api.search()
-  .newRequest('getSearch', [text, categories], { strict: strict })
+  .newRequest('getSearch', [categories, text], { strict: strict })
   .then(result => {
     if (categories.length == 1) {
       // Return array for that category
@@ -16,7 +16,7 @@ function defaultSearch(api, categories, strict, text) {
 
 function characterSearch(api, categories, strict, character, token, text) {
   return api.search(token)
-  .newRequest('getCharacterCharacterIdSearch', [character, text, categories],
+  .newRequest('getCharacterCharacterIdSearch', [categories, character, text],
       { strict: strict })
   .then(result => {
     if (categories.length == 1) {

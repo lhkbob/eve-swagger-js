@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 <a name="getCharactersCharacterIdSearch"></a>
 # **getCharactersCharacterIdSearch**
-> GetCharactersCharacterIdSearchOk getCharactersCharacterIdSearch(characterId, search, categories, opts)
+> GetCharactersCharacterIdSearchOk getCharactersCharacterIdSearch(categories, characterId, search, opts)
 
 Search on a string
 
@@ -27,16 +27,19 @@ evesso.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new EveSwaggerInterface.SearchApi();
 
+var categories = ["categories_example"]; // [String] | Type of entities to search for
+
 var characterId = 56; // Integer | An EVE character ID
 
 var search = "search_example"; // String | The string to search on
 
-var categories = ["categories_example"]; // [String] | Type of entities to search for
-
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'language': "en-us", // String | Search locale
   'strict': false, // Boolean | Whether the search should be a strict match
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -46,19 +49,22 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getCharactersCharacterIdSearch(characterId, search, categories, opts, callback);
+apiInstance.getCharactersCharacterIdSearch(categories, characterId, search, opts, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **categories** | [**[String]**](String.md)| Type of entities to search for | 
  **characterId** | **Integer**| An EVE character ID | 
  **search** | **String**| The string to search on | 
- **categories** | [**[String]**](String.md)| Type of entities to search for | 
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
  **language** | **String**| Search locale | [optional] [default to en-us]
  **strict** | **Boolean**| Whether the search should be a strict match | [optional] [default to false]
- **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -75,7 +81,7 @@ Name | Type | Description  | Notes
 
 <a name="getSearch"></a>
 # **getSearch**
-> GetSearchOk getSearch(search, categories, opts)
+> GetSearchOk getSearch(categories, search, opts)
 
 Search on a string
 
@@ -87,14 +93,16 @@ var EveSwaggerInterface = require('eve_swagger_interface');
 
 var apiInstance = new EveSwaggerInterface.SearchApi();
 
-var search = "search_example"; // String | The string to search on
-
 var categories = ["categories_example"]; // [String] | Type of entities to search for
 
+var search = "search_example"; // String | The string to search on
+
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'language': "en-us", // String | Search locale
   'strict': false, // Boolean | Whether the search should be a strict match
-  'datasource': "tranquility" // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -104,18 +112,20 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getSearch(search, categories, opts, callback);
+apiInstance.getSearch(categories, search, opts, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **search** | **String**| The string to search on | 
  **categories** | [**[String]**](String.md)| Type of entities to search for | 
+ **search** | **String**| The string to search on | 
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
  **language** | **String**| Search locale | [optional] [default to en-us]
  **strict** | **Boolean**| Whether the search should be a strict match | [optional] [default to false]
- **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
