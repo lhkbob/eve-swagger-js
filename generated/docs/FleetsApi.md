@@ -43,7 +43,10 @@ var fleetId = 789; // Integer | ID for a fleet
 var memberId = 56; // Integer | The character ID of a member in this fleet
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -63,6 +66,9 @@ Name | Type | Description  | Notes
  **fleetId** | **Integer**| ID for a fleet | 
  **memberId** | **Integer**| The character ID of a member in this fleet | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -101,7 +107,10 @@ var fleetId = 789; // Integer | ID for a fleet
 var squadId = 789; // Integer | The squad to delete
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -121,6 +130,9 @@ Name | Type | Description  | Notes
  **fleetId** | **Integer**| ID for a fleet | 
  **squadId** | **Integer**| The squad to delete | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -159,7 +171,10 @@ var fleetId = 789; // Integer | ID for a fleet
 var wingId = 789; // Integer | The wing to delete
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -179,6 +194,9 @@ Name | Type | Description  | Notes
  **fleetId** | **Integer**| ID for a fleet | 
  **wingId** | **Integer**| The wing to delete | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -215,7 +233,10 @@ var apiInstance = new EveSwaggerInterface.FleetsApi();
 var fleetId = 789; // Integer | ID for a fleet
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -234,6 +255,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetId** | **Integer**| ID for a fleet | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -270,8 +294,11 @@ var apiInstance = new EveSwaggerInterface.FleetsApi();
 var fleetId = 789; // Integer | ID for a fleet
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'language': "en-us", // String | Language to use in the response
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -289,8 +316,11 @@ apiInstance.getFleetsFleetIdMembers(fleetId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetId** | **Integer**| ID for a fleet | 
- **language** | **String**| Language to use in the response | [optional] [default to en-us]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **language** | **String**| Language to use in the response | [optional] [default to en-us]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -327,8 +357,11 @@ var apiInstance = new EveSwaggerInterface.FleetsApi();
 var fleetId = 789; // Integer | ID for a fleet
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'language': "en-us", // String | Language to use in the response
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -346,8 +379,11 @@ apiInstance.getFleetsFleetIdWings(fleetId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetId** | **Integer**| ID for a fleet | 
- **language** | **String**| Language to use in the response | [optional] [default to en-us]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **language** | **String**| Language to use in the response | [optional] [default to en-us]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -386,7 +422,10 @@ var fleetId = 789; // Integer | ID for a fleet
 var invitation = new EveSwaggerInterface.PostFleetsFleetIdMembersInvitation(); // PostFleetsFleetIdMembersInvitation | Details of the invitation
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -406,6 +445,9 @@ Name | Type | Description  | Notes
  **fleetId** | **Integer**| ID for a fleet | 
  **invitation** | [**PostFleetsFleetIdMembersInvitation**](PostFleetsFleetIdMembersInvitation.md)| Details of the invitation | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -442,7 +484,10 @@ var apiInstance = new EveSwaggerInterface.FleetsApi();
 var fleetId = 789; // Integer | ID for a fleet
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -461,6 +506,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetId** | **Integer**| ID for a fleet | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -499,7 +547,10 @@ var fleetId = 789; // Integer | ID for a fleet
 var wingId = 789; // Integer | The wing_id to create squad in
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -519,6 +570,9 @@ Name | Type | Description  | Notes
  **fleetId** | **Integer**| ID for a fleet | 
  **wingId** | **Integer**| The wing_id to create squad in | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -557,7 +611,10 @@ var fleetId = 789; // Integer | ID for a fleet
 var newSettings = new EveSwaggerInterface.PutFleetsFleetIdNewSettings(); // PutFleetsFleetIdNewSettings | What to update for this fleet
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -577,6 +634,9 @@ Name | Type | Description  | Notes
  **fleetId** | **Integer**| ID for a fleet | 
  **newSettings** | [**PutFleetsFleetIdNewSettings**](PutFleetsFleetIdNewSettings.md)| What to update for this fleet | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -617,7 +677,10 @@ var memberId = 56; // Integer | The character ID of a member in this fleet
 var movement = new EveSwaggerInterface.PutFleetsFleetIdMembersMemberIdMovement(); // PutFleetsFleetIdMembersMemberIdMovement | Details of the invitation
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -638,6 +701,9 @@ Name | Type | Description  | Notes
  **memberId** | **Integer**| The character ID of a member in this fleet | 
  **movement** | [**PutFleetsFleetIdMembersMemberIdMovement**](PutFleetsFleetIdMembersMemberIdMovement.md)| Details of the invitation | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -654,7 +720,7 @@ null (empty response body)
 
 <a name="putFleetsFleetIdSquadsSquadId"></a>
 # **putFleetsFleetIdSquadsSquadId**
-> putFleetsFleetIdSquadsSquadId(fleetId, squadId, naming, opts)
+> putFleetsFleetIdSquadsSquadId(fleetId, naming, squadId, opts)
 
 Rename fleet squad
 
@@ -673,12 +739,15 @@ var apiInstance = new EveSwaggerInterface.FleetsApi();
 
 var fleetId = 789; // Integer | ID for a fleet
 
-var squadId = 789; // Integer | The squad to rename
-
 var naming = new EveSwaggerInterface.PutFleetsFleetIdSquadsSquadIdNaming(); // PutFleetsFleetIdSquadsSquadIdNaming | New name of the squad
 
+var squadId = 789; // Integer | The squad to rename
+
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -688,7 +757,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.putFleetsFleetIdSquadsSquadId(fleetId, squadId, naming, opts, callback);
+apiInstance.putFleetsFleetIdSquadsSquadId(fleetId, naming, squadId, opts, callback);
 ```
 
 ### Parameters
@@ -696,9 +765,12 @@ apiInstance.putFleetsFleetIdSquadsSquadId(fleetId, squadId, naming, opts, callba
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetId** | **Integer**| ID for a fleet | 
- **squadId** | **Integer**| The squad to rename | 
  **naming** | [**PutFleetsFleetIdSquadsSquadIdNaming**](PutFleetsFleetIdSquadsSquadIdNaming.md)| New name of the squad | 
+ **squadId** | **Integer**| The squad to rename | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -715,7 +787,7 @@ null (empty response body)
 
 <a name="putFleetsFleetIdWingsWingId"></a>
 # **putFleetsFleetIdWingsWingId**
-> putFleetsFleetIdWingsWingId(fleetId, wingId, naming, opts)
+> putFleetsFleetIdWingsWingId(fleetId, naming, wingId, opts)
 
 Rename fleet wing
 
@@ -734,12 +806,15 @@ var apiInstance = new EveSwaggerInterface.FleetsApi();
 
 var fleetId = 789; // Integer | ID for a fleet
 
-var wingId = 789; // Integer | The wing to rename
-
 var naming = new EveSwaggerInterface.PutFleetsFleetIdWingsWingIdNaming(); // PutFleetsFleetIdWingsWingIdNaming | New name of the wing
 
+var wingId = 789; // Integer | The wing to rename
+
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -749,7 +824,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.putFleetsFleetIdWingsWingId(fleetId, wingId, naming, opts, callback);
+apiInstance.putFleetsFleetIdWingsWingId(fleetId, naming, wingId, opts, callback);
 ```
 
 ### Parameters
@@ -757,9 +832,12 @@ apiInstance.putFleetsFleetIdWingsWingId(fleetId, wingId, naming, opts, callback)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetId** | **Integer**| ID for a fleet | 
- **wingId** | **Integer**| The wing to rename | 
  **naming** | [**PutFleetsFleetIdWingsWingIdNaming**](PutFleetsFleetIdWingsWingIdNaming.md)| New name of the wing | 
+ **wingId** | **Integer**| The wing to rename | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
