@@ -39,7 +39,10 @@ var characterId = 56; // Integer | An EVE character ID
 var labelId = 56; // Integer | An EVE label id
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -59,6 +62,9 @@ Name | Type | Description  | Notes
  **characterId** | **Integer**| An EVE character ID | 
  **labelId** | **Integer**| An EVE label id | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -97,7 +103,10 @@ var characterId = 56; // Integer | An EVE character ID
 var mailId = 56; // Integer | An EVE mail ID
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -117,6 +126,9 @@ Name | Type | Description  | Notes
  **characterId** | **Integer**| An EVE character ID | 
  **mailId** | **Integer**| An EVE mail ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -153,9 +165,12 @@ var apiInstance = new EveSwaggerInterface.MailApi();
 var characterId = 56; // Integer | An EVE character ID
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'labels': [56], // [Integer] | Fetch only mails that match one or more of the given labels
   'lastMailId': 56, // Integer | List only mail with an ID lower than the given ID, if present
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -173,9 +188,12 @@ apiInstance.getCharactersCharacterIdMail(characterId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| An EVE character ID | 
+ **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
  **labels** | [**[Integer]**](Integer.md)| Fetch only mails that match one or more of the given labels | [optional] 
  **lastMailId** | **Integer**| List only mail with an ID lower than the given ID, if present | [optional] 
- **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -212,7 +230,10 @@ var apiInstance = new EveSwaggerInterface.MailApi();
 var characterId = 56; // Integer | An EVE character ID
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -231,6 +252,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| An EVE character ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -267,7 +291,10 @@ var apiInstance = new EveSwaggerInterface.MailApi();
 var characterId = 56; // Integer | An EVE character ID
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -286,6 +313,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| An EVE character ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -324,7 +354,10 @@ var characterId = 56; // Integer | An EVE character ID
 var mailId = 56; // Integer | An EVE mail ID
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -344,6 +377,9 @@ Name | Type | Description  | Notes
  **characterId** | **Integer**| An EVE character ID | 
  **mailId** | **Integer**| An EVE mail ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -382,7 +418,10 @@ var characterId = 56; // Integer | The sender's character ID
 var mail = new EveSwaggerInterface.PostCharactersCharacterIdMailMail(); // PostCharactersCharacterIdMailMail | The mail to send
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -402,6 +441,9 @@ Name | Type | Description  | Notes
  **characterId** | **Integer**| The sender&#39;s character ID | 
  **mail** | [**PostCharactersCharacterIdMailMail**](PostCharactersCharacterIdMailMail.md)| The mail to send | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -438,8 +480,11 @@ var apiInstance = new EveSwaggerInterface.MailApi();
 var characterId = 56; // Integer | An EVE character ID
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'label': new EveSwaggerInterface.PostCharactersCharacterIdMailLabelsLabel(), // PostCharactersCharacterIdMailLabelsLabel | Label to create
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -457,8 +502,11 @@ apiInstance.postCharactersCharacterIdMailLabels(characterId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| An EVE character ID | 
- **label** | [**PostCharactersCharacterIdMailLabelsLabel**](PostCharactersCharacterIdMailLabelsLabel.md)| Label to create | [optional] 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **label** | [**PostCharactersCharacterIdMailLabelsLabel**](PostCharactersCharacterIdMailLabelsLabel.md)| Label to create | [optional] 
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -475,7 +523,7 @@ Name | Type | Description  | Notes
 
 <a name="putCharactersCharacterIdMailMailId"></a>
 # **putCharactersCharacterIdMailMailId**
-> putCharactersCharacterIdMailMailId(characterId, mailId, contents, opts)
+> putCharactersCharacterIdMailMailId(characterId, contents, mailId, opts)
 
 Update metadata about a mail
 
@@ -494,12 +542,15 @@ var apiInstance = new EveSwaggerInterface.MailApi();
 
 var characterId = 56; // Integer | An EVE character ID
 
-var mailId = 56; // Integer | An EVE mail ID
-
 var contents = new EveSwaggerInterface.PutCharactersCharacterIdMailMailIdContents(); // PutCharactersCharacterIdMailMailIdContents | Data used to update the mail
 
+var mailId = 56; // Integer | An EVE mail ID
+
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -509,7 +560,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.putCharactersCharacterIdMailMailId(characterId, mailId, contents, opts, callback);
+apiInstance.putCharactersCharacterIdMailMailId(characterId, contents, mailId, opts, callback);
 ```
 
 ### Parameters
@@ -517,9 +568,12 @@ apiInstance.putCharactersCharacterIdMailMailId(characterId, mailId, contents, op
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| An EVE character ID | 
- **mailId** | **Integer**| An EVE mail ID | 
  **contents** | [**PutCharactersCharacterIdMailMailIdContents**](PutCharactersCharacterIdMailMailIdContents.md)| Data used to update the mail | 
+ **mailId** | **Integer**| An EVE mail ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
