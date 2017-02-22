@@ -111,6 +111,46 @@ class Corporation {
     return this._api.corporation()
     .newRequest('getCorporationsCorporationIdIcons', [this._id]);
   }
+
+  /**
+   * Get all offers from a corporation's loyalty store, from the ESI endpoint.
+   * This makes an HTTP GET request to
+   * [`loyalty/stores/{id}/offers/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Loyalty/get_loyalty_stores_corporation_id_offers).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   {
+   *     "isk_cost": 0,
+   *     "lp_cost": 100,
+   *     "offer_id": 1,
+   *     "quantity": 1,
+   *     "required_items": [],
+   *     "type_id": 123
+   *  },
+   *  {
+   *     "isk_cost": 1000,
+   *     "lp_cost": 100,
+   *     "offer_id": 2,
+   *     "quantity": 10,
+   *     "required_items": [
+   *       {
+   *         "quantity": 10,
+   *         "type_id": 1234
+   *       }
+   *     ],
+   *     "type_id": 1235
+   *   }
+   * ]
+   * ```
+   *
+   * @returns {Promise}
+   * @esi_link LoyaltyApi.getLoyaltyStoresCorporationIdOffers
+   */
+  loyaltyOffers() {
+    return this._api.loyalty().newRequest('getLoyaltyStoresCorporationIdOffers', [this._id]);
+  }
 }
 
 /**

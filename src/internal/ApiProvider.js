@@ -497,6 +497,18 @@ class ApiProvider {
    * @param accessToken {String} Optional character access token for all
    *     requests.
    * @returns {PromiseApi}
+   * @esi_link LoyaltyApi
+   */
+  loyalty(accessToken = '') {
+    return new PromiseApi('LoyaltyApi', this, accessToken);
+  }
+
+  /**
+   * Create a new PromiseApi.
+   *
+   * @param accessToken {String} Optional character access token for all
+   *     requests.
+   * @returns {PromiseApi}
    * @esi_link MailApi
    */
   mail(accessToken = '') {
