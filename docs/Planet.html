@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Freeports - Documentation</title>
+    <title>Planet - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Freeports</h1>
+    <h1 class="page-title">Planet</h1>
     
 
     
@@ -40,16 +40,14 @@
 <header>
     
         <h2>
-        Freeports
+        Planet
         </h2>
         
-            <div class="class-description"><p>An api adapter over the end points handling public structures via functions
-in the <a href="https://esi.tech.ccp.is/latest/#/Universe">universe</a> ESI endpoints.
-You should not usually instantiate this directly as its constructor requires
-an internal api instance.</p>
-<p>This is a function class so instances of <code>Freeports</code> are functions and can be
-invoked directly, besides accessing its members. Its default function action
-is equivalent to <a href="Freeports.html#all"><code>all</code></a>.</p></div>
+            <div class="class-description"><p>An api adapter that provides functions for accessing various details for a
+planet specified by id, via functions in the
+<a href="https://esi.tech.ccp.is/latest/#/Universe">universe</a> ESI endpoints. You
+should not usually instantiate this directly as its constructor requires an
+internal api instance.</p></div>
         
     
 </header>
@@ -63,7 +61,7 @@ is equivalent to <a href="Freeports.html#all"><code>all</code></a>.</p></div>
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="Freeports"><span class="type-signature"></span>new Freeports<span class="signature">(api)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Planet"><span class="type-signature"></span>new Planet<span class="signature">(api, planetId)</span><span class="type-signature"></span></h4>
 
     
 
@@ -75,7 +73,7 @@ is equivalent to <a href="Freeports.html#all"><code>all</code></a>.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_Freeports.js.html">api/universe/Freeports.js</a>, <a href="api_universe_Freeports.js.html#line13">line 13</a>
+        <a href="api_universe_Planets.js.html">api/universe/Planets.js</a>, <a href="api_universe_Planets.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -115,7 +113,8 @@ is equivalent to <a href="Freeports.html#all"><code>all</code></a>.</p></div>
 
 
 <div class="description">
-    <p>Create a new Freeports function using the given <code>api</code>.</p>
+    <p>Create a new Planet for the given <code>api</code> provider and specific
+<code>planetId</code>.</p>
 </div>
 
 
@@ -169,7 +168,31 @@ is equivalent to <a href="Freeports.html#all"><code>all</code></a>.</p></div>
 
             
 
-            <td class="description last"><p>The api provider</p></td>
+            <td class="description last"><p>The api provider used to generate web requests</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>planetId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The planet id that is used for all
+    requests</p></td>
         </tr>
 
     
@@ -214,7 +237,7 @@ is equivalent to <a href="Freeports.html#all"><code>all</code></a>.</p></div>
 
     
 
-    <h4 class="name" id="all"><span class="type-signature"></span>all<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id="info"><span class="type-signature"></span>info<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -226,7 +249,7 @@ is equivalent to <a href="Freeports.html#all"><code>all</code></a>.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_Freeports.js.html">api/universe/Freeports.js</a>, <a href="api_universe_Freeports.js.html#line42">line 42</a>
+        <a href="api_universe_Planets.js.html">api/universe/Planets.js</a>, <a href="api_universe_Planets.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -266,15 +289,22 @@ is equivalent to <a href="Freeports.html#all"><code>all</code></a>.</p></div>
 
 
 <div class="description">
-    <p>Get all public structure ids (or freeports) from the ESI endpoint. This
-makes an HTTP GET request to
-<a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures"><code>universe/structures/</code></a>
+    <p>Get information on the planet from the ESI endpoint. This makes an
+HTTP GET request to
+<a href="https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Universe/get_universe_planets_planet_id"><code>universe/planets/{id}/</code></a>.
 The request is returned as an asynchronous Promise that resolves to an
-array parsed from the response JSON model. An example value looks like:</p>
-<pre class="prettyprint source"><code>[
-  1000000017013,
-  1000000025062
-]</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniverseStructures">UniverseApi.getUniverseStructures</a>.</p>
+object parsed from the response JSON model. An example value looks like:</p>
+<pre class="prettyprint source"><code>{
+  &quot;name&quot;: &quot;Akpivem III&quot;,
+  &quot;planet_id&quot;: 40000046,
+  &quot;position&quot;: {
+    &quot;x&quot;: -189226344497,
+    &quot;y&quot;: 9901605317,
+    &quot;z&quot;: -254852632979
+  },
+  &quot;system_id&quot;: 30000003,
+  &quot;type_id&quot;: 13
+}</code></pre><p>This promisifies a call to the generated <a href="https://github.com/lhkbob/eve-swagger-js/blob/master/generated/docs/UniverseApi.md#getUniversePlanetsPlanetId">UniverseApi.getUniversePlanetsPlanetId</a>.</p>
 </div>
 
 
@@ -302,10 +332,6 @@ array parsed from the response JSON model. An example value looks like:</p>
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    <p>A Promise that resolves to the response of the request</p>
-</div>
-
 
 
 <dl class="param-type">
