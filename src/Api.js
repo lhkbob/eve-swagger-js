@@ -17,6 +17,7 @@ const PlanetaryInteraction = require('./api/universe/PlanetaryInteraction');
 const Races = require('./api/universe/Races');
 const Regions = require('./api/universe/Regions');
 const SolarSystems = require('./api/universe/SolarSystems');
+const Stargates = require('./api/universe/Stargates');
 const Stations = require('./api/universe/Stations');
 const Types = require('./api/universe/Types');
 const Wormholes = require('./api/universe/Wormholes');
@@ -69,6 +70,7 @@ class Api extends ExtendableFunction {
     this._const = null;
     this._faction = null;
     this._freeport = null;
+    this._gate = null;
     this._indy = null;
     this._insurance = null;
     this._moon = null;
@@ -270,6 +272,19 @@ class Api extends ExtendableFunction {
       this._system = new SolarSystems(this._api);
     }
     return this._system;
+  }
+
+  /**
+   * An instance of Stargates using a shared ApiProvider configured based on
+   * the Api's initialization options.
+   *
+   * @returns {Stargates}
+   */
+  get stargates() {
+    if (!this._gate) {
+      this._gate = new Stargates(this._api);
+    }
+    return this._gate;
   }
 
   /**
