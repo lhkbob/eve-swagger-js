@@ -162,6 +162,28 @@ class Corporations extends ExtendableFunction {
   }
 
   /**
+   * Get a list of NPC corporation ids from the ESI endpoint. This makes an
+   * HTTP GET request to
+   * [`corporations/npccorps/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Corporation/get_corporations_npccorps).
+   * The request is returned as an asycnrhonous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   1000001,
+   *   1000002,
+   *   1000003
+   * ]
+   * ```
+   *
+   * @return {Promise} A Promise that resolves to the response of the request
+   * @esi_link CorporationApi.getCorporationsNpccorps
+   */
+  npc() {
+    return this._api.corporation().newRequest('getCorporationsNpccorps', []);
+  }
+
+  /**
    * Get the names for a list of corporation ids from the ESI endpoint. This
    * makes an HTTP GET request to
    * [`corporations/names/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names).
