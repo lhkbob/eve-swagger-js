@@ -291,7 +291,7 @@ class Regions extends ExtendableFunction {
    */
   names(ids = []) {
     if (!ids || ids.length == 0) {
-      return this.all().then(allIds => this.names(ids));
+      return this.all().then(allIds => this.names(allIds));
     } else {
       return _names(this._api, 'region', ids);
     }
