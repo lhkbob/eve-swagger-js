@@ -11,6 +11,8 @@ const Factions = require('./api/universe/Factions');
 const Freeports = require('./api/universe/Freeports');
 const Industry = require('./api/universe/Industry');
 const Insurance = require('./api/universe/Insurance');
+const Moons = require('./api/universe/Moons');
+const Planets = require('./api/universe/Planets');
 const PlanetaryInteraction = require('./api/universe/PlanetaryInteraction');
 const Races = require('./api/universe/Races');
 const Regions = require('./api/universe/Regions');
@@ -69,7 +71,9 @@ class Api extends ExtendableFunction {
     this._freeport = null;
     this._indy = null;
     this._insurance = null;
+    this._moon = null;
     this._pi = null;
+    this._planet = null;
     this._race = null;
     this._region = null;
     this._system = null;
@@ -188,6 +192,32 @@ class Api extends ExtendableFunction {
       this._insurance = new Insurance(this._api);
     }
     return this._insurance;
+  }
+
+  /**
+   * An instance of Moons using a shared ApiProvider configured based
+   * on the Api's initialization options.
+   *
+   * @returns {Moons}
+   */
+  get moons() {
+    if (!this._moon) {
+      this._moon = new Moons(this._api);
+    }
+    return this._moon;
+  }
+
+  /**
+   * An instance of Planets using a shared ApiProvider configured based
+   * on the Api's initialization options.
+   *
+   * @returns {Planets}
+   */
+  get planets() {
+    if (!this._planet) {
+      this._planet = new Planets(this._api);
+    }
+    return this._planet;
   }
 
   /**
