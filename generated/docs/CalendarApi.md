@@ -31,8 +31,11 @@ var apiInstance = new EveSwaggerInterface.CalendarApi();
 var characterId = 56; // Integer | The character to retrieve events from
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'fromEvent': 56, // Integer | The event ID to retrieve events from
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -50,8 +53,11 @@ apiInstance.getCharactersCharacterIdCalendar(characterId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| The character to retrieve events from | 
- **fromEvent** | **Integer**| The event ID to retrieve events from | [optional] 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **fromEvent** | **Integer**| The event ID to retrieve events from | [optional] 
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -90,7 +96,10 @@ var characterId = 56; // Integer | The character id requesting the event
 var eventId = 56; // Integer | The id of the event requested
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -110,6 +119,9 @@ Name | Type | Description  | Notes
  **characterId** | **Integer**| The character id requesting the event | 
  **eventId** | **Integer**| The id of the event requested | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -150,7 +162,10 @@ var eventId = 56; // Integer | The ID of the event requested
 var response = new EveSwaggerInterface.PutCharactersCharacterIdCalendarEventIdResponse(); // PutCharactersCharacterIdCalendarEventIdResponse | The response value to set, overriding current value.
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -171,6 +186,9 @@ Name | Type | Description  | Notes
  **eventId** | **Integer**| The ID of the event requested | 
  **response** | [**PutCharactersCharacterIdCalendarEventIdResponse**](PutCharactersCharacterIdCalendarEventIdResponse.md)| The response value to set, overriding current value. | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
