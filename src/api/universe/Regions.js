@@ -275,8 +275,8 @@ class Regions extends ExtendableFunction {
    * ```
    * [
    *   {
-   *     "id": 1000171,
-   *     "name": "Republic University"
+   *     "id": 10000042,
+   *     "name": "Metropolis"
    *   }
    * ]
    * ```
