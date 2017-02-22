@@ -41,7 +41,7 @@ class Squad {
   rename(name) {
     return this._fleet._api.fleets(this._fleet._token)
     .newRequest('putFleetsFleetIdSquadsSquadId',
-        [this._fleet._id, this._id, { name: name }]);
+        [this._fleet._id, { name: name }, this._id]);
   }
 
   /**
@@ -161,7 +161,7 @@ class Wing {
   rename(name) {
     return this._fleet._api.fleets(this._fleet._token)
     .newRequest('putFleetsFleetIdWingsWingId',
-        [this._fleet._id, this._id, { name: name }]);
+        [this._fleet._id,  { name: name }, this._id]);
   }
 
   /**

@@ -30,7 +30,30 @@ class SolarSystem {
    *
    * ```
    * {
-   *   "solar_system_name": "Jita"
+   *   "constellation_id": 20000001,
+   *   "name": "Akpivem",
+   *   "planets": [
+   *     {
+   *       "moons": [
+   *         40000042
+   *       ],
+   *       "planet_id": 40000041
+   *     },
+   *     {
+   *      "planet_id": 40000043
+   *     }
+   *   ],
+   *   "position": {
+   *     "x": -91174141133075340,
+   *     "y": 43938227486247170,
+   *     "z": -56482824383339900
+   *   },
+   *   "security_class": "B",
+   *   "security_status": 0.8462923765182495,
+   *   "stargates": [
+   *     50000342
+   *   ],
+   *   "system_id": 30000003
    * }
    * ```
    *
@@ -53,7 +76,8 @@ class SolarSystem {
  *
  * This is a function class so instances of `SolarSystems` are functions and can
  * be invoked directly, besides accessing its members. Its default function
- * action is equivalent to {@link SolarSystems#get get}.
+ * action is equivalent to {@link SolarSystems#get get} or {@link SolarSystems#all all}
+ * if no id is provided.
  */
 class SolarSystems extends ExtendableFunction {
   /**
@@ -63,7 +87,7 @@ class SolarSystems extends ExtendableFunction {
    * @constructor
    */
   constructor(api) {
-    super(id => this.get(id));
+    super(id => (id ? this.get(id) : this.all()));
     this._api = api;
 
     this._search = null;
@@ -93,6 +117,27 @@ class SolarSystems extends ExtendableFunction {
   }
 
   /**
+   * Get all solar system ids from the ESI endpoint. This makes an HTTP GET
+   * request to
+   * [`universe/systems/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Universe/get_universe_systems).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   30000001,
+   *   30000002
+   * ]
+   * ```
+   *
+   * @returns {Promise}
+   * @esi_link UniverseApi.getUniverseSystems
+   */
+  all() {
+    return this._api.universe().newRequest('getUniverseSystems', []);
+  }
+
+  /**
    * Get the names for a list of solar system ids from the ESI endpoint. This
    * makes an HTTP POST request to
    * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
@@ -102,8 +147,8 @@ class SolarSystems extends ExtendableFunction {
    * ```
    * [
    *   {
-   *     "id": 1000171,
-   *     "name": "Republic University"
+   *     "id": 30000003,
+   *     "name": "Akpivem"
    *   }
    * ]
    * ```
@@ -111,13 +156,18 @@ class SolarSystems extends ExtendableFunction {
    * Note that this has the category field stripped from the response and will
    * only include matches with the solar system category.
    *
-   * @param {Array.<Number>} ids The solar system ids to look up.
+   * @param {Array.<Number>} ids  Optional; the solar system ids to look up. If
+   *     not provided then the names of all systems will be returned.
    * @return {Promise} A Promise that resolves to the response of
-   *   the request
+   *     the request
    * @esi_link UniverseApi.postUniverseNames
    */
-  names(ids) {
-    return _names(this._api, 'solar_system', ids);
+  names(ids = []) {
+    if (!ids || ids.length == 0) {
+      return this.all().then(allIds => this.names(allIds));
+    } else {
+      return _names(this._api, 'solar_system', ids);
+    }
   }
 }
 

@@ -27,6 +27,32 @@ class Region {
   }
 
   /**
+   * Get the public information about the region from the ESI endpoint.
+   * This makes an HTTP GET request to
+   * [`/universe/regions/{id}/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Universe/get_universe_regions_region_id).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * object parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * {
+   *   "constellations": [
+   *     20000302,
+   *     20000303
+   *   ],
+   *   "description": "It has long been an established fact of civilization...",
+   *   "name": "Metropolis",
+   *   "region_id": 10000042
+   * }
+   * ```
+   *
+   * @returns {Promise}
+   */
+  info() {
+    return this._api.universe()
+    .newRequest('getUniverseRegionsRegionId', [this._id]);
+  }
+
+  /**
    * Get historical market statistics for the region and provided item type
    * from the ESI endpoint. This makes an HTTP GET request to
    * [`/markets/{regionId}/history/`](https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_history).
@@ -95,7 +121,7 @@ class Region {
       return this._all.getAll();
     } else {
       return this._api.market()
-      .newRequest('getMarketsRegionIdOrders', [this._id, 'all'],
+      .newRequest('getMarketsRegionIdOrders', ['all', this._id],
           { page: page });
     }
   }
@@ -111,7 +137,7 @@ class Region {
    */
   buyOrdersFor(typeId) {
     return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', [this._id, 'buy'],
+    .newRequest('getMarketsRegionIdOrders', ['buy', this._id],
         { typeId: typeId });
   }
 
@@ -126,7 +152,7 @@ class Region {
    */
   sellOrdersFor(typeId) {
     return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', [this._id, 'sell'],
+    .newRequest('getMarketsRegionIdOrders', ['sell', this._id],
         { typeId: typeId });
   }
 
@@ -164,7 +190,7 @@ class Region {
    */
   ordersFor(typeId) {
     return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', [this._id, 'all'],
+    .newRequest('getMarketsRegionIdOrders', ['all', this._id],
         { typeId: typeId });
   }
 }
@@ -178,7 +204,8 @@ class Region {
  *
  * This is a function class so instances of `Regions` are functions and can be
  * invoked directly, besides accessing its members. Its default function action
- * is equivalent to {@link Regions#get get}.
+ * is equivalent to {@link Regions#get get} or to {@link Regions#all all} if
+ * no id is provided.
  */
 class Regions extends ExtendableFunction {
   /**
@@ -188,7 +215,7 @@ class Regions extends ExtendableFunction {
    * @constructor
    */
   constructor(api) {
-    super(id => this.get(id));
+    super(id => (id ? this.get(id) : this.all()));
     this._api = api;
 
     this._search = null;
@@ -218,6 +245,27 @@ class Regions extends ExtendableFunction {
   }
 
   /**
+   * Get all region ids from the ESI endpoint. This makes an HTTP GET
+   * request to
+   * [`universe/regions/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Universe/get_universe_regions).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   11000001,
+   *   11000002
+   * ]
+   * ```
+   *
+   * @returns {Promise}
+   * @esi_link UniverseApi.getUniverseRegions
+   */
+  all() {
+    return this._api.universe().newRequest('getUniverseRegions', []);
+  }
+
+  /**
    * Get the names for a list of region ids from the ESI endpoint. This
    * makes an HTTP POST request to
    * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
@@ -227,8 +275,8 @@ class Regions extends ExtendableFunction {
    * ```
    * [
    *   {
-   *     "id": 1000171,
-   *     "name": "Republic University"
+   *     "id": 10000042,
+   *     "name": "Metropolis"
    *   }
    * ]
    * ```
@@ -236,12 +284,17 @@ class Regions extends ExtendableFunction {
    * Note that this has the category field stripped from the response and will
    * only include matches with the region category.
    *
-   * @param {Array.<Number>} ids The region ids to look up.
+   * @param {Array.<Number>} ids Optional; the region ids to look up. If
+   *     not provided then the names of all regions will be returned.
    * @return {Promise} A Promise that resolves to the response of the request
    * @esi_link UniverseApi.postUniverseNames
    */
-  names(ids) {
-    return _names(this._api, 'region', ids);
+  names(ids = []) {
+    if (!ids || ids.length == 0) {
+      return this.all().then(allIds => this.names(allIds));
+    } else {
+      return _names(this._api, 'region', ids);
+    }
   }
 }
 

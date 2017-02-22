@@ -11,10 +11,13 @@ const Factions = require('./api/universe/Factions');
 const Freeports = require('./api/universe/Freeports');
 const Industry = require('./api/universe/Industry');
 const Insurance = require('./api/universe/Insurance');
+const Moons = require('./api/universe/Moons');
+const Planets = require('./api/universe/Planets');
 const PlanetaryInteraction = require('./api/universe/PlanetaryInteraction');
 const Races = require('./api/universe/Races');
 const Regions = require('./api/universe/Regions');
 const SolarSystems = require('./api/universe/SolarSystems');
+const Stargates = require('./api/universe/Stargates');
 const Stations = require('./api/universe/Stations');
 const Types = require('./api/universe/Types');
 const Wormholes = require('./api/universe/Wormholes');
@@ -67,9 +70,12 @@ class Api extends ExtendableFunction {
     this._const = null;
     this._faction = null;
     this._freeport = null;
+    this._gate = null;
     this._indy = null;
     this._insurance = null;
+    this._moon = null;
     this._pi = null;
+    this._planet = null;
     this._race = null;
     this._region = null;
     this._system = null;
@@ -191,6 +197,32 @@ class Api extends ExtendableFunction {
   }
 
   /**
+   * An instance of Moons using a shared ApiProvider configured based
+   * on the Api's initialization options.
+   *
+   * @returns {Moons}
+   */
+  get moons() {
+    if (!this._moon) {
+      this._moon = new Moons(this._api);
+    }
+    return this._moon;
+  }
+
+  /**
+   * An instance of Planets using a shared ApiProvider configured based
+   * on the Api's initialization options.
+   *
+   * @returns {Planets}
+   */
+  get planets() {
+    if (!this._planet) {
+      this._planet = new Planets(this._api);
+    }
+    return this._planet;
+  }
+
+  /**
    * An instance of PlanetaryInteraction using a shared ApiProvider configured
    * based on the Api's initialization options.
    *
@@ -240,6 +272,19 @@ class Api extends ExtendableFunction {
       this._system = new SolarSystems(this._api);
     }
     return this._system;
+  }
+
+  /**
+   * An instance of Stargates using a shared ApiProvider configured based on
+   * the Api's initialization options.
+   *
+   * @returns {Stargates}
+   */
+  get stargates() {
+    if (!this._gate) {
+      this._gate = new Stargates(this._api);
+    }
+    return this._gate;
   }
 
   /**

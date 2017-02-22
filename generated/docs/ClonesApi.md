@@ -29,7 +29,10 @@ var apiInstance = new EveSwaggerInterface.ClonesApi();
 var characterId = 56; // Integer | An EVE character ID
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -48,6 +51,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| An EVE character ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 

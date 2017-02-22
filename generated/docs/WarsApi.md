@@ -24,8 +24,10 @@ var EveSwaggerInterface = require('eve_swagger_interface');
 var apiInstance = new EveSwaggerInterface.WarsApi();
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'maxWarId': 56, // Integer | Only return wars with ID smaller than this.
-  'datasource': "tranquility" // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -42,8 +44,10 @@ apiInstance.getWars(opts, callback);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **maxWarId** | **Integer**| Only return wars with ID smaller than this. | [optional] 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **maxWarId** | **Integer**| Only return wars with ID smaller than this. | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -75,7 +79,9 @@ var apiInstance = new EveSwaggerInterface.WarsApi();
 var warId = 56; // Integer | ID for a war
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -94,6 +100,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **warId** | **Integer**| ID for a war | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -125,8 +133,10 @@ var apiInstance = new EveSwaggerInterface.WarsApi();
 var warId = 56; // Integer | A valid war ID
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'page': 1, // Integer | Which page to query, starting at 1, 2000 killmails per page.
-  'datasource': "tranquility" // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -144,8 +154,10 @@ apiInstance.getWarsWarIdKillmails(warId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **warId** | **Integer**| A valid war ID | 
- **page** | **Integer**| Which page to query, starting at 1, 2000 killmails per page. | [optional] [default to 1]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **page** | **Integer**| Which page to query, starting at 1, 2000 killmails per page. | [optional] [default to 1]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 

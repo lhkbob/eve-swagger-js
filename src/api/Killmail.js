@@ -79,7 +79,7 @@ class Killmail extends ExtendableFunction {
    */
   get(id, hash) {
     return this._api.killmails()
-    .newRequest('getKillmailsKillmailIdKillmailHash', [id, hash]);
+    .newRequest('getKillmailsKillmailIdKillmailHash', [hash, id]);
   }
 }
 

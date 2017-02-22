@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="postUiAutopilotWaypoint"></a>
 # **postUiAutopilotWaypoint**
-> postUiAutopilotWaypoint(destinationId, clearOtherWaypoints, addToBeginning, opts)
+> postUiAutopilotWaypoint(addToBeginning, clearOtherWaypoints, destinationId, opts)
 
 Set Autopilot Waypoint
 
@@ -30,14 +30,17 @@ evesso.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new EveSwaggerInterface.UserInterfaceApi();
 
-var destinationId = 789; // Integer | The destination to travel to, can be solar system, station or structure's id
+var addToBeginning = false; // Boolean | Whether this solar system should be added to the beginning of all waypoints
 
 var clearOtherWaypoints = false; // Boolean | Whether clean other waypoints beforing adding this one
 
-var addToBeginning = false; // Boolean | Whether this solar system should be added to the beginning of all waypoints
+var destinationId = 789; // Integer | The destination to travel to, can be solar system, station or structure's id
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -47,17 +50,20 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.postUiAutopilotWaypoint(destinationId, clearOtherWaypoints, addToBeginning, opts, callback);
+apiInstance.postUiAutopilotWaypoint(addToBeginning, clearOtherWaypoints, destinationId, opts, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **destinationId** | **Integer**| The destination to travel to, can be solar system, station or structure&#39;s id | 
- **clearOtherWaypoints** | **Boolean**| Whether clean other waypoints beforing adding this one | [default to false]
  **addToBeginning** | **Boolean**| Whether this solar system should be added to the beginning of all waypoints | [default to false]
+ **clearOtherWaypoints** | **Boolean**| Whether clean other waypoints beforing adding this one | [default to false]
+ **destinationId** | **Integer**| The destination to travel to, can be solar system, station or structure&#39;s id | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -94,7 +100,10 @@ var apiInstance = new EveSwaggerInterface.UserInterfaceApi();
 var contractId = 56; // Integer | The contract to open
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -113,6 +122,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contractId** | **Integer**| The contract to open | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -149,7 +161,10 @@ var apiInstance = new EveSwaggerInterface.UserInterfaceApi();
 var targetId = 56; // Integer | The target to open
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -168,6 +183,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **targetId** | **Integer**| The target to open | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -204,7 +222,10 @@ var apiInstance = new EveSwaggerInterface.UserInterfaceApi();
 var typeId = 56; // Integer | The item type to open in market window
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -223,6 +244,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **typeId** | **Integer**| The item type to open in market window | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -259,7 +283,10 @@ var apiInstance = new EveSwaggerInterface.UserInterfaceApi();
 var newMail = new EveSwaggerInterface.PostUiOpenwindowNewmailNewMail(); // PostUiOpenwindowNewmailNewMail | The details of mail to create
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -278,6 +305,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **newMail** | [**PostUiOpenwindowNewmailNewMail**](PostUiOpenwindowNewmailNewMail.md)| The details of mail to create | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 

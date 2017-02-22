@@ -500,6 +500,31 @@ class Character extends CharacterInfo {
   }
 
   /**
+   * Get all loyalty points the character has earned, from every corporation
+   * they have worked for from the ESI endpoint. This makes an HTTP GET request
+   * to
+   * [`characters/{id}/loyalty/points/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Loyalty/get_characters_character_id_loyalty_points).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   {
+   *     "corporation_id": 123,
+   *     "loyalty_points": 100
+   *   }
+   * ]
+   * ```
+   *
+   * @returns {Promise}
+   * @esi_link LoyaltyApi.getCharactersCharacterIdLoyaltyPoints
+   */
+  loyaltyPoints() {
+    return this._api.loyalty(this._token)
+    .newRequest('getCharactersCharacterIdLoyaltyPoints', [this._id]);
+  }
+
+  /**
    * Get a character's current ship from the ESI endpoint. This makes an HTTP
    * GET request to
    * [`characters/{id}/ship/`](https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship).

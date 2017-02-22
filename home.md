@@ -21,8 +21,8 @@ code will not need to be changed. On the other hand, the new ESI
 versions could add new end points or change the data in a response, etc.
 in which case this will be updated ASAP.
 
-- ESI version: 0.3.10.dev12
-- Module version: 0.2.1
+- ESI version: 0.4.1.dev1
+- Module version: 0.2.2
 - Source: https://github.com/lhkbob/eve-swagger-js/
 
 
@@ -33,11 +33,11 @@ in which case this will be updated ASAP.
 Currently, this library has not been published to the `npm` repository.
 However, it can still be depended on in NodeJS projects by including a
 dependency in `package.json` using a GitHub URL. A specific release can
-be requested by appending, e.g. `#0.2.1`, to the end of the URL:
+be requested by appending, e.g. `#0.2.2`, to the end of the URL:
 
 ```json
 "dependencies": {
-   "eve_swagger_interface": "git://github.com/lhkbob/eve-swagger-js.git#0.2.1",
+   "eve_swagger_interface": "git://github.com/lhkbob/eve-swagger-js.git#0.2.2",
 }
 ```
 
@@ -104,8 +104,9 @@ esi.alliances().then(result => {
 | [`PUT /characters/{id}/contacts/`](https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts) | [`Contact.update()`](Contact.html#update), [`Contact.updateWatched()`](Contact.html#updateWatched) | `esi.characters(id, token).contacts(cId).update(...) & updateWatched(...)` |
 | [`GET /characters/{id}/contacts/labels/`](https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts_labels) | [`Contacts.labels()`](Contacts.html#labels) | `esi.characters(id, token).contacts.labels()` |
 | [**Corporation**](https://esi.tech.ccp.is/latest/#/Corporation)
-| [`GET /corporations/names/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names) | [`Corporations.names()`](Corporations.html#names) | `esi.corporations.names(ids)`
-| [`GET /corporations/{id}/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id) | [`Corporation.info()`](Corporation.html#info) | `esi.corporations(id).info()`
+| [`GET /corporations/names/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names) | [`Corporations.names()`](Corporations.html#names) | `esi.corporations.names(ids)` |
+| [`GET /corporations/npccorps/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_npccorps) | [`Corporations.npc()`](Corporations.html#npc) | `esi.corporations.npc()` |
+| [`GET /corporations/{id}/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id) | [`Corporation.info()`](Corporation.html#info) | `esi.corporations(id).info()` |
 | [`GET /corporations/{id}/alliancehistory/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory) | [`Corporation.history()`](Corporation.html#history) | `esi.corporations(id).history()` |
 | [`GET /corporations/{id}/icons/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons) | [`Corporation.icon()`](Corporation.html#icon) | `esi.corporations(id).icon()` |
 | [`GET /corporations/{id}/members/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members) | [`CharacterCorporation.members()`](CharacterCorporation.html#members) | `esi.characters(id, token).corporation.members()` |
@@ -127,6 +128,9 @@ esi.alliances().then(result => {
 | [**Location**](https://esi.tech.ccp.is/latest/#/Location)
 | [`GET /characters/{id}/location/`](https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location) | [`Character.location()`](Character.html#location) | `esi.characters(id, token).location()` |
 | [`GET /characters/{id}/ship/`](https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship) | [`Character.ship()`](Character.html#ship) | `esi.characters(id, token).ship()` |
+| [**Loyalty**](https://esi.tech.ccp.is/latest/#/Loyalty)
+| [`GET /characters/{id}/loyalty/points/`](https://esi.tech.ccp.is/latest/#!/Loyalty/get_characters_character_id_loyalty_points) | `Character.loyaltyPoints()`](Character.html#loyaltyPoints) | `esi.characters(id, token).loyaltyPoints()` |
+| [`GET /loyalty/stores/{id}/offers/`](https://esi.tech.ccp.is/latest/#!/Loyalty/get_loyalty_stores_corporation_id_offers) | `Corporation.loyaltyOffers()`](Corporation.html#loyaltyOffers) | `esi.corporations(id).loyaltyOffers()` |
 | [**Mail**](https://esi.tech.ccp.is/latest/#/Mail)
 | [`GET /characters/{id}/mail/`](https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail) | [`Mail.inbox()`](Mail.html#inbox), [`Mail.all()`](Mail.html#all) | `esi.characters(id, token).mail.inbox(), all()` |
 | [`POST /characters/{id}/mail/`](https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail) | [`Mail.send()`](Mail.html#send) | `esi.characters(id, token).mail.send(...)` |
@@ -170,9 +174,12 @@ esi.alliances().then(result => {
 | [`GET /universe/bloodlines/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_bloodlines) | [`Bloodlines.all()`](Bloodlines.html#all) | `esi.bloodlines()` |
 | [`GET /universe/categories/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories) | [`Categories.all()`](Categories.html#all) | `esi.types.categories()` |
 | [`GET /universe/categories/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories_category_id) | [`Category.info()`](Category.html#info) | `esi.types.categories(id).info()` |
+| [`GET /universe/constellations/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_constellations) | [`Constellations.all()`](Constellations.html#all) | `esi.constellations()` |
+| [`GET /universe/constellations/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_constellations_constellation_id) | [`Constellation.info()`](Constellation.html#info) | `esi.constellations(id).info()` |
 | [`GET /universe/factions/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_factions) | [`Factions.all()`](Factions.html#all) | `esi.factions()` |
 | [`GET /universe/groups/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups) | [`Groups.all()`](Groups.html#all) | `esi.types.groups()` |
 | [`GET /universe/groups/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups_group_id) | [`Group.info()`](Group.html#info) | `esi.types.groups(id).info()` |
+| [`GET /universe/moons/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_moons_moon_id) | [`Moon.info()`](Moon.html#info) | `esi.moons(id).info()` |
 | [`POST /universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names) | [`Api.names()`](Api.html#names) | `esi.names(ids)` |
 | [`POST /universe/names/?category=character`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names) | [`Characters.names()`](Characters.html#names) | `esi.characters.names(ids)` |
 | [`POST /universe/names/?category=corporation`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names) | [`Corporations.names()`](Corporations.html#names) | `esi.corporations.names(ids)` |
@@ -182,10 +189,15 @@ esi.alliances().then(result => {
 | [`POST /universe/names/?category=constellation`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names) | [`Constellations.names()`](Constellations.html#names) | `esi.constellations.names(ids)` |
 | [`POST /universe/names/?category=region`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names) | [`Regions.names()`](Regions.html#names) | `esi.regions.names(ids)` |
 | [`POST /universe/names/?category=inventory_type`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names) | [`Types.names()`](Types.html#names) | `esi.types.names(ids)` |
+| [`GET /universe/planets/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_planets_planet_id) | [`Planets.info()`](Planet.html#info) | `esi.planets(id).info()` |
 | [`GET /universe/races/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_races) | [`Races.all()`](Races.html#all) | `esi.races()` |
+| [`GET /universe/regions/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_regions) | [`Regions.all()`](Regions.html#all) | `esi.regions()` |
+| [`GET /universe/regions/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_regions_region_id) | [`Region.info()`](Region.html#info) | `esi.regions(id).info()` |
+| [`GET /universe/stargates/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_stargates_stargate_id) | [`Stargate.info()`](Stargate.html#info) | `esi.stargates(id).info()` |
 | [`GET /universe/stations/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_stations_station_id) | [`Station.info()`](Station.html#info) | `esi.stations(id).info()` |
 | [`GET /universe/structures/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures) | [`Freeports.all()`](Freeports.html#all) | `esi.freeports()` |
 | [`GET /universe/structures/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures_structure_id) | [`Structure.info()`](Structure.html#info) | `esi.characters(cId, token).structures(id).info()` |
+| [`GET /universe/systems/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_systems) | [`SolarSystems.all()`](SolarSystems.html#all) | `esi.solarSystems()` |
 | [`GET /universe/systems/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_systems_system_id) | [`SolarSystem.info()`](SolarSystem.html#info) | `esi.solarSystems(id).info()` |
 | [`GET /universe/types/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types) | [`Types.all()`](Types.html#all) | `esi.types()` |
 | [`GET /universe/types/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types_type_id) | [`Type.info()`](Type.html#info) | `esi.types(id).info()` |
@@ -235,6 +247,7 @@ The available scopes for an access token are described below.
   - esi-calendar.read_calendar_events.v1: EVE SSO scope esi-calendar.read_calendar_events.v1
   - esi-calendar.respond_calendar_events.v1: EVE SSO scope esi-calendar.respond_calendar_events.v1
   - esi-characters.read_contacts.v1: EVE SSO scope esi-characters.read_contacts.v1
+  - esi-characters.read_loyalty.v1: EVE SSO scope esi-characters.read_loyalty.v1
   - esi-characters.write_contacts.v1: EVE SSO scope esi-characters.write_contacts.v1
   - esi-clones.read_clones.v1: EVE SSO scope esi-clones.read_clones.v1
   - esi-corporations.read_corporation_membership.v1: EVE SSO scope esi-corporations.read_corporation_membership.v1

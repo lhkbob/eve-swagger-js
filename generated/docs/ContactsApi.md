@@ -35,7 +35,10 @@ var characterId = 56; // Integer | ID for a character
 var contactIds = [new EveSwaggerInterface.[Integer]()]; // [Integer] | A list of contacts to edit
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -55,6 +58,9 @@ Name | Type | Description  | Notes
  **characterId** | **Integer**| ID for a character | 
  **contactIds** | **[Integer]**| A list of contacts to edit | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -91,8 +97,11 @@ var apiInstance = new EveSwaggerInterface.ContactsApi();
 var characterId = 56; // Integer | ID for a character
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'page': 1, // Integer | page integer
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -110,8 +119,11 @@ apiInstance.getCharactersCharacterIdContacts(characterId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| ID for a character | 
- **page** | **Integer**| page integer | [optional] [default to 1]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **page** | **Integer**| page integer | [optional] [default to 1]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -148,7 +160,10 @@ var apiInstance = new EveSwaggerInterface.ContactsApi();
 var characterId = 56; // Integer | ID for a character
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -167,6 +182,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| ID for a character | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -183,7 +201,7 @@ Name | Type | Description  | Notes
 
 <a name="postCharactersCharacterIdContacts"></a>
 # **postCharactersCharacterIdContacts**
-> [&#39;Integer&#39;] postCharactersCharacterIdContacts(characterId, standing, contactIds, opts)
+> [&#39;Integer&#39;] postCharactersCharacterIdContacts(characterId, contactIds, standing, opts)
 
 Add contacts
 
@@ -202,14 +220,17 @@ var apiInstance = new EveSwaggerInterface.ContactsApi();
 
 var characterId = 56; // Integer | ID for a character
 
-var standing = 3.4; // Number | Standing for the new contact
-
 var contactIds = [new EveSwaggerInterface.[Integer]()]; // [Integer] | A list of contacts to add
 
+var standing = 3.4; // Number | Standing for the new contact
+
 var opts = { 
-  'watched': false, // Boolean | Whether the new contact should be watched, note this is only effective on characters
+  'datasource': "tranquility", // String | The server name you would like data from
   'labelId': 0, // Integer | Add a custom label to the new contact
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'watched': false, // Boolean | Whether the new contact should be watched, note this is only effective on characters
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -219,7 +240,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.postCharactersCharacterIdContacts(characterId, standing, contactIds, opts, callback);
+apiInstance.postCharactersCharacterIdContacts(characterId, contactIds, standing, opts, callback);
 ```
 
 ### Parameters
@@ -227,11 +248,14 @@ apiInstance.postCharactersCharacterIdContacts(characterId, standing, contactIds,
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| ID for a character | 
- **standing** | **Number**| Standing for the new contact | 
  **contactIds** | **[Integer]**| A list of contacts to add | 
- **watched** | **Boolean**| Whether the new contact should be watched, note this is only effective on characters | [optional] [default to false]
- **labelId** | **Integer**| Add a custom label to the new contact | [optional] [default to 0]
+ **standing** | **Number**| Standing for the new contact | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **labelId** | **Integer**| Add a custom label to the new contact | [optional] [default to 0]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **watched** | **Boolean**| Whether the new contact should be watched, note this is only effective on characters | [optional] [default to false]
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -248,7 +272,7 @@ Name | Type | Description  | Notes
 
 <a name="putCharactersCharacterIdContacts"></a>
 # **putCharactersCharacterIdContacts**
-> putCharactersCharacterIdContacts(characterId, standing, contactIds, opts)
+> putCharactersCharacterIdContacts(characterId, contactIds, standing, opts)
 
 Edit contacts
 
@@ -267,14 +291,17 @@ var apiInstance = new EveSwaggerInterface.ContactsApi();
 
 var characterId = 56; // Integer | ID for a character
 
-var standing = 3.4; // Number | Standing for the contact
-
 var contactIds = [new EveSwaggerInterface.[Integer]()]; // [Integer] | A list of contacts to edit
 
+var standing = 3.4; // Number | Standing for the contact
+
 var opts = { 
-  'watched': false, // Boolean | Whether the contact should be watched, note this is only effective on characters
+  'datasource': "tranquility", // String | The server name you would like data from
   'labelId': 0, // Integer | Add a custom label to the contact, use 0 for clearing label
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'watched': false, // Boolean | Whether the contact should be watched, note this is only effective on characters
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -284,7 +311,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.putCharactersCharacterIdContacts(characterId, standing, contactIds, opts, callback);
+apiInstance.putCharactersCharacterIdContacts(characterId, contactIds, standing, opts, callback);
 ```
 
 ### Parameters
@@ -292,11 +319,14 @@ apiInstance.putCharactersCharacterIdContacts(characterId, standing, contactIds, 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| ID for a character | 
- **standing** | **Number**| Standing for the contact | 
  **contactIds** | **[Integer]**| A list of contacts to edit | 
- **watched** | **Boolean**| Whether the contact should be watched, note this is only effective on characters | [optional] [default to false]
- **labelId** | **Integer**| Add a custom label to the contact, use 0 for clearing label | [optional] [default to 0]
+ **standing** | **Number**| Standing for the contact | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **labelId** | **Integer**| Add a custom label to the contact, use 0 for clearing label | [optional] [default to 0]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **watched** | **Boolean**| Whether the contact should be watched, note this is only effective on characters | [optional] [default to false]
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 

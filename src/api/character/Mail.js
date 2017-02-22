@@ -86,10 +86,10 @@ class Message {
   update({ labels: labels = [], read: read = true }) {
     return this._mail._api.mail(this._mail._token)
     .newRequest('putCharactersCharacterIdMailMailId', [
-      this._mail._id, this._id, {
+      this._mail._id, {
         labels: labels,
         read: read
-      }
+      }, this._id
     ]);
   }
 }

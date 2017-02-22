@@ -31,7 +31,10 @@ var apiInstance = new EveSwaggerInterface.PlanetaryInteractionApi();
 var characterId = 56; // Integer | Character id of the target character
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -50,6 +53,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **characterId** | **Integer**| Character id of the target character | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -70,7 +76,7 @@ Name | Type | Description  | Notes
 
 Get colony layout
 
-Returns full details on the layout of a single planetary colony, including links, pins and routes. Note: Planetary information is only recalculated when the colony is viewed through the client. Information on this endpoint will not update until this criteria is met.  ---  Alternate route: &#x60;/v1/characters/{character_id}/planets/{planet_id}/&#x60;  Alternate route: &#x60;/legacy/characters/{character_id}/planets/{planet_id}/&#x60;  Alternate route: &#x60;/dev/characters/{character_id}/planets/{planet_id}/&#x60;   ---  This route is cached for up to 600 seconds
+Returns full details on the layout of a single planetary colony, including links, pins and routes. Note: Planetary information is only recalculated when the colony is viewed through the client. Information on this endpoint will not update until this criteria is met.  ---  Alternate route: &#x60;/v1/characters/{character_id}/planets/{planet_id}/&#x60;  Alternate route: &#x60;/legacy/characters/{character_id}/planets/{planet_id}/&#x60;   ---  This route is cached for up to 600 seconds
 
 ### Example
 ```javascript
@@ -88,7 +94,10 @@ var characterId = 56; // Integer | Character id of the target character
 var planetId = 56; // Integer | Planet id of the target planet
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -108,6 +117,9 @@ Name | Type | Description  | Notes
  **characterId** | **Integer**| Character id of the target character | 
  **planetId** | **Integer**| Planet id of the target planet | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -139,7 +151,9 @@ var apiInstance = new EveSwaggerInterface.PlanetaryInteractionApi();
 var schematicId = 56; // Integer | A PI schematic ID
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -158,6 +172,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **schematicId** | **Integer**| A PI schematic ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 

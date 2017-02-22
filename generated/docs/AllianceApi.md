@@ -26,7 +26,9 @@ var EveSwaggerInterface = require('eve_swagger_interface');
 var apiInstance = new EveSwaggerInterface.AllianceApi();
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -44,6 +46,8 @@ apiInstance.getAlliances(opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -75,7 +79,9 @@ var apiInstance = new EveSwaggerInterface.AllianceApi();
 var allianceId = 56; // Integer | An Eve alliance ID
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -94,6 +100,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **allianceId** | **Integer**| An Eve alliance ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -125,7 +133,9 @@ var apiInstance = new EveSwaggerInterface.AllianceApi();
 var allianceId = 56; // Integer | An EVE alliance ID
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -144,6 +154,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **allianceId** | **Integer**| An EVE alliance ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -175,7 +187,9 @@ var apiInstance = new EveSwaggerInterface.AllianceApi();
 var allianceId = 56; // Integer | An EVE alliance ID
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -194,6 +208,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **allianceId** | **Integer**| An EVE alliance ID | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -225,7 +241,9 @@ var apiInstance = new EveSwaggerInterface.AllianceApi();
 var allianceIds = [56]; // [Integer] | A comma separated list of alliance IDs
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -244,6 +262,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **allianceIds** | [**[Integer]**](Integer.md)| A comma separated list of alliance IDs | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 

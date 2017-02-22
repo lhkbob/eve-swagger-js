@@ -111,6 +111,46 @@ class Corporation {
     return this._api.corporation()
     .newRequest('getCorporationsCorporationIdIcons', [this._id]);
   }
+
+  /**
+   * Get all offers from a corporation's loyalty store, from the ESI endpoint.
+   * This makes an HTTP GET request to
+   * [`loyalty/stores/{id}/offers/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Loyalty/get_loyalty_stores_corporation_id_offers).
+   * The request is returned as an asynchronous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   {
+   *     "isk_cost": 0,
+   *     "lp_cost": 100,
+   *     "offer_id": 1,
+   *     "quantity": 1,
+   *     "required_items": [],
+   *     "type_id": 123
+   *  },
+   *  {
+   *     "isk_cost": 1000,
+   *     "lp_cost": 100,
+   *     "offer_id": 2,
+   *     "quantity": 10,
+   *     "required_items": [
+   *       {
+   *         "quantity": 10,
+   *         "type_id": 1234
+   *       }
+   *     ],
+   *     "type_id": 1235
+   *   }
+   * ]
+   * ```
+   *
+   * @returns {Promise}
+   * @esi_link LoyaltyApi.getLoyaltyStoresCorporationIdOffers
+   */
+  loyaltyOffers() {
+    return this._api.loyalty().newRequest('getLoyaltyStoresCorporationIdOffers', [this._id]);
+  }
 }
 
 /**
@@ -159,6 +199,28 @@ class Corporations extends ExtendableFunction {
    */
   get(id) {
     return new Corporation(this._api, id);
+  }
+
+  /**
+   * Get a list of NPC corporation ids from the ESI endpoint. This makes an
+   * HTTP GET request to
+   * [`corporations/npccorps/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Corporation/get_corporations_npccorps).
+   * The request is returned as an asycnrhonous Promise that resolves to an
+   * array parsed from the response JSON model. An example value looks like:
+   *
+   * ```
+   * [
+   *   1000001,
+   *   1000002,
+   *   1000003
+   * ]
+   * ```
+   *
+   * @return {Promise} A Promise that resolves to the response of the request
+   * @esi_link CorporationApi.getCorporationsNpccorps
+   */
+  npc() {
+    return this._api.corporation().newRequest('getCorporationsNpccorps', []);
   }
 
   /**

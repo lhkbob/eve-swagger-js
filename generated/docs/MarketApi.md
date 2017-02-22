@@ -25,7 +25,9 @@ var EveSwaggerInterface = require('eve_swagger_interface');
 var apiInstance = new EveSwaggerInterface.MarketApi();
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -43,6 +45,8 @@ apiInstance.getMarketsPrices(opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -76,7 +80,9 @@ var regionId = 56; // Integer | Return statistics in this region
 var typeId = 56; // Integer | Return statistics for this type
 
 var opts = { 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'datasource': "tranquility", // String | The server name you would like data from
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -96,6 +102,8 @@ Name | Type | Description  | Notes
  **regionId** | **Integer**| Return statistics in this region | 
  **typeId** | **Integer**| Return statistics for this type | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -112,7 +120,7 @@ No authorization required
 
 <a name="getMarketsRegionIdOrders"></a>
 # **getMarketsRegionIdOrders**
-> [GetMarketsRegionIdOrders200Ok] getMarketsRegionIdOrders(regionId, orderType, opts)
+> [GetMarketsRegionIdOrders200Ok] getMarketsRegionIdOrders(orderType, regionId, opts)
 
 List orders in a region
 
@@ -124,14 +132,16 @@ var EveSwaggerInterface = require('eve_swagger_interface');
 
 var apiInstance = new EveSwaggerInterface.MarketApi();
 
-var regionId = 56; // Integer | Return orders in this region
-
 var orderType = "all"; // String | Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders. 
 
+var regionId = 56; // Integer | Return orders in this region
+
 var opts = { 
-  'typeId': 56, // Integer | Return orders only for this type
+  'datasource': "tranquility", // String | The server name you would like data from
   'page': 1, // Integer | Which page to query, only used for querying without type_id. Starting at 1 
-  'datasource': "tranquility" // String | The server name you would like data from
+  'typeId': 56, // Integer | Return orders only for this type
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -141,18 +151,20 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getMarketsRegionIdOrders(regionId, orderType, opts, callback);
+apiInstance.getMarketsRegionIdOrders(orderType, regionId, opts, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **regionId** | **Integer**| Return orders in this region | 
  **orderType** | **String**| Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders.  | [default to all]
- **typeId** | **Integer**| Return orders only for this type | [optional] 
- **page** | **Integer**| Which page to query, only used for querying without type_id. Starting at 1  | [optional] [default to 1]
+ **regionId** | **Integer**| Return orders in this region | 
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **page** | **Integer**| Which page to query, only used for querying without type_id. Starting at 1  | [optional] [default to 1]
+ **typeId** | **Integer**| Return orders only for this type | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
@@ -189,8 +201,11 @@ var apiInstance = new EveSwaggerInterface.MarketApi();
 var structureId = 789; // Integer | Return orders in this structure
 
 var opts = { 
+  'datasource': "tranquility", // String | The server name you would like data from
   'page': 1, // Integer | Which page to query, starting at 1
-  'datasource': "tranquility" // String | The server name you would like data from
+  'token': "token_example", // String | Access token to use, if preferred over a header
+  'userAgent': "userAgent_example", // String | Client identifier, takes precedence over headers
+  'xUserAgent': "xUserAgent_example" // String | Client identifier, takes precedence over User-Agent
 };
 
 var callback = function(error, data, response) {
@@ -208,8 +223,11 @@ apiInstance.getMarketsStructuresStructureId(structureId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **structureId** | **Integer**| Return orders in this structure | 
- **page** | **Integer**| Which page to query, starting at 1 | [optional] [default to 1]
  **datasource** | **String**| The server name you would like data from | [optional] [default to tranquility]
+ **page** | **Integer**| Which page to query, starting at 1 | [optional] [default to 1]
+ **token** | **String**| Access token to use, if preferred over a header | [optional] 
+ **userAgent** | **String**| Client identifier, takes precedence over headers | [optional] 
+ **xUserAgent** | **String**| Client identifier, takes precedence over User-Agent | [optional] 
 
 ### Return type
 
