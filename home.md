@@ -247,6 +247,7 @@ The available scopes for an access token are described below.
   - esi-calendar.read_calendar_events.v1: EVE SSO scope esi-calendar.read_calendar_events.v1
   - esi-calendar.respond_calendar_events.v1: EVE SSO scope esi-calendar.respond_calendar_events.v1
   - esi-characters.read_contacts.v1: EVE SSO scope esi-characters.read_contacts.v1
+  - esi-characters.read_loyalty.v1: EVE SSO scope esi-characters.read_loyalty.v1
   - esi-characters.write_contacts.v1: EVE SSO scope esi-characters.write_contacts.v1
   - esi-clones.read_clones.v1: EVE SSO scope esi-clones.read_clones.v1
   - esi-corporations.read_corporation_membership.v1: EVE SSO scope esi-corporations.read_corporation_membership.v1
