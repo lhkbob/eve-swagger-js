@@ -7,8 +7,7 @@
   },
   "source": {
     "include": [
-      "src",
-      "home.md"
+      "src"
     ],
     "includePattern": ".js$",
     "excludePattern": "(node_modules/|docs)"
@@ -17,7 +16,9 @@
     "lib/esi-param",
     "lib/esi-returns",
     "lib/esi-route",
+    "lib/esi-example",
     "lib/esi-description",
+    "lib/esi-homepage",
     "plugins/markdown"
   ],
   "templates": {
