@@ -23,38 +23,9 @@ class Incursions extends ExtendableFunction {
   }
 
   /**
-   * Get all incursions from the ESI endpoint. This makes an HTTP GET request
-   * to
-   * [`/incursions`](https://esi.tech.ccp.is/latest/#!/Incursions/get_incursions).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_incursions
    *
-   * ```
-   * [
-   *   {
-   *     "constellation_id": 20000607,
-   *     "faction_id": 500019,
-   *     "has_boss": true,
-   *     "infested_solar_systems": [
-   *        30004148,
-   *        30004149,
-   *        30004150,
-   *        30004151,
-   *        30004152,
-   *        30004153,
-   *        30004154
-   *     ],
-   *     "influence": 1,
-   *     "staging_solar_system_id": 30004154,
-   *     "state": "mobilizing",
-   *     "type": "Incursion"
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link IncursionsApi.getIncursions
+   * @return {Promise.<Array.<Object>>}
    */
   all() {
     return this._api.incursions().newRequest('getIncursions', []);

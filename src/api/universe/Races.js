@@ -23,25 +23,9 @@ class Races extends ExtendableFunction {
   }
 
   /**
-   * Get all races and their information from the ESI endpoints. This makes
-   * an HTTP GET request to
-   * [`universe/races/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_races)
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_races
    *
-   * ```
-   * [
-   *   {
-   *     "alliance_id": 500001,
-   *     "description": "Founded on the tenets of patriotism and hard work...",
-   *     "name": "Caldari",
-   *     "race_id": 1
-   *   }
-   * ]
-   * ```
-   *
-   * @returns {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseRaces
+   * @returns {Promise.<Array.<Object>>}
    */
   all() {
     return this._api.universe().newRequest('getUniverseRaces', []);

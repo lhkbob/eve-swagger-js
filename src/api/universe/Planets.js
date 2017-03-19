@@ -25,28 +25,9 @@ class Planet {
   }
 
   /**
-   * Get information on the planet from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`universe/planets/{id}/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Universe/get_universe_planets_planet_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_planets_planet_id
    *
-   * ```
-   * {
-   *   "name": "Akpivem III",
-   *   "planet_id": 40000046,
-   *   "position": {
-   *     "x": -189226344497,
-   *     "y": 9901605317,
-   *     "z": -254852632979
-   *   },
-   *   "system_id": 30000003,
-   *   "type_id": 13
-   * }
-   * ```
-   *
-   * @returns {Promise}
-   * @esi_link UniverseApi.getUniversePlanetsPlanetId
+   * @returns {Promise.<Object>}
    */
   info() {
     return this._api.universe()

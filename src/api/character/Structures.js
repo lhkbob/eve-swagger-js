@@ -31,21 +31,9 @@ class Structure {
   }
 
   /**
-   * Get structure info from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`/universe/structures/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures_structure_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_structures_structure_id
    *
-   * ```
-   * {
-   *   "name": "V-3YG7 VI - The Capital",
-   *   "solar_system_id": 30000142
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseStructuresStructureId
+   * @returns {Promise.<Object>}
    */
   info() {
     return this._api.universe(this._token)
@@ -53,38 +41,11 @@ class Structure {
   }
 
   /**
-   * Get a page of market orders in the structure from the ESI endpoint. Orders
-   * include buy and sell, and are for any item type. This makes an HTTP GET
-   * request to
-   * [`/markets/structures/{structureId}/`](https://esi.tech.ccp.is/latest/#!/Market/get_market_structures_structure_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_markets_structures_structure_id
    *
-   * ```
-   * [
-   *   {
-   *     "duration": 90,
-   *     "is_buy_order": false,
-   *     "issued": "2016-09-03T05:12:25Z",
-   *     "location_id": 60005599,
-   *     "min_volume": 1,
-   *     "order_id": 4623824223,
-   *     "price": 9.9,
-   *     "range": "region",
-   *     "type_id": 34,
-   *     "volume_remain": 1296000,
-   *     "volume_total": 2000000
-   *   }
-   * ]
-   * ```
-   *
-   * This orders request is paginated, with `page` starting at 1 for the first
-   * page of data. If `page` is not provided, then all orders are returned
-   * (making multiple calls and concatenating the results).
-   *
-   * @param {Number} page Optional; the page of orders that is requested.
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link MarketApi.getMarketsStructuresStructureId
+   * @param page {Number} If `0`, all pages of orders are returned as a
+   *     concatenated array.
+   * @returns {Promise.<Array.<Object>>}
    */
   orders(page = 0) {
     if (page == 0) {
@@ -101,8 +62,9 @@ class Structure {
    * is equivalent to {@link Structure#ordersFor ordersFor} except that it
    * additionally filters orders to have `is_buy_order` set to `true`.
    *
-   * @param {Number} typeId The type id to query from the market
-   * @return {Promise} A Promise that resolves to the response of the request
+   * @param typeId {Number} The type id to query from the market
+   * @return {Promise.<Array.<Object>>} A Promise that resolves to the response
+   *     of the request
    */
   buyOrdersFor(typeId) {
     return this.ordersFor(typeId).then(typeOrders => {
@@ -116,8 +78,9 @@ class Structure {
    * is equivalent to {@link Structure#ordersFor ordersFor} except that it
    * additionally filters orders to have `is_buy_order` set to `false`.
    *
-   * @param {Number} typeId The type id to query from the market
-   * @return {Promise} A Promise that resolves to the response of the request
+   * @param typeId {Number} The type id to query from the market
+   * @return {Promise.<Array.<Object>>} A Promise that resolves to the response
+   *     of the request
    */
   sellOrdersFor(typeId) {
     return this.ordersFor(typeId).then(typeOrders => {
@@ -135,8 +98,9 @@ class Structure {
    * all orders for the structure are requested via {@link Structure.orders
    * orders} and then filtered.
    *
-   * @param {Number} typeId The type id to query from the market
-   * @return {Promise} A Promise that resolves to the response of the request
+   * @param typeId {Number} The type id to query from the market
+   * @return {Promise.<Array.<Object>>} A Promise that resolves to the response
+   *     of the request
    */
   ordersFor(typeId) {
     return this.orders().then(allOrders => {

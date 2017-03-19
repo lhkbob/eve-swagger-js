@@ -16,60 +16,18 @@ class Sovereignty {
   }
 
   /**
-   * Get sovereignty campaign information from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`/sovereignty/campaigns`](https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_campaigns).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_sovereignty_campaigns
    *
-   * ```
-   * [
-   *   {
-   *     "attackers_score": 0.4,
-   *     "campaign_id": 32833,
-   *     "constellation_id": 20000125,
-   *     "defender_id": 1695357456,
-   *     "defender_score": 0.6,
-   *     "event_type": "station_defense",
-   *     "solar_system_id": 30000856,
-   *     "start_time": "2016-10-29T14:34:40Z",
-   *     "structure_id": 61001096
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link SovereigntyApi.getSovereigntyCampaigns
+   * @return {Promise.<Array.<Object>>}
    */
   campaigns() {
     return this._api.sovereignty().newRequest('getSovereigntyCampaigns', []);
   }
 
   /**
-   * Get sovereignty structure information from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`/sovereignty/structures`](https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_sovereignty_structures
    *
-   * ```
-   * [
-   *   {
-   *     "alliance_id": 498125261,
-   *     "solar_system_id": 30000570,
-   *     "structure_id": 1018253388776,
-   *     "structure_type_id": 32226,
-   *     "vulnerability_occupancy_level": 2,
-   *     "vulnerable_end_time": "2016-10-29T05:30:00Z",
-   *     "vulnerable_start_time": "2016-10-28T20:30:00Z"
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link SovereigntyApi.getSovereigntyStructures
+   * @return {Promise.<Array.<Object>>}
    */
   structures() {
     return this._api.sovereignty().newRequest('getSovereigntyStructures', []);

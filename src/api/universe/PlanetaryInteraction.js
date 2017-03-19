@@ -17,23 +17,11 @@ class PlanetaryInteraction {
   }
 
   /**
-   * Get a planetary interaction schematic's public info from the ESI endpoint.
-   * This makes an HTTP GET request to
-   * [`/universe/schematics/{id}/`](https://esi.tech.ccp.is/latest/#!/Planetary_Interaction/get_universe_schematics_schematic_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_schematics_schematic_id
+   * @esi_param schematic_id - id
    *
-   * ```
-   * {
-   *   "cycle_time": 1800,
-   *   "schematic_name": "Bacteria"
-   * }
-   * ```
-   *
-   * @param {Number} id The schematic id to look up
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link PlanetaryInteractionApi.getUniverseSchematicsSchematicId
+   * @param {Number} id
+   * @return {Promise.<Object>}
    */
   schematic(id) {
     return this._api.planetaryInteraction()

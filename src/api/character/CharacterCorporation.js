@@ -29,11 +29,11 @@ class CharacterCorporation {
   }
 
   /**
-   * Get the character's corporation's public info from the ESI endpoint.
-   * Besides being defined against a particular character, this is equivalent to
-   * {@link Corporation#info}.
+   * @esi_route get_corporations_corporation_id
    *
-   * @return {Promise} A Promise that resolves to the response of the request
+   * Note that this is equivalent to {@link Corporation#info}.
+   *
+   * @returns {Promise.<Object>}
    */
   info() {
     if (this._id) {
@@ -48,11 +48,11 @@ class CharacterCorporation {
   }
 
   /**
-   * Get the character's corporation's alliance history from the ESI endpoint.
-   * Besides being defined against a particular character, this is equivalent to
-   * {@link Corporation#history}.
+   * @esi_route get_corporations_corporation_id_alliancehistory
    *
-   * @return {Promise} A Promise that resolves to the response of the request
+   * Note that this is equivalent to {@link Corporation#history}.
+   *
+   * @returns {Promise.<Array.<Object>>}
    */
   history() {
     if (this._id) {
@@ -66,13 +66,12 @@ class CharacterCorporation {
     }
   }
 
-
   /**
-   * Get the character's corporation's icon URLs from the ESI endpoint. Besides
-   * being defined against a particular character, this is equivalent to {@link
-      * Corporation#icon}.
+   * @esi_route get_corporations_corporation_id_icons
    *
-   * @return {Promise} A Promise that resolves to the response of the request
+   * Note that this is equivalent to {@link Corporation#icon}
+   *
+   * @returns {Promise.<Object>}
    */
   icon() {
     if (this._id) {
@@ -87,22 +86,12 @@ class CharacterCorporation {
   }
 
   /**
-   * Get the character's corporation's member list from the ESI endpoint. This
-   * makes an HTTP GET request to
-   * [`corporations/{id}/members/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array of character ids. An example value looks like:
+   * @esi_route get_corporations_corporation_id_members
+   * @esi_returns character_id
    *
-   * ```
-   * [
-   *   90000001,
-   *   90000002
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CorporationApi.getCorporationsCorporationIdMembers
+   * @returns {Promise.<Array.<Number>>}
    */
+  // FIXME how to document the remap?
   members() {
     if (this._id) {
       return this._api.corporation(this._token)
@@ -118,29 +107,9 @@ class CharacterCorporation {
   }
 
   /**
-   * Get the character's corporation's member list with roles for each
-   * character
-   * from the ESI endpoint. The character must have the personalle manager or
-   * any other grantable role in order for this request to succeed. This makes
-   * an HTTP GET request to
-   * [`corporations/{id}/roles/`](https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_corporations_corporation_id_roles
    *
-   * ```
-   * [
-   *   {
-   *     "character_id": 1000171,
-   *     "roles": [
-   *       "Director",
-   *       "Station_Manager"
-   *     ]
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CorporationApi.getCorporationsCorporationIdRoles
+   * @returns {Promise.<Array.<Object>>}
    */
   roles() {
     if (this._id) {
@@ -157,8 +126,8 @@ class CharacterCorporation {
   /**
    * Get the corporation id of the corp that the character belongs to.
    *
-   * @returns {Promise} A Promise that resolves to the character's corporation
-   *     id
+   * @returns {Promise.<Number>} A Promise that resolves to the character's
+   *     corporation id
    */
   id() {
     if (this._id) {

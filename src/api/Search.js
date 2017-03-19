@@ -43,13 +43,30 @@ class Search extends ExtendableFunction {
   /**
    * Create a new Search api wrapper with the given configuration. If
    * `categories` is provided then the search is restricted to those categories,
-   * otherwise it will search over all categories.
+   * otherwise it will search over all categories. If `categories` is a single
+   * item, the return result of the search is simplified to be the array of ids
+   * for that category (instead of an outer object with keys per category).
+   *
+   * Categories must from the following enumeration:
+   *
+   * + `agent`
+   * + `alliance`
+   * + `character`
+   * + `constellation`
+   * + `corporation`
+   * + `faction`
+   * + `inventorytype`
+   * + `region`
+   * + `solarsystem`
+   * + `station`
+   * + `wormhole`
    *
    * If `characterId` and `accessToken` are provided then the search will use
-   * character specific search end point.
+   * character specific search end point, and the `structure` category can also
+   * be used.
    *
    * @param api {ApiProvider} The api provider
-   * @param categories {Array.<String>} Optional; the categories search through
+   * @param categories {Array.<String>} Optional; the categories search to through
    * @param characterId {Number} Optional; the character id of the search
    * @param accessToken {String} Optional; SSO token for the provided character,
    *    must be provided if `characterId` is given
@@ -86,53 +103,36 @@ class Search extends ExtendableFunction {
   }
 
   /**
-   * Get the search results from the ESI endpoint that match the given query
-   * `text`, restricted to the categories selected for this Search instance.
-   * This search is not strict.
-   *
-   * This makes an HTTP GET request to
-   * [`/search/`](https://esi.tech.ccp.is/latest/#!/Search/get_search) or
-   * [`/character/{id}/search/`](https://esi.tech.ccp.is/latest/#!/Search/get_characters_character_id_search)
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
-   *
-   * ```
-   * {
-   *   "solarsystem": [
-   *     30002510
-   *   ],
-   *   "station": [
-   *     60004588,
-   *     60004594,
-   *     60005725,
-   *     60009106,
-   *     60012721,
-   *     60012724,
-   *     60012727
-   *   ]
-   * }
-   * ```
+   * @esi_route get_search
+   * @esi_param search - text
+   * @esi_param !categories
+   * @esi_param strict - false
    *
    * However, if the Search instance is configured to search over only a single
    * category then the Promise simply resolves to the array of ids (e.g. the
    * category was fetched from the response dictionary of category to array).
    *
    * @param {String} text The search terms of the query
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link SearchApi.getSearch
+   * @return {Promise.<Object>} Or a `Promise.<Array.<Number>>` for a
+   *    single-category search.
    */
   get(text) {
     return this._doSearch(text, false);
   }
 
   /**
-   * Perform a strict search for `text`, but is otherwise identical to
-   * {@link Search.get get}.
+   * @esi_route get_search
+   * @esi_param search - text
+   * @esi_param !categories
+   * @esi_param strict - true
    *
-   * @param text
-   * @returns {Promise}
-   * @esi_link SearchApi.getSearch
+   * However, if the Search instance is configured to search over only a single
+   * category then the Promise simply resolves to the array of ids (e.g. the
+   * category was fetched from the response dictionary of category to array).
+   *
+   * @param {String} text The search terms of the query
+   * @return {Promise.<Object>} Or a `Promise.<Array.<Number>>` for a
+   *    single-category search.
    */
   strict(text) {
     return this._doSearch(text, true);

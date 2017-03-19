@@ -22,43 +22,9 @@ class SolarSystem {
   }
 
   /**
-   * Get solar system public info from the ESI endpoint. This makes an HTTP GET
-   * request to
-   * [`/universe/systems/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_systems_system_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_systems_system_id
    *
-   * ```
-   * {
-   *   "constellation_id": 20000001,
-   *   "name": "Akpivem",
-   *   "planets": [
-   *     {
-   *       "moons": [
-   *         40000042
-   *       ],
-   *       "planet_id": 40000041
-   *     },
-   *     {
-   *      "planet_id": 40000043
-   *     }
-   *   ],
-   *   "position": {
-   *     "x": -91174141133075340,
-   *     "y": 43938227486247170,
-   *     "z": -56482824383339900
-   *   },
-   *   "security_class": "B",
-   *   "security_status": 0.8462923765182495,
-   *   "stargates": [
-   *     50000342
-   *   ],
-   *   "system_id": 30000003
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseSystemsSystemId
+   * @return {Promise.<Object>}
    */
   info() {
     return this._api.universe()
@@ -117,50 +83,27 @@ class SolarSystems extends ExtendableFunction {
   }
 
   /**
-   * Get all solar system ids from the ESI endpoint. This makes an HTTP GET
-   * request to
-   * [`universe/systems/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Universe/get_universe_systems).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_systems
    *
-   * ```
-   * [
-   *   30000001,
-   *   30000002
-   * ]
-   * ```
-   *
-   * @returns {Promise}
-   * @esi_link UniverseApi.getUniverseSystems
+   * @returns {Promise.<Array.<Number>>}
    */
   all() {
     return this._api.universe().newRequest('getUniverseSystems', []);
   }
 
   /**
-   * Get the names for a list of solar system ids from the ESI endpoint. This
-   * makes an HTTP POST request to
-   * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route post_universe_names
    *
-   * ```
-   * [
-   *   {
-   *     "id": 30000003,
-   *     "name": "Akpivem"
-   *   }
-   * ]
-   * ```
+   * Results will only include matches with the solar system category.
+   * If `ids` is longer than the reported maximum length for ESI, the array
+   * will be split into smaller chunks and multiple requests will be made and
+   * then concatenated back together.
    *
-   * Note that this has the category field stripped from the response and will
-   * only include matches with the solar system category.
+   * @esi_returns {!category}
    *
-   * @param {Array.<Number>} ids  Optional; the solar system ids to look up. If
-   *     not provided then the names of all systems will be returned.
-   * @return {Promise} A Promise that resolves to the response of
-   *     the request
-   * @esi_link UniverseApi.postUniverseNames
+   * @param {Array.<Number>} ids If no ids are provided, then all names are
+   *     returned.
+   * @return {Promise.<Array.<Object>>}
    */
   names(ids = []) {
     if (!ids || ids.length == 0) {

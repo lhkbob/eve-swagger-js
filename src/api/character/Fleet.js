@@ -21,22 +21,11 @@ class Squad {
   }
 
   /**
-   * Rename a squad in a fleet with the ESI endpoint. This makes an HTTP PUT
-   * request to
-   * [`/fleets/{fleetId}/squads/{squadId}/`](https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_squads_squad_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success. The update parameters are stored in an object
-   * like:
+   * @esi_route put_fleets_fleet_id_squads_squad_id
+   * @esi_param naming - {name}
    *
-   * ```
-   * {
-   *   "name": "string"
-   * }
-   * ```
-   *
-   * @param {String} name The new name of the squad
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.putFleetsFleetIdSquadsSquadId
+   * @param name {String}
+   * @returns {Promise.<Object>}
    */
   rename(name) {
     return this._fleet._api.fleets(this._fleet._token)
@@ -45,14 +34,9 @@ class Squad {
   }
 
   /**
-   * Delete a squad from a fleet with the ESI endpoint. This makes an HTTP
-   * DELETE request to
-   * [`/fleets/{fleetId}/squads/{squadId}/`](https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_squads_squad_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route delete_fleets_fleet_id_squads_squad_id
    *
-   * @return {Promise} A Promise that resolves to the response of  the request
-   * @esi_link FleetsApi.deleteFleetsFleetIdSquadsSquadId
+   * @returns {Promise.<Object>}
    */
   remove() {
     return this._fleet._api.fleets(this._fleet._token)
@@ -85,20 +69,10 @@ class Squads extends ExtendableFunction {
   }
 
   /**
-   * Add a new squad to a fleet's wing with the ESI endpoint. This makes an
-   * HTTP POST request to
-   * [`/fleets/{fleetId}/wings/{wingId}/squads`](https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route post_fleets_fleet_id_wings_wing_id_squads
+   * @esi_returns id:squad_id
    *
-   * ```
-   * {
-   *   "squad_id": 123
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.postFleetsFleetIdWingsWingIdSquads
+   * @returns {Promise.<Number>}
    */
   add() {
     return this._wing._fleet._api.fleets(this._wing._fleet._token)
@@ -148,31 +122,22 @@ class Wing {
   }
 
   /**
-   * Rename a wing in a fleet with the ESI endpoint. This makes an HTTP PUT
-   * request to
-   * [`/fleets/{fleetId}/wings/{wingId}/`](https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_wings_wing_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route put_fleets_fleet_id_wings_wing_id
+   * @esi_param naming - {name}
    *
-   * @param {String} name The new name of the wing
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.putFleetsFleetIdWingsWingId
+   * @param name {String}
+   * @returns {Promise.<Object>}
    */
   rename(name) {
     return this._fleet._api.fleets(this._fleet._token)
     .newRequest('putFleetsFleetIdWingsWingId',
-        [this._fleet._id,  { name: name }, this._id]);
+        [this._fleet._id, { name: name }, this._id]);
   }
 
   /**
-   * Remove a wing from a fleet with the ESI endpoint. This makes an HTTP
-   * DELETE request to
-   * [`/fleets/{fleetId}/wings/{wingId}/`](https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_wings_wing_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route delete_fleets_fleet_id_wings_wing_id
    *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.deleteFleetsFleetIdWingsWingId
+   * @returns {Promise.<Object>}
    */
   remove() {
     return this._fleet._api.fleets(this._fleet._token)
@@ -204,30 +169,9 @@ class Wings extends ExtendableFunction {
   }
 
   /**
-   * Get information on all wings in a fleet with the ESI endpoint. This makes
-   * an HTTP GET request to
-   * [`/fleets/{id}/wings/`](https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_wings).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_fleets_fleet_id_wings
    *
-   * ```
-   * [
-   *   {
-   *     "id": 2073711261968,
-   *     "name": "Wing 1",
-   *     "squads": [
-   *       {
-   *         "id": 3129411261968,
-   *        "name": "Squad 1"
-   *       }
-   *     ]
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link FleetsApi.getFleetsFleetIdWings
+   * @returns {Promise.<Array.<Object>>}
    */
   all() {
     return this._fleet._api.fleets(this._fleet._token)
@@ -235,20 +179,10 @@ class Wings extends ExtendableFunction {
   }
 
   /**
-   * Add a new wing to a fleet with the ESI endpoint. This makes an HTTP POST
-   * request to
-   * [`/fleets/{id}/wings/`](https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route post_fleets_fleet_id_wings
+   * @esi_returns id:wing_id
    *
-   * ```
-   * {
-   *   "wing_id": 123
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of  the request
-   * @esi_link FleetsApi.postFleetsFleetIdWings
+   * @returns {Promise.<Number>}
    */
   add() {
     return this._fleet._api.fleets(this._fleet._token)
@@ -301,22 +235,9 @@ class Fleet {
   }
 
   /**
-   * Get fleet details from the ESI endpoint. This makes an HTTP GET request to
-   * [`/fleets/{id}/`](https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_fleets_fleet_id
    *
-   * ```
-   * {
-   *   "is_free_move": false,
-   *   "is_registered": false,
-   *   "is_voice_enabled": false,
-   *   "motd": "This is an <b>awesome</b> fleet!"
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.getFleetsFleetId
+   * @returns {Promise.<Object>}
    */
   info() {
     return this._api.fleets(this._token)
@@ -324,30 +245,9 @@ class Fleet {
   }
 
   /**
-   * Get fleet members from the ESI endpoint. This makes an HTTP GET request to
-   * [`/fleets/{id}/members/`](https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_members).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_fleets_fleet_id_members
    *
-   * ```
-   * [
-   *   {
-   *     "character_id": 93265215,
-   *     "join_time": "2016-04-29T12:34:56Z",
-   *     "role": "squad_commander",
-   *     "role_name": "Squad Commander (Boss)",
-   *     "ship_type_id": 33328,
-   *     "solar_system_id": 30003729,
-   *     "squad_id": 3129411261968,
-   *     "station_id": 61000180,
-   *     "takes_fleet_warp": true,
-   *     "wing_id": 2073711261968
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.getFleetsFleetIdMembers
+   * @returns {Promise.<Array.<Object>>}
    */
   members() {
     return this._api.fleets(this._token)
@@ -355,25 +255,10 @@ class Fleet {
   }
 
   /**
-   * Send a fleet invite to a character with the ESI endpoint. This makes
-   * an HTTP POST request to
-   * [`/fleets/{id}/members/`](https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_members).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success. An example `invitation` value looks like:
+   * @esi_route post_fleets_fleet_id_members
    *
-   * ```
-   * {
-   *   "character_id": 0,
-   *   "role": "fleet_commander",
-   *   "squad_id": 0,
-   *   "wing_id": 0
-   * }
-   * ```
-   *
-   * @param {Object} invitation Simple object specifying character to invite,
-   *   and their fleet position on accept
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.postFleetsFleetIdMembers
+   * @param invitation {Object}
+   * @returns {Promise.<Object>}
    */
   invite(invitation) {
     return this._api.fleets(this._token)
@@ -381,15 +266,10 @@ class Fleet {
   }
 
   /**
-   * Remove a member from a fleet with the ESI endpoint. This makes an HTTP
-   * DELETE request to
-   * [`/fleets/{fleetId}/members/{memberId}/`](https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_members_member_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route delete_fleets_fleet_id_members_member_id
    *
-   * @param {Number} memberId The member character id to kick
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.deleteFleetsFleetIdMembersMemberId
+   * @param memberId {Number}
+   * @returns {Promise.<Object>}
    */
   kick(memberId) {
     return this._api.fleets(this._token)
@@ -397,24 +277,12 @@ class Fleet {
   }
 
   /**
-   * Move or update a member in a fleet with the ESI endpoint. This makes an
-   * HTTP PUT request to
-   * [`/fleets/{fleetId}/members/{memberId}/`](https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_members_member_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success. An example move order looks like:
+   * @esi_route put_fleets_fleet_id_members_member_id
+   * @esi_param movement - moveOrder
    *
-   * ```
-   * {
-   *   "role": "fleet_commander",
-   *   "squad_id": 0,
-   *   "wing_id": 0
-   * }
-   * ```
-   *
-   * @param {Number} memberId The character id of the fleet member being moved
-   * @param {Object} moveOrder A simple object describing the move or update
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.putFleetsFleetIdMembersMemberId
+   * @param memberId {Number}
+   * @param moveOrder {Object}
+   * @returns {Promise.<Object>}
    */
   move(memberId, moveOrder) {
     return this._api.fleets(this._token)
@@ -423,22 +291,10 @@ class Fleet {
   }
 
   /**
-   * Update fleet details with the ESI endpoint. This makes an HTTP PUT request
-   * to
-   * [`/fleets/{id}/`](https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success. An example `newSettings` value looks like:
+   * @esi_route put_fleets_fleet_id
    *
-   * ```
-   * {
-   *   "is_free_move": true,
-   *   "motd": "string"
-   * }
-   * ```
-   *
-   * @param {Object} newSettings Simple object of properties to modify
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FleetsApi.putFleetsFleetId
+   * @param newSettings {Object}
+   * @returns {Promise.<Object>}
    */
   update(newSettings) {
     return this._api.fleets(this._token)

@@ -20,15 +20,11 @@ class Window {
   }
 
   /**
-   * Open the in-game information window on the specific entity via the ESI
-   * endpoint. This makes an  HTTP POST request to
-   * [`/ui/openwindow/information/`](https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_information).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route post_ui_openwindow_information
+   * @esi_param target_id - id
    *
-   * @param {Number} id The id of the entity to look up
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UserInterfaceApi.postUiOpenwindowContract
+   * @param id {Number}
+   * @return {Promise.<Object>}
    */
   info(id) {
     return this._api.userInterface(this._token)
@@ -36,15 +32,10 @@ class Window {
   }
 
   /**
-   * Open the in-game market window to the specified type via the ESI endpoint.
-   * This makes an  HTTP POST request to
-   * [`/ui/openwindow/marketdetails/`](https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_marketdetails).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route post_ui_openwindow_marketdetails
    *
-   * @param {Number} typeId The id of the type on the market to pull up
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UserInterfaceApi.postUiOpenwindowMarketdetails
+   * @param typeId {Number}
+   * @return {Promise.<Object>}
    */
   market(typeId) {
     return this._api.userInterface(this._token)
@@ -52,15 +43,10 @@ class Window {
   }
 
   /**
-   * Open the in-game contracts window to the specified contract via the ESI
-   * endpoint. This makes an  HTTP POST request to
-   * [`/ui/openwindow/contract/`](https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_contract).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route post_ui_openwindow_contract
    *
-   * @param {Number} contractId The id of the contract
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UserInterfaceApi.postUiOpenwindowContract
+   * @param contractId {Number}
+   * @return {Promise.<Object>}
    */
   contract(contractId) {
     return this._api.userInterface(this._token)
@@ -68,28 +54,11 @@ class Window {
   }
 
   /**
-   * Open the in-game mail window to send a new mail via the ESI endpoint. This
-   * makes an  HTTP POST request to
-   * [`/ui/openwindow/contract/`](https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_openwindow_newmail).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success. The new mail dialog is initialized based on the
-   * mail configuration passed in, an example of which looks like:
+   * @esi_route post_ui_openwindow_newmail
+   * @esi_param new_mail - settings
    *
-   * ```
-   * {
-   *   "body": "string",
-   *   "recipients": [
-   *     0
-   *   ],
-   *   "subject": "string",
-   *   "to_corp_or_alliance_id": 0,
-   *   "to_mailing_list_id": 0
-   * }
-   * ```
-   *
-   * @param {Object} settings The initial state of the new mail
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UserInterfaceApi.postUiOpenwindowNewmail
+   * @param settings {Object}
+   * @return {Promise.<Object>}
    */
   newMail(settings) {
     return this._api.userInterface(this._token)

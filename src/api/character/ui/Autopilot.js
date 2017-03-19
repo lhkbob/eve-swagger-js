@@ -26,53 +26,39 @@ class Autopilot {
   }
 
   /**
-   * Set the in-game autopilot waypoint with the ESI endpoint. This makes an
-   * HTTP POST request to
-   * [`/ui/autopilot/waypoint/`](https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route post_ui_autopilot_waypoint
+   * @esi_param destination_id - id
+   * @esi_param clear_other_waypoints - true
+   * @esi_param add_to_beginning - true
    *
-   * This clears all other waypoints.
-   *
-   * @param {Number} id The id of the destination system or object
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UserInterfaceApi.postUiAutopilotWaypoint
+   * @param {Number} id
+   * @return {Promise.<Object>}
    */
   destination(id) {
     return this._waypoint(id, true, true);
   }
 
   /**
-   * Append a destination to the in-game autopilot with the ESI endpoint. This
-   * makes an HTTP POST request to
-   * [`/ui/autopilot/waypoint/`](https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route post_ui_autopilot_waypoint
+   * @esi_param destination_id - id
+   * @esi_param clear_other_waypoints - false
+   * @esi_param add_to_beginning - false
    *
-   * This does not remove other waypoints and the new waypoint is added to the
-   * end of the path.
-   *
-   * @param {Number} id The id of the destination system or object
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UserInterfaceApi.postUiAutopilotWaypoint
+   * @param {Number} id
+   * @return {Promise.<Object>}
    */
   append(id) {
     return this._waypoint(id, false, false);
   }
 
   /**
-   * Prepend a destination to the in-game autopilot with the ESI endpoint. This
-   * makes an HTTP POST request to
-   * [`/ui/autopilot/waypoint/`](https://esi.tech.ccp.is/latest/#!/User_Interface/post_ui_autopilot_waypoint).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route post_ui_autopilot_waypoint
+   * @esi_param destination_id - id
+   * @esi_param clear_other_waypoints - false
+   * @esi_param add_to_beginning - true
    *
-   * This does not remove other waypoints and the new waypoint is added to the
-   * start of the path.
-   *
-   * @param {Number} id The id of the destination system or object
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UserInterfaceApi.postUiAutopilotWaypoint
+   * @param {Number} id
+   * @return {Promise.<Object>}
    */
   prepend(id) {
     return this._waypoint(id, false, true);

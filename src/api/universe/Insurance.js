@@ -16,29 +16,9 @@ class Insurance {
   }
 
   /**
-   * Get insurance prices for all ship types from the ESI endpoint. This makes
-   * an HTTP GET request to
-   * [`/insurance/prices/`](https://esi.tech.ccp.is/latest/#!/Insurance/get_insurance_prices).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_insurance_prices
    *
-   * ```
-   * [
-   *   {
-   *     "levels": [
-   *       {
-   *         "cost": 10,
-   *         "name": "Basic",
-   *         "payout": 20
-   *       }
-   *     ],
-   *     "type_id": 1
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link InsuranceApi.getInsurancePrices
+   * @return {Promise.<Array.<Object>>}
    */
   prices() {
     return this._api.insurance().newRequest('getInsurancePrices', []);

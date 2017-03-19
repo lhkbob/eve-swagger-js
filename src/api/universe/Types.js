@@ -22,28 +22,9 @@ class Group {
   }
 
   /**
-   * Get an item groups's details from the ESI endpoint. This makes an HTTP
-   * GET request to
-   * [`/universe/groups/{id}`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups_group_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_groups_group_id
    *
-   * ```
-   * {
-   *   "category_id": 6,
-   *   "group_id": 25,
-   *   "name": "Frigate",
-   *   "published": true,
-   *   "types": [
-   *     587,
-   *     586,
-   *     585
-   *   ]
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseGroupsGroupId
+   * @return {Promise.<Object>}
    */
   info() {
     return this._api.universe()
@@ -86,28 +67,11 @@ class Groups extends ExtendableFunction {
   }
 
   /**
-   * Get all item groups in the universe from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`/universe/groups/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_groups
    *
-   * ```
-   * [
-   *   1,
-   *   2,
-   *   3
-   * ]
-   * ```
-   *
-   * Technically, this end point is paginated by ESI. If invoked without a page
-   * argument, the end point will be queried multiple times to fetch the
-   * entirety of groups.
-   *
-   * @param page {Number} Optional; the page of groups to return, starting with
-   *     page 1. If not provided, all groups are returned.
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseGroups
+   * @param page {Number} If 0, then all pages are returned concatenated into a
+   *     single array.
+   * @return {Promise.<Array.<Number>>}
    */
   all(page = 0) {
     if (page == 0) {
@@ -138,27 +102,9 @@ class Category {
   }
 
   /**
-   * Get an item category's details from the ESI endpoint. This makes an HTTP
-   * GET request to
-   * [`/universe/categories/{id}`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories_category_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_categories_category_id
    *
-   * ```
-   * {
-   *   "category_id": 6,
-   *    "groups": [
-   *      25,
-   *      26,
-   *      27
-   *    ],
-   *    "name": "Ship",
-   *    "published": true
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseCategoriesCategoryId
+   * @return {Promise.<Object>}
    */
   info() {
     return this._api.universe()
@@ -200,23 +146,9 @@ class Categories extends ExtendableFunction {
   }
 
   /**
-   * Get all item categories in the universe from the ESI endpoint. This makes
-   * an HTTP GET request to
-   * [`/universe/categories/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_categories
    *
-   * ```
-   * [
-   *   1,
-   *   2,
-   *   3
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link UniverseApi.getUniverseCategories
+   * @return {Promise.<Array.<Number>>}
    */
   all() {
     return this._api.universe().newRequest('getUniverseCategories', []);
@@ -242,42 +174,9 @@ class Type {
   }
 
   /**
-   * Get a type's public info from the ESI endpoint. This makes an HTTP GET
-   * request to
-   * [`/universe/types/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types_type_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_types_type_id
    *
-   * ```
-   * {
-   *   "type_id": 587,
-   *   "name": "Rifter",
-   *   "description": "The Rifter is a ...",
-   *   "published": true,
-   *   "group_id": 25,
-   *   "radius": 31,
-   *   "volume": 27289,
-   *   "capacity": 140,
-   *   "portion_size": 1,
-   *   "mass": 1067000,
-   *   "graphic_id": 46,
-   *   "dogma_attributes": [
-   *     {
-   *       "attribute_id": 3,
-   *       "value": 0
-   *     }
-   *   ],
-   *   "dogma_effects": [
-   *     {
-   *       "effect_id": 508,
-   *       "is_default": false
-   *     }
-   *   ]
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseTypesTypeId
+   * @return {Promise.<Object>}
    */
   info() {
     return this._api.universe()
@@ -363,52 +262,20 @@ class Types extends ExtendableFunction {
   }
 
   /**
-   * Get prices for all item types from the ESI endpoint. This makes an HTTP
-   * GET
-   * request to
-   * [`/markets/prices`](https://esi.tech.ccp.is/latest/#!/Market/get_markets_prices).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_markets_prices
    *
-   * ```
-   * [
-   *   {
-   *     "adjusted_price": 306988.09,
-   *     "average_price": 306292.67,
-   *     "type_id": 32772
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link MarketApi.getMarketsPrices
+   * @return {Promise.<Array.<Object>>}
    */
   prices() {
     return this._api.market().newRequest('getMarketPrices', []);
   }
 
   /**
-   * Get all type id's the ESI endpoint. This makes an HTTP GET request to
-   * [`universe/types/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_types
    *
-   * ```
-   * [
-   *   1,
-   *   2,
-   *   3
-   * ]
-   * ```
-   *
-   * Technically, this end point is paginated by ESI. If invoked without a page
-   * argument, the end point will be queried multiple times to fetch the
-   * entirety of groups.
-   *
-   * @param page {Number} Optional; the page of groups to return, starting with
-   *     page 1. If not provided, all groups are returned.
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseTypes
+   * @param page {Number} If 0, then all pages are returned, concatenated as a
+   *     single array.
+   * @return {Promise.<Array.<Number>>}
    */
   all(page = 0) {
     if (page == 0) {
@@ -419,28 +286,18 @@ class Types extends ExtendableFunction {
   }
 
   /**
-   * Get the names for a list of solar system ids from the ESI endpoint. This
-   * makes an HTTP POST request to
-   * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route post_universe_names
    *
-   * ```
-   * [
-   *   {
-   *     "id": 1000171,
-   *     "name": "Republic University"
-   *   }
-   * ]
-   * ```
+   * Results will only includes matches with the type category.
+   * If `ids` is longer than the reported maximum length for ESI, the array
+   * will be split into smaller chunks and multiple requests will be made and
+   * then concatenated back together.
    *
-   * Note that this has the category field stripped from the response and will
-   * only include matches with the type category.
+   * @esi_returns {!category}
    *
-   * @param {Array.<Number>} ids The type ids to look up. If not provided then
-   *     the names of all item types will be returned.
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.postUniverseNames
+   * @param {Array.<Number>} ids If no ids are provided, then all names are
+   *     returned
+   * @return {Promise.<Array.<Object>>}
    */
   names(ids = []) {
     if (!ids || ids.length == 0) {

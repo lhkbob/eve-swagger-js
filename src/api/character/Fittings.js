@@ -22,14 +22,9 @@ class Fitting {
   }
 
   /**
-   * Delete the fitting from the given character's list via the ESI end point.
-   * This makes an HTTP DELETE request to
-   * [`/characters/{characterId}/fittings/{fittingId}/`](https://esi.tech.ccp.is/latest/#!/Fittings/delete_characters_character_id_fittings_fitting_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object from the response JSON model.
+   * @esi_route delete_characters_character_id_fittings_fitting_id
    *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FittingsApi.deleteCharactersCharacterIdFittingsFittingId
+   * @returns {Promise.<Object>}
    */
   del() {
     return this._fit._api.fittings(this._fit._token)
@@ -67,32 +62,9 @@ class Fittings extends ExtendableFunction {
   }
 
   /**
-   * Get all fittings for the character via the ESI end point. This makes
-   * an HTTP GET request to
-   * [`/characters/{id}/fittings/`](https://esi.tech.ccp.is/latest/#!/Fittings/get_characters_character_id_fittings).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_fittings
    *
-   * ```
-   * [
-   *   {
-   *     "description": "Awesome Vindi fitting",
-   *     "fitting_id": 1,
-   *     "items": [
-   *       {
-   *         "flag": 12,
-   *         "quantity": 1,
-   *         "type_id": 1234
-   *       }
-   *     ],
-   *     "name": "Best Vindicator",
-   *     "ship_type_id": 123
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FittingsApi.getCharactersCharacterIdFittings
+   * @returns {Promise.<Array.<Object>>}
    */
   all() {
     return this._api.fittings(this._token)
@@ -100,41 +72,11 @@ class Fittings extends ExtendableFunction {
   }
 
   /**
-   * Create a new fitting for the charactervia the ESI end point. This makes an
-   * HTTP POST request to
-   * [`/characters/{characterId}/fittings/`](https://esi.tech.ccp.is/latest/#!/Fittings/post_characters_character_id_fittings).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object containing the created fit's id. An example return value looks
-   * like:
+   * @esi_route post_characters_character_id_fittings
+   * @esi_returns id:fitting_id
    *
-   * ```
-   * {
-   *   "fitting_id": 2
-   * }
-   * ```
-   *
-   * The fitting is described by an object containing all items, an example
-   * being:
-   *
-   * ```
-   * {
-   *   "description": "string",
-   *   "items": [
-   *     {
-   *       "flag": 0,
-   *       "quantity": 0,
-   *       "type_id": 0
-   *     }
-   *   ],
-   *   "name": "string",
-   *   "ship_type_id": 0
-   * }
-   * ```
-   *
-   * @param {Object} fitting The fitting specification
-   *   access token is used. This will fail if neither is available.
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link FittingsApi.postCharactersCharacterIdFittings
+   * @param fitting {Object}
+   * @returns {Promise.<Number>}
    */
   add(fitting) {
     return this._api.fittings(this._token)

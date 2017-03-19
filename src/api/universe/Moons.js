@@ -25,27 +25,9 @@ class Moon {
   }
 
   /**
-   * Get information on the planet from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`universe/moons/{id}/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Universe/get_universe_moons_moon_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_moons_moon_id
    *
-   * ```
-   * {
-   *   "moon_id": 40000042,
-   *   "name": "Akpivem I - Moon 1",
-   *   "position": {
-   *     "x": 58605102008,
-   *     "y": -3066616285,
-   *     "z": -55193617920
-   *   },
-   *   "system_id": 30000003
-   * }
-   * ```
-   *
-   * @returns {Promise}
-   * @esi_link UniverseApi.getUniverseMoonsMoonId
+   * @returns {Promise.<Object>}
    */
   info() {
     return this._api.universe()

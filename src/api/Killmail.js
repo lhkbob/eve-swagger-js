@@ -69,13 +69,15 @@ class Killmail extends ExtendableFunction {
    * }
    * ```
    *
-   * @param {Number} id The killmail id
-   * @param {String} hash The killmail hash
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
+   * @esi_route get_killmails_killmail_id_killmail_hash
+   * @esi_param killmail_id - id
+   * @esi_param killmail_hash - hash
+   *
+   * @param {Number} id
+   * @param {String} hash
+   * @return {Promise.<Object>}
    * @see War#killmails
    * @see Character#killmails
-   * @esi_link KillmailsApi.getKillmailsKillmailIdKillmailHash
    */
   get(id, hash) {
     return this._api.killmails()

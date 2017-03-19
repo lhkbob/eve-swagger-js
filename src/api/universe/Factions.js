@@ -40,30 +40,9 @@ class Factions extends ExtendableFunction {
   }
 
   /**
-   * Get all factions and their information from the ESI endpoints. This makes
-   * an HTTP GET request to
-   * [`universe/factions/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_factions)
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_factions
    *
-   * ```
-   * [
-   *   {
-   *     "corporation_id": 456,
-   *     "description": "blah blah",
-   *     "faction_id": 1,
-   *     "is_unique": true,
-   *     "name": "Faction",
-   *     "size_factor": 1,
-   *     "solar_system_id": 123,
-   *     "station_count": 1000,
-   *     "station_system_count": 100
-   *   }
-   * ]
-   * ```
-   *
-   * @returns {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseFactions
+   * @returns {Promise.<Array.<Object>>}
    */
   all() {
     return this._api.universe().newRequest('getUniverseFactions', []);

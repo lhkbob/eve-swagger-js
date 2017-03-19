@@ -23,32 +23,9 @@ class Bloodlines extends ExtendableFunction {
   }
 
   /**
-   * Get all bloodlines and their information from the ESI endpoints. This makes
-   * an HTTP GET request to
-   * [`universe/bloodlines/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_bloodlines)
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_bloodlines
    *
-   * ```
-   * [
-   *   {
-   *     "bloodline_id": 1,
-   *     "charisma": 6,
-   *     "corporation_id": 1000006,
-   *     "description": "The Deteis are regarded as ...",
-   *     "intelligence": 7,
-   *     "memory": 7,
-   *     "name": "Deteis",
-   *     "perception": 5,
-   *     "race_id": 1,
-   *     "ship_type_id": 601,
-   *     "willpower": 5
-   *   }
-   * ]
-   * ```
-   *
-   * @returns {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseBloodlines
+   * @returns {Promise.<Array.<Object>>}
    */
   all() {
     return this._api.universe().newRequest('getUniverseBloodlines', []);

@@ -29,89 +29,23 @@ class War {
   }
 
   /**
-   * Get information on a war from the ESI endpoint. This makes an HTTP GET
-   * request to
-   * [`/wars/{id}/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_wars_war_id
    *
-   * ```
-   * {
-   *   "aggressor": {
-   *     "corporation_id": 986665792,
-   *     "isk_destroyed": 0,
-   *     "ships_killed": 0
-   *   },
-   *   "declared": "2004-05-22T05:20:00Z",
-   *   "defender": {
-   *     "corporation_id": 1001562011,
-   *     "isk_destroyed": 0,
-   *     "ships_killed": 0
-   *   },
-   *   "id": 1941,
-   *   "mutual": false,
-   *   "open_for_allies": false
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
+   * @return {Promise.<Object>} A Promise that resolves to the response of
    *   the request
-   * @esi_link WarsApi.getWarsWarId
    */
   info() {
     return this._api.wars().newRequest('getWarsWarId', [this._id]);
   }
 
   /**
-   * Get the kill details for the given `page` of killmails. This fetches the
-   * killmails and then uses {@link Killmail.get} to map the details. The
-   * request resolves to an array, each containing a killmail detail:
-   *
-   * ```
-   * [
-   *   {
-   *     "attackers": [
-   *       {
-   *         "character_id": 95810944,
-   *         "corporation_id": 1000179,
-   *         "damage_done": 5745,
-   *         "faction_id": 500003,
-   *         "final_blow": true,
-   *         "security_status": -0.3,
-   *         "ship_type_id": 17841,
-   *         "weapon_type_id": 3074
-   *       }
-   *     ],
-   *     "killmail_id": 56733821,
-   *     "killmail_time": "2016-10-22T17:13:36Z",
-   *     "solar_system_id": 30002976,
-   *     "victim": {
-   *       "alliance_id": 621338554,
-   *       "character_id": 92796241,
-   *       "corporation_id": 841363671,
-   *       "damage_taken": 5745,
-   *       "items": [
-   *         {
-   *           "flag": 20,
-   *           "item_type_id": 5973,
-   *           "quantity_dropped": 1,
-   *           "singleton": 0
-   *         }
-   *       ],
-   *       "position": {
-   *         "x": 452186600569.4748,
-   *         "y": 146704961490.90222,
-   *         "z": 109514596532.54477
-   *       },
-   *       "ship_type_id": 17812
-   *     }
-   *   }
-   * ]
-   * ```
+   * Get the kill details for the war's {@link War#killmails
+   * killmails} and then uses {@link Killmail#get} to map the details.
+   * The request resolves to an array, each containing a killmail detail.
    *
    * @param page {Number} Optional; the page of killmails to fetch, starting
    *     with page 1. If not provided then all kills are returned.
-   * @returns {Promise}
+   * @returns {Promise.<Array.<Object>>}
    */
   kills(page = 0) {
     if (page == 0) {
@@ -133,32 +67,12 @@ class War {
   }
 
   /**
-   * Get killmail ids and hashes from a war from the ESI endpoint. This makes
-   * an
-   * HTTP GET request to
-   * [`/wars/{id}/killmails/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_wars_war_id_killmails
    *
-   * ```
-   * [
-   *   {
-   *     "killmail_hash": "8eef5e8fb6b88fe3407c489df33822b2e3b57a5e",
-   *     "killmail_id": 2
-   *   },
-   *   {
-   *     "killmail_hash": "b41ccb498ece33d64019f64c0db392aa3aa701fb",
-   *     "killmail_id": 1
-   *   }
-   * ]
-   * ```
-   *
-   * @param page {Number} Optional; the page of killmails to fetch, starting
-   *     with page 1. If not provided then all mails are returned.
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
+   * @param page {Number} If 0, then all pages are fetched and concatenated
+   *     together
+   * @return {Promise.<Array.<Object>>}
    * @see Killmail#get
-   * @esi_link WarsApi.getWarsWarIdKillmails
    */
   killmails(page = 0) {
     if (page == 0) {
@@ -208,26 +122,11 @@ class Wars extends ExtendableFunction {
   }
 
   /**
-   * Get the latest war ids from the ESI endpoint. This makes an HTTP GET
-   * request to [`/wars/`](https://esi.tech.ccp.is/latest/#!/Wars/get_wars). The
-   * request is returned as an asynchronous Promise that resolves to an array
-   * parsed from the response JSON model. An example value looks like:
+   * @esi_route get_wars
+   * @esi_param max_war_id - maxId
    *
-   * ```
-   * [
-   *   3,
-   *   2,
-   *   1
-   * ]
-   * ```
-   *
-   * Up to 2000 wars are returned per request.
-   *
-   * @param maxId {Number} Optional; the maximum war id for the request, only
-   *     wars smaller than this are returned. If not provided, the newest wars
-   *     are returned
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link WarsApi.getWars
+   * @param maxId {Number} If not provided (or 0), the newest wars are returned
+   * @return {Promise.<Array.<Number>>}
    */
   recent(maxId = 0) {
     let opts = {};
@@ -237,6 +136,5 @@ class Wars extends ExtendableFunction {
     return this._api.wars().newRequest('getWars', [], opts);
   }
 }
-
 
 module.exports = Wars;

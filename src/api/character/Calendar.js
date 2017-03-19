@@ -28,32 +28,8 @@ class Event {
   }
 
   /**
-   * Get all information for a specific event via the ESI end point. This makes
-   * an HTTP GET request to
-   * [`/characters/{characterId}/calendar/{eventId}`](https://esi.tech.ccp.is/latest/#!/Calendar/get_characters_character_id_calendar_event_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
-   *
-   * ```
-   * {
-   *   "date": "2016-06-26T21:00:00Z",
-   *   "duration": 60,
-   *   "event_id": 1386435,
-   *   "importance": 1,
-   *   "owner_id": 1,
-   *   "owner_name": "EVE System",
-   *   "owner_type": "eve_server",
-   *   "response": "Undecided",
-   *   "text": "o7: The EVE Online Show features latest developer news, fast
-   * paced action, community overviews and a lot more with CCP Guard and CCP
-   * Mimic. Join the thrilling o7 live broadcast at 20:00 EVE time (=UTC) on
-   * <a href=\"http://www.twitch.tv/ccp\">EVE TV</a>. Don't miss it!",
-   *   "title": "o7 The EVE Online Show"
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CalendarApi.getCharactersCharacterIdCalendarEventId
+   * @esi_route get_characters_character_id_calendar_event_id
+   * @returns {Promise.<Object>}
    */
   info() {
     return this._cal._api.calendar(this._cal._token)
@@ -62,45 +38,33 @@ class Event {
   }
 
   /**
-   * Update response for the event to be `'rejected'`, via the ESI end point.
-   * This makes an HTTP PUT request to
-   * [`/characters/{characterId}/calendar/{eventId}`](https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route put_characters_character_id_calendar_event_id
+   * @esi_param response - {"response": "rejected"}
    *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CalendarApi.putCharactersCharacterIdCalendarEventId
+   * @returns {Promise.<Object>}
    */
   reject() {
     return respondToEvent(this._cal, this._id, 'rejected');
   }
 
   /**
-   * Update response for the event to be `'accepted'`, via the ESI end point.
-   * This makes an HTTP PUT request to
-   * [`/characters/{characterId}/calendar/{eventId}`](https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route put_characters_character_id_calendar_event_id
+   * @esi_param response - {"response": "accepted"}
    *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CalendarApi.putCharactersCharacterIdCalendarEventId
+   * @returns {Promise.<Object>}
    */
   accept() {
     return respondToEvent(this._cal, this._id, 'accepted');
   }
 
   /**
-   * Update response for the event to be `'undecided'`, via the ESI end point.
-   * This makes an HTTP PUT request to
-   * [`/characters/{characterId}/calendar/{eventId}`](https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * empty object on success.
+   * @esi_route put_characters_character_id_calendar_event_id
+   * @esi_param response - {"response": "tentative"}
    *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CalendarApi.putCharactersCharacterIdCalendarEventId
+   * @returns {Promise.<Object>}
    */
   undecided() {
-    return respondToEvent(this._cal, this._id, 'undecided');
+    return respondToEvent(this._cal, this._id, 'tentative');
   }
 }
 
@@ -144,31 +108,11 @@ class Calendar extends ExtendableFunction {
   }
 
   /**
-   * Get up to 50 future calendar event summaries for the character via
-   * the ESI end point. If `fromEventId` is provided, the returned events will
-   * be the next 50 events chronologically beyond the event.
+   * @esi_route get_characters_character_id_calendar
+   * @esi_param from_event - fromEventId
    *
-   * This makes an HTTP GET request to
-   * [`/characters/{characterId}/calendar`](https://esi.tech.ccp.is/latest/#!/Calendar/get_characters_character_id_calendar).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
-   *
-   * ```
-   * [
-   *   {
-   *     "event_date": "2016-06-26T20:00:00Z",
-   *     "event_id": 1386435,
-   *     "event_response": "accepted",
-   *     "importance": 0,
-   *     "title": "o7 The EVE Online Show"
-   *   }
-   * ]
-   * ```
-   *
-   * @param {Number} fromEventId Optional; the event id that returned events
-   *   will be chronologically later than.
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CalendarApi.getCharactersCharacterIdCalendar
+   * @param fromEventId {Number} If `0`, the most recent events are returned.
+   * @returns {Promise.<Array.<Object>>}
    */
   recent(fromEventId = 0) {
     let opts = {};

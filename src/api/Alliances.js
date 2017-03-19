@@ -25,24 +25,9 @@ class Alliance {
   }
 
   /**
-   * Get the public info of the alliance from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`alliances/{id}/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_alliances_alliance_id
    *
-   * ```
-   * {
-   *   "alliance_name": "C C P Alliance",
-   *   "date_founded": "2016-06-26T21:00:00Z",
-   *   "executor_corp": 98356193,
-   *   "ticker": "<C C P>"
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link AllianceApi.getAlliancesAllianceId
+   * @return {Promise.<Object>}
    */
   info() {
     return this._api.alliance()
@@ -50,47 +35,19 @@ class Alliance {
   }
 
   /**
-   * Get the corporations of the alliance from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`alliances/{id}/corporations/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_corporations).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_alliances_alliance_id_corporations
    *
-   * ```
-   * [
-   *   98000001
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link AllianceApi.getAlliancesAllianceIdCorporations
+   * @return {Promise.<Array.<Number>>}
    */
   corporations() {
     return this._api.alliance()
     .newRequest('getAlliancesAllianceIdCorporations', [this._id]);
   }
 
-
   /**
-   * Get the icon URLs the alliance from the ESI endpoint. This makes an HTTP
-   * GET request to
-   * [`alliances/{id}/icons/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_icons).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_alliances_alliance_id_icons
    *
-   * ```
-   * {
-   *   "px128x128":
-   *      "https://imageserver.eveonline.com/Alliance/503818424_128.png",
-   *   "px64x64":
-   *      "https://imageserver.eveonline.com/Alliance/503818424_64.png"
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link AllianceApi.getAlliancesAllianceIdIcons
+   * @return {Promise.<Object>}
    */
   icon() {
     return this._api.alliance()
@@ -147,53 +104,22 @@ class Alliances extends ExtendableFunction {
   }
 
   /**
-   * Get all active alliance id's the ESI endpoint. This makes an HTTP GET
-   * request to
-   * [`alliances/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_alliances
    *
-   * ```
-   * [
-   *   99000001,
-   *   99000002
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link AllianceApi.getAlliances
+   * @return {Promise.<Array.<Number>>}
    */
   all() {
     return this._api.alliance().newRequest('getAlliances', []);
   }
 
   /**
-   * Get the names for a list of alliance ids from the ESI endpoint. This makes
-   * an HTTP GET request to
-   * [`alliances/names/`](https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_names).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_alliances_names
+   * @esi_param alliance_ids - ids
+   * @esi_returns {alliance_id: id, alliance_name: name}
    *
-   * ```
-   * [
-   *   {
-   *     "id": 1000171,
-   *     "name": "Republic University"
-   *   }
-   * ]
-   * ```
-   *
-   * Note that this has the id and name fields simplified compared to what the
-   * actual ESI end point reports ('alliance_id' and 'alliance_name'). For very
-   * long arrays, this will fall back to making an HTTP POST request to
-   * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names),
-   * which does not have a URL length limitation. In this case the response
-   * format will be as above.
-   *
-   * @param {Array.<Number>} ids Optional; the alliance ids to look up. If not
-   *   provided then the names of all alliances will be returned.
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link AllianceApi.getAlliancesNames
+   * @param {Array.<Number>} ids If not provided then the names of all
+   *     alliances will be returned.
+   * @return {Promise.<Array.<Object>>}
    */
   names(ids = []) {
     if (!ids || ids.length == 0) {
@@ -204,7 +130,7 @@ class Alliances extends ExtendableFunction {
         // the URL gets too long.
         return _names(this._api, 'alliance', ids);
       } else {
-        // Use alliance/names end point and
+        // Use alliance/names end point
         return this._api.alliance().newRequest('getAlliancesNames', [ids])
         .then(result => {
           // Rename alliance_id and alliance_name

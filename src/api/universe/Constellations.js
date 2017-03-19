@@ -26,31 +26,9 @@ class Constellation {
   }
 
   /**
-   * Get information on the constellation from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`universe/constellations/{id}/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Universe/get_universe_constellations_constellation_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_constellations_constellation_id
    *
-   * ```
-   * {
-   *   "constellation_id": 20000009,
-   *   "name": "Mekashtad",
-   *   "position": {
-   *     "x": 67796138757472320,
-   *     "y": -70591121348560960,
-   *     "z": -59587016159270070
-   *   },
-   *   "region_id": 10000001,
-   *   "systems": [
-   *     20000302,
-   *     20000303
-   *   ]
-   * }
-   * ```
-   *
-   * @returns {Promise}
-   * @esi_link UniverseApi.getUniverseConstellationsConstellationId
+   * @returns {Promise.<Object>}
    */
   info() {
     return this._api.universe()
@@ -110,50 +88,27 @@ class Constellations extends ExtendableFunction {
   }
 
   /**
-   * Get all constellation ids from the ESI endpoint. This makes an HTTP GET
-   * request to
-   * [`universe/constellations/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Universe/get_universe_constellations).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_constellations
    *
-   * ```
-   * [
-   *   20000001,
-   *   20000002
-   * ]
-   * ```
-   *
-   * @returns {Promise}
-   * @esi_link UniverseApi.getUniverseConstellations
+   * @return {Promise.<Array.<Number>>}
    */
   all() {
     return this._api.universe().newRequest('getUniverseConstellations', []);
   }
 
   /**
-   * Get the names for a list of constellation ids from the ESI endpoint. This
-   * makes an HTTP POST request to
-   * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route post_universe_names
    *
-   * ```
-   * [
-   *   {
-   *     "id": 1000171,
-   *     "name": "Republic University"
-   *   }
-   * ]
-   * ```
+   * The results will only include matches with the constellation category.
+   * If `ids` is longer than the reported maximum length for ESI, the array
+   * will be split into smaller chunks and multiple requests will be made and
+   * then concatenated back together.
    *
-   * Note that this has the category field stripped from the response and will
-   * only include matches with the constellation category.
+   * @esi_returns {!category}
    *
-   * @param {Array.<Number>} ids Optional; the constellation ids to look up. If
-   *     not provided then the names of all constellations will be returned.
-   * @return {Promise} A Promise that resolves to the response of
-   *     the request
-   * @esi_link UniverseApi.postUniverseNames
+   * @param {Array.<Number>} ids If no ids are provided, then all names are
+   *     returned.
+   * @return {Promise.<Array.<Object>>}
    */
   names(ids = []) {
     if (!ids || ids.length == 0) {

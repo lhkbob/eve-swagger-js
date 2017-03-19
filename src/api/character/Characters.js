@@ -41,27 +41,9 @@ class CharacterInfo {
   }
 
   /**
-   * Get the public info of the character from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`characters/{id}/`](https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id
    *
-   * ```
-   * {
-   *   "ancestry_id": 19,
-   *   "birthday": "2015-03-24T11:37:00Z",
-   *   "bloodline_id": 3,
-   *   "corporation_id": 109299958,
-   *   "description": "",
-   *   "gender": "male",
-   *   "name": "CCP Bartender",
-   *   "race_id": 2
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CharacterApi.getCharactersCharacterId
+   * @returns {Promise.<Object>}
    */
   info() {
     return this._api.character()
@@ -69,59 +51,19 @@ class CharacterInfo {
   }
 
   /**
-   * Get a character's portrait URLs from the ESI endpoint. This makes an HTTP
-   * GET request to
-   * [`characters/{id}/portraits/`](https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_portraits).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_portrait
    *
-   * ```
-   * {
-   *   "px128x128":
-   * "https://imageserver.eveonline.com/Character/95465499_128.jpg",
-   *   "px256x256":
-   * "https://imageserver.eveonline.com/Character/95465499_256.jpg",
-   *   "px512x512":
-   * "https://imageserver.eveonline.com/Character/95465499_512.jpg",
-   *   "px64x64":
-   * "https://imageserver.eveonline.com/Character/95465499_64.jpg"
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CharacterApi.getCharactersCharacterIdPortraits
+   * @returns {Promise.<Object>}
    */
   portrait() {
     return this._api.character()
-    .newRequest('getCharactersCharacterIdPortraits', [this._id]);
+    .newRequest('getCharactersCharacterIdPortrait', [this._id]);
   }
 
   /**
-   * Get a character's corporation history from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`characters/{id}/corporationhistory/`](https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_corporationhistory).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_corporationhistory
    *
-   * ```
-   * [
-   *   {
-   *     "corporation_id": 90000001,
-   *     "is_deleted": false,
-   *     "record_id": 500,
-   *     "start_date": "2016-06-26T20:00:00Z"
-   *   },
-   *   {
-   *     "corporation_id": 90000002,
-   *     "is_deleted": false,
-   *     "record_id": 501,
-   *     "start_date": "2016-07-26T20:00:00Z"
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CharacterApi.getCharactersCharacterIdCorporationHistory
+   * @returns {Promise.<Array.<Object>>}
    */
   history() {
     return this._api.character()
@@ -309,27 +251,9 @@ class Character extends CharacterInfo {
   }
 
   /**
-   * Get a character's assets from the ESI endpoint. This makes an HTTP GET
-   * request to
-   * [`characters/{id}/assets/`](https://esi.tech.ccp.is/latest/#!/Assets/get_characters_character_id_assets).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_assets
    *
-   * ```
-   * [
-   *   {
-   *     "is_singleton": true,
-   *     "item_id": 1000000016835,
-   *     "location_flag": "Hangar",
-   *     "location_id": 60002959,
-   *     "location_type": "station",
-   *     "type_id": 3516
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link AssetsApi.getCharactersCharacterIdPortraits
+   * @returns {Promise.<Array.<Object>>}
    */
   assets() {
     return this._api.assets(this._token)
@@ -337,37 +261,9 @@ class Character extends CharacterInfo {
   }
 
   /**
-   * Get a character's clones state from the ESI endpoint. This makes an HTTP
-   * GET request to
-   * [`characters/{id}/clones/`](https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_clones).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_clones
    *
-   * ```
-   * {
-   *   "home_location": {
-   *     "location_id": 1021348135816,
-   *    "location_type": "structure"
-   *   },
-   *   "jump_clones": [
-   *     {
-   *       "implants": [
-   *         22118
-   *       ],
-   *       "location_id": 60003463,
-   *       "location_type": "station"
-   *     },
-   *     {
-   *       "implants": [],
-   *      "location_id": 1021348135816,
-   *      "location_type": "structure"
-   *     }
-   *   ]
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link ClonesApi.getCharactersCharacterIdClones
+   * @returns {Promise.<Object>}
    */
   clones() {
     return this._api.clones(this._token)
@@ -375,55 +271,13 @@ class Character extends CharacterInfo {
   }
 
   /**
-   * Get the kill details for the recent {@link Character.recentKillmails
-   * recentKillmails} and then uses {@link Killmail.get} to map the details.
-   * The request resolves to an array, each containing a killmail detail:
-   *
-   * ```
-   * [
-   *   {
-   *     "attackers": [
-   *       {
-   *         "character_id": 95810944,
-   *         "corporation_id": 1000179,
-   *         "damage_done": 5745,
-   *         "faction_id": 500003,
-   *         "final_blow": true,
-   *         "security_status": -0.3,
-   *         "ship_type_id": 17841,
-   *         "weapon_type_id": 3074
-   *       }
-   *     ],
-   *     "killmail_id": 56733821,
-   *     "killmail_time": "2016-10-22T17:13:36Z",
-   *     "solar_system_id": 30002976,
-   *     "victim": {
-   *       "alliance_id": 621338554,
-   *       "character_id": 92796241,
-   *       "corporation_id": 841363671,
-   *       "damage_taken": 5745,
-   *       "items": [
-   *         {
-   *           "flag": 20,
-   *           "item_type_id": 5973,
-   *           "quantity_dropped": 1,
-   *           "singleton": 0
-   *         }
-   *       ],
-   *       "position": {
-   *         "x": 452186600569.4748,
-   *         "y": 146704961490.90222,
-   *         "z": 109514596532.54477
-   *       },
-   *       "ship_type_id": 17812
-   *     }
-   *   }
-   * ]
-   * ```
+   * Get the kill details for the recent {@link Character#recentKillmails
+   * recentKillmails} and then uses {@link Killmail#get} to map the details.
+   * The request resolves to an array, each containing a killmail detail.
    *
    * @param maxKillId {Number} Optional; the mail id that limits which mails
    *   can be returned. If provided recent mails older than the id are returned
-   * @returns {Promise}
+   * @returns {Promise.<Array.<Object>>}
    */
   recentKills(maxKillId = 0) {
     if (this._kills == null) {
@@ -438,45 +292,23 @@ class Character extends CharacterInfo {
 
   /**
    * Get all kill, over all of history, for the given character. This makes
-   * multiple calls to {@link Character.recentKills recentKills}. This
+   * multiple calls to {@link Character#recentKills recentKills}. This
    * should be used with caution as some characters may have a very large number
    * of kills.
    *
-   * @returns {Promise}
+   * @returns {Promise.<Array.<Object>>}
    */
   kills() {
     return this._allKills.getAll();
   }
 
   /**
-   * Get recent kill mails for the given character via the ESI end point. Up to
-   * to 50 mails are provided at a time. Pagination is supported by specifying
-   * `maxKillId`, in which case the most recent mails prior to the max id will
-   * be returned.
+   * @esi_route get_characters_character_id_killmails_recent
+   * @esi_param max_count - 50
    *
-   * This makes an HTTP GET request to
-   * [`/characters/{characterId}/killmails/recent/`](https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
-   *
-   * ```
-   * [
-   *   {
-   *     "killmail_hash": "8eef5e8fb6b88fe3407c489df33822b2e3b57a5e",
-   *     "killmail_id": 2
-   *   },
-   *   {
-   *     "killmail_hash": "b41ccb498ece33d64019f64c0db392aa3aa701fb",
-   *     "killmail_id": 1
-   *   }
-   * ]
-   * ```
-   *
-   * @param {Number} maxKillId Optional; the mail id that limits which mails
-   *   can be returned. If provided recent mails older than the id are returned
-   * @return {Promise} A Promise that resolves to the response of the request
+   * @param maxKillId {Number} If `0`, the most recent killmails are returned.
+   * @returns {Promise.<Array.<Object>>}
    * @see Killmail#get
-   * @esi_link KillmailsApi.getCharactersCharacterIdKillmailsRecent
    */
   recentKillmails(maxKillId = 0) {
     let opts = { maxCount: 50 };
@@ -489,35 +321,20 @@ class Character extends CharacterInfo {
 
   /**
    * Get all killmails, over all of history, for the given character. This makes
-   * multiple calls to {@link Character.recentKillmails recentKillmails}. This
+   * multiple calls to {@link Character#recentKillmails recentKillmails}. This
    * should be used with caution as some characters may have a very large number
    * of kills.
    *
-   * @returns {Promise}
+   * @returns {Promise.<Array.<Object>>}
    */
   killmails() {
     return this._allMails.getAll();
   }
 
   /**
-   * Get all loyalty points the character has earned, from every corporation
-   * they have worked for from the ESI endpoint. This makes an HTTP GET request
-   * to
-   * [`characters/{id}/loyalty/points/`](https://esi.tech.ccp.is/dev/?datasource=tranquility#!/Loyalty/get_characters_character_id_loyalty_points).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_loyalty_points
    *
-   * ```
-   * [
-   *   {
-   *     "corporation_id": 123,
-   *     "loyalty_points": 100
-   *   }
-   * ]
-   * ```
-   *
-   * @returns {Promise}
-   * @esi_link LoyaltyApi.getCharactersCharacterIdLoyaltyPoints
+   * @returns {Promise.<Array.<Object>>}
    */
   loyaltyPoints() {
     return this._api.loyalty(this._token)
@@ -525,22 +342,9 @@ class Character extends CharacterInfo {
   }
 
   /**
-   * Get a character's current ship from the ESI endpoint. This makes an HTTP
-   * GET request to
-   * [`characters/{id}/ship/`](https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_ship
    *
-   * ```
-   * {
-   *   "ship_item_id": 1000000016991,
-   *   "ship_name": "SPACESHIPS!!!",
-   *   "ship_type_id": 1233
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link LocationApi.getCharactersCharacterIdShip
+   * @returns {Promise.<Object>}
    */
   ship() {
     return this._api.location(this._token)
@@ -548,22 +352,9 @@ class Character extends CharacterInfo {
   }
 
   /**
-   * Get the character's location from the ESI endpoint. This makes an HTTP GET
-   * request to
-   * [`characters/{id}/location/`](https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_location
    *
-   * ```
-   * {
-   *   "solar_system_id": 30002505,
-   *   "structure_id": 1000000016989
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of
-   *   the request
-   * @esi_link LocationApi.getCharactersCharacterIdLocation
+   * @returns {Promise.<Object>}
    */
   location() {
     return this._api.location(this._token)
@@ -571,23 +362,9 @@ class Character extends CharacterInfo {
   }
 
   /**
-   * Get the character's wallets' balances from the ESI endpoint. This makes an
-   * HTTP GET request to
-   * [`characters/{id}/wallets/`](https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_wallets
    *
-   * ```
-   * [
-   *   {
-   *     "balance": 295000,
-   *     "wallet_id": 1000
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link WalletApi.getCharactersCharacterIdWallets
+   * @returns {Promise.<Array.<Object>>}
    */
   wallets() {
     return this._api.wallet(this._token)
@@ -595,32 +372,9 @@ class Character extends CharacterInfo {
   }
 
   /**
-   * Get the character's trained skills, sorted ascending by finishing time,
-   * from the ESI endpoint. This makes an HTTP GET request to
-   * [`characters/{id}/skills/`](https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_skills
    *
-   * ```
-   * {
-   *   "skills": [
-   *     {
-   *       "current_skill_level": 1,
-   *       "skill_id": 1,
-   *       "skillpoints_in_skill": 10000
-   *     },
-   *     {
-   *       "current_skill_level": 1,
-   *       "skill_id": 2,
-   *       "skillpoints_in_skill": 10000
-   *     }
-   *   ],
-   *   "total_sp": 20000
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link SkillsApi.getCharactersCharacterIdSkills
+   * @returns {Promise.<Object>}
    */
   skills() {
     return this._api.skills(this._token)
@@ -628,40 +382,9 @@ class Character extends CharacterInfo {
   }
 
   /**
-   * Get the character's skill queue, sorted ascending by finishing time, from
-   * the ESI endpoint. This makes an HTTP GET request to
-   * [`characters/{id}/skillqueue/`](https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_character_id_skillqueue
    *
-   * ```
-   * [
-   *   {
-   *     "finish_date": "2016-06-29T10:47:00Z",
-   *     "finished_level": 3,
-   *     "queue_position": 0,
-   *     "skill_id": 1,
-   *     "start_date": "2016-06-29T10:46:00Z"
-   *   },
-   *   {
-   *     "finish_date": "2016-07-15T10:47:00Z",
-   *     "finished_level": 4,
-   *     "queue_position": 1,
-   *     "skill_id": 1,
-   *     "start_date": "2016-06-29T10:47:00Z"
-   *   },
-   *   {
-   *     "finish_date": "2016-08-30T10:47:00Z",
-   *     "finished_level": 2,
-   *     "queue_position": 2,
-   *     "skill_id": 2,
-   *     "start_date": "2016-07-15T10:47:00Z"
-   *   }
-   * ]
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link SkillsApi.getCharactersCharacterIdSkillqueue
+   * @returns {Promise.<Array.<Object>>}
    */
   skillqueue() {
     return this._api.skills(this._token)
@@ -724,40 +447,21 @@ class Characters extends ExtendableFunction {
   }
 
   /**
-   * Get the names for a list of character ids from the ESI endpoint. This
-   * makes
-   * an HTTP GET request to
-   * [`characters/names/`](https://esi.tech.ccp.is/latest/#!/Character/get_characters_names).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route get_characters_names
+   * @esi_param character_ids - ids
+   * @esi_returns {character_id: id, character_name: name}
    *
-   * ```
-   * [
-   *   {
-   *     "id": 95465499,
-   *     "name": "CCP Bartender"
-   *   }
-   * ]
-   * ```
-   *
-   * Note that this has the id and name fields simplified compared to what the
-   * actual ESI end point reports ('character_id' and 'character_name'). For
-   * very long arrays, this will fall back to making an HTTP POST request to
-   * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names),
-   * which does not have a URL length limitation. In this case the response
-   * format will be as above.
-   *
-   * @param {Array.<Number>} ids The character ids to look up.
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link CharacterApi.getCharactersNames
+   * @param ids {Array.<Number>}
+   * @returns {Promise.<Array.<Object>>}
    */
   names(ids) {
+    // FIXME actually call get_characters_names
     if (ids.length > 20) {
       // Use universe/names end point since the /characters one breaks if
       // the URL gets too long.
       return _names(this._api, 'character', ids);
     } else {
-      // Use characters/names end point and
+      // Use character/names end point
       return this._api.character().newRequest('getCharactersNames', [ids])
       .then(result => {
         // Rename character_id and character_name

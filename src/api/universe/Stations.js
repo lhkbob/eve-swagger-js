@@ -22,21 +22,9 @@ class Station {
   }
 
   /**
-   * Get station public info from the ESI endpoint. This makes an HTTP GET
-   * request to
-   * [`/universe/stations/{id}/`](https://esi.tech.ccp.is/latest/#!/Universe/get_universe_stations_station_id).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * @esi_route get_universe_stations_station_id
    *
-   * ```
-   * {
-   *   "solar_system_id": 30000142,
-   *   "station_name": "Jita IV Moon IV - Caldari Navy Assembly Plant"
-   * }
-   * ```
-   *
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.getUniverseStationsStationId
+   * @return {Promise.<Object>}
    */
   info() {
     return this._api.universe()
@@ -93,27 +81,17 @@ class Stations extends ExtendableFunction {
   }
 
   /**
-   * Get the names for a list of station ids from the ESI endpoint. This
-   * makes an HTTP POST request to
-   * [`universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
-   * The request is returned as an asynchronous Promise that resolves to an
-   * array parsed from the response JSON model. An example value looks like:
+   * @esi_route post_universe_names
    *
-   * ```
-   * [
-   *   {
-   *     "id": 1000171,
-   *     "name": "Republic University"
-   *   }
-   * ]
-   * ```
+   * Results will only include matches with the station category.
+   * If `ids` is longer than the reported maximum length for ESI, the array
+   * will be split into smaller chunks and multiple requests will be made and
+   * then concatenated back together.
    *
-   * Note that this has the category field stripped from the response and will
-   * only include matches with the station category.
+   * @esi_returns {!category}
    *
-   * @param {Array.<Number>} ids The station ids to look up.
-   * @return {Promise} A Promise that resolves to the response of the request
-   * @esi_link UniverseApi.postUniverseNames
+   * @param {Array.<Number>} ids
+   * @return {Promise.<Array.<Object>>}
    */
   names(ids) {
     return _names(this._api, 'station', ids);
