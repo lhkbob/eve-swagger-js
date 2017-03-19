@@ -869,36 +869,128 @@ evesso tokens.</p>
 <p>The OAuth verification is made against <a href="https://login.eveonline.com/oauth/authorize">https://login.eveonline.com/oauth/authorize</a>, although this
 is the responsibility of the app that wishes to use this library.
 <code>eve-swagger-js</code> does not provide any OAuth support.</p>
-<h3>Available Scopes</h3><ul>
-<li><code>esi-assets.read_assets.v1</code>: EVE SSO scope esi-assets.read_assets.v1</li>
-<li><code>esi-bookmarks.read_character_bookmarks.v1</code>: EVE SSO scope esi-bookmarks.read_character_bookmarks.v1</li>
-<li><code>esi-calendar.read_calendar_events.v1</code>: EVE SSO scope esi-calendar.read_calendar_events.v1</li>
-<li><code>esi-calendar.respond_calendar_events.v1</code>: EVE SSO scope esi-calendar.respond_calendar_events.v1</li>
-<li><code>esi-characters.read_contacts.v1</code>: EVE SSO scope esi-characters.read_contacts.v1</li>
-<li><code>esi-characters.read_loyalty.v1</code>: EVE SSO scope esi-characters.read_loyalty.v1</li>
-<li><code>esi-characters.write_contacts.v1</code>: EVE SSO scope esi-characters.write_contacts.v1</li>
-<li><code>esi-clones.read_clones.v1</code>: EVE SSO scope esi-clones.read_clones.v1</li>
-<li><code>esi-corporations.read_corporation_membership.v1</code>: EVE SSO scope esi-corporations.read_corporation_membership.v1</li>
-<li><code>esi-fittings.read_fittings.v1</code>: EVE SSO scope esi-fittings.read_fittings.v1</li>
-<li><code>esi-fittings.write_fittings.v1</code>: EVE SSO scope esi-fittings.write_fittings.v1</li>
-<li><code>esi-fleets.read_fleet.v1</code>: EVE SSO scope esi-fleets.read_fleet.v1</li>
-<li><code>esi-fleets.write_fleet.v1</code>: EVE SSO scope esi-fleets.write_fleet.v1</li>
-<li><code>esi-killmails.read_killmails.v1</code>: EVE SSO scope esi-killmails.read_killmails.v1</li>
-<li><code>esi-location.read_location.v1</code>: EVE SSO scope esi-location.read_location.v1</li>
-<li><code>esi-location.read_ship_type.v1</code>: EVE SSO scope esi-location.read_ship_type.v1</li>
-<li><code>esi-mail.organize_mail.v1</code>: EVE SSO scope esi-mail.organize_mail.v1</li>
-<li><code>esi-mail.read_mail.v1</code>: EVE SSO scope esi-mail.read_mail.v1</li>
-<li><code>esi-mail.send_mail.v1</code>: EVE SSO scope esi-mail.send_mail.v1</li>
-<li><code>esi-markets.structure_markets.v1</code>: EVE SSO scope esi-markets.structure_markets.v1</li>
-<li><code>esi-planets.manage_planets.v1</code>: EVE SSO scope esi-planets.manage_planets.v1</li>
-<li><code>esi-search.search_structures.v1</code>: EVE SSO scope esi-search.search_structures.v1</li>
-<li><code>esi-skills.read_skillqueue.v1</code>: EVE SSO scope esi-skills.read_skillqueue.v1</li>
-<li><code>esi-skills.read_skills.v1</code>: EVE SSO scope esi-skills.read_skills.v1</li>
-<li><code>esi-ui.open_window.v1</code>: EVE SSO scope esi-ui.open_window.v1</li>
-<li><code>esi-ui.write_waypoint.v1</code>: EVE SSO scope esi-ui.write_waypoint.v1</li>
-<li><code>esi-universe.read_structures.v1</code>: EVE SSO scope esi-universe.read_structures.v1</li>
-<li><code>esi-wallet.read_character_wallet.v1</code>: EVE SSO scope esi-wallet.read_character_wallet.v1</li>
-</ul></article>
+<h3>Available Scopes</h3><table>
+<thead>
+<tr>
+<th>SSO Scope</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>esi-assets.read_assets.v1</code></td>
+<td>EVE SSO scope esi-assets.read_assets.v1</td>
+</tr>
+<tr>
+<td><code>esi-bookmarks.read_character_bookmarks.v1</code></td>
+<td>EVE SSO scope esi-bookmarks.read_character_bookmarks.v1</td>
+</tr>
+<tr>
+<td><code>esi-calendar.read_calendar_events.v1</code></td>
+<td>EVE SSO scope esi-calendar.read_calendar_events.v1</td>
+</tr>
+<tr>
+<td><code>esi-calendar.respond_calendar_events.v1</code></td>
+<td>EVE SSO scope esi-calendar.respond_calendar_events.v1</td>
+</tr>
+<tr>
+<td><code>esi-characters.read_contacts.v1</code></td>
+<td>EVE SSO scope esi-characters.read_contacts.v1</td>
+</tr>
+<tr>
+<td><code>esi-characters.read_loyalty.v1</code></td>
+<td>EVE SSO scope esi-characters.read_loyalty.v1</td>
+</tr>
+<tr>
+<td><code>esi-characters.write_contacts.v1</code></td>
+<td>EVE SSO scope esi-characters.write_contacts.v1</td>
+</tr>
+<tr>
+<td><code>esi-clones.read_clones.v1</code></td>
+<td>EVE SSO scope esi-clones.read_clones.v1</td>
+</tr>
+<tr>
+<td><code>esi-corporations.read_corporation_membership.v1</code></td>
+<td>EVE SSO scope esi-corporations.read_corporation_membership.v1</td>
+</tr>
+<tr>
+<td><code>esi-fittings.read_fittings.v1</code></td>
+<td>EVE SSO scope esi-fittings.read_fittings.v1</td>
+</tr>
+<tr>
+<td><code>esi-fittings.write_fittings.v1</code></td>
+<td>EVE SSO scope esi-fittings.write_fittings.v1</td>
+</tr>
+<tr>
+<td><code>esi-fleets.read_fleet.v1</code></td>
+<td>EVE SSO scope esi-fleets.read_fleet.v1</td>
+</tr>
+<tr>
+<td><code>esi-fleets.write_fleet.v1</code></td>
+<td>EVE SSO scope esi-fleets.write_fleet.v1</td>
+</tr>
+<tr>
+<td><code>esi-killmails.read_killmails.v1</code></td>
+<td>EVE SSO scope esi-killmails.read_killmails.v1</td>
+</tr>
+<tr>
+<td><code>esi-location.read_location.v1</code></td>
+<td>EVE SSO scope esi-location.read_location.v1</td>
+</tr>
+<tr>
+<td><code>esi-location.read_ship_type.v1</code></td>
+<td>EVE SSO scope esi-location.read_ship_type.v1</td>
+</tr>
+<tr>
+<td><code>esi-mail.organize_mail.v1</code></td>
+<td>EVE SSO scope esi-mail.organize_mail.v1</td>
+</tr>
+<tr>
+<td><code>esi-mail.read_mail.v1</code></td>
+<td>EVE SSO scope esi-mail.read_mail.v1</td>
+</tr>
+<tr>
+<td><code>esi-mail.send_mail.v1</code></td>
+<td>EVE SSO scope esi-mail.send_mail.v1</td>
+</tr>
+<tr>
+<td><code>esi-markets.structure_markets.v1</code></td>
+<td>EVE SSO scope esi-markets.structure_markets.v1</td>
+</tr>
+<tr>
+<td><code>esi-planets.manage_planets.v1</code></td>
+<td>EVE SSO scope esi-planets.manage_planets.v1</td>
+</tr>
+<tr>
+<td><code>esi-search.search_structures.v1</code></td>
+<td>EVE SSO scope esi-search.search_structures.v1</td>
+</tr>
+<tr>
+<td><code>esi-skills.read_skillqueue.v1</code></td>
+<td>EVE SSO scope esi-skills.read_skillqueue.v1</td>
+</tr>
+<tr>
+<td><code>esi-skills.read_skills.v1</code></td>
+<td>EVE SSO scope esi-skills.read_skills.v1</td>
+</tr>
+<tr>
+<td><code>esi-ui.open_window.v1</code></td>
+<td>EVE SSO scope esi-ui.open_window.v1</td>
+</tr>
+<tr>
+<td><code>esi-ui.write_waypoint.v1</code></td>
+<td>EVE SSO scope esi-ui.write_waypoint.v1</td>
+</tr>
+<tr>
+<td><code>esi-universe.read_structures.v1</code></td>
+<td>EVE SSO scope esi-universe.read_structures.v1</td>
+</tr>
+<tr>
+<td><code>esi-wallet.read_character_wallet.v1</code></td>
+<td>EVE SSO scope esi-wallet.read_character_wallet.v1</td>
+</tr>
+</tbody>
+</table></article>
     </section>
 
 
