@@ -26,6 +26,7 @@ class Alliance {
 
   /**
    * @esi_route get_alliances_alliance_id
+   * @esi_example esi.alliances(1).info()
    *
    * @return {Promise.<Object>}
    */
@@ -36,6 +37,7 @@ class Alliance {
 
   /**
    * @esi_route get_alliances_alliance_id_corporations
+   * @esi_example esi.alliances(1).corporations()
    *
    * @return {Promise.<Array.<Number>>}
    */
@@ -46,6 +48,7 @@ class Alliance {
 
   /**
    * @esi_route get_alliances_alliance_id_icons
+   * @esi_example esi.alliances(1).icon()
    *
    * @return {Promise.<Object>}
    */
@@ -84,7 +87,7 @@ class Alliances extends ExtendableFunction {
    * A Search module instance configured to search over the `'alliance'`
    * type.
    *
-   * @returns {Search}
+   * @type {Search}
    */
   get search() {
     if (!this._search) {

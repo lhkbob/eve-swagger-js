@@ -96,7 +96,7 @@ class Corporations extends ExtendableFunction {
    * A Search module instance configured to search over the `'corporation'`
    * type.
    *
-   * @returns {Search}
+   * @type {Search}
    */
   get search() {
     if (!this._search) {

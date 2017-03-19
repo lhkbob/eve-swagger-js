@@ -61,7 +61,7 @@ class Stations extends ExtendableFunction {
    * A Search module instance configured to search over the `'station'`
    * type.
    *
-   * @returns {Search}
+   * @type {Search}
    */
   get search() {
     if (!this._search) {

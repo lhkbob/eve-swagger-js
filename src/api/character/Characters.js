@@ -123,7 +123,7 @@ class Character extends CharacterInfo {
   /**
    * An Autopilot instance linked to this Character.
    *
-   * @returns {Autopilot}
+   * @type {Autopilot}
    */
   get autopilot() {
     if (!this._auto) {
@@ -135,7 +135,7 @@ class Character extends CharacterInfo {
   /**
    * A Bookmarks instance linked to this Character.
    *
-   * @returns {Bookmarks}
+   * @type {Bookmarks}
    */
   get bookmarks() {
     if (!this._bms) {
@@ -147,7 +147,7 @@ class Character extends CharacterInfo {
   /**
    * A Calendar instance linked to this Character.
    *
-   * @returns {Calendar}
+   * @type {Calendar}
    */
   get calendar() {
     if (!this._cal) {
@@ -159,7 +159,7 @@ class Character extends CharacterInfo {
   /**
    * A Colonies instance linked to this Character.
    *
-   * @returns {Colonies}
+   * @type {Colonies}
    */
   get colonies() {
     if (!this._pi) {
@@ -171,7 +171,7 @@ class Character extends CharacterInfo {
   /**
    * A Contacts instance linked to this Character.
    *
-   * @returns {Contacts}
+   * @type {Contacts}
    */
   get contacts() {
     if (!this._contacts) {
@@ -183,7 +183,7 @@ class Character extends CharacterInfo {
   /**
    * A CharacterCorporation instance linked to this Character.
    *
-   * @returns {CharacterCorporation}
+   * @type {CharacterCorporation}
    */
   get corporation() {
     if (!this._corp) {
@@ -195,7 +195,7 @@ class Character extends CharacterInfo {
   /**
    * A Fittings instance linked to this Character.
    *
-   * @returns {Fittings}
+   * @type {Fittings}
    */
   get fittings() {
     if (!this._fit) {
@@ -207,7 +207,7 @@ class Character extends CharacterInfo {
   /**
    * A Mail instance linked to this Character.
    *
-   * @returns {Mail}
+   * @type {Mail}
    */
   get mail() {
     if (!this._mail) {
@@ -219,7 +219,7 @@ class Character extends CharacterInfo {
   /**
    * A Structures instance linked to this Character.
    *
-   * @returns {Structures}
+   * @type {Structures}
    */
   get structures() {
     if (!this._struct) {
@@ -231,7 +231,7 @@ class Character extends CharacterInfo {
   /**
    * A Window instance linked to this Character.
    *
-   * @returns {Window}
+   * @type {Window}
    */
   get window() {
     if (!this._win) {
@@ -420,7 +420,7 @@ class Characters extends ExtendableFunction {
    * A Search module instance configured to search over the `'character'`
    * type.
    *
-   * @returns {Search}
+   * @type {Search}
    */
   get search() {
     if (!this._search) {

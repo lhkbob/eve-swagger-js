@@ -63,7 +63,7 @@ class SolarSystems extends ExtendableFunction {
    * A Search module instance configured to search over the `'solarsystem'`
    * type.
    *
-   * @returns {Search}
+   * @type {Search}
    */
   get search() {
     if (!this._search) {

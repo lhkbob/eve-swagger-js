@@ -217,7 +217,7 @@ class Types extends ExtendableFunction {
   /**
    * A Categories instance configured with the same api.
    *
-   * @returns {Categories}
+   * @type {Categories}
    */
   get categories() {
     if (!this._cats) {
@@ -229,7 +229,7 @@ class Types extends ExtendableFunction {
   /**
    * A Groups instance configured with the same api.
    *
-   * @returns {Groups}
+   * @type {Groups}
    */
   get groups() {
     if (!this._groups) {
@@ -242,7 +242,7 @@ class Types extends ExtendableFunction {
    * A Search module instance configured to search over the `'inventoryType'`
    * type.
    *
-   * @returns {Search}
+   * @type {Search}
    */
   get search() {
     if (!this._search) {

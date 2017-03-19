@@ -115,7 +115,7 @@ class Wing {
   /**
    * Get the Squads end point for this particular wing.
    *
-   * @returns {Squads}
+   * @type {Squads}
    */
   get squads() {
     return this._squads;
@@ -228,7 +228,7 @@ class Fleet {
    * The Wings api adapter for accessing and modifying the wing state of the
    * fleet.
    *
-   * @returns {Wings}
+   * @type {Wings}
    */
   get wings() {
     return this._wings;

@@ -96,7 +96,7 @@ class Api extends ExtendableFunction {
    * An instance of Characters using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Characters}
+   * @type {Characters}
    */
   get characters() {
     if (!this._char) {
@@ -109,7 +109,7 @@ class Api extends ExtendableFunction {
    * An instance of Agents using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Agents}
+   * @type {Agents}
    */
   get agents() {
     if (!this._agent) {
@@ -122,7 +122,7 @@ class Api extends ExtendableFunction {
    * An instance of Bloodlines using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Bloodlines}
+   * @type {Bloodlines}
    */
   get bloodlines() {
     if (!this._blood) {
@@ -135,7 +135,7 @@ class Api extends ExtendableFunction {
    * An instance of Constellations using a shared ApiProvider configured based
    * on the Api's initialization options.
    *
-   * @returns {Constellations}
+   * @type {Constellations}
    */
   get constellations() {
     if (!this._const) {
@@ -148,7 +148,7 @@ class Api extends ExtendableFunction {
    * An instance of Factions using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Factions}
+   * @type {Factions}
    */
   get factions() {
     if (!this._faction) {
@@ -161,7 +161,7 @@ class Api extends ExtendableFunction {
    * An instance of Freeports using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Freeports}
+   * @type {Freeports}
    */
   get freeports() {
     if (!this._freeport) {
@@ -174,7 +174,7 @@ class Api extends ExtendableFunction {
    * An instance of Industry using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Industry}
+   * @type {Industry}
    */
   get industry() {
     if (!this._indy) {
@@ -187,7 +187,7 @@ class Api extends ExtendableFunction {
    * An instance of Insurance using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Insurance}
+   * @type {Insurance}
    */
   get insurance() {
     if (!this._insurance) {
@@ -200,7 +200,7 @@ class Api extends ExtendableFunction {
    * An instance of Moons using a shared ApiProvider configured based
    * on the Api's initialization options.
    *
-   * @returns {Moons}
+   * @type {Moons}
    */
   get moons() {
     if (!this._moon) {
@@ -213,7 +213,7 @@ class Api extends ExtendableFunction {
    * An instance of Planets using a shared ApiProvider configured based
    * on the Api's initialization options.
    *
-   * @returns {Planets}
+   * @type {Planets}
    */
   get planets() {
     if (!this._planet) {
@@ -226,7 +226,7 @@ class Api extends ExtendableFunction {
    * An instance of PlanetaryInteraction using a shared ApiProvider configured
    * based on the Api's initialization options.
    *
-   * @returns {PlanetaryInteraction}
+   * @type {PlanetaryInteraction}
    */
   get pi() {
     if (!this._pi) {
@@ -239,7 +239,7 @@ class Api extends ExtendableFunction {
    * An instance of Races using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Races}
+   * @type {Races}
    */
   get races() {
     if (!this._race) {
@@ -252,7 +252,7 @@ class Api extends ExtendableFunction {
    * An instance of Regions using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Regions}
+   * @type {Regions}
    */
   get regions() {
     if (!this._region) {
@@ -265,7 +265,7 @@ class Api extends ExtendableFunction {
    * An instance of SolarSystems using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {SolarSystems}
+   * @type {SolarSystems}
    */
   get solarSystems() {
     if (!this._system) {
@@ -278,7 +278,7 @@ class Api extends ExtendableFunction {
    * An instance of Stargates using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Stargates}
+   * @type {Stargates}
    */
   get stargates() {
     if (!this._gate) {
@@ -291,7 +291,7 @@ class Api extends ExtendableFunction {
    * An instance of Stations using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Stations}
+   * @type {Stations}
    */
   get stations() {
     if (!this._station) {
@@ -304,7 +304,7 @@ class Api extends ExtendableFunction {
    * An instance of Types using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Types}
+   * @type {Types}
    */
   get types() {
     if (!this._type) {
@@ -317,7 +317,7 @@ class Api extends ExtendableFunction {
    * An instance of Wormholes using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Wormholes}
+   * @type {Wormholes}
    */
   get wormholes() {
     if (!this._worm) {
@@ -330,7 +330,7 @@ class Api extends ExtendableFunction {
    * An instance of Alliances using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Alliances}
+   * @type {Alliances}
    */
   get alliances() {
     if (!this._alliance) {
@@ -343,7 +343,7 @@ class Api extends ExtendableFunction {
    * An instance of Corporations using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Corporations}
+   * @type {Corporations}
    */
   get corporations() {
     if (!this._corp) {
@@ -356,7 +356,7 @@ class Api extends ExtendableFunction {
    * An instance of Incursions using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Incursions}
+   * @type {Incursions}
    */
   get incursions() {
     if (!this._incursion) {
@@ -369,7 +369,7 @@ class Api extends ExtendableFunction {
    * An instance of Killmail using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Killmail}
+   * @type {Killmail}
    */
   get killmail() {
     if (!this._km) {
@@ -382,7 +382,7 @@ class Api extends ExtendableFunction {
    * An instance of Sovereignty using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Sovereignty}
+   * @type {Sovereignty}
    */
   get sovereignty() {
     if (!this._sov) {
@@ -395,7 +395,7 @@ class Api extends ExtendableFunction {
    * An instance of Wars using a shared ApiProvider configured based on
    * the Api's initialization options.
    *
-   * @returns {Wars}
+   * @type {Wars}
    */
   get wars() {
     if (!this._wars) {
@@ -409,7 +409,7 @@ class Api extends ExtendableFunction {
    * the Api's initialization options. This Search instance is configured to
    * use all categories and is not tied to a character.
    *
-   * @returns {Search}
+   * @type {Search}
    */
   get search() {
     if (!this._search) {
@@ -442,7 +442,7 @@ class Api extends ExtendableFunction {
    * ```
    *
    * @param ids {Array.<Number>} Ids to look up
-   * @returns {Promise}
+   * @type {Promise}
    * @private
    */
   names(ids) {
