@@ -14,8 +14,11 @@
     "excludePattern": "(node_modules/|docs)"
   },
   "plugins": [
-    "plugins/markdown",
-    "src/internal/jsdoc-esi-link"
+    "lib/esi-param",
+    "lib/esi-returns",
+    "lib/esi-route",
+    "lib/esi-description",
+    "plugins/markdown"
   ],
   "templates": {
     "cleverLinks": false,
