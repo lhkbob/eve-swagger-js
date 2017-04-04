@@ -87,6 +87,8 @@ class Alliances extends ExtendableFunction {
    * A Search module instance configured to search over the `'alliance'`
    * type.
    *
+   * @esi_example esi.alliances.search('text') categories=[alliance] get_search
+   *
    * @type {Search}
    */
   get search() {
@@ -108,6 +110,7 @@ class Alliances extends ExtendableFunction {
 
   /**
    * @esi_route get_alliances
+   * @esi_example esi.alliances()
    *
    * @return {Promise.<Array.<Number>>}
    */
@@ -119,6 +122,7 @@ class Alliances extends ExtendableFunction {
    * @esi_route get_alliances_names
    * @esi_param alliance_ids - ids
    * @esi_returns {alliance_id: id, alliance_name: name}
+   * @esi_example esi.alliance.names(ids)
    *
    * @param {Array.<Number>} ids If not provided then the names of all
    *     alliances will be returned.
