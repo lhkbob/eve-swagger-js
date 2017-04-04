@@ -1,3 +1,7 @@
 {
-  "presets": ["es2015"]
+  // FIXME is es2015 required for env? Does env do anything surprising?
+  "presets": ["es2015", "env"],
+  "plugins": [
+    "transform-runtime"
+  ]
 }
