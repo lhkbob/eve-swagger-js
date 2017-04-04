@@ -1,8 +1,13 @@
 const ExtendableFunction = require('../internal/ExtendableFunction');
 
 function defaultSearch(api, categories, strict, text) {
-  return api.search()
-  .newRequest('getSearch', [categories, text], { strict: strict })
+  return api.noAuth.get('/v1/search/', {
+    query: {
+      'categories': categories,
+      'search': text,
+      'strict': strict
+    }
+  })
   .then(result => {
     if (categories.length == 1) {
       // Return array for that category
@@ -15,9 +20,14 @@ function defaultSearch(api, categories, strict, text) {
 }
 
 function characterSearch(api, categories, strict, character, token, text) {
-  return api.search(token)
-  .newRequest('getCharacterCharacterIdSearch', [categories, character, text],
-      { strict: strict })
+  return api.auth(token).get('/v1/characters/{character_id}/search/', {
+    path: { 'character_id': character },
+    query: {
+      'categories': categories,
+      'search': text,
+      'strict': strict
+    }
+  })
   .then(result => {
     if (categories.length == 1) {
       // Return array for that category
@@ -42,7 +52,8 @@ function characterSearch(api, categories, strict, character, token, text) {
 class Search extends ExtendableFunction {
   /**
    * Create a new Search api wrapper with the given configuration. If
-   * `categories` is provided then the search is restricted to those categories,
+   * `categories` is provided then the search is restricted to those
+   * categories,
    * otherwise it will search over all categories. If `categories` is a single
    * item, the return result of the search is simplified to be the array of ids
    * for that category (instead of an outer object with keys per category).
@@ -65,14 +76,16 @@ class Search extends ExtendableFunction {
    * character specific search end point, and the `structure` category can also
    * be used.
    *
-   * @param api {ApiProvider} The api provider
-   * @param categories {Array.<String>} Optional; the categories search to through
+   * @param api {ESIAgent} The api provider
+   * @param categories {Array.<String>} Optional; the categories search to
+   *     through
    * @param characterId {Number} Optional; the character id of the search
-   * @param accessToken {String} Optional; SSO token for the provided character,
+   * @param accessToken {String} Optional; SSO token for the provided
+   *     character,
    *    must be provided if `characterId` is given
    */
   constructor(api, categories = [], characterId = 0, accessToken = '') {
-    super(text => this.search(text));
+    super(text => this.get(text));
 
     this._api = api;
     this._categories = categories;

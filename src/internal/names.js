@@ -15,7 +15,7 @@ function splitIds(ids) {
 }
 
 function getFilteredNames(api, ids, category) {
-  return api.universe().newRequest('postUniverseNames', [ids])
+  return api.noAuth.post('/v2/universe/names/', { body: ids })
   .then(result => {
     if (category != 'all') {
       // Filter by category and remove the category field
@@ -28,9 +28,8 @@ function getFilteredNames(api, ids, category) {
     } else {
       return result;
     }
-  })
+  });
 }
-
 
 
 /**
@@ -70,7 +69,7 @@ function getFilteredNames(api, ids, category) {
  * # `'all'` to disable category filtering (in which case `category` is
  * included` in each result element
  *
- * @param api {ApiProvider} Internal api
+ * @param api {ESIAgent} Internal api
  * @param category {String} Category to filter names to
  * @param ids {Array.<Number>} Ids to look up
  * @returns {Promise}

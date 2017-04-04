@@ -15,12 +15,12 @@ class Alliance {
    * Create a new Alliance for the given `api` provider and specific
    * `allianceId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param api {ESIAgent} The api provider used to generate web requests
    * @param allianceId {Number} The alliance id that is used for all requests
    * @constructor
    */
   constructor(api, allianceId) {
-    this._api = api;
+    this._agent = api;
     this._id = allianceId;
   }
 
@@ -31,8 +31,8 @@ class Alliance {
    * @return {Promise.<Object>}
    */
   info() {
-    return this._api.alliance()
-    .newRequest('getAlliancesAllianceId', [this._id]);
+    return this._agent.noAuth.get('/v2/alliances/{alliance_id}/',
+        { path: { 'alliance_id': this._id } });
   }
 
   /**
@@ -42,8 +42,8 @@ class Alliance {
    * @return {Promise.<Array.<Number>>}
    */
   corporations() {
-    return this._api.alliance()
-    .newRequest('getAlliancesAllianceIdCorporations', [this._id]);
+    return this._agent.noAuth.get('/v1/alliances/{alliance_id}/corporations/',
+        { path: { 'alliance_id': this._id } });
   }
 
   /**
@@ -53,8 +53,8 @@ class Alliance {
    * @return {Promise.<Object>}
    */
   icon() {
-    return this._api.alliance()
-    .newRequest('getAlliancesAllianceIdIcons', [this._id]);
+    return this._agent.noAuth.get('/v1/alliances/{alliance_id}/icons/',
+        { path: { 'alliance_id': this._id } });
   }
 }
 
@@ -73,12 +73,12 @@ class Alliances extends ExtendableFunction {
   /**
    * Create a new Alliances function using the given `api`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => (id ? this.get(id) : this.all()));
-    this._api = api;
+    this._agent = agent;
 
     this._search = null;
   }
@@ -91,7 +91,7 @@ class Alliances extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['alliance']);
+      this._search = new Search(this._agent, ['alliance']);
     }
     return this._search;
   }
@@ -103,7 +103,7 @@ class Alliances extends ExtendableFunction {
    * @returns {Alliance}
    */
   get(id) {
-    return new Alliance(this._api, id);
+    return new Alliance(this._agent, id);
   }
 
   /**
@@ -112,7 +112,7 @@ class Alliances extends ExtendableFunction {
    * @return {Promise.<Array.<Number>>}
    */
   all() {
-    return this._api.alliance().newRequest('getAlliances', []);
+    return this._agent.noAuth.get('/v1/alliances/');
   }
 
   /**
@@ -131,10 +131,11 @@ class Alliances extends ExtendableFunction {
       if (ids.length > 20) {
         // Use universe/names end point since the /alliances one breaks if
         // the URL gets too long.
-        return _names(this._api, 'alliance', ids);
+        return _names(this._agent, 'alliance', ids);
       } else {
         // Use alliance/names end point
-        return this._api.alliance().newRequest('getAlliancesNames', [ids])
+        return this._agent.noAuth.get('/v1/alliances/names/',
+            { query: { 'alliance_ids': ids } })
         .then(result => {
           // Rename alliance_id and alliance_name
           return result.map(r => {
