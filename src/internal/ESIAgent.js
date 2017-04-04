@@ -5,12 +5,6 @@ const Moment = require('moment');
 const Promise = require('bluebird');
 const VError = require('verror');
 
-// FIXME can I use express in testing to parrot back what the request was, and then
-// validate that against the swagger.json
-// FIXME use hardcoded versions for routes
-// FIXME write test that verifies route versions haven't been changed
-// FIXME set up continuous integration
-
 
 const CLIENT_ERROR = 'esi:ClientError';
 const FORBIDDEN_ERROR = 'esi:ForbiddenError';
@@ -230,6 +224,7 @@ class ESIAgent {
    * @param minTime {Number} Minimum time before launching another request (in
    *     milliseconds)
    * @constructor
+   * @private
    */
   constructor({
       service: service, source: source, agent: agent, language: language, timeout: timeout, maxConcurrent: maxConcurrent, minTime: minTime
@@ -267,50 +262,5 @@ class ESIAgent {
     return handler;
   }
 }
-
-/*
-z
- {
- service: service = 'https://esi.tech.ccp.is/latest', source: source = 'tranquility', agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js', language: language = 'en-us', timeout: timeout = 6000
- } = {}
-
-let esi = new ESIAgent({
-  service: 'https://esi.tech.ccp.is/latest',
-  source: 'tranquility',
-  agent: 'test',
-  language: 'en-us',
-  timeout: 5000,
-  maxConcurrent: 1,
-  minTime: 5000
-});
-
-esi.noAuth.get('/characters/{id}/', { path: { id: 92755159 } })
-.then(response => {
-  console.log('1a', response);
-  return esi.noAuth.get('/characters/{id}/', { path: { id: 92755159 } })
-  .then(response => {
-    console.log('1b', response);
-  }).catch(error => {
-    console.error('1be', error.message);
-  })
-}).catch(error => {
-  console.error('1ae', error.message);
-}).then(() => {
-  console.log('whats up?');
-});
-
-esi.noAuth.get('/characters/{id}/', { path: { id: 92755158 } })
-.then(response => {
-  console.log('2a', response);
-  return esi.noAuth.get('/characters/{id}/', { path: { id: 92755158 } })
-  .then(response => {
-    console.log('2b', response);
-  }).catch(error => {
-    console.error('2be', error.message);
-  })
-}).catch(error => {
-  console.error('2ae', error.message);
-});
-    */
 
 module.exports = ESIAgent;
