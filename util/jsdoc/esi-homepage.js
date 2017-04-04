@@ -1,11 +1,9 @@
 const path = require('path');
 const fs = require('fs');
 const markdown = require('jsdoc/util/markdown');
-
-const SwaggerAPI = require('./SwaggerAPI');
-
 let env = require('jsdoc/env');
 
+const SwaggerAPI = require('../SwaggerAPI');
 let api = SwaggerAPI.getLocalAPI();
 
 module.exports.handlers = exports.handlers = {

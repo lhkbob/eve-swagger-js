@@ -1,4 +1,4 @@
-const SwaggerAPI = require('./SwaggerAPI');
+const SwaggerAPI = require('../SwaggerAPI');
 
 // Parameters common to all ESI routes that are handled at a lower level by the
 // library

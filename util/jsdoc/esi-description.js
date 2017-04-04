@@ -4,11 +4,11 @@
  * defined in the local `swagger.json` file.
  */
 
+const logger = require('jsdoc/util/logger');
+
 const parseParam = require('./RouteParameter');
 const parseResult = require('./RouteResult');
-const SwaggerAPI = require('./SwaggerAPI');
-
-const logger = require('jsdoc/util/logger');
+const SwaggerAPI = require('../SwaggerAPI');
 
 function checkTypeMatch(name, doc, expected) {
   if (doc && doc.type && doc.type['names'] && doc.type['names'].length > 0) {

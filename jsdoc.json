@@ -13,12 +13,12 @@
     "excludePattern": "(node_modules/|docs)"
   },
   "plugins": [
-    "lib/esi-param",
-    "lib/esi-returns",
-    "lib/esi-route",
-    "lib/esi-example",
-    "lib/esi-description",
-    "lib/esi-homepage",
+    "util/jsdoc/esi-param",
+    "util/jsdoc/esi-returns",
+    "util/jsdoc/esi-route",
+    "util/jsdoc/esi-example",
+    "util/jsdoc/esi-description",
+    "util/jsdoc/esi-homepage",
     "plugins/markdown"
   ],
   "templates": {

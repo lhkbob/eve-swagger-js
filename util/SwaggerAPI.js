@@ -41,8 +41,7 @@ function buildExample(schemaOrType, providedExample) {
     }
   } else {
     if (schemaOrType['properties']) {
-      // This is an object, so build examples of all properties and combine
-      // them
+      // This is an object, so build examples of all properties and combine them
       // (delete any properties from the provided example that aren't actually
       // defined)
       let example = {};
@@ -82,6 +81,67 @@ function buildExample(schemaOrType, providedExample) {
     } else {
       return buildExample(schemaOrType['type'], providedExample);
     }
+  }
+}
+
+function validateSchema(schemaOrType, value) {
+  if (schemaOrType instanceof String || (typeof schemaOrType) == 'string') {
+    if (schemaOrType == 'string') {
+      return isString(value) ? '' : 'value not a string';
+    } else if (schemaOrType == 'integer') {
+      return isNumber(value) && Math.floor(value) == value ? '' : 'value not an integer';
+    } else if (schemaOrType == 'float' || value == 'number') {
+      return isNumber(value) ? '' : 'value not a number';
+    } else if (schemaOrType == 'boolean') {
+      return isBoolean(value) ? '' : 'value not a boolean';
+    } else if (schemaOrType == 'array') {
+      return isArray(value) ? '' : 'value not an array';
+    } else if (schemaOrType == 'object') {
+      return isObject(value) ? '' : 'value not an object';
+    } else {
+      return 'unexpected value type';
+    }
+  } else if (schemaOrType['properties']) {
+    if (!isObject(value)) {
+      return 'value is not an object';
+    }
+
+    // Validate each property, and make sure the example doesn't have any
+    // extras
+    for (let definedProp of Object.keys(schemaOrType['properties'])) {
+      if (!value[definedProp]) {
+        return 'value missing ' + definedProp;
+      }
+
+      let propValid = validateSchema(schemaOrType['properties'][definedProp], value[definedProp]);
+      if (propValid != '') {
+        return definedProp + ' fails validation: ' + propValid;
+      }
+    }
+    for (let valueProp of Object.keys(value)) {
+      if (!schemaOrType['properties'][valueProp]) {
+        return 'value defines extra ' + valueProp;
+      }
+    }
+
+    return '';
+  } else if (schemaOrType['items']) {
+    if (!isArray(value)) {
+      return 'value is not an array';
+    }
+
+    // Validate each item of the array
+    for (let e of value) {
+      let elValid = validateSchema(schemaOrType['items'], e);
+      if (elValid != '') {
+        return 'element fails validation: ' + elValid;
+      }
+    }
+    return '';
+  } else if (schemaOrType['schema']) {
+    return validateSchema(schemaOrType['schema'], value);
+  } else {
+    return validateSchema(schemaOrType['type'], value);
   }
 }
 
@@ -156,7 +216,7 @@ class Route {
   }
 
   get httpMethod() {
-    return this._data['method'];
+    return this._data['method'].toUpperCase();
   }
 
   get description() {
@@ -215,6 +275,14 @@ class Route {
     } else {
       return data;
     }
+  }
+
+  validateParameter(name, value) {
+    return validateSchema(this.parameterData(name), value);
+  }
+
+  validateResponse(value) {
+    return validateSchema(this.responseData, value);
   }
 
   get responseType() {

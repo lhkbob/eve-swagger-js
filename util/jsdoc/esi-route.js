@@ -9,7 +9,7 @@
 
 const logger = require('jsdoc/util/logger');
 
-const SwaggerAPI = require('./SwaggerAPI');
+const SwaggerAPI = require('../SwaggerAPI');
 const handleTag = require('./jsdoc-desc-helper');
 
 let api = SwaggerAPI.getLocalAPI();
