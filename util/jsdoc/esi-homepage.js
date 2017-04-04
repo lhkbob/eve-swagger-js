@@ -28,7 +28,7 @@ module.exports.handlers = exports.handlers = {
       }
     });
 
-    let template = fs.readFileSync(path.join(__dirname, '../home.md'), {encoding: 'utf8'});
+    let template = fs.readFileSync(path.join(__dirname, '../../home.md'), {encoding: 'utf8'});
 
     let final = template.replace(/\{esi-examples}/g, generateExampleTableMarkdown(examples));
     final = final.replace(/\{esi-sso}/g, generateSSOTable());

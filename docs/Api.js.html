@@ -37,7 +37,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const ApiProvider = require('./internal/ApiProvider');
+            <pre class="prettyprint source linenums"><code>const ESIAgent = require('./internal/ESIAgent');
 const ExtendableFunction = require('./internal/ExtendableFunction');
 const _names = require('./internal/names');
 
@@ -87,19 +87,26 @@ class Api extends ExtendableFunction {
    * @param agent {String} Custom user agent string to send with each request,
    *     which defaults to this project but really should be set for your app
    * @param language {String} Language character code, defaults to `en-us`
-   * @param timeout {Number} Request timeout in milliseconds, defaults to `6000`
+   * @param timeout {Number} Request timeout in milliseconds, defaults to
+   *     `6000`
+   * @param maxConcurrent {Number} Maximum number of requests running at once,
+   *     defaults to 0 (unlimited)
+   * @param minTime {Number} Minimum time before launching another request (in
+   *     milliseconds), defaults to 0 (no rate limiting)
    * @constructor
    */
   constructor({
-      service: service = 'https://esi.tech.ccp.is/latest', source: source = 'tranquility', agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js', language: language = 'en-us', timeout: timeout = 6000
+      service: service = 'https://esi.tech.ccp.is/latest', source: source = 'tranquility', agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js', language: language = 'en-us', timeout: timeout = 6000, maxConcurrent: maxConcurrent = 0, minTime: minTime = 0
   } = {}) {
     super(config => new Api(config));
-    this._api = new ApiProvider({
-      service: service,
-      source: source,
-      agent: agent,
-      language: language,
-      timeout: timeout
+    this._esiAgent = new ESIAgent({
+      service,
+      source,
+      agent,
+      language,
+      timeout,
+      maxConcurrent,
+      minTime
     });
 
     this._char = null;
@@ -139,7 +146,7 @@ class Api extends ExtendableFunction {
    */
   get characters() {
     if (!this._char) {
-      this._char = new Characters(this._api);
+      this._char = new Characters(this._esiAgent);
     }
     return this._char;
   }
@@ -152,7 +159,7 @@ class Api extends ExtendableFunction {
    */
   get agents() {
     if (!this._agent) {
-      this._agent = new Agents(this._api);
+      this._agent = new Agents(this._esiAgent);
     }
     return this._agent;
   }
@@ -165,7 +172,7 @@ class Api extends ExtendableFunction {
    */
   get bloodlines() {
     if (!this._blood) {
-      this._blood = new Bloodlines(this._api);
+      this._blood = new Bloodlines(this._esiAgent);
     }
     return this._blood;
   }
@@ -178,7 +185,7 @@ class Api extends ExtendableFunction {
    */
   get constellations() {
     if (!this._const) {
-      this._const = new Constellations(this._api);
+      this._const = new Constellations(this._esiAgent);
     }
     return this._const;
   }
@@ -191,7 +198,7 @@ class Api extends ExtendableFunction {
    */
   get factions() {
     if (!this._faction) {
-      this._faction = new Factions(this._api);
+      this._faction = new Factions(this._esiAgent);
     }
     return this._faction;
   }
@@ -204,7 +211,7 @@ class Api extends ExtendableFunction {
    */
   get freeports() {
     if (!this._freeport) {
-      this._freeport = new Freeports(this._api);
+      this._freeport = new Freeports(this._esiAgent);
     }
     return this._freeport;
   }
@@ -217,7 +224,7 @@ class Api extends ExtendableFunction {
    */
   get industry() {
     if (!this._indy) {
-      this._indy = new Industry(this._api);
+      this._indy = new Industry(this._esiAgent);
     }
     return this._indy;
   }
@@ -230,7 +237,7 @@ class Api extends ExtendableFunction {
    */
   get insurance() {
     if (!this._insurance) {
-      this._insurance = new Insurance(this._api);
+      this._insurance = new Insurance(this._esiAgent);
     }
     return this._insurance;
   }
@@ -243,7 +250,7 @@ class Api extends ExtendableFunction {
    */
   get moons() {
     if (!this._moon) {
-      this._moon = new Moons(this._api);
+      this._moon = new Moons(this._esiAgent);
     }
     return this._moon;
   }
@@ -256,7 +263,7 @@ class Api extends ExtendableFunction {
    */
   get planets() {
     if (!this._planet) {
-      this._planet = new Planets(this._api);
+      this._planet = new Planets(this._esiAgent);
     }
     return this._planet;
   }
@@ -269,7 +276,7 @@ class Api extends ExtendableFunction {
    */
   get pi() {
     if (!this._pi) {
-      this._pi = new PlanetaryInteraction(this._api);
+      this._pi = new PlanetaryInteraction(this._esiAgent);
     }
     return this._pi;
   }
@@ -282,7 +289,7 @@ class Api extends ExtendableFunction {
    */
   get races() {
     if (!this._race) {
-      this._race = new Races(this._api);
+      this._race = new Races(this._esiAgent);
     }
     return this._race;
   }
@@ -295,7 +302,7 @@ class Api extends ExtendableFunction {
    */
   get regions() {
     if (!this._region) {
-      this._region = new Regions(this._api);
+      this._region = new Regions(this._esiAgent);
     }
     return this._region;
   }
@@ -308,7 +315,7 @@ class Api extends ExtendableFunction {
    */
   get solarSystems() {
     if (!this._system) {
-      this._system = new SolarSystems(this._api);
+      this._system = new SolarSystems(this._esiAgent);
     }
     return this._system;
   }
@@ -321,7 +328,7 @@ class Api extends ExtendableFunction {
    */
   get stargates() {
     if (!this._gate) {
-      this._gate = new Stargates(this._api);
+      this._gate = new Stargates(this._esiAgent);
     }
     return this._gate;
   }
@@ -334,7 +341,7 @@ class Api extends ExtendableFunction {
    */
   get stations() {
     if (!this._station) {
-      this._station = new Stations(this._api);
+      this._station = new Stations(this._esiAgent);
     }
     return this._station;
   }
@@ -347,7 +354,7 @@ class Api extends ExtendableFunction {
    */
   get types() {
     if (!this._type) {
-      this._type = new Types(this._api);
+      this._type = new Types(this._esiAgent);
     }
     return this._type;
   }
@@ -360,7 +367,7 @@ class Api extends ExtendableFunction {
    */
   get wormholes() {
     if (!this._worm) {
-      this._worm = new Wormholes(this._api);
+      this._worm = new Wormholes(this._esiAgent);
     }
     return this._worm;
   }
@@ -373,7 +380,7 @@ class Api extends ExtendableFunction {
    */
   get alliances() {
     if (!this._alliance) {
-      this._alliance = new Alliances(this._api);
+      this._alliance = new Alliances(this._esiAgent);
     }
     return this._alliance;
   }
@@ -386,7 +393,7 @@ class Api extends ExtendableFunction {
    */
   get corporations() {
     if (!this._corp) {
-      this._corp = new Corporations(this._api);
+      this._corp = new Corporations(this._esiAgent);
     }
     return this._corp;
   }
@@ -399,7 +406,7 @@ class Api extends ExtendableFunction {
    */
   get incursions() {
     if (!this._incursion) {
-      this._incursion = new Incursions(this._api);
+      this._incursion = new Incursions(this._esiAgent);
     }
     return this._incursion;
   }
@@ -412,7 +419,7 @@ class Api extends ExtendableFunction {
    */
   get killmail() {
     if (!this._km) {
-      this._km = new Killmail(this._api);
+      this._km = new Killmail(this._esiAgent);
     }
     return this._km;
   }
@@ -425,7 +432,7 @@ class Api extends ExtendableFunction {
    */
   get sovereignty() {
     if (!this._sov) {
-      this._sov = new Sovereignty(this._api);
+      this._sov = new Sovereignty(this._esiAgent);
     }
     return this._sov;
   }
@@ -438,7 +445,7 @@ class Api extends ExtendableFunction {
    */
   get wars() {
     if (!this._wars) {
-      this._wars = new Wars(this._api);
+      this._wars = new Wars(this._esiAgent);
     }
     return this._wars;
   }
@@ -452,7 +459,7 @@ class Api extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api);
+      this._search = new Search(this._esiAgent);
     }
     return this._search;
   }
@@ -485,7 +492,7 @@ class Api extends ExtendableFunction {
    * @private
    */
   names(ids) {
-    return _names(this._api, 'all', ids);
+    return _names(this._esiAgent, 'all', ids);
   }
 }
 

@@ -272,7 +272,7 @@ class ESIAgent {
    */
   constructor({
       service: service, source: source, agent: agent, language: language, timeout: timeout, maxConcurrent: maxConcurrent, minTime: minTime
-  }) {
+  } = {}) {
     // Save URL, agent, and timeout for later as they configure the ApiClient
     this._eveURL = service;
     this._userAgent = agent;
@@ -306,6 +306,12 @@ class ESIAgent {
     return handler;
   }
 }
+
+/*
+z
+ {
+ service: service = 'https://esi.tech.ccp.is/latest', source: source = 'tranquility', agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js', language: language = 'en-us', timeout: timeout = 6000
+ } = {}
 
 let esi = new ESIAgent({
   service: 'https://esi.tech.ccp.is/latest',
@@ -343,7 +349,11 @@ esi.noAuth.get('/characters/{id}/', { path: { id: 92755158 } })
   })
 }).catch(error => {
   console.error('2ae', error.message);
-});</code></pre>
+});
+    */
+
+module.exports = ESIAgent;
+</code></pre>
         </article>
     </section>
 

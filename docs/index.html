@@ -119,16 +119,16 @@ call the linked function.</p>
 <td>&mdash;</td>
 </tr>
 <tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_corporations"><code>GET /alliances/{alliance_id}/corporations/</code></a></td>
-<td><code>v1</code></td>
-<td><a href="Alliance.html#corporations"><code>Alliance.corporations()</code></a></td>
-<td><code>esi.alliances(1).corporations()</code></td>
-</tr>
-<tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id"><code>GET /alliances/{alliance_id}/</code></a></td>
 <td><code>v2</code></td>
 <td><a href="Alliance.html#info"><code>Alliance.info()</code></a></td>
 <td><code>esi.alliances(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_corporations"><code>GET /alliances/{alliance_id}/corporations/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Alliance.html#corporations"><code>Alliance.corporations()</code></a></td>
+<td><code>esi.alliances(1).corporations()</code></td>
 </tr>
 <tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_icons"><code>GET /alliances/{alliance_id}/icons/</code></a></td>
@@ -143,21 +143,27 @@ call the linked function.</p>
 <td>&mdash;</td>
 </tr>
 <tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id"><code>GET /characters/{character_id}/</code></a></td>
+<td><code>v4</code></td>
+<td><a href="CharacterInfo.html#info"><code>CharacterInfo.info()</code></a></td>
+<td>&mdash;</td>
+</tr>
+<tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Assets/get_characters_character_id_assets"><code>GET /characters/{character_id}/assets/</code></a></td>
 <td><code>v1</code></td>
 <td><a href="Character.html#assets"><code>Character.assets()</code></a></td>
 <td>&mdash;</td>
 </tr>
 <tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks_folders"><code>GET /characters/{character_id}/bookmarks/folders/</code></a></td>
-<td><code>v1</code></td>
-<td><a href="Bookmarks.html#folders"><code>Bookmarks.folders()</code></a></td>
-<td>&mdash;</td>
-</tr>
-<tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks"><code>GET /characters/{character_id}/bookmarks/</code></a></td>
 <td><code>v1</code></td>
 <td><a href="Bookmarks.html#all"><code>Bookmarks.all()</code></a></td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks_folders"><code>GET /characters/{character_id}/bookmarks/folders/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Bookmarks.html#folders"><code>Bookmarks.folders()</code></a></td>
 <td>&mdash;</td>
 </tr>
 <tr>
@@ -209,9 +215,9 @@ call the linked function.</p>
 <td>&mdash;</td>
 </tr>
 <tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts_labels"><code>GET /characters/{character_id}/contacts/labels/</code></a></td>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts"><code>POST /characters/{character_id}/contacts/</code></a></td>
 <td><code>v1</code></td>
-<td><a href="Contacts.html#labels"><code>Contacts.labels()</code></a></td>
+<td><a href="Contacts.html#add"><code>Contacts.add()</code></a></td>
 <td>&mdash;</td>
 </tr>
 <tr>
@@ -221,9 +227,9 @@ call the linked function.</p>
 <td>&mdash;</td>
 </tr>
 <tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts"><code>POST /characters/{character_id}/contacts/</code></a></td>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts"><code>PUT /characters/{character_id}/contacts/</code></a></td>
 <td><code>v1</code></td>
-<td><a href="Contacts.html#add"><code>Contacts.add()</code></a></td>
+<td><a href="Contact.html#updateWatched"><code>Contact.updateWatched()</code></a></td>
 <td>&mdash;</td>
 </tr>
 <tr>
@@ -233,9 +239,9 @@ call the linked function.</p>
 <td>&mdash;</td>
 </tr>
 <tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts"><code>PUT /characters/{character_id}/contacts/</code></a></td>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts_labels"><code>GET /characters/{character_id}/contacts/labels/</code></a></td>
 <td><code>v1</code></td>
-<td><a href="Contact.html#updateWatched"><code>Contact.updateWatched()</code></a></td>
+<td><a href="Contacts.html#labels"><code>Contacts.labels()</code></a></td>
 <td>&mdash;</td>
 </tr>
 <tr>
@@ -269,12 +275,6 @@ call the linked function.</p>
 <td>&mdash;</td>
 </tr>
 <tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id"><code>GET /characters/{character_id}/</code></a></td>
-<td><code>v4</code></td>
-<td><a href="CharacterInfo.html#info"><code>CharacterInfo.info()</code></a></td>
-<td>&mdash;</td>
-</tr>
-<tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent"><code>GET /characters/{character_id}/killmails/recent/</code></a></td>
 <td><code>v1</code></td>
 <td><a href="Character.html#recentKillmails"><code>Character.recentKillmails()</code></a></td>
@@ -299,6 +299,12 @@ call the linked function.</p>
 <td>&mdash;</td>
 </tr>
 <tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail"><code>POST /characters/{character_id}/mail/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Mail.html#send"><code>Mail.send()</code></a></td>
+<td>&mdash;</td>
+</tr>
+<tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_labels"><code>GET /characters/{character_id}/mail/labels/</code></a></td>
 <td><code>v3</code></td>
 <td><a href="Labels.html#all"><code>Labels.all()</code></a></td>
@@ -320,12 +326,6 @@ call the linked function.</p>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_lists"><code>GET /characters/{character_id}/mail/lists/</code></a></td>
 <td><code>v1</code></td>
 <td><a href="Mail.html#lists"><code>Mail.lists()</code></a></td>
-<td>&mdash;</td>
-</tr>
-<tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail"><code>POST /characters/{character_id}/mail/</code></a></td>
-<td><code>v1</code></td>
-<td><a href="Mail.html#send"><code>Mail.send()</code></a></td>
 <td>&mdash;</td>
 </tr>
 <tr>
@@ -401,18 +401,6 @@ call the linked function.</p>
 <td>&mdash;</td>
 </tr>
 <tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>GET /corporations/{corporation_id}/alliancehistory/</code></a></td>
-<td><code>v1</code></td>
-<td><a href="Corporation.html#history"><code>Corporation.history()</code></a></td>
-<td>&mdash;</td>
-</tr>
-<tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>GET /corporations/{corporation_id}/alliancehistory/</code></a></td>
-<td><code>v1</code></td>
-<td><a href="CharacterCorporation.html#history"><code>CharacterCorporation.history()</code></a></td>
-<td>&mdash;</td>
-</tr>
-<tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id"><code>GET /corporations/{corporation_id}/</code></a></td>
 <td><code>v2</code></td>
 <td><a href="Corporation.html#info"><code>Corporation.info()</code></a></td>
@@ -422,6 +410,18 @@ call the linked function.</p>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id"><code>GET /corporations/{corporation_id}/</code></a></td>
 <td><code>v2</code></td>
 <td><a href="CharacterCorporation.html#info"><code>CharacterCorporation.info()</code></a></td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>GET /corporations/{corporation_id}/alliancehistory/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="CharacterCorporation.html#history"><code>CharacterCorporation.history()</code></a></td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>GET /corporations/{corporation_id}/alliancehistory/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Corporation.html#history"><code>Corporation.history()</code></a></td>
 <td>&mdash;</td>
 </tr>
 <tr>
@@ -455,6 +455,12 @@ call the linked function.</p>
 <td>&mdash;</td>
 </tr>
 <tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id"><code>PUT /fleets/{fleet_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fleet.html#update"><code>Fleet.update()</code></a></td>
+<td>&mdash;</td>
+</tr>
+<tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_members"><code>GET /fleets/{fleet_id}/members/</code></a></td>
 <td><code>v1</code></td>
 <td><a href="Fleet.html#members"><code>Fleet.members()</code></a></td>
@@ -476,12 +482,6 @@ call the linked function.</p>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_members_member_id"><code>PUT /fleets/{fleet_id}/members/{member_id}/</code></a></td>
 <td><code>v1</code></td>
 <td><a href="Fleet.html#move"><code>Fleet.move()</code></a></td>
-<td>&mdash;</td>
-</tr>
-<tr>
-<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id"><code>PUT /fleets/{fleet_id}/</code></a></td>
-<td><code>v1</code></td>
-<td><a href="Fleet.html#update"><code>Fleet.update()</code></a></td>
 <td>&mdash;</td>
 </tr>
 <tr>
