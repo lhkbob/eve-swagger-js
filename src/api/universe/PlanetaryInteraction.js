@@ -7,13 +7,13 @@
  */
 class PlanetaryInteraction {
   /**
-   * Create a new PlanetaryInteraction instance using the given `api`.
+   * Create a new PlanetaryInteraction instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
-    this._api = api;
+  constructor(agent) {
+    this._agent = agent;
   }
 
   /**
@@ -24,8 +24,8 @@ class PlanetaryInteraction {
    * @return {Promise.<Object>}
    */
   schematic(id) {
-    return this._api.planetaryInteraction()
-    .newRequest('getUniverseSchematicsSchematicId', [id]);
+    return this._agent.noAuth.get('/v1/universe/schematics/{schematic_id}/',
+        { path: { 'schematic_id': id } });
   }
 }
 
