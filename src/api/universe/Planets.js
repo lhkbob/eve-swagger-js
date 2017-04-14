@@ -11,16 +11,16 @@ const ExtendableFunction = require('../../internal/ExtendableFunction');
  */
 class Planet {
   /**
-   * Create a new Planet for the given `api` provider and specific
+   * Create a new Planet for the given `agent` provider and specific
    * `planetId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param planetId {Number} The planet id that is used for all
    *     requests
    * @constructor
    */
-  constructor(api, planetId) {
-    this._api = api;
+  constructor(agent, planetId) {
+    this._agent = agent;
     this._id = planetId;
   }
 
@@ -30,8 +30,8 @@ class Planet {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniversePlanetsPlanetId', [this._id]);
+    return this._agent.noAuth.get('/v1/universe/planets/{planet_id}/',
+        { path: { 'planet_id': this._id } });
   }
 }
 
@@ -47,14 +47,14 @@ class Planet {
  */
 class Planets extends ExtendableFunction {
   /**
-   * Create a new Planets instance using the given `api`.
+   * Create a new Planets instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => this.get(id));
-    this._api = api;
+    this._agent = agent;
   }
 
   /**
@@ -65,7 +65,7 @@ class Planets extends ExtendableFunction {
    * @returns {Planet}
    */
   get(id) {
-    return new Planet(this._api, id);
+    return new Planet(this._agent, id);
   }
 }
 
