@@ -65,7 +65,9 @@ function expectRequest(expected, method, url, path, query, body, token) {
     nonIgnoredRouteParams++;
 
     let expectedValue = expected.paramValue(param);
-    expect(expectedValue).toBeDefined();
+    if (expectedValue === undefined) {
+      throw new Error('Missing parameter in expected params definition: ' + param);
+    }
     if (expectedValue != null) {
       expect(route.validateParameter(param, expectedValue)).toEqual('');
     } else {

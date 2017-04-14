@@ -12,16 +12,16 @@ const _names = require('../../internal/names');
  */
 class Constellation {
   /**
-   * Create a new Constellation for the given `api` provider and specific
+   * Create a new Constellation for the given `agent` provider and specific
    * `constellationId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param constellationId {Number} The constellation id that is used for all
    *     requests
    * @constructor
    */
-  constructor(api, constellationId) {
-    this._api = api;
+  constructor(agent, constellationId) {
+    this._agent = agent;
     this._id = constellationId;
   }
 
@@ -31,8 +31,9 @@ class Constellation {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniverseConstellationsConstellationId', [this._id]);
+    return this._agent.noAuth.get(
+        '/v1/universe/constellations/{constellation_id}/',
+        { path: { 'constellation_id': this._id } });
   }
 }
 
@@ -51,14 +52,14 @@ class Constellation {
  */
 class Constellations extends ExtendableFunction {
   /**
-   * Create a new Constellations instance using the given `api`.
+   * Create a new Constellations instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => (id ? this.get(id) : this.all()));
-    this._api = api;
+    this._agent = agent;
 
     this._search = null;
   }
@@ -71,7 +72,7 @@ class Constellations extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['constellation']);
+      this._search = new Search(this._agent, ['constellation']);
     }
     return this._search;
   }
@@ -84,7 +85,7 @@ class Constellations extends ExtendableFunction {
    * @returns {Constellation}
    */
   get(id) {
-    return new Constellation(this._api, id);
+    return new Constellation(this._agent, id);
   }
 
   /**
@@ -93,7 +94,7 @@ class Constellations extends ExtendableFunction {
    * @return {Promise.<Array.<Number>>}
    */
   all() {
-    return this._api.universe().newRequest('getUniverseConstellations', []);
+    return this._agent.noAuth.get('/v1/universe/constellations/');
   }
 
   /**
@@ -114,7 +115,7 @@ class Constellations extends ExtendableFunction {
     if (!ids || ids.length == 0) {
       return this.all().then(allIds => this.names(allIds));
     } else {
-      return _names(this._api, 'constellation', ids);
+      return _names(this._agent, 'constellation', ids);
     }
   }
 }
