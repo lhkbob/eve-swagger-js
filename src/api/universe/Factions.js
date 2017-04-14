@@ -14,14 +14,14 @@ const Search = require('../Search');
  */
 class Factions extends ExtendableFunction {
   /**
-   * Create a new Factions function using the given `api`.
+   * Create a new Factions function using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(() => this.all());
-    this._api = api;
+    this._agent = agent;
 
     this._search = null;
   }
@@ -34,7 +34,7 @@ class Factions extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['faction']);
+      this._search = new Search(this._agent, ['faction']);
     }
     return this._search;
   }
@@ -45,7 +45,7 @@ class Factions extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   all() {
-    return this._api.universe().newRequest('getUniverseFactions', []);
+    return this._agent.noAuth.get('/v1/universe/factions/');
   }
 }
 
