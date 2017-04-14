@@ -13,7 +13,7 @@ afterEach(() => {
 // Only test the category-less versions for no-auth and auth searches.
 // Other variants are tested in the category-specific class.
 
-test('Search all-categories, no token', () => {
+test('Search.get', () => {
   agent.__expectRoute('get_search', {
     'categories': [
       'agent',
@@ -39,7 +39,7 @@ test('Search all-categories, no token', () => {
   });
 });
 
-test('Search all-categories, no token, strict', () => {
+test('Search.strict', () => {
   agent.__expectRoute('get_search', {
     'categories': [
       'agent',
@@ -65,7 +65,7 @@ test('Search all-categories, no token, strict', () => {
   });
 });
 
-test('Search all-categories, with token', () => {
+test('Search.get for character', () => {
   agent.__expectRoute('get_characters_character_id_search', {
     'character_id': 1,
     'categories': [
@@ -93,7 +93,7 @@ test('Search all-categories, with token', () => {
   });
 });
 
-test('Search all-categories, with token, strict', () => {
+test('Search.strict for character', () => {
   agent.__expectRoute('get_characters_character_id_search', {
     'character_id': 1,
     'categories': [

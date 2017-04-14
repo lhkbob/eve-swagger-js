@@ -10,26 +10,25 @@ const Search = require('../Search');
  */
 class Agents {
   /**
-   * Create a new Agents instance using the given `api`.
+   * Create a new Agents instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
-    this._api = api;
+  constructor(agent) {
+    this._agent = agent;
 
     this._search = null;
   }
 
   /**
-   * A Search module instance configured to search over the `'agent'`
-   * type.
+   * A Search module instance configured to search over the `'agent'` type.
    *
    * @type {Search}
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['agent']);
+      this._search = new Search(this._agent, ['agent']);
     }
     return this._search;
   }
