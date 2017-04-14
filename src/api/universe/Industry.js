@@ -6,13 +6,13 @@
  */
 class Industry {
   /**
-   * Create a new Industry instance using the given `api`.
+   * Create a new Industry instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The agent provider
    * @constructor
    */
-  constructor(api) {
-    this._api = api;
+  constructor(agent) {
+    this._agent = agent;
   }
 
   /**
@@ -21,7 +21,7 @@ class Industry {
    * @return {Promise.<Array.<Object>>}
    */
   facilities() {
-    return this._api.industry().newRequest('getIndustryFacilities', []);
+    return this._agent.noAuth.get('/v1/industry/facilities/');
   }
 
   /**
@@ -30,7 +30,7 @@ class Industry {
    * @return {Promise.<Array.<Object>>}
    */
   systemCosts() {
-    return this._api.industry().newRequest('getIndustrySystems', []);
+    return this._agent.noAuth.get('/v1/industry/systems/');
   }
 }
 
