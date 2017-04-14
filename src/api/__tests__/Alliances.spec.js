@@ -5,6 +5,10 @@ const Api = require('../../Api');
 let api = new Api();
 let agent = api._esiAgent;
 
+afterEach(() => {
+  agent.__reset();
+});
+
 test('Alliance.info', () => {
   agent.__expectRoute('get_alliances_alliance_id', { 'alliance_id': 1 });
   return api.alliances(1).info().then(result => {

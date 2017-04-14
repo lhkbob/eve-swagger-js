@@ -198,6 +198,10 @@ class MockESIAgent {
     let realRoute = this._api.route(route);
     this._expect.push(new Expectation(realRoute, params, returns, token));
   }
+
+  __reset() {
+    this._expect = [];
+  }
 }
 
 module.exports = MockESIAgent;
