@@ -12,14 +12,14 @@ const ExtendableFunction = require('../../internal/ExtendableFunction');
  */
 class Bloodlines extends ExtendableFunction {
   /**
-   * Create a new Bloodlines function using the given `api`.
+   * Create a new Bloodlines function using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(() => this.all());
-    this._api = api;
+    this._agent = agent;
   }
 
   /**
@@ -28,7 +28,7 @@ class Bloodlines extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   all() {
-    return this._api.universe().newRequest('getUniverseBloodlines', []);
+    return this._agent.noAuth.get('/v1/universe/bloodlines');
   }
 }
 
