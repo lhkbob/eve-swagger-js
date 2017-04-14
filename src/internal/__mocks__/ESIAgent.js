@@ -53,9 +53,9 @@ function expectRequest(expected, method, url, path, query, body, token) {
   let nonIgnoredRouteParams = 0;
   for (let param of route.parameterNames) {
     // Parameters that should not be set by the route call:
-    //   user_agent, X-User-Agent, datasource, language
+    //   user_agent, X-User-Agent, datasource, language, token
     if (param == 'user_agent' || param == 'X-User-Agent' || param
-        == 'datasource' || param == 'language') {
+        == 'datasource' || param == 'language' || param == "token") {
       expect(expected.paramValue(param)).not.toBeDefined();
       continue;
     }
@@ -88,19 +88,19 @@ function expectRequest(expected, method, url, path, query, body, token) {
       throw new Error('Unsupported route parameter type for ' + param + ' in '
           + route.id);
     }
-
-    // Check authentication as well
-    if (route.isTokenRequired) {
-      expect(token).toEqual(expected.token);
-    } else {
-      // Should not send a token
-      expect(token).toEqual('');
-      // Sanity check for the test
-      expect(expected.token).toEqual('');
-    }
   }
   // No extra parameters included in the example
   expect(expected.paramNames.length).toEqual(nonIgnoredRouteParams);
+
+  // Check authentication as well
+  if (route.isTokenRequired) {
+    expect(token).toEqual(expected.token);
+  } else {
+    // Should not send a token
+    expect(token).toEqual('');
+    // Sanity check for the test
+    expect(expected.token).toEqual('');
+  }
 
   if (body) {
     // Make sure that there is a route parameter of type body

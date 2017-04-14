@@ -20,7 +20,7 @@ function defaultSearch(api, categories, strict, text) {
 }
 
 function characterSearch(api, categories, strict, character, token, text) {
-  return api.auth(token).get('/v1/characters/{character_id}/search/', {
+  return api.auth(token).get('/v2/characters/{character_id}/search/', {
     path: { 'character_id': character },
     query: {
       'categories': categories,

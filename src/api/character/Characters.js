@@ -455,7 +455,6 @@ class Characters extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   names(ids) {
-    // FIXME actually call get_characters_names
     if (ids.length > 20) {
       // Use universe/names end point since the /characters one breaks if
       // the URL gets too long.

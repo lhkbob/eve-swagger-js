@@ -109,7 +109,7 @@ function validateSchema(schemaOrType, value) {
     // Validate each property, and make sure the example doesn't have any
     // extras
     for (let definedProp of Object.keys(schemaOrType['properties'])) {
-      if (!value[definedProp]) {
+      if (value[definedProp] === undefined) {
         return 'value missing ' + definedProp;
       }
 
@@ -119,7 +119,7 @@ function validateSchema(schemaOrType, value) {
       }
     }
     for (let valueProp of Object.keys(value)) {
-      if (!schemaOrType['properties'][valueProp]) {
+      if (schemaOrType['properties'][valueProp] === undefined) {
         return 'value defines extra ' + valueProp;
       }
     }
@@ -275,6 +275,11 @@ class Route {
     } else {
       return data;
     }
+  }
+
+  isParameterRequired(name) {
+    let data = this.parameterData(name);
+    return data['required'] || false;
   }
 
   validateParameter(name, value) {
