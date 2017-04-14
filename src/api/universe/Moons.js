@@ -11,16 +11,16 @@ const ExtendableFunction = require('../../internal/ExtendableFunction');
  */
 class Moon {
   /**
-   * Create a new Moon for the given `api` provider and specific
+   * Create a new Moon for the given `agent` provider and specific
    * `moonId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The ESI agent used to generate web requests
    * @param moonId {Number} The moon id that is used for all
    *     requests
    * @constructor
    */
-  constructor(api, moonId) {
-    this._api = api;
+  constructor(agent, moonId) {
+    this._agent = agent;
     this._id = moonId;
   }
 
@@ -30,8 +30,8 @@ class Moon {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniverseMoonsMoonId', [this._id]);
+    return this._agent.noAuth.get('/v1/universe/moons/{moon_id}/',
+        { path: { 'moon_id': this._id } });
   }
 }
 
@@ -47,14 +47,14 @@ class Moon {
  */
 class Moons extends ExtendableFunction {
   /**
-   * Create a new Moons instance using the given `api`.
+   * Create a new Moons instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => this.get(id));
-    this._api = api;
+    this._agent = agent;
   }
 
   /**
@@ -65,7 +65,7 @@ class Moons extends ExtendableFunction {
    * @returns {Moon}
    */
   get(id) {
-    return new Moon(this._api, id);
+    return new Moon(this._agent, id);
   }
 }
 
