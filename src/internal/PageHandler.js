@@ -31,22 +31,22 @@ class PageHandler {
    *     sequence of data
    */
   getAll() {
-    let _get = function(page) {
-      return this._fetch(page).then(result => {
-        if (result.length <= this._resultLength) {
-          // End of the data so return it
-          return result;
-        } else {
-          // Fetch the next page
-          return _get(page + 1).then(nextResult => {
-            // FIXME de-duplicate results if page contents shift between calls
-            return result.concat(nextResult);
-          });
-        }
-      });
-    };
+    return this._get(1);
+  }
 
-    return _get(1);
+  _get(page) {
+    return this._fetch(page).then(result => {
+      if (result.length < this._resultLength) {
+        // End of the data so return it
+        return result;
+      } else {
+        // Fetch the next page
+        return this._get(page + 1).then(nextResult => {
+          // FIXME de-duplicate results if page contents shift between calls
+          return result.concat(nextResult);
+        });
+      }
+    });
   }
 }
 

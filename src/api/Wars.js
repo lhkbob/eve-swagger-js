@@ -13,15 +13,15 @@ const Killmail = require('./Killmail');
  */
 class War {
   /**
-   * Create a new War for the given `api` provider and specific
+   * Create a new War for the given `agent` provider and specific
    * `warId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The ESI agent used to generate web requests
    * @param warId {Number} The war id that is used for all requests
    * @constructor
    */
-  constructor(api, warId) {
-    this._api = api;
+  constructor(agent, warId) {
+    this._agent = agent;
     this._id = warId;
     this._kills = null;
     this._allKills = new PageHandler(page => this._fetchKills(page), 2000);
@@ -35,7 +35,8 @@ class War {
    *   the request
    */
   info() {
-    return this._api.wars().newRequest('getWarsWarId', [this._id]);
+    return this._agent.noAuth.get('/v1/wars/{war_id}/',
+        { path: { 'war_id': this._id } });
   }
 
   /**
@@ -57,7 +58,7 @@ class War {
 
   _fetchKills(page) {
     if (this._kills == null) {
-      this._kills = new Killmail(this._api);
+      this._kills = new Killmail(this._agent);
     }
 
     return this.killmails(page).then(kms => {
@@ -83,8 +84,10 @@ class War {
   }
 
   _fetchMails(page) {
-    return this._api.wars()
-    .newRequest('getWarsWarIdKillmails', [this._id], { page: page });
+    return this._agent.noAuth.get('/v1/wars/{war_id}/killmails/', {
+      path: { 'war_id': this._id },
+      query: { 'page': page }
+    });
   }
 }
 
@@ -101,14 +104,14 @@ class War {
  */
 class Wars extends ExtendableFunction {
   /**
-   * Create a new Wars function using the given `api`.
+   * Create a new Wars function using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => (id ? this.get(id) : this.recent()));
-    this._api = api;
+    this._agent = agent;
   }
 
   /**
@@ -118,7 +121,7 @@ class Wars extends ExtendableFunction {
    * @returns {War}
    */
   get(id) {
-    return new War(this._api, id);
+    return new War(this._agent, id);
   }
 
   /**
@@ -129,11 +132,8 @@ class Wars extends ExtendableFunction {
    * @return {Promise.<Array.<Number>>}
    */
   recent(maxId = 0) {
-    let opts = {};
-    if (maxId) {
-      opts.max_war_id = maxId;
-    }
-    return this._api.wars().newRequest('getWars', [], opts);
+    return this._agent.noAuth.get('/v1/wars/',
+        { query: { 'max_war_id': maxId == 0 ? null : maxId } });
   }
 }
 
