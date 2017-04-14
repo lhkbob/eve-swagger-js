@@ -6,13 +6,13 @@
  */
 class Sovereignty {
   /**
-   * Create a new Sovereignty instance using the given `api`.
+   * Create a new Sovereignty instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI Agent
    * @constructor
    */
-  constructor(api) {
-    this._api = api;
+  constructor(agent) {
+    this._agent = agent;
   }
 
   /**
@@ -21,7 +21,7 @@ class Sovereignty {
    * @return {Promise.<Array.<Object>>}
    */
   campaigns() {
-    return this._api.sovereignty().newRequest('getSovereigntyCampaigns', []);
+    return this._agent.noAuth.get('/v1/sovereignty/campaigns/');
   }
 
   /**
@@ -30,7 +30,7 @@ class Sovereignty {
    * @return {Promise.<Array.<Object>>}
    */
   structures() {
-    return this._api.sovereignty().newRequest('getSovereigntyStructures', []);
+    return this._agent.noAuth.get('/v1/sovereignty/structures/');
   }
 }
 
