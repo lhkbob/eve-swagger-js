@@ -102,7 +102,9 @@ class ESIRequestHandler {
     if (params) {
       for (let p of Object.keys(params)) {
         // This converts everything to strings, including arrays to CSV list
-        allParams[p] = toPathString(params[p]);
+        if (params[p] != null) {
+          allParams[p] = toPathString(params[p]);
+        }
       }
     }
     return allParams;

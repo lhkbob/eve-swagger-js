@@ -66,7 +66,11 @@ function expectRequest(expected, method, url, path, query, body, token) {
 
     let expectedValue = expected.paramValue(param);
     expect(expectedValue).toBeDefined();
-    expect(route.validateParameter(param, expectedValue)).toEqual('');
+    if (expectedValue != null) {
+      expect(route.validateParameter(param, expectedValue)).toEqual('');
+    } else {
+      expect(route.isParameterRequired(param)).toBeFalsy();
+    }
 
     // And the request must have put the value in the appropriate place
     if (route.isPathParameter(param)) {
