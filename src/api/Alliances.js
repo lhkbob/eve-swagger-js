@@ -12,15 +12,15 @@ const _names = require('../internal/names');
  */
 class Alliance {
   /**
-   * Create a new Alliance for the given `api` provider and specific
+   * Create a new Alliance for the given `agent` provider and specific
    * `allianceId`.
    *
-   * @param api {ESIAgent} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param allianceId {Number} The alliance id that is used for all requests
    * @constructor
    */
-  constructor(api, allianceId) {
-    this._agent = api;
+  constructor(agent, allianceId) {
+    this._agent = agent;
     this._id = allianceId;
   }
 
@@ -71,7 +71,7 @@ class Alliance {
  */
 class Alliances extends ExtendableFunction {
   /**
-   * Create a new Alliances function using the given `api`.
+   * Create a new Alliances function using the given `agent`.
    *
    * @param agent {ESIAgent} The ESI agent
    * @constructor
