@@ -18,7 +18,7 @@ test('Agents.search', () => {
   return api.agents.search('search text').then(result => {
     // Expect the results to be an array
     expect(Array.isArray(result)).toBeTruthy();
-  })
+  });
 });
 
 test('Agents.search.strict', () => {
@@ -30,5 +30,5 @@ test('Agents.search.strict', () => {
   return api.agents.search.strict('search text').then(result => {
     // Expect the results to be an array
     expect(Array.isArray(result)).toBeTruthy();
-  })
+  });
 });
