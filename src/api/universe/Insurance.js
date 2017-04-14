@@ -6,13 +6,13 @@
  */
 class Insurance {
   /**
-   * Create a new Insurance instance using the given `api`.
+   * Create a new Insurance instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
-    this._api = api;
+  constructor(agent) {
+    this._agent = agent;
   }
 
   /**
@@ -21,7 +21,7 @@ class Insurance {
    * @return {Promise.<Array.<Object>>}
    */
   prices() {
-    return this._api.insurance().newRequest('getInsurancePrices', []);
+    return this._agent.noAuth.get('/v1/insurance/prices/');
   }
 }
 
