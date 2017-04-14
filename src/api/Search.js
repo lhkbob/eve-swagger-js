@@ -1,7 +1,7 @@
 const ExtendableFunction = require('../internal/ExtendableFunction');
 
-function defaultSearch(api, categories, strict, text) {
-  return api.noAuth.get('/v1/search/', {
+function defaultSearch(agent, categories, strict, text) {
+  return agent.noAuth.get('/v1/search/', {
     query: {
       'categories': categories,
       'search': text,
@@ -19,8 +19,8 @@ function defaultSearch(api, categories, strict, text) {
   });
 }
 
-function characterSearch(api, categories, strict, character, token, text) {
-  return api.auth(token).get('/v2/characters/{character_id}/search/', {
+function characterSearch(agent, categories, strict, character, token, text) {
+  return agent.auth(token).get('/v2/characters/{character_id}/search/', {
     path: { 'character_id': character },
     query: {
       'categories': categories,
@@ -76,7 +76,7 @@ class Search extends ExtendableFunction {
    * character specific search end point, and the `structure` category can also
    * be used.
    *
-   * @param api {ESIAgent} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param categories {Array.<String>} Optional; the categories search to
    *     through
    * @param characterId {Number} Optional; the character id of the search
@@ -84,10 +84,10 @@ class Search extends ExtendableFunction {
    *     character,
    *    must be provided if `characterId` is given
    */
-  constructor(api, categories = [], characterId = 0, accessToken = '') {
+  constructor(agent, categories = [], characterId = 0, accessToken = '') {
     super(text => this.get(text));
 
-    this._api = api;
+    this._agent = agent;
     this._categories = categories;
     this._character = characterId;
     this._token = accessToken;
@@ -154,10 +154,10 @@ class Search extends ExtendableFunction {
   _doSearch(text, strict) {
     if (this._character == '' && this._token == '') {
       // Do a default search
-      return defaultSearch(this._api, this._categories, strict, text);
+      return defaultSearch(this._agent, this._categories, strict, text);
     } else {
       // Do a character search
-      return characterSearch(this._api, this._categories, strict,
+      return characterSearch(this._agent, this._categories, strict,
           this._character, this._token, text);
     }
   }
