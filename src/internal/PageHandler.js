@@ -36,7 +36,7 @@ class PageHandler {
 
   _get(page) {
     return this._fetch(page).then(result => {
-      if (result.length < this._resultLength) {
+      if (result.length < this._resultLength || result.length == 0) {
         // End of the data so return it
         return result;
       } else {

@@ -13,15 +13,15 @@ const _names = require('../../internal/names');
  */
 class Region {
   /**
-   * Create a new Region for the given `api` provider and specific
+   * Create a new Region for the given `agent` provider and specific
    * `regionId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param regionId {Number} The region id that is used for all requests
    * @constructor
    */
-  constructor(api, regionId) {
-    this._api = api;
+  constructor(agent, regionId) {
+    this._agent = agent;
     this._id = regionId;
     this._all = new PageHandler(page => this.orders(page))
   }
@@ -32,8 +32,8 @@ class Region {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniverseRegionsRegionId', [this._id]);
+    return this._agent.noAuth.get('/v1/universe/regions/{region_id}/',
+        { path: { 'region_id': this._id } });
   }
 
   /**
@@ -43,8 +43,10 @@ class Region {
    * @return {Promise.<Array.<Object>>}
    */
   history(typeId) {
-    return this._api.market()
-    .newRequest('getMarketsRegionIdHistory', [this._id, typeId]);
+    return this._agent.noAuth.get('/v1/markets/{region_id}/history/', {
+      path: { 'region_id': this._id },
+      query: { 'type_id': typeId }
+    });
   }
 
   /**
@@ -59,9 +61,14 @@ class Region {
     if (page == 0) {
       return this._all.getAll();
     } else {
-      return this._api.market()
-      .newRequest('getMarketsRegionIdOrders', ['all', this._id],
-          { page: page });
+      return this._agent.noAuth.get('/v1/markets/{region_id}/orders/', {
+        path: { 'region_id': this._id },
+        query: {
+          'type_id': null,
+          'page': page,
+          'order_type': 'all'
+        }
+      });
     }
   }
 
@@ -74,9 +81,14 @@ class Region {
    * @return {Promise.<Array.<Object>>}
    */
   buyOrdersFor(typeId) {
-    return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', ['buy', this._id],
-        { typeId: typeId });
+    return this._agent.noAuth.get('/v1/markets/{region_id}/orders/', {
+      path: { 'region_id': this._id },
+      query: {
+        'type_id': typeId,
+        'page': null,
+        'order_type': 'buy'
+      }
+    });
   }
 
   /**
@@ -88,9 +100,14 @@ class Region {
    * @return {Promise.<Array.<Object>>}
    */
   sellOrdersFor(typeId) {
-    return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', ['sell', this._id],
-        { typeId: typeId });
+    return this._agent.noAuth.get('/v1/markets/{region_id}/orders/', {
+      path: { 'region_id': this._id },
+      query: {
+        'type_id': typeId,
+        'page': null,
+        'order_type': 'sell'
+      }
+    });
   }
 
   /**
@@ -102,9 +119,14 @@ class Region {
    * @return {Promise.<Array.<Object>>}
    */
   ordersFor(typeId) {
-    return this._api.market()
-    .newRequest('getMarketsRegionIdOrders', ['all', this._id],
-        { typeId: typeId });
+    return this._agent.noAuth.get('/v1/markets/{region_id}/orders/', {
+      path: { 'region_id': this._id },
+      query: {
+        'type_id': typeId,
+        'page': null,
+        'order_type': 'all'
+      }
+    });
   }
 }
 
@@ -122,14 +144,14 @@ class Region {
  */
 class Regions extends ExtendableFunction {
   /**
-   * Create a new Regions function using the given `api`.
+   * Create a new Regions function using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => (id ? this.get(id) : this.all()));
-    this._api = api;
+    this._agent = agent;
 
     this._search = null;
   }
@@ -141,7 +163,7 @@ class Regions extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['region']);
+      this._search = new Search(this._agent, ['region']);
     }
     return this._search;
   }
@@ -153,7 +175,7 @@ class Regions extends ExtendableFunction {
    * @returns {Region}
    */
   get(id) {
-    return new Region(this._api, id);
+    return new Region(this._agent, id);
   }
 
   /**
@@ -162,7 +184,7 @@ class Regions extends ExtendableFunction {
    * @returns {Promise.<Array.<Number>>}
    */
   all() {
-    return this._api.universe().newRequest('getUniverseRegions', []);
+    return this._agent.noAuth.get('/v1/universe/regions/');
   }
 
   /**
@@ -183,7 +205,7 @@ class Regions extends ExtendableFunction {
     if (!ids || ids.length == 0) {
       return this.all().then(allIds => this.names(allIds));
     } else {
-      return _names(this._api, 'region', ids);
+      return _names(this._agent, 'region', ids);
     }
   }
 }
