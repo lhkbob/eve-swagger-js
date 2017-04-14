@@ -15,16 +15,16 @@ const _names = require('../internal/names');
  */
 class Corporation {
   /**
-   * Create a new Corporation for the given `api` provider and specific
+   * Create a new Corporation for the given `agent` provider and specific
    * `corporationId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param corporationId {Number} The corporation id that is used for all
    *     requests
    * @constructor
    */
-  constructor(api, corporationId) {
-    this._api = api;
+  constructor(agent, corporationId) {
+    this._agent = agent;
     this._id = corporationId;
   }
 
@@ -34,8 +34,8 @@ class Corporation {
    * @return {Promise.<Object>}
    */
   info() {
-    return this._api.corporation()
-    .newRequest('getCorporationsCorporationId', [this._id]);
+    return this._agent.noAuth.get('/v2/corporations/{corporation_id}/',
+        { path: { 'corporation_id': this._id } });
   }
 
   /**
@@ -44,8 +44,9 @@ class Corporation {
    * @return {Promise.<Array.<Object>>}
    */
   history() {
-    return this._api.corporation()
-    .newRequest('getCorporationsCorporationIdAllianceHistory', [this._id]);
+    return this._agent.noAuth.get(
+        '/v1/corporations/{corporation_id}/alliancehistory/',
+        { path: { 'corporation_id': this._id } });
   }
 
   /**
@@ -54,8 +55,8 @@ class Corporation {
    * @return {Promise.<Object>}
    */
   icon() {
-    return this._api.corporation()
-    .newRequest('getCorporationsCorporationIdIcons', [this._id]);
+    return this._agent.noAuth.get('/v1/corporations/{corporation_id}/icons/',
+        { path: { 'corporation_id': this._id } });
   }
 
   /**
@@ -64,7 +65,8 @@ class Corporation {
    * @returns {Promise.<Array.<Object>>}
    */
   loyaltyOffers() {
-    return this._api.loyalty().newRequest('getLoyaltyStoresCorporationIdOffers', [this._id]);
+    return this._agent.noAuth.get('/v1/loyalty/stores/{corporation_id}/offers/',
+        { path: { 'corporation_id': this._id } });
   }
 }
 
@@ -82,12 +84,12 @@ class Corporations extends ExtendableFunction {
   /**
    * Create a new Corporations function using the given `api`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => this.get(id));
-    this._api = api;
+    this._agent = agent;
 
     this._search = null;
   }
@@ -100,7 +102,7 @@ class Corporations extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['corporation']);
+      this._search = new Search(this._agent, ['corporation']);
     }
     return this._search;
   }
@@ -113,7 +115,7 @@ class Corporations extends ExtendableFunction {
    * @returns {Corporation}
    */
   get(id) {
-    return new Corporation(this._api, id);
+    return new Corporation(this._agent, id);
   }
 
   /**
@@ -122,7 +124,7 @@ class Corporations extends ExtendableFunction {
    * @return {Promise.<Array.<Number>>}
    */
   npc() {
-    return this._api.corporation().newRequest('getCorporationsNpccorps', []);
+    return this._agent.noAuth.get('/v1/corporations/npccorps/');
   }
 
   /**
@@ -137,10 +139,11 @@ class Corporations extends ExtendableFunction {
     if (ids.length > 20) {
       // Use universe/names end point since the /corporations one breaks if
       // the URL gets too long.
-      return _names(this._api, 'corporation', ids);
+      return _names(this._agent, 'corporation', ids);
     } else {
       // Use alliance/names end point and
-      return this._api.corporation().newRequest('getCorporationsNames', [ids])
+      return this._agent.noAuth.get('/v1/corporations/names/',
+          { query: { 'corporation_ids': ids } })
       .then(result => {
         // Rename corporation_id and corporation_name
         return result.map(r => {
