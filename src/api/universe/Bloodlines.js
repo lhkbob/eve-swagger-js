@@ -28,7 +28,7 @@ class Bloodlines extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   all() {
-    return this._agent.noAuth.get('/v1/universe/bloodlines');
+    return this._agent.noAuth.get('/v1/universe/bloodlines/');
   }
 }
 
