@@ -9,15 +9,15 @@ const _names = require('../../internal/names');
  */
 class SolarSystem {
   /**
-   * Create a new SolarSystem for the given `api` provider and specific
+   * Create a new SolarSystem for the given `agent` provider and specific
    * `solarSystemId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param solarSystemId {Number} The system id that is used for all requests
    * @constructor
    */
-  constructor(api, solarSystemId) {
-    this._api = api;
+  constructor(agent, solarSystemId) {
+    this._agent = agent;
     this._id = solarSystemId;
   }
 
@@ -27,34 +27,36 @@ class SolarSystem {
    * @return {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniverseSystemsSystemId', [this._id]);
+    return this._agent.noAuth.get('/v2/universe/systems/{system_id}/',
+        { path: { 'system_id': this._id } });
   }
 }
 
 /**
- * An api adapter that provides functions for accessing solar system information
+ * An api adapter that provides functions for accessing solar system
+ * information
  * via the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
  * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.
  * You should not usually instantiate this directly as its constructor requires
  * an internal api instance.
  *
- * This is a function class so instances of `SolarSystems` are functions and can
+ * This is a function class so instances of `SolarSystems` are functions and
+ * can
  * be invoked directly, besides accessing its members. Its default function
- * action is equivalent to {@link SolarSystems#get get} or {@link SolarSystems#all all}
- * if no id is provided.
+ * action is equivalent to {@link SolarSystems#get get} or {@link
+ * SolarSystems#all all} if no id is provided.
  */
 class SolarSystems extends ExtendableFunction {
   /**
    * Create a new SolarSystems instance using the given `api`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => (id ? this.get(id) : this.all()));
-    this._api = api;
+    this._agent = agent;
 
     this._search = null;
   }
@@ -67,7 +69,7 @@ class SolarSystems extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['solarsystem']);
+      this._search = new Search(this._agent, ['solarsystem']);
     }
     return this._search;
   }
@@ -79,7 +81,7 @@ class SolarSystems extends ExtendableFunction {
    * @returns {SolarSystem}
    */
   get(id) {
-    return new SolarSystem(this._api, id);
+    return new SolarSystem(this._agent, id);
   }
 
   /**
@@ -88,7 +90,7 @@ class SolarSystems extends ExtendableFunction {
    * @returns {Promise.<Array.<Number>>}
    */
   all() {
-    return this._api.universe().newRequest('getUniverseSystems', []);
+    return this._agent.noAuth.get('/v1/universe/systems/');
   }
 
   /**
@@ -109,7 +111,7 @@ class SolarSystems extends ExtendableFunction {
     if (!ids || ids.length == 0) {
       return this.all().then(allIds => this.names(allIds));
     } else {
-      return _names(this._api, 'solar_system', ids);
+      return _names(this._agent, 'solar_system', ids);
     }
   }
 }

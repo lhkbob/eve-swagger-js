@@ -9,35 +9,35 @@ afterEach(() => {
   agent.__reset();
 });
 
-test('Constellation.info', () => {
-  agent.__expectRoute('get_universe_constellations_constellation_id', {
-    'constellation_id': 1
+test('SolarSystem.info', () => {
+  agent.__expectRoute('get_universe_systems_system_id', {
+    'system_id': 1
   });
-  return api.constellations(1).info().then(result => {
+  return api.solarSystems(1).info().then(result => {
     expect(result).toBeDefined();
   });
 });
 
-test('Constellations.all', () => {
-  agent.__expectRoute('get_universe_constellations', {});
-  return api.constellations().then(result => {
+test('SolarSystems.all', () => {
+  agent.__expectRoute('get_universe_systems', {});
+  return api.solarSystems().then(result => {
     expect(result).toBeDefined();
   });
 });
 
 
-test('Constellations.names empty', () => {
-  agent.__expectRoute('get_universe_constellations', {});
-  agent.__expectRoute('post_universe_names', { 'ids': [20000001] }, {
+test('SolarSystems.names empty', () => {
+  agent.__expectRoute('get_universe_systems', {});
+  agent.__expectRoute('post_universe_names', { 'ids': [30000001] }, {
     returns: [
       {
         'id': 20000001,
         'name': 'Test',
-        'category': 'constellation'
+        'category': 'solar_system'
       }
     ]
   });
-  return api.constellations.names().then(result => {
+  return api.solarSystems.names().then(result => {
     // Expect the results to be renamed
     expect(result.length).toBeGreaterThan(0);
     for (let n of result) {
@@ -46,17 +46,17 @@ test('Constellations.names empty', () => {
   });
 });
 
-test('Constellations.names', () => {
+test('SolarSystems.names', () => {
   agent.__expectRoute('post_universe_names', { 'ids': [2] }, {
     returns: [
       {
         'id': 2,
         'name': 'Test',
-        'category': 'constellation'
+        'category': 'solar_system'
       }
     ]
   });
-  return api.constellations.names([2]).then(result => {
+  return api.solarSystems.names([2]).then(result => {
     // Expect the results to be renamed
     expect(result.length).toBeGreaterThan(0);
     for (let n of result) {
@@ -65,25 +65,25 @@ test('Constellations.names', () => {
   });
 });
 
-test('Constellations.search', () => {
+test('SolarSystems.search', () => {
   agent.__expectRoute('get_search', {
     'search': 'search text',
-    'categories': ['constellation'],
+    'categories': ['solarsystem'],
     'strict': false
   });
-  return api.constellations.search('search text').then(result => {
+  return api.solarSystems.search('search text').then(result => {
     // Expect the results to be an array
     expect(Array.isArray(result)).toBeTruthy();
   });
 });
 
-test('Constellations.search.strict', () => {
+test('SolarSystems.search.strict', () => {
   agent.__expectRoute('get_search', {
     'search': 'search text',
-    'categories': ['constellation'],
+    'categories': ['solarsystem'],
     'strict': true
   });
-  return api.constellations.search.strict('search text').then(result => {
+  return api.solarSystems.search.strict('search text').then(result => {
     // Expect the results to be an array
     expect(Array.isArray(result)).toBeTruthy();
   });
