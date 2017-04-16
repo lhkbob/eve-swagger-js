@@ -12,12 +12,12 @@ class Station {
    * Create a new Station for the given `api` provider and specific
    * `stationId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param stationId {Number} The station id that is used for all requests
    * @constructor
    */
-  constructor(api, stationId) {
-    this._api = api;
+  constructor(agent, stationId) {
+    this._agent = agent;
     this._id = stationId;
   }
 
@@ -27,8 +27,8 @@ class Station {
    * @return {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniverseStationsStationId', [this._id]);
+    return this._agent.noAuth.get('/v2/universe/stations/{station_id}/',
+        {path: {'station_id': this._id}});
   }
 }
 
@@ -45,14 +45,14 @@ class Station {
  */
 class Stations extends ExtendableFunction {
   /**
-   * Create a new Stations instance using the given `api`.
+   * Create a new Stations instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI Agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => this.get(id));
-    this._api = api;
+    this._agent = agent;
 
     this._search = null;
   }
@@ -65,7 +65,7 @@ class Stations extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['station']);
+      this._search = new Search(this._agent, ['station']);
     }
     return this._search;
   }
@@ -77,7 +77,7 @@ class Stations extends ExtendableFunction {
    * @returns {Station}
    */
   get(id) {
-    return new Station(this._api, id);
+    return new Station(this._agent, id);
   }
 
   /**
@@ -94,7 +94,7 @@ class Stations extends ExtendableFunction {
    * @return {Promise.<Array.<Object>>}
    */
   names(ids) {
-    return _names(this._api, 'station', ids);
+    return _names(this._agent, 'station', ids);
   }
 }
 
