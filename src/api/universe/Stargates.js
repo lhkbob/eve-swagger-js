@@ -11,16 +11,15 @@ const ExtendableFunction = require('../../internal/ExtendableFunction');
  */
 class Stargate {
   /**
-   * Create a new Stargate for the given `api` provider and specific
+   * Create a new Stargate for the given `agent` provider and specific
    * `stargateId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
-   * @param stargateId {Number} The stargate id that is used for all
-   *     requests
+   * @param agent {ESIAgent} The agent used to generate web requests
+   * @param stargateId {Number} The stargate id that is used for all requests
    * @constructor
    */
-  constructor(api, stargateId) {
-    this._api = api;
+  constructor(agent, stargateId) {
+    this._agent = agent;
     this._id = stargateId;
   }
 
@@ -30,8 +29,8 @@ class Stargate {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniverseStargatesStargateId', [this._id]);
+    return this._agent.noAuth.get('/v1/universe/stargates/{stargate_id}/',
+        { path: { 'stargate_id': this._id } });
   }
 }
 
@@ -49,12 +48,12 @@ class Stargates extends ExtendableFunction {
   /**
    * Create a new Stargates instance using the given `api`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => this.get(id));
-    this._api = api;
+    this._agent = agent;
   }
 
   /**
@@ -65,7 +64,7 @@ class Stargates extends ExtendableFunction {
    * @returns {Stargate}
    */
   get(id) {
-    return new Stargate(this._api, id);
+    return new Stargate(this._agent, id);
   }
 }
 
