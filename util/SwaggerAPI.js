@@ -90,7 +90,7 @@ function validateSchema(schemaOrType, value) {
       return isString(value) ? '' : 'value not a string';
     } else if (schemaOrType == 'integer') {
       return isNumber(value) && Math.floor(value) == value ? '' : 'value not an integer';
-    } else if (schemaOrType == 'float' || value == 'number') {
+    } else if (schemaOrType == 'float' || schemaOrType == 'number') {
       return isNumber(value) ? '' : 'value not a number';
     } else if (schemaOrType == 'boolean') {
       return isBoolean(value) ? '' : 'value not a boolean';
@@ -99,7 +99,7 @@ function validateSchema(schemaOrType, value) {
     } else if (schemaOrType == 'object') {
       return isObject(value) ? '' : 'value not an object';
     } else {
-      return 'unexpected value type';
+      return 'unexpected value type: ' + schemaOrType;
     }
   } else if (schemaOrType['properties']) {
     if (!isObject(value)) {
