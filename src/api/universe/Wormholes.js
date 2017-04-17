@@ -10,13 +10,13 @@ const Search = require('../Search');
  */
 class Wormholes {
   /**
-   * Create a new Wormholes instance using the given `api`.
+   * Create a new Wormholes instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
-    this._api = api;
+  constructor(agent) {
+    this._agent = agent;
 
     this._search = null;
   }
@@ -28,7 +28,7 @@ class Wormholes {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['wormhole']);
+      this._search = new Search(this._agent, ['wormhole']);
     }
     return this._search;
   }
