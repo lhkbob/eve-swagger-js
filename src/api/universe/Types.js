@@ -10,14 +10,14 @@ const _names = require('../../internal/names');
  */
 class Group {
   /**
-   * Create a new Group for the given `api` provider and specific `groupId`.
+   * Create a new Group for the given `agent` provider and specific `groupId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param groupId {Number} The group id that is used for all requests
    * @constructor
    */
-  constructor(api, groupId) {
-    this._api = api;
+  constructor(agent, groupId) {
+    this._agent = agent;
     this._id = groupId;
   }
 
@@ -27,8 +27,8 @@ class Group {
    * @return {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniverseGroupsGroupId', [this._id]);
+    return this._agent.noAuth.get('/v1/universe/groups/{group_id}/',
+        { path: { 'group_id': this._id } });
   }
 }
 
@@ -45,14 +45,14 @@ class Group {
  */
 class Groups extends ExtendableFunction {
   /**
-   * Create a new Groups instance using the given `api`.
+   * Create a new Groups instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => (id ? this.get(id) : this.all()));
-    this._api = api;
+    this._agent = agent;
     this._all = new PageHandler(page => this.all(page));
   }
 
@@ -63,7 +63,7 @@ class Groups extends ExtendableFunction {
    * @returns {Group}
    */
   get(id) {
-    return new Group(this._api, id);
+    return new Group(this._agent, id);
   }
 
   /**
@@ -77,8 +77,8 @@ class Groups extends ExtendableFunction {
     if (page == 0) {
       return this._all.getAll();
     } else {
-      return this._api.universe()
-      .newRequest('getUniverseGroups', [], { page: page });
+      return this._agent.noAuth.get('/v1/universe/groups/',
+          { query: { 'page': page } });
     }
   };
 }
@@ -89,15 +89,15 @@ class Groups extends ExtendableFunction {
  */
 class Category {
   /**
-   * Create a new Category for the given `api` provider and specific
+   * Create a new Category for the given `agent` provider and specific
    * `categoryId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param categoryId {Number} The category id that is used for all requests
    * @constructor
    */
-  constructor(api, categoryId) {
-    this._api = api;
+  constructor(agent, categoryId) {
+    this._agent = agent;
     this._id = categoryId;
   }
 
@@ -107,8 +107,8 @@ class Category {
    * @return {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniverseCategoriesCategoryId', [this._id]);
+    return this._agent.noAuth.get('/v1/universe/categories/{category_id}/',
+        { path: { 'category_id': this._id } });
   }
 }
 
@@ -125,14 +125,14 @@ class Category {
  */
 class Categories extends ExtendableFunction {
   /**
-   * Create a new Categories instance using the given `api`.
+   * Create a new Categories instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => (id ? this.get(id) : this.all()));
-    this._api = api;
+    this._agent = agent;
   }
 
   /**
@@ -142,7 +142,7 @@ class Categories extends ExtendableFunction {
    * @returns {Category}
    */
   get(id) {
-    return new Category(this._api, id);
+    return new Category(this._agent, id);
   }
 
   /**
@@ -151,7 +151,7 @@ class Categories extends ExtendableFunction {
    * @return {Promise.<Array.<Number>>}
    */
   all() {
-    return this._api.universe().newRequest('getUniverseCategories', []);
+    return this._agent.noAuth.get('/v1/universe/categories/');
   }
 }
 
@@ -161,15 +161,15 @@ class Categories extends ExtendableFunction {
  */
 class Type {
   /**
-   * Create a new Type for the given `api` provider and specific
+   * Create a new Type for the given `agent` provider and specific
    * `typeId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param typeId {Number} The type id that is used for all requests
    * @constructor
    */
-  constructor(api, typeId) {
-    this._api = api;
+  constructor(agent, typeId) {
+    this._agent = agent;
     this._id = typeId;
   }
 
@@ -179,8 +179,8 @@ class Type {
    * @return {Promise.<Object>}
    */
   info() {
-    return this._api.universe()
-    .newRequest('getUniverseTypesTypeId', [this._id]);
+    return this._agent.noAuth.get('/v2/universe/types/{type_id}/',
+        { path: { 'type_id': this._id } });
   }
 }
 
@@ -199,14 +199,14 @@ class Type {
  */
 class Types extends ExtendableFunction {
   /**
-   * Create a new Types instance using the given `api`.
+   * Create a new Types instance using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super(id => (id ? this.get(id) : this.all()));
-    this._api = api;
+    this._agent = agent;
     this._all = new PageHandler(page => this.all(page));
 
     this._search = null;
@@ -221,7 +221,7 @@ class Types extends ExtendableFunction {
    */
   get categories() {
     if (!this._cats) {
-      this._cats = new Categories(this._api);
+      this._cats = new Categories(this._agent);
     }
     return this._cats;
   }
@@ -233,20 +233,20 @@ class Types extends ExtendableFunction {
    */
   get groups() {
     if (!this._groups) {
-      this._groups = new Groups(this._api);
+      this._groups = new Groups(this._agent);
     }
     return this._groups;
   }
 
   /**
-   * A Search module instance configured to search over the `'inventoryType'`
+   * A Search module instance configured to search over the `'inventorytype'`
    * type.
    *
    * @type {Search}
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['inventoryType']);
+      this._search = new Search(this._agent, ['inventorytype']);
     }
     return this._search;
   }
@@ -258,7 +258,7 @@ class Types extends ExtendableFunction {
    * @returns {Type}
    */
   get(id) {
-    return new Type(this._api, id);
+    return new Type(this._agent, id);
   }
 
   /**
@@ -267,7 +267,7 @@ class Types extends ExtendableFunction {
    * @return {Promise.<Array.<Object>>}
    */
   prices() {
-    return this._api.market().newRequest('getMarketPrices', []);
+    return this._agent.noAuth.get('/v1/markets/prices/');
   }
 
   /**
@@ -281,7 +281,8 @@ class Types extends ExtendableFunction {
     if (page == 0) {
       return this._all.getAll();
     } else {
-      return this._api.universe().newRequest('getUniverseTypes', []);
+      return this._agent.noAuth.get('/v1/universe/types/',
+          { query: { 'page': page } });
     }
   }
 
@@ -303,7 +304,7 @@ class Types extends ExtendableFunction {
     if (!ids || ids.length == 0) {
       return this.all().then(allIds => this.names(allIds));
     } else {
-      return _names(this._api, 'inventory_type', ids);
+      return _names(this._agent, 'inventory_type', ids);
     }
   }
 }
