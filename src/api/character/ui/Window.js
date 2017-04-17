@@ -7,15 +7,15 @@
  */
 class Window {
   /**
-   * Create a new Window for the given `api` provider. Requires an access
+   * Create a new Window for the given `agent` provider. Requires an access
    * token for a character currently in game.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param token {String} Access token for the character in game
    * @constructor
    */
-  constructor(api, token) {
-    this._api = api;
+  constructor(agent, token) {
+    this._agent = agent;
     this._token = token;
   }
 
@@ -27,8 +27,8 @@ class Window {
    * @return {Promise.<Object>}
    */
   info(id) {
-    return this._api.userInterface(this._token)
-    .newRequest('postUiOpenwindowInformation', [id]);
+    return this._agent.auth(this._token)
+    .post('/v1/ui/openwindow/information/', { query: { 'target_id': id } });
   }
 
   /**
@@ -38,8 +38,8 @@ class Window {
    * @return {Promise.<Object>}
    */
   market(typeId) {
-    return this._api.userInterface(this._token)
-    .newRequest('postUiOpenwindowMarketdetails', [typeId]);
+    return this._agent.auth(this._token)
+    .post('/v1/ui/openwindow/marketdetails/', { query: { 'type_id': typeId } });
   }
 
   /**
@@ -49,8 +49,8 @@ class Window {
    * @return {Promise.<Object>}
    */
   contract(contractId) {
-    return this._api.userInterface(this._token)
-    .newRequest('postUiOpenwindowContract', [contractId]);
+    return this._agent.auth(this._token).post('/v1/ui/openwindow/contract/',
+        { query: { 'contract_id': contractId } });
   }
 
   /**
@@ -61,8 +61,8 @@ class Window {
    * @return {Promise.<Object>}
    */
   newMail(settings) {
-    return this._api.userInterface(this._token)
-    .newRequest('postUiOpenwindowNewmail', [settings]);
+    return this._agent.auth(this._token)
+    .post('/v1/ui/openwindow/newmail/', { body: settings });
   }
 }
 
