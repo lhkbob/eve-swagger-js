@@ -12,17 +12,17 @@ const ExtendableFunction = require('../../internal/ExtendableFunction');
  */
 class Bookmarks extends ExtendableFunction {
   /**
-   * Create a new Bookmarks function using the given `api`, for the character
+   * Create a new Bookmarks function using the given `agent`, for the character
    * described by `characterId` with SSO access from `token`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param characterId {Number} The character id whose calendar is accessed
    * @param token {String} The SSO access token for the character
    * @constructor
    */
-  constructor(api, characterId, token) {
+  constructor(agent, characterId, token) {
     super(() => this.all());
-    this._api = api;
+    this._agent = agent;
     this._id = characterId;
     this._token = token;
   }
@@ -33,8 +33,9 @@ class Bookmarks extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   folders() {
-    return this._api.bookmarks(this._token)
-    .newRequest('getCharactersCharacterIdBookmarksFolders', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/bookmarks/folders/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -43,8 +44,9 @@ class Bookmarks extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   all() {
-    return this._api.bookmarks(this._token)
-    .newRequest('getCharactersCharacterIdBookmarks', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/bookmarks/',
+        { path: { 'character_id': this._id } });
   }
 }
 
