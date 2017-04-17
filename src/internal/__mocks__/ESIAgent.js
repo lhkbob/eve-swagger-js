@@ -68,7 +68,8 @@ function expectRequest(expected, method, url, path, query, body, token) {
 
     let expectedValue = expected.paramValue(param);
     if (expectedValue === undefined) {
-      throw new Error('Missing parameter in expected params definition: ' + param);
+      throw new Error('Missing parameter in expected params definition: '
+          + param);
     }
     if (expectedValue != null) {
       expect(route.validateParameter(param, expectedValue)).toEqual('');
@@ -114,11 +115,16 @@ function expectRequest(expected, method, url, path, query, body, token) {
 
 
 class Expectation {
-  constructor(route, params, returns, token) {
+  constructor(route, params, returns, overrides, token) {
     this._route = route;
     this._params = params;
     this._returns = returns;
+    this._overrides = overrides;
     this._token = token;
+
+    if (returns && overrides) {
+      throw new Error('Cannot provide both explicit return value and return overrides');
+    }
   }
 
   get route() {
@@ -131,6 +137,10 @@ class Expectation {
 
   get returns() {
     return this._returns;
+  }
+
+  get overrides() {
+    return this._overrides;
   }
 
   paramValue(key) {
@@ -165,7 +175,15 @@ class MockESIRequestHandler {
           return {};
         } else {
           // Assume the created example matches the spec
-          return SwaggerAPI.createExample(expectedCall.route.responseData);
+          let result = SwaggerAPI.createExample(expectedCall.route.responseData);
+          // And then possibly apply any overrides
+          if (expectedCall.overrides != null) {
+            result = Object.assign(result, expectedCall.overrides);
+            expect(expectedCall.route.validateResponse(result))
+            .toEqual('');
+          }
+
+          return result;
         }
       }
     });
@@ -207,9 +225,9 @@ class MockESIAgent {
   }
 
   __expectRoute(route, params,
-      { returns: returns = null, token: token = '' } = {}) {
+      { returns: returns = null, overrides: overrides = null, token: token = '' } = {}) {
     let realRoute = this._api.route(route);
-    this._expect.push(new Expectation(realRoute, params, returns, token));
+    this._expect.push(new Expectation(realRoute, params, returns, overrides, token));
   }
 
   __reset() {
