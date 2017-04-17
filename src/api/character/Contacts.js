@@ -29,19 +29,24 @@ class Contact {
    * @returns {Promise.<Object>}
    */
   remove() {
-    return this._contacts._api.contacts(this._contacts._token)
-    .newRequest('deleteCharactersCharacterIdContacts',
-        [this._contacts._id, [this._id]]);
+    return this._contacts._agent.auth(this._contacts._token)
+    .del('/v1/characters/{character_id}/contacts/', {
+      path: { 'character_id': this._contacts._id },
+      body: [this._id]
+    });
   }
 
   _updateContact(standing, label, watched) {
-    let opts = {
-      watched: watched,
-      label: label
-    };
-    return this._contacts._api.contacts(this._contacts._token)
-    .newRequest('putCharactersCharacterIdContacts',
-        [this._contacts._id, [this._id], standing], opts);
+    return this._contacts._agent.auth(this._contacts._token)
+    .put('/v1/characters/{character_id}/contacts/', {
+      path: { 'character_id': this._contacts._id },
+      query: {
+        'label_id': label,
+        'standing': standing,
+        'watched': watched
+      },
+      body: [this._id]
+    });
   }
 
   /**
@@ -88,18 +93,18 @@ class Contact {
  */
 class Contacts extends ExtendableFunction {
   /**
-   * Create a new Contacts function using the given `api`, for the
+   * Create a new Contacts function using the given `agent`, for the
    * character described by `characterId` with SSO access from `token`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param characterId {Number} The character id whose contacts are accessed
    * @param token {String} The SSO access token for the character
    * @constructor
    */
-  constructor(api, characterId, token) {
+  constructor(agent, characterId, token) {
     super(id => (id ? this.get(id) : this.all()));
 
-    this._api = api;
+    this._agent = agent;
     this._id = characterId;
     this._token = token;
     this._all = new PageHandler(page => this.all(page));
@@ -116,9 +121,11 @@ class Contacts extends ExtendableFunction {
     if (page == 0) {
       return this._all.getAll();
     } else {
-      return this._api.contacts(this._token)
-      .newRequest('getCharactersCharacterIdContacts', [this._id],
-          { page: page });
+      return this._agent.auth(this._token)
+      .get('/v1/characters/{character_id}/contacts/', {
+        path: { 'character_id': this._id },
+        query: { 'page': page }
+      });
     }
   }
 
@@ -128,19 +135,22 @@ class Contacts extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   labels() {
-    return this._api.contacts(this._token)
-    .newRequest('getCharactersCharacterIdContactsLabels', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/contacts/labels/',
+        { path: { 'character_id': this._id } });
   }
 
   _createContacts(contacts, standing, label, watched) {
-    let opts = { watched: watched };
-    if (label) {
-      opts.label = label;
-    }
-
-    return this._api.contacts(this._token)
-    .newRequest('postCharactersCharacterIdContacts',
-        [this._id, contacts, standing], opts);
+    return this._agent.auth(this._token)
+    .post('/v1/characters/{character_id}/contacts/', {
+      path: { 'character_id': this._id },
+      query: {
+        'label_id': label,
+        'standing': standing,
+        'watched': watched
+      },
+      body: contacts
+    });
   };
 
   /**
