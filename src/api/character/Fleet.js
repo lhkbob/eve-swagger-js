@@ -28,9 +28,14 @@ class Squad {
    * @returns {Promise.<Object>}
    */
   rename(name) {
-    return this._fleet._api.fleets(this._fleet._token)
-    .newRequest('putFleetsFleetIdSquadsSquadId',
-        [this._fleet._id, { name: name }, this._id]);
+    return this._fleet._agent.auth(this._fleet._token)
+    .put('/v1/fleets/{fleet_id}/squads/{squad_id}/', {
+      path: {
+        'fleet_id': this._fleet._id,
+        'squad_id': this._id
+      },
+      body: { 'name': name }
+    });
   }
 
   /**
@@ -39,9 +44,13 @@ class Squad {
    * @returns {Promise.<Object>}
    */
   remove() {
-    return this._fleet._api.fleets(this._fleet._token)
-    .newRequest('deleteFleetsFleetIdSquadsSquadId',
-        [this._fleet._id, this._id]);
+    return this._fleet._agent.auth(this._fleet._token)
+    .del('/v1/fleets/{fleet_id}/squads/{squad_id}/', {
+      path: {
+        'fleet_id': this._fleet._id,
+        'squad_id': this._id
+      }
+    });
   }
 }
 
@@ -75,9 +84,13 @@ class Squads extends ExtendableFunction {
    * @returns {Promise.<Number>}
    */
   add() {
-    return this._wing._fleet._api.fleets(this._wing._fleet._token)
-    .newRequest('postFleetsFleetIdWingsWingIdSquads',
-        [this._wing._fleet._id, this._wing._id]);
+    return this._wing._fleet._agent.auth(this._wing._fleet._token)
+    .post('/v1/fleets/{fleet_id}/wings/{wing_id}/squads/', {
+      path: {
+        'fleet_id': this._wing._fleet._id,
+        'wing_id': this._wing._id
+      }
+    });
   }
 
   /**
@@ -129,9 +142,14 @@ class Wing {
    * @returns {Promise.<Object>}
    */
   rename(name) {
-    return this._fleet._api.fleets(this._fleet._token)
-    .newRequest('putFleetsFleetIdWingsWingId',
-        [this._fleet._id, { name: name }, this._id]);
+    return this._fleet._agent.auth(this._fleet._token)
+    .put('/v1/fleets/{fleet_id}/wings/{wing_id}/', {
+      path: {
+        'fleet_id': this._fleet._id,
+        'wing_id': this._id
+      },
+      body: { 'name': name }
+    });
   }
 
   /**
@@ -140,8 +158,13 @@ class Wing {
    * @returns {Promise.<Object>}
    */
   remove() {
-    return this._fleet._api.fleets(this._fleet._token)
-    .newRequest('deleteFleetsFleetIdWingsWingId', [this._fleet._id, this._id]);
+    return this._fleet._agent.auth(this._fleet._token)
+    .del('/v1/fleets/{fleet_id}/wings/{wing_id}/', {
+      path: {
+        'fleet_id': this._fleet._id,
+        'wing_id': this._id
+      }
+    });
   }
 }
 
@@ -174,8 +197,9 @@ class Wings extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   all() {
-    return this._fleet._api.fleets(this._fleet._token)
-    .newRequest('getFleetsFleetIdWings', [this._fleet._id]);
+    return this._fleet._agent.auth(this._fleet._token)
+    .get('/v1/fleets/{fleet_id}/wings/',
+        { path: { 'fleet_id': this._fleet._id } });
   }
 
   /**
@@ -185,8 +209,9 @@ class Wings extends ExtendableFunction {
    * @returns {Promise.<Number>}
    */
   add() {
-    return this._fleet._api.fleets(this._fleet._token)
-    .newRequest('postFleetsFleetIdWings', [this._fleet._id]);
+    return this._fleet._agent.auth(this._fleet._token)
+    .post('/v1/fleets/{fleet_id}/wings/',
+        { path: { 'fleet_id': this._fleet._id } });
   }
 
   /**
@@ -208,16 +233,16 @@ class Wings extends ExtendableFunction {
  */
 class Fleet {
   /**
-   * Create a new Fleet function using the given `api` with SSO access from
+   * Create a new Fleet function using the given `agent` with SSO access from
    * `token`. The `fleetId` must also be provided.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param token {String} The SSO access token for the character
    * @param fleetId {Number} The fleet id of the fleet the character belongs to
    * @constructor
    */
-  constructor(api, token, fleetId) {
-    this._api = api;
+  constructor(agent, token, fleetId) {
+    this._agent = agent;
     this._token = token;
     this._id = fleetId;
 
@@ -240,8 +265,8 @@ class Fleet {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._api.fleets(this._token)
-    .newRequest('getFleetsFleetId', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/fleets/{fleet_id}/', { path: { 'fleet_id': this._id } });
   }
 
   /**
@@ -250,8 +275,8 @@ class Fleet {
    * @returns {Promise.<Array.<Object>>}
    */
   members() {
-    return this._api.fleets(this._token)
-    .newRequest('getFleetsFleetIdMembers', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/fleets/{fleet_id}/members/', { path: { 'fleet_id': this._id } });
   }
 
   /**
@@ -261,8 +286,11 @@ class Fleet {
    * @returns {Promise.<Object>}
    */
   invite(invitation) {
-    return this._api.fleets(this._token)
-    .newRequest('postFleetsFleetIdMembers', [this._id, invitation]);
+    return this._agent.auth(this._token)
+    .post('/v1/fleets/{fleet_id}/members/', {
+      path: { 'fleet_id': this._id },
+      body: invitation
+    });
   }
 
   /**
@@ -272,8 +300,13 @@ class Fleet {
    * @returns {Promise.<Object>}
    */
   kick(memberId) {
-    return this._api.fleets(this._token)
-    .newRequest('deleteFleetsFleetIdMembersMemberId', [this._id, memberId]);
+    return this._agent.auth(this._token)
+    .del('/v1/fleets/{fleet_id}/members/{member_id}/', {
+      path: {
+        'fleet_id': this._id,
+        'member_id': memberId
+      }
+    });
   }
 
   /**
@@ -285,9 +318,14 @@ class Fleet {
    * @returns {Promise.<Object>}
    */
   move(memberId, moveOrder) {
-    return this._api.fleets(this._token)
-    .newRequest('putFleetsFleetIdMembersMemberId',
-        [this._id, memberId, moveOrder]);
+    return this._agent.auth(this._token)
+    .put('/v1/fleets/{fleet_id}/members/{member_id}/', {
+      path: {
+        'fleet_id': this._id,
+        'member_id': memberId
+      },
+      body: moveOrder
+    });
   }
 
   /**
@@ -297,8 +335,11 @@ class Fleet {
    * @returns {Promise.<Object>}
    */
   update(newSettings) {
-    return this._api.fleets(this._token)
-    .newRequest('putFleetsFleetId', [this._id, newSettings]);
+    return this._agent.auth(this._token)
+    .put('/v1/fleets/{fleet_id}/', {
+      path: { 'fleet_id': this._id },
+      body: newSettings
+    });
   }
 }
 
