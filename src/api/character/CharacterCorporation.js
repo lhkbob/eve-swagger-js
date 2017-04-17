@@ -89,6 +89,25 @@ class CharacterCorporation {
   }
 
   /**
+   * @esi_route get_loyalty_stores_corporation_id_offers
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  loyaltyOffers() {
+    if (this._id) {
+      return this._agent.noAuth.get(
+          '/v1/loyalty/stores/{corporation_id}/offers/',
+          { path: { 'corporation_id': this._id } });
+    } else {
+      return this.id().then(corpId => {
+        return this._agent.noAuth.get(
+            '/v1/loyalty/stores/{corporation_id}/offers/',
+            { path: { 'corporation_id': corpId } });
+      });
+    }
+  }
+
+  /**
    * @esi_route get_corporations_corporation_id_members
    * @esi_returns character_id
    *

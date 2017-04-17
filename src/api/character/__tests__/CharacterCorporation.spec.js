@@ -33,6 +33,14 @@ test('CharacterCorporation.icon', () => {
   });
 });
 
+test('CharacterCorporation.loyaltyOffers', () => {
+  agent.__expectRoute('get_characters_character_id', {'character_id': 1});
+  agent.__expectRoute('get_loyalty_stores_corporation_id_offers', {'corporation_id': 109299958});
+  return api.characters(1, 'my_token').corporation.loyaltyOffers().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
 test('CharacterCorporation.members', () => {
   agent.__expectRoute('get_characters_character_id', {'character_id': 1});
   agent.__expectRoute('get_corporations_corporation_id_members', {'corporation_id': 109299958}, {token: 'my_token'});
@@ -60,4 +68,22 @@ test('CharacterCorporation.id', () => {
   }).then(result => {
     expect(result).toEqual(109299958);
   });
+});
+
+test('CharacterCorporation duck typing', () => {
+  // Make sure CharacterCorporation has all of the public functions exposed
+  // by the regular Corporation.
+  let corp = api.corporations(1);
+  let charCorp = api.characters(1, 'my_token').corporation;
+
+  let corpMembers = Object.getOwnPropertyNames(Object.getPrototypeOf(corp));
+  let charCorpMembers = Object.getOwnPropertyNames(Object.getPrototypeOf(charCorp));
+
+  for (let e of corpMembers) {
+    if (e == 'constructor') {
+      continue; // skip this one
+    }
+
+    expect(charCorpMembers.includes(e)).toBeTruthy();
+  }
 });
