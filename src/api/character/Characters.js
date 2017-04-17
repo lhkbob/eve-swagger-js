@@ -28,15 +28,15 @@ const _names = require('../../internal/names');
  */
 class CharacterInfo {
   /**
-   * Create a new CharacterInfo for the given `api` provider targeting the
+   * Create a new CharacterInfo for the given `agent`, targeting the
    * specific `characterId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param characterId {Number} The id used for all character requests
    * @constructor
    */
-  constructor(api, characterId) {
-    this._api = api;
+  constructor(agent, characterId) {
+    this._agent = agent;
     this._id = characterId;
   }
 
@@ -46,8 +46,8 @@ class CharacterInfo {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._api.character()
-    .newRequest('getCharactersCharacterId', [this._id]);
+    return this._agent.noAuth.get('/v4/characters/{character_id}/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -56,8 +56,8 @@ class CharacterInfo {
    * @returns {Promise.<Object>}
    */
   portrait() {
-    return this._api.character()
-    .newRequest('getCharactersCharacterIdPortrait', [this._id]);
+    return this._agent.noAuth.get('/v2/characters/{character_id}/portrait/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -66,8 +66,9 @@ class CharacterInfo {
    * @returns {Promise.<Array.<Object>>}
    */
   history() {
-    return this._api.character()
-    .newRequest('getCharactersCharacterIdCorporationHistory', [this._id]);
+    return this._agent.noAuth.get(
+        '/v1/characters/{character_id}/corporationhistory/',
+        { path: { 'character_id': this._id } });
   }
 }
 
@@ -90,16 +91,16 @@ class CharacterInfo {
  */
 class Character extends CharacterInfo {
   /**
-   * Create a new CharacterInfo for the given `api` provider targeting the
+   * Create a new CharacterInfo for the given `agent`, targeting the
    * specific `characterId`.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param characterId {Number} The id used for all character requests
    * @param token {String} The SSO access token for the character
    * @constructor
    */
-  constructor(api, characterId, token) {
-    super(api, characterId);
+  constructor(agent, characterId, token) {
+    super(agent, characterId);
     this._token = token;
 
     this._allKills = new MaxIdHandler(id => this.recentKills(id),
@@ -127,7 +128,7 @@ class Character extends CharacterInfo {
    */
   get autopilot() {
     if (!this._auto) {
-      this._auto = new Autopilot(this._api, this._token);
+      this._auto = new Autopilot(this._agent, this._token);
     }
     return this._auto;
   }
@@ -139,7 +140,7 @@ class Character extends CharacterInfo {
    */
   get bookmarks() {
     if (!this._bms) {
-      this._bms = new Bookmarks(this._api, this._id, this._token);
+      this._bms = new Bookmarks(this._agent, this._id, this._token);
     }
     return this._bms;
   }
@@ -151,7 +152,7 @@ class Character extends CharacterInfo {
    */
   get calendar() {
     if (!this._cal) {
-      this._cal = new Calendar(this._api, this._id, this._token);
+      this._cal = new Calendar(this._agent, this._id, this._token);
     }
     return this._cal;
   }
@@ -163,7 +164,7 @@ class Character extends CharacterInfo {
    */
   get colonies() {
     if (!this._pi) {
-      this._pi = new Colonies(this._api, this._id, this._token);
+      this._pi = new Colonies(this._agent, this._id, this._token);
     }
     return this._pi;
   }
@@ -175,7 +176,7 @@ class Character extends CharacterInfo {
    */
   get contacts() {
     if (!this._contacts) {
-      this._contacts = new Contacts(this._api, this._id, this._token);
+      this._contacts = new Contacts(this._agent, this._id, this._token);
     }
     return this._contacts;
   }
@@ -187,7 +188,7 @@ class Character extends CharacterInfo {
    */
   get corporation() {
     if (!this._corp) {
-      this._corp = new CharacterCorporation(this._api, this._id, this._token);
+      this._corp = new CharacterCorporation(this._agent, this._id, this._token);
     }
     return this._corp;
   }
@@ -199,7 +200,7 @@ class Character extends CharacterInfo {
    */
   get fittings() {
     if (!this._fit) {
-      this._fit = new Fittings(this._api, this._id, this._token);
+      this._fit = new Fittings(this._agent, this._id, this._token);
     }
     return this._fit;
   }
@@ -211,7 +212,7 @@ class Character extends CharacterInfo {
    */
   get mail() {
     if (!this._mail) {
-      this._mail = new Mail(this._api, this._id, this._token);
+      this._mail = new Mail(this._agent, this._id, this._token);
     }
     return this._mail;
   }
@@ -223,7 +224,7 @@ class Character extends CharacterInfo {
    */
   get structures() {
     if (!this._struct) {
-      this._struct = new Structures(this._api, this._id, this._token);
+      this._struct = new Structures(this._agent, this._id, this._token);
     }
     return this._struct;
   }
@@ -235,7 +236,7 @@ class Character extends CharacterInfo {
    */
   get window() {
     if (!this._win) {
-      this._win = new Window(this._api, this._token);
+      this._win = new Window(this._agent, this._token);
     }
     return this._win;
   }
@@ -247,7 +248,7 @@ class Character extends CharacterInfo {
    * @returns {Fleet}
    */
   fleet(id) {
-    return new Fleet(this._api, this._token, id);
+    return new Fleet(this._agent, this._token, id);
   }
 
   /**
@@ -256,8 +257,9 @@ class Character extends CharacterInfo {
    * @returns {Promise.<Array.<Object>>}
    */
   assets() {
-    return this._api.assets(this._token)
-    .newRequest('getCharactersCharacterIdAssets', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/assets/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -266,8 +268,9 @@ class Character extends CharacterInfo {
    * @returns {Promise.<Object>}
    */
   clones() {
-    return this._api.clones(this._token)
-    .newRequest('getCharactersCharacterIdClones', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v2/characters/{character_id}/clones/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -281,7 +284,7 @@ class Character extends CharacterInfo {
    */
   recentKills(maxKillId = 0) {
     if (this._kills == null) {
-      this._kills = new Killmail(this._api);
+      this._kills = new Killmail(this._agent);
     }
 
     return this.recentKillmails(maxKillId).then(kms => {
@@ -315,8 +318,14 @@ class Character extends CharacterInfo {
     if (maxKillId != 0) {
       opts.maxKillId = maxKillId;
     }
-    return this._api.killmails(this._token)
-    .newRequest('getCharactersCharacterIdKillmailsRecent', [this._id], opts);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/killmails/recent/', {
+      path: { 'character_id': this._id },
+      query: {
+        'max_kill_id': maxKillId == 0 ? null : maxKillId,
+        'max_count': 50
+      }
+    });
   }
 
   /**
@@ -337,8 +346,9 @@ class Character extends CharacterInfo {
    * @returns {Promise.<Array.<Object>>}
    */
   loyaltyPoints() {
-    return this._api.loyalty(this._token)
-    .newRequest('getCharactersCharacterIdLoyaltyPoints', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/loyalty/points/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -347,8 +357,9 @@ class Character extends CharacterInfo {
    * @returns {Promise.<Object>}
    */
   ship() {
-    return this._api.location(this._token)
-    .newRequest('getCharactersCharacterIdShip', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/ship/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -357,8 +368,9 @@ class Character extends CharacterInfo {
    * @returns {Promise.<Object>}
    */
   location() {
-    return this._api.location(this._token)
-    .newRequest('getCharactersCharacterIdLocation', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/location/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -367,8 +379,9 @@ class Character extends CharacterInfo {
    * @returns {Promise.<Array.<Object>>}
    */
   wallets() {
-    return this._api.wallet(this._token)
-    .newRequest('getCharactersCharacterIdWallets', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/wallets/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -377,8 +390,9 @@ class Character extends CharacterInfo {
    * @returns {Promise.<Object>}
    */
   skills() {
-    return this._api.skills(this._token)
-    .newRequest('getCharactersCharacterIdSkills', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v3/characters/{character_id}/skills/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -387,8 +401,9 @@ class Character extends CharacterInfo {
    * @returns {Promise.<Array.<Object>>}
    */
   skillqueue() {
-    return this._api.skills(this._token)
-    .newRequest('getCharactersCharacterIdSkillqueue', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v2/characters/{character_id}/skillqueue/',
+        { path: { 'character_id': this._id } });
   }
 }
 
@@ -404,14 +419,14 @@ class Character extends CharacterInfo {
  */
 class Characters extends ExtendableFunction {
   /**
-   * Create a new Characters function using the given `api`.
+   * Create a new Characters function using the given `agent`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @constructor
    */
-  constructor(api) {
+  constructor(agent) {
     super((id, token) => this.get(id, token));
-    this._api = api;
+    this._agent = agent;
 
     this._search = null;
   }
@@ -424,7 +439,7 @@ class Characters extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['character']);
+      this._search = new Search(this._agent, ['character']);
     }
     return this._search;
   }
@@ -440,9 +455,9 @@ class Characters extends ExtendableFunction {
    */
   get(id, token = '') {
     if (token && token.length > 0) {
-      return new Character(this._api, id, token);
+      return new Character(this._agent, id, token);
     } else {
-      return new CharacterInfo(this._api, id);
+      return new CharacterInfo(this._agent, id);
     }
   }
 
@@ -458,10 +473,11 @@ class Characters extends ExtendableFunction {
     if (ids.length > 20) {
       // Use universe/names end point since the /characters one breaks if
       // the URL gets too long.
-      return _names(this._api, 'character', ids);
+      return _names(this._agent, 'character', ids);
     } else {
       // Use character/names end point
-      return this._api.character().newRequest('getCharactersNames', [ids])
+      return this._agent.noAuth.get('/v1/characters/names/',
+          { query: { 'character_ids': ids } })
       .then(result => {
         // Rename character_id and character_name
         return result.map(r => {

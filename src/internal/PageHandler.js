@@ -90,26 +90,26 @@ class MaxIdHandler {
    *     sequence of data
    */
   getAll() {
-    let _get = function(maxId) {
-      return this._fetch(maxId).then(result => {
-        if (result.length == 0 || result.length < this._resultLength) {
-          // End of the data so just return it
-          return result;
-        } else {
-          // Iterate and fetch again based on the id at the end of the result
-          // (assuming that ids are sorted appropriately in the result).
-          let nextMaxId = this._resolveId(result[result.length - 1]);
-          return _get(nextMaxId).then(nextResult => {
-            // Note: this shouldn't require de-duplication because pagination
-            // is based off of ids, and so each call should return mutually
-            // exclusive sets.
-            return result.concat(nextResult);
-          });
-        }
-      })
-    };
+    return this._get(undefined);
+  }
 
-    return _get();
+  _get(maxId) {
+    return this._fetch(maxId).then(result => {
+      if (result.length < this._resultLength || result.length == 0) {
+        // End of the data so just return it
+        return result;
+      } else {
+        // Iterate and fetch again based on the id at the end of the result
+        // (assuming that ids are sorted appropriately in the result).
+        let nextMaxId = this._resolveId(result[result.length - 1]);
+        return this._get(nextMaxId).then(nextResult => {
+          // Note: this shouldn't require de-duplication because pagination
+          // is based off of ids, and so each call should return mutually
+          // exclusive sets.
+          return result.concat(nextResult);
+        });
+      }
+    });
   }
 }
 
