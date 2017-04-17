@@ -16,14 +16,14 @@ class Colonies extends ExtendableFunction {
   /**
    * Create a new Colonies function for the character, including its SSO token.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param characterId {Number} The id of the character whose PI is accessed
    * @param token {String} The SSO access token for the character
    * @constructor
    */
-  constructor(api, characterId, token) {
+  constructor(agent, characterId, token) {
     super(id => (id ? this.layout(id) : this.all()));
-    this._api = api;
+    this._agent = agent;
     this._id = characterId;
     this._token = token;
   }
@@ -35,9 +35,13 @@ class Colonies extends ExtendableFunction {
    * @returns {Promise.<Object>}
    */
   layout(planetId) {
-    return this._api.planetaryInteraction(this._token)
-    .newRequest('getCharactersCharacterIdPlanetsPlanetId',
-        [this._id, planetId]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/planets/{planet_id}/', {
+      path: {
+        'character_id': this._id,
+        'planet_id': planetId
+      }
+    });
   }
 
   /**
@@ -46,8 +50,9 @@ class Colonies extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   all() {
-    return this._api.planetaryInteraction(this._token)
-    .newRequest('getCharactersCharacterIdPlanets', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/planets/',
+        { path: { 'character_id': this._id } });
   }
 }
 
