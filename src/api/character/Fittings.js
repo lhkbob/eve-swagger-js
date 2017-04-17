@@ -27,9 +27,13 @@ class Fitting {
    * @returns {Promise.<Object>}
    */
   del() {
-    return this._fit._api.fittings(this._fit._token)
-    .newRequest('deleteCharactersCharacterIdFittingsFittingId',
-        [this._fit._id, this._id]);
+    return this._fit._agent.auth(this._fit._token)
+    .del('/v1/characters/{character_id}/fittings/{fitting_id}/', {
+      path: {
+        'character_id': this._fit._id,
+        'fitting_id': this._id
+      }
+    });
   }
 }
 
@@ -46,17 +50,17 @@ class Fitting {
  */
 class Fittings extends ExtendableFunction {
   /**
-   * Create a new Fittings function using the given `api`, for the
+   * Create a new Fittings function using the given `agent`, for the
    * character described by `characterId` with SSO access from `token`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param characterId {Number} The character id whose fittings are accessed
    * @param token {String} The SSO access token for the character
    * @constructor
    */
-  constructor(api, characterId, token) {
+  constructor(agent, characterId, token) {
     super(id => (id ? this.get(id) : this.all()));
-    this._api = api;
+    this._agent = agent;
     this._id = characterId;
     this._token = token;
   }
@@ -67,8 +71,9 @@ class Fittings extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   all() {
-    return this._api.fittings(this._token)
-    .newRequest('getCharactersCharacterIdFittings', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/fittings/',
+        { path: { 'character_id': this._id } });
   }
 
   /**
@@ -79,9 +84,11 @@ class Fittings extends ExtendableFunction {
    * @returns {Promise.<Number>}
    */
   add(fitting) {
-    return this._api.fittings(this._token)
-    .newRequest('postCharactersCharacterIdFittings', [this._id],
-        { fitting: fitting });
+    return this._agent.auth(this._token)
+    .post('/v1/characters/{character_id}/fittings/', {
+      path: { 'character_id': this._id },
+      body: fitting
+    });
   }
 
   /**
