@@ -1,11 +1,5 @@
 const ExtendableFunction = require('../../internal/ExtendableFunction');
 
-function respondToEvent(calendar, eventId, response) {
-  return calendar._api.calendar(calendar._token)
-  .newRequest('putCharactersCharacterIdCalendarEventId',
-      [calendar._id, eventId], { response: response });
-}
-
 /**
  * An api adapter that provides functions for accessing various details for a
  * specific event specified by id via functions in the
@@ -32,19 +26,34 @@ class Event {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._cal._api.calendar(this._cal._token)
-    .newRequest('getCharactersCharacterIdCalendarEventId',
-        [this._cal._id, this._id]);
+    return this._cal._agent.auth(this._cal._token)
+    .get('/v3/characters/{character_id}/calendar/{event_id}/', {
+      path: {
+        'character_id': this._cal._id,
+        'event_id': this._id
+      }
+    });
+  }
+
+  _respond(state) {
+    return this._cal._agent.auth(this._cal._token)
+    .put('/v3/characters/{character_id}/calendar/{event_id}/', {
+      path: {
+        'character_id': this._cal._id,
+        'event_id': this._id
+      },
+      body: { 'response': state }
+    });
   }
 
   /**
    * @esi_route put_characters_character_id_calendar_event_id
-   * @esi_param response - {"response": "rejected"}
+   * @esi_param response - {"response": "declined"}
    *
    * @returns {Promise.<Object>}
    */
   reject() {
-    return respondToEvent(this._cal, this._id, 'rejected');
+    return this._respond('declined');
   }
 
   /**
@@ -54,7 +63,7 @@ class Event {
    * @returns {Promise.<Object>}
    */
   accept() {
-    return respondToEvent(this._cal, this._id, 'accepted');
+    return this._respond('accepted');
   }
 
   /**
@@ -64,7 +73,7 @@ class Event {
    * @returns {Promise.<Object>}
    */
   undecided() {
-    return respondToEvent(this._cal, this._id, 'tentative');
+    return this._respond('tentative');
   }
 }
 
@@ -81,17 +90,17 @@ class Event {
  */
 class Calendar extends ExtendableFunction {
   /**
-   * Create a new Calendar function using the given `api`, for the
+   * Create a new Calendar function using the given `agent`, for the
    * character described by `characterId` with SSO access from `token`.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param characterId {Number} The character id whose calendar is accessed
    * @param token {String} The SSO access token for the character
    * @constructor
    */
-  constructor(api, characterId, token) {
+  constructor(agent, characterId, token) {
     super(id => (id ? this.event(id) : this.recent()));
-    this._api = api;
+    this._agent = agent;
     this._id = characterId;
     this._token = token;
   }
@@ -115,12 +124,11 @@ class Calendar extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   recent(fromEventId = 0) {
-    let opts = {};
-    if (fromEventId) {
-      opts.fromEvent = fromEventId;
-    }
-    return this._api.calendar(this._token)
-    .newRequest('getCharactersCharacterIdCalendar', [this._id], opts);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/calendar/', {
+      path: { 'character_id': this._id },
+      query: { 'from_event': fromEventId == 0 ? null : fromEventId }
+    });
   }
 }
 
