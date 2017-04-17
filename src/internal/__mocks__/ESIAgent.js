@@ -27,7 +27,9 @@ function expectConstructorCall(params) {
 }
 
 function expectRequest(expected, method, url, path, query, body, token) {
-  expect(expected).toBeDefined();
+  if (!expected) {
+    throw new Error('Unexpected request to ' + method + ' ' + url);
+  }
 
   let route = expected.route;
 
