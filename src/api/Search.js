@@ -102,7 +102,7 @@ class Search extends ExtendableFunction {
         'constellation',
         'corporation',
         'faction',
-        'inventoryType',
+        'inventorytype',
         'region',
         'solarsystem',
         'station',
