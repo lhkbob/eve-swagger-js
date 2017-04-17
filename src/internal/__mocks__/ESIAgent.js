@@ -202,8 +202,8 @@ class MockESIRequestHandler {
     return this._request('POST', url, path, query, body);
   }
 
-  del(url, { path: path = null, query: query = null } = {}) {
-    return this._request('DELETE', url, path, query, null);
+  del(url, { path: path = null, query: query = null, body: body = null } = {}) {
+    return this._request('DELETE', url, path, query, body);
   }
 }
 

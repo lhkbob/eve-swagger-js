@@ -205,13 +205,14 @@ class ESIRequestHandler {
     return this._schedule('POST', url, path, query, body);
   }
 
-  del(url, { path: path = null, query: query = null } = {}) {
-    return this._schedule('DELETE', url, path, query, null);
+  del(url, { path: path = null, query: query = null, body: body = null } = {}) {
+    return this._schedule('DELETE', url, path, query, body);
   }
 }
 
 // FIXME add cache options as well (default timeout and disable caching)
-// Perhaps we can split it into { service: {url, source, agent, language, timeout}, cache: { ... }, rateLimit: { } }
+// Perhaps we can split it into { service: {url, source, agent, language,
+// timeout}, cache: { ... }, rateLimit: { } }
 class ESIAgent {
   /**
    * Create a new ESIAgent with the given configuration provided in a single
