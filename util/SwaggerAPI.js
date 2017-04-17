@@ -141,6 +141,20 @@ function validateSchema(schemaOrType, value) {
   } else if (schemaOrType['schema']) {
     return validateSchema(schemaOrType['schema'], value);
   } else {
+    if (schemaOrType['enum']) {
+      // Check value against allowed set of enums
+      let found = false;
+      for (let e of schemaOrType['enum']) {
+        if (e == value) {
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        return 'value not in enum set: ' + value;
+      }
+    }
     return validateSchema(schemaOrType['type'], value);
   }
 }
