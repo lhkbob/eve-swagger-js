@@ -158,8 +158,13 @@ class MockESIRequestHandler {
 
         return expectedCall.returns;
       } else {
-        // Assume the created example matches the spec
-        return SwaggerAPI.createExample(expectedCall.route.responseData);
+        if (expectedCall.route.responseStatus == 204) {
+          // No response definition provided for a 204
+          return {};
+        } else {
+          // Assume the created example matches the spec
+          return SwaggerAPI.createExample(expectedCall.route.responseData);
+        }
       }
     });
   }

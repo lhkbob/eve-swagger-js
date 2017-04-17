@@ -7,22 +7,26 @@
  */
 class Autopilot {
   /**
-   * Create a new Autopilot for the given `api` provider. Requires an access
+   * Create a new Autopilot for the given `agent` provider. Requires an access
    * token for a character currently in game.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param token {String} Access token for the character in game
    * @constructor
    */
-  constructor(api, token) {
-    this._api = api;
+  constructor(agent, token) {
+    this._agent = agent;
     this._token = token;
   }
 
   _waypoint(dest, clearWaypoints, prependWaypoint) {
-    return this._api.userInterface(this._token)
-    .newRequest('postUiAutopilotWaypoint',
-        [prependWaypoint, clearWaypoints, dest]);
+    return this._agent.auth(this._token).post('/v2/ui/autopilot/waypoint/', {
+      query: {
+        'destination_id': dest,
+        'clear_other_waypoints': clearWaypoints,
+        'add_to_beginning': prependWaypoint
+      }
+    });
   }
 
   /**
