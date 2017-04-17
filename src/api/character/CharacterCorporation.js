@@ -14,15 +14,15 @@ const Promise = require('bluebird');
  */
 class CharacterCorporation {
   /**
-   * Create a new corporation api adapter for the particular character's
+   * Create a new corporation agent adapter for the particular character's
    * corporation.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param characterId {Number} The character this is linked to
    * @param token {String} The SSO access token for the character
    */
-  constructor(api, characterId, token) {
-    this._api = api;
+  constructor(agent, characterId, token) {
+    this._agent = agent;
     this._charId = characterId;
     this._token = token;
     this._id = null;
@@ -37,12 +37,12 @@ class CharacterCorporation {
    */
   info() {
     if (this._id) {
-      return this._api.corporation()
-      .newRequest('getCorporationsCorporationId', [this._id]);
+      return this._agent.noAuth.get('/v2/corporations/{corporation_id}/',
+          { path: { 'corporation_id': this._id } });
     } else {
       return this.id().then(corpId => {
-        return this._api.corporation()
-        .newRequest('getCorporationsCorporationId', [corpId]);
+        return this._agent.noAuth.get('/v2/corporations/{corporation_id}/',
+            { path: { 'corporation_id': corpId } });
       });
     }
   }
@@ -56,12 +56,14 @@ class CharacterCorporation {
    */
   history() {
     if (this._id) {
-      return this._api.corporation()
-      .newRequest('getCorporationsCorporationIdAllianceHistory', [this._id]);
+      return this._agent.noAuth.get(
+          '/v1/corporations/{corporation_id}/alliancehistory/',
+          { path: { 'corporation_id': this._id } });
     } else {
       return this.id().then(corpId => {
-        return this._api.corporation()
-        .newRequest('getCorporationsCorporationIdAllianceHistory', [corpId]);
+        return this._agent.noAuth.get(
+            '/v1/corporations/{corporation_id}/alliancehistory/',
+            { path: { 'corporation_id': corpId } });
       });
     }
   }
@@ -75,12 +77,13 @@ class CharacterCorporation {
    */
   icon() {
     if (this._id) {
-      return this._api.corporation()
-      .newRequest('getCorporationsCorporationIdIcons', [this._id]);
+      return this._agent.noAuth.get('/v1/corporations/{corporation_id}/icons/',
+          { path: { 'corporation_id': this._id } });
     } else {
       return this.id().then(corpId => {
-        return this._api.corporation()
-        .newRequest('getCorporationsCorporationIdIcons', [corpId]);
+        return this._agent.noAuth.get(
+            '/v1/corporations/{corporation_id}/icons/',
+            { path: { 'corporation_id': corpId } });
       });
     }
   }
@@ -91,18 +94,17 @@ class CharacterCorporation {
    *
    * @returns {Promise.<Array.<Number>>}
    */
-  // FIXME how to document the remap?
   members() {
     if (this._id) {
-      return this._api.corporation(this._token)
-      .newRequest('getCorporationsCorporationIdMembers', [this._id])
-      .then(members => members.map(m => m.character_id));
+      return this._agent.auth(this._token)
+      .get('/v2/corporations/{corporation_id}/members/',
+          { path: { 'corporation_id': this._id } });
     } else {
       return this.id().then(corpId => {
-        return this._api.corporation(this._token)
-        .newRequest('getCorporationsCorporationIdMembers', [corpId])
-        .then(members => members.map(m => m.character_id));
-      })
+        return this._agent.auth(this._token)
+        .get('/v2/corporations/{corporation_id}/members/',
+            { path: { 'corporation_id': corpId } });
+      });
     }
   }
 
@@ -113,13 +115,15 @@ class CharacterCorporation {
    */
   roles() {
     if (this._id) {
-      return this._api.corporation(this._token)
-      .newRequest('getCorporationsCorporationIdRoles', [this._id]);
+      return this._agent.auth(this._token)
+      .get('/v1/corporations/{corporation_id}/roles/',
+          { path: { 'corporation_id': this._id } });
     } else {
       return this.id().then(corpId => {
-        return this._api.corporation(this._token)
-        .newRequest('getCorporationsCorporationIdRoles', [corpId]);
-      })
+        return this._agent.auth(this._token)
+        .get('/v1/corporations/{corporation_id}/roles/',
+            { path: { 'corporation_id': corpId } });
+      });
     }
   }
 
@@ -133,9 +137,8 @@ class CharacterCorporation {
     if (this._id) {
       return Promise.resolve(this._id);
     } else {
-      return this._api.character()
-      .newRequest('getCharactersCharacterId', [this._charId])
-      .then(result => {
+      return this._agent.noAuth.get('/v4/characters/{character_id}/',
+          { path: { 'character_id': this._charId } }).then(result => {
         let id = result.corporation_id;
         this._id = id;
         return id;
