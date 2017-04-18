@@ -1,9 +1,9 @@
-const Api = require('./Api');
+const API = require('./api');
 
 /**
- * Exports an instance of {@link Api} with default settings.
+ * Exports an instance of {@link API} with default settings.
  *
  * @module eve_swagger_interface
- * @type {Api}
+ * @type {API}
  */
-module.exports = new Api();
+module.exports = new API();

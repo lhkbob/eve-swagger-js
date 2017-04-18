@@ -3,7 +3,7 @@ const fs = require('fs');
 const markdown = require('jsdoc/util/markdown');
 let env = require('jsdoc/env');
 
-const SwaggerAPI = require('../SwaggerAPI');
+const SwaggerAPI = require('../swagger-api');
 let api = SwaggerAPI.getLocalAPI();
 
 module.exports.handlers = exports.handlers = {
