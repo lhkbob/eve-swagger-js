@@ -3,12 +3,12 @@ const Promise = require('bluebird');
 function splitIds(ids) {
   let groups = [];
 
-  while (ids.length > 500) {
-    groups.push(ids.splice(0, 500));
-  }
-
-  if (ids.length > 0) {
-    groups.push(ids);
+  for (let i = 0; i < ids.length; i += 500) {
+    let end = i + 500;
+    if (end > ids.length) {
+      end = ids.length;
+    }
+    groups.push(ids.slice(i, end));
   }
 
   return groups;
