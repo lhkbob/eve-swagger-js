@@ -21,12 +21,12 @@ test('Squad.rename', () => {
   });
 });
 
-test('Squad.remove', () => {
+test('Squad.del', () => {
   agent.__expectRoute('delete_fleets_fleet_id_squads_squad_id', {
     'fleet_id': 2,
     'squad_id': 3
   }, { token: 'my token' });
-  return api.characters(1, 'my token').fleet(2).wings(4).squads(3).remove()
+  return api.characters(1, 'my token').fleet(2).wings(4).squads(3).del()
   .then(result => {
     expect(result).toBeDefined();
   });
@@ -55,12 +55,12 @@ test('Wing.rename', () => {
   });
 });
 
-test('Wing.remove', () => {
+test('Wing.del', () => {
   agent.__expectRoute('delete_fleets_fleet_id_wings_wing_id', {
     'fleet_id': 2,
     'wing_id': 3
   }, { token: 'my token' });
-  return api.characters(1, 'my token').fleet(2).wings(3).remove()
+  return api.characters(1, 'my token').fleet(2).wings(3).del()
   .then(result => {
     expect(result).toBeDefined();
   });
@@ -146,15 +146,17 @@ test('Fleet.move', () => {
 });
 
 test('Fleet.update', () => {
-  let settings = {
-    'is_free_move': true,
-    'motd': 'The message of the day!'
-  };
   agent.__expectRoute('put_fleets_fleet_id', {
     'fleet_id': 2,
-    'new_settings': settings
+    'new_settings': {
+      'is_free_move': true,
+      'motd': 'The message of the day!'
+    }
   }, { token: 'my token' });
-  return api.characters(1, 'my token').fleet(2).update(settings)
+  return api.characters(1, 'my token').fleet(2).update({
+    motd: 'The message of the day!',
+    isFreeMove: true
+  })
   .then(result => {
     expect(result).toBeDefined();
   });

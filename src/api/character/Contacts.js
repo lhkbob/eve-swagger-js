@@ -28,7 +28,7 @@ class Contact {
    *
    * @returns {Promise.<Object>}
    */
-  remove() {
+  del() {
     return this._contacts._agent.auth(this._contacts._token)
     .del('/v1/characters/{character_id}/contacts/', {
       path: { 'character_id': this._contacts._id },
@@ -60,7 +60,7 @@ class Contact {
    *
    * @returns {Promise.<Object>}
    */
-  update(standing, label = 0) {
+  update({ standing: standing, label: label = 0 }) {
     return this._updateContact(standing, label, false);
   }
 
@@ -75,7 +75,7 @@ class Contact {
    *
    * @returns {Promise.<Object>}
    */
-  updateWatched(standing, label = 0) {
+  updateWatched({ standing: standing, label: label = 0 }) {
     return this._updateContact(standing, label, true);
   };
 }
@@ -157,33 +157,33 @@ class Contacts extends ExtendableFunction {
    * @esi_route post_characters_character_id_contacts
    * @esi_param watched - false
    * @esi_param label_id - label
-   * @esi_param contact_ids - contacts
+   * @esi_param contact_ids - ids
    *
    *
-   * @param contacts {Array.<Number>}
+   * @param ids {Array.<Number>}
    * @param standing {Number}
    * @param label {Number}
    *
    * @returns {Promise.<Array.<Number>>}
    */
-  add(contacts, standing, label = 0) {
-    return this._createContacts(contacts, standing, label, false);
+  add({ ids: ids, standing: standing, label: label = 0 }) {
+    return this._createContacts(ids, standing, label, false);
   }
 
   /**
    * @esi_route post_characters_character_id_contacts
    * @esi_param watched - true
    * @esi_param label_id - label
-   * @esi_param contact_ids - contacts
+   * @esi_param contact_ids - ids
    *
-   * @param contacts {Array.<Number>}
+   * @param ids {Array.<Number>}
    * @param standing {Number}
    * @param label {Number}
    *
    * @returns {Promise.<Array.<Number>>}
    */
-  addWatched(contacts, standing, label = 0) {
-    return this._createContacts(contacts, standing, label, true);
+  addWatched({ ids: ids, standing: standing, label: label = 0 }) {
+    return this._createContacts(ids, standing, label, true);
   }
 
   /**

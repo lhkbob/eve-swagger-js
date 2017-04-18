@@ -114,7 +114,7 @@ test('Labels.all', () => {
   });
 });
 
-test('Labels.create', () => {
+test('Labels.add', () => {
   agent.__expectRoute('post_characters_character_id_mail_labels', {
     'character_id': 1,
     'label': {
@@ -122,7 +122,7 @@ test('Labels.create', () => {
       'color': '#660066'
     }
   }, { token: 'my token' });
-  return api.characters(1, 'my token').mail.labels.create({
+  return api.characters(1, 'my token').mail.labels.add({
     name: 'new label',
     color: '#660066'
   }).then(result => {

@@ -169,7 +169,7 @@ class Labels extends ExtendableFunction {
    * @param color {String} Defaults to white.
    * @returns {Promise.<Number>}
    */
-  create({ name: name, color: color = '#ffffff' }) {
+  add({ name: name, color: color = '#ffffff' }) {
     return this._mail._agent.auth(this._mail._token)
     .post('/v2/characters/{character_id}/mail/labels/', {
       path: {

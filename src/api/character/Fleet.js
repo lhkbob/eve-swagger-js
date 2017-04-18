@@ -43,7 +43,7 @@ class Squad {
    *
    * @returns {Promise.<Object>}
    */
-  remove() {
+  del() {
     return this._fleet._agent.auth(this._fleet._token)
     .del('/v1/fleets/{fleet_id}/squads/{squad_id}/', {
       path: {
@@ -157,7 +157,7 @@ class Wing {
    *
    * @returns {Promise.<Object>}
    */
-  remove() {
+  del() {
     return this._fleet._agent.auth(this._fleet._token)
     .del('/v1/fleets/{fleet_id}/wings/{wing_id}/', {
       path: {
@@ -330,15 +330,20 @@ class Fleet {
 
   /**
    * @esi_route put_fleets_fleet_id
+   * @esi_param new_settings - {motd: motd, is_free_move: isFreeMove}
    *
-   * @param newSettings {Object}
+   * @param motd {String}
+   * @param isFreeMove {Boolean}
    * @returns {Promise.<Object>}
    */
-  update(newSettings) {
+  update({ motd: motd, isFreeMove: isFreeMove = false }) {
     return this._agent.auth(this._token)
     .put('/v1/fleets/{fleet_id}/', {
       path: { 'fleet_id': this._id },
-      body: newSettings
+      body: {
+        'motd': motd,
+        'is_free_move': isFreeMove
+      }
     });
   }
 }

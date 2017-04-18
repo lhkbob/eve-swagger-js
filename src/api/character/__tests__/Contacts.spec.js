@@ -9,12 +9,12 @@ afterEach(() => {
   agent.__reset();
 });
 
-test('Contact.remove', () => {
+test('Contact.del', () => {
   agent.__expectRoute('delete_characters_character_id_contacts', {
     'character_id': 1,
     'contact_ids': [2]
   }, { token: 'my_token' });
-  return api.characters(1, 'my_token').contacts(2).remove().then(result => {
+  return api.characters(1, 'my_token').contacts(2).del().then(result => {
     expect(result).toBeDefined();
   });
 });
@@ -27,7 +27,10 @@ test('Contact.update', () => {
     'standing': 3.5,
     'label_id': 3
   }, { token: 'my_token' });
-  return api.characters(1, 'my_token').contacts(2).update(3.5, 3)
+  return api.characters(1, 'my_token').contacts(2).update({
+    standing: 3.5,
+    label: 3
+  })
   .then(result => {
     expect(result).toBeDefined();
   });
@@ -41,7 +44,10 @@ test('Contact.updateWatched', () => {
     'standing': 3.5,
     'label_id': 3
   }, { token: 'my_token' });
-  return api.characters(1, 'my_token').contacts(2).updateWatched(3.5, 3)
+  return api.characters(1, 'my_token').contacts(2).updateWatched({
+    standing: 3.5,
+    label: 3
+  })
   .then(result => {
     expect(result).toBeDefined();
   });
@@ -55,7 +61,11 @@ test('Contacts.add', () => {
     'standing': 3.5,
     'label_id': 3
   }, { token: 'my_token' });
-  return api.characters(1, 'my_token').contacts.add([2, 3], 3.5, 3)
+  return api.characters(1, 'my_token').contacts.add({
+    ids: [2, 3],
+    standing: 3.5,
+    label: 3
+  })
   .then(result => {
     expect(result).toBeDefined();
   });
@@ -69,7 +79,11 @@ test('Contacts.addWatched', () => {
     'standing': 3.5,
     'label_id': 3
   }, { token: 'my_token' });
-  return api.characters(1, 'my_token').contacts.addWatched([2, 3], 3.5, 3)
+  return api.characters(1, 'my_token').contacts.addWatched({
+    ids: [2, 3],
+    standing: 3.5,
+    label: 3
+  })
   .then(result => {
     expect(result).toBeDefined();
   });
@@ -96,11 +110,16 @@ test('Contacts.all page', () => {
 
 test('Contacts.all', () => {
   agent.__expectRoute('get_characters_character_id_contacts', {
-    'character_id': 1, 'page': 1
-  }, {token: 'my_token'});
+    'character_id': 1,
+    'page': 1
+  }, { token: 'my_token' });
   agent.__expectRoute('get_characters_character_id_contacts', {
-    'character_id': 1, 'page': 2
-  }, {token: 'my_token', returns: []});
+    'character_id': 1,
+    'page': 2
+  }, {
+    token: 'my_token',
+    returns: []
+  });
 
   return api.characters(1, 'my_token').contacts().then(result => {
     expect(result).toBeDefined();
