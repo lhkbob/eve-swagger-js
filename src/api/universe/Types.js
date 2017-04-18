@@ -304,7 +304,7 @@ class Types extends ExtendableFunction {
    * then concatenated back together.
    *
    * @esi_returns {!category}
-   * @esi_example esi.types.names()
+   * @esi_example esi.types.names() category=[inventory_type]
    *
    * @param {Array.<Number>} ids If no ids are provided, then all names are
    *     returned

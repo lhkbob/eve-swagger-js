@@ -205,7 +205,7 @@ class Regions extends ExtendableFunction {
    * then concatenated back together.
    *
    * @esi_returns {!category}
-   * @esi_example esi.regions.names()
+   * @esi_example esi.regions.names() category=[region]
    *
    * @param {Array.<Number>} ids If no ids are provided, then all names are
    *     returned.

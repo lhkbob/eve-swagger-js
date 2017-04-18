@@ -92,7 +92,7 @@ class Stations extends ExtendableFunction {
    * then concatenated back together.
    *
    * @esi_returns {!category}
-   * @esi_example esi.stations.names(ids)
+   * @esi_example esi.stations.names(ids) category=[station]
    *
    * @param {Array.<Number>} ids
    * @return {Promise.<Array.<Object>>}

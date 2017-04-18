@@ -103,7 +103,7 @@ class SolarSystems extends ExtendableFunction {
    * then concatenated back together.
    *
    * @esi_returns {!category}
-   * @esi_example esi.solarSystems.names()
+   * @esi_example esi.solarSystems.names() category=[solar_system]
    *
    * @param {Array.<Number>} ids If no ids are provided, then all names are
    *     returned.
