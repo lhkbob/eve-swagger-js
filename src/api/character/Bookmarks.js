@@ -29,6 +29,7 @@ class Bookmarks extends ExtendableFunction {
 
   /**
    * @esi_route get_characters_character_id_bookmarks_folders
+   * @esi_example esi.characters(1, 'token').bookmarks.folders()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -40,6 +41,7 @@ class Bookmarks extends ExtendableFunction {
 
   /**
    * @esi_route get_characters_character_id_bookmarks
+   * @esi_example esi.characters(1, 'token').bookmarks()
    *
    * @returns {Promise.<Array.<Object>>}
    */

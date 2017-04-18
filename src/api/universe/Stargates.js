@@ -25,6 +25,7 @@ class Stargate {
 
   /**
    * @esi_route get_universe_stargates_stargate_id
+   * @esi_example esi.stargates(1).info()
    *
    * @returns {Promise.<Object>}
    */

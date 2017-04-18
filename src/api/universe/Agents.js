@@ -24,6 +24,8 @@ class Agents {
   /**
    * A Search module instance configured to search over the `'agent'` type.
    *
+   * @esi_example esi.agents.search('text') categories=[agent] get_search
+   *
    * @type {Search}
    */
   get search() {

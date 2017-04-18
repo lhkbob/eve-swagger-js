@@ -25,6 +25,7 @@ class Contact {
   /**
    * @esi_route delete_characters_character_id_contacts
    * @esi_param !contact_ids
+   * @esi_example esi.characters(1, 'token').contacts(2).del()
    *
    * @returns {Promise.<Object>}
    */
@@ -55,6 +56,8 @@ class Contact {
    * @esi_param !contact_ids
    * @esi_param label_id - label
    *
+   * @esi_example esi.characters(1, 'token').contacts(2).update({...})
+   *
    * @param standing {Number}
    * @param label {Number}
    *
@@ -69,6 +72,8 @@ class Contact {
    * @esi_param watched - true
    * @esi_param !contact_ids
    * @esi_param label_id - label
+   *
+   * @esi_example esi.characters(1, 'token').contacts(2).updateWatched({...})
    *
    * @param standing {Number}
    * @param label {Number}
@@ -112,6 +117,7 @@ class Contacts extends ExtendableFunction {
 
   /**
    * @esi_route get_characters_character_id_contacts
+   * @esi_example esi.characters(1, 'token').contacts()
    *
    * @param page {Number} If `0`, all pages are returned, concatenated into a
    *     single array.
@@ -131,6 +137,7 @@ class Contacts extends ExtendableFunction {
 
   /**
    * @esi_route get_characters_character_id_contacts_labels
+   * @esi_example esi.characters(1, 'token').contacts.labels()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -159,6 +166,7 @@ class Contacts extends ExtendableFunction {
    * @esi_param label_id - label
    * @esi_param contact_ids - ids
    *
+   * @esi_example esi.characters(1, 'token').contacts.add({...})
    *
    * @param ids {Array.<Number>}
    * @param standing {Number}
@@ -175,6 +183,8 @@ class Contacts extends ExtendableFunction {
    * @esi_param watched - true
    * @esi_param label_id - label
    * @esi_param contact_ids - ids
+   *
+   * @esi_example esi.characters(1, 'token').contacts.addWatched({...})
    *
    * @param ids {Array.<Number>}
    * @param standing {Number}

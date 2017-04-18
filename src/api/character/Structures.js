@@ -32,6 +32,7 @@ class Structure {
 
   /**
    * @esi_route get_universe_structures_structure_id
+   * @esi_example esi.characters(1, 'token').structures(2).info()
    *
    * @returns {Promise.<Object>}
    */
@@ -43,6 +44,7 @@ class Structure {
 
   /**
    * @esi_route get_markets_structures_structure_id
+   * @esi_example esi.characters(1, 'token').structures(2).orders() orders=all
    *
    * @param page {Number} If `0`, all pages of orders are returned as a
    *     concatenated array.
@@ -65,6 +67,8 @@ class Structure {
    * is equivalent to {@link Structure#ordersFor ordersFor} except that it
    * additionally filters orders to have `is_buy_order` set to `true`.
    *
+   * @esi_example esi.characters(1, 'token').structures(2).orders() orders=buy&typeId get_markets_structures_structure_id
+   *
    * @param typeId {Number} The type id to query from the market
    * @return {Promise.<Array.<Object>>} A Promise that resolves to the response
    *     of the request
@@ -80,6 +84,8 @@ class Structure {
    * This
    * is equivalent to {@link Structure#ordersFor ordersFor} except that it
    * additionally filters orders to have `is_buy_order` set to `false`.
+   *
+   * @esi_example esi.characters(1, 'token').structures(2).orders() orders=sell&typeId get_markets_structures_structure_id
    *
    * @param typeId {Number} The type id to query from the market
    * @return {Promise.<Array.<Object>>} A Promise that resolves to the response
@@ -100,6 +106,8 @@ class Structure {
    * type filtering is implemented in-library for structures. This means that
    * all orders for the structure are requested via {@link Structure.orders
    * orders} and then filtered.
+   *
+   * @esi_example esi.characters(1, 'token').structures(2).orders() orders=all&typeId get_markets_structures_structure_id
    *
    * @param typeId {Number} The type id to query from the market
    * @return {Promise.<Array.<Object>>} A Promise that resolves to the response
@@ -145,6 +153,8 @@ class Structures extends ExtendableFunction {
   /**
    * A Search module instance configured to search over the `'structure'`
    * type and linked to the character.
+   *
+   * @esi_example esi.characters(1, 'token').structures.search('text') category=[structure] get_characters_character_id_search
    *
    * @type {Search}
    */

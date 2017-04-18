@@ -24,6 +24,7 @@ class Freeports extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_structures
+   * @esi_example esi.freeports()
    *
    * @returns {Promise.<Array.<Number>>}
    */

@@ -17,6 +17,7 @@ class Industry {
 
   /**
    * @esi_route get_industry_facilities
+   * @esi_example esi.industry.facilities()
    *
    * @return {Promise.<Array.<Object>>}
    */
@@ -26,6 +27,7 @@ class Industry {
 
   /**
    * @esi_route get_industry_systems
+   * @esi_example esi.industry.systemCosts()
    *
    * @return {Promise.<Array.<Object>>}
    */

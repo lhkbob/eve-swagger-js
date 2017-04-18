@@ -30,6 +30,7 @@ class Corporation {
 
   /**
    * @esi_route get_corporations_corporation_id
+   * @esi_example esi.corporations(1).info()
    *
    * @return {Promise.<Object>}
    */
@@ -40,6 +41,7 @@ class Corporation {
 
   /**
    * @esi_route get_corporations_corporation_id_alliancehistory
+   * @esi_example esi.corporations(1).history()
    *
    * @return {Promise.<Array.<Object>>}
    */
@@ -51,6 +53,7 @@ class Corporation {
 
   /**
    * @esi_route get_corporations_corporation_id_icons
+   * @esi_example esi.corporations(1).icon()
    *
    * @return {Promise.<Object>}
    */
@@ -61,6 +64,7 @@ class Corporation {
 
   /**
    * @esi_route get_loyalty_stores_corporation_id_offers
+   * @esi_example esi.corporations(1).loyaltyOffers()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -98,6 +102,8 @@ class Corporations extends ExtendableFunction {
    * A Search module instance configured to search over the `'corporation'`
    * type.
    *
+   * @esi_example esi.corporations.search('text') categories=[corporation] get_search
+   *
    * @type {Search}
    */
   get search() {
@@ -120,6 +126,7 @@ class Corporations extends ExtendableFunction {
 
   /**
    * @esi_route get_corporations_npccorps
+   * @esi_example esi.corporations.npc()
    *
    * @return {Promise.<Array.<Number>>}
    */
@@ -131,6 +138,7 @@ class Corporations extends ExtendableFunction {
    * @esi_route get_corporations_names
    * @esi_param corporation_ids - ids
    * @esi_returns {corporation_id: id, corporation_name: name}
+   * @esi_example esi.corporations.names()
    *
    * @param {Array.<Number>} ids
    * @return {Promise.<Array.<Object>>}

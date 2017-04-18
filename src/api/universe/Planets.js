@@ -26,6 +26,7 @@ class Planet {
 
   /**
    * @esi_route get_universe_planets_planet_id
+   * @esi_example esi.planets(1).info()
    *
    * @returns {Promise.<Object>}
    */

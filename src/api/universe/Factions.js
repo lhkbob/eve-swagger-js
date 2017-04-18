@@ -30,6 +30,8 @@ class Factions extends ExtendableFunction {
    * A Search module instance configured to search over the `'faction'`
    * type.
    *
+   * @esi_example esi.factions.search('text') category=[faction] get_search
+   *
    * @type {Search}
    */
   get search() {
@@ -41,6 +43,7 @@ class Factions extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_factions
+   * @esi_example esi.factions()
    *
    * @returns {Promise.<Array.<Object>>}
    */

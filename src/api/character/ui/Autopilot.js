@@ -35,6 +35,8 @@ class Autopilot {
    * @esi_param clear_other_waypoints - true
    * @esi_param add_to_beginning - true
    *
+   * @esi_example esi.characters(1, 'token').autopilot.destination(2)
+   *
    * @param {Number} id
    * @return {Promise.<Object>}
    */
@@ -48,6 +50,8 @@ class Autopilot {
    * @esi_param clear_other_waypoints - false
    * @esi_param add_to_beginning - false
    *
+   * @esi_example esi.characters(1, 'token').autopilot.append(2)
+   *
    * @param {Number} id
    * @return {Promise.<Object>}
    */
@@ -60,6 +64,8 @@ class Autopilot {
    * @esi_param destination_id - id
    * @esi_param clear_other_waypoints - false
    * @esi_param add_to_beginning - true
+   *
+   * @esi_example esi.characters(1, 'token').autopilot.prepend(2)
    *
    * @param {Number} id
    * @return {Promise.<Object>}

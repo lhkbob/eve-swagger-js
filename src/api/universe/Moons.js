@@ -26,6 +26,7 @@ class Moon {
 
   /**
    * @esi_route get_universe_moons_moon_id
+   * @esi_example esi.moons(1).info()
    *
    * @returns {Promise.<Object>}
    */

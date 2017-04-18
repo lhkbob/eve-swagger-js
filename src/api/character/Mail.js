@@ -24,6 +24,7 @@ class Message {
 
   /**
    * @esi_route get_characters_character_id_mail_mail_id
+   * @esi_example esi.characters(1, 'token').mail(2).info()
    *
    * @returns {Promise.<Object>}
    */
@@ -39,6 +40,7 @@ class Message {
 
   /**
    * @esi_route delete_characters_character_id_mail_mail_id
+   * @esi_example esi.characters(1, 'token').mail(2).del()
    *
    * @returns {Promise.<Object>}
    */
@@ -55,6 +57,7 @@ class Message {
   /**
    * @esi_route put_characters_character_id_mail_mail_id
    * @esi_param contents - {labels, read}
+   * @esi_example esi.characters(1, 'token').mail(2).update({...})
    *
    * @param labels {Array.<Number>} Array of label ids to attach to the message
    * @param read {Boolean} True or false if the message is marked as read
@@ -98,6 +101,7 @@ class Label {
 
   /**
    * @esi_route delete_characters_character_id_mail_labels_label_id
+   * @esi_example esi.characters(1, 'token').mail.labels(2).del()
    *
    * @returns {Promise.<Object>}
    */
@@ -147,6 +151,7 @@ class Labels extends ExtendableFunction {
   /**
    * @esi_route get_characters_character_id_mail_labels
    * @esi_returns labels
+   * @esi_example esi.characters(1, 'token').mail.labels()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -164,6 +169,7 @@ class Labels extends ExtendableFunction {
   /**
    * @esi_route post_characters_character_id_mail_labels
    * @esi_param label - {name, color}
+   * @esi_example esi.characters(1, 'token').mail.labels.add({...})
    *
    * @param name {String}
    * @param color {String} Defaults to white.
@@ -242,6 +248,7 @@ class Mail extends ExtendableFunction {
    *
    * @esi_route get_characters_character_id_mail_labels
    * @esi_returns total_unread_count
+   * @esi_example esi.characters(1, 'token').mail.unreadCount()
    *
    * @returns {Promise.<Number>}
    */
@@ -260,6 +267,7 @@ class Mail extends ExtendableFunction {
    * @esi_route post_characters_character_id_cspa
    * @esi_param characters - {characters: toIds}
    * @esi_returns cost
+   * @esi_example esi.characters(1, 'token').mail.cspaCost()
    *
    * @param toIds {Array.<Number>}
    * @returns {Promise.<Number>}
@@ -275,6 +283,7 @@ class Mail extends ExtendableFunction {
   /**
    * @esi_route get_characters_character_id_mail
    * @esi_param labels - labelIds
+   * @esi_example esi.characters(1, 'token').mail()
    *
    * @param labelIds {Array.<Number>} If empty, no filtering is performed.
    * @param lastMailId {Number} If `0`, the most recent mails are returned.
@@ -312,6 +321,7 @@ class Mail extends ExtendableFunction {
 
   /**
    * @esi_route post_characters_character_id_mail
+   * @esi_example esi.characters(1, 'token').mail.send({...})
    *
    * @param {Object} mail The mail descriptor
    * @return {Promise.<Number>}
@@ -326,6 +336,7 @@ class Mail extends ExtendableFunction {
 
   /**
    * @esi_route get_characters_character_id_mail_lists
+   * @esi_example esi.characters(1, 'token').mail.lists()
    *
    * @returns {Promise.<Array.<Object>>}
    */

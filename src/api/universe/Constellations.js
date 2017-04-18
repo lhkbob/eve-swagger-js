@@ -27,6 +27,7 @@ class Constellation {
 
   /**
    * @esi_route get_universe_constellations_constellation_id
+   * @esi_example esi.constellations(1).info()
    *
    * @returns {Promise.<Object>}
    */
@@ -48,7 +49,7 @@ class Constellation {
  * This is a function class so instances of `Constellations` are functions and
  * can be invoked directly, besides accessing its members. Its default function
  * action is equivalent to {@link Constellations#get get} or {@link
- * Constellations#all all} if no id is provided.
+    * Constellations#all all} if no id is provided.
  */
 class Constellations extends ExtendableFunction {
   /**
@@ -67,6 +68,8 @@ class Constellations extends ExtendableFunction {
   /**
    * A Search module instance configured to search over the `'constellation'`
    * type.
+   *
+   * @esi_example esi.constellations.search('text') category=[constellation] get_search
    *
    * @type {Search}
    */
@@ -90,6 +93,7 @@ class Constellations extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_constellations
+   * @esi_example esi.constellations()
    *
    * @return {Promise.<Array.<Number>>}
    */
@@ -106,6 +110,7 @@ class Constellations extends ExtendableFunction {
    * then concatenated back together.
    *
    * @esi_returns {!category}
+   * @esi_example esi.constellations.names()
    *
    * @param {Array.<Number>} ids If no ids are provided, then all names are
    *     returned.

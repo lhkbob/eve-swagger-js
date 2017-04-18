@@ -28,6 +28,7 @@ class Region {
 
   /**
    * @esi_route get_universe_regions_region_id
+   * @esi_example esi.regions(1).info()
    *
    * @returns {Promise.<Object>}
    */
@@ -38,6 +39,7 @@ class Region {
 
   /**
    * @esi_route get_markets_region_id_history
+   * @esi_example esi.regions(1).history();
    *
    * @param {Number} typeId
    * @return {Promise.<Array.<Object>>}
@@ -53,6 +55,7 @@ class Region {
    * @esi_route get_markets_region_id_orders
    * @esi_param order_type - "all"
    * @esi_param !type_id
+   * @esi_example esi.regions(1).orders() orders=all
    *
    * @param {Number} page
    * @return {Promise.<Array.<Object>>}
@@ -76,6 +79,7 @@ class Region {
    * @esi_route get_markets_region_id_orders
    * @esi_param order_type - "buy"
    * @esi_param !page
+   * @esi_example esi.regions(1).buyOrdersFor(2) orders=buy&typeId
    *
    * @param {Number} typeId
    * @return {Promise.<Array.<Object>>}
@@ -95,6 +99,7 @@ class Region {
    * @esi_route get_markets_region_id_orders
    * @esi_param order_type - "sell"
    * @esi_param !page
+   * @esi_example esi.regions(1).sellOrdersFor(2) orders=sell&typeId
    *
    * @param {Number} typeId
    * @return {Promise.<Array.<Object>>}
@@ -114,6 +119,7 @@ class Region {
    * @esi_route get_markets_region_id_orders
    * @esi_param order_type - "all"
    * @esi_param !page
+   * @esi_example esi.regions(1).ordersFor(2) orders=all&typeId
    *
    * @param {Number} typeId
    * @return {Promise.<Array.<Object>>}
@@ -159,6 +165,8 @@ class Regions extends ExtendableFunction {
   /**
    * A Search module instance configured to search over the `'region'` type.
    *
+   * @esi_example esi.regions.search('text') category=[region] get_search
+   *
    * @type {Search}
    */
   get search() {
@@ -180,6 +188,7 @@ class Regions extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_regions
+   * @esi_example esi.regions()
    *
    * @returns {Promise.<Array.<Number>>}
    */
@@ -196,6 +205,7 @@ class Regions extends ExtendableFunction {
    * then concatenated back together.
    *
    * @esi_returns {!category}
+   * @esi_example esi.regions.names()
    *
    * @param {Array.<Number>} ids If no ids are provided, then all names are
    *     returned.

@@ -26,10 +26,12 @@ class Killmail extends ExtendableFunction {
    * @esi_route get_killmails_killmail_id_killmail_hash
    * @esi_param killmail_id - id
    * @esi_param killmail_hash - hash
+   * @esi_example esi.killmail(id, hash)
    *
    * @param {Number} id
    * @param {String} hash
    * @return {Promise.<Object>}
+   *
    * @see War#killmails
    * @see Character#killmails
    */

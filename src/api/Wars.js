@@ -30,6 +30,7 @@ class War {
 
   /**
    * @esi_route get_wars_war_id
+   * @esi_example esi.wars(1).info()
    *
    * @return {Promise.<Object>} A Promise that resolves to the response of
    *   the request
@@ -43,6 +44,8 @@ class War {
    * Get the kill details for the war's {@link War#killmails
    * killmails} and then uses {@link Killmail#get} to map the details.
    * The request resolves to an array, each containing a killmail detail.
+   *
+   * @esi_example esi.wars(1).kills() ~ get_wars_war_id_killmails
    *
    * @param page {Number} Optional; the page of killmails to fetch, starting
    *     with page 1. If not provided then all kills are returned.
@@ -69,6 +72,7 @@ class War {
 
   /**
    * @esi_route get_wars_war_id_killmails
+   * @esi_example esi.wars(1).killmails()
    *
    * @param page {Number} If 0, then all pages are fetched and concatenated
    *     together
@@ -127,6 +131,7 @@ class Wars extends ExtendableFunction {
   /**
    * @esi_route get_wars
    * @esi_param max_war_id - maxId
+   * @esi_example esi.wars.recent()
    *
    * @param maxId {Number} If not provided (or 0), the newest wars are returned
    * @return {Promise.<Array.<Number>>}

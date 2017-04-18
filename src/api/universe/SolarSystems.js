@@ -23,6 +23,7 @@ class SolarSystem {
 
   /**
    * @esi_route get_universe_systems_system_id
+   * @esi_example esi.solarSystems(1).info()
    *
    * @return {Promise.<Object>}
    */
@@ -33,19 +34,16 @@ class SolarSystem {
 }
 
 /**
- * An api adapter that provides functions for accessing solar system
- * information
- * via the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
- * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.
- * You should not usually instantiate this directly as its constructor requires
- * an internal api instance.
+ * An api adapter that provides functions for accessing solar system information
+ * via the [universe](https://esi.tech.ccp.is/latest/#/Universe) and
+ * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points. You should
+ * not usually instantiate this directly as its constructor requires an internal
+ * api instance.
  *
- * This is a function class so instances of `SolarSystems` are functions and
- * can
+ * This is a function class so instances of `SolarSystems` are functions and can
  * be invoked directly, besides accessing its members. Its default function
  * action is equivalent to {@link SolarSystems#get get} or {@link
- * SolarSystems#all all} if no id is provided.
+    * SolarSystems#all all} if no id is provided.
  */
 class SolarSystems extends ExtendableFunction {
   /**
@@ -64,6 +62,8 @@ class SolarSystems extends ExtendableFunction {
   /**
    * A Search module instance configured to search over the `'solarsystem'`
    * type.
+   *
+   * @esi_example esi.solarSystems.search('text') category=[solarsystem] get_search
    *
    * @type {Search}
    */
@@ -86,6 +86,7 @@ class SolarSystems extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_systems
+   * @esi_example esi.solarSystems()
    *
    * @returns {Promise.<Array.<Number>>}
    */
@@ -102,6 +103,7 @@ class SolarSystems extends ExtendableFunction {
    * then concatenated back together.
    *
    * @esi_returns {!category}
+   * @esi_example esi.solarSystems.names()
    *
    * @param {Array.<Number>} ids If no ids are provided, then all names are
    *     returned.

@@ -19,6 +19,7 @@ class PlanetaryInteraction {
   /**
    * @esi_route get_universe_schematics_schematic_id
    * @esi_param schematic_id - id
+   * @esi_example esi.pi.schematic(1)
    *
    * @param {Number} id
    * @return {Promise.<Object>}

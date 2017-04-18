@@ -24,6 +24,7 @@ class Incursions extends ExtendableFunction {
 
   /**
    * @esi_route get_incursions
+   * @esi_example esi.incursions()
    *
    * @return {Promise.<Array.<Object>>}
    */

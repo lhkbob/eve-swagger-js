@@ -23,6 +23,7 @@ class Fitting {
 
   /**
    * @esi_route delete_characters_character_id_fittings_fitting_id
+   * @esi_example esi.characters(1, 'token').fittings(2).del()
    *
    * @returns {Promise.<Object>}
    */
@@ -67,6 +68,7 @@ class Fittings extends ExtendableFunction {
 
   /**
    * @esi_route get_characters_character_id_fittings
+   * @esi_example esi.characters(1, 'token').fittings()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -79,6 +81,7 @@ class Fittings extends ExtendableFunction {
   /**
    * @esi_route post_characters_character_id_fittings
    * @esi_returns id:fitting_id
+   * @esi_example esi.characters(1, 'token').fittings.add({...})
    *
    * @param fitting {Object}
    * @returns {Promise.<Number>}

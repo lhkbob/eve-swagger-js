@@ -33,6 +33,8 @@ class CharacterCorporation {
    *
    * Note that this is equivalent to {@link Corporation#info}.
    *
+   * @esi_example esi.characters(1, 'token').corporation.info()
+   *
    * @returns {Promise.<Object>}
    */
   info() {
@@ -51,6 +53,8 @@ class CharacterCorporation {
    * @esi_route get_corporations_corporation_id_alliancehistory
    *
    * Note that this is equivalent to {@link Corporation#history}.
+   *
+   * @esi_example esi.characters(1, 'token').corporation.history()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -73,6 +77,8 @@ class CharacterCorporation {
    *
    * Note that this is equivalent to {@link Corporation#icon}
    *
+   * @esi_example esi.characters(1, 'token').corporation.icon()
+   *
    * @returns {Promise.<Object>}
    */
   icon() {
@@ -90,6 +96,10 @@ class CharacterCorporation {
 
   /**
    * @esi_route get_loyalty_stores_corporation_id_offers
+   *
+   * Note that this is equivalent to {@link Corporation#loyaltyOffers}
+   *
+   * @esi_example esi.characters(1, 'token').corporation.loyaltyOffers()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -110,6 +120,7 @@ class CharacterCorporation {
   /**
    * @esi_route get_corporations_corporation_id_members
    * @esi_returns character_id
+   * @esi_example esi.characters(1, 'token').corporation.members()
    *
    * @returns {Promise.<Array.<Number>>}
    */
@@ -129,6 +140,7 @@ class CharacterCorporation {
 
   /**
    * @esi_route get_corporations_corporation_id_roles
+   * @esi_example esi.characters(1, 'token').corporation.roles()
    *
    * @returns {Promise.<Array.<Object>>}
    */

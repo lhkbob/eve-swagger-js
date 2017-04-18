@@ -30,6 +30,7 @@ class Colonies extends ExtendableFunction {
 
   /**
    * @esi_route get_characters_character_id_planets_planet_id
+   * @esi_example esi.characters(1, 'token').colonies.layout(2)
    *
    * @param planetId {Number}
    * @returns {Promise.<Object>}
@@ -46,6 +47,7 @@ class Colonies extends ExtendableFunction {
 
   /**
    * @esi_route get_characters_character_id_planets
+   * @esi_example esi.characters(1, 'token').colonies()
    *
    * @returns {Promise.<Array.<Object>>}
    */

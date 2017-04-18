@@ -17,6 +17,7 @@ class Insurance {
 
   /**
    * @esi_route get_insurance_prices
+   * @esi_example esi.insurance.prices()
    *
    * @return {Promise.<Array.<Object>>}
    */

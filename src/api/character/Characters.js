@@ -42,6 +42,7 @@ class CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id
+   * @esi_example esi.characters(1).info()
    *
    * @returns {Promise.<Object>}
    */
@@ -52,6 +53,7 @@ class CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_portrait
+   * @esi_example esi.characters(1).portrait()
    *
    * @returns {Promise.<Object>}
    */
@@ -62,6 +64,7 @@ class CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_corporationhistory
+   * @esi_example esi.characters(1).history()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -253,6 +256,7 @@ class Character extends CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_assets
+   * @esi_example esi.characters(1, 'token').assets()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -264,6 +268,7 @@ class Character extends CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_clones
+   * @esi_example esi.characters(1, 'token').clones()
    *
    * @returns {Promise.<Object>}
    */
@@ -277,6 +282,8 @@ class Character extends CharacterInfo {
    * Get the kill details for the recent {@link Character#recentKillmails
    * recentKillmails} and then uses {@link Killmail#get} to map the details.
    * The request resolves to an array, each containing a killmail detail.
+   *
+   * @esi_example esi.characters(1, 'token').recentKills() ~ get_characters_character_id_killmails_recent
    *
    * @param maxKillId {Number} Optional; the mail id that limits which mails
    *   can be returned. If provided recent mails older than the id are returned
@@ -308,6 +315,7 @@ class Character extends CharacterInfo {
   /**
    * @esi_route get_characters_character_id_killmails_recent
    * @esi_param max_count - 50
+   * @esi_example esi.characters(1, 'token').recentKillmails() ~ get_characters_character_id_killmails_recent
    *
    * @param maxKillId {Number} If `0`, the most recent killmails are returned.
    * @returns {Promise.<Array.<Object>>}
@@ -342,6 +350,7 @@ class Character extends CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_loyalty_points
+   * @esi_example esi.characters(1, 'token').loyaltyPoints()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -353,6 +362,7 @@ class Character extends CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_ship
+   * @esi_example esi.characters(1, 'token').ship()
    *
    * @returns {Promise.<Object>}
    */
@@ -364,6 +374,7 @@ class Character extends CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_location
+   * @esi_example esi.characters(1, 'token').location()
    *
    * @returns {Promise.<Object>}
    */
@@ -375,6 +386,7 @@ class Character extends CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_wallets
+   * @esi_example esi.characters(1, 'token').wallets()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -386,6 +398,7 @@ class Character extends CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_skills
+   * @esi_example esi.characters(1, 'token').skills()
    *
    * @returns {Promise.<Object>}
    */
@@ -397,6 +410,7 @@ class Character extends CharacterInfo {
 
   /**
    * @esi_route get_characters_character_id_skillqueue
+   * @esi_example esi.characters(1, 'token').skillqueue()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -435,6 +449,8 @@ class Characters extends ExtendableFunction {
    * A Search module instance configured to search over the `'character'`
    * type.
    *
+   * @esi_example esi.characters.search categories=[character] get_search
+   *
    * @type {Search}
    */
   get search() {
@@ -465,6 +481,7 @@ class Characters extends ExtendableFunction {
    * @esi_route get_characters_names
    * @esi_param character_ids - ids
    * @esi_returns {character_id: id, character_name: name}
+   * @esi_example esi.characters.names(ids)
    *
    * @param ids {Array.<Number>}
    * @returns {Promise.<Array.<Object>>}

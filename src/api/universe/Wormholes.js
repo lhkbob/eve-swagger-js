@@ -24,6 +24,8 @@ class Wormholes {
   /**
    * A Search module instance configured to search over the `'wormhole'`  type.
    *
+   * @esi_example esi.wormholes.search('text') category=[wormhole] get_search
+   *
    * @type {Search}
    */
   get search() {

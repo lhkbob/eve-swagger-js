@@ -23,6 +23,7 @@ class Squad {
   /**
    * @esi_route put_fleets_fleet_id_squads_squad_id
    * @esi_param naming - {name}
+   * @esi_example esi.characters(1, 'token').fleet(2).wings(3).squads(4).rename('name')
    *
    * @param name {String}
    * @returns {Promise.<Object>}
@@ -40,6 +41,7 @@ class Squad {
 
   /**
    * @esi_route delete_fleets_fleet_id_squads_squad_id
+   * @esi_example esi.characters(1, 'token').fleet(2).wings(3).squads(4).del()
    *
    * @returns {Promise.<Object>}
    */
@@ -80,6 +82,7 @@ class Squads extends ExtendableFunction {
   /**
    * @esi_route post_fleets_fleet_id_wings_wing_id_squads
    * @esi_returns id:squad_id
+   * @esi_example esi.characters(1, 'token').fleet(2).wings(3).squads.add()
    *
    * @returns {Promise.<Number>}
    */
@@ -137,6 +140,7 @@ class Wing {
   /**
    * @esi_route put_fleets_fleet_id_wings_wing_id
    * @esi_param naming - {name}
+   * @esi_example esi.characters(1, 'token').fleet(2).wings(3).rename('name')
    *
    * @param name {String}
    * @returns {Promise.<Object>}
@@ -154,6 +158,7 @@ class Wing {
 
   /**
    * @esi_route delete_fleets_fleet_id_wings_wing_id
+   * @esi_example esi.characters(1, 'token').fleet(2).wings(3).del()
    *
    * @returns {Promise.<Object>}
    */
@@ -193,6 +198,7 @@ class Wings extends ExtendableFunction {
 
   /**
    * @esi_route get_fleets_fleet_id_wings
+   * @esi_example esi.characters(1, 'token').fleet(2).wings()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -205,6 +211,7 @@ class Wings extends ExtendableFunction {
   /**
    * @esi_route post_fleets_fleet_id_wings
    * @esi_returns id:wing_id
+   * @esi_example esi.characters(1, 'token').fleet(2).wings.add()
    *
    * @returns {Promise.<Number>}
    */
@@ -261,6 +268,7 @@ class Fleet {
 
   /**
    * @esi_route get_fleets_fleet_id
+   * @esi_example esi.characters(1, 'token').fleet(2).info()
    *
    * @returns {Promise.<Object>}
    */
@@ -271,6 +279,7 @@ class Fleet {
 
   /**
    * @esi_route get_fleets_fleet_id_members
+   * @esi_example esi.characters(1, 'token').fleet(2).members()
    *
    * @returns {Promise.<Array.<Object>>}
    */
@@ -281,6 +290,7 @@ class Fleet {
 
   /**
    * @esi_route post_fleets_fleet_id_members
+   * @esi_example esi.characters(1, 'token').fleet(2).invite({...})
    *
    * @param invitation {Object}
    * @returns {Promise.<Object>}
@@ -295,6 +305,7 @@ class Fleet {
 
   /**
    * @esi_route delete_fleets_fleet_id_members_member_id
+   * @esi_example esi.characters(1, 'token').fleet(2).kick(3)
    *
    * @param memberId {Number}
    * @returns {Promise.<Object>}
@@ -312,6 +323,7 @@ class Fleet {
   /**
    * @esi_route put_fleets_fleet_id_members_member_id
    * @esi_param movement - moveOrder
+   * @esi_example esi.characters(1, 'token').fleet(2).move(3, {...})
    *
    * @param memberId {Number}
    * @param moveOrder {Object}
@@ -331,6 +343,7 @@ class Fleet {
   /**
    * @esi_route put_fleets_fleet_id
    * @esi_param new_settings - {motd: motd, is_free_move: isFreeMove}
+   * @esi_example esi.characters(1, 'token').fleet(2).update({...})
    *
    * @param motd {String}
    * @param isFreeMove {Boolean}

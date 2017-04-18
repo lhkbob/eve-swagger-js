@@ -23,6 +23,7 @@ class Group {
 
   /**
    * @esi_route get_universe_groups_group_id
+   * @esi_example esi.types.groups(1).info()
    *
    * @return {Promise.<Object>}
    */
@@ -68,6 +69,7 @@ class Groups extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_groups
+   * @esi_example esi.types.groups()
    *
    * @param page {Number} If 0, then all pages are returned concatenated into a
    *     single array.
@@ -103,6 +105,7 @@ class Category {
 
   /**
    * @esi_route get_universe_categories_category_id
+   * @esi_example esi.types.categories(1).info()
    *
    * @return {Promise.<Object>}
    */
@@ -147,6 +150,7 @@ class Categories extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_categories
+   * @esi_example esi.types.categories()
    *
    * @return {Promise.<Array.<Number>>}
    */
@@ -175,6 +179,7 @@ class Type {
 
   /**
    * @esi_route get_universe_types_type_id
+   * @esi_example esi.types(1).info()
    *
    * @return {Promise.<Object>}
    */
@@ -242,6 +247,8 @@ class Types extends ExtendableFunction {
    * A Search module instance configured to search over the `'inventorytype'`
    * type.
    *
+   * @esi_example esi.types.search('text') category=[inventorytype] get_search
+   *
    * @type {Search}
    */
   get search() {
@@ -263,6 +270,7 @@ class Types extends ExtendableFunction {
 
   /**
    * @esi_route get_markets_prices
+   * @esi_example esi.types.prices()
    *
    * @return {Promise.<Array.<Object>>}
    */
@@ -272,6 +280,7 @@ class Types extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_types
+   * @esi_example esi.types()
    *
    * @param page {Number} If 0, then all pages are returned, concatenated as a
    *     single array.
@@ -295,6 +304,7 @@ class Types extends ExtendableFunction {
    * then concatenated back together.
    *
    * @esi_returns {!category}
+   * @esi_example esi.types.names()
    *
    * @param {Array.<Number>} ids If no ids are provided, then all names are
    *     returned

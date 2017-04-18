@@ -23,6 +23,7 @@ class Station {
 
   /**
    * @esi_route get_universe_stations_station_id
+   * @esi_example esi.stations(1).info()
    *
    * @return {Promise.<Object>}
    */
@@ -61,6 +62,8 @@ class Stations extends ExtendableFunction {
    * A Search module instance configured to search over the `'station'`
    * type.
    *
+   * @esi_example esi.stations.search('text') category=[station] get_search
+   *
    * @type {Search}
    */
   get search() {
@@ -71,7 +74,7 @@ class Stations extends ExtendableFunction {
   }
 
   /**
-   * Create a new Stationend point targeting the particular system by `id`.
+   * Create a new Station end point targeting the particular system by `id`.
    *
    * @param id {Number} The station id
    * @returns {Station}
@@ -89,6 +92,7 @@ class Stations extends ExtendableFunction {
    * then concatenated back together.
    *
    * @esi_returns {!category}
+   * @esi_example esi.stations.names(ids)
    *
    * @param {Array.<Number>} ids
    * @return {Promise.<Array.<Object>>}

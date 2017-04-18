@@ -87,7 +87,7 @@ class Alliances extends ExtendableFunction {
    * A Search module instance configured to search over the `'alliance'`
    * type.
    *
-   * @esi_example esi.alliances.search('text') categories=[alliance] get_search
+   * @esi_example esi.alliances.search('text') category=[alliance] get_search
    *
    * @type {Search}
    */

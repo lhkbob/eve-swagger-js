@@ -17,6 +17,7 @@ class Sovereignty {
 
   /**
    * @esi_route get_sovereignty_campaigns
+   * @esi_example esi.sovereignty.campaigns()
    *
    * @return {Promise.<Array.<Object>>}
    */
@@ -26,6 +27,7 @@ class Sovereignty {
 
   /**
    * @esi_route get_sovereignty_structures
+   * @esi_example esi.sovereignty.structures()
    *
    * @return {Promise.<Array.<Object>>}
    */

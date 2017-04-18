@@ -24,6 +24,7 @@ class Races extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_races
+   * @esi_example esi.races()
    *
    * @returns {Promise.<Array.<Object>>}
    */

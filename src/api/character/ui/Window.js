@@ -22,6 +22,7 @@ class Window {
   /**
    * @esi_route post_ui_openwindow_information
    * @esi_param target_id - id
+   * @esi_example esi.characters(1, 'token').window.info(2)
    *
    * @param id {Number}
    * @return {Promise.<Object>}
@@ -33,6 +34,7 @@ class Window {
 
   /**
    * @esi_route post_ui_openwindow_marketdetails
+   * @esi_example esi.characters(1, 'token').window.market(2)
    *
    * @param typeId {Number}
    * @return {Promise.<Object>}
@@ -44,6 +46,7 @@ class Window {
 
   /**
    * @esi_route post_ui_openwindow_contract
+   * @esi_example esi.characters(1, 'token').window.contract(2)
    *
    * @param contractId {Number}
    * @return {Promise.<Object>}
@@ -56,6 +59,7 @@ class Window {
   /**
    * @esi_route post_ui_openwindow_newmail
    * @esi_param new_mail - settings
+   * @esi_example esi.characters(1, 'token').window.newMail({...})
    *
    * @param settings {Object}
    * @return {Promise.<Object>}

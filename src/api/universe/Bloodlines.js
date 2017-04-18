@@ -24,6 +24,7 @@ class Bloodlines extends ExtendableFunction {
 
   /**
    * @esi_route get_universe_bloodlines
+   * @esi_example esi.bloodlines()
    *
    * @returns {Promise.<Array.<Object>>}
    */

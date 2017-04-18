@@ -125,6 +125,8 @@ class Search extends ExtendableFunction {
    * category then the Promise simply resolves to the array of ids (e.g. the
    * category was fetched from the response dictionary of category to array).
    *
+   * @esi_example esi.search('query') strict=false
+   *
    * @param {String} text The search terms of the query
    * @return {Promise.<Object>} Or a `Promise.<Array.<Number>>` for a
    *    single-category search.
@@ -142,6 +144,8 @@ class Search extends ExtendableFunction {
    * However, if the Search instance is configured to search over only a single
    * category then the Promise simply resolves to the array of ids (e.g. the
    * category was fetched from the response dictionary of category to array).
+   *
+   * @esi_example esi.search.strict('query') strict=true
    *
    * @param {String} text The search terms of the query
    * @return {Promise.<Object>} Or a `Promise.<Array.<Number>>` for a
