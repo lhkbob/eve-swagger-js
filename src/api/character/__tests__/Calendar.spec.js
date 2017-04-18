@@ -19,13 +19,13 @@ test('Event.info', () => {
   });
 });
 
-test('Event.reject', () => {
+test('Event.decline', () => {
   agent.__expectRoute('put_characters_character_id_calendar_event_id', {
     'character_id': 1,
     'event_id': 2,
     'response': { 'response': 'declined' }
   }, { token: 'my_token' });
-  return api.characters(1, 'my_token').calendar(2).reject().then(result => {
+  return api.characters(1, 'my_token').calendar(2).decline().then(result => {
     expect(result).toBeDefined();
   });
 });
@@ -41,13 +41,13 @@ test('Event.accept', () => {
   });
 });
 
-test('Event.undecided', () => {
+test('Event.tentative', () => {
   agent.__expectRoute('put_characters_character_id_calendar_event_id', {
     'character_id': 1,
     'event_id': 2,
     'response': { 'response': 'tentative' }
   }, { token: 'my_token' });
-  return api.characters(1, 'my_token').calendar(2).undecided().then(result => {
+  return api.characters(1, 'my_token').calendar(2).tentative().then(result => {
     expect(result).toBeDefined();
   });
 });

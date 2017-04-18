@@ -23,6 +23,8 @@ class Event {
 
   /**
    * @esi_route get_characters_character_id_calendar_event_id
+   * @esi_example esi.characters(1, 'token').calendar(2).info()
+   *
    * @returns {Promise.<Object>}
    */
   info() {
@@ -49,16 +51,18 @@ class Event {
   /**
    * @esi_route put_characters_character_id_calendar_event_id
    * @esi_param response - {"response": "declined"}
+   * @esi_example esi.characters(1, 'token').calendar(2).decline()
    *
    * @returns {Promise.<Object>}
    */
-  reject() {
+  decline() {
     return this._respond('declined');
   }
 
   /**
    * @esi_route put_characters_character_id_calendar_event_id
    * @esi_param response - {"response": "accepted"}
+   * @esi_example esi.characters(1, 'token').calendar(2).accept()
    *
    * @returns {Promise.<Object>}
    */
@@ -69,10 +73,11 @@ class Event {
   /**
    * @esi_route put_characters_character_id_calendar_event_id
    * @esi_param response - {"response": "tentative"}
+   * @esi_example esi.characters(1, 'token').calendar(2).tentative()
    *
    * @returns {Promise.<Object>}
    */
-  undecided() {
+  tentative() {
     return this._respond('tentative');
   }
 }
@@ -119,6 +124,7 @@ class Calendar extends ExtendableFunction {
   /**
    * @esi_route get_characters_character_id_calendar
    * @esi_param from_event - fromEventId
+   * @esi_example esi.characters(1, 'token').calendar()
    *
    * @param fromEventId {Number} If `0`, the most recent events are returned.
    * @returns {Promise.<Array.<Object>>}
