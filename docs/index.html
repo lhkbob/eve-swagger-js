@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agents.html">Agents</a></li><li><a href="Alliance.html">Alliance</a><ul class='methods'><li data-type='method'><a href="Alliance.html#corporations">corporations</a></li><li data-type='method'><a href="Alliance.html#icon">icon</a></li><li data-type='method'><a href="Alliance.html#info">info</a></li></ul></li><li><a href="Alliances.html">Alliances</a><ul class='methods'><li data-type='method'><a href="Alliances.html#all">all</a></li><li data-type='method'><a href="Alliances.html#get">get</a></li><li data-type='method'><a href="Alliances.html#names">names</a></li></ul></li><li><a href="API.html">API</a><ul class='methods'><li data-type='method'><a href="API.html#names">names</a></li></ul></li><li><a href="Autopilot.html">Autopilot</a><ul class='methods'><li data-type='method'><a href="Autopilot.html#append">append</a></li><li data-type='method'><a href="Autopilot.html#destination">destination</a></li><li data-type='method'><a href="Autopilot.html#prepend">prepend</a></li></ul></li><li><a href="Bloodlines.html">Bloodlines</a><ul class='methods'><li data-type='method'><a href="Bloodlines.html#all">all</a></li></ul></li><li><a href="Bookmarks.html">Bookmarks</a><ul class='methods'><li data-type='method'><a href="Bookmarks.html#all">all</a></li><li data-type='method'><a href="Bookmarks.html#folders">folders</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#event">event</a></li><li data-type='method'><a href="Calendar.html#recent">recent</a></li></ul></li><li><a href="Categories.html">Categories</a><ul class='methods'><li data-type='method'><a href="Categories.html#all">all</a></li><li data-type='method'><a href="Categories.html#get">get</a></li></ul></li><li><a href="Category.html">Category</a><ul class='methods'><li data-type='method'><a href="Category.html#info">info</a></li></ul></li><li><a href="Character.html">Character</a><ul class='methods'><li data-type='method'><a href="Character.html#assets">assets</a></li><li data-type='method'><a href="Character.html#clones">clones</a></li><li data-type='method'><a href="Character.html#fleet">fleet</a></li><li data-type='method'><a href="Character.html#killmails">killmails</a></li><li data-type='method'><a href="Character.html#kills">kills</a></li><li data-type='method'><a href="Character.html#location">location</a></li><li data-type='method'><a href="Character.html#loyaltyPoints">loyaltyPoints</a></li><li data-type='method'><a href="Character.html#recentKillmails">recentKillmails</a></li><li data-type='method'><a href="Character.html#recentKills">recentKills</a></li><li data-type='method'><a href="Character.html#ship">ship</a></li><li data-type='method'><a href="Character.html#skillqueue">skillqueue</a></li><li data-type='method'><a href="Character.html#skills">skills</a></li><li data-type='method'><a href="Character.html#wallets">wallets</a></li></ul></li><li><a href="CharacterCorporation.html">CharacterCorporation</a><ul class='methods'><li data-type='method'><a href="CharacterCorporation.html#history">history</a></li><li data-type='method'><a href="CharacterCorporation.html#icon">icon</a></li><li data-type='method'><a href="CharacterCorporation.html#id">id</a></li><li data-type='method'><a href="CharacterCorporation.html#info">info</a></li><li data-type='method'><a href="CharacterCorporation.html#loyaltyOffers">loyaltyOffers</a></li><li data-type='method'><a href="CharacterCorporation.html#members">members</a></li><li data-type='method'><a href="CharacterCorporation.html#roles">roles</a></li></ul></li><li><a href="CharacterInfo.html">CharacterInfo</a><ul class='methods'><li data-type='method'><a href="CharacterInfo.html#history">history</a></li><li data-type='method'><a href="CharacterInfo.html#info">info</a></li><li data-type='method'><a href="CharacterInfo.html#portrait">portrait</a></li></ul></li><li><a href="Characters.html">Characters</a><ul class='methods'><li data-type='method'><a href="Characters.html#get">get</a></li><li data-type='method'><a href="Characters.html#names">names</a></li></ul></li><li><a href="Colonies.html">Colonies</a><ul class='methods'><li data-type='method'><a href="Colonies.html#all">all</a></li><li data-type='method'><a href="Colonies.html#layout">layout</a></li></ul></li><li><a href="Constellation.html">Constellation</a><ul class='methods'><li data-type='method'><a href="Constellation.html#info">info</a></li></ul></li><li><a href="Constellations.html">Constellations</a><ul class='methods'><li data-type='method'><a href="Constellations.html#all">all</a></li><li data-type='method'><a href="Constellations.html#get">get</a></li><li data-type='method'><a href="Constellations.html#names">names</a></li></ul></li><li><a href="Contact.html">Contact</a><ul class='methods'><li data-type='method'><a href="Contact.html#del">del</a></li><li data-type='method'><a href="Contact.html#update">update</a></li><li data-type='method'><a href="Contact.html#updateWatched">updateWatched</a></li></ul></li><li><a href="Contacts.html">Contacts</a><ul class='methods'><li data-type='method'><a href="Contacts.html#add">add</a></li><li data-type='method'><a href="Contacts.html#addWatched">addWatched</a></li><li data-type='method'><a href="Contacts.html#all">all</a></li><li data-type='method'><a href="Contacts.html#get">get</a></li><li data-type='method'><a href="Contacts.html#labels">labels</a></li></ul></li><li><a href="Corporation.html">Corporation</a><ul class='methods'><li data-type='method'><a href="Corporation.html#history">history</a></li><li data-type='method'><a href="Corporation.html#icon">icon</a></li><li data-type='method'><a href="Corporation.html#info">info</a></li><li data-type='method'><a href="Corporation.html#loyaltyOffers">loyaltyOffers</a></li></ul></li><li><a href="Corporations.html">Corporations</a><ul class='methods'><li data-type='method'><a href="Corporations.html#get">get</a></li><li data-type='method'><a href="Corporations.html#names">names</a></li><li data-type='method'><a href="Corporations.html#npc">npc</a></li></ul></li><li><a href="Event.html">Event</a><ul class='methods'><li data-type='method'><a href="Event.html#accept">accept</a></li><li data-type='method'><a href="Event.html#decline">decline</a></li><li data-type='method'><a href="Event.html#info">info</a></li><li data-type='method'><a href="Event.html#tentative">tentative</a></li></ul></li><li><a href="Factions.html">Factions</a><ul class='methods'><li data-type='method'><a href="Factions.html#all">all</a></li></ul></li><li><a href="Fitting.html">Fitting</a><ul class='methods'><li data-type='method'><a href="Fitting.html#del">del</a></li></ul></li><li><a href="Fittings.html">Fittings</a><ul class='methods'><li data-type='method'><a href="Fittings.html#add">add</a></li><li data-type='method'><a href="Fittings.html#all">all</a></li><li data-type='method'><a href="Fittings.html#get">get</a></li></ul></li><li><a href="Fleet.html">Fleet</a><ul class='methods'><li data-type='method'><a href="Fleet.html#info">info</a></li><li data-type='method'><a href="Fleet.html#invite">invite</a></li><li data-type='method'><a href="Fleet.html#kick">kick</a></li><li data-type='method'><a href="Fleet.html#members">members</a></li><li data-type='method'><a href="Fleet.html#move">move</a></li><li data-type='method'><a href="Fleet.html#update">update</a></li></ul></li><li><a href="Freeports.html">Freeports</a><ul class='methods'><li data-type='method'><a href="Freeports.html#all">all</a></li></ul></li><li><a href="Group.html">Group</a><ul class='methods'><li data-type='method'><a href="Group.html#info">info</a></li></ul></li><li><a href="Groups.html">Groups</a><ul class='methods'><li data-type='method'><a href="Groups.html#all">all</a></li><li data-type='method'><a href="Groups.html#get">get</a></li></ul></li><li><a href="Incursions.html">Incursions</a><ul class='methods'><li data-type='method'><a href="Incursions.html#all">all</a></li></ul></li><li><a href="Industry.html">Industry</a><ul class='methods'><li data-type='method'><a href="Industry.html#facilities">facilities</a></li><li data-type='method'><a href="Industry.html#systemCosts">systemCosts</a></li></ul></li><li><a href="Insurance.html">Insurance</a><ul class='methods'><li data-type='method'><a href="Insurance.html#prices">prices</a></li></ul></li><li><a href="Killmail.html">Killmail</a><ul class='methods'><li data-type='method'><a href="Killmail.html#get">get</a></li></ul></li><li><a href="Label.html">Label</a><ul class='methods'><li data-type='method'><a href="Label.html#del">del</a></li></ul></li><li><a href="Labels.html">Labels</a><ul class='methods'><li data-type='method'><a href="Labels.html#add">add</a></li><li data-type='method'><a href="Labels.html#all">all</a></li><li data-type='method'><a href="Labels.html#get">get</a></li></ul></li><li><a href="Mail.html">Mail</a><ul class='methods'><li data-type='method'><a href="Mail.html#all">all</a></li><li data-type='method'><a href="Mail.html#cspaCost">cspaCost</a></li><li data-type='method'><a href="Mail.html#get">get</a></li><li data-type='method'><a href="Mail.html#inbox">inbox</a></li><li data-type='method'><a href="Mail.html#lists">lists</a></li><li data-type='method'><a href="Mail.html#send">send</a></li><li data-type='method'><a href="Mail.html#unreadCount">unreadCount</a></li></ul></li><li><a href="Message.html">Message</a><ul class='methods'><li data-type='method'><a href="Message.html#del">del</a></li><li data-type='method'><a href="Message.html#info">info</a></li><li data-type='method'><a href="Message.html#update">update</a></li></ul></li><li><a href="Moon.html">Moon</a><ul class='methods'><li data-type='method'><a href="Moon.html#info">info</a></li></ul></li><li><a href="Moons.html">Moons</a><ul class='methods'><li data-type='method'><a href="Moons.html#get">get</a></li></ul></li><li><a href="Planet.html">Planet</a><ul class='methods'><li data-type='method'><a href="Planet.html#info">info</a></li></ul></li><li><a href="PlanetaryInteraction.html">PlanetaryInteraction</a><ul class='methods'><li data-type='method'><a href="PlanetaryInteraction.html#schematic">schematic</a></li></ul></li><li><a href="Planets.html">Planets</a><ul class='methods'><li data-type='method'><a href="Planets.html#get">get</a></li></ul></li><li><a href="Races.html">Races</a><ul class='methods'><li data-type='method'><a href="Races.html#all">all</a></li></ul></li><li><a href="Region.html">Region</a><ul class='methods'><li data-type='method'><a href="Region.html#buyOrdersFor">buyOrdersFor</a></li><li data-type='method'><a href="Region.html#history">history</a></li><li data-type='method'><a href="Region.html#info">info</a></li><li data-type='method'><a href="Region.html#orders">orders</a></li><li data-type='method'><a href="Region.html#ordersFor">ordersFor</a></li><li data-type='method'><a href="Region.html#sellOrdersFor">sellOrdersFor</a></li></ul></li><li><a href="Regions.html">Regions</a><ul class='methods'><li data-type='method'><a href="Regions.html#all">all</a></li><li data-type='method'><a href="Regions.html#get">get</a></li><li data-type='method'><a href="Regions.html#names">names</a></li></ul></li><li><a href="Search.html">Search</a><ul class='methods'><li data-type='method'><a href="Search.html#get">get</a></li><li data-type='method'><a href="Search.html#strict">strict</a></li></ul></li><li><a href="SolarSystem.html">SolarSystem</a><ul class='methods'><li data-type='method'><a href="SolarSystem.html#info">info</a></li></ul></li><li><a href="SolarSystems.html">SolarSystems</a><ul class='methods'><li data-type='method'><a href="SolarSystems.html#all">all</a></li><li data-type='method'><a href="SolarSystems.html#get">get</a></li><li data-type='method'><a href="SolarSystems.html#names">names</a></li></ul></li><li><a href="Sovereignty.html">Sovereignty</a><ul class='methods'><li data-type='method'><a href="Sovereignty.html#campaigns">campaigns</a></li><li data-type='method'><a href="Sovereignty.html#structures">structures</a></li></ul></li><li><a href="Squad.html">Squad</a><ul class='methods'><li data-type='method'><a href="Squad.html#del">del</a></li><li data-type='method'><a href="Squad.html#rename">rename</a></li></ul></li><li><a href="Squads.html">Squads</a><ul class='methods'><li data-type='method'><a href="Squads.html#add">add</a></li><li data-type='method'><a href="Squads.html#get">get</a></li></ul></li><li><a href="Stargate.html">Stargate</a><ul class='methods'><li data-type='method'><a href="Stargate.html#info">info</a></li></ul></li><li><a href="Stargates.html">Stargates</a><ul class='methods'><li data-type='method'><a href="Stargates.html#get">get</a></li></ul></li><li><a href="Station.html">Station</a><ul class='methods'><li data-type='method'><a href="Station.html#info">info</a></li></ul></li><li><a href="Stations.html">Stations</a><ul class='methods'><li data-type='method'><a href="Stations.html#get">get</a></li><li data-type='method'><a href="Stations.html#names">names</a></li></ul></li><li><a href="Structure.html">Structure</a><ul class='methods'><li data-type='method'><a href="Structure.html#buyOrdersFor">buyOrdersFor</a></li><li data-type='method'><a href="Structure.html#info">info</a></li><li data-type='method'><a href="Structure.html#orders">orders</a></li><li data-type='method'><a href="Structure.html#ordersFor">ordersFor</a></li><li data-type='method'><a href="Structure.html#sellOrdersFor">sellOrdersFor</a></li></ul></li><li><a href="Structures.html">Structures</a><ul class='methods'><li data-type='method'><a href="Structures.html#get">get</a></li></ul></li><li><a href="Type.html">Type</a><ul class='methods'><li data-type='method'><a href="Type.html#info">info</a></li></ul></li><li><a href="Types.html">Types</a><ul class='methods'><li data-type='method'><a href="Types.html#all">all</a></li><li data-type='method'><a href="Types.html#get">get</a></li><li data-type='method'><a href="Types.html#names">names</a></li><li data-type='method'><a href="Types.html#prices">prices</a></li></ul></li><li><a href="War.html">War</a><ul class='methods'><li data-type='method'><a href="War.html#info">info</a></li><li data-type='method'><a href="War.html#killmails">killmails</a></li><li data-type='method'><a href="War.html#kills">kills</a></li></ul></li><li><a href="Wars.html">Wars</a><ul class='methods'><li data-type='method'><a href="Wars.html#get">get</a></li><li data-type='method'><a href="Wars.html#recent">recent</a></li></ul></li><li><a href="Window.html">Window</a><ul class='methods'><li data-type='method'><a href="Window.html#contract">contract</a></li><li data-type='method'><a href="Window.html#info">info</a></li><li data-type='method'><a href="Window.html#market">market</a></li><li data-type='method'><a href="Window.html#newMail">newMail</a></li></ul></li><li><a href="Wing.html">Wing</a><ul class='methods'><li data-type='method'><a href="Wing.html#del">del</a></li><li data-type='method'><a href="Wing.html#rename">rename</a></li></ul></li><li><a href="Wings.html">Wings</a><ul class='methods'><li data-type='method'><a href="Wings.html#add">add</a></li><li data-type='method'><a href="Wings.html#all">all</a></li><li data-type='method'><a href="Wings.html#get">get</a></li></ul></li><li><a href="Wormholes.html">Wormholes</a></li></ul><h3>Modules</h3><ul><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>eve_swagger_interface</h1><h2>JS Client for the Eve Swagger Interface (ESI)</h2><p>JavaScript client for
+<a href="https://developers.eveonline.com/blog/article/introducing-the-esi-api">ESI</a>
+compatible with NodeJS. The client returns a developer friendly set of
+functions that return <a href="https://bluebirdjs.com">Promises</a> resolving to
+the response from ESI endpoint.</p>
+<p>The versioning of this library is independent of the ESI version.
+Because this is a client adapter, it is possible that certain routes
+are perfectly usable even when an ESI update changes other routes.
+The library uses specific route versions for each end point instead of
+the legacy, latest, or dev aliases.</p>
+<ul>
+<li>Package name: eve_swagger_interface</li>
+<li>Package version: 0.2.2</li>
+<li>ESI version: 0.4.1.dev1</li>
+<li>Source: <a href="https://github.com/lhkbob/eve-swagger-js/">https://github.com/lhkbob/eve-swagger-js/</a></li>
+<li>Documentation: <a href="https://lhkbob.github.io/eve-swagger-js/">https://lhkbob.github.io/eve-swagger-js/</a></li>
+</ul>
+<h2>Installation</h2><h3>For <a href="https://nodejs.org/">Node.js</a></h3><p>Currently, this library has not been published to the <code>npm</code> repository.
+However, it can still be depended on in NodeJS projects by including a
+dependency in <code>package.json</code> using a GitHub URL. A specific release can
+be requested by appending, e.g. <code>#0.2.2</code>, to the end of the URL:</p>
+<pre class="prettyprint source lang-json"><code>&quot;dependencies&quot;: {
+   &quot;eve_swagger_interface&quot;: &quot;git://github.com/lhkbob/eve-swagger-js.git#0.2.2&quot;,
+}</code></pre><h2>Getting Started</h2><p>Please follow the <a href="#installation">Installation</a> instruction and execute
+the following JS code. All ESI end points and their code mappings are
+provided in the subsequent <a href="#esi-mappings">ESI Mappings</a> section.</p>
+<pre class="prettyprint source lang-javascript"><code>// The main module returns a default Api instance with an attached
+// Api constructor if configuration changes are necessary.
+let esi = require('eve_swagger_interface');
+
+// Creating a new Api instance with a different configuration.
+// All options, with their default values, are shown below.
+let esi2 = esi({
+    service: 'https://esi.tech.ccp.is/latest',
+    source: 'tranquility',
+    agent: 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js',
+    language: 'en-us',
+    timeout: 6000
+  });
+
+// Fetch all active alliance ids (could also call 'esi.alliances.all()')
+esi.alliances().then(result => {
+  console.log(result);
+}).catch(error => {
+  console.error(error);
+});</code></pre><h2>ESI Mappings</h2><p>The following table lists the mapping from ESI route end point to the
+function in the library that contacts that route. It also contains the
+version of the route that this library is coded to use (on a per-route
+basis as recommended by CCP) and an example snippet showing how to
+call the linked function.</p>
+<table>
+<thead>
+<tr>
+<th>ESI URL</th>
+<th>Version</th>
+<th>JS Function</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td><a href="Corporations.html#npc"><code>Corporations.npc()</code></a></td>
+<td><code>esi.corporations.npc()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances"><code>GET /alliances/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Alliances.html#all"><code>Alliances.all()</code></a></td>
+<td><code>esi.alliances()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_names"><code>GET /alliances/names/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Alliances.html#names"><code>Alliances.names()</code></a></td>
+<td><code>esi.alliance.names(ids)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id"><code>GET /alliances/{alliance_id}/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Alliance.html#info"><code>Alliance.info()</code></a></td>
+<td><code>esi.alliances(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_corporations"><code>GET /alliances/{alliance_id}/corporations/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Alliance.html#corporations"><code>Alliance.corporations()</code></a></td>
+<td><code>esi.alliances(1).corporations()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances_alliance_id_icons"><code>GET /alliances/{alliance_id}/icons/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Alliance.html#icon"><code>Alliance.icon()</code></a></td>
+<td><code>esi.alliances(1).icon()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Character/get_characters_names"><code>GET /characters/names/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Characters.html#names"><code>Characters.names()</code></a></td>
+<td><code>esi.characters.names(ids)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id"><code>GET /characters/{character_id}/</code></a></td>
+<td><code>v4</code></td>
+<td><a href="CharacterInfo.html#info"><code>CharacterInfo.info()</code></a></td>
+<td><code>esi.characters(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Assets/get_characters_character_id_assets"><code>GET /characters/{character_id}/assets/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Character.html#assets"><code>Character.assets()</code></a></td>
+<td><code>esi.characters(1, 'token').assets()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks"><code>GET /characters/{character_id}/bookmarks/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Bookmarks.html#all"><code>Bookmarks.all()</code></a></td>
+<td><code>esi.characters(1, 'token').bookmarks()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Bookmarks/get_characters_character_id_bookmarks_folders"><code>GET /characters/{character_id}/bookmarks/folders/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Bookmarks.html#folders"><code>Bookmarks.folders()</code></a></td>
+<td><code>esi.characters(1, 'token').bookmarks.folders()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Calendar/get_characters_character_id_calendar"><code>GET /characters/{character_id}/calendar/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Calendar.html#recent"><code>Calendar.recent()</code></a></td>
+<td><code>esi.characters(1, 'token').calendar()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Calendar/get_characters_character_id_calendar_event_id"><code>GET /characters/{character_id}/calendar/{event_id}/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Event.html#info"><code>Event.info()</code></a></td>
+<td><code>esi.characters(1, 'token').calendar(2).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id"><code>PUT /characters/{character_id}/calendar/{event_id}/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Event.html#accept"><code>Event.accept()</code></a></td>
+<td><code>esi.characters(1, 'token').calendar(2).accept()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id"><code>PUT /characters/{character_id}/calendar/{event_id}/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Event.html#decline"><code>Event.decline()</code></a></td>
+<td><code>esi.characters(1, 'token').calendar(2).decline()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id"><code>PUT /characters/{character_id}/calendar/{event_id}/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Event.html#tentative"><code>Event.tentative()</code></a></td>
+<td><code>esi.characters(1, 'token').calendar(2).tentative()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Clones/get_characters_character_id_clones"><code>GET /characters/{character_id}/clones/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Character.html#clones"><code>Character.clones()</code></a></td>
+<td><code>esi.characters(1, 'token').clones()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/delete_characters_character_id_contacts"><code>DELETE /characters/{character_id}/contacts/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Contact.html#del"><code>Contact.del()</code></a></td>
+<td><code>esi.characters(1, 'token').contacts(2).del()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts"><code>GET /characters/{character_id}/contacts/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Contacts.html#all"><code>Contacts.all()</code></a></td>
+<td><code>esi.characters(1, 'token').contacts()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts"><code>POST /characters/{character_id}/contacts/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Contacts.html#addWatched"><code>Contacts.addWatched()</code></a></td>
+<td><code>esi.characters(1, 'token').contacts.addWatched({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts"><code>POST /characters/{character_id}/contacts/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Contacts.html#add"><code>Contacts.add()</code></a></td>
+<td><code>esi.characters(1, 'token').contacts.add({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts"><code>PUT /characters/{character_id}/contacts/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Contact.html#updateWatched"><code>Contact.updateWatched()</code></a></td>
+<td><code>esi.characters(1, 'token').contacts(2).updateWatched({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts"><code>PUT /characters/{character_id}/contacts/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Contact.html#update"><code>Contact.update()</code></a></td>
+<td><code>esi.characters(1, 'token').contacts(2).update({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/get_characters_character_id_contacts_labels"><code>GET /characters/{character_id}/contacts/labels/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Contacts.html#labels"><code>Contacts.labels()</code></a></td>
+<td><code>esi.characters(1, 'token').contacts.labels()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_corporationhistory"><code>GET /characters/{character_id}/corporationhistory/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="CharacterInfo.html#history"><code>CharacterInfo.history()</code></a></td>
+<td><code>esi.characters(1).history()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Character/post_characters_character_id_cspa"><code>POST /characters/{character_id}/cspa/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Mail.html#cspaCost"><code>Mail.cspaCost()</code></a></td>
+<td><code>esi.characters(1, 'token').mail.cspaCost()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fittings/get_characters_character_id_fittings"><code>GET /characters/{character_id}/fittings/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fittings.html#all"><code>Fittings.all()</code></a></td>
+<td><code>esi.characters(1, 'token').fittings()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fittings/post_characters_character_id_fittings"><code>POST /characters/{character_id}/fittings/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fittings.html#add"><code>Fittings.add()</code></a></td>
+<td><code>esi.characters(1, 'token').fittings.add({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fittings/delete_characters_character_id_fittings_fitting_id"><code>DELETE /characters/{character_id}/fittings/{fitting_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fitting.html#del"><code>Fitting.del()</code></a></td>
+<td><code>esi.characters(1, 'token').fittings(2).del()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent"><code>GET /characters/{character_id}/killmails/recent/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Character.html#recentKillmails"><code>Character.recentKillmails()</code></a></td>
+<td><code>esi.characters(1, 'token').recentKillmails()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent"><code>GET /characters/{character_id}/killmails/recent/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Character.html#recentKills"><code>Character.recentKills()</code></a></td>
+<td><code>esi.characters(1, 'token').recentKills()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location"><code>GET /characters/{character_id}/location/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Character.html#location"><code>Character.location()</code></a></td>
+<td><code>esi.characters(1, 'token').location()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Loyalty/get_characters_character_id_loyalty_points"><code>GET /characters/{character_id}/loyalty/points/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Character.html#loyaltyPoints"><code>Character.loyaltyPoints()</code></a></td>
+<td><code>esi.characters(1, 'token').loyaltyPoints()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail"><code>GET /characters/{character_id}/mail/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Mail.html#inbox"><code>Mail.inbox()</code></a></td>
+<td><code>esi.characters(1, 'token').mail()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail"><code>POST /characters/{character_id}/mail/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Mail.html#send"><code>Mail.send()</code></a></td>
+<td><code>esi.characters(1, 'token').mail.send({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_labels"><code>GET /characters/{character_id}/mail/labels/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Mail.html#unreadCount"><code>Mail.unreadCount()</code></a></td>
+<td><code>esi.characters(1, 'token').mail.unreadCount()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_labels"><code>GET /characters/{character_id}/mail/labels/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Labels.html#all"><code>Labels.all()</code></a></td>
+<td><code>esi.characters(1, 'token').mail.labels()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/post_characters_character_id_mail_labels"><code>POST /characters/{character_id}/mail/labels/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Labels.html#add"><code>Labels.add()</code></a></td>
+<td><code>esi.characters(1, 'token').mail.labels.add({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_labels_label_id"><code>DELETE /characters/{character_id}/mail/labels/{label_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Label.html#del"><code>Label.del()</code></a></td>
+<td><code>esi.characters(1, 'token').mail.labels(2).del()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_lists"><code>GET /characters/{character_id}/mail/lists/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Mail.html#lists"><code>Mail.lists()</code></a></td>
+<td><code>esi.characters(1, 'token').mail.lists()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/delete_characters_character_id_mail_mail_id"><code>DELETE /characters/{character_id}/mail/{mail_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Message.html#del"><code>Message.del()</code></a></td>
+<td><code>esi.characters(1, 'token').mail(2).del()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_mail_id"><code>GET /characters/{character_id}/mail/{mail_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Message.html#info"><code>Message.info()</code></a></td>
+<td><code>esi.characters(1, 'token').mail(2).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Mail/put_characters_character_id_mail_mail_id"><code>PUT /characters/{character_id}/mail/{mail_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Message.html#update"><code>Message.update()</code></a></td>
+<td><code>esi.characters(1, 'token').mail(2).update({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Planetary Interaction/get_characters_character_id_planets"><code>GET /characters/{character_id}/planets/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Colonies.html#all"><code>Colonies.all()</code></a></td>
+<td><code>esi.characters(1, 'token').colonies()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Planetary Interaction/get_characters_character_id_planets_planet_id"><code>GET /characters/{character_id}/planets/{planet_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Colonies.html#layout"><code>Colonies.layout()</code></a></td>
+<td><code>esi.characters(1, 'token').colonies.layout(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_portrait"><code>GET /characters/{character_id}/portrait/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="CharacterInfo.html#portrait"><code>CharacterInfo.portrait()</code></a></td>
+<td><code>esi.characters(1).portrait()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_characters_character_id_search"><code>GET /characters/{character_id}/search/?category=[structure]</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Structures.html#search"><code>Structures.search()</code></a></td>
+<td><code>esi.characters(1, 'token').structures.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_ship"><code>GET /characters/{character_id}/ship/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Character.html#ship"><code>Character.ship()</code></a></td>
+<td><code>esi.characters(1, 'token').ship()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skillqueue"><code>GET /characters/{character_id}/skillqueue/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Character.html#skillqueue"><code>Character.skillqueue()</code></a></td>
+<td><code>esi.characters(1, 'token').skillqueue()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Skills/get_characters_character_id_skills"><code>GET /characters/{character_id}/skills/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Character.html#skills"><code>Character.skills()</code></a></td>
+<td><code>esi.characters(1, 'token').skills()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Wallet/get_characters_character_id_wallets"><code>GET /characters/{character_id}/wallets/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Character.html#wallets"><code>Character.wallets()</code></a></td>
+<td><code>esi.characters(1, 'token').wallets()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_names"><code>GET /corporations/names/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Corporations.html#names"><code>Corporations.names()</code></a></td>
+<td><code>esi.corporations.names()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id"><code>GET /corporations/{corporation_id}/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Corporation.html#info"><code>Corporation.info()</code></a></td>
+<td><code>esi.corporations(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id"><code>GET /corporations/{corporation_id}/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="CharacterCorporation.html#info"><code>CharacterCorporation.info()</code></a></td>
+<td><code>esi.characters(1, 'token').corporation.info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>GET /corporations/{corporation_id}/alliancehistory/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Corporation.html#history"><code>Corporation.history()</code></a></td>
+<td><code>esi.corporations(1).history()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_alliancehistory"><code>GET /corporations/{corporation_id}/alliancehistory/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="CharacterCorporation.html#history"><code>CharacterCorporation.history()</code></a></td>
+<td><code>esi.characters(1, 'token').corporation.history()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons"><code>GET /corporations/{corporation_id}/icons/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="CharacterCorporation.html#icon"><code>CharacterCorporation.icon()</code></a></td>
+<td><code>esi.characters(1, 'token').corporation.icon()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_icons"><code>GET /corporations/{corporation_id}/icons/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Corporation.html#icon"><code>Corporation.icon()</code></a></td>
+<td><code>esi.corporations(1).icon()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_members"><code>GET /corporations/{corporation_id}/members/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="CharacterCorporation.html#members"><code>CharacterCorporation.members()</code></a></td>
+<td><code>esi.characters(1, 'token').corporation.members()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Corporation/get_corporations_corporation_id_roles"><code>GET /corporations/{corporation_id}/roles/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="CharacterCorporation.html#roles"><code>CharacterCorporation.roles()</code></a></td>
+<td><code>esi.characters(1, 'token').corporation.roles()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id"><code>GET /fleets/{fleet_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fleet.html#info"><code>Fleet.info()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id"><code>PUT /fleets/{fleet_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fleet.html#update"><code>Fleet.update()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).update({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_members"><code>GET /fleets/{fleet_id}/members/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fleet.html#members"><code>Fleet.members()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).members()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_members"><code>POST /fleets/{fleet_id}/members/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fleet.html#invite"><code>Fleet.invite()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).invite({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_members_member_id"><code>DELETE /fleets/{fleet_id}/members/{member_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fleet.html#kick"><code>Fleet.kick()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).kick(3)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_members_member_id"><code>PUT /fleets/{fleet_id}/members/{member_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Fleet.html#move"><code>Fleet.move()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).move(3, {...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_squads_squad_id"><code>DELETE /fleets/{fleet_id}/squads/{squad_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Squad.html#del"><code>Squad.del()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).wings(3).squads(4).del()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_squads_squad_id"><code>PUT /fleets/{fleet_id}/squads/{squad_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Squad.html#rename"><code>Squad.rename()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).wings(3).squads(4).rename('name')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/get_fleets_fleet_id_wings"><code>GET /fleets/{fleet_id}/wings/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Wings.html#all"><code>Wings.all()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).wings()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings"><code>POST /fleets/{fleet_id}/wings/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Wings.html#add"><code>Wings.add()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).wings.add()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/delete_fleets_fleet_id_wings_wing_id"><code>DELETE /fleets/{fleet_id}/wings/{wing_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Wing.html#del"><code>Wing.del()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).wings(3).del()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/put_fleets_fleet_id_wings_wing_id"><code>PUT /fleets/{fleet_id}/wings/{wing_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Wing.html#rename"><code>Wing.rename()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).wings(3).rename('name')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads"><code>POST /fleets/{fleet_id}/wings/{wing_id}/squads/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Squads.html#add"><code>Squads.add()</code></a></td>
+<td><code>esi.characters(1, 'token').fleet(2).wings(3).squads.add()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Incursions/get_incursions"><code>GET /incursions/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Incursions.html#all"><code>Incursions.all()</code></a></td>
+<td><code>esi.incursions()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Industry/get_industry_facilities"><code>GET /industry/facilities/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Industry.html#facilities"><code>Industry.facilities()</code></a></td>
+<td><code>esi.industry.facilities()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Industry/get_industry_systems"><code>GET /industry/systems/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Industry.html#systemCosts"><code>Industry.systemCosts()</code></a></td>
+<td><code>esi.industry.systemCosts()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Insurance/get_insurance_prices"><code>GET /insurance/prices/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Insurance.html#prices"><code>Insurance.prices()</code></a></td>
+<td><code>esi.insurance.prices()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Killmails/get_killmails_killmail_id_killmail_hash"><code>GET /killmails/{killmail_id}/{killmail_hash}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Killmail.html#get"><code>Killmail.get()</code></a></td>
+<td><code>esi.killmail(id, hash)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Loyalty/get_loyalty_stores_corporation_id_offers"><code>GET /loyalty/stores/{corporation_id}/offers/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Corporation.html#loyaltyOffers"><code>Corporation.loyaltyOffers()</code></a></td>
+<td><code>esi.corporations(1).loyaltyOffers()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Loyalty/get_loyalty_stores_corporation_id_offers"><code>GET /loyalty/stores/{corporation_id}/offers/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="CharacterCorporation.html#loyaltyOffers"><code>CharacterCorporation.loyaltyOffers()</code></a></td>
+<td><code>esi.characters(1, 'token').corporation.loyaltyOffers()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_prices"><code>GET /markets/prices/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Types.html#prices"><code>Types.prices()</code></a></td>
+<td><code>esi.types.prices()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_structures_structure_id"><code>GET /markets/structures/{structure_id}/?orders=sell&amp;typeId</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Structure.html#sellOrdersFor"><code>Structure.sellOrdersFor()</code></a></td>
+<td><code>esi.characters(1, 'token').structures(2).orders()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_structures_structure_id"><code>GET /markets/structures/{structure_id}/?orders=all&amp;typeId</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Structure.html#ordersFor"><code>Structure.ordersFor()</code></a></td>
+<td><code>esi.characters(1, 'token').structures(2).orders()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_structures_structure_id"><code>GET /markets/structures/{structure_id}/?orders=all</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Structure.html#orders"><code>Structure.orders()</code></a></td>
+<td><code>esi.characters(1, 'token').structures(2).orders()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_structures_structure_id"><code>GET /markets/structures/{structure_id}/?orders=buy&amp;typeId</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Structure.html#buyOrdersFor"><code>Structure.buyOrdersFor()</code></a></td>
+<td><code>esi.characters(1, 'token').structures(2).orders()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_history"><code>GET /markets/{region_id}/history/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Region.html#history"><code>Region.history()</code></a></td>
+<td><code>esi.regions(1).history();</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>GET /markets/{region_id}/orders/?orders=all</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Region.html#orders"><code>Region.orders()</code></a></td>
+<td><code>esi.regions(1).orders()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>GET /markets/{region_id}/orders/?orders=buy&amp;typeId</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Region.html#buyOrdersFor"><code>Region.buyOrdersFor()</code></a></td>
+<td><code>esi.regions(1).buyOrdersFor(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>GET /markets/{region_id}/orders/?orders=sell&amp;typeId</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Region.html#sellOrdersFor"><code>Region.sellOrdersFor()</code></a></td>
+<td><code>esi.regions(1).sellOrdersFor(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>GET /markets/{region_id}/orders/?orders=all&amp;typeId</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Region.html#ordersFor"><code>Region.ordersFor()</code></a></td>
+<td><code>esi.regions(1).ordersFor(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?category=[station]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Stations.html#search"><code>Stations.search()</code></a></td>
+<td><code>esi.stations.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?category=[constellation]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Constellations.html#search"><code>Constellations.search()</code></a></td>
+<td><code>esi.constellations.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?strict=true</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Search.html#strict"><code>Search.strict()</code></a></td>
+<td><code>esi.search.strict('query')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?categories=[character]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Characters.html#search"><code>Characters.search()</code></a></td>
+<td><code>esi.characters.search</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?category=[region]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Regions.html#search"><code>Regions.search()</code></a></td>
+<td><code>esi.regions.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?categories=[agent]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Agents.html#search"><code>Agents.search()</code></a></td>
+<td><code>esi.agents.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?category=[wormhole]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Wormholes.html#search"><code>Wormholes.search()</code></a></td>
+<td><code>esi.wormholes.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?category=[alliance]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Alliances.html#search"><code>Alliances.search()</code></a></td>
+<td><code>esi.alliances.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?categories=[corporation]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Corporations.html#search"><code>Corporations.search()</code></a></td>
+<td><code>esi.corporations.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?category=[inventorytype]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Types.html#search"><code>Types.search()</code></a></td>
+<td><code>esi.types.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?strict=false</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Search.html#get"><code>Search.get()</code></a></td>
+<td><code>esi.search('query')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?category=[faction]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Factions.html#search"><code>Factions.search()</code></a></td>
+<td><code>esi.factions.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Search/get_search"><code>GET /search/?category=[solarsystem]</code></a></td>
+<td><code>v1</code></td>
+<td><a href="SolarSystems.html#search"><code>SolarSystems.search()</code></a></td>
+<td><code>esi.solarSystems.search('text')</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_campaigns"><code>GET /sovereignty/campaigns/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Sovereignty.html#campaigns"><code>Sovereignty.campaigns()</code></a></td>
+<td><code>esi.sovereignty.campaigns()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Sovereignty/get_sovereignty_structures"><code>GET /sovereignty/structures/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Sovereignty.html#structures"><code>Sovereignty.structures()</code></a></td>
+<td><code>esi.sovereignty.structures()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/User Interface/post_ui_autopilot_waypoint"><code>POST /ui/autopilot/waypoint/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Autopilot.html#destination"><code>Autopilot.destination()</code></a></td>
+<td><code>esi.characters(1, 'token').autopilot.destination(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/User Interface/post_ui_autopilot_waypoint"><code>POST /ui/autopilot/waypoint/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Autopilot.html#prepend"><code>Autopilot.prepend()</code></a></td>
+<td><code>esi.characters(1, 'token').autopilot.prepend(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/User Interface/post_ui_autopilot_waypoint"><code>POST /ui/autopilot/waypoint/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Autopilot.html#append"><code>Autopilot.append()</code></a></td>
+<td><code>esi.characters(1, 'token').autopilot.append(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/User Interface/post_ui_openwindow_contract"><code>POST /ui/openwindow/contract/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Window.html#contract"><code>Window.contract()</code></a></td>
+<td><code>esi.characters(1, 'token').window.contract(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/User Interface/post_ui_openwindow_information"><code>POST /ui/openwindow/information/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Window.html#info"><code>Window.info()</code></a></td>
+<td><code>esi.characters(1, 'token').window.info(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/User Interface/post_ui_openwindow_marketdetails"><code>POST /ui/openwindow/marketdetails/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Window.html#market"><code>Window.market()</code></a></td>
+<td><code>esi.characters(1, 'token').window.market(2)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/User Interface/post_ui_openwindow_newmail"><code>POST /ui/openwindow/newmail/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Window.html#newMail"><code>Window.newMail()</code></a></td>
+<td><code>esi.characters(1, 'token').window.newMail({...})</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_bloodlines"><code>GET /universe/bloodlines/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Bloodlines.html#all"><code>Bloodlines.all()</code></a></td>
+<td><code>esi.bloodlines()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories"><code>GET /universe/categories/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Categories.html#all"><code>Categories.all()</code></a></td>
+<td><code>esi.types.categories()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_categories_category_id"><code>GET /universe/categories/{category_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Category.html#info"><code>Category.info()</code></a></td>
+<td><code>esi.types.categories(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_constellations"><code>GET /universe/constellations/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Constellations.html#all"><code>Constellations.all()</code></a></td>
+<td><code>esi.constellations()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_constellations_constellation_id"><code>GET /universe/constellations/{constellation_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Constellation.html#info"><code>Constellation.info()</code></a></td>
+<td><code>esi.constellations(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_factions"><code>GET /universe/factions/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Factions.html#all"><code>Factions.all()</code></a></td>
+<td><code>esi.factions()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups"><code>GET /universe/groups/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Groups.html#all"><code>Groups.all()</code></a></td>
+<td><code>esi.types.groups()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_groups_group_id"><code>GET /universe/groups/{group_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Group.html#info"><code>Group.info()</code></a></td>
+<td><code>esi.types.groups(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_moons_moon_id"><code>GET /universe/moons/{moon_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Moon.html#info"><code>Moon.info()</code></a></td>
+<td><code>esi.moons(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names"><code>POST /universe/names/?category=[station]</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Stations.html#names"><code>Stations.names()</code></a></td>
+<td><code>esi.stations.names(ids)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names"><code>POST /universe/names/?category=[inventory_type]</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Types.html#names"><code>Types.names()</code></a></td>
+<td><code>esi.types.names()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names"><code>POST /universe/names/?category=[region]</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Regions.html#names"><code>Regions.names()</code></a></td>
+<td><code>esi.regions.names()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names"><code>POST /universe/names/?category=[solar_system]</code></a></td>
+<td><code>v2</code></td>
+<td><a href="SolarSystems.html#names"><code>SolarSystems.names()</code></a></td>
+<td><code>esi.solarSystems.names()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names"><code>POST /universe/names/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="API.html#names"><code>API.names()</code></a></td>
+<td><code>esi.names(ids)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names"><code>POST /universe/names/?category=[constellation]</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Constellations.html#names"><code>Constellations.names()</code></a></td>
+<td><code>esi.constellations.names()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_planets_planet_id"><code>GET /universe/planets/{planet_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Planet.html#info"><code>Planet.info()</code></a></td>
+<td><code>esi.planets(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_races"><code>GET /universe/races/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Races.html#all"><code>Races.all()</code></a></td>
+<td><code>esi.races()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_regions"><code>GET /universe/regions/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Regions.html#all"><code>Regions.all()</code></a></td>
+<td><code>esi.regions()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_regions_region_id"><code>GET /universe/regions/{region_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Region.html#info"><code>Region.info()</code></a></td>
+<td><code>esi.regions(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Planetary Interaction/get_universe_schematics_schematic_id"><code>GET /universe/schematics/{schematic_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="PlanetaryInteraction.html#schematic"><code>PlanetaryInteraction.schematic()</code></a></td>
+<td><code>esi.pi.schematic(1)</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_stargates_stargate_id"><code>GET /universe/stargates/{stargate_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Stargate.html#info"><code>Stargate.info()</code></a></td>
+<td><code>esi.stargates(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_stations_station_id"><code>GET /universe/stations/{station_id}/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Station.html#info"><code>Station.info()</code></a></td>
+<td><code>esi.stations(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures"><code>GET /universe/structures/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Freeports.html#all"><code>Freeports.all()</code></a></td>
+<td><code>esi.freeports()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_structures_structure_id"><code>GET /universe/structures/{structure_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Structure.html#info"><code>Structure.info()</code></a></td>
+<td><code>esi.characters(1, 'token').structures(2).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_systems"><code>GET /universe/systems/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="SolarSystems.html#all"><code>SolarSystems.all()</code></a></td>
+<td><code>esi.solarSystems()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_systems_system_id"><code>GET /universe/systems/{system_id}/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="SolarSystem.html#info"><code>SolarSystem.info()</code></a></td>
+<td><code>esi.solarSystems(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types"><code>GET /universe/types/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Types.html#all"><code>Types.all()</code></a></td>
+<td><code>esi.types()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_types_type_id"><code>GET /universe/types/{type_id}/</code></a></td>
+<td><code>v2</code></td>
+<td><a href="Type.html#info"><code>Type.info()</code></a></td>
+<td><code>esi.types(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars"><code>GET /wars/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Wars.html#recent"><code>Wars.recent()</code></a></td>
+<td><code>esi.wars.recent()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id"><code>GET /wars/{war_id}/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="War.html#info"><code>War.info()</code></a></td>
+<td><code>esi.wars(1).info()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails"><code>GET /wars/{war_id}/killmails/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="War.html#kills"><code>War.kills()</code></a></td>
+<td><code>esi.wars(1).kills()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Wars/get_wars_war_id_killmails"><code>GET /wars/{war_id}/killmails/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="War.html#killmails"><code>War.killmails()</code></a></td>
+<td><code>esi.wars(1).killmails()</code></td>
+</tr>
+</tbody>
+</table>
+<h2>SSO Token Authorization</h2><p>Numerous functions require user authorization. EVE and ESI manage this
+via access tokens that have been verified between the user, app, and EVE
+using the OAuth protocol. When an app requests a token for a user it
+specifies a number of scopes that it requires to successfully operate.
+These scopes allow for compartmentalization between a user's various
+in-game data, enabling apps to only have access to what they need.</p>
+<p>All end points that require authentication via a token are exposed by
+calling <code>esi.characters(id, token)</code>. The returned <code>Character</code> instance
+and child adapters will then use that token for all requests. This
+instance can be saved by the app if the app's purpose focuses on a
+limited set of characters. Otherwise the created <code>Character</code> instances
+are lightweight enough that it can be called each time a new character
+must be accessed. This module does not provide any tools for acquiring
+evesso tokens.</p>
+<p>The OAuth verification is made against <a href="https://login.eveonline.com/oauth/authorize">https://login.eveonline.com/oauth/authorize</a>, although this
+is the responsibility of the app that wishes to use this library.
+<code>eve-swagger-js</code> does not provide any OAuth support.</p>
+<h3>Available Scopes</h3><table>
+<thead>
+<tr>
+<th>SSO Scope</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>esi-assets.read_assets.v1</code></td>
+<td>EVE SSO scope esi-assets.read_assets.v1</td>
+</tr>
+<tr>
+<td><code>esi-bookmarks.read_character_bookmarks.v1</code></td>
+<td>EVE SSO scope esi-bookmarks.read_character_bookmarks.v1</td>
+</tr>
+<tr>
+<td><code>esi-calendar.read_calendar_events.v1</code></td>
+<td>EVE SSO scope esi-calendar.read_calendar_events.v1</td>
+</tr>
+<tr>
+<td><code>esi-calendar.respond_calendar_events.v1</code></td>
+<td>EVE SSO scope esi-calendar.respond_calendar_events.v1</td>
+</tr>
+<tr>
+<td><code>esi-characters.read_contacts.v1</code></td>
+<td>EVE SSO scope esi-characters.read_contacts.v1</td>
+</tr>
+<tr>
+<td><code>esi-characters.read_loyalty.v1</code></td>
+<td>EVE SSO scope esi-characters.read_loyalty.v1</td>
+</tr>
+<tr>
+<td><code>esi-characters.write_contacts.v1</code></td>
+<td>EVE SSO scope esi-characters.write_contacts.v1</td>
+</tr>
+<tr>
+<td><code>esi-clones.read_clones.v1</code></td>
+<td>EVE SSO scope esi-clones.read_clones.v1</td>
+</tr>
+<tr>
+<td><code>esi-corporations.read_corporation_membership.v1</code></td>
+<td>EVE SSO scope esi-corporations.read_corporation_membership.v1</td>
+</tr>
+<tr>
+<td><code>esi-fittings.read_fittings.v1</code></td>
+<td>EVE SSO scope esi-fittings.read_fittings.v1</td>
+</tr>
+<tr>
+<td><code>esi-fittings.write_fittings.v1</code></td>
+<td>EVE SSO scope esi-fittings.write_fittings.v1</td>
+</tr>
+<tr>
+<td><code>esi-fleets.read_fleet.v1</code></td>
+<td>EVE SSO scope esi-fleets.read_fleet.v1</td>
+</tr>
+<tr>
+<td><code>esi-fleets.write_fleet.v1</code></td>
+<td>EVE SSO scope esi-fleets.write_fleet.v1</td>
+</tr>
+<tr>
+<td><code>esi-killmails.read_killmails.v1</code></td>
+<td>EVE SSO scope esi-killmails.read_killmails.v1</td>
+</tr>
+<tr>
+<td><code>esi-location.read_location.v1</code></td>
+<td>EVE SSO scope esi-location.read_location.v1</td>
+</tr>
+<tr>
+<td><code>esi-location.read_ship_type.v1</code></td>
+<td>EVE SSO scope esi-location.read_ship_type.v1</td>
+</tr>
+<tr>
+<td><code>esi-mail.organize_mail.v1</code></td>
+<td>EVE SSO scope esi-mail.organize_mail.v1</td>
+</tr>
+<tr>
+<td><code>esi-mail.read_mail.v1</code></td>
+<td>EVE SSO scope esi-mail.read_mail.v1</td>
+</tr>
+<tr>
+<td><code>esi-mail.send_mail.v1</code></td>
+<td>EVE SSO scope esi-mail.send_mail.v1</td>
+</tr>
+<tr>
+<td><code>esi-markets.structure_markets.v1</code></td>
+<td>EVE SSO scope esi-markets.structure_markets.v1</td>
+</tr>
+<tr>
+<td><code>esi-planets.manage_planets.v1</code></td>
+<td>EVE SSO scope esi-planets.manage_planets.v1</td>
+</tr>
+<tr>
+<td><code>esi-search.search_structures.v1</code></td>
+<td>EVE SSO scope esi-search.search_structures.v1</td>
+</tr>
+<tr>
+<td><code>esi-skills.read_skillqueue.v1</code></td>
+<td>EVE SSO scope esi-skills.read_skillqueue.v1</td>
+</tr>
+<tr>
+<td><code>esi-skills.read_skills.v1</code></td>
+<td>EVE SSO scope esi-skills.read_skills.v1</td>
+</tr>
+<tr>
+<td><code>esi-ui.open_window.v1</code></td>
+<td>EVE SSO scope esi-ui.open_window.v1</td>
+</tr>
+<tr>
+<td><code>esi-ui.write_waypoint.v1</code></td>
+<td>EVE SSO scope esi-ui.write_waypoint.v1</td>
+</tr>
+<tr>
+<td><code>esi-universe.read_structures.v1</code></td>
+<td>EVE SSO scope esi-universe.read_structures.v1</td>
+</tr>
+<tr>
+<td><code>esi-wallet.read_character_wallet.v1</code></td>
+<td>EVE SSO scope esi-wallet.read_character_wallet.v1</td>
+</tr>
+</tbody>
+</table></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
