@@ -231,7 +231,10 @@ class MockESIAgent {
   }
 
   __reset() {
+    let len = this._expect.length;
     this._expect = [];
+
+    expect(len).toEqual(0);
   }
 }
 
