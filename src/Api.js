@@ -426,31 +426,16 @@ class Api extends ExtendableFunction {
   }
 
   /**
-   * Query names of a given set of `ids`. These ids can be of mixed types, and
-   * each entry has its category reported. This makes an HTTP POST request to
-   * [`/universe/names/`](https://esi.tech.ccp.is/latest/#!/Universe/post_universe_names).
+   * @esi_route post_universe_names
    *
-   * The request is returned as an asynchronous Promise that resolves to an
-   * object parsed from the response JSON model. An example value looks like:
+   * If ids is longer than the reported maximum length for ESI, the array will
+   * be split into smaller chunks and multiple requests will be made and then
+   * concatenated back together.
    *
-   * ```
-   * [
-   *   {
-   *     "id": 95465499,
-   *     "name": "CCP Bartender",
-   *     "category": "character"
-   *   },
-   *   {
-   *     "id": 30000142,
-   *     "name": "Jita",
-   *     "category": "solar_system"
-   *   }
-   * ]
-   * ```
+   * @esi_example esi.names(ids)
    *
-   * @param ids {Array.<Number>} Ids to look up
-   * @type {Promise}
-   * @private
+   * @param ids {Array.<Number>}
+   * @returns {Promise.<Array.<Object>>}
    */
   names(ids) {
     return _names(this._esiAgent, 'all', ids);
