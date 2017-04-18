@@ -10,7 +10,7 @@
       "src"
     ],
     "includePattern": ".js$",
-    "excludePattern": "(node_modules/|docs)"
+    "excludePattern": "(node_modules|docs|__tests__)"
   },
   "plugins": [
     "util/jsdoc/esi-param",
@@ -19,6 +19,7 @@
     "util/jsdoc/esi-example",
     "util/jsdoc/esi-description",
     "util/jsdoc/esi-homepage",
+    "util/jsdoc/esi-all-routes",
     "plugins/markdown"
   ],
   "templates": {

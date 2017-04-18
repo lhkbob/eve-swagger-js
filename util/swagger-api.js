@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const request = require('sync-request');
 
 const methods = ['get', 'post', 'put', 'delete'];
 
@@ -89,7 +90,8 @@ function validateSchema(schemaOrType, value) {
     if (schemaOrType == 'string') {
       return isString(value) ? '' : 'value not a string';
     } else if (schemaOrType == 'integer') {
-      return isNumber(value) && Math.floor(value) == value ? '' : 'value not an integer';
+      return isNumber(value) && Math.floor(value) == value ? ''
+          : 'value not an integer';
     } else if (schemaOrType == 'float' || schemaOrType == 'number') {
       return isNumber(value) ? '' : 'value not a number';
     } else if (schemaOrType == 'boolean') {
@@ -113,7 +115,8 @@ function validateSchema(schemaOrType, value) {
         return 'value missing ' + definedProp;
       }
 
-      let propValid = validateSchema(schemaOrType['properties'][definedProp], value[definedProp]);
+      let propValid = validateSchema(schemaOrType['properties'][definedProp],
+          value[definedProp]);
       if (propValid != '') {
         return definedProp + ' fails validation: ' + propValid;
       }
@@ -318,6 +321,7 @@ class Route {
 }
 
 let localApi = null;
+let remoteApi = null;
 
 class SwaggerAPI {
   constructor(swaggerContents) {
@@ -493,7 +497,12 @@ class SwaggerAPI {
   }
 
   static getRemoteAPI() {
-    return null;
+    if (!remoteApi) {
+      let json = request('GET', 'https://esi.tech.ccp.is/latest/swagger.json');
+      // console.log('my json response', json);
+      remoteApi = new SwaggerAPI(json.getBody());
+    }
+    return remoteApi;
   }
 }
 

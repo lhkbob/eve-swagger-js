@@ -43,7 +43,7 @@ class API extends CallableInstance {
    * object map. If no argument is provided, the defaults are used.
    *
    * @param service {String} URL to the ESI service, defaults to
-   *     `'https://esi.tech.ccp.is/latest'`.
+   *     `'https://esi.tech.ccp.is/'`.
    * @param source {String} Data source used, defaults to `tranquility`.
    * @param agent {String} Custom user agent string to send with each request,
    *     which defaults to this project but really should be set for your app
@@ -57,7 +57,7 @@ class API extends CallableInstance {
    * @constructor
    */
   constructor({
-      service: service = 'https://esi.tech.ccp.is/latest', source: source = 'tranquility', agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js', language: language = 'en-us', timeout: timeout = 6000, maxConcurrent: maxConcurrent = 0, minTime: minTime = 0
+      service: service = 'https://esi.tech.ccp.is', source: source = 'tranquility', agent: agent = 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js', language: language = 'en-us', timeout: timeout = 6000, maxConcurrent: maxConcurrent = 0, minTime: minTime = 0
   } = {}) {
     super(config => new API(config));
     this._esiAgent = new ESIAgent({

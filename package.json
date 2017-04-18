@@ -35,6 +35,7 @@
     "babel-preset-es2015": "^6.24.0",
     "docdash": "^0.4.0",
     "jest": "^19.0.2",
-    "jsdoc": "^3.4.3"
+    "jsdoc": "^3.4.3",
+    "sync-request": "^4.0.2"
   }
 }
