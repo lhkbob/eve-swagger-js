@@ -28,9 +28,13 @@ class Message {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._mail._api.mail(this._mail._token)
-    .newRequest('getCharactersCharacterIdMailMailId',
-        [this._mail._id, this._id]);
+    return this._mail._agent.auth(this._mail._token)
+    .get('/v1/characters/{character_id}/mail/{mail_id}/', {
+      path: {
+        'character_id': this._mail._id,
+        'mail_id': this._id
+      }
+    });
   }
 
   /**
@@ -39,9 +43,13 @@ class Message {
    * @returns {Promise.<Object>}
    */
   del() {
-    return this._mail._api.mail(this._mail._token)
-    .newRequest('deleteCharactersCharacterIdMailMailId',
-        [this._mail._id, this._id]);
+    return this._mail._agent.auth(this._mail._token)
+    .del('/v1/characters/{character_id}/mail/{mail_id}/', {
+      path: {
+        'character_id': this._mail._id,
+        'mail_id': this._id
+      }
+    });
   }
 
   /**
@@ -53,13 +61,17 @@ class Message {
    * @return {Promise.<Object>}
    */
   update({ labels: labels = [], read: read = true }) {
-    return this._mail._api.mail(this._mail._token)
-    .newRequest('putCharactersCharacterIdMailMailId', [
-      this._mail._id, {
+    return this._mail._agent.auth(this._mail._token)
+    .put('/v1/characters/{character_id}/mail/{mail_id}/', {
+      path: {
+        'character_id': this._mail._id,
+        'mail_id': this._id
+      },
+      body: {
         labels: labels,
         read: read
-      }, this._id
-    ]);
+      }
+    });
   }
 }
 
@@ -90,9 +102,13 @@ class Label {
    * @returns {Promise.<Object>}
    */
   del() {
-    return this._mail._api.mail(this._mail._token)
-    .newRequest('deleteCharactersCharacterIdMailLabelsLabelId',
-        [this._mail._id, this._id]);
+    return this._mail._agent.auth(this._mail._token)
+    .del('/v1/characters/{character_id}/mail/labels/{label_id}/', {
+      path: {
+        'character_id': this._mail._id,
+        'label_id': this._id
+      }
+    });
   }
 }
 
@@ -135,9 +151,12 @@ class Labels extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   all() {
-    return this._mail._api.mail(this._mail._token)
-    .newRequest('getCharactersCharacterIdMailLabels', [this._mail._id])
-    .then(result => {
+    return this._mail._agent.auth(this._mail._token)
+    .get('/v3/characters/{character_id}/mail/labels/', {
+      path: {
+        'character_id': this._mail._id,
+      }
+    }).then(result => {
       return result.labels;
     });
   }
@@ -151,9 +170,12 @@ class Labels extends ExtendableFunction {
    * @returns {Promise.<Number>}
    */
   create({ name: name, color: color = '#ffffff' }) {
-    return this._mail._api.mail(this._mail._token)
-    .newRequest('postCharactersCharacterIdMailLabels', [this._mail._id], {
-      label: {
+    return this._mail._agent.auth(this._mail._token)
+    .post('/v2/characters/{character_id}/mail/labels/', {
+      path: {
+        'character_id': this._mail._id,
+      },
+      body: {
         name: name,
         color: color
       }
@@ -176,14 +198,14 @@ class Mail extends ExtendableFunction {
   /**
    * Create a new Mail function for the character, including its SSO token.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param characterId {Number} The id of the character whose mail is accessed
    * @param token {String} The SSO access token for the character
    * @constructor
    */
-  constructor(api, characterId, token) {
+  constructor(agent, characterId, token) {
     super(id => (id ? this.get(id) : this.inbox()));
-    this._api = api;
+    this._agent = agent;
     this._id = characterId;
     this._token = token;
 
@@ -215,19 +237,21 @@ class Mail extends ExtendableFunction {
   }
 
   /**
-   * Get the total number of unread messages in the character's inbox, across
-   * all labels. This makes an HTTP GET request to
-   * [`/characters/{id}/mail/labels/`](https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail_labels)
-   * and then filters the result to just return the total unread count as a
-   * Number.
+   * This makes a request to the `labels` route and then filters the result
+   * to just return the total unread count.
    *
-   * @returns {Promise.<Number>} A promise that resolves to the total unread
-   *     count in the character's inbox
+   * @esi_route get_characters_character_id_mail_labels
+   * @esi_returns total_unread_count
+   *
+   * @returns {Promise.<Number>}
    */
   unreadCount() {
-    return this._api.mail(this._token)
-    .newRequest('getCharactersCharacterIdMailLabels', [this._id])
-    .then(result => {
+    return this._agent.auth(this._token)
+    .get('/v3/characters/{character_id}/mail/labels/', {
+      path: {
+        'character_id': this._id,
+      }
+    }).then(result => {
       return result.total_unread_count;
     });
   }
@@ -235,17 +259,17 @@ class Mail extends ExtendableFunction {
   /**
    * @esi_route post_characters_character_id_cspa
    * @esi_param characters - {characters: toIds}
-   *
-   * Here is some other comment?
-   *
    * @esi_returns cost
    *
    * @param toIds {Array.<Number>}
    * @returns {Promise.<Number>}
    */
   cspaCost(toIds) {
-    return this._api.mail(this._token)
-    .newRequest('postCharactersCharacterIdCspa', [this._id, toIds]);
+    return this._agent.auth(this._token)
+    .post('/v3/characters/{character_id}/cspa/', {
+      path: { 'character_id': this._id },
+      body: { 'characters': toIds }
+    });
   }
 
   /**
@@ -265,8 +289,14 @@ class Mail extends ExtendableFunction {
       opts['last_mail_id'] = lastMailId;
     }
 
-    return this._api.mail(this._token)
-    .newRequest('getCharactersCharacterIdMail', [this._id], opts);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/mail/', {
+      path: { 'character_id': this._id },
+      query: {
+        'labels': !labelIds || labelIds.length == 0 ? null : labelIds,
+        'last_mail_id': lastMailId == 0 ? null : lastMailId
+      }
+    });
   };
 
   /**
@@ -287,8 +317,11 @@ class Mail extends ExtendableFunction {
    * @return {Promise.<Number>}
    */
   send(mail) {
-    return this._api.mail(this._token)
-    .newRequest('postCharactersCharacterIdMail', [this._id, mail]);
+    return this._agent.auth(this._token)
+    .post('/v1/characters/{character_id}/mail/', {
+      path: { 'character_id': this._id },
+      body: mail
+    });
   }
 
   /**
@@ -297,8 +330,9 @@ class Mail extends ExtendableFunction {
    * @returns {Promise.<Array.<Object>>}
    */
   lists() {
-    return this._api.mail(this._token)
-    .newRequest('getCharactersCharacterIdMailLists', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/mail/lists/',
+        { path: { 'character_id': this._id } });
   }
 }
 
