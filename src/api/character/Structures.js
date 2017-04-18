@@ -12,18 +12,18 @@ const Search = require('../Search');
  */
 class Structure {
   /**
-   * Create a new Structure for the given `api` provider and specific
+   * Create a new Structure for the given `agent` provider and specific
    * `structureId`. Requires an access token for a character with access to the
    * structure.
    *
-   * @param api {ApiProvider} The api provider used to generate web requests
+   * @param agent {ESIAgent} The agent used to generate web requests
    * @param structureId {Number} The structure id that is used for all requests
    * @param token {String} Access token of a character with on the ACL list of
    *     the structure
    * @constructor
    */
-  constructor(api, structureId, token) {
-    this._api = api;
+  constructor(agent, structureId, token) {
+    this._agent = agent;
     this._id = structureId;
     this._token = token;
 
@@ -36,8 +36,9 @@ class Structure {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._api.universe(this._token)
-    .newRequest('getUniverseStructuresStructureId', [this._id]);
+    return this._agent.auth(this._token)
+    .get('/v1/universe/structures/{structure_id}/',
+        { path: { 'structure_id': this._id } });
   }
 
   /**
@@ -51,9 +52,11 @@ class Structure {
     if (page == 0) {
       return this._all.getAll();
     } else {
-      return this._api.market(this._token)
-      .newRequest('getMarketsStructuresStructureId', [this._id],
-          { page: page });
+      return this._agent.auth(this._token)
+      .get('/v1/markets/structures/{structure_id}/', {
+        path: { 'structure_id': this._id },
+        query: { 'page': page }
+      });
     }
   }
 
@@ -122,17 +125,17 @@ class Structure {
  */
 class Structures extends ExtendableFunction {
   /**
-   * Create a new Structures function using the given `api` and tied to
+   * Create a new Structures function using the given `agent` and tied to
    * the character.
    *
-   * @param api {ApiProvider} The api provider
+   * @param agent {ESIAgent} The ESI agent
    * @param characterId {Number} The character whose structures are accessed
    * @param token {String} SSO access token for the character
    * @constructor
    */
-  constructor(api, characterId, token) {
+  constructor(agent, characterId, token) {
     super(id => this.get(id));
-    this._api = api;
+    this._agent = agent;
     this._id = characterId;
     this._token = token;
 
@@ -147,7 +150,7 @@ class Structures extends ExtendableFunction {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._api, ['structure'], this._id, this._token);
+      this._search = new Search(this._agent, ['structure'], this._id, this._token);
     }
     return this._search;
   }
@@ -160,7 +163,7 @@ class Structures extends ExtendableFunction {
    * @returns {Structure}
    */
   get(id) {
-    return new Structure(this._api, id, this._token);
+    return new Structure(this._agent, id, this._token);
   }
 }
 
