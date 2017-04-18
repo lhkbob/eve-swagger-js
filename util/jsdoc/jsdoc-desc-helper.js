@@ -1,39 +1,52 @@
+
+
 function getNextGroup(value) {
   if (!value) {
     return null;
   }
 
-  let openSymbol, closeSymbol;
-  if (value[0] == '{') {
-    openSymbol = '{';
-    closeSymbol = '}';
-  } else if (value[0] == '[') {
-    openSymbol = '[';
-    closeSymbol = ']';
-  } else if (value[0] == '(') {
-    openSymbol = '(';
-    closeSymbol = ')';
-  } else {
-    for (let i = 0; i < value.length; i++) {
-      if (value[i] == ' ' || value[i] == '\t') {
-        return value.substring(0, i + 1);
+  let group = '';
+  let symbolStack = 0;
+  let openSymbol = null;
+  let closeSymbol = null;
+
+  for (let i = 0; i < value.length; i++) {
+    // Always append the current character
+    // console.log('  -', group, '(', value[i],')', openSymbol, closeSymbol, symbolStack);
+    group += value[i];
+
+    if (openSymbol == null) {
+      // Not currently within a grouping symbol, so check for a group start,
+      // or break if we hit white space
+      if (value[i] == '{') {
+        openSymbol = '{';
+        closeSymbol = '}';
+        symbolStack = 1;
+      } else if (value[i] == '[') {
+        openSymbol = '[';
+        closeSymbol = ']';
+        symbolStack = 1;
+      } else if (value[i] == '(') {
+        openSymbol = '(';
+        closeSymbol = ')';
+        symbolStack = 1;
+      } else if (value[i] == ' ' || value[i] == '\t') {
+        // Weren't within a group, and encountered white space
+        break;
+      }
+    } else {
+      // Maintain symbol stack
+      if (value[i] == openSymbol) {
+        symbolStack++;
+      } else if (value[i] == closeSymbol) {
+        symbolStack--;
+        if (symbolStack == 0) {
+          // Reset group tracking
+          openSymbol = null;
+          closeSymbol = null;
+        }
       }
     }
-
-    return value;
-  }
-
-  let i = 1;
-  let group = value[0];
-  let symbolStack = 1;
-  while(symbolStack > 0 && i < value.length) {
-    group += value[i];
-    if (value[i] == openSymbol) {
-      symbolStack++;
-    } else if (value[i] == closeSymbol) {
-      symbolStack--;
-    }
-    i++;
   }
 
   return group;
@@ -51,6 +64,10 @@ function getGroupsAndBody(value, maxFields) {
   }
 
   let groups = new Array(maxFields);
+  for (let i = 0; i < maxFields; i++) {
+    groups[i] = null;
+  }
+
   for (let i = 0; i < maxFields; i++) {
     groups[i] = getNextGroup(line);
     if (groups[i] == null) {
