@@ -39,8 +39,9 @@ test('Squads.add', () => {
   }, { token: 'my token' });
   return api.characters(1, 'my token').fleet(2).wings(3).squads.add()
   .then(result => {
-    expect(result).toBeDefined();
-  });
+    expect(result instanceof Number || (typeof result) == 'number')
+    .toBeTruthy();
+    expect(Math.floor(result)).toEqual(result);  });
 });
 
 test('Wing.rename', () => {
@@ -80,8 +81,9 @@ test('Wings.add', () => {
     'fleet_id': 2
   }, { token: 'my token' });
   return api.characters(1, 'my token').fleet(2).wings.add().then(result => {
-    expect(result).toBeDefined();
-  });
+    expect(result instanceof Number || (typeof result) == 'number')
+    .toBeTruthy();
+    expect(Math.floor(result)).toEqual(result);  });
 });
 
 test('Fleet.info', () => {

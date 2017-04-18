@@ -45,6 +45,12 @@ test('CharacterCorporation.members', () => {
   agent.__expectRoute('get_characters_character_id', {'character_id': 1});
   agent.__expectRoute('get_corporations_corporation_id_members', {'corporation_id': 109299958}, {token: 'my_token'});
   return api.characters(1, 'my_token').corporation.members().then(result => {
+    // Make sure the result is an array of integers
+    expect(result.length).toBeGreaterThan(0);
+    for (let e of result) {
+      expect(e instanceof Number || (typeof e) == 'number').toBeTruthy();
+      expect(Math.floor(e)).toEqual(e);
+    }
     expect(result).toBeDefined();
   });
 });

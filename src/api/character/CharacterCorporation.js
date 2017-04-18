@@ -128,12 +128,16 @@ class CharacterCorporation {
     if (this._id) {
       return this._agent.auth(this._token)
       .get('/v2/corporations/{corporation_id}/members/',
-          { path: { 'corporation_id': this._id } });
+          { path: { 'corporation_id': this._id } }).then(result => {
+            return result.map(e => e.character_id);
+      });
     } else {
       return this.id().then(corpId => {
         return this._agent.auth(this._token)
         .get('/v2/corporations/{corporation_id}/members/',
             { path: { 'corporation_id': corpId } });
+      }).then(result => {
+        return result.map(e => e.character_id);
       });
     }
   }

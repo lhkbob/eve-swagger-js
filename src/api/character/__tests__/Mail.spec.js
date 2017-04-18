@@ -110,7 +110,8 @@ test('Labels.all', () => {
     'character_id': 1,
   }, { token: 'my token' });
   return api.characters(1, 'my token').mail.labels().then(result => {
-    expect(result).toBeDefined();
+    expect(Array.isArray(result)).toBeTruthy();
+    expect(result['total_unread_count']).toBeUndefined();
   });
 });
 
@@ -135,7 +136,9 @@ test('Mail.unreadCount', () => {
     'character_id': 1
   }, { token: 'my token' });
   return api.characters(1, 'my token').mail.unreadCount().then(result => {
-    expect(result).toBeDefined();
+    expect(result instanceof Number || (typeof result) == 'number')
+    .toBeTruthy();
+    expect(Math.floor(result)).toEqual(result);
   });
 });
 
@@ -145,7 +148,8 @@ test('Mail.cspaCost', () => {
     'characters': { 'characters': [2, 3, 4] }
   }, { token: 'my token' });
   return api.characters(1, 'my token').mail.cspaCost([2, 3, 4]).then(result => {
-    expect(result).toBeDefined();
+    expect(result instanceof Number || (typeof result) == 'number')
+    .toBeTruthy();
   });
 });
 

@@ -93,6 +93,8 @@ class Squads extends ExtendableFunction {
         'fleet_id': this._wing._fleet._id,
         'wing_id': this._wing._id
       }
+    }).then(result => {
+      return result.squad_id;
     });
   }
 
@@ -218,7 +220,10 @@ class Wings extends ExtendableFunction {
   add() {
     return this._fleet._agent.auth(this._fleet._token)
     .post('/v1/fleets/{fleet_id}/wings/',
-        { path: { 'fleet_id': this._fleet._id } });
+        { path: { 'fleet_id': this._fleet._id } })
+    .then(result => {
+      return result.wing_id;
+    });
   }
 
   /**

@@ -277,6 +277,8 @@ class Mail extends ExtendableFunction {
     .post('/v3/characters/{character_id}/cspa/', {
       path: { 'character_id': this._id },
       body: { 'characters': toIds }
+    }).then(result => {
+      return result.cost;
     });
   }
 

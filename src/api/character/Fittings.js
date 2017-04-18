@@ -91,6 +91,8 @@ class Fittings extends ExtendableFunction {
     .post('/v1/characters/{character_id}/fittings/', {
       path: { 'character_id': this._id },
       body: fitting
+    }).then(result => {
+      return result.fitting_id;
     });
   }
 
