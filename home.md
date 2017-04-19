@@ -6,7 +6,7 @@ JavaScript client for
 [ESI](https://developers.eveonline.com/blog/article/introducing-the-esi-api)
 compatible with NodeJS. The client returns a developer friendly set of
 functions that return [Promises](https://bluebirdjs.com) resolving to
-the response from ESI endpoint.
+the response from the ESI endpoint.
 
 The versioning of this library is independent of the ESI version.
 Because this is a client adapter, it is possible that certain routes
@@ -32,7 +32,7 @@ be requested by appending, e.g. `#{package-version}`, to the end of the URL:
 
 ```json
 "dependencies": {
-   "eve_swagger_interface": "git://github.com/lhkbob/eve-swagger-js.git#{package-version}",
+   "{package-name}": "git://github.com/lhkbob/eve-swagger-js.git#{package-version}",
 }
 ```
 
@@ -50,11 +50,13 @@ let esi = require('{package-name}');
 // Creating a new Api instance with a different configuration.
 // All options, with their default values, are shown below.
 let esi2 = esi({
-    service: 'https://esi.tech.ccp.is/latest',
+    service: 'https://esi.tech.ccp.is',
     source: 'tranquility',
-    agent: 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js',
+    agent: 'eve-swagger | https://github.com/lhkbob/eve-swagger-js',
     language: 'en-us',
-    timeout: 6000
+    timeout: 6000,
+    minTime: 0,
+    maxConcurrent: 0
   });
 
 // Fetch all active alliance ids (could also call 'esi.alliances.all()')
