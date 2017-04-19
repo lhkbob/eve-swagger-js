@@ -16,26 +16,56 @@ test('Swagger version', () => {
 });
 
 test('Swagger routes', () => {
+  let missingRoutes = [];
   for (let route of swaggerLatest.routeNames) {
     if (!implementedRoutes.includes(route)) {
-      // Weird expectation to create a better error message
-      expect('New route is not implemented: ' + route).toEqual('');
-    } else {
-      // Confirm that version hasn't changed
-      expect(swaggerImpl.route(route).version)
-      .toEqual(swaggerLatest.route(route).version);
+      missingRoutes.push(route);
+    }
+  }
+  expect(missingRoutes).toEqual([]);
+
+  let delRoutes = [];
+  for (let route of implementedRoutes) {
+    if (!swaggerLatest.routeNames.includes(route)) {
+      delRoutes.push(route);
     }
   }
 
-  for (let route of implementedRoutes) {
-    if (!swaggerLatest.routeNames.includes(route)) {
-      expect('Old route is no longer defined: ' + route).toEqual('');
-    }
-  }
+  expect(delRoutes).toEqual([]);
 });
 
 test('Integration test', () => {
   return esi.characters(92755159).info().then(result => {
     expect(result.name).toEqual('Ziggs Boson');
+  });
+});
+
+test('Cache and throttle', () => {
+  let limitedESI = esi({
+    minTime: 2000,
+    maxConcurrent: 1
+  });
+  let firstRequestTime;
+
+  // Make the first request, which should not be throttled nor cached
+  return limitedESI.characters(92755159).info().then(result => {
+    firstRequestTime = new Date().getTime();
+    expect(result.name).toEqual('Ziggs Boson');
+    // Make second request to the same end point, which should complete
+    // almost immediately since it's cached (bypassing the throttle)
+    return limitedESI.characters(92755159).info();
+  }).then(result => {
+    expect(result.name).toEqual('Ziggs Boson');
+    let elapsedTime = Math.abs(new Date().getTime() - firstRequestTime);
+    expect(elapsedTime).toBeLessThan(100);
+
+    // Make a third request to a new end point, which should complete
+    // approximately 2 seconds after the first request
+    return limitedESI.corporations(result.corporation_id).info();
+  }).then(result => {
+    expect(result.corporation_name).toEqual('Nobody in Local');
+    let elapsedTime = Math.abs(new Date().getTime() - firstRequestTime);
+    expect(elapsedTime).toBeGreaterThan(1800);
+    expect(elapsedTime).toBeLessThan(2500);
   });
 });

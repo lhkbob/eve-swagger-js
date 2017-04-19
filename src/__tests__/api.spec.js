@@ -37,6 +37,6 @@ test('API.names long', () => {
 
 test('API ctor', () => {
   let newAPI = api();
-  expect(newAPI instanceof API).toBeTruthy();
+  expect(newAPI).toBeInstanceOf(API);
   expect(newAPI != api).toBeTruthy();
 });
