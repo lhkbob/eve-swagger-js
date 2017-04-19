@@ -10,7 +10,7 @@
       "src"
     ],
     "includePattern": ".js$",
-    "excludePattern": "(node_modules|docs|__tests__)"
+    "excludePattern": "(node_modules|docs|lib|util|__tests__)"
   },
   "plugins": [
     "util/jsdoc/esi-param",
@@ -32,7 +32,7 @@
   },
   "opts": {
     "template": "node_modules/docdash",
-    "destination": "./docs/",
+    "destination": "docs/",
     "encoding": "utf8",
     "private": false,
     "recurse": true

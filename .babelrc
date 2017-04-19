@@ -1,6 +1,14 @@
 {
-  // FIXME is es2015 required for env? Does env do anything surprising?
-  "presets": ["es2015", "env"],
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": 4
+        }
+      }
+    ]
+  ],
   "plugins": [
     "transform-runtime"
   ]
