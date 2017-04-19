@@ -65,7 +65,7 @@ test('Cache and throttle', () => {
   }).then(result => {
     expect(result.corporation_name).toEqual('Nobody in Local');
     let elapsedTime = Math.abs(new Date().getTime() - firstRequestTime);
-    expect(elapsedTime).toBeGreaterThan(1800);
-    expect(elapsedTime).toBeLessThan(2500);
+    expect(elapsedTime).toBeGreaterThan(1700);
+    expect(elapsedTime).toBeLessThan(2800);
   });
 });
