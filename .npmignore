@@ -1,0 +1,1 @@
+# Empty .npmignore file so that we include lib/, which is ignored for git

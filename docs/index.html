@@ -46,19 +46,19 @@
 
 
     <section class="readme">
-        <article><h1>eve_swagger_interface</h1><h2>JS Client for the Eve Swagger Interface (ESI)</h2><p>JavaScript client for
+        <article><h1>eve-swagger</h1><h2>JS Client for the Eve Swagger Interface (ESI)</h2><p>JavaScript client for
 <a href="https://developers.eveonline.com/blog/article/introducing-the-esi-api">ESI</a>
 compatible with NodeJS. The client returns a developer friendly set of
 functions that return <a href="https://bluebirdjs.com">Promises</a> resolving to
-the response from ESI endpoint.</p>
+the response from the ESI endpoint.</p>
 <p>The versioning of this library is independent of the ESI version.
 Because this is a client adapter, it is possible that certain routes
 are perfectly usable even when an ESI update changes other routes.
 The library uses specific route versions for each end point instead of
 the legacy, latest, or dev aliases.</p>
 <ul>
-<li>Package name: eve_swagger_interface</li>
-<li>Package version: 0.2.2</li>
+<li>Package name: eve-swagger</li>
+<li>Package version: 0.3.0</li>
 <li>ESI version: 0.4.1.dev1</li>
 <li>Source: <a href="https://github.com/lhkbob/eve-swagger-js/">https://github.com/lhkbob/eve-swagger-js/</a></li>
 <li>Documentation: <a href="https://lhkbob.github.io/eve-swagger-js/">https://lhkbob.github.io/eve-swagger-js/</a></li>
@@ -66,24 +66,26 @@ the legacy, latest, or dev aliases.</p>
 <h2>Installation</h2><h3>For <a href="https://nodejs.org/">Node.js</a></h3><p>Currently, this library has not been published to the <code>npm</code> repository.
 However, it can still be depended on in NodeJS projects by including a
 dependency in <code>package.json</code> using a GitHub URL. A specific release can
-be requested by appending, e.g. <code>#0.2.2</code>, to the end of the URL:</p>
+be requested by appending, e.g. <code>#0.3.0</code>, to the end of the URL:</p>
 <pre class="prettyprint source lang-json"><code>&quot;dependencies&quot;: {
-   &quot;eve_swagger_interface&quot;: &quot;git://github.com/lhkbob/eve-swagger-js.git#0.2.2&quot;,
+   &quot;eve-swagger&quot;: &quot;git://github.com/lhkbob/eve-swagger-js.git#0.3.0&quot;,
 }</code></pre><h2>Getting Started</h2><p>Please follow the <a href="#installation">Installation</a> instruction and execute
 the following JS code. All ESI end points and their code mappings are
 provided in the subsequent <a href="#esi-mappings">ESI Mappings</a> section.</p>
 <pre class="prettyprint source lang-javascript"><code>// The main module returns a default Api instance with an attached
 // Api constructor if configuration changes are necessary.
-let esi = require('eve_swagger_interface');
+let esi = require('eve-swagger');
 
 // Creating a new Api instance with a different configuration.
 // All options, with their default values, are shown below.
 let esi2 = esi({
-    service: 'https://esi.tech.ccp.is/latest',
+    service: 'https://esi.tech.ccp.is',
     source: 'tranquility',
-    agent: 'eve-swagger-js / https://github.com/lhkbob/eve-swagger-js',
+    agent: 'eve-swagger | https://github.com/lhkbob/eve-swagger-js',
     language: 'en-us',
-    timeout: 6000
+    timeout: 6000,
+    minTime: 0,
+    maxConcurrent: 0
   });
 
 // Fetch all active alliance ids (could also call 'esi.alliances.all()')
