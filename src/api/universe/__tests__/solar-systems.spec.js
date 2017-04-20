@@ -18,6 +18,93 @@ test('SolarSystem.info', () => {
   });
 });
 
+test('SolarSystem.shortestRoute', () => {
+  agent.__expectRoute('get_route_origin_destination', {
+    'origin': 1,
+    'destination': 2,
+    'avoid': [],
+    'connections': [],
+    'flag': 'shortest'
+  });
+  return api.solarSystems(1).shortestRoute(2).then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('SolarSystem.shortestRoute custom', () => {
+  agent.__expectRoute('get_route_origin_destination', {
+    'origin': 1,
+    'destination': 2,
+    'avoid': [3, 4],
+    'connections': ['5|6', '7|8'],
+    'flag': 'shortest'
+  });
+  return api.solarSystems(1).shortestRoute(2, {
+    avoid: [3, 4],
+    connections: [[5,6],[7,8]]
+  }).then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('SolarSystem.secureRoute', () => {
+  agent.__expectRoute('get_route_origin_destination', {
+    'origin': 1,
+    'destination': 2,
+    'avoid': [],
+    'connections': [],
+    'flag': 'secure'
+  });
+  return api.solarSystems(1).secureRoute(2).then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('SolarSystem.secureRoute custom', () => {
+  agent.__expectRoute('get_route_origin_destination', {
+    'origin': 1,
+    'destination': 2,
+    'avoid': [3, 4],
+    'connections': ['5|6', '7|8'],
+    'flag': 'secure'
+  });
+  return api.solarSystems(1).secureRoute(2, {
+    avoid: [3, 4],
+    connections: [[5,6],[7,8]]
+  }).then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('SolarSystem.insecureRoute', () => {
+  agent.__expectRoute('get_route_origin_destination', {
+    'origin': 1,
+    'destination': 2,
+    'avoid': [],
+    'connections': [],
+    'flag': 'insecure'
+  });
+  return api.solarSystems(1).insecureRoute(2).then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('SolarSystem.insecureRoute custom', () => {
+  agent.__expectRoute('get_route_origin_destination', {
+    'origin': 1,
+    'destination': 2,
+    'avoid': [3, 4],
+    'connections': ['5|6', '7|8'],
+    'flag': 'insecure'
+  });
+  return api.solarSystems(1).insecureRoute(2, {
+    avoid: [3, 4],
+    connections: [[5,6],[7,8]]
+  }).then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
 test('SolarSystems.all', () => {
   agent.__expectRoute('get_universe_systems', {});
   return api.solarSystems().then(result => {
@@ -25,6 +112,19 @@ test('SolarSystems.all', () => {
   });
 });
 
+test('SolarSystems.jumpStats', () => {
+  agent.__expectRoute('get_universe_system_jumps', {});
+  return api.solarSystems.jumpStats().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('SolarSystems.killStats', () => {
+  agent.__expectRoute('get_universe_system_kills', {});
+  return api.solarSystems.killStats().then(result => {
+    expect(result).toBeDefined();
+  });
+});
 
 test('SolarSystems.names empty', () => {
   agent.__expectRoute('get_universe_systems', {});

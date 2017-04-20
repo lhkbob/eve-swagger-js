@@ -5,7 +5,8 @@ const _names = require('../../internal/names');
 
 /**
  * An api adapter for dealing with a single solar system, currently only
- * supporting fetching simple information.
+ * supporting fetching simple information and calculating routes between
+ * systems.
  */
 class SolarSystem {
   /**
@@ -30,6 +31,73 @@ class SolarSystem {
   info() {
     return this._agent.noAuth.get('/v2/universe/systems/{system_id}/',
         { path: { 'system_id': this._id } });
+  }
+
+  _getRoute(type, to, avoid, connections) {
+    // Build up single level connections array
+    let flatConnections = [];
+    for (let c of connections) {
+      flatConnections.push(c[0] + '|' + c[1]);
+    }
+    return this._agent.noAuth.get('/v1/route/{origin}/{destination}/', {
+      path: {
+        'origin': this._id,
+        'destination': to
+      },
+      query: {
+        'flag': type,
+        'avoid': avoid,
+        'connections': flatConnections
+      }
+    });
+  }
+
+  /**
+   * @esi_route get_route_origin_destination
+   * @esi_param destination - to
+   * @esi_param flag - "shortest"
+   *
+   * @esi_example esi.solarSystems(1).shortestRoute(2, {...})
+   *
+   * @param to {Number}
+   * @param avoid {Array.<Number>} Defaults to `[]`
+   * @param connections {Array.<Array.<Number>>} Defaults to `[]`
+   * @returns {Promise.<Array.<Number>>}
+   */
+  shortestRoute(to, { avoid: avoid = [], connections: connections = [] } = {}) {
+    return this._getRoute('shortest', to, avoid, connections);
+  }
+
+  /**
+   * @esi_route get_route_origin_destination
+   * @esi_param destination - to
+   * @esi_param flag - "secure"
+   *
+   * @esi_example esi.solarSystems(1).secureRoute(2, {...})
+   *
+   * @param to {Number}
+   * @param avoid {Array.<Number>} Defaults to `[]`
+   * @param connections {Array.<Array.<Number>>} Defaults to `[]`
+   * @returns {Promise.<Array.<Number>>}
+   */
+  secureRoute(to, { avoid: avoid = [], connections: connections = [] } = {}) {
+    return this._getRoute('secure', to, avoid, connections);
+  }
+
+  /**
+   * @esi_route get_route_origin_destination
+   * @esi_param destination - to
+   * @esi_param flag - "insecure"
+   *
+   * @esi_example esi.solarSystems(1).insecureRoute(2, {...})
+   *
+   * @param to {Number}
+   * @param avoid {Array.<Number>} Defaults to `[]`
+   * @param connections {Array.<Array.<Number>>} Defaults to `[]`
+   * @returns {Promise.<Array.<Number>>}
+   */
+  insecureRoute(to, { avoid: avoid = [], connections: connections = [] } = {}) {
+    return this._getRoute('insecure', to, avoid, connections);
   }
 }
 
@@ -92,6 +160,26 @@ class SolarSystems extends CallableInstance {
    */
   all() {
     return this._agent.noAuth.get('/v1/universe/systems/');
+  }
+
+  /**
+   * @esi_route get_universe_system_jumps
+   * @esi_example esi.solarSystems.jumpStats()
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  jumpStats() {
+    return this._agent.noAuth.get('/v1/universe/system_jumps/');
+  }
+
+  /**
+   * @esi_route get_universe_system_kills
+   * @esi_example esi.solarSystems.killStats()
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  killStats() {
+    return this._agent.noAuth.get('/v1/universe/system_kills/');
   }
 
   /**
