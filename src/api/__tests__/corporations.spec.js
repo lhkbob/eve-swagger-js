@@ -37,7 +37,7 @@ test('Corporation.loyaltyOffers', () => {
   });
 });
 
-test.skip('Corporations.npc', () => {
+test('Corporations.npc', () => {
   agent.__expectRoute('get_corporations_npccorps', {});
   return api.corporations.npc().then(result => {
     expect(result).toBeDefined();
