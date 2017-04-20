@@ -35,7 +35,7 @@ class Corporation {
    * @return {Promise.<Object>}
    */
   info() {
-    return this._agent.noAuth.get('/v2/corporations/{corporation_id}/',
+    return this._agent.noAuth.get('/v3/corporations/{corporation_id}/',
         { path: { 'corporation_id': this._id } });
   }
 

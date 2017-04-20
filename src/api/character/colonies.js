@@ -37,7 +37,7 @@ class Colonies extends CallableInstance {
    */
   layout(planetId) {
     return this._agent.auth(this._token)
-    .get('/v1/characters/{character_id}/planets/{planet_id}/', {
+    .get('/v2/characters/{character_id}/planets/{planet_id}/', {
       path: {
         'character_id': this._id,
         'planet_id': planetId
