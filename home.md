@@ -25,14 +25,14 @@ the legacy, latest, or dev aliases.
 
 ### For [Node.js](https://nodejs.org/)
 
-Currently, this library has not been published to the `npm` repository.
-However, it can still be depended on in NodeJS projects by including a
-dependency in `package.json` using a GitHub URL. A specific release can
-be requested by appending, e.g. `#{package-version}`, to the end of the URL:
+The library is published to `npm` as
+[eve-swagger](https://www.npmjs.com/package/eve-swagger). It can be
+depended on as usual by running `npm install --save {package-name}`,
+or by including in your `package.json`:
 
 ```json
 "dependencies": {
-   "{package-name}": "git://github.com/lhkbob/eve-swagger-js.git#{package-version}",
+   "{package-name}": "^{package-version}",
 }
 ```
 
