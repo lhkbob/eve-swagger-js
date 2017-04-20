@@ -130,7 +130,16 @@ function validateSchema(schemaOrType, value) {
     return '';
   } else if (schemaOrType['items']) {
     if (!isArray(value)) {
-      return 'value is not an array';
+      if (schemaOrType['collectionFormat'] == 'pipes') {
+        // Ugly special case for handling arrays of arrays (i.e. get_route)
+        if (isString(value) && value.indexOf('|') >= 0) {
+          return '';
+        } else {
+          return 'value is not a piped array';
+        }
+      } else {
+        return 'value is not an array';
+      }
     }
 
     // Validate each item of the array
@@ -477,7 +486,7 @@ class SwaggerAPI {
         return 'Object';
       } else if (def['type'] == 'array' || 'items' in def) {
         // An array definition, but provide a parameter
-        return 'Array.<' + SwaggerAPI.getJSType(def['items']['type']) + '>';
+        return 'Array.<' + SwaggerAPI.getJSType(def['items']) + '>';
       } else if (def['schema']) {
         // Unwrap the schema
         return SwaggerAPI.getJSType(def['schema']);
