@@ -7,15 +7,20 @@
   },
   "source": {
     "include": [
-      "src",
-      "home.md"
+      "src"
     ],
     "includePattern": ".js$",
-    "excludePattern": "(node_modules/|docs)"
+    "excludePattern": "(node_modules|docs|lib|util|__tests__)"
   },
   "plugins": [
-    "plugins/markdown",
-    "src/internal/jsdoc-esi-link"
+    "util/jsdoc/esi-param",
+    "util/jsdoc/esi-returns",
+    "util/jsdoc/esi-route",
+    "util/jsdoc/esi-example",
+    "util/jsdoc/esi-description",
+    "util/jsdoc/esi-homepage",
+    "util/jsdoc/esi-all-routes",
+    "plugins/markdown"
   ],
   "templates": {
     "cleverLinks": false,
@@ -27,7 +32,7 @@
   },
   "opts": {
     "template": "node_modules/docdash",
-    "destination": "./docs/",
+    "destination": "docs/",
     "encoding": "utf8",
     "private": false,
     "recurse": true
