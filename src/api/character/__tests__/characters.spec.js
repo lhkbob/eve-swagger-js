@@ -198,6 +198,54 @@ test('Character.skillqueue', () => {
   });
 });
 
+test('Character.agentResearch', () => {
+  agent.__expectRoute('get_characters_character_id_agents_research',
+      {'character_id': 1}, {token: 'my_token'});
+  return api.characters(1, 'my_token').agentResearch().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('Character.chatChannels', () => {
+  agent.__expectRoute('get_characters_character_id_chat_channels',
+      {'character_id': 1}, {token: 'my_token'});
+  return api.characters(1, 'my_token').chatChannels().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('Character.medals', () => {
+  agent.__expectRoute('get_characters_character_id_medals',
+      {'character_id': 1}, {token: 'my_token'});
+  return api.characters(1, 'my_token').medals().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('Character.opportunities', () => {
+  agent.__expectRoute('get_characters_character_id_opportunities',
+      {'character_id': 1}, {token: 'my_token'});
+  return api.characters(1, 'my_token').opportunities().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('Character.standings', () => {
+  agent.__expectRoute('get_characters_character_id_standings',
+      {'character_id': 1}, {token: 'my_token'});
+  return api.characters(1, 'my_token').standings().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('Characters.affiliation', () => {
+  agent.__expectRoute('post_characters_affiliation',
+      {'characters': [2]});
+  return api.characters.affiliations([2]).then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
 test('Characters.names small', () => {
   agent.__expectRoute('get_characters_names', { 'character_ids': [2] });
   return api.characters.names([2]).then(result => {
