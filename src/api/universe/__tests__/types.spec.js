@@ -23,7 +23,7 @@ test('Groups.all', () => {
       { returns: [3, 4] });
   agent.__expectRoute('get_universe_groups', { 'page': 3 }, { returns: [] });
 
-  return api.types.groups.all().then(result => {
+  return api.types.groups().then(result => {
     expect(result).toEqual([1, 2, 3, 4]);
   });
 });
@@ -31,6 +31,22 @@ test('Groups.all', () => {
 test('Groups.all page', () => {
   agent.__expectRoute('get_universe_groups', { 'page': 1 });
   return api.types.groups.all(1).then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('MarketGroup.info', () => {
+  agent.__expectRoute('get_markets_groups_market_group_id',
+      { 'market_group_id': 1 });
+  return api.types.marketGroups(1).info().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('MarketGroups.all', () => {
+  agent.__expectRoute('get_markets_groups', {});
+
+  return api.types.marketGroups().then(result => {
     expect(result).toBeDefined();
   });
 });
@@ -46,7 +62,7 @@ test('Category.info', () => {
 test('Categories.all', () => {
   agent.__expectRoute('get_universe_categories', {});
 
-  return api.types.categories.all().then(result => {
+  return api.types.categories().then(result => {
     expect(result).toBeDefined();
   });
 });

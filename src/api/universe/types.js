@@ -82,7 +82,81 @@ class Groups extends CallableInstance {
       return this._agent.noAuth.get('/v1/universe/groups/',
           { query: { 'page': page } });
     }
-  };
+  }
+}
+
+/**
+ * An api adapter for dealing with a single market group, currently only
+ * supporting fetching simple information.
+ */
+class MarketGroup {
+  /**
+   * Create a new MarketGroup for the given `agent` provider and specific
+   * `groupId`.
+   *
+   * @param agent {ESIAgent} The agent used to generate web requests
+   * @param groupId {Number} The group id that is used for all requests
+   * @constructor
+   */
+  constructor(agent, groupId) {
+    this._agent = agent;
+    this._id = groupId;
+  }
+
+  /**
+   * @esi_route get_markets_groups_market_group_id
+   * @esi_example esi.types.marketGroups(1).info()
+   *
+   * @return {Promise.<Object>}
+   */
+  info() {
+    return this._agent.noAuth.get('/v1/markets/groups/{market_group_id}/',
+        { path: { 'market_group_id': this._id } });
+  }
+}
+
+/**
+ * An api adapter that provides functions for accessing market group information
+ * via the [market](https://esi.tech.ccp.is/latest/#/Market) ESI end points.
+ * You should not usually instantiate this directly as its constructor requires
+ * an internal api instance.
+ *
+ * This is a function class so instances of `MarketGroups` are functions and can
+ * be invoked directly, besides accessing its members. Its default function
+ * action is equivalent to {@link MarketGroups#get get} or {@link
+    * MarketGroups#all all} if no id is provided.
+ */
+class MarketGroups extends CallableInstance {
+  /**
+   * Create a new Groups instance using the given `agent`.
+   *
+   * @param agent {ESIAgent} The ESI agent
+   * @constructor
+   */
+  constructor(agent) {
+    super(id => (id ? this.get(id) : this.all()));
+    this._agent = agent;
+  }
+
+  /**
+   * Create a new MarketGroup end point targeting the particular group by `id`.
+   *
+   * @param id {Number} The group id
+   * @returns {MarketGroup}
+   */
+  get(id) {
+    return new MarketGroup(this._agent, id);
+  }
+
+  /**
+   * @esi_route get_markets_groups
+   * @esi_example esi.types.marketGroups()
+   *
+   * @return {Promise.<Array.<Number>>}
+   */
+  all() {
+    return this._agent.noAuth.get('/v1/markets/groups/');
+  }
 }
 
 /**
@@ -217,10 +291,11 @@ class Types extends CallableInstance {
     this._search = null;
     this._cats = null;
     this._groups = null;
+    this._mktGroups = null;
   }
 
   /**
-   * A Categories instance configured with the same api.
+   * A Categories instance configured with the same agent.
    *
    * @type {Categories}
    */
@@ -232,7 +307,7 @@ class Types extends CallableInstance {
   }
 
   /**
-   * A Groups instance configured with the same api.
+   * A Groups instance configured with the same agent.
    *
    * @type {Groups}
    */
@@ -241,6 +316,18 @@ class Types extends CallableInstance {
       this._groups = new Groups(this._agent);
     }
     return this._groups;
+  }
+
+  /**
+   * A MarketGroups instance configured with the same agent.
+   *
+   * @type {MarketGroups}
+   */
+  get marketGroups() {
+    if (!this._mktGroups) {
+      this._mktGroups = new MarketGroups(this._agent);
+    }
+    return this._mktGroups;
   }
 
   /**
