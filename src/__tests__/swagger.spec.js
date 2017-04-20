@@ -10,6 +10,9 @@ let swaggerLatest = SwaggerAPI.getRemoteAPI();
 let implementedRoutes = JSON.parse(
     fs.readFileSync(path.join(__dirname, '../../util/implemented-routes.json'),
         { encoding: 'utf8' }));
+// Manually add these routes, which are defined and used but don't have
+// a documentation call out
+implementedRoutes.push('get_characters_character_id_search');
 
 test('Swagger version', () => {
   expect(swaggerImpl.version).toEqual(swaggerLatest.version);
@@ -30,7 +33,6 @@ test('Swagger routes', () => {
       delRoutes.push(route);
     }
   }
-
   expect(delRoutes).toEqual([]);
 });
 
