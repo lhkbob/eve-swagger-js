@@ -227,7 +227,7 @@ class Character extends CharacterInfo {
    */
   get structures() {
     if (!this._struct) {
-      this._struct = new Structures(this._agent, this._id, this._token);
+      this._struct = new Structures(this);
     }
     return this._struct;
   }
@@ -419,6 +419,66 @@ class Character extends CharacterInfo {
     .get('/v2/characters/{character_id}/skillqueue/',
         { path: { 'character_id': this._id } });
   }
+
+  /**
+   * @esi_route get_characters_character_id_agents_research
+   * @esi_example esi.characters(1, 'token').agentResearch()
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  agentResearch() {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/agents_research/',
+        { path: { 'character_id': this._id } });
+  }
+
+  /**
+   * @esi_route get_characters_character_id_chat_channels
+   * @esi_example esi.characters(1, 'token').chatChannels()
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  chatChannels() {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/chat_channels/',
+        { path: { 'character_id': this._id } });
+  }
+
+  /**
+   * @esi_route get_characters_character_id_medals
+   * @esi_example esi.characters(1, 'token').medals()
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  medals() {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/medals/',
+        { path: { 'character_id': this._id } });
+  }
+
+  /**
+   * @esi_route get_characters_character_id_standings
+   * @esi_example esi.characters(1, 'token').standings()
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  standings() {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/standings/',
+        { path: { 'character_id': this._id } });
+  }
+
+  /**
+   * @esi_route get_characters_character_id_opportunities
+   * @esi_example esi.characters(1, 'token').opportunities()
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  opportunities() {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/opportunities/',
+        { path: { 'character_id': this._id } });
+  }
 }
 
 /**
@@ -475,6 +535,19 @@ class Characters extends CallableInstance {
     } else {
       return new CharacterInfo(this._agent, id);
     }
+  }
+
+  /**
+   * @esi_route post_characters_affiliation
+   * @esi_param characters - ids
+   * @esi_example esi.characters.affiliations(ids)
+   *
+   * @param ids {Array.<Number>}
+   * @returns {Promise.<Array.<Object>>}
+   */
+  affiliations(ids) {
+    return this._agent.noAuth.post('/v1/characters/affiliation/',
+        { body: ids });
   }
 
   /**
