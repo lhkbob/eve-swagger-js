@@ -48,6 +48,21 @@ test('Structure.info', () => {
   });
 });
 
+test('Structure.vulnerability', () => {
+  let schedule = [{hour: 0, day: 0}];
+  agent.__expectRoute('get_characters_character_id', { 'character_id': 1 });
+  agent.__expectRoute('put_corporations_corporation_id_structures_structure_id',
+      {
+        'corporation_id': 109299958,
+        'structure_id': 2,
+        'new_schedule': schedule
+      }, { token: 'my token' });
+  return api.characters(1, 'my token').structures(2).vulnerability(schedule)
+  .then(result => {
+    expect(result).toEqual({});
+  });
+});
+
 test('Structure.orders', () => {
   agent.__expectRoute('get_markets_structures_structure_id', {
     'structure_id': 2,
@@ -155,7 +170,7 @@ test('Structures.search', () => {
   })
 });
 
-test('Alliances.search.strict', () => {
+test('Structures.search.strict', () => {
   agent.__expectRoute('get_characters_character_id_search', {
     'character_id': 1,
     'search': 'search text',

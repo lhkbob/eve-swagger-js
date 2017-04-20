@@ -12,21 +12,16 @@ const Search = require('../search');
  */
 class Structure {
   /**
-   * Create a new Structure for the given `agent` provider and specific
-   * `structureId`. Requires an access token for a character with access to the
-   * structure.
+   * Create a new Structure for the given `character` and specific
+   * `structureId`. Requires a character with access to the structure.
    *
-   * @param agent {ESIAgent} The agent used to generate web requests
+   * @param character {Character} The character with access to the structure
    * @param structureId {Number} The structure id that is used for all requests
-   * @param token {String} Access token of a character with on the ACL list of
-   *     the structure
    * @constructor
    */
-  constructor(agent, structureId, token) {
-    this._agent = agent;
+  constructor(character, structureId) {
+    this._char = character;
     this._id = structureId;
-    this._token = token;
-
     this._all = new PageHandler(page => this.orders(page));
   }
 
@@ -37,9 +32,29 @@ class Structure {
    * @returns {Promise.<Object>}
    */
   info() {
-    return this._agent.auth(this._token)
+    return this._char._agent.auth(this._char._token)
     .get('/v1/universe/structures/{structure_id}/',
         { path: { 'structure_id': this._id } });
+  }
+
+  /**
+   * @esi_route put_corporations_corporation_id_structures_structure_id
+   * @esi_example esi.characters(1, 'token').structures(2).vulnerability({...})
+   *
+   * @param newSchedule {Array.<Object>}
+   * @returns {Promise.<Object>}
+   */
+  vulnerability(newSchedule) {
+    return this._char.corporation.id().then(corpId => {
+      return this._char._agent.auth(this._char._token)
+      .put('/v1/corporations/{corporation_id}/structures/{structure_id}/', {
+        path: {
+          'corporation_id': corpId,
+          'structure_id': this._id
+        },
+        body: newSchedule
+      });
+    });
   }
 
   /**
@@ -54,7 +69,7 @@ class Structure {
     if (page == 0) {
       return this._all.getAll();
     } else {
-      return this._agent.auth(this._token)
+      return this._char._agent.auth(this._char._token)
       .get('/v1/markets/structures/{structure_id}/', {
         path: { 'structure_id': this._id },
         query: { 'page': page }
@@ -133,19 +148,14 @@ class Structure {
  */
 class Structures extends CallableInstance {
   /**
-   * Create a new Structures function using the given `agent` and tied to
-   * the character.
+   * Create a new Structures function tied to the given character.
    *
-   * @param agent {ESIAgent} The ESI agent
-   * @param characterId {Number} The character whose structures are accessed
-   * @param token {String} SSO access token for the character
+   * @param character {Character}
    * @constructor
    */
-  constructor(agent, characterId, token) {
+  constructor(character) {
     super(id => this.get(id));
-    this._agent = agent;
-    this._id = characterId;
-    this._token = token;
+    this._char = character;
 
     this._search = null;
   }
@@ -160,7 +170,7 @@ class Structures extends CallableInstance {
    */
   get search() {
     if (!this._search) {
-      this._search = new Search(this._agent, ['structure'], this._id, this._token);
+      this._search = new Search(this._char._agent, ['structure'], this._char._id, this._char._token);
     }
     return this._search;
   }
@@ -173,7 +183,7 @@ class Structures extends CallableInstance {
    * @returns {Structure}
    */
   get(id) {
-    return new Structure(this._agent, id, this._token);
+    return new Structure(this._char, id);
   }
 }
 
