@@ -1,5 +1,7 @@
 const Promise = require('bluebird');
 
+const [PageHandler,] = require('../../internal/page-handler');
+
 /**
  * An api adapter that provides functions for accessing various details for a
  * corporation specified by id via functions in the
@@ -26,6 +28,7 @@ class CharacterCorporation {
     this._charId = characterId;
     this._token = token;
     this._id = null;
+    this._allStructs = new PageHandler(page => this.structures(page), 250);
   }
 
   /**
@@ -38,15 +41,10 @@ class CharacterCorporation {
    * @returns {Promise.<Object>}
    */
   info() {
-    if (this._id) {
-      return this._agent.noAuth.get('/v2/corporations/{corporation_id}/',
-          { path: { 'corporation_id': this._id } });
-    } else {
-      return this.id().then(corpId => {
-        return this._agent.noAuth.get('/v2/corporations/{corporation_id}/',
-            { path: { 'corporation_id': corpId } });
-      });
-    }
+    return this.id().then(corpId => {
+      return this._agent.noAuth.get('/v3/corporations/{corporation_id}/',
+          { path: { 'corporation_id': corpId } });
+    });
   }
 
   /**
@@ -59,17 +57,11 @@ class CharacterCorporation {
    * @returns {Promise.<Array.<Object>>}
    */
   history() {
-    if (this._id) {
+    return this.id().then(corpId => {
       return this._agent.noAuth.get(
           '/v1/corporations/{corporation_id}/alliancehistory/',
-          { path: { 'corporation_id': this._id } });
-    } else {
-      return this.id().then(corpId => {
-        return this._agent.noAuth.get(
-            '/v1/corporations/{corporation_id}/alliancehistory/',
-            { path: { 'corporation_id': corpId } });
-      });
-    }
+          { path: { 'corporation_id': corpId } });
+    });
   }
 
   /**
@@ -82,16 +74,10 @@ class CharacterCorporation {
    * @returns {Promise.<Object>}
    */
   icon() {
-    if (this._id) {
+    return this.id().then(corpId => {
       return this._agent.noAuth.get('/v1/corporations/{corporation_id}/icons/',
-          { path: { 'corporation_id': this._id } });
-    } else {
-      return this.id().then(corpId => {
-        return this._agent.noAuth.get(
-            '/v1/corporations/{corporation_id}/icons/',
-            { path: { 'corporation_id': corpId } });
-      });
-    }
+          { path: { 'corporation_id': corpId } });
+    });
   }
 
   /**
@@ -104,17 +90,11 @@ class CharacterCorporation {
    * @returns {Promise.<Array.<Object>>}
    */
   loyaltyOffers() {
-    if (this._id) {
+    return this.id().then(corpId => {
       return this._agent.noAuth.get(
           '/v1/loyalty/stores/{corporation_id}/offers/',
-          { path: { 'corporation_id': this._id } });
-    } else {
-      return this.id().then(corpId => {
-        return this._agent.noAuth.get(
-            '/v1/loyalty/stores/{corporation_id}/offers/',
-            { path: { 'corporation_id': corpId } });
-      });
-    }
+          { path: { 'corporation_id': corpId } });
+    });
   }
 
   /**
@@ -125,21 +105,13 @@ class CharacterCorporation {
    * @returns {Promise.<Array.<Number>>}
    */
   members() {
-    if (this._id) {
+    return this.id().then(corpId => {
       return this._agent.auth(this._token)
       .get('/v2/corporations/{corporation_id}/members/',
-          { path: { 'corporation_id': this._id } }).then(result => {
-            return result.map(e => e.character_id);
-      });
-    } else {
-      return this.id().then(corpId => {
-        return this._agent.auth(this._token)
-        .get('/v2/corporations/{corporation_id}/members/',
-            { path: { 'corporation_id': corpId } });
-      }).then(result => {
-        return result.map(e => e.character_id);
-      });
-    }
+          { path: { 'corporation_id': corpId } });
+    }).then(result => {
+      return result.map(e => e.character_id);
+    });
   }
 
   /**
@@ -149,15 +121,31 @@ class CharacterCorporation {
    * @returns {Promise.<Array.<Object>>}
    */
   roles() {
-    if (this._id) {
+    return this.id().then(corpId => {
       return this._agent.auth(this._token)
       .get('/v1/corporations/{corporation_id}/roles/',
-          { path: { 'corporation_id': this._id } });
+          { path: { 'corporation_id': corpId } });
+    });
+  }
+
+  /**
+   * @esi_route get_corporations_corporation_id_structures
+   * @esi_example esi.characters(1, 'token').corporation.structures()
+   *
+   * @param page {Number} If `0`, all structures are returned
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  structures(page = 0) {
+    if (page == 0) {
+      return this._allStructs.getAll();
     } else {
       return this.id().then(corpId => {
         return this._agent.auth(this._token)
-        .get('/v1/corporations/{corporation_id}/roles/',
-            { path: { 'corporation_id': corpId } });
+        .get('/v1/corporations/{corporation_id}/structures/', {
+          path: { 'corporation_id': corpId },
+          query: { 'page': page }
+        });
       });
     }
   }
