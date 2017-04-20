@@ -22,3 +22,10 @@ test('Sovereignty.structures', () => {
     expect(result).toBeDefined();
   });
 });
+
+test('Sovereignty.map', () => {
+  agent.__expectRoute('get_sovereignty_map', {});
+  return api.sovereignty.map().then(result => {
+    expect(result).toBeDefined();
+  });
+});

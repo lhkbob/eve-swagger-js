@@ -34,6 +34,16 @@ class Sovereignty {
   structures() {
     return this._agent.noAuth.get('/v1/sovereignty/structures/');
   }
+
+  /**
+   * @esi_route get_sovereignty_map
+   * @esi_example esi.sovereignty.map()
+   *
+   * @return {Promise.<Array.<Object>>}
+   */
+  map() {
+    return this._agent.noAuth.get('/v1/sovereignty/map/');
+  }
 }
 
 
