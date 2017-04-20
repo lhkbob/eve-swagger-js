@@ -7,11 +7,14 @@ const Characters = require('./api/character/characters');
 const Agents = require('./api/universe/agents');
 const Bloodlines = require('./api/universe/bloodlines');
 const Constellations = require('./api/universe/constellations');
+const Dogma = require('./api/universe/dogma');
 const Factions = require('./api/universe/factions');
 const Freeports = require('./api/universe/freeports');
+const Graphics = require('./api/universe/graphics');
 const Industry = require('./api/universe/industry');
 const Insurance = require('./api/universe/insurance');
 const Moons = require('./api/universe/moons');
+const Opportunities = require('./api/universe/opportunities');
 const Planets = require('./api/universe/planets');
 const PlanetaryInteraction = require('./api/universe/planetary-interaction');
 const Races = require('./api/universe/races');
@@ -31,7 +34,7 @@ const Sovereignty = require('./api/sovereignty');
 const Wars = require('./api/wars');
 
 /**
- * API creates a shared, internal ApiProvider and then lazily instantiates all
+ * API creates a shared, internal ESIAgent and then lazily instantiates all
  * specific modules as needed. The API instance is also a function that can
  * be invoked to create a new API instance with a different configuration.
  *
@@ -76,12 +79,15 @@ class API extends CallableInstance {
     this._agent = null;
     this._blood = null;
     this._const = null;
+    this._dogma = null;
     this._faction = null;
     this._freeport = null;
+    this._graphics = null;
     this._gate = null;
     this._indy = null;
     this._insurance = null;
     this._moon = null;
+    this._opty = null;
     this._pi = null;
     this._planet = null;
     this._race = null;
@@ -101,7 +107,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Characters using a shared ApiProvider configured based on
+   * An instance of Characters using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Characters}
@@ -114,7 +120,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Agents using a shared ApiProvider configured based on
+   * An instance of Agents using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Agents}
@@ -127,7 +133,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Bloodlines using a shared ApiProvider configured based on
+   * An instance of Bloodlines using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Bloodlines}
@@ -140,7 +146,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Constellations using a shared ApiProvider configured based
+   * An instance of Constellations using a shared ESIAgent configured based
    * on the API's initialization options.
    *
    * @type {Constellations}
@@ -153,7 +159,20 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Factions using a shared ApiProvider configured based on
+   * An instance of Dogma using a shared ESIAgent configured based
+   * on the API's initialization options.
+   *
+   * @type {Dogma}
+   */
+  get dogma() {
+    if (!this._dogma) {
+      this._dogma = new Dogma(this._esiAgent);
+    }
+    return this._dogma;
+  }
+
+  /**
+   * An instance of Factions using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Factions}
@@ -166,7 +185,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Freeports using a shared ApiProvider configured based on
+   * An instance of Freeports using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Freeports}
@@ -179,7 +198,20 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Industry using a shared ApiProvider configured based on
+   * An instance of Graphics using a shared ESIAgent configured based on
+   * the API's initialization options.
+   *
+   * @type {Graphics}
+   */
+  get graphics() {
+    if (!this._graphics) {
+      this._graphics = new Graphics(this._esiAgent);
+    }
+    return this._graphics;
+  }
+
+  /**
+   * An instance of Industry using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Industry}
@@ -192,7 +224,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Insurance using a shared ApiProvider configured based on
+   * An instance of Insurance using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Insurance}
@@ -205,7 +237,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Moons using a shared ApiProvider configured based
+   * An instance of Moons using a shared ESIAgent configured based
    * on the API's initialization options.
    *
    * @type {Moons}
@@ -218,7 +250,20 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Planets using a shared ApiProvider configured based
+   * An instance of Opportunities using a shared ESIAgent configured based
+   * on the API's initialization options.
+   *
+   * @type {Opportunities}
+   */
+  get opportunities() {
+    if (!this._opty) {
+      this._opty = new Opportunities(this._esiAgent);
+    }
+    return this._opty;
+  }
+
+  /**
+   * An instance of Planets using a shared ESIAgent configured based
    * on the API's initialization options.
    *
    * @type {Planets}
@@ -231,7 +276,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of PlanetaryInteraction using a shared ApiProvider configured
+   * An instance of PlanetaryInteraction using a shared ESIAgent configured
    * based on the API's initialization options.
    *
    * @type {PlanetaryInteraction}
@@ -244,7 +289,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Races using a shared ApiProvider configured based on
+   * An instance of Races using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Races}
@@ -257,7 +302,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Regions using a shared ApiProvider configured based on
+   * An instance of Regions using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Regions}
@@ -270,7 +315,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of SolarSystems using a shared ApiProvider configured based on
+   * An instance of SolarSystems using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {SolarSystems}
@@ -283,7 +328,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Stargates using a shared ApiProvider configured based on
+   * An instance of Stargates using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Stargates}
@@ -296,7 +341,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Stations using a shared ApiProvider configured based on
+   * An instance of Stations using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Stations}
@@ -309,7 +354,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Types using a shared ApiProvider configured based on
+   * An instance of Types using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Types}
@@ -322,7 +367,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Wormholes using a shared ApiProvider configured based on
+   * An instance of Wormholes using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Wormholes}
@@ -335,7 +380,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Alliances using a shared ApiProvider configured based on
+   * An instance of Alliances using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Alliances}
@@ -348,7 +393,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Corporations using a shared ApiProvider configured based on
+   * An instance of Corporations using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Corporations}
@@ -361,7 +406,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Incursions using a shared ApiProvider configured based on
+   * An instance of Incursions using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Incursions}
@@ -374,7 +419,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Killmail using a shared ApiProvider configured based on
+   * An instance of Killmail using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Killmail}
@@ -387,7 +432,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Sovereignty using a shared ApiProvider configured based on
+   * An instance of Sovereignty using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Sovereignty}
@@ -400,7 +445,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Wars using a shared ApiProvider configured based on
+   * An instance of Wars using a shared ESIAgent configured based on
    * the API's initialization options.
    *
    * @type {Wars}
@@ -413,7 +458,7 @@ class API extends CallableInstance {
   }
 
   /**
-   * An instance of Search using a shared ApiProvider configured based on
+   * An instance of Search using a shared ESIAgent configured based on
    * the API's initialization options. This Search instance is configured to
    * use all categories and is not tied to a character.
    *
@@ -440,6 +485,16 @@ class API extends CallableInstance {
    */
   names(ids) {
     return _names(this._esiAgent, 'all', ids);
+  }
+
+  /**
+   * @esi_route get_status
+   * @esi_example esi.status()
+   *
+   * @returns {Promise.<Object>}
+   */
+  status() {
+    return this._esiAgent.noAuth.get('/v1/status/');
   }
 }
 

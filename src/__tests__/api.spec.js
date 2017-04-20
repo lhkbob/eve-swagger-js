@@ -9,6 +9,13 @@ afterEach(() => {
   agent.__reset();
 });
 
+test('API.status', () => {
+  agent.__expectRoute('get_status', {});
+  return api.status().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
 test('API.names', () => {
   agent.__expectRoute('post_universe_names', {'ids': [2]});
   return api.names([2]).then(result => {
