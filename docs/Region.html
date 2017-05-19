@@ -1,40 +1,78 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Region - Documentation</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Eve Swagger JS Class: Region</title>
 
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.lumen.css">
+
 </head>
+
 <body>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Eve Swagger JS</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="Agents.html">Agents</a></li><li><a href="Alliance.html">Alliance</a></li><li><a href="Alliances.html">Alliances</a></li><li><a href="API.html">API</a></li><li><a href="Attribute.html">Attribute</a></li><li><a href="Attributes.html">Attributes</a></li><li><a href="Autopilot.html">Autopilot</a></li><li><a href="Bloodlines.html">Bloodlines</a></li><li><a href="Bookmarks.html">Bookmarks</a></li><li><a href="Calendar.html">Calendar</a></li><li><a href="Categories.html">Categories</a></li><li><a href="Category.html">Category</a></li><li><a href="Character.html">Character</a></li><li><a href="CharacterCorporation.html">CharacterCorporation</a></li><li><a href="CharacterInfo.html">CharacterInfo</a></li><li><a href="Characters.html">Characters</a></li><li><a href="Colonies.html">Colonies</a></li><li><a href="Constellation.html">Constellation</a></li><li><a href="Constellations.html">Constellations</a></li><li><a href="Contact.html">Contact</a></li><li><a href="Contacts.html">Contacts</a></li><li><a href="Corporation.html">Corporation</a></li><li><a href="Corporations.html">Corporations</a></li><li><a href="Dogma.html">Dogma</a></li><li><a href="Effect.html">Effect</a></li><li><a href="Effects.html">Effects</a></li><li><a href="Event.html">Event</a></li><li><a href="Factions.html">Factions</a></li><li><a href="Fitting.html">Fitting</a></li><li><a href="Fittings.html">Fittings</a></li><li><a href="Fleet.html">Fleet</a></li><li><a href="Freeports.html">Freeports</a></li><li><a href="Graphic.html">Graphic</a></li><li><a href="Graphics.html">Graphics</a></li><li><a href="Group.html">Group</a></li><li><a href="Groups.html">Groups</a></li><li><a href="Incursions.html">Incursions</a></li><li><a href="Industry.html">Industry</a></li><li><a href="Insurance.html">Insurance</a></li><li><a href="Killmail.html">Killmail</a></li><li><a href="Label.html">Label</a></li><li><a href="Labels.html">Labels</a></li><li><a href="Mail.html">Mail</a></li><li><a href="MarketGroup.html">MarketGroup</a></li><li><a href="MarketGroups.html">MarketGroups</a></li><li><a href="Message.html">Message</a></li><li><a href="Moon.html">Moon</a></li><li><a href="Moons.html">Moons</a></li><li><a href="Opportunities.html">Opportunities</a></li><li><a href="OpportunityGroup.html">OpportunityGroup</a></li><li><a href="OpportunityGroups.html">OpportunityGroups</a></li><li><a href="OpportunityTask.html">OpportunityTask</a></li><li><a href="OpportunityTasks.html">OpportunityTasks</a></li><li><a href="Planet.html">Planet</a></li><li><a href="PlanetaryInteraction.html">PlanetaryInteraction</a></li><li><a href="Planets.html">Planets</a></li><li><a href="Races.html">Races</a></li><li><a href="Region.html">Region</a></li><li><a href="Regions.html">Regions</a></li><li><a href="Search.html">Search</a></li><li><a href="SolarSystem.html">SolarSystem</a></li><li><a href="SolarSystems.html">SolarSystems</a></li><li><a href="Sovereignty.html">Sovereignty</a></li><li><a href="Squad.html">Squad</a></li><li><a href="Squads.html">Squads</a></li><li><a href="Stargate.html">Stargate</a></li><li><a href="Stargates.html">Stargates</a></li><li><a href="Station.html">Station</a></li><li><a href="Stations.html">Stations</a></li><li><a href="Structure.html">Structure</a></li><li><a href="Structures.html">Structures</a></li><li><a href="Type.html">Type</a></li><li><a href="Types.html">Types</a></li><li><a href="War.html">War</a></li><li><a href="Wars.html">Wars</a></li><li><a href="Window.html">Window</a></li><li><a href="Wing.html">Wing</a></li><li><a href="Wings.html">Wings</a></li><li><a href="Wormholes.html">Wormholes</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
 
-<label for="nav-trigger" class="overlay"></label>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agents.html">Agents</a></li><li><a href="Alliance.html">Alliance</a><ul class='methods'><li data-type='method'><a href="Alliance.html#corporations">corporations</a></li><li data-type='method'><a href="Alliance.html#icon">icon</a></li><li data-type='method'><a href="Alliance.html#info">info</a></li></ul></li><li><a href="Alliances.html">Alliances</a><ul class='methods'><li data-type='method'><a href="Alliances.html#all">all</a></li><li data-type='method'><a href="Alliances.html#get">get</a></li><li data-type='method'><a href="Alliances.html#names">names</a></li></ul></li><li><a href="API.html">API</a><ul class='methods'><li data-type='method'><a href="API.html#names">names</a></li><li data-type='method'><a href="API.html#status">status</a></li></ul></li><li><a href="Attribute.html">Attribute</a><ul class='methods'><li data-type='method'><a href="Attribute.html#info">info</a></li></ul></li><li><a href="Attributes.html">Attributes</a><ul class='methods'><li data-type='method'><a href="Attributes.html#all">all</a></li><li data-type='method'><a href="Attributes.html#get">get</a></li></ul></li><li><a href="Autopilot.html">Autopilot</a><ul class='methods'><li data-type='method'><a href="Autopilot.html#append">append</a></li><li data-type='method'><a href="Autopilot.html#destination">destination</a></li><li data-type='method'><a href="Autopilot.html#prepend">prepend</a></li></ul></li><li><a href="Bloodlines.html">Bloodlines</a><ul class='methods'><li data-type='method'><a href="Bloodlines.html#all">all</a></li></ul></li><li><a href="Bookmarks.html">Bookmarks</a><ul class='methods'><li data-type='method'><a href="Bookmarks.html#all">all</a></li><li data-type='method'><a href="Bookmarks.html#folders">folders</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#event">event</a></li><li data-type='method'><a href="Calendar.html#recent">recent</a></li></ul></li><li><a href="Categories.html">Categories</a><ul class='methods'><li data-type='method'><a href="Categories.html#all">all</a></li><li data-type='method'><a href="Categories.html#get">get</a></li></ul></li><li><a href="Category.html">Category</a><ul class='methods'><li data-type='method'><a href="Category.html#info">info</a></li></ul></li><li><a href="Character.html">Character</a><ul class='methods'><li data-type='method'><a href="Character.html#agentResearch">agentResearch</a></li><li data-type='method'><a href="Character.html#assets">assets</a></li><li data-type='method'><a href="Character.html#chatChannels">chatChannels</a></li><li data-type='method'><a href="Character.html#clones">clones</a></li><li data-type='method'><a href="Character.html#fleet">fleet</a></li><li data-type='method'><a href="Character.html#killmails">killmails</a></li><li data-type='method'><a href="Character.html#kills">kills</a></li><li data-type='method'><a href="Character.html#location">location</a></li><li data-type='method'><a href="Character.html#loyaltyPoints">loyaltyPoints</a></li><li data-type='method'><a href="Character.html#medals">medals</a></li><li data-type='method'><a href="Character.html#opportunities">opportunities</a></li><li data-type='method'><a href="Character.html#recentKillmails">recentKillmails</a></li><li data-type='method'><a href="Character.html#recentKills">recentKills</a></li><li data-type='method'><a href="Character.html#ship">ship</a></li><li data-type='method'><a href="Character.html#skillqueue">skillqueue</a></li><li data-type='method'><a href="Character.html#skills">skills</a></li><li data-type='method'><a href="Character.html#standings">standings</a></li><li data-type='method'><a href="Character.html#wallets">wallets</a></li></ul></li><li><a href="CharacterCorporation.html">CharacterCorporation</a><ul class='methods'><li data-type='method'><a href="CharacterCorporation.html#history">history</a></li><li data-type='method'><a href="CharacterCorporation.html#icon">icon</a></li><li data-type='method'><a href="CharacterCorporation.html#id">id</a></li><li data-type='method'><a href="CharacterCorporation.html#info">info</a></li><li data-type='method'><a href="CharacterCorporation.html#loyaltyOffers">loyaltyOffers</a></li><li data-type='method'><a href="CharacterCorporation.html#members">members</a></li><li data-type='method'><a href="CharacterCorporation.html#roles">roles</a></li><li data-type='method'><a href="CharacterCorporation.html#structures">structures</a></li></ul></li><li><a href="CharacterInfo.html">CharacterInfo</a><ul class='methods'><li data-type='method'><a href="CharacterInfo.html#history">history</a></li><li data-type='method'><a href="CharacterInfo.html#info">info</a></li><li data-type='method'><a href="CharacterInfo.html#portrait">portrait</a></li></ul></li><li><a href="Characters.html">Characters</a><ul class='methods'><li data-type='method'><a href="Characters.html#affiliations">affiliations</a></li><li data-type='method'><a href="Characters.html#get">get</a></li><li data-type='method'><a href="Characters.html#names">names</a></li></ul></li><li><a href="Colonies.html">Colonies</a><ul class='methods'><li data-type='method'><a href="Colonies.html#all">all</a></li><li data-type='method'><a href="Colonies.html#layout">layout</a></li></ul></li><li><a href="Constellation.html">Constellation</a><ul class='methods'><li data-type='method'><a href="Constellation.html#info">info</a></li></ul></li><li><a href="Constellations.html">Constellations</a><ul class='methods'><li data-type='method'><a href="Constellations.html#all">all</a></li><li data-type='method'><a href="Constellations.html#get">get</a></li><li data-type='method'><a href="Constellations.html#names">names</a></li></ul></li><li><a href="Contact.html">Contact</a><ul class='methods'><li data-type='method'><a href="Contact.html#del">del</a></li><li data-type='method'><a href="Contact.html#update">update</a></li><li data-type='method'><a href="Contact.html#updateWatched">updateWatched</a></li></ul></li><li><a href="Contacts.html">Contacts</a><ul class='methods'><li data-type='method'><a href="Contacts.html#add">add</a></li><li data-type='method'><a href="Contacts.html#addWatched">addWatched</a></li><li data-type='method'><a href="Contacts.html#all">all</a></li><li data-type='method'><a href="Contacts.html#get">get</a></li><li data-type='method'><a href="Contacts.html#labels">labels</a></li></ul></li><li><a href="Corporation.html">Corporation</a><ul class='methods'><li data-type='method'><a href="Corporation.html#history">history</a></li><li data-type='method'><a href="Corporation.html#icon">icon</a></li><li data-type='method'><a href="Corporation.html#info">info</a></li><li data-type='method'><a href="Corporation.html#loyaltyOffers">loyaltyOffers</a></li></ul></li><li><a href="Corporations.html">Corporations</a><ul class='methods'><li data-type='method'><a href="Corporations.html#get">get</a></li><li data-type='method'><a href="Corporations.html#names">names</a></li><li data-type='method'><a href="Corporations.html#npc">npc</a></li></ul></li><li><a href="Dogma.html">Dogma</a></li><li><a href="Effect.html">Effect</a><ul class='methods'><li data-type='method'><a href="Effect.html#info">info</a></li></ul></li><li><a href="Effects.html">Effects</a><ul class='methods'><li data-type='method'><a href="Effects.html#all">all</a></li><li data-type='method'><a href="Effects.html#get">get</a></li></ul></li><li><a href="Event.html">Event</a><ul class='methods'><li data-type='method'><a href="Event.html#accept">accept</a></li><li data-type='method'><a href="Event.html#decline">decline</a></li><li data-type='method'><a href="Event.html#info">info</a></li><li data-type='method'><a href="Event.html#tentative">tentative</a></li></ul></li><li><a href="Factions.html">Factions</a><ul class='methods'><li data-type='method'><a href="Factions.html#all">all</a></li></ul></li><li><a href="Fitting.html">Fitting</a><ul class='methods'><li data-type='method'><a href="Fitting.html#del">del</a></li></ul></li><li><a href="Fittings.html">Fittings</a><ul class='methods'><li data-type='method'><a href="Fittings.html#add">add</a></li><li data-type='method'><a href="Fittings.html#all">all</a></li><li data-type='method'><a href="Fittings.html#get">get</a></li></ul></li><li><a href="Fleet.html">Fleet</a><ul class='methods'><li data-type='method'><a href="Fleet.html#info">info</a></li><li data-type='method'><a href="Fleet.html#invite">invite</a></li><li data-type='method'><a href="Fleet.html#kick">kick</a></li><li data-type='method'><a href="Fleet.html#members">members</a></li><li data-type='method'><a href="Fleet.html#move">move</a></li><li data-type='method'><a href="Fleet.html#update">update</a></li></ul></li><li><a href="Freeports.html">Freeports</a><ul class='methods'><li data-type='method'><a href="Freeports.html#all">all</a></li></ul></li><li><a href="Graphic.html">Graphic</a><ul class='methods'><li data-type='method'><a href="Graphic.html#info">info</a></li></ul></li><li><a href="Graphics.html">Graphics</a><ul class='methods'><li data-type='method'><a href="Graphics.html#all">all</a></li><li data-type='method'><a href="Graphics.html#get">get</a></li></ul></li><li><a href="Group.html">Group</a><ul class='methods'><li data-type='method'><a href="Group.html#info">info</a></li></ul></li><li><a href="Groups.html">Groups</a><ul class='methods'><li data-type='method'><a href="Groups.html#all">all</a></li><li data-type='method'><a href="Groups.html#get">get</a></li></ul></li><li><a href="Incursions.html">Incursions</a><ul class='methods'><li data-type='method'><a href="Incursions.html#all">all</a></li></ul></li><li><a href="Industry.html">Industry</a><ul class='methods'><li data-type='method'><a href="Industry.html#facilities">facilities</a></li><li data-type='method'><a href="Industry.html#systemCosts">systemCosts</a></li></ul></li><li><a href="Insurance.html">Insurance</a><ul class='methods'><li data-type='method'><a href="Insurance.html#prices">prices</a></li></ul></li><li><a href="Killmail.html">Killmail</a><ul class='methods'><li data-type='method'><a href="Killmail.html#get">get</a></li></ul></li><li><a href="Label.html">Label</a><ul class='methods'><li data-type='method'><a href="Label.html#del">del</a></li></ul></li><li><a href="Labels.html">Labels</a><ul class='methods'><li data-type='method'><a href="Labels.html#add">add</a></li><li data-type='method'><a href="Labels.html#all">all</a></li><li data-type='method'><a href="Labels.html#get">get</a></li></ul></li><li><a href="Mail.html">Mail</a><ul class='methods'><li data-type='method'><a href="Mail.html#all">all</a></li><li data-type='method'><a href="Mail.html#cspaCost">cspaCost</a></li><li data-type='method'><a href="Mail.html#get">get</a></li><li data-type='method'><a href="Mail.html#inbox">inbox</a></li><li data-type='method'><a href="Mail.html#lists">lists</a></li><li data-type='method'><a href="Mail.html#send">send</a></li><li data-type='method'><a href="Mail.html#unreadCount">unreadCount</a></li></ul></li><li><a href="MarketGroup.html">MarketGroup</a><ul class='methods'><li data-type='method'><a href="MarketGroup.html#info">info</a></li></ul></li><li><a href="MarketGroups.html">MarketGroups</a><ul class='methods'><li data-type='method'><a href="MarketGroups.html#all">all</a></li><li data-type='method'><a href="MarketGroups.html#get">get</a></li></ul></li><li><a href="Message.html">Message</a><ul class='methods'><li data-type='method'><a href="Message.html#del">del</a></li><li data-type='method'><a href="Message.html#info">info</a></li><li data-type='method'><a href="Message.html#update">update</a></li></ul></li><li><a href="Moon.html">Moon</a><ul class='methods'><li data-type='method'><a href="Moon.html#info">info</a></li></ul></li><li><a href="Moons.html">Moons</a><ul class='methods'><li data-type='method'><a href="Moons.html#get">get</a></li></ul></li><li><a href="Opportunities.html">Opportunities</a></li><li><a href="OpportunityGroup.html">OpportunityGroup</a><ul class='methods'><li data-type='method'><a href="OpportunityGroup.html#info">info</a></li></ul></li><li><a href="OpportunityGroups.html">OpportunityGroups</a><ul class='methods'><li data-type='method'><a href="OpportunityGroups.html#all">all</a></li><li data-type='method'><a href="OpportunityGroups.html#get">get</a></li></ul></li><li><a href="OpportunityTask.html">OpportunityTask</a><ul class='methods'><li data-type='method'><a href="OpportunityTask.html#info">info</a></li></ul></li><li><a href="OpportunityTasks.html">OpportunityTasks</a><ul class='methods'><li data-type='method'><a href="OpportunityTasks.html#all">all</a></li><li data-type='method'><a href="OpportunityTasks.html#get">get</a></li></ul></li><li><a href="Planet.html">Planet</a><ul class='methods'><li data-type='method'><a href="Planet.html#info">info</a></li></ul></li><li><a href="PlanetaryInteraction.html">PlanetaryInteraction</a><ul class='methods'><li data-type='method'><a href="PlanetaryInteraction.html#schematic">schematic</a></li></ul></li><li><a href="Planets.html">Planets</a><ul class='methods'><li data-type='method'><a href="Planets.html#get">get</a></li></ul></li><li><a href="Races.html">Races</a><ul class='methods'><li data-type='method'><a href="Races.html#all">all</a></li></ul></li><li><a href="Region.html">Region</a><ul class='methods'><li data-type='method'><a href="Region.html#buyOrdersFor">buyOrdersFor</a></li><li data-type='method'><a href="Region.html#history">history</a></li><li data-type='method'><a href="Region.html#info">info</a></li><li data-type='method'><a href="Region.html#orders">orders</a></li><li data-type='method'><a href="Region.html#ordersFor">ordersFor</a></li><li data-type='method'><a href="Region.html#sellOrdersFor">sellOrdersFor</a></li></ul></li><li><a href="Regions.html">Regions</a><ul class='methods'><li data-type='method'><a href="Regions.html#all">all</a></li><li data-type='method'><a href="Regions.html#get">get</a></li><li data-type='method'><a href="Regions.html#names">names</a></li></ul></li><li><a href="Search.html">Search</a><ul class='methods'><li data-type='method'><a href="Search.html#get">get</a></li><li data-type='method'><a href="Search.html#strict">strict</a></li></ul></li><li><a href="SolarSystem.html">SolarSystem</a><ul class='methods'><li data-type='method'><a href="SolarSystem.html#info">info</a></li><li data-type='method'><a href="SolarSystem.html#insecureRoute">insecureRoute</a></li><li data-type='method'><a href="SolarSystem.html#secureRoute">secureRoute</a></li><li data-type='method'><a href="SolarSystem.html#shortestRoute">shortestRoute</a></li></ul></li><li><a href="SolarSystems.html">SolarSystems</a><ul class='methods'><li data-type='method'><a href="SolarSystems.html#all">all</a></li><li data-type='method'><a href="SolarSystems.html#get">get</a></li><li data-type='method'><a href="SolarSystems.html#jumpStats">jumpStats</a></li><li data-type='method'><a href="SolarSystems.html#killStats">killStats</a></li><li data-type='method'><a href="SolarSystems.html#names">names</a></li></ul></li><li><a href="Sovereignty.html">Sovereignty</a><ul class='methods'><li data-type='method'><a href="Sovereignty.html#campaigns">campaigns</a></li><li data-type='method'><a href="Sovereignty.html#map">map</a></li><li data-type='method'><a href="Sovereignty.html#structures">structures</a></li></ul></li><li><a href="Squad.html">Squad</a><ul class='methods'><li data-type='method'><a href="Squad.html#del">del</a></li><li data-type='method'><a href="Squad.html#rename">rename</a></li></ul></li><li><a href="Squads.html">Squads</a><ul class='methods'><li data-type='method'><a href="Squads.html#add">add</a></li><li data-type='method'><a href="Squads.html#get">get</a></li></ul></li><li><a href="Stargate.html">Stargate</a><ul class='methods'><li data-type='method'><a href="Stargate.html#info">info</a></li></ul></li><li><a href="Stargates.html">Stargates</a><ul class='methods'><li data-type='method'><a href="Stargates.html#get">get</a></li></ul></li><li><a href="Station.html">Station</a><ul class='methods'><li data-type='method'><a href="Station.html#info">info</a></li></ul></li><li><a href="Stations.html">Stations</a><ul class='methods'><li data-type='method'><a href="Stations.html#get">get</a></li><li data-type='method'><a href="Stations.html#names">names</a></li></ul></li><li><a href="Structure.html">Structure</a><ul class='methods'><li data-type='method'><a href="Structure.html#buyOrdersFor">buyOrdersFor</a></li><li data-type='method'><a href="Structure.html#info">info</a></li><li data-type='method'><a href="Structure.html#orders">orders</a></li><li data-type='method'><a href="Structure.html#ordersFor">ordersFor</a></li><li data-type='method'><a href="Structure.html#sellOrdersFor">sellOrdersFor</a></li><li data-type='method'><a href="Structure.html#vulnerability">vulnerability</a></li></ul></li><li><a href="Structures.html">Structures</a><ul class='methods'><li data-type='method'><a href="Structures.html#get">get</a></li></ul></li><li><a href="Type.html">Type</a><ul class='methods'><li data-type='method'><a href="Type.html#info">info</a></li></ul></li><li><a href="Types.html">Types</a><ul class='methods'><li data-type='method'><a href="Types.html#all">all</a></li><li data-type='method'><a href="Types.html#get">get</a></li><li data-type='method'><a href="Types.html#names">names</a></li><li data-type='method'><a href="Types.html#prices">prices</a></li></ul></li><li><a href="War.html">War</a><ul class='methods'><li data-type='method'><a href="War.html#info">info</a></li><li data-type='method'><a href="War.html#killmails">killmails</a></li><li data-type='method'><a href="War.html#kills">kills</a></li></ul></li><li><a href="Wars.html">Wars</a><ul class='methods'><li data-type='method'><a href="Wars.html#get">get</a></li><li data-type='method'><a href="Wars.html#recent">recent</a></li></ul></li><li><a href="Window.html">Window</a><ul class='methods'><li data-type='method'><a href="Window.html#contract">contract</a></li><li data-type='method'><a href="Window.html#info">info</a></li><li data-type='method'><a href="Window.html#market">market</a></li><li data-type='method'><a href="Window.html#newMail">newMail</a></li></ul></li><li><a href="Wing.html">Wing</a><ul class='methods'><li data-type='method'><a href="Wing.html#del">del</a></li><li data-type='method'><a href="Wing.html#rename">rename</a></li></ul></li><li><a href="Wings.html">Wings</a><ul class='methods'><li data-type='method'><a href="Wings.html#add">add</a></li><li data-type='method'><a href="Wings.html#all">all</a></li><li data-type='method'><a href="Wings.html#get">get</a></li></ul></li><li><a href="Wormholes.html">Wormholes</a></li></ul><h3>Modules</h3><ul><li><a href="module-eve_swagger_interface.html">eve_swagger_interface</a></li></ul>
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">Region</h1>
-    
-
-    
+</div>
+</div>
 
 
+<div class="container" id="toc-content">
+<div class="row">
 
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
 
+	<h1 class="page-title">Class: Region</h1>
 <section>
 
 <header>
@@ -52,85 +90,36 @@ api instance.</p></div>
     
 </header>
 
+
 <article>
     <div class="container-overview">
     
         
+<hr>
+<dt>
+    <h4 class="name" id="Region"><span class="type-signature"></span>new Region(agent, regionId)</h4>
+    
+    
+</dt>
+<dd>
 
     
-    <h2>Constructor</h2>
-    
-
-    <h4 class="name" id="Region"><span class="type-signature"></span>new Region<span class="signature">(agent, regionId)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_regions.js.html">api/universe/regions.js</a>, <a href="api_universe_regions.js.html#line14">line 14</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Create a new Region for the given <code>agent</code> provider and specific
+    <div class="description">
+        <p>Create a new Region for the given <code>agent</code> provider and specific
 <code>regionId</code>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    </div>
     
 
-<table class="params">
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -161,6 +150,7 @@ api instance.</p></div>
 <span class="param-type">ESIAgent</span>
 
 
+
             
             </td>
 
@@ -184,6 +174,7 @@ api instance.</p></div>
 <span class="param-type">Number</span>
 
 
+
             
             </td>
 
@@ -198,20 +189,62 @@ api instance.</p></div>
     </tbody>
 </table>
 
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
+	
+
+	
+
+	
+
+	
+</dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
+    
+</dd>
 
     
     </div>
@@ -222,7 +255,7 @@ api instance.</p></div>
 
     
 
-     
+    
 
     
 
@@ -231,64 +264,19 @@ api instance.</p></div>
     
         <h3 class="subsection-title">Methods</h3>
 
-        
+        <dl>
             
+<hr>
+<dt>
+    <h4 class="name" id="buyOrdersFor"><span class="type-signature"></span>buyOrdersFor(typeId)</h4>
+    
+    
+</dt>
+<dd>
 
     
-
-    <h4 class="name" id="buyOrdersFor"><span class="type-signature"></span>buyOrdersFor<span class="signature">(typeId)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_regions.js.html">api/universe/regions.js</a>, <a href="api_universe_regions.js.html#line87">line 87</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Return a list of orders in a region.  This route is cached for up to 300 seconds. </p>
+    <div class="description">
+        <p>Return a list of orders in a region.  This route is cached for up to 300 seconds. </p>
 <p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>/markets/{region_id}/orders/</code></a>. The route version is <code>v1</code>. </p>
 <p>This function invokes the route with <code>order_type</code> set to <code>&quot;buy&quot;</code>.  </p>
 <p>On success, this resolves to a list of orders.  An example result is:</p>
@@ -307,22 +295,19 @@ api instance.</p></div>
     &quot;volume_total&quot;: 2000000
   }
 ]</code></pre>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    </div>
     
 
-<table class="params">
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -351,6 +336,7 @@ api instance.</p></div>
             
                 
 <span class="param-type">Number</span>
+
 
 
             
@@ -367,29 +353,69 @@ api instance.</p></div>
     </tbody>
 </table>
 
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
+	
+
+	
+
+	
+
+	
+</dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-<h5>Returns:</h5>
-
-        
+    
+    <h5>Returns:</h5>
+    
+            
 <div class="param-desc">
     <p>A Promise that resolves to the parsed JSON of the response.</p>
 </div>
 
 
 
-<dl class="param-type">
+<dl>
     <dt>
         Type
     </dt>
@@ -398,70 +424,29 @@ api instance.</p></div>
 <span class="param-type">Promise.&lt;Array.&lt;Object>></span>
 
 
+
     </dd>
 </dl>
 
-    
 
+        
+
+    
+</dd>
 
         
             
+<hr>
+<dt>
+    <h4 class="name" id="history"><span class="type-signature"></span>history(typeId)</h4>
+    
+    
+</dt>
+<dd>
 
     
-
-    <h4 class="name" id="history"><span class="type-signature"></span>history<span class="signature">(typeId)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_regions.js.html">api/universe/regions.js</a>, <a href="api_universe_regions.js.html#line47">line 47</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Return a list of historical market statistics for the specified type in a region.  This route is cached for up to 3600 seconds. </p>
+    <div class="description">
+        <p>Return a list of historical market statistics for the specified type in a region.  This route is cached for up to 3600 seconds. </p>
 <p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_history"><code>/markets/{region_id}/history/</code></a>. The route version is <code>v1</code>. </p>
 <p>On success, this resolves to a list of historical market statistics.  An example result is:</p>
 <pre class="prettyprint source"><code>[
@@ -474,22 +459,19 @@ api instance.</p></div>
     &quot;volume&quot;: 16276782035
   }
 ]</code></pre>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    </div>
     
 
-<table class="params">
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -520,6 +502,7 @@ api instance.</p></div>
 <span class="param-type">Number</span>
 
 
+
             
             </td>
 
@@ -534,29 +517,69 @@ api instance.</p></div>
     </tbody>
 </table>
 
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
+	
+
+	
+
+	
+
+	
+</dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-<h5>Returns:</h5>
-
-        
+    
+    <h5>Returns:</h5>
+    
+            
 <div class="param-desc">
     <p>A Promise that resolves to the parsed JSON of the response.</p>
 </div>
 
 
 
-<dl class="param-type">
+<dl>
     <dt>
         Type
     </dt>
@@ -565,70 +588,29 @@ api instance.</p></div>
 <span class="param-type">Promise.&lt;Array.&lt;Object>></span>
 
 
+
     </dd>
 </dl>
 
-    
 
+        
+
+    
+</dd>
 
         
             
+<hr>
+<dt>
+    <h4 class="name" id="info"><span class="type-signature"></span>info()</h4>
+    
+    
+</dt>
+<dd>
 
     
-
-    <h4 class="name" id="info"><span class="type-signature"></span>info<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_regions.js.html">api/universe/regions.js</a>, <a href="api_universe_regions.js.html#line35">line 35</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Get information on a region.  This route is cached for up to 3600 seconds. </p>
+    <div class="description">
+        <p>Get information on a region.  This route is cached for up to 3600 seconds. </p>
 <p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Universe/get_universe_regions_region_id"><code>/universe/regions/{region_id}/</code></a>. The route version is <code>v1</code>. </p>
 <p>On success, this resolves to information about a region.  An example result is:</p>
 <pre class="prettyprint source"><code>{
@@ -639,40 +621,77 @@ api instance.</p></div>
   &quot;name&quot;: &quot;Metropolis&quot;,
   &quot;region_id&quot;: 10000042
 }</code></pre>
-</div>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
+	
+
+	
+
+	
+
+	
+</dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
+    
+    <h5>Returns:</h5>
+    
+            
 <div class="param-desc">
     <p>A Promise that resolves to the parsed JSON of the response.</p>
 </div>
 
 
 
-<dl class="param-type">
+<dl>
     <dt>
         Type
     </dt>
@@ -681,70 +700,29 @@ api instance.</p></div>
 <span class="param-type">Promise.&lt;Object></span>
 
 
+
     </dd>
 </dl>
 
-    
 
+        
+
+    
+</dd>
 
         
             
+<hr>
+<dt>
+    <h4 class="name" id="orders"><span class="type-signature"></span>orders(page)</h4>
+    
+    
+</dt>
+<dd>
 
     
-
-    <h4 class="name" id="orders"><span class="type-signature"></span>orders<span class="signature">(page)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_regions.js.html">api/universe/regions.js</a>, <a href="api_universe_regions.js.html#line63">line 63</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Return a list of orders in a region.  This route is cached for up to 300 seconds. </p>
+    <div class="description">
+        <p>Return a list of orders in a region.  This route is cached for up to 300 seconds. </p>
 <p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>/markets/{region_id}/orders/</code></a>. The route version is <code>v1</code>. </p>
 <p>This function invokes the route with <code>order_type</code> set to <code>&quot;all&quot;</code>.  </p>
 <p>On success, this resolves to a list of orders.  An example result is:</p>
@@ -763,22 +741,19 @@ api instance.</p></div>
     &quot;volume_total&quot;: 2000000
   }
 ]</code></pre>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    </div>
     
 
-<table class="params">
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -811,6 +786,7 @@ api instance.</p></div>
 <span class="param-type">Number</span>
 
 
+
             
             </td>
 
@@ -819,7 +795,7 @@ api instance.</p></div>
             
                 <td class="default">
                 
-                    <code>0</code>
+                    0
                 
                 </td>
             
@@ -831,29 +807,69 @@ api instance.</p></div>
     </tbody>
 </table>
 
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
+	
+
+	
+
+	
+
+	
+</dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-<h5>Returns:</h5>
-
-        
+    
+    <h5>Returns:</h5>
+    
+            
 <div class="param-desc">
     <p>A Promise that resolves to the parsed JSON of the response.</p>
 </div>
 
 
 
-<dl class="param-type">
+<dl>
     <dt>
         Type
     </dt>
@@ -862,70 +878,29 @@ api instance.</p></div>
 <span class="param-type">Promise.&lt;Array.&lt;Object>></span>
 
 
+
     </dd>
 </dl>
 
-    
 
+        
+
+    
+</dd>
 
         
             
+<hr>
+<dt>
+    <h4 class="name" id="ordersFor"><span class="type-signature"></span>ordersFor(typeId)</h4>
+    
+    
+</dt>
+<dd>
 
     
-
-    <h4 class="name" id="ordersFor"><span class="type-signature"></span>ordersFor<span class="signature">(typeId)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_regions.js.html">api/universe/regions.js</a>, <a href="api_universe_regions.js.html#line127">line 127</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Return a list of orders in a region.  This route is cached for up to 300 seconds. </p>
+    <div class="description">
+        <p>Return a list of orders in a region.  This route is cached for up to 300 seconds. </p>
 <p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>/markets/{region_id}/orders/</code></a>. The route version is <code>v1</code>. </p>
 <p>This function invokes the route with <code>order_type</code> set to <code>&quot;all&quot;</code>.  </p>
 <p>On success, this resolves to a list of orders.  An example result is:</p>
@@ -944,22 +919,19 @@ api instance.</p></div>
     &quot;volume_total&quot;: 2000000
   }
 ]</code></pre>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    </div>
     
 
-<table class="params">
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -990,6 +962,7 @@ api instance.</p></div>
 <span class="param-type">Number</span>
 
 
+
             
             </td>
 
@@ -1004,29 +977,69 @@ api instance.</p></div>
     </tbody>
 </table>
 
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
+	
+
+	
+
+	
+
+	
+</dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-<h5>Returns:</h5>
-
-        
+    
+    <h5>Returns:</h5>
+    
+            
 <div class="param-desc">
     <p>A Promise that resolves to the parsed JSON of the response.</p>
 </div>
 
 
 
-<dl class="param-type">
+<dl>
     <dt>
         Type
     </dt>
@@ -1035,70 +1048,29 @@ api instance.</p></div>
 <span class="param-type">Promise.&lt;Array.&lt;Object>></span>
 
 
+
     </dd>
 </dl>
 
-    
 
+        
+
+    
+</dd>
 
         
             
+<hr>
+<dt>
+    <h4 class="name" id="sellOrdersFor"><span class="type-signature"></span>sellOrdersFor(typeId)</h4>
+    
+    
+</dt>
+<dd>
 
     
-
-    <h4 class="name" id="sellOrdersFor"><span class="type-signature"></span>sellOrdersFor<span class="signature">(typeId)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_universe_regions.js.html">api/universe/regions.js</a>, <a href="api_universe_regions.js.html#line107">line 107</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Return a list of orders in a region.  This route is cached for up to 300 seconds. </p>
+    <div class="description">
+        <p>Return a list of orders in a region.  This route is cached for up to 300 seconds. </p>
 <p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Market/get_markets_region_id_orders"><code>/markets/{region_id}/orders/</code></a>. The route version is <code>v1</code>. </p>
 <p>This function invokes the route with <code>order_type</code> set to <code>&quot;sell&quot;</code>.  </p>
 <p>On success, this resolves to a list of orders.  An example result is:</p>
@@ -1117,22 +1089,19 @@ api instance.</p></div>
     &quot;volume_total&quot;: 2000000
   }
 ]</code></pre>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    </div>
     
 
-<table class="params">
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -1163,6 +1132,7 @@ api instance.</p></div>
 <span class="param-type">Number</span>
 
 
+
             
             </td>
 
@@ -1177,29 +1147,69 @@ api instance.</p></div>
     </tbody>
 </table>
 
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
+	
+
+	
+
+	
+
+	
+</dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-<h5>Returns:</h5>
-
-        
+    
+    <h5>Returns:</h5>
+    
+            
 <div class="param-desc">
     <p>A Promise that resolves to the parsed JSON of the response.</p>
 </div>
 
 
 
-<dl class="param-type">
+<dl>
     <dt>
         Type
     </dt>
@@ -1208,13 +1218,17 @@ api instance.</p></div>
 <span class="param-type">Promise.&lt;Array.&lt;Object>></span>
 
 
+
     </dd>
 </dl>
 
-    
-
 
         
+
+    
+</dd>
+
+        </dl>
     
 
     
@@ -1227,15 +1241,130 @@ api instance.</p></div>
 
 
 
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
 </div>
 
-<br class="clear">
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
 </footer>
 
-<script>prettyPrint();</script>
-<script src="scripts/linenumber.js"></script>
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
 </body>
 </html>

@@ -479,6 +479,57 @@ class Character extends CharacterInfo {
     .get('/v1/characters/{character_id}/opportunities/',
         { path: { 'character_id': this._id } });
   }
+
+  /**
+   * @esi_route get_characters_character_id_orders
+   * @esi_example esi.characters(1, 'token').orders()
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  orders() {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/orders/',
+        { path: { 'character_id': this._id } });
+  }
+
+  /**
+   * @esi_route get_characters_character_id_blueprints
+   * @esi_example esi.characters(1, 'token').blueprints()
+   *
+   * @returns {Promise.<Array.<Object>>}
+   */
+  blueprints() {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/blueprints/',
+        { path: { 'character_id': this._id } });
+  }
+
+  /**
+   * @esi_route get_characters_character_id_roles
+   * @esi_example esi.characters(1, 'token').roles()
+   *
+   * @returns {Promise.<Array.<String>>}
+   */
+  roles() {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/roles/',
+        { path: { 'character_id': this._id } });
+  }
+
+  /**
+   * @esi_route get_characters_character_id_industry_jobs
+   * @esi_example esi.characters(1, 'token').industryJobs()
+   *
+   * @param includeCompleted
+   * @returns {Promise.<Array.<Object>>}
+   */
+  industryJobs(includeCompleted = false) {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/industry/jobs/', {
+      path: { 'character_id': this._id },
+      query: { 'include_completed': includeCompleted }
+    });
+  }
 }
 
 /**

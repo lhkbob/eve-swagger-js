@@ -23,22 +23,23 @@
     "plugins/markdown"
   ],
   "templates": {
-    "cleverLinks": false,
-    "monospaceLinks": true,
-    "useLongnameInNav": false,
-    "default": {
-      "includeDate": false
-    }
+    "systemName": "Eve Swagger JS",
+    "theme": "lumen",
+    "syntaxTheme": "default",
+    "navType": "inline",
+
+    "collapseSymbols": false,
+    "includeDate": false,
+    "inverseNav": true,
+    "linenums": true,
+    "search": true,
+    "sort": true
   },
   "opts": {
-    "template": "node_modules/docdash",
+    "template": "node_modules/ink-docstrap/template",
     "destination": "docs/",
     "encoding": "utf8",
     "private": false,
     "recurse": true
-  },
-  "docdash": {
-    "static": true,
-    "sort": true
   }
 }

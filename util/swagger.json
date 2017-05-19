@@ -4,7 +4,7 @@
   "info": {
     "description": "An OpenAPI for EVE Online",
     "title": "EVE Swagger Interface",
-    "version": "0.4.3.dev4"
+    "version": "0.4.6"
   },
   "paths": {
     "/alliances/": {
@@ -1568,6 +1568,288 @@
         "x-cached-seconds": 3600
       }
     },
+    "/characters/{character_id}/blueprints/": {
+      "get": {
+        "description": "Return a list of blueprints the character has\n\n---\n\nAlternate route: `/v1/characters/{character_id}/blueprints/`\n\nAlternate route: `/legacy/characters/{character_id}/blueprints/`\n\nAlternate route: `/dev/characters/{character_id}/blueprints/`\n\n\n---\n\nThis route is cached for up to 3600 seconds",
+        "operationId": "get_characters_character_id_blueprints",
+        "parameters": [
+          {
+            "description": "ID for a character",
+            "format": "int32",
+            "in": "path",
+            "name": "character_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "tranquility",
+            "description": "The server name you would like data from",
+            "enum": [
+              "tranquility",
+              "singularity"
+            ],
+            "in": "query",
+            "name": "datasource",
+            "type": "string"
+          },
+          {
+            "description": "Access token to use, if preferred over a header",
+            "in": "query",
+            "name": "token",
+            "type": "string"
+          },
+          {
+            "description": "Client identifier, takes precedence over headers",
+            "in": "query",
+            "name": "user_agent",
+            "type": "string"
+          },
+          {
+            "description": "Client identifier, takes precedence over User-Agent",
+            "in": "header",
+            "name": "X-User-Agent",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of blueprints",
+            "examples": {
+              "application/json": [
+                {
+                  "item_id": 1000000010495,
+                  "location_flag": "Hangar",
+                  "location_id": 60014719,
+                  "material_efficiency": 0,
+                  "quantity": 1,
+                  "runs": -1,
+                  "time_efficiency": 0,
+                  "type_id": 691
+                }
+              ]
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "The caching mechanism used",
+                "type": "string"
+              },
+              "Expires": {
+                "description": "RFC7231 formatted datetime string",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "RFC7231 formatted datetime string",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "description": "200 ok array",
+              "items": {
+                "description": "200 ok object",
+                "properties": {
+                  "item_id": {
+                    "description": "Unique ID for this item. The ID of an item is stable if that item is not repackaged, stacked, detached from a stack, assembled, or otherwise altered. If an item is changed in one of these ways, then the ID will also change (see notes below).",
+                    "format": "int64",
+                    "title": "get_characters_character_id_blueprints_item_id",
+                    "type": "integer"
+                  },
+                  "location_flag": {
+                    "description": "Indicates something about this item's storage location. The flag is used to differentiate between hangar divisions, drone bay, fitting location, and similar.",
+                    "enum": [
+                      "AutoFit",
+                      "Cargo",
+                      "CorpseBay",
+                      "DroneBay",
+                      "FleetHangar",
+                      "Deliveries",
+                      "HiddenModifiers",
+                      "Hangar",
+                      "HangarAll",
+                      "LoSlot0",
+                      "LoSlot1",
+                      "LoSlot2",
+                      "LoSlot3",
+                      "LoSlot4",
+                      "LoSlot5",
+                      "LoSlot6",
+                      "LoSlot7",
+                      "MedSlot0",
+                      "MedSlot1",
+                      "MedSlot2",
+                      "MedSlot3",
+                      "MedSlot4",
+                      "MedSlot5",
+                      "MedSlot6",
+                      "MedSlot7",
+                      "HiSlot0",
+                      "HiSlot1",
+                      "HiSlot2",
+                      "HiSlot3",
+                      "HiSlot4",
+                      "HiSlot5",
+                      "HiSlot6",
+                      "HiSlot7",
+                      "AssetSafety",
+                      "Locked",
+                      "Unlocked",
+                      "Implant",
+                      "QuafeBay",
+                      "RigSlot0",
+                      "RigSlot1",
+                      "RigSlot2",
+                      "RigSlot3",
+                      "RigSlot4",
+                      "RigSlot5",
+                      "RigSlot6",
+                      "RigSlot7",
+                      "ShipHangar",
+                      "SpecializedFuelBay",
+                      "SpecializedOreHold",
+                      "SpecializedGasHold",
+                      "SpecializedMineralHold",
+                      "SpecializedSalvageHold",
+                      "SpecializedShipHold",
+                      "SpecializedSmallShipHold",
+                      "SpecializedMediumShipHold",
+                      "SpecializedLargeShipHold",
+                      "SpecializedIndustrialShipHold",
+                      "SpecializedAmmoHold",
+                      "SpecializedCommandCenterHold",
+                      "SpecializedPlanetaryCommoditiesHold",
+                      "SpecializedMaterialBay",
+                      "SubSystemSlot0",
+                      "SubSystemSlot1",
+                      "SubSystemSlot2",
+                      "SubSystemSlot3",
+                      "SubSystemSlot4",
+                      "SubSystemSlot5",
+                      "SubSystemSlot6",
+                      "SubSystemSlot7",
+                      "FighterBay",
+                      "FighterTube0",
+                      "FighterTube1",
+                      "FighterTube2",
+                      "FighterTube3",
+                      "FighterTube4",
+                      "Module"
+                    ],
+                    "title": "get_characters_character_id_blueprints_location_flag",
+                    "type": "string"
+                  },
+                  "location_id": {
+                    "description": "References a solar system, station or itemID if this blueprint is located within a container. If an itemID the Character - AssetList API must be queried to find the container using the itemID, from which the correct location of the Blueprint can be derived.",
+                    "format": "int64",
+                    "title": "get_characters_character_id_blueprints_location_id",
+                    "type": "integer"
+                  },
+                  "material_efficiency": {
+                    "description": "Material Efficiency Level of the blueprint, can be any integer between 0 and 10.",
+                    "format": "int32",
+                    "title": "get_characters_character_id_blueprints_material_efficiency",
+                    "type": "integer"
+                  },
+                  "quantity": {
+                    "description": "Typically will be -1 or -2 designating a singleton item, where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (no activities performed on them yet).",
+                    "format": "int32",
+                    "title": "get_characters_character_id_blueprints_quantity",
+                    "type": "integer"
+                  },
+                  "runs": {
+                    "description": "Number of runs remaining if the blueprint is a copy, -1 if it is an original.",
+                    "format": "int32",
+                    "title": "get_characters_character_id_blueprints_runs",
+                    "type": "integer"
+                  },
+                  "time_efficiency": {
+                    "description": "Time Efficiency Level of the blueprint, can be any even integer between 0 and 20.",
+                    "format": "int32",
+                    "title": "get_characters_character_id_blueprints_time_efficiency",
+                    "type": "integer"
+                  },
+                  "type_id": {
+                    "description": "type_id integer",
+                    "format": "int32",
+                    "title": "get_characters_character_id_blueprints_type_id",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "item_id",
+                  "type_id",
+                  "location_id",
+                  "location_flag",
+                  "quantity",
+                  "time_efficiency",
+                  "material_efficiency",
+                  "runs"
+                ],
+                "title": "get_characters_character_id_blueprints_200_ok",
+                "type": "object"
+              },
+              "title": "get_characters_character_id_blueprints_ok",
+              "type": "array"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "examples": {
+              "application/json": {
+                "error": "Token is not valid for scope(s): esi-characters.read_blueprints.v1"
+              }
+            },
+            "schema": {
+              "description": "Forbidden",
+              "properties": {
+                "error": {
+                  "description": "Forbidden message",
+                  "title": "get_characters_character_id_blueprints_403_forbidden",
+                  "type": "string"
+                }
+              },
+              "title": "get_characters_character_id_blueprints_forbidden",
+              "type": "object"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "examples": {
+              "application/json": {
+                "error": "uncaught exception: IOError('out of memory')"
+              }
+            },
+            "schema": {
+              "description": "Internal server error",
+              "properties": {
+                "error": {
+                  "description": "Internal server error message",
+                  "title": "get_characters_character_id_blueprints_500_internal_server_error",
+                  "type": "string"
+                }
+              },
+              "title": "get_characters_character_id_blueprints_internal_server_error",
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "evesso": [
+              "esi-characters.read_blueprints.v1"
+            ]
+          }
+        ],
+        "summary": "Get blueprints",
+        "tags": [
+          "Character"
+        ],
+        "x-alternate-versions": [
+          "dev",
+          "legacy",
+          "v1"
+        ],
+        "x-cached-seconds": 3600
+      }
+    },
     "/characters/{character_id}/bookmarks/": {
       "get": {
         "description": "List your character's personal bookmarks\n\n---\n\nAlternate route: `/v1/characters/{character_id}/bookmarks/`\n\nAlternate route: `/legacy/characters/{character_id}/bookmarks/`\n\nAlternate route: `/dev/characters/{character_id}/bookmarks/`\n\n\n---\n\nThis route is cached for up to 3600 seconds",
@@ -2405,142 +2687,6 @@
           "v3"
         ],
         "x-cached-seconds": 5
-      },
-      "put": {
-        "description": "Set your response status to an event\n\n---\n\nAlternate route: `/v3/characters/{character_id}/calendar/{event_id}/`\n\nAlternate route: `/dev/characters/{character_id}/calendar/{event_id}/`\n",
-        "operationId": "put_characters_character_id_calendar_event_id",
-        "parameters": [
-          {
-            "description": "The character ID requesting the event",
-            "format": "int32",
-            "in": "path",
-            "name": "character_id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "default": "tranquility",
-            "description": "The server name you would like data from",
-            "enum": [
-              "tranquility",
-              "singularity"
-            ],
-            "in": "query",
-            "name": "datasource",
-            "type": "string"
-          },
-          {
-            "description": "The ID of the event requested",
-            "format": "int32",
-            "in": "path",
-            "name": "event_id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The response value to set, overriding current value.",
-            "in": "body",
-            "name": "response",
-            "required": true,
-            "schema": {
-              "description": "response schema",
-              "properties": {
-                "response": {
-                  "description": "response string",
-                  "enum": [
-                    "accepted",
-                    "declined",
-                    "tentative"
-                  ],
-                  "title": "put_characters_character_id_calendar_event_id_response",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "response"
-              ],
-              "title": "put_characters_character_id_calendar_event_id_response"
-            }
-          },
-          {
-            "description": "Access token to use, if preferred over a header",
-            "in": "query",
-            "name": "token",
-            "type": "string"
-          },
-          {
-            "description": "Client identifier, takes precedence over headers",
-            "in": "query",
-            "name": "user_agent",
-            "type": "string"
-          },
-          {
-            "description": "Client identifier, takes precedence over User-Agent",
-            "in": "header",
-            "name": "X-User-Agent",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Event updated"
-          },
-          "403": {
-            "description": "Forbidden",
-            "examples": {
-              "application/json": {
-                "error": "Token is not valid for scope(s): esi-calendar.respond_calendar_events.v1"
-              }
-            },
-            "schema": {
-              "description": "Forbidden",
-              "properties": {
-                "error": {
-                  "description": "Forbidden message",
-                  "title": "put_characters_character_id_calendar_event_id_403_forbidden",
-                  "type": "string"
-                }
-              },
-              "title": "put_characters_character_id_calendar_event_id_forbidden",
-              "type": "object"
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "examples": {
-              "application/json": {
-                "error": "uncaught exception: IOError('out of memory')"
-              }
-            },
-            "schema": {
-              "description": "Internal server error",
-              "properties": {
-                "error": {
-                  "description": "Internal server error message",
-                  "title": "put_characters_character_id_calendar_event_id_500_internal_server_error",
-                  "type": "string"
-                }
-              },
-              "title": "put_characters_character_id_calendar_event_id_internal_server_error",
-              "type": "object"
-            }
-          }
-        },
-        "security": [
-          {
-            "evesso": [
-              "esi-calendar.respond_calendar_events.v1"
-            ]
-          }
-        ],
-        "summary": "Respond to an event",
-        "tags": [
-          "Calendar"
-        ],
-        "x-alternate-versions": [
-          "dev",
-          "v3"
-        ]
       }
     },
     "/characters/{character_id}/chat_channels/": {
@@ -4435,7 +4581,7 @@
                 "description": {
                   "description": "description string",
                   "maxLength": 500,
-                  "minLength": 1,
+                  "minLength": 0,
                   "title": "post_characters_character_id_fittings_description",
                   "type": "string"
                 },
@@ -4715,6 +4861,323 @@
           "legacy",
           "v1"
         ]
+      }
+    },
+    "/characters/{character_id}/industry/jobs/": {
+      "get": {
+        "description": "List industry jobs placed by a character\n\n---\n\nAlternate route: `/v1/characters/{character_id}/industry/jobs/`\n\nAlternate route: `/legacy/characters/{character_id}/industry/jobs/`\n\nAlternate route: `/dev/characters/{character_id}/industry/jobs/`\n\n\n---\n\nThis route is cached for up to 300 seconds",
+        "operationId": "get_characters_character_id_industry_jobs",
+        "parameters": [
+          {
+            "description": "An EVE character ID",
+            "format": "int32",
+            "in": "path",
+            "name": "character_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "tranquility",
+            "description": "The server name you would like data from",
+            "enum": [
+              "tranquility",
+              "singularity"
+            ],
+            "in": "query",
+            "name": "datasource",
+            "type": "string"
+          },
+          {
+            "description": "Whether retrieve completed character industry jobs as well",
+            "in": "query",
+            "name": "include_completed",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "Access token to use, if preferred over a header",
+            "in": "query",
+            "name": "token",
+            "type": "string"
+          },
+          {
+            "description": "Client identifier, takes precedence over headers",
+            "in": "query",
+            "name": "user_agent",
+            "type": "string"
+          },
+          {
+            "description": "Client identifier, takes precedence over User-Agent",
+            "in": "header",
+            "name": "X-User-Agent",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Industry jobs placed by a character",
+            "examples": {
+              "application/json": [
+                {
+                  "activity_id": 1,
+                  "blueprint_id": 1015116533326,
+                  "blueprint_location_id": 60006382,
+                  "blueprint_type_id": 2047,
+                  "cost": 118.0,
+                  "duration": 548,
+                  "end_date": "2014-07-19T15:56:14Z",
+                  "facility_id": 60006382,
+                  "installer_id": 498338451,
+                  "job_id": 229136101,
+                  "licensed_runs": 200,
+                  "output_location_id": 60006382,
+                  "runs": 1,
+                  "start_date": "2014-07-19T15:47:06Z",
+                  "station_id": 60006382,
+                  "status": "active"
+                }
+              ]
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "The caching mechanism used",
+                "type": "string"
+              },
+              "Expires": {
+                "description": "RFC7231 formatted datetime string",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "RFC7231 formatted datetime string",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "description": "200 ok array",
+              "items": {
+                "description": "200 ok object",
+                "properties": {
+                  "activity_id": {
+                    "description": "Job activity ID",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_activity_id",
+                    "type": "integer"
+                  },
+                  "blueprint_id": {
+                    "description": "blueprint_id integer",
+                    "format": "int64",
+                    "title": "get_characters_character_id_industry_jobs_blueprint_id",
+                    "type": "integer"
+                  },
+                  "blueprint_location_id": {
+                    "description": "Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility",
+                    "format": "int64",
+                    "title": "get_characters_character_id_industry_jobs_blueprint_location_id",
+                    "type": "integer"
+                  },
+                  "blueprint_type_id": {
+                    "description": "blueprint_type_id integer",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_blueprint_type_id",
+                    "type": "integer"
+                  },
+                  "completed_character_id": {
+                    "description": "ID of the character which completed this job",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_completed_character_id",
+                    "type": "integer"
+                  },
+                  "completed_date": {
+                    "description": "Date and time when this job was completed",
+                    "format": "date-time",
+                    "title": "get_characters_character_id_industry_jobs_completed_date",
+                    "type": "string"
+                  },
+                  "cost": {
+                    "description": "The sume of job installation fee and industry facility tax",
+                    "format": "float",
+                    "title": "get_characters_character_id_industry_jobs_cost",
+                    "type": "number"
+                  },
+                  "duration": {
+                    "description": "Job duration in seconds",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_duration",
+                    "type": "integer"
+                  },
+                  "end_date": {
+                    "description": "Date and time when this job finished",
+                    "format": "date-time",
+                    "title": "get_characters_character_id_industry_jobs_end_date",
+                    "type": "string"
+                  },
+                  "facility_id": {
+                    "description": "ID of the facility where this job is running",
+                    "format": "int64",
+                    "title": "get_characters_character_id_industry_jobs_facility_id",
+                    "type": "integer"
+                  },
+                  "installer_id": {
+                    "description": "ID of the character which installed this job",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_installer_id",
+                    "type": "integer"
+                  },
+                  "job_id": {
+                    "description": "Unique job ID",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_job_id",
+                    "type": "integer"
+                  },
+                  "licensed_runs": {
+                    "description": "Number of runs blueprint is licensed for",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_licensed_runs",
+                    "type": "integer"
+                  },
+                  "output_location_id": {
+                    "description": "Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility",
+                    "format": "int64",
+                    "title": "get_characters_character_id_industry_jobs_output_location_id",
+                    "type": "integer"
+                  },
+                  "pause_date": {
+                    "description": "Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)",
+                    "format": "date-time",
+                    "title": "get_characters_character_id_industry_jobs_pause_date",
+                    "type": "string"
+                  },
+                  "probability": {
+                    "description": "Chance of success for invention",
+                    "format": "float",
+                    "title": "get_characters_character_id_industry_jobs_probability",
+                    "type": "number"
+                  },
+                  "product_type_id": {
+                    "description": "Type ID of product (manufactured, copied or invented)",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_product_type_id",
+                    "type": "integer"
+                  },
+                  "runs": {
+                    "description": "Number of runs for a manufacturing job, or number of copies to make for a blueprint copy",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_runs",
+                    "type": "integer"
+                  },
+                  "start_date": {
+                    "description": "Date and time when this job started",
+                    "format": "date-time",
+                    "title": "get_characters_character_id_industry_jobs_start_date",
+                    "type": "string"
+                  },
+                  "station_id": {
+                    "description": "ID of the station where industry facility is located",
+                    "format": "int64",
+                    "title": "get_characters_character_id_industry_jobs_station_id",
+                    "type": "integer"
+                  },
+                  "status": {
+                    "description": "status string",
+                    "enum": [
+                      "active",
+                      "paused",
+                      "ready",
+                      "delivered",
+                      "cancelled",
+                      "reverted"
+                    ],
+                    "title": "get_characters_character_id_industry_jobs_status",
+                    "type": "string"
+                  },
+                  "successful_runs": {
+                    "description": "Number of successful runs for this job. Equal to runs unless this is an invention job",
+                    "format": "int32",
+                    "title": "get_characters_character_id_industry_jobs_successful_runs",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "job_id",
+                  "installer_id",
+                  "facility_id",
+                  "station_id",
+                  "activity_id",
+                  "blueprint_id",
+                  "blueprint_type_id",
+                  "blueprint_location_id",
+                  "output_location_id",
+                  "runs",
+                  "status",
+                  "duration",
+                  "start_date",
+                  "end_date"
+                ],
+                "title": "get_characters_character_id_industry_jobs_200_ok",
+                "type": "object"
+              },
+              "title": "get_characters_character_id_industry_jobs_ok",
+              "type": "array"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "examples": {
+              "application/json": {
+                "error": "Token is not valid for scope(s): esi-industry.read_character_jobs.v1"
+              }
+            },
+            "schema": {
+              "description": "Forbidden",
+              "properties": {
+                "error": {
+                  "description": "Forbidden message",
+                  "title": "get_characters_character_id_industry_jobs_403_forbidden",
+                  "type": "string"
+                }
+              },
+              "title": "get_characters_character_id_industry_jobs_forbidden",
+              "type": "object"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "examples": {
+              "application/json": {
+                "error": "uncaught exception: IOError('out of memory')"
+              }
+            },
+            "schema": {
+              "description": "Internal server error",
+              "properties": {
+                "error": {
+                  "description": "Internal server error message",
+                  "title": "get_characters_character_id_industry_jobs_500_internal_server_error",
+                  "type": "string"
+                }
+              },
+              "title": "get_characters_character_id_industry_jobs_internal_server_error",
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "evesso": [
+              "esi-industry.read_character_jobs.v1"
+            ]
+          }
+        ],
+        "summary": "List character industry jobs",
+        "tags": [
+          "Industry"
+        ],
+        "x-alternate-versions": [
+          "dev",
+          "legacy",
+          "v1"
+        ],
+        "x-cached-seconds": 300
       }
     },
     "/characters/{character_id}/killmails/recent/": {
@@ -7241,6 +7704,293 @@
         "x-cached-seconds": 3600
       }
     },
+    "/characters/{character_id}/orders/": {
+      "get": {
+        "description": "List market orders placed by a character\n\n---\n\nAlternate route: `/v1/characters/{character_id}/orders/`\n\nAlternate route: `/legacy/characters/{character_id}/orders/`\n\nAlternate route: `/dev/characters/{character_id}/orders/`\n\n\n---\n\nThis route is cached for up to 3600 seconds",
+        "operationId": "get_characters_character_id_orders",
+        "parameters": [
+          {
+            "description": "An EVE character ID",
+            "format": "int32",
+            "in": "path",
+            "name": "character_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "tranquility",
+            "description": "The server name you would like data from",
+            "enum": [
+              "tranquility",
+              "singularity"
+            ],
+            "in": "query",
+            "name": "datasource",
+            "type": "string"
+          },
+          {
+            "description": "Access token to use, if preferred over a header",
+            "in": "query",
+            "name": "token",
+            "type": "string"
+          },
+          {
+            "description": "Client identifier, takes precedence over headers",
+            "in": "query",
+            "name": "user_agent",
+            "type": "string"
+          },
+          {
+            "description": "Client identifier, takes precedence over User-Agent",
+            "in": "header",
+            "name": "X-User-Agent",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Market orders placed by a character",
+            "examples": {
+              "application/json": [
+                {
+                  "account_id": 1000,
+                  "duration": 30,
+                  "escrow": 45.6,
+                  "is_buy_order": true,
+                  "is_corp": false,
+                  "issued": "2016-09-03T05:12:25Z",
+                  "location_id": 456,
+                  "min_volume": 1,
+                  "order_id": 123,
+                  "price": 33.3,
+                  "range": "station",
+                  "region_id": 123,
+                  "state": "open",
+                  "type_id": 456,
+                  "volume_remain": 4422,
+                  "volume_total": 123456
+                }
+              ]
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "The caching mechanism used",
+                "type": "string"
+              },
+              "Expires": {
+                "description": "RFC7231 formatted datetime string",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "RFC7231 formatted datetime string",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "description": "200 ok array",
+              "items": {
+                "description": "200 ok object",
+                "properties": {
+                  "account_id": {
+                    "description": "Wallet division for the buyer or seller of this order. Always 1000 for characters. Currently 1000 through 1006 for corporations",
+                    "format": "int32",
+                    "title": "get_characters_character_id_orders_account_id",
+                    "type": "integer"
+                  },
+                  "duration": {
+                    "description": "Numer of days for which order is valid (starting from the issued date). An order expires at time issued + duration",
+                    "format": "int32",
+                    "title": "get_characters_character_id_orders_duration",
+                    "type": "integer"
+                  },
+                  "escrow": {
+                    "description": "For buy orders, the amount of ISK in escrow",
+                    "format": "float",
+                    "title": "get_characters_character_id_orders_escrow",
+                    "type": "number"
+                  },
+                  "is_buy_order": {
+                    "description": "True for a bid (buy) order. False for an offer (sell) order",
+                    "title": "get_characters_character_id_orders_is_buy_order",
+                    "type": "boolean"
+                  },
+                  "is_corp": {
+                    "description": "is_corp boolean",
+                    "title": "get_characters_character_id_orders_is_corp",
+                    "type": "boolean"
+                  },
+                  "issued": {
+                    "description": "Date and time when this order was issued",
+                    "format": "date-time",
+                    "title": "get_characters_character_id_orders_issued",
+                    "type": "string"
+                  },
+                  "location_id": {
+                    "description": "ID of the location where order was placed",
+                    "format": "int64",
+                    "title": "get_characters_character_id_orders_location_id",
+                    "type": "integer"
+                  },
+                  "min_volume": {
+                    "description": "For bids (buy orders), the minimum quantity that will be accepted in a matching offer (sell order)",
+                    "format": "int32",
+                    "title": "get_characters_character_id_orders_min_volume",
+                    "type": "integer"
+                  },
+                  "order_id": {
+                    "description": "Unique order ID",
+                    "format": "int64",
+                    "title": "get_characters_character_id_orders_order_id",
+                    "type": "integer"
+                  },
+                  "price": {
+                    "description": "Cost per unit for this order",
+                    "format": "float",
+                    "title": "get_characters_character_id_orders_price",
+                    "type": "number"
+                  },
+                  "range": {
+                    "description": "Valid order range, numbers are ranges in jumps",
+                    "enum": [
+                      "station",
+                      "region",
+                      "solarsystem",
+                      "1",
+                      "2",
+                      "3",
+                      "4",
+                      "5",
+                      "10",
+                      "20",
+                      "30",
+                      "40"
+                    ],
+                    "title": "get_characters_character_id_orders_range",
+                    "type": "string"
+                  },
+                  "region_id": {
+                    "description": "ID of the region where order was placed",
+                    "format": "int32",
+                    "title": "get_characters_character_id_orders_region_id",
+                    "type": "integer"
+                  },
+                  "state": {
+                    "description": "Current order state",
+                    "enum": [
+                      "open",
+                      "closed",
+                      "expired",
+                      "cancelled",
+                      "pending",
+                      "character_deleted"
+                    ],
+                    "title": "get_characters_character_id_orders_state",
+                    "type": "string"
+                  },
+                  "type_id": {
+                    "description": "The type ID of the item transacted in this order",
+                    "format": "int32",
+                    "title": "get_characters_character_id_orders_type_id",
+                    "type": "integer"
+                  },
+                  "volume_remain": {
+                    "description": "Quantity of items still required or offered",
+                    "format": "int32",
+                    "title": "get_characters_character_id_orders_volume_remain",
+                    "type": "integer"
+                  },
+                  "volume_total": {
+                    "description": "Quantity of items required or offered at time order was placed",
+                    "format": "int32",
+                    "title": "get_characters_character_id_orders_volume_total",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "order_id",
+                  "type_id",
+                  "region_id",
+                  "location_id",
+                  "range",
+                  "is_buy_order",
+                  "price",
+                  "volume_total",
+                  "volume_remain",
+                  "issued",
+                  "state",
+                  "min_volume",
+                  "account_id",
+                  "duration",
+                  "is_corp",
+                  "escrow"
+                ],
+                "title": "get_characters_character_id_orders_200_ok",
+                "type": "object"
+              },
+              "title": "get_characters_character_id_orders_ok",
+              "type": "array"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "examples": {
+              "application/json": {
+                "error": "Token is not valid for scope(s): esi-markets.read_character_orders.v1"
+              }
+            },
+            "schema": {
+              "description": "Forbidden",
+              "properties": {
+                "error": {
+                  "description": "Forbidden message",
+                  "title": "get_characters_character_id_orders_403_forbidden",
+                  "type": "string"
+                }
+              },
+              "title": "get_characters_character_id_orders_forbidden",
+              "type": "object"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "examples": {
+              "application/json": {
+                "error": "uncaught exception: IOError('out of memory')"
+              }
+            },
+            "schema": {
+              "description": "Internal server error",
+              "properties": {
+                "error": {
+                  "description": "Internal server error message",
+                  "title": "get_characters_character_id_orders_500_internal_server_error",
+                  "type": "string"
+                }
+              },
+              "title": "get_characters_character_id_orders_internal_server_error",
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "evesso": [
+              "esi-markets.read_character_orders.v1"
+            ]
+          }
+        ],
+        "summary": "List orders from a character",
+        "tags": [
+          "Market"
+        ],
+        "x-alternate-versions": [
+          "dev",
+          "legacy",
+          "v1"
+        ],
+        "x-cached-seconds": 3600
+      }
+    },
     "/characters/{character_id}/planets/": {
       "get": {
         "description": "Returns a list of all planetary colonies owned by a character.\n\n---\n\nAlternate route: `/v1/characters/{character_id}/planets/`\n\nAlternate route: `/legacy/characters/{character_id}/planets/`\n\nAlternate route: `/dev/characters/{character_id}/planets/`\n\n\n---\n\nThis route is cached for up to 600 seconds",
@@ -8062,6 +8812,196 @@
         "x-alternate-versions": [
           "dev",
           "v2"
+        ],
+        "x-cached-seconds": 3600
+      }
+    },
+    "/characters/{character_id}/roles/": {
+      "get": {
+        "description": "Returns a character's corporation roles\n\n---\n\nAlternate route: `/v1/characters/{character_id}/roles/`\n\nAlternate route: `/legacy/characters/{character_id}/roles/`\n\nAlternate route: `/dev/characters/{character_id}/roles/`\n\n\n---\n\nThis route is cached for up to 3600 seconds",
+        "operationId": "get_characters_character_id_roles",
+        "parameters": [
+          {
+            "description": "A character ID",
+            "format": "int32",
+            "in": "path",
+            "name": "character_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "tranquility",
+            "description": "The server name you would like data from",
+            "enum": [
+              "tranquility",
+              "singularity"
+            ],
+            "in": "query",
+            "name": "datasource",
+            "type": "string"
+          },
+          {
+            "description": "Access token to use, if preferred over a header",
+            "in": "query",
+            "name": "token",
+            "type": "string"
+          },
+          {
+            "description": "Client identifier, takes precedence over headers",
+            "in": "query",
+            "name": "user_agent",
+            "type": "string"
+          },
+          {
+            "description": "Client identifier, takes precedence over User-Agent",
+            "in": "header",
+            "name": "X-User-Agent",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The character's roles in thier corporation",
+            "examples": {
+              "application/json": [
+                "Director",
+                "Station_Manager"
+              ]
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "The caching mechanism used",
+                "type": "string"
+              },
+              "Expires": {
+                "description": "RFC7231 formatted datetime string",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "RFC7231 formatted datetime string",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "description": "200 ok array",
+              "items": {
+                "description": "200 ok string",
+                "enum": [
+                  "Director",
+                  "Personnel_Manager",
+                  "Accountant",
+                  "Security_Officer",
+                  "Factory_Manager",
+                  "Station_Manager",
+                  "Auditor",
+                  "Hangar_Take_1",
+                  "Hangar_Take_2",
+                  "Hangar_Take_3",
+                  "Hangar_Take_4",
+                  "Hangar_Take_5",
+                  "Hangar_Take_6",
+                  "Hangar_Take_7",
+                  "Hangar_Query_1",
+                  "Hangar_Query_2",
+                  "Hangar_Query_3",
+                  "Hangar_Query_4",
+                  "Hangar_Query_5",
+                  "Hangar_Query_6",
+                  "Hangar_Query_7",
+                  "Account_Take_1",
+                  "Account_Take_2",
+                  "Account_Take_3",
+                  "Account_Take_4",
+                  "Account_Take_5",
+                  "Account_Take_6",
+                  "Account_Take_7",
+                  "Diplomat",
+                  "Config_Equipment",
+                  "Container_Take_1",
+                  "Container_Take_2",
+                  "Container_Take_3",
+                  "Container_Take_4",
+                  "Container_Take_5",
+                  "Container_Take_6",
+                  "Container_Take_7",
+                  "Rent_Office",
+                  "Rent_Factory_Facility",
+                  "Rent_Research_Facility",
+                  "Junior_Accountant",
+                  "Config_Starbase_Equipment",
+                  "Trader",
+                  "Communications_Officer",
+                  "Contract_Manager",
+                  "Starbase_Defense_Operator",
+                  "Starbase_Fuel_Technician",
+                  "Fitting_Manager",
+                  "Terrestrial_Combat_Officer",
+                  "Terrestrial_Logistics_Officer"
+                ],
+                "title": "get_characters_character_id_roles_200_ok",
+                "type": "string",
+                "uniqueItems": true
+              },
+              "title": "get_characters_character_id_roles_ok",
+              "type": "array"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "examples": {
+              "application/json": {
+                "error": "Token is not valid for scope(s): esi-characters.read_corporation_roles.v1"
+              }
+            },
+            "schema": {
+              "description": "Forbidden",
+              "properties": {
+                "error": {
+                  "description": "Forbidden message",
+                  "title": "get_characters_character_id_roles_403_forbidden",
+                  "type": "string"
+                }
+              },
+              "title": "get_characters_character_id_roles_forbidden",
+              "type": "object"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "examples": {
+              "application/json": {
+                "error": "uncaught exception: IOError('out of memory')"
+              }
+            },
+            "schema": {
+              "description": "Internal server error",
+              "properties": {
+                "error": {
+                  "description": "Internal server error message",
+                  "title": "get_characters_character_id_roles_500_internal_server_error",
+                  "type": "string"
+                }
+              },
+              "title": "get_characters_character_id_roles_internal_server_error",
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "evesso": [
+              "esi-characters.read_corporation_roles.v1"
+            ]
+          }
+        ],
+        "summary": "Get character corporation roles",
+        "tags": [
+          "Character"
+        ],
+        "x-alternate-versions": [
+          "dev",
+          "legacy",
+          "v1"
         ],
         "x-cached-seconds": 3600
       }
@@ -18113,7 +19053,7 @@
             "examples": {
               "application/json": {
                 "players": 12345,
-                "server_version": 1132976,
+                "server_version": "1132976",
                 "start_time": "2017-01-02T12:34:56Z"
               }
             },
@@ -20297,10 +21237,10 @@
               "description": "200 ok object",
               "properties": {
                 "category_id": {
-                  "description": "category_id number",
-                  "format": "float",
+                  "description": "category_id integer",
+                  "format": "int32",
                   "title": "get_universe_groups_group_id_category_id",
-                  "type": "number"
+                  "type": "integer"
                 },
                 "group_id": {
                   "description": "group_id integer",
@@ -23872,10 +24812,11 @@
         "esi-assets.read_assets.v1": "EVE SSO scope esi-assets.read_assets.v1",
         "esi-bookmarks.read_character_bookmarks.v1": "EVE SSO scope esi-bookmarks.read_character_bookmarks.v1",
         "esi-calendar.read_calendar_events.v1": "EVE SSO scope esi-calendar.read_calendar_events.v1",
-        "esi-calendar.respond_calendar_events.v1": "EVE SSO scope esi-calendar.respond_calendar_events.v1",
         "esi-characters.read_agents_research.v1": "EVE SSO scope esi-characters.read_agents_research.v1",
+        "esi-characters.read_blueprints.v1": "EVE SSO scope esi-characters.read_blueprints.v1",
         "esi-characters.read_chat_channels.v1": "EVE SSO scope esi-characters.read_chat_channels.v1",
         "esi-characters.read_contacts.v1": "EVE SSO scope esi-characters.read_contacts.v1",
+        "esi-characters.read_corporation_roles.v1": "EVE SSO scope esi-characters.read_corporation_roles.v1",
         "esi-characters.read_loyalty.v1": "EVE SSO scope esi-characters.read_loyalty.v1",
         "esi-characters.read_medals.v1": "EVE SSO scope esi-characters.read_medals.v1",
         "esi-characters.read_opportunities.v1": "EVE SSO scope esi-characters.read_opportunities.v1",
@@ -23889,12 +24830,14 @@
         "esi-fittings.write_fittings.v1": "EVE SSO scope esi-fittings.write_fittings.v1",
         "esi-fleets.read_fleet.v1": "EVE SSO scope esi-fleets.read_fleet.v1",
         "esi-fleets.write_fleet.v1": "EVE SSO scope esi-fleets.write_fleet.v1",
+        "esi-industry.read_character_jobs.v1": "EVE SSO scope esi-industry.read_character_jobs.v1",
         "esi-killmails.read_killmails.v1": "EVE SSO scope esi-killmails.read_killmails.v1",
         "esi-location.read_location.v1": "EVE SSO scope esi-location.read_location.v1",
         "esi-location.read_ship_type.v1": "EVE SSO scope esi-location.read_ship_type.v1",
         "esi-mail.organize_mail.v1": "EVE SSO scope esi-mail.organize_mail.v1",
         "esi-mail.read_mail.v1": "EVE SSO scope esi-mail.read_mail.v1",
         "esi-mail.send_mail.v1": "EVE SSO scope esi-mail.send_mail.v1",
+        "esi-markets.read_character_orders.v1": "EVE SSO scope esi-markets.read_character_orders.v1",
         "esi-markets.structure_markets.v1": "EVE SSO scope esi-markets.structure_markets.v1",
         "esi-planets.manage_planets.v1": "EVE SSO scope esi-planets.manage_planets.v1",
         "esi-search.search_structures.v1": "EVE SSO scope esi-search.search_structures.v1",

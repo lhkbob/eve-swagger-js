@@ -33,7 +33,7 @@ function expectKillsSinglePage(charId, maxKillId, token, mails) {
     agent.__expectRoute('get_killmails_killmail_id_killmail_hash', {
       'killmail_id': mails[i].killmail_id,
       'killmail_hash': mails[i].killmail_hash
-    }, { overrides: {'killmail_id': mails[i].killmail_id } });
+    }, { overrides: { 'killmail_id': mails[i].killmail_id } });
   }
 }
 
@@ -200,7 +200,7 @@ test('Character.skillqueue', () => {
 
 test('Character.agentResearch', () => {
   agent.__expectRoute('get_characters_character_id_agents_research',
-      {'character_id': 1}, {token: 'my_token'});
+      { 'character_id': 1 }, { token: 'my_token' });
   return api.characters(1, 'my_token').agentResearch().then(result => {
     expect(result).toBeDefined();
   });
@@ -208,7 +208,7 @@ test('Character.agentResearch', () => {
 
 test('Character.chatChannels', () => {
   agent.__expectRoute('get_characters_character_id_chat_channels',
-      {'character_id': 1}, {token: 'my_token'});
+      { 'character_id': 1 }, { token: 'my_token' });
   return api.characters(1, 'my_token').chatChannels().then(result => {
     expect(result).toBeDefined();
   });
@@ -216,7 +216,7 @@ test('Character.chatChannels', () => {
 
 test('Character.medals', () => {
   agent.__expectRoute('get_characters_character_id_medals',
-      {'character_id': 1}, {token: 'my_token'});
+      { 'character_id': 1 }, { token: 'my_token' });
   return api.characters(1, 'my_token').medals().then(result => {
     expect(result).toBeDefined();
   });
@@ -224,7 +224,7 @@ test('Character.medals', () => {
 
 test('Character.opportunities', () => {
   agent.__expectRoute('get_characters_character_id_opportunities',
-      {'character_id': 1}, {token: 'my_token'});
+      { 'character_id': 1 }, { token: 'my_token' });
   return api.characters(1, 'my_token').opportunities().then(result => {
     expect(result).toBeDefined();
   });
@@ -232,15 +232,54 @@ test('Character.opportunities', () => {
 
 test('Character.standings', () => {
   agent.__expectRoute('get_characters_character_id_standings',
-      {'character_id': 1}, {token: 'my_token'});
+      { 'character_id': 1 }, { token: 'my_token' });
   return api.characters(1, 'my_token').standings().then(result => {
     expect(result).toBeDefined();
   });
 });
 
+test('Character.blueprints', () => {
+  agent.__expectRoute('get_characters_character_id_blueprints',
+      { 'character_id': 1 }, { token: 'my_token' });
+  return api.characters(1, 'my_token').blueprints().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('Character.roles', () => {
+  agent.__expectRoute('get_characters_character_id_roles',
+      { 'character_id': 1 }, { token: 'my_token' });
+  return api.characters(1, 'my_token').roles().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('Character.industryJobs', () => {
+  agent.__expectRoute('get_characters_character_id_industry_jobs',
+      { 'character_id': 1, 'include_completed': false }, { token: 'my_token' });
+  return api.characters(1, 'my_token').industryJobs().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('Character.industryJobs completed', () => {
+  agent.__expectRoute('get_characters_character_id_industry_jobs',
+      { 'character_id': 1, 'include_completed': true }, { token: 'my_token' });
+  return api.characters(1, 'my_token').industryJobs(true).then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
+test('Character.orders', () => {
+  agent.__expectRoute('get_characters_character_id_orders',
+      { 'character_id': 1 }, { token: 'my_token' });
+  return api.characters(1, 'my_token').orders().then(result => {
+    expect(result).toBeDefined();
+  });
+});
+
 test('Characters.affiliation', () => {
-  agent.__expectRoute('post_characters_affiliation',
-      {'characters': [2]});
+  agent.__expectRoute('post_characters_affiliation', { 'characters': [2] });
   return api.characters.affiliations([2]).then(result => {
     expect(result).toBeDefined();
   });
