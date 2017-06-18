@@ -1,6 +1,6 @@
 {
   "name": "eve-swagger",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Promise-based, fluent API for EVE Online's ESI web interface",
   "license": "BSD-3-Clause",
   "author": "Michael Ludwig <lhkbob@gmail.com>",
@@ -10,6 +10,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
+    "prepack": "npm run gen-docs; npm run build; npm test",
     "build": "babel src -d lib --ignore **/*.spec.js,*/__tests__/*,*/__mocks__/*",
     "test": "jest",
     "gen-docs": "jsdoc --configure ./jsdoc.json"
