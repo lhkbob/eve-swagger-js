@@ -106,7 +106,7 @@ the legacy, latest, or dev aliases.</p>
 <ul>
 <li>Package name: eve-swagger</li>
 <li>Package version: 0.3.1</li>
-<li>ESI version: 0.4.6</li>
+<li>ESI version: 0.5.0</li>
 <li>Source: <a href="https://github.com/lhkbob/eve-swagger-js/">https://github.com/lhkbob/eve-swagger-js/</a></li>
 <li>Documentation: <a href="https://lhkbob.github.io/eve-swagger-js/">https://lhkbob.github.io/eve-swagger-js/</a></li>
 </ul>
@@ -155,24 +155,6 @@ call the linked function.</p>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>&mdash;</td>
-<td>&mdash;</td>
-<td><a href="Event.html#tentative"><code>Event.tentative()</code></a></td>
-<td><code>esi.characters(1, 'token').calendar(2).tentative()</code></td>
-</tr>
-<tr>
-<td>&mdash;</td>
-<td>&mdash;</td>
-<td><a href="Event.html#accept"><code>Event.accept()</code></a></td>
-<td><code>esi.characters(1, 'token').calendar(2).accept()</code></td>
-</tr>
-<tr>
-<td>&mdash;</td>
-<td>&mdash;</td>
-<td><a href="Event.html#decline"><code>Event.decline()</code></a></td>
-<td><code>esi.characters(1, 'token').calendar(2).decline()</code></td>
-</tr>
 <tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Alliance/get_alliances"><code>GET /alliances/</code></a></td>
 <td><code>v1</code></td>
@@ -264,6 +246,24 @@ call the linked function.</p>
 <td><code>esi.characters(1, 'token').calendar(2).info()</code></td>
 </tr>
 <tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id"><code>PUT /characters/{character_id}/calendar/{event_id}/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Event.html#decline"><code>Event.decline()</code></a></td>
+<td><code>esi.characters(1, 'token').calendar(2).decline()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id"><code>PUT /characters/{character_id}/calendar/{event_id}/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Event.html#accept"><code>Event.accept()</code></a></td>
+<td><code>esi.characters(1, 'token').calendar(2).accept()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Calendar/put_characters_character_id_calendar_event_id"><code>PUT /characters/{character_id}/calendar/{event_id}/</code></a></td>
+<td><code>v3</code></td>
+<td><a href="Event.html#tentative"><code>Event.tentative()</code></a></td>
+<td><code>esi.characters(1, 'token').calendar(2).tentative()</code></td>
+</tr>
+<tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Character/get_characters_character_id_chat_channels"><code>GET /characters/{character_id}/chat_channels/</code></a></td>
 <td><code>v1</code></td>
 <td><a href="Character.html#chatChannels"><code>Character.chatChannels()</code></a></td>
@@ -290,14 +290,14 @@ call the linked function.</p>
 <tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts"><code>POST /characters/{character_id}/contacts/</code></a></td>
 <td><code>v1</code></td>
-<td><a href="Contacts.html#addWatched"><code>Contacts.addWatched()</code></a></td>
-<td><code>esi.characters(1, 'token').contacts.addWatched({...})</code></td>
+<td><a href="Contacts.html#add"><code>Contacts.add()</code></a></td>
+<td><code>esi.characters(1, 'token').contacts.add({...})</code></td>
 </tr>
 <tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/post_characters_character_id_contacts"><code>POST /characters/{character_id}/contacts/</code></a></td>
 <td><code>v1</code></td>
-<td><a href="Contacts.html#add"><code>Contacts.add()</code></a></td>
-<td><code>esi.characters(1, 'token').contacts.add({...})</code></td>
+<td><a href="Contacts.html#addWatched"><code>Contacts.addWatched()</code></a></td>
+<td><code>esi.characters(1, 'token').contacts.addWatched({...})</code></td>
 </tr>
 <tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Contacts/put_characters_character_id_contacts"><code>PUT /characters/{character_id}/contacts/</code></a></td>
@@ -356,14 +356,14 @@ call the linked function.</p>
 <tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent"><code>GET /characters/{character_id}/killmails/recent/</code></a></td>
 <td><code>v1</code></td>
-<td><a href="Character.html#recentKills"><code>Character.recentKills()</code></a></td>
-<td><code>esi.characters(1, 'token').recentKills()</code></td>
+<td><a href="Character.html#recentKillmails"><code>Character.recentKillmails()</code></a></td>
+<td><code>esi.characters(1, 'token').recentKillmails()</code></td>
 </tr>
 <tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Killmails/get_characters_character_id_killmails_recent"><code>GET /characters/{character_id}/killmails/recent/</code></a></td>
 <td><code>v1</code></td>
-<td><a href="Character.html#recentKillmails"><code>Character.recentKillmails()</code></a></td>
-<td><code>esi.characters(1, 'token').recentKillmails()</code></td>
+<td><a href="Character.html#recentKills"><code>Character.recentKills()</code></a></td>
+<td><code>esi.characters(1, 'token').recentKills()</code></td>
 </tr>
 <tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_location"><code>GET /characters/{character_id}/location/</code></a></td>
@@ -442,6 +442,12 @@ call the linked function.</p>
 <td><code>v1</code></td>
 <td><a href="Character.html#medals"><code>Character.medals()</code></a></td>
 <td><code>esi.characters(1, 'token').medals()</code></td>
+</tr>
+<tr>
+<td><a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_online"><code>GET /characters/{character_id}/online/</code></a></td>
+<td><code>v1</code></td>
+<td><a href="Character.html#online"><code>Character.online()</code></a></td>
+<td><code>esi.characters(1, 'token').online()</code></td>
 </tr>
 <tr>
 <td><a href="https://esi.tech.ccp.is/latest/#!/Opportunities/get_characters_character_id_opportunities"><code>GET /characters/{character_id}/opportunities/</code></a></td>
@@ -1245,6 +1251,10 @@ is the responsibility of the app that wishes to use this library.
 <td>EVE SSO scope esi-calendar.read_calendar_events.v1</td>
 </tr>
 <tr>
+<td><code>esi-calendar.respond_calendar_events.v1</code></td>
+<td>EVE SSO scope esi-calendar.respond_calendar_events.v1</td>
+</tr>
+<tr>
 <td><code>esi-characters.read_agents_research.v1</code></td>
 <td>EVE SSO scope esi-characters.read_agents_research.v1</td>
 </tr>
@@ -1327,6 +1337,10 @@ is the responsibility of the app that wishes to use this library.
 <tr>
 <td><code>esi-location.read_location.v1</code></td>
 <td>EVE SSO scope esi-location.read_location.v1</td>
+</tr>
+<tr>
+<td><code>esi-location.read_online.v1</code></td>
+<td>EVE SSO scope esi-location.read_online.v1</td>
 </tr>
 <tr>
 <td><code>esi-location.read_ship_type.v1</code></td>

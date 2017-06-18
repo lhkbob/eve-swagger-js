@@ -509,7 +509,7 @@ given <code>messageId</code>.</p>
     <div class="description">
         <p>Update metadata about a mail. </p>
 <p>This makes an HTTP PUT request to <a href="https://esi.tech.ccp.is/latest/#!/Mail/put_characters_character_id_mail_mail_id"><code>/characters/{character_id}/mail/{mail_id}/</code></a>. The route version is <code>v1</code>. </p>
-<p>The route parameter, <code>contents</code>, is built implicitly by the function.  The function argument <code>labels</code> maps to the <code>labels</code> property of the <code>contents</code> route parameter.  The function argument <code>read</code> maps to the <code>read</code> property of the <code>contents</code> route parameter.  </p>
+<p>The route parameter, <code>contents</code>, is built implicitly by the function.  The function argument <code>labels</code> maps to the <code>labels</code> property of the <code>contents</code> route parameter. The array length of <code>labels</code> can be at most <code>25</code>.  The function argument <code>read</code> maps to the <code>read</code> property of the <code>contents</code> route parameter.  </p>
 <p>On success, this resolves to an empty object.</p>
 <p>This function must be used with an SSO token that has the following scopes: </p>
 <ul>
