@@ -19,8 +19,7 @@ test('Event.info', () => {
   });
 });
 
-// TODO remove skip once CCP fixes calendar event routes in ESI
-test.skip('Event.decline', () => {
+test('Event.decline', () => {
   agent.__expectRoute('put_characters_character_id_calendar_event_id', {
     'character_id': 1,
     'event_id': 2,
@@ -31,7 +30,7 @@ test.skip('Event.decline', () => {
   });
 });
 
-test.skip('Event.accept', () => {
+test('Event.accept', () => {
   agent.__expectRoute('put_characters_character_id_calendar_event_id', {
     'character_id': 1,
     'event_id': 2,
@@ -42,7 +41,7 @@ test.skip('Event.accept', () => {
   });
 });
 
-test.skip('Event.tentative', () => {
+test('Event.tentative', () => {
   agent.__expectRoute('put_characters_character_id_calendar_event_id', {
     'character_id': 1,
     'event_id': 2,
