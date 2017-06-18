@@ -2538,6 +2538,114 @@ of kills.</p>
             
 <hr>
 <dt>
+    <h4 class="name" id="online"><span class="type-signature"></span>online()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Checks if the character is currently online.  This route is cached for up to 60 seconds. </p>
+<p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Location/get_characters_character_id_online"><code>/characters/{character_id}/online/</code></a>. The route version is <code>v1</code>. </p>
+<p>On success, this resolves to boolean of if the character is currently online. </p>
+<p>This function must be used with an SSO token that has the following scopes: </p>
+<ul>
+<li><code>esi-location.read_online.v1</code></li>
+</ul>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>A Promise that resolves to the parsed JSON of the response.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Boolean></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
     <h4 class="name" id="opportunities"><span class="type-signature"></span>opportunities()</h4>
     
     

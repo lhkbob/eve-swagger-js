@@ -480,7 +480,7 @@ could have substantial amounts of mail.</p>
     <div class="description">
         <p>Takes a source character ID in the url and a set of target character ID's in the body, returns a CSPA charge cost. </p>
 <p>This makes an HTTP POST request to <a href="https://esi.tech.ccp.is/latest/#!/Character/post_characters_character_id_cspa"><code>/characters/{character_id}/cspa/</code></a>. The route version is <code>v3</code>. </p>
-<p>The route parameter, <code>characters</code>, is built implicitly by the function.  The function argument <code>toIds</code> maps to the <code>characters</code> property of the <code>characters</code> route parameter. The array length of <code>toIds</code> must be at least <code>1</code>.  </p>
+<p>The route parameter, <code>characters</code>, is built implicitly by the function.  The function argument <code>toIds</code> maps to the <code>characters</code> property of the <code>characters</code> route parameter. The array length of <code>toIds</code> must be between <code>1</code> and <code>100</code>.  </p>
 <p>On success, this resolves to aggregate cost of sending a mail from the source character to the target characters, in ISK hundredths.  Note that the type schema of the response is modified from what is defined in ESI. Specifically, it returns only the <code>cost</code> property.</p>
 <p>This function must be used with an SSO token that has the following scopes: </p>
 <ul>
@@ -781,7 +781,7 @@ could have substantial amounts of mail.</p>
     <div class="description">
         <p>Return the 50 most recent mail headers belonging to the character that match the query criteria. Queries can be filtered by label, and last_mail_id can be used to paginate backwards. This route is cached for up to 30 seconds. </p>
 <p>This makes an HTTP GET request to <a href="https://esi.tech.ccp.is/latest/#!/Mail/get_characters_character_id_mail"><code>/characters/{character_id}/mail/</code></a>. The route version is <code>v1</code>. </p>
-<p>The array length of <code>labelIds</code> must be at least <code>1</code>.  </p>
+<p>The array length of <code>labelIds</code> must be between <code>1</code> and <code>25</code>.  </p>
 <p>On success, this resolves to the requested mail.  An example result is:</p>
 <pre class="prettyprint source"><code>[
   {

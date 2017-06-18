@@ -385,6 +385,18 @@ class Character extends CharacterInfo {
   }
 
   /**
+   * @esi_route get_characters_character_id_online
+   * @esi_example esi.characters(1, 'token').online()
+   *
+   * @returns {Promise.<Boolean>}
+   */
+  online() {
+    return this._agent.auth(this._token)
+    .get('/v1/characters/{character_id}/online/',
+        { path: { 'character_id': this._id } });
+  }
+
+  /**
    * @esi_route get_characters_character_id_wallets
    * @esi_example esi.characters(1, 'token').wallets()
    *
