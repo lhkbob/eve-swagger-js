@@ -174,6 +174,14 @@ test('Character.location', () => {
   });
 });
 
+test('Character.online', () => {
+  agent.__expectRoute('get_characters_character_id_online',
+      { 'character_id': 1 }, { token: 'my_token' });
+  return api.characters(1, 'my_token').online().then(result => {
+    expect(result).toBeTruthy();
+  });
+});
+
 test('Character.wallets', () => {
   agent.__expectRoute('get_characters_character_id_wallets',
       { 'character_id': 1 }, { token: 'my_token' });
