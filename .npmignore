@@ -1,1 +1,17 @@
-# Empty .npmignore file so that we include lib/, which is ignored for git
+# Dev environment
+.idea/
+
+# Typescript source
+/src/
+/gen/
+/util/
+tsconfig.json
+tsconfig.*.json
+
+# Compiled utilities that are only used for building
+dist/util/
+
+# Documentation settings
+typedoc.js
+home.md
+jsdoc.json

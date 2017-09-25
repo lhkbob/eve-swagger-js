@@ -1,5 +1,11 @@
+# Node/npm
 node_modules/
 npm-debug.log
+
+# Dev environment
 .DS_Store
 .idea/
-lib/
+
+# Project structure
+dist/
+gen/
