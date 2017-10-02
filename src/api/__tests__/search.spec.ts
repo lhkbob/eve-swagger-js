@@ -1,7 +1,7 @@
 jest.mock('../../internal/esi-agent');
 
 import { esi } from '../../../gen/esi';
-import { API, makeAPI } from '../../api';
+import { API, makeAPI } from '../../index';
 import { ESIAgent } from '../../internal/esi-agent';
 import {
   Search,

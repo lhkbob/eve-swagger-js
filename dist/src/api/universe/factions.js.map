@@ -1,0 +1,1 @@
+{"version":3,"file":"factions.js","sourceRoot":"","sources":["../../../../src/api/universe/factions.ts"],"names":[],"mappings":";;AACA,kDAAkE;AA2BlE;;;;;;GAMG;AACH,sBAA6B,KAAe;IAC1C,IAAI,OAAO,GAAoB;QAC7B,MAAM,CAAC,KAAK,CAAC,OAAO,CAAC,uBAAuB,EAAE,SAAS,CAAC,CAAC;IAC3D,CAAC,CAAC;IACF,OAAO,CAAC,MAAM,GAAG,0BAAiB,CAAC,KAAK,0BAA6B,CAAC;IACtE,MAAM,CAAC,OAAO,CAAC;AACjB,CAAC;AAND,oCAMC"}

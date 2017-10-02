@@ -4,68 +4,10 @@ import { NAMESPACE_OVERRIDES, COLLAPSE_NAMESPACE } from './type-overrides';
 
 const pluralize = require('pluralize'); // No typings associated
 
-function propertyNameToTypeName(propertyName: string): string {
-  let prevWasUnderscore = true; // True to force capital at start of name
-  let typeName: string = '';
-  for (let i = 0; i < propertyName.length; i++) {
-    let currentChar = propertyName[i];
-    if (currentChar === '_' || currentChar === '-') {
-      // Must capitalize next letter and discard the _ symbol
-      prevWasUnderscore = true;
-    } else {
-      typeName += prevWasUnderscore ? currentChar.toUpperCase() : currentChar;
-      prevWasUnderscore = false;
-    }
-  }
-  return typeName;
-}
-
-function collectRoutes(spec: API,
-    root: ExportableType): Map<ExportableType, string[]> {
-  return root.collect((path, prior) => {
-    // Determine route based on path; first node is the root, second node is
-    // the route aggregator (encoded by its key).
-    if (path.length <= 1) {
-      return ['root'];
-    }
-
-    let routeID = path[1].key;
-    if (path[1].node.type !== 'route' || !spec.route(routeID)) {
-      // Skip this path, if the path eventually reaches another type
-      if (path.length > 2) {
-        return prior || [];
-      } else {
-        // The path ends on a non-route type that should be grouped with the root
-        return ['root'];
-      }
-    }
-
-    if (prior) {
-      // Include new route in the list if it's not already there
-      if (prior.indexOf(routeID) < 0) {
-        return prior.concat(routeID);
-      } else {
-        return prior;
-      }
-    } else {
-      // Initialize with just this route
-      return [routeID];
-    }
-  });
-}
-
-// Generate the names for all route ids in the specification
-function getRouteNamespaces(spec: API): Map<string, [Namespace, boolean]> {
-  let names = new Map();
-  for (let id of spec.routeIDs) {
-    names.set(id, Namespace.forRoute(spec.route(id)!));
-  }
-  return names;
-}
-
 export class Namespace {
   static readonly root: Namespace = new Namespace('');
 
+  log: string[];
   members: ExportableType[];
   private children_: Map<string, Namespace>;
   private parent_: Namespace | undefined;
@@ -73,6 +15,7 @@ export class Namespace {
 
   private constructor(readonly name: string, parent?: Namespace) {
     this.members = [];
+    this.log = [];
     this.children_ = new Map();
 
     if (parent) {
@@ -95,8 +38,10 @@ export class Namespace {
     return this.parent_;
   }
 
-  get children(): IterableIterator<Namespace> {
-    return this.children_.values();
+  get children(): Namespace[] {
+    let children = Array.from(this.children_.values());
+    children.sort((a, b) => a.name.localeCompare(b.name));
+    return children;
   }
 
   get fullName(): string {
@@ -130,6 +75,10 @@ export class Namespace {
 
   child(name: string): Namespace | undefined {
     return this.children_.get(name);
+  }
+
+  sortMembers(): void {
+    this.members.sort((a, b) => a.typeName.localeCompare(b.typeName));
   }
 
   ensure(name: string): Namespace {
@@ -189,12 +138,16 @@ export class Namespace {
     // the collection is being modified potentially)
     for (let name of Array.from(this.children_.keys())) {
       let c = this.child(name)!;
-      if (c.declarationCount < minTypes || COLLAPSE_NAMESPACE.indexOf(
-              c.fullName) >= 0) {
+      let decCountCheck = c.declarationCount < minTypes;
+      let explicitCheck = COLLAPSE_NAMESPACE.indexOf(c.fullName) >= 0;
+      if (decCountCheck || explicitCheck) {
         // Move members into this node and detach child
         this.members.push(...c.members);
         this.children_.delete(name);
         c.parent_ = undefined;
+
+        this.log.push(...c.log);
+        this.log.push(`Collapsed ${name} into ${this.fullName} (failed declaration limit = ${decCountCheck}, explicit = ${explicitCheck})`);
       }
     }
 
@@ -211,12 +164,17 @@ export class Namespace {
         }
       }
 
-      // All siblings can be collapsed
-      for (let c of this.children) {
-        this.members.push(...c.members);
-        c.parent_ = undefined;
+      if (this.children_.size > 0) {
+        // All siblings can be collapsed
+        for (let c of this.children) {
+          this.members.push(...c.members);
+          this.log.push(...c.log);
+          c.parent_ = undefined;
+        }
+        this.log.push(
+            `Collapsed all children into ${this.fullName} due to sibling limit.`);
+        this.children_.clear();
       }
-      this.children_.clear();
     }
   }
 
@@ -244,6 +202,10 @@ export class Namespace {
     if (tagName != 'Character' && route.id.indexOf('character_id') >= 0) {
       // Insert extra character namespace into it
       root = root.ensure('character');
+    }
+    if (tagName != 'Corporation' && route.id.indexOf('corporation_id') >= 0) {
+      // Same but for corporation
+      root = root.ensure('corporation');
     }
 
     let tag = root.ensure(tagName);
@@ -325,4 +287,66 @@ export class Namespace {
       finalNamespace[0].members.push(type);
     }
   }
+}
+
+function propertyNameToTypeName(propertyName: string): string {
+  let prevWasUnderscore = true; // True to force capital at start of name
+  let typeName: string = '';
+  for (let i = 0; i < propertyName.length; i++) {
+    let currentChar = propertyName[i];
+    if (currentChar === '_' || currentChar === '-') {
+      // Must capitalize next letter and discard the _ symbol
+      prevWasUnderscore = true;
+    } else {
+      typeName += prevWasUnderscore ? currentChar.toUpperCase() : currentChar;
+      prevWasUnderscore = false;
+    }
+  }
+  return typeName;
+}
+
+function collectRoutes(spec: API,
+    root: ExportableType): Map<ExportableType, string[]> {
+  return root.collect((path, prior) => {
+    // Determine route based on path; first node is the root, second node is
+    // the route aggregator (encoded by its key).
+    if (path.length <= 1) {
+      return ['root'];
+    }
+
+    let routeID = path[1].key;
+    if (path[1].node.type !== 'route' || !spec.route(routeID)) {
+      // Skip this path, if the path eventually reaches another type
+      if (path.length > 2) {
+        return prior || [];
+      } else {
+        // The path ends on a non-route type that should be grouped with the
+        // root
+        return ['root'];
+      }
+    }
+
+    if (prior) {
+      // Include new route in the list if it's not already there
+      if (prior.indexOf(routeID) < 0) {
+        return prior.concat(routeID);
+      } else {
+        return prior;
+      }
+    } else {
+      // Initialize with just this route
+      return [routeID];
+    }
+  });
+}
+
+// Generate the names for all route ids in the specification
+function getRouteNamespaces(spec: API): Map<string, [Namespace, boolean]> {
+  let names = new Map();
+  for (let id of spec.routeIDs) {
+    let [namespace, explicit] = Namespace.forRoute(spec.route(id)!);
+    namespace.log.push(`Route ${id} maps to ${namespace.fullName} (explicit = ${explicit})`);
+    names.set(id, [namespace, explicit]);
+  }
+  return names;
 }

@@ -4,196 +4,6 @@ import deepEquals = require('deep-equal');
 
 import * as esi from '../esi-api';
 
-// Parameters common to all ESI routes that are handled at a lower level by the
-// library that should not be included in the parameter specification for a
-// route
-const FILTER_PARAMS = [
-  'token', 'datasource', 'language', 'user_agent', 'X-User-Agent'
-];
-
-// The official swagger type spec makes it a little bit of a pain to work with
-// the wrappers around type definitions.
-function isSchema(blob: any): blob is swagger.Schema {
-  // A schema will have one of these
-  return blob.properties !== undefined || blob.enum !== undefined || blob.items
-      !== undefined || blob.type !== undefined;
-}
-
-function checkMemberCompatibility(a: ts.NodeArray<ts.TypeElement>,
-    b: ts.NodeArray<ts.TypeElement>): boolean {
-  if (a.length != b.length) {
-    return false;
-  }
-  // Since property sets are same size, if all of a's properties can be found
-  // in b, then the two sets are equal.
-  for (let i = 0; i < a.length; i++) {
-    let aProp: ts.PropertySignature = <ts.PropertySignature> a[i];
-    // Property can be in any order between the two
-    let correspondingFound = false;
-    for (let j = 0; j < b.length; j++) {
-      let bProp: ts.PropertySignature = <ts.PropertySignature> b[j];
-      if (deepEquals(aProp.name, bProp.name)) {
-        // Found the property of the same name, so make sure types are valid
-        // (and check question mark state)
-        if (!deepEquals(aProp.questionToken, bProp.questionToken)
-            || !checkTypeCompatibility(aProp.type, bProp.type)) {
-          return false;
-        }
-        correspondingFound = true;
-        break;
-      }
-    }
-
-    if (!correspondingFound) {
-      // Couldn't find a property in b that was defined in a
-      return false;
-    }
-  }
-  return true;
-}
-
-function checkTypeCompatibility(a?: ts.Node, b?: ts.Node): boolean {
-  // First look for types being undefined
-  if (!a && !b) {
-    return true; // Both undefined
-  } else if (!a || !b) {
-    return false; // One is undefined
-  }
-
-  // Otherwise both types defined, so check more carefully
-  if (ts.isArrayTypeNode(a) && ts.isArrayTypeNode(b)) {
-    // Array types are compatible if their element types are compatible
-    return checkTypeCompatibility(a.elementType, b.elementType);
-  } else if (ts.isEnumDeclaration(a) && ts.isEnumDeclaration(b)) {
-    // Enums are compatible if they have the same length and each corresponding
-    // element is equal between the two
-    if (a.members.length != b.members.length) {
-      return false;
-    }
-    for (let i = 0; i < a.members.length; i++) {
-      if (!deepEquals(a.members[i], b.members[i])) {
-        return false;
-      }
-    }
-    return true;
-  } else if (ts.isTypeLiteralNode(a) && ts.isTypeLiteralNode(b)) {
-    // Object types are compatible if each property is compatible, and they
-    // have the same property key set.
-    return checkMemberCompatibility(a.members, b.members);
-  } else if (ts.isInterfaceDeclaration(a) && ts.isInterfaceDeclaration(b)) {
-    // Interfaces are compatible in the same way type literals are
-    return checkMemberCompatibility(a.members, b.members);
-  } else if (ts.isUnionTypeNode(a) && ts.isUnionTypeNode(b)) {
-    // Make sure the sets are the same, order doesn't matter
-    if (a.types.length != b.types.length) {
-      return false;
-    }
-    for (let i = 0; i < a.types.length; i++) {
-      let matchFound = false;
-      for (let j = 0; j < b.types.length; j++) {
-        if (checkTypeCompatibility(a.types[i], b.types[j])) {
-          matchFound = true;
-          break;
-        }
-      }
-
-      if (!matchFound) {
-        return false;
-      }
-    }
-
-    return true;
-  } else {
-    // Either a very primitive type or an a type that hasn't been special cased
-    // yet, so rely on deepEquals
-    return deepEquals(a, b);
-  }
-}
-
-function camelCaseToEnumName(camelCase: string): string {
-  if (+camelCase) {
-    // The string is actually just digits, in which case it won't produce a
-    // valid name either.
-    return 'V_' + camelCase;
-  }
-  if (camelCase[0] === '#') {
-    // Heuristic for a hexcode color
-    return 'C_' + camelCase.substring(1).toUpperCase();
-  }
-
-  let prevWasUpperOrDigit: boolean = false;
-  let enumName: string = '';
-  for (let i = 0; i < camelCase.length; i++) {
-    let currentChar = camelCase[i];
-    let toUpper = currentChar.toUpperCase();
-
-    if (currentChar === toUpper) {
-      // Potentially at a word boundary so add an underscore (unless the
-      // character is already an underscore in which case just rely on it to
-      // form the word separation automatically).
-      if (i > 0 && !prevWasUpperOrDigit && currentChar !== '_') {
-        // Add an underscore
-        enumName += '_';
-      }
-      prevWasUpperOrDigit = true;
-
-      // Exclude hyphens since they generate bad names
-      if (toUpper !== '-') {
-        enumName += toUpper;
-      }
-    } else {
-      // Just include the upper-case version of the character
-      prevWasUpperOrDigit = false;
-      enumName += toUpper;
-    }
-  }
-
-  return enumName;
-}
-
-function isValidDescription(description: string): boolean {
-  return description.toLowerCase() !== description && description.split(
-          ' ').length > 2;
-}
-
-function addJSDoc(node: ts.Node, description: string): ts.Node {
-  let comment = '*\n';
-  for (let line of description.split('\n')) {
-    comment += ' * ' + line + '\n';
-  }
-  comment += ' ';
-  return ts.addSyntheticLeadingComment(node,
-      ts.SyntaxKind.MultiLineCommentTrivia, comment, true);
-}
-
-function toMarkdownList(description: string): string {
-  // If the description contains a list pattern formed by ' - ', it splits it
-  // and moves each to its own line. Text preceeding first ' - ' is included
-  // but not as a list element. It is assumed that there is no closing, non-list
-  // text that should not be on its own line.
-  let listStart = description.indexOf('- ');
-  if (listStart >= 0) {
-    let preList = description.substring(0, listStart);
-    let list = description.substring(listStart).split('- ');
-
-    description = preList + '\n\n';
-    for (let e of list) {
-      e = e.trim();
-      if (e !== '') {
-        // Force punctuation
-        if (e[e.length - 1] !== '.' && e[e.length - 1] !== '?' && e[e.length
-            - 1] !== '!') {
-          e += '.';
-        }
-        description += '- ' + e + '\n';
-      }
-    }
-  }
-
-  return description;
-}
-
-export const value = { hello: 'world' };
 
 /**
  * The visit callback is called *after* all of the node's children have
@@ -224,12 +34,14 @@ export const value = { hello: 'world' };
 export type TypeVisitor<T> = (path: { node: ExportableType, key: string }[],
     priorVisitResult: T | undefined, childResults: Map<ExportableType, T>) => T;
 
-// A swagger defined type that should be exported into some namespace.
-// It may also be an inlined type that none-the-less depends on types that
-// were exported.
-//
-// This tracks what other exportable types it depends on, what uses itself,
-// and what its possible names could be.
+/**
+ *  A swagger defined type that should be exported into some namespace.
+ * It may also be an inlined type that none-the-less depends on types that
+ * were exported.
+ *
+ * This tracks what other exportable types it depends on, what uses itself,
+ * and what its possible names could be.
+ */
 export class ExportableType {
   readonly titles: string[];
 
@@ -248,7 +60,8 @@ export class ExportableType {
   private dependents_: { key: string, parent: ExportableType }[];
 
   // Will include any namespace structure as well
-  private typeName?: string;
+  private typeName_?: string;
+  private explicitTypeName_: boolean;
   private descriptions: Set<string>;
   private memberDescriptions: Map<string, Set<string>>;
 
@@ -260,10 +73,11 @@ export class ExportableType {
     this.titles = [title];
     this.descriptions = new Set();
     this.memberDescriptions = new Map();
+    this.explicitTypeName_ = false;
 
     if (typeof type !== 'string') {
       if (ts.isInterfaceDeclaration(type) || ts.isEnumDeclaration(type)) {
-        this.typeName = type.name.text;
+        this.typeName_ = type.name.text;
       }
     }
   }
@@ -301,15 +115,32 @@ export class ExportableType {
     return this.dependencies_.values();
   }
 
+  get dependents(): IterableIterator<{ key: string, parent: ExportableType }> {
+    // Array.prototype.values() is not implemented in V8 because it breaks a
+    // crappy Microsoft product when used in Chrome, but that means node.js
+    // also doesn't provide it...
+    // - So, wrap it and call Set.values to get an iterator
+    return new Set(this.dependents_).values();
+  }
+
+  get typeName(): string {
+    return this.typeName_ || '';
+  }
+
+  get isTypeNameExplicitlySet(): boolean {
+    return this.explicitTypeName_;
+  }
+
   dependency(memberName: string): ExportableType | undefined {
     return this.dependencies_.get(memberName);
   }
 
-  renameType(newName: string): void {
+  renameType(newName: string, explicit: boolean = false): void {
     if (!this.hasDeclaration) {
       throw new Error('Type is not declared, has no name');
     }
-    this.typeName = newName;
+    this.typeName_ = newName;
+    this.explicitTypeName_ = explicit;
 
     // Since it has a declaration, assert its type and rename the declaration
     let decl = <ts.DeclarationStatement> this.type;
@@ -372,7 +203,7 @@ export class ExportableType {
       return this.type as ts.TypeNode;
     } else {
       // Is a declaration, so return a reference by type name
-      return ts.createTypeReferenceNode(this.typeName!, undefined);
+      return ts.createTypeReferenceNode(this.typeName, undefined);
     }
   }
 
@@ -814,10 +645,8 @@ export class ExportableType {
 
     // Get type node for each property, then build a PropertySignature for it
     // based on the name and if it's required or not
-    let members = [];
+    let members: { sig: ts.PropertySignature, name: string, desc: string }[] = [];
     let dependencies: Map<string, ExportableType> = new Map();
-    let explicitMemberDesc = [];
-    let memberNames = [];
 
     for (let name of Object.keys(schema.properties)) {
       let prop = schema.properties[name];
@@ -844,26 +673,29 @@ export class ExportableType {
       let signature = ts.createPropertySignature(undefined, name, questionToken,
           tsType, undefined);
 
-      explicitMemberDesc.push(prop.description || '');
-      members.push(signature);
-      memberNames.push(name);
+      members.push(
+          { sig: signature, name: name, desc: prop.description || '' });
     }
+
+    // Sort members by their name
+    members.sort((a, b) => a.name.localeCompare(b.name));
+    let memberSigs = members.map(m => m.sig);
 
     // If any children were exports or it's top level, return a properly linked
     // export. Otherwise return the type literal directly.
     if (isTopLevel || dependencies.size > 0) {
       let complexType;
       if (isTopLevel) {
-        complexType = ExportableType.createInterfaceType(title, members,
+        complexType = ExportableType.createInterfaceType(title, memberSigs,
             dependencies);
       } else {
-        complexType = ExportableType.createTypeLiteral(title, members,
+        complexType = ExportableType.createTypeLiteral(title, memberSigs,
             dependencies);
       }
 
       // Add explicit member descriptions for members
-      for (let i = 0; i < memberNames.length; i++) {
-        complexType.addDescription(explicitMemberDesc[i], memberNames[i]);
+      for (let i = 0; i < members.length; i++) {
+        complexType.addDescription(members[i].desc, members[i].name);
       }
 
       complexType.addDescription(schema);
@@ -872,12 +704,12 @@ export class ExportableType {
       // Add all descriptions to members, since there is no description merging
       // to be performed by ExportableType.
       for (let i = 0; i < members.length; i++) {
-        let desc = esi.API.createDescription(explicitMemberDesc[i]);
+        let desc = esi.API.createDescription(members[i].desc);
         if (isValidDescription(desc)) {
-          addJSDoc(members[i], desc);
+          addJSDoc(members[i].sig, desc);
         }
       }
-      return ts.createTypeLiteralNode(members);
+      return ts.createTypeLiteralNode(memberSigs);
     }
   }
 
@@ -954,9 +786,9 @@ export class ExportableType {
     // parameters that the agent manages on its own, and separate them into
     // their sources.
     let queryParams = new Map();
-    let queryParamSigs :ts.PropertySignature[] = [];
+    let queryParamSigs: ts.PropertySignature[] = [];
     let pathParams = new Map();
-    let pathParamSigs :ts.PropertySignature[] = [];
+    let pathParamSigs: ts.PropertySignature[] = [];
     let bodyParam;
     let bodyQuestionToken;
     for (let param of route.parameterNames) {
@@ -1037,24 +869,28 @@ export class ExportableType {
   private static createParameterTypeAggregate(spec: esi.API,
       root: ExportableType): ExportableType {
     let memberTypes = new Map();
-    let members = [];
+    let members: { route: esi.Route, sig: ts.PropertySignature }[] = [];
 
     for (let route of spec.routeIDs) {
       let paramType = ExportableType.createParameterType(spec.route(route)!,
           root);
+      let sig;
       if (paramType) {
         memberTypes.set(route, paramType);
-        members.push(ts.createPropertySignature(undefined, route, undefined,
-            paramType.createReferenceType(), undefined));
+        sig = ts.createPropertySignature(undefined, route, undefined,
+            paramType.createReferenceType(), undefined);
       } else {
-        members.push(ts.createPropertySignature(undefined, route, undefined,
+        sig = ts.createPropertySignature(undefined, route, undefined,
             ts.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
-            undefined));
+            undefined);
       }
+      members.push({ sig: sig, route: spec.route(route)! });
     }
 
-    let params = ExportableType.createInterfaceType('Parameters', members,
-        memberTypes);
+    members.sort(sortByRoute);
+
+    let params = ExportableType.createInterfaceType('Parameters',
+        members.map(m => m.sig), memberTypes);
     params.addDescription(
         'A special-purpose interface that provides keys mapping from route ID to a structure describing the parameters for the route.  This is not intended to be instantiated, but as a tool with TypeScript\'s `keyof` features to support type checking on generic request functions');
     for (let id of spec.routeIDs) {
@@ -1073,7 +909,7 @@ export class ExportableType {
   private static createResponseTypeAggregate(spec: esi.API,
       root: ExportableType): ExportableType {
     let memberTypes = new Map();
-    let members = [];
+    let members: { route: esi.Route, sig: ts.PropertySignature }[] = [];
 
     for (let route of spec.routeIDs) {
       let routeAggregate = root.dependency(route);
@@ -1091,11 +927,13 @@ export class ExportableType {
           responseType.createReferenceType(), undefined);
 
       memberTypes.set(route, responseType);
-      members.push(sig);
+      members.push({ sig: sig, route: spec.route(route)! });
     }
 
-    let rawResponses = ExportableType.createInterfaceType('Responses', members,
-        memberTypes);
+    members.sort(sortByRoute);
+
+    let rawResponses = ExportableType.createInterfaceType('Responses',
+        members.map(m => m.sig), memberTypes);
     rawResponses.addDescription(
         'A special-purpose interface that provides keys mapping from route ID to the response type for each route.  This is not intended to be instantiated, but as a tool with TypeScript\'s `keyof` features to support type checking on generic response functions');
     for (let id of spec.routeIDs) {
@@ -1123,8 +961,7 @@ export class ExportableType {
     let urlMapType = ExportableType.createInterfaceType('URLInfo',
         [urlSig, methodSig], new Map());
 
-    let mapInitializers = [];
-    let mapMembers = [];
+    let mapMembers: { route: esi.Route, sig: ts.PropertySignature, value: ts.PropertyAssignment }[] = [];
     let mapDependencies = new Map();
     for (let id of spec.routeIDs) {
       let route = spec.route(id)!;
@@ -1135,14 +972,18 @@ export class ExportableType {
           ts.createLiteral(route.httpMethod.toUpperCase()));
       let value = ts.createObjectLiteral([url, method], false);
 
-      mapInitializers.push(ts.createPropertyAssignment(id, value));
-      mapMembers.push(ts.createPropertySignature(undefined, id, undefined,
-          urlMapType.createReferenceType(), undefined));
+      mapMembers.push({
+        route: route,
+        sig: ts.createPropertySignature(undefined, id, undefined,
+            urlMapType.createReferenceType(), undefined),
+        value: ts.createPropertyAssignment(id, value)
+      });
       mapDependencies.set(id, urlMapType);
     }
 
+    mapMembers.sort(sortByRoute);
     let routeMapType = ExportableType.createInterfaceType('RouteMap',
-        mapMembers, mapDependencies);
+        mapMembers.map(m => m.sig), mapDependencies);
 
     let declaration = ts.createVariableStatement([
       ts.createToken(ts.SyntaxKind.ExportKeyword),
@@ -1150,7 +991,7 @@ export class ExportableType {
     ], [
       ts.createVariableDeclaration('ROUTE_MAP',
           routeMapType.createReferenceType(),
-          ts.createObjectLiteral(mapInitializers, true))
+          ts.createObjectLiteral(mapMembers.map(m => m.value), true))
     ]);
 
     let routeMap = new ExportableType('ROUTE_MAP', declaration);
@@ -1209,5 +1050,205 @@ export class ExportableType {
     root.updateASTWithJSDoc();
 
     return root;
+  }
+}
+
+// Parameters common to all ESI routes that are handled at a lower level by the
+// library that should not be included in the parameter specification for a
+// route
+const FILTER_PARAMS = [
+  'token', 'datasource', 'language', 'user_agent', 'X-User-Agent'
+];
+
+// The official swagger type spec makes it a little bit of a pain to work with
+// the wrappers around type definitions.
+function isSchema(blob: any): blob is swagger.Schema {
+  // A schema will have one of these
+  return blob.properties !== undefined || blob.enum !== undefined || blob.items
+      !== undefined || blob.type !== undefined;
+}
+
+function checkMemberCompatibility(a: ts.NodeArray<ts.TypeElement>,
+    b: ts.NodeArray<ts.TypeElement>): boolean {
+  if (a.length != b.length) {
+    return false;
+  }
+  // Since property sets are same size, if all of a's properties can be found
+  // in b, then the two sets are equal.
+  for (let i = 0; i < a.length; i++) {
+    let aProp: ts.PropertySignature = <ts.PropertySignature> a[i];
+    // Property can be in any order between the two
+    let correspondingFound = false;
+    for (let j = 0; j < b.length; j++) {
+      let bProp: ts.PropertySignature = <ts.PropertySignature> b[j];
+      if (deepEquals(aProp.name, bProp.name)) {
+        // Found the property of the same name, so make sure types are valid
+        // (and check question mark state)
+        if (!deepEquals(aProp.questionToken, bProp.questionToken)
+            || !checkTypeCompatibility(aProp.type, bProp.type)) {
+          return false;
+        }
+        correspondingFound = true;
+        break;
+      }
+    }
+
+    if (!correspondingFound) {
+      // Couldn't find a property in b that was defined in a
+      return false;
+    }
+  }
+  return true;
+}
+
+function checkTypeCompatibility(a?: ts.Node, b?: ts.Node): boolean {
+  // First look for types being undefined
+  if (!a && !b) {
+    return true; // Both undefined
+  } else if (!a || !b) {
+    return false; // One is undefined
+  }
+
+  // Otherwise both types defined, so check more carefully
+  if (ts.isArrayTypeNode(a) && ts.isArrayTypeNode(b)) {
+    // Array types are compatible if their element types are compatible
+    return checkTypeCompatibility(a.elementType, b.elementType);
+  } else if (ts.isEnumDeclaration(a) && ts.isEnumDeclaration(b)) {
+    // Enums are compatible if they have the same length and each corresponding
+    // element is equal between the two
+    if (a.members.length != b.members.length) {
+      return false;
+    }
+    for (let i = 0; i < a.members.length; i++) {
+      if (!deepEquals(a.members[i], b.members[i])) {
+        return false;
+      }
+    }
+    return true;
+  } else if (ts.isTypeLiteralNode(a) && ts.isTypeLiteralNode(b)) {
+    // Object types are compatible if each property is compatible, and they
+    // have the same property key set.
+    return checkMemberCompatibility(a.members, b.members);
+  } else if (ts.isInterfaceDeclaration(a) && ts.isInterfaceDeclaration(b)) {
+    // Interfaces are compatible in the same way type literals are
+    return checkMemberCompatibility(a.members, b.members);
+  } else if (ts.isUnionTypeNode(a) && ts.isUnionTypeNode(b)) {
+    // Make sure the sets are the same, order doesn't matter
+    if (a.types.length != b.types.length) {
+      return false;
+    }
+    for (let i = 0; i < a.types.length; i++) {
+      let matchFound = false;
+      for (let j = 0; j < b.types.length; j++) {
+        if (checkTypeCompatibility(a.types[i], b.types[j])) {
+          matchFound = true;
+          break;
+        }
+      }
+
+      if (!matchFound) {
+        return false;
+      }
+    }
+
+    return true;
+  } else {
+    // Either a very primitive type or an a type that hasn't been special cased
+    // yet, so rely on deepEquals
+    return deepEquals(a, b);
+  }
+}
+
+function camelCaseToEnumName(camelCase: string): string {
+  if (+camelCase) {
+    // The string is actually just digits, in which case it won't produce a
+    // valid name either.
+    return 'V_' + camelCase;
+  }
+  if (camelCase[0] === '#') {
+    // Heuristic for a hexcode color
+    return 'C_' + camelCase.substring(1).toUpperCase();
+  }
+
+  let prevWasUpperOrDigit: boolean = false;
+  let enumName: string = '';
+  for (let i = 0; i < camelCase.length; i++) {
+    let currentChar = camelCase[i];
+    let toUpper = currentChar.toUpperCase();
+
+    if (currentChar === toUpper) {
+      // Potentially at a word boundary so add an underscore (unless the
+      // character is already an underscore in which case just rely on it to
+      // form the word separation automatically).
+      if (i > 0 && !prevWasUpperOrDigit && currentChar !== '_') {
+        // Add an underscore
+        enumName += '_';
+      }
+      prevWasUpperOrDigit = true;
+
+      // Exclude hyphens and spaces since they generate bad names
+      if (toUpper !== '-' && toUpper !== ' ') {
+        enumName += toUpper;
+      }
+    } else {
+      // Just include the upper-case version of the character
+      prevWasUpperOrDigit = false;
+      enumName += toUpper;
+    }
+  }
+
+  return enumName;
+}
+
+function isValidDescription(description: string): boolean {
+  return description.toLowerCase() !== description && description.split(
+          ' ').length > 2;
+}
+
+function addJSDoc(node: ts.Node, description: string): ts.Node {
+  let comment = '*\n';
+  for (let line of description.split('\n')) {
+    comment += ' * ' + line + '\n';
+  }
+  comment += ' ';
+  return ts.addSyntheticLeadingComment(node,
+      ts.SyntaxKind.MultiLineCommentTrivia, comment, true);
+}
+
+function toMarkdownList(description: string): string {
+  // If the description contains a list pattern formed by ' - ', it splits it
+  // and moves each to its own line. Text preceeding first ' - ' is included
+  // but not as a list element. It is assumed that there is no closing, non-list
+  // text that should not be on its own line.
+  let listStart = description.indexOf('- ');
+  if (listStart >= 0) {
+    let preList = description.substring(0, listStart);
+    let list = description.substring(listStart).split('- ');
+
+    description = preList + '\n\n';
+    for (let e of list) {
+      e = e.trim();
+      if (e !== '') {
+        // Force punctuation
+        if (e[e.length - 1] !== '.' && e[e.length - 1] !== '?' && e[e.length
+            - 1] !== '!') {
+          e += '.';
+        }
+        description += '- ' + e + '\n';
+      }
+    }
+  }
+
+  return description;
+}
+
+function sortByRoute(a: { route: esi.Route }, b: { route: esi.Route }) {
+  // First compare by tag
+  let tag = a.route.tag.localeCompare(b.route.tag);
+  if (tag !== 0) {
+    return tag;
+  } else {
+    // Next compare by the id
+    return a.route.id.localeCompare(b.route.id);
   }
 }

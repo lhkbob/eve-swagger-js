@@ -59,6 +59,10 @@ export class ESIError extends VError {
     this.kind = kind;
   }
 
+  get info(): Info {
+    return VError.info(this);
+  }
+
   get fullStack(): string {
     return VError.fullStack(this);
   }
@@ -68,7 +72,7 @@ export class ESIError extends VError {
   }
 }
 
-export function isESIError(error: Error, kind?: ErrorName): boolean {
+export function isESIError(error: Error, kind?: ErrorName): error is ESIError {
   if (kind) {
     // Check for the specific name in the error chain
     if (error instanceof ESIError) {

@@ -382,7 +382,7 @@ export function makeCharacters(agent: ESIAgent): Characters {
     return agent.request('post_characters_affiliation', { body: ids });
   };
   characters.names = function (ids: number[]) {
-    if (ids.length > 20) {
+    if (ids.length > 100) {
       // Use universe/names end point since the /characters one breaks if
       // the URL gets too long.
       return getNames(agent, esi.universe.NameCategory.CHARACTER, ids);

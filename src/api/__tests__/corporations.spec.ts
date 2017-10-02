@@ -1,6 +1,6 @@
 jest.mock('../../internal/esi-agent');
 
-import { API, makeAPI } from '../../api';
+import { API, makeAPI } from '../../index';
 import { ESIAgent } from '../../internal/esi-agent';
 
 let api: API = makeAPI();
@@ -56,7 +56,7 @@ test('Corporations.names small', () => {
 });
 
 test('Corporations.names large', () => {
-  let ids = [...new Array(30).keys()];
+  let ids = [...new Array(130).keys()];
   agent.__expectRoute('post_universe_names', { 'ids': ids }, {
     returns: [
       {

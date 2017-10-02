@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import {makeAPI} from '../api';
+import {makeAPI} from '../index';
 import * as swagger from '../../util/esi-api';
 
 const swaggerImpl = swagger.API.getLocalAPI();

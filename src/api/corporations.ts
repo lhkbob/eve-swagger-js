@@ -98,7 +98,7 @@ export function makeCorporations(agent: ESIAgent): Corporations {
     return agent.request('get_corporations_npccorps', undefined);
   };
   functor.names = function (ids: number[]) {
-    if (ids.length > 20) {
+    if (ids.length > 100) {
       return getNames(agent, esi.universe.NameCategory.CORPORATION, ids);
     } else {
       // Use corporation/names end point and map manually

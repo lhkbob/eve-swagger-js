@@ -36,6 +36,8 @@ import { Wars, makeWars } from './api/wars';
 
 import { Characters, makeCharacters } from './api/character/characters';
 
+export {esi};
+export * from './error';
 
 /**
  * API creates a shared, internal ESIAgent and then lazily instantiates all

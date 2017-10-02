@@ -1,0 +1,15 @@
+{
+  "explicit": {
+    "get_characters_character_id_killmails_recent": "esi.killmail",
+    "get_universe_schematics_schematic_id": "esi.universe",
+    "post_ui_openwindow_newmail": "esi.character.mail"
+  },
+  "collapse": [
+    "esi.character.mail.label",
+    "esi.character.skill",
+    "esi.corporation.structure",
+    "esi.fleet.member",
+    "esi.fleet.wing",
+    "esi.universe.type"
+  ]
+}

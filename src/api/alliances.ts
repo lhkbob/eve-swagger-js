@@ -94,7 +94,7 @@ export function makeAlliances(agent: ESIAgent): Alliances {
   functor.names = function (ids?: number[]) {
     if (ids === undefined) {
       return functor().then(allIds => functor.names(allIds));
-    } else if (ids.length > 20) {
+    } else if (ids.length > 100) {
       return getNames(agent, esi.universe.NameCategory.ALLIANCE, ids);
     } else {
       return agent.request('get_alliances_names',

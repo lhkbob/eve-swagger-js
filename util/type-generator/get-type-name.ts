@@ -4,6 +4,39 @@ import { TYPENAME_OVERRIDES } from './type-overrides';
 
 const pluralize = require('pluralize'); // No typings associated
 
+export function getTypeName(namespace: Namespace,
+    type: ExportableType): [string, boolean] {
+  let namespaceName = namespace.fullName;
+  let finalName: [string, boolean] | undefined;
+  for (let title of type.titles) {
+    let name = titleToTypeName(namespaceName, title);
+    if (finalName) {
+      if (name[1]) {
+        // An explicit type name, so make sure it isn't masking anything
+        if (finalName[1] && name[0] !== finalName[0]) {
+          // Previous explicit name from another title is different
+          throw new Error(title + '\'s override to ' + name[0]
+              + ' would shadow explicit name of ' + finalName[0]);
+        }
+        // Otherwise take this name since it either is the same, or overrides
+        // a non-explicit name
+        finalName = name;
+      } else if (!finalName[1] && name[0].length < finalName[0].length) {
+        // Take the shorter of the generated names
+        finalName = name;
+      }
+    } else {
+      // First valid name
+      finalName = name;
+    }
+  }
+
+  if (finalName) {
+    return finalName;
+  } else {
+    throw new Error('Unable to generate typename for ' + type.titles[0]);
+  }
+}
 
 function makeStem(text: string) :string {
   return pluralize.singular(text).toLowerCase();
@@ -119,38 +152,4 @@ function titleToTypeName(namespace: string, title: string): [string, boolean] {
 
   let generatedName = goodTokens.length > 0 ? goodTokens.join('') : backupToken;
   return [generatedName, false];
-}
-
-export function getTypeName(namespace: Namespace,
-    type: ExportableType): string {
-  let namespaceName = namespace.fullName;
-  let finalName: [string, boolean] | undefined;
-  for (let title of type.titles) {
-    let name = titleToTypeName(namespaceName, title);
-    if (finalName) {
-      if (name[1]) {
-        // An explicit type name, so make sure it isn't masking anything
-        if (finalName[1] && name[0] !== finalName[0]) {
-          // Previous explicit name from another title is different
-          throw new Error(title + '\'s override to ' + name[0]
-              + ' would shadow explicit name of ' + finalName[0]);
-        }
-        // Otherwise take this name since it either is the same, or overrides
-        // a non-explicit name
-        finalName = name;
-      } else if (!finalName[1] && name[0].length < finalName[0].length) {
-        // Take the shorter of the generated names
-        finalName = name;
-      }
-    } else {
-      // First valid name
-      finalName = name;
-    }
-  }
-
-  if (finalName) {
-    return finalName[0];
-  } else {
-    throw new Error('Unable to generate typename for ' + type.titles[0]);
-  }
 }

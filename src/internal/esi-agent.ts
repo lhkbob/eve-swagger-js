@@ -403,13 +403,21 @@ export class ESIAgent {
         let remainingCount = +remaining;
         let windowSeconds = +window;
 
-        if (remainingCount < 25) {
+        if (remainingCount < 50) {
           // There have been enough regularly scheduled requests to fail that
           // pressure is on the error limit, so enable extra bottlenecks
-          let minTime = Math.max(10, 1000 * windowSeconds / remainingCount);
+          let minTime;
+          if (remainingCount > 0) {
+            minTime = 1.5 * Math.max(10, 1000 * windowSeconds / remainingCount);
+          } else {
+            // rate limiting wasn't successful and the global error response
+            // has been triggered, so just wait until the window has elapsed
+            minTime = 2 * 1000 * windowSeconds;
+          }
+
           this.errorLimiterActive = true;
           this.errorRateLimiter.changeSettings(1, minTime);
-        } else if (remainingCount > 75 && this.errorLimiterActive) {
+        } else if (remainingCount > 85 && this.errorLimiterActive) {
           // Error limit pressure seems to be relieved so disable
           this.errorLimiterActive = false;
           this.errorRateLimiter.changeSettings(0, 0);
