@@ -5,7 +5,7 @@ import {
   makePageBasedLoader
 } from '../../internal/page-loader';
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 
 
 /**

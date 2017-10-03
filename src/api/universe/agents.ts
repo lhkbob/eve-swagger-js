@@ -1,6 +1,6 @@
 import { Search, makeDefaultSearch } from '../../internal/search';
 import { ESIAgent } from '../../internal/esi-agent';
-import { esi } from '../../../gen/esi';
+import { esi } from '../../internal/esi-types';
 
 /**
  * An api adapter that provides functions for accessing agent information

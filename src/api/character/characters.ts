@@ -4,7 +4,7 @@ import {
 import { getNames } from '../../internal/names';
 import { Search, makeDefaultSearch } from '../../internal/search';
 import { ESIAgent, SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 
 import { Killmail, makeKillmail } from '../killmail';
 

@@ -1,6 +1,6 @@
 import { getNames } from '../..//internal/names';
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 
 /**
  * An api adapter that provides functions for accessing various details for a

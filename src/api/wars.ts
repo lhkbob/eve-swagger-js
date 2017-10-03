@@ -1,6 +1,6 @@
 import { ESIAgent } from '../internal/esi-agent';
 import { PaginatedLoader, makePageBasedLoader } from '../internal/page-loader';
-import { Responses, esi } from '../../gen/esi';
+import { Responses, esi } from '../internal/esi-types';
 import { Killmail, makeKillmail } from './killmail';
 
 /**

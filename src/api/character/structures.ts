@@ -3,7 +3,7 @@ import {
 } from '../../internal/page-loader';
 import { Search, makeCharacterSearch } from '../../internal/search';
 import { ESIAgent, SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 import { CharacterCorporation, makeCharacterCorporation } from './character-corporation';
 
 /**

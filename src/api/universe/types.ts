@@ -4,7 +4,7 @@ import {
   PaginatedLoader, makePageBasedLoader
 } from '../../internal/page-loader';
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 
 /**
  * An api adapter for dealing with a single item group, currently only

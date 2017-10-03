@@ -1,3 +1,6 @@
+// This is a generated file, take caution when editing manually.
+// Run `npm run gen:esi` to regenerate.
+// Generated 164 types in monolithic namespace for ESI v0.5.2.
 export namespace esi {
     export namespace alliance {
         /**
@@ -4412,4 +4415,3 @@ export interface URLInfo {
     url: string;
     method: "GET" | "POST" | "PUT" | "DELETE";
 }
-// Generated 164 types in monolithic namespace.

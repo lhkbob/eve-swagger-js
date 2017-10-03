@@ -1,5 +1,5 @@
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 
 // FIXME move this into a fleet/ package and split it into multiple files
 // FIXME can probably move it outside the character package as well, since it

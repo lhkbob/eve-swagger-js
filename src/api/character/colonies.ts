@@ -1,5 +1,5 @@
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses } from '../../../gen/esi';
+import { Responses } from '../../internal/esi-types';
 
 /**
  * An api adapter over the end points handling a specific colony via functions

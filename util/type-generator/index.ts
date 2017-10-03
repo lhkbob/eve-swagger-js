@@ -278,7 +278,7 @@ function parseArguments(): Options | undefined {
   let options: Options = {
     printTypeScript: true,
     verbose: false,
-    outputFile: join(__dirname, '../../../gen/esi.ts'),
+    outputFile: join(__dirname, '../../../src/internal/esi-types.ts'),
     restrictNamespace: undefined,
     restrictRoute: undefined,
     parameter: undefined,

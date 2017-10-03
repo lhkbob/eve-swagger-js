@@ -2,7 +2,7 @@ import {
   PaginatedLoader, makePageBasedLoader
 } from '../../internal/page-loader';
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 import { Corporation, makeCorporation } from '../corporations';
 
 /**

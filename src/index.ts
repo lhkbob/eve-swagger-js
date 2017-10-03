@@ -1,6 +1,6 @@
 import { ESIAgent, Configuration } from './internal/esi-agent';
 import { getAllNames } from './internal/names';
-import { Responses, esi } from '../gen/esi';
+import { Responses, esi } from './internal/esi-types';
 
 import { Agents, makeAgents } from './api/universe/agents';
 import { Bloodlines, makeBloodlines } from './api/universe/bloodlines';

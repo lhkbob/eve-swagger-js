@@ -2,7 +2,7 @@ import {
   PaginatedLoader, makePageBasedLoader
 } from '../../internal/page-loader';
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 
 /**
  * An api adapter that provides functions for modifying and removing a

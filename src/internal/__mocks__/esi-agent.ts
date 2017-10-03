@@ -9,7 +9,7 @@
  */
 
 import * as swagger from '../../../util/esi-api';
-import { Parameters, Responses, ROUTE_MAP, esi  } from '../../../gen/esi';
+import { Parameters, Responses, ROUTE_MAP, esi  } from '../esi-types';
 
 function expectConstructorCall(params: Configuration): void {
   //  - None of the actual ESIAgent parameters are used in the mock

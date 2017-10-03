@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// This is a generated file, take caution when editing manually.
+// Run `npm run gen:esi` to regenerate.
+// Generated 164 types in monolithic namespace for ESI v0.5.2.
 var esi;
 (function (esi) {
     let character;
@@ -647,5 +650,4 @@ exports.ROUTE_MAP = {
     get_wars_war_id: { url: "/v1/wars/{war_id}/", method: "GET" },
     get_wars_war_id_killmails: { url: "/v1/wars/{war_id}/killmails/", method: "GET" }
 };
-// Generated 164 types in monolithic namespace.
-//# sourceMappingURL=esi.js.map
+//# sourceMappingURL=esi-types.js.map
