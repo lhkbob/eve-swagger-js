@@ -29,7 +29,7 @@ export function generateTypes(opts: Options): void {
   generateTypeNamesForNamespace(Namespace.root);
 
   // Handle all the output
-  let typeCount = writeMonolithicNamespace(opts);
+  let typeCount = writeMonolithicNamespace(spec, opts);
 
   if (!opts.printTypeScript) {
     console.log(`Generated ${typeCount} types in monolithic namespace.`);
@@ -95,6 +95,10 @@ function getTypeDebugLog(type: ExportableType): string {
   log += `Type ${type.typeName} (explicit = ${type.isTypeNameExplicitlySet}), from:\n`;
   for (let t of type.titles) {
     log += `  - ${t}\n`;
+  }
+  log += ` Extra:\n`;
+  for (let l of type.log) {
+    log += `  - ${l}`;
   }
   return log;
 }
@@ -227,7 +231,7 @@ function checkTypeAgainstFilter(type: ExportableType, opts: Options): boolean {
   return false;
 }
 
-function writeMonolithicNamespace(opts: Options): number {
+function writeMonolithicNamespace(spec: esi.API, opts: Options): number {
   // Turn the namespace into an AST, starting at either the root or the
   // specified restricted namespace.
   let targetNamespace;
@@ -240,11 +244,15 @@ function writeMonolithicNamespace(opts: Options): number {
   let [ast, count] = toNamespaceAST(targetNamespace, opts);
 
   // Update with a count in the AST
-  let empty = ts.createNotEmittedStatement(ts.createEmptyStatement());
-  ts.addSyntheticTrailingComment(empty,
-      ts.SyntaxKind.SingleLineCommentTrivia,
-      ` Generated ${count} types in monolithic namespace.`, false);
-  ast.push(empty);
+  let header = ts.createNotEmittedStatement(ts.createEmptyStatement());
+  ts.addSyntheticLeadingComment(header, ts.SyntaxKind.SingleLineCommentTrivia,
+      ' This is a generated file, take caution when editing manually.', false);
+  ts.addSyntheticLeadingComment(header, ts.SyntaxKind.SingleLineCommentTrivia,
+      ' Run `npm run gen:esi` to regenerate.', false);
+  ts.addSyntheticLeadingComment(header, ts.SyntaxKind.SingleLineCommentTrivia,
+      ` Generated ${count} types in monolithic namespace for ESI v${spec.version}.`,
+      false);
+  ast.unshift(header);
 
   let sourceFile = ts.createSourceFile(opts.outputFile || 'console.ts', '',
       ts.ScriptTarget.Latest, false, ts.ScriptKind.TS);

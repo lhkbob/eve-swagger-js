@@ -43,6 +43,7 @@ export type TypeVisitor<T> = (path: { node: ExportableType, key: string }[],
  * and what its possible names could be.
  */
 export class ExportableType {
+  public log:string[];
   readonly titles: string[];
 
   // For dependencies and dependents, the keys associated with the type
@@ -68,6 +69,7 @@ export class ExportableType {
 
   constructor(title: string,
       readonly type: ts.DeclarationStatement | ts.VariableStatement | ts.TypeNode | string) {
+    this.log = [];
     this.dependencies_ = new Map();
     this.dependents_ = [];
     this.titles = [title];
