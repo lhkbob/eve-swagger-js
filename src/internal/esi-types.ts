@@ -58,17 +58,17 @@ export namespace esi {
                 title: string;
             }
             export const enum EventResponse {
+                ACCEPTED = "accepted",
                 DECLINED = "declined",
                 NOT_RESPONDED = "not_responded",
-                ACCEPTED = "accepted",
                 TENTATIVE = "tentative"
             }
             export const enum OwnerType {
-                EVE_SERVER = "eve_server",
-                CORPORATION = "corporation",
-                FACTION = "faction",
+                ALLIANCE = "alliance",
                 CHARACTER = "character",
-                ALLIANCE = "alliance"
+                CORPORATION = "corporation",
+                EVE_SERVER = "eve_server",
+                FACTION = "faction"
             }
             /**
              * This type is a parameter for the route, [`PUT /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.tech.ccp.is//#!/Calendar/put_characters_character_id_calendar_event_id).
@@ -133,10 +133,10 @@ export namespace esi {
              * To whom the contract is available.
              */
             export const enum Availability {
-                PUBLIC = "public",
-                PERSONAL = "personal",
+                ALLIANCE = "alliance",
                 CORPORATION = "corporation",
-                ALLIANCE = "alliance"
+                PERSONAL = "personal",
+                PUBLIC = "public"
             }
             export interface Bid {
                 /**
@@ -261,26 +261,26 @@ export namespace esi {
              * Status of the the contract.
              */
             export const enum Status {
-                OUTSTANDING = "outstanding",
-                IN_PROGRESS = "in_progress",
-                FINISHED_ISSUER = "finished_issuer",
-                FINISHED_CONTRACTOR = "finished_contractor",
-                FINISHED = "finished",
                 CANCELLED = "cancelled",
-                REJECTED = "rejected",
-                FAILED = "failed",
                 DELETED = "deleted",
+                FAILED = "failed",
+                FINISHED = "finished",
+                FINISHED_CONTRACTOR = "finished_contractor",
+                FINISHED_ISSUER = "finished_issuer",
+                IN_PROGRESS = "in_progress",
+                OUTSTANDING = "outstanding",
+                REJECTED = "rejected",
                 REVERSED = "reversed"
             }
             /**
              * Type of the contract.
              */
             export const enum Type {
-                UNKNOWN = "unknown",
-                ITEM_EXCHANGE = "item_exchange",
                 AUCTION = "auction",
                 COURIER = "courier",
-                LOAN = "loan"
+                ITEM_EXCHANGE = "item_exchange",
+                LOAN = "loan",
+                UNKNOWN = "unknown"
             }
         }
         export namespace fitting {
@@ -317,24 +317,24 @@ export namespace esi {
              * Hexadecimal string representing label color, in RGB format.
              */
             export const enum Color {
-                C_FFFFFF = "#ffffff",
-                C_FFFF01 = "#ffff01",
-                C_FF6600 = "#ff6600",
-                C_FE0000 = "#fe0000",
-                C_9A0000 = "#9a0000",
-                C_660066 = "#660066",
                 C_0000FE = "#0000fe",
-                C_0099FF = "#0099ff",
-                C_01FFFF = "#01ffff",
-                C_00FF33 = "#00ff33",
-                C_349800 = "#349800",
                 C_006634 = "#006634",
+                C_0099FF = "#0099ff",
+                C_00FF33 = "#00ff33",
+                C_01FFFF = "#01ffff",
+                C_349800 = "#349800",
+                C_660066 = "#660066",
                 C_666666 = "#666666",
                 C_999999 = "#999999",
-                C_E6E6E6 = "#e6e6e6",
-                C_FFFFCD = "#ffffcd",
                 C_99FFFF = "#99ffff",
-                C_CCFF9A = "#ccff9a"
+                C_9A0000 = "#9a0000",
+                C_CCFF9A = "#ccff9a",
+                C_E6E6E6 = "#e6e6e6",
+                C_FE0000 = "#fe0000",
+                C_FF6600 = "#ff6600",
+                C_FFFF01 = "#ffff01",
+                C_FFFFCD = "#ffffcd",
+                C_FFFFFF = "#ffffff"
             }
             export interface Label {
                 color?: esi.character.mail.Color;
@@ -503,14 +503,14 @@ export namespace esi {
                 upgrade_level: number;
             }
             export const enum PlanetType {
-                TEMPERATE = "temperate",
                 BARREN = "barren",
-                OCEANIC = "oceanic",
-                ICE = "ice",
                 GAS = "gas",
+                ICE = "ice",
                 LAVA = "lava",
+                OCEANIC = "oceanic",
+                PLASMA = "plasma",
                 STORM = "storm",
-                PLASMA = "plasma"
+                TEMPERATE = "temperate"
             }
             export interface Route {
                 content_type_id: number;
@@ -560,31 +560,21 @@ export namespace esi {
             type_id: number;
         }
         export const enum AssetLocation {
+            ASSET_SAFETY = "AssetSafety",
             AUTO_FIT = "AutoFit",
             CARGO = "Cargo",
             CORPSE_BAY = "CorpseBay",
-            DRONE_BAY = "DroneBay",
-            FLEET_HANGAR = "FleetHangar",
             DELIVERIES = "Deliveries",
-            HIDDEN_MODIFIERS = "HiddenModifiers",
+            DRONE_BAY = "DroneBay",
+            FIGHTER_BAY = "FighterBay",
+            FIGHTER_TUBE_0 = "FighterTube0",
+            FIGHTER_TUBE_1 = "FighterTube1",
+            FIGHTER_TUBE_2 = "FighterTube2",
+            FIGHTER_TUBE_3 = "FighterTube3",
+            FIGHTER_TUBE_4 = "FighterTube4",
+            FLEET_HANGAR = "FleetHangar",
             HANGAR = "Hangar",
             HANGAR_ALL = "HangarAll",
-            LO_SLOT_0 = "LoSlot0",
-            LO_SLOT_1 = "LoSlot1",
-            LO_SLOT_2 = "LoSlot2",
-            LO_SLOT_3 = "LoSlot3",
-            LO_SLOT_4 = "LoSlot4",
-            LO_SLOT_5 = "LoSlot5",
-            LO_SLOT_6 = "LoSlot6",
-            LO_SLOT_7 = "LoSlot7",
-            MED_SLOT_0 = "MedSlot0",
-            MED_SLOT_1 = "MedSlot1",
-            MED_SLOT_2 = "MedSlot2",
-            MED_SLOT_3 = "MedSlot3",
-            MED_SLOT_4 = "MedSlot4",
-            MED_SLOT_5 = "MedSlot5",
-            MED_SLOT_6 = "MedSlot6",
-            MED_SLOT_7 = "MedSlot7",
             HI_SLOT_0 = "HiSlot0",
             HI_SLOT_1 = "HiSlot1",
             HI_SLOT_2 = "HiSlot2",
@@ -593,10 +583,26 @@ export namespace esi {
             HI_SLOT_5 = "HiSlot5",
             HI_SLOT_6 = "HiSlot6",
             HI_SLOT_7 = "HiSlot7",
-            ASSET_SAFETY = "AssetSafety",
-            LOCKED = "Locked",
-            UNLOCKED = "Unlocked",
+            HIDDEN_MODIFIERS = "HiddenModifiers",
             IMPLANT = "Implant",
+            LO_SLOT_0 = "LoSlot0",
+            LO_SLOT_1 = "LoSlot1",
+            LO_SLOT_2 = "LoSlot2",
+            LO_SLOT_3 = "LoSlot3",
+            LO_SLOT_4 = "LoSlot4",
+            LO_SLOT_5 = "LoSlot5",
+            LO_SLOT_6 = "LoSlot6",
+            LO_SLOT_7 = "LoSlot7",
+            LOCKED = "Locked",
+            MED_SLOT_0 = "MedSlot0",
+            MED_SLOT_1 = "MedSlot1",
+            MED_SLOT_2 = "MedSlot2",
+            MED_SLOT_3 = "MedSlot3",
+            MED_SLOT_4 = "MedSlot4",
+            MED_SLOT_5 = "MedSlot5",
+            MED_SLOT_6 = "MedSlot6",
+            MED_SLOT_7 = "MedSlot7",
+            MODULE = "Module",
             QUAFE_BAY = "QuafeBay",
             RIG_SLOT_0 = "RigSlot0",
             RIG_SLOT_1 = "RigSlot1",
@@ -607,20 +613,20 @@ export namespace esi {
             RIG_SLOT_6 = "RigSlot6",
             RIG_SLOT_7 = "RigSlot7",
             SHIP_HANGAR = "ShipHangar",
+            SPECIALIZED_AMMO_HOLD = "SpecializedAmmoHold",
+            SPECIALIZED_COMMAND_CENTER_HOLD = "SpecializedCommandCenterHold",
             SPECIALIZED_FUEL_BAY = "SpecializedFuelBay",
-            SPECIALIZED_ORE_HOLD = "SpecializedOreHold",
             SPECIALIZED_GAS_HOLD = "SpecializedGasHold",
+            SPECIALIZED_INDUSTRIAL_SHIP_HOLD = "SpecializedIndustrialShipHold",
+            SPECIALIZED_LARGE_SHIP_HOLD = "SpecializedLargeShipHold",
+            SPECIALIZED_MATERIAL_BAY = "SpecializedMaterialBay",
+            SPECIALIZED_MEDIUM_SHIP_HOLD = "SpecializedMediumShipHold",
             SPECIALIZED_MINERAL_HOLD = "SpecializedMineralHold",
+            SPECIALIZED_ORE_HOLD = "SpecializedOreHold",
+            SPECIALIZED_PLANETARY_COMMODITIES_HOLD = "SpecializedPlanetaryCommoditiesHold",
             SPECIALIZED_SALVAGE_HOLD = "SpecializedSalvageHold",
             SPECIALIZED_SHIP_HOLD = "SpecializedShipHold",
             SPECIALIZED_SMALL_SHIP_HOLD = "SpecializedSmallShipHold",
-            SPECIALIZED_MEDIUM_SHIP_HOLD = "SpecializedMediumShipHold",
-            SPECIALIZED_LARGE_SHIP_HOLD = "SpecializedLargeShipHold",
-            SPECIALIZED_INDUSTRIAL_SHIP_HOLD = "SpecializedIndustrialShipHold",
-            SPECIALIZED_AMMO_HOLD = "SpecializedAmmoHold",
-            SPECIALIZED_COMMAND_CENTER_HOLD = "SpecializedCommandCenterHold",
-            SPECIALIZED_PLANETARY_COMMODITIES_HOLD = "SpecializedPlanetaryCommoditiesHold",
-            SPECIALIZED_MATERIAL_BAY = "SpecializedMaterialBay",
             SUB_SYSTEM_SLOT_0 = "SubSystemSlot0",
             SUB_SYSTEM_SLOT_1 = "SubSystemSlot1",
             SUB_SYSTEM_SLOT_2 = "SubSystemSlot2",
@@ -629,13 +635,7 @@ export namespace esi {
             SUB_SYSTEM_SLOT_5 = "SubSystemSlot5",
             SUB_SYSTEM_SLOT_6 = "SubSystemSlot6",
             SUB_SYSTEM_SLOT_7 = "SubSystemSlot7",
-            FIGHTER_BAY = "FighterBay",
-            FIGHTER_TUBE_0 = "FighterTube0",
-            FIGHTER_TUBE_1 = "FighterTube1",
-            FIGHTER_TUBE_2 = "FighterTube2",
-            FIGHTER_TUBE_3 = "FighterTube3",
-            FIGHTER_TUBE_4 = "FighterTube4",
-            MODULE = "Module",
+            UNLOCKED = "Unlocked",
             WARDROBE = "Wardrobe"
         }
         export interface Blueprint {
@@ -672,31 +672,21 @@ export namespace esi {
          * Indicates something about this item's storage location. The flag is used to differentiate between hangar divisions, drone bay, fitting location, and similar.
          */
         export const enum BlueprintLocation {
+            ASSET_SAFETY = "AssetSafety",
             AUTO_FIT = "AutoFit",
             CARGO = "Cargo",
             CORPSE_BAY = "CorpseBay",
-            DRONE_BAY = "DroneBay",
-            FLEET_HANGAR = "FleetHangar",
             DELIVERIES = "Deliveries",
-            HIDDEN_MODIFIERS = "HiddenModifiers",
+            DRONE_BAY = "DroneBay",
+            FIGHTER_BAY = "FighterBay",
+            FIGHTER_TUBE_0 = "FighterTube0",
+            FIGHTER_TUBE_1 = "FighterTube1",
+            FIGHTER_TUBE_2 = "FighterTube2",
+            FIGHTER_TUBE_3 = "FighterTube3",
+            FIGHTER_TUBE_4 = "FighterTube4",
+            FLEET_HANGAR = "FleetHangar",
             HANGAR = "Hangar",
             HANGAR_ALL = "HangarAll",
-            LO_SLOT_0 = "LoSlot0",
-            LO_SLOT_1 = "LoSlot1",
-            LO_SLOT_2 = "LoSlot2",
-            LO_SLOT_3 = "LoSlot3",
-            LO_SLOT_4 = "LoSlot4",
-            LO_SLOT_5 = "LoSlot5",
-            LO_SLOT_6 = "LoSlot6",
-            LO_SLOT_7 = "LoSlot7",
-            MED_SLOT_0 = "MedSlot0",
-            MED_SLOT_1 = "MedSlot1",
-            MED_SLOT_2 = "MedSlot2",
-            MED_SLOT_3 = "MedSlot3",
-            MED_SLOT_4 = "MedSlot4",
-            MED_SLOT_5 = "MedSlot5",
-            MED_SLOT_6 = "MedSlot6",
-            MED_SLOT_7 = "MedSlot7",
             HI_SLOT_0 = "HiSlot0",
             HI_SLOT_1 = "HiSlot1",
             HI_SLOT_2 = "HiSlot2",
@@ -705,10 +695,26 @@ export namespace esi {
             HI_SLOT_5 = "HiSlot5",
             HI_SLOT_6 = "HiSlot6",
             HI_SLOT_7 = "HiSlot7",
-            ASSET_SAFETY = "AssetSafety",
-            LOCKED = "Locked",
-            UNLOCKED = "Unlocked",
+            HIDDEN_MODIFIERS = "HiddenModifiers",
             IMPLANT = "Implant",
+            LO_SLOT_0 = "LoSlot0",
+            LO_SLOT_1 = "LoSlot1",
+            LO_SLOT_2 = "LoSlot2",
+            LO_SLOT_3 = "LoSlot3",
+            LO_SLOT_4 = "LoSlot4",
+            LO_SLOT_5 = "LoSlot5",
+            LO_SLOT_6 = "LoSlot6",
+            LO_SLOT_7 = "LoSlot7",
+            LOCKED = "Locked",
+            MED_SLOT_0 = "MedSlot0",
+            MED_SLOT_1 = "MedSlot1",
+            MED_SLOT_2 = "MedSlot2",
+            MED_SLOT_3 = "MedSlot3",
+            MED_SLOT_4 = "MedSlot4",
+            MED_SLOT_5 = "MedSlot5",
+            MED_SLOT_6 = "MedSlot6",
+            MED_SLOT_7 = "MedSlot7",
+            MODULE = "Module",
             QUAFE_BAY = "QuafeBay",
             RIG_SLOT_0 = "RigSlot0",
             RIG_SLOT_1 = "RigSlot1",
@@ -719,20 +725,20 @@ export namespace esi {
             RIG_SLOT_6 = "RigSlot6",
             RIG_SLOT_7 = "RigSlot7",
             SHIP_HANGAR = "ShipHangar",
+            SPECIALIZED_AMMO_HOLD = "SpecializedAmmoHold",
+            SPECIALIZED_COMMAND_CENTER_HOLD = "SpecializedCommandCenterHold",
             SPECIALIZED_FUEL_BAY = "SpecializedFuelBay",
-            SPECIALIZED_ORE_HOLD = "SpecializedOreHold",
             SPECIALIZED_GAS_HOLD = "SpecializedGasHold",
+            SPECIALIZED_INDUSTRIAL_SHIP_HOLD = "SpecializedIndustrialShipHold",
+            SPECIALIZED_LARGE_SHIP_HOLD = "SpecializedLargeShipHold",
+            SPECIALIZED_MATERIAL_BAY = "SpecializedMaterialBay",
+            SPECIALIZED_MEDIUM_SHIP_HOLD = "SpecializedMediumShipHold",
             SPECIALIZED_MINERAL_HOLD = "SpecializedMineralHold",
+            SPECIALIZED_ORE_HOLD = "SpecializedOreHold",
+            SPECIALIZED_PLANETARY_COMMODITIES_HOLD = "SpecializedPlanetaryCommoditiesHold",
             SPECIALIZED_SALVAGE_HOLD = "SpecializedSalvageHold",
             SPECIALIZED_SHIP_HOLD = "SpecializedShipHold",
             SPECIALIZED_SMALL_SHIP_HOLD = "SpecializedSmallShipHold",
-            SPECIALIZED_MEDIUM_SHIP_HOLD = "SpecializedMediumShipHold",
-            SPECIALIZED_LARGE_SHIP_HOLD = "SpecializedLargeShipHold",
-            SPECIALIZED_INDUSTRIAL_SHIP_HOLD = "SpecializedIndustrialShipHold",
-            SPECIALIZED_AMMO_HOLD = "SpecializedAmmoHold",
-            SPECIALIZED_COMMAND_CENTER_HOLD = "SpecializedCommandCenterHold",
-            SPECIALIZED_PLANETARY_COMMODITIES_HOLD = "SpecializedPlanetaryCommoditiesHold",
-            SPECIALIZED_MATERIAL_BAY = "SpecializedMaterialBay",
             SUB_SYSTEM_SLOT_0 = "SubSystemSlot0",
             SUB_SYSTEM_SLOT_1 = "SubSystemSlot1",
             SUB_SYSTEM_SLOT_2 = "SubSystemSlot2",
@@ -741,13 +747,7 @@ export namespace esi {
             SUB_SYSTEM_SLOT_5 = "SubSystemSlot5",
             SUB_SYSTEM_SLOT_6 = "SubSystemSlot6",
             SUB_SYSTEM_SLOT_7 = "SubSystemSlot7",
-            FIGHTER_BAY = "FighterBay",
-            FIGHTER_TUBE_0 = "FighterTube0",
-            FIGHTER_TUBE_1 = "FighterTube1",
-            FIGHTER_TUBE_2 = "FighterTube2",
-            FIGHTER_TUBE_3 = "FighterTube3",
-            FIGHTER_TUBE_4 = "FighterTube4",
-            MODULE = "Module"
+            UNLOCKED = "Unlocked"
         }
         export interface Bookmark {
             bookmark_id: number;
@@ -835,9 +835,9 @@ export namespace esi {
             label_name: string;
         }
         export const enum ContactType {
+            ALLIANCE = "alliance",
             CHARACTER = "character",
             CORPORATION = "corporation",
-            ALLIANCE = "alliance",
             FACTION = "faction"
         }
         export interface CorporationHistory {
@@ -953,10 +953,10 @@ export namespace esi {
         }
         export const enum JobStatus {
             ACTIVE = "active",
+            CANCELLED = "cancelled",
+            DELIVERED = "delivered",
             PAUSED = "paused",
             READY = "ready",
-            DELIVERED = "delivered",
-            CANCELLED = "cancelled",
             REVERTED = "reverted"
         }
         export interface JumpClone {
@@ -1056,12 +1056,12 @@ export namespace esi {
          * Current order state.
          */
         export const enum OrderState {
-            OPEN = "open",
+            CANCELLED = "cancelled",
+            CHARACTER_DELETED = "character_deleted",
             CLOSED = "closed",
             EXPIRED = "expired",
-            CANCELLED = "cancelled",
-            PENDING = "pending",
-            CHARACTER_DELETED = "character_deleted"
+            OPEN = "open",
+            PENDING = "pending"
         }
         /**
          * This is the response type for the route, [`GET /v2/characters/{character_id}/portrait/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_portrait).
@@ -1227,10 +1227,10 @@ export namespace esi {
             url: string;
         }
         export const enum Faction {
-            MINMATAR = "Minmatar",
-            GALLENTE = "Gallente",
+            AMARR = "Amarr",
             CALDARI = "Caldari",
-            AMARR = "Amarr"
+            GALLENTE = "Gallente",
+            MINMATAR = "Minmatar"
         }
         /**
          * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/icons/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_icons).
@@ -1490,9 +1490,9 @@ export namespace esi {
         }
         export const enum Role {
             FLEET_COMMANDER = "fleet_commander",
-            WING_COMMANDER = "wing_commander",
             SQUAD_COMMANDER = "squad_commander",
-            SQUAD_MEMBER = "squad_member"
+            SQUAD_MEMBER = "squad_member",
+            WING_COMMANDER = "wing_commander"
         }
         export interface Squad {
             id: number;
@@ -1524,14 +1524,14 @@ export namespace esi {
     }
     export namespace industry {
         export const enum Activity {
-            NONE = "none",
-            MANUFACTURING = "manufacturing",
-            RESEARCHING_TECHNOLOGY = "researching_technology",
-            RESEARCHING_TIME_EFFICIENCY = "researching_time_efficiency",
-            RESEARCHING_MATERIAL_EFFICIENCY = "researching_material_efficiency",
             COPYING = "copying",
             DUPLICATING = "duplicating",
             INVENTION = "invention",
+            MANUFACTURING = "manufacturing",
+            NONE = "none",
+            RESEARCHING_MATERIAL_EFFICIENCY = "researching_material_efficiency",
+            RESEARCHING_TECHNOLOGY = "researching_technology",
+            RESEARCHING_TIME_EFFICIENCY = "researching_time_efficiency",
             REVERSE_ENGINEERING = "reverse_engineering"
         }
         export interface CostIndex {
@@ -1765,10 +1765,10 @@ export namespace esi {
          * Type of event this campaign is for. tcu_defense, ihub_defense and station_defense are referred to as "Defense Events", station_freeport as "Freeport Events".
          */
         export const enum EventType {
-            TCU_DEFENSE = "tcu_defense",
             IHUB_DEFENSE = "ihub_defense",
             STATION_DEFENSE = "station_defense",
-            STATION_FREEPORT = "station_freeport"
+            STATION_FREEPORT = "station_freeport",
+            TCU_DEFENSE = "tcu_defense"
         }
         export interface Map {
             alliance_id?: number;
@@ -1971,33 +1971,33 @@ export namespace esi {
             schematic_name: string;
         }
         export const enum Service {
-            BOUNTY_MISSIONS = "bounty-missions",
             ASSASINATION_MISSIONS = "assasination-missions",
-            COURIER_MISSIONS = "courier-missions",
-            INTERBUS = "interbus",
-            REPROCESSING_PLANT = "reprocessing-plant",
-            REFINERY = "refinery",
-            MARKET = "market",
             BLACK_MARKET = "black-market",
-            STOCK_EXCHANGE = "stock-exchange",
+            BOUNTY_MISSIONS = "bounty-missions",
             CLONING = "cloning",
-            SURGERY = "surgery",
+            COURIER_MISSIONS = "courier-missions",
             DNA_THERAPY = "dna-therapy",
-            REPAIR_FACILITIES = "repair-facilities",
-            FACTORY = "factory",
-            LABRATORY = "labratory",
-            GAMBLING = "gambling",
-            FITTING = "fitting",
-            PAINTSHOP = "paintshop",
-            NEWS = "news",
-            STORAGE = "storage",
-            INSURANCE = "insurance",
             DOCKING = "docking",
-            OFFICE_RENTAL = "office-rental",
+            FACTORY = "factory",
+            FITTING = "fitting",
+            GAMBLING = "gambling",
+            INSURANCE = "insurance",
+            INTERBUS = "interbus",
             JUMP_CLONE_FACILITY = "jump-clone-facility",
+            LABRATORY = "labratory",
             LOYALTY_POINT_STORE = "loyalty-point-store",
+            MARKET = "market",
             NAVY_OFFICES = "navy-offices",
-            SECURITY_OFFICES = "security-offices"
+            NEWS = "news",
+            OFFICE_RENTAL = "office-rental",
+            PAINTSHOP = "paintshop",
+            REFINERY = "refinery",
+            REPAIR_FACILITIES = "repair-facilities",
+            REPROCESSING_PLANT = "reprocessing-plant",
+            SECURITY_OFFICES = "security-offices",
+            STOCK_EXCHANGE = "stock-exchange",
+            STORAGE = "storage",
+            SURGERY = "surgery"
         }
         /**
          * This is the response type for the route, [`GET /v1/universe/stargates/{stargate_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stargates_stargate_id).
@@ -2232,41 +2232,20 @@ export namespace esi {
      * Valid order range, numbers are ranges in jumps.
      */
     export const enum OrderRange {
-        STATION = "station",
         REGION = "region",
         SOLARSYSTEM = "solarsystem",
+        STATION = "station",
         V_1 = "1",
-        V_2 = "2",
-        V_3 = "3",
-        V_4 = "4",
-        V_5 = "5",
         V_10 = "10",
+        V_2 = "2",
         V_20 = "20",
+        V_3 = "3",
         V_30 = "30",
-        V_40 = "40"
+        V_4 = "4",
+        V_40 = "40",
+        V_5 = "5"
     }
     export const enum Role {
-        DIRECTOR = "Director",
-        PERSONNEL_MANAGER = "Personnel_Manager",
-        ACCOUNTANT = "Accountant",
-        SECURITY_OFFICER = "Security_Officer",
-        FACTORY_MANAGER = "Factory_Manager",
-        STATION_MANAGER = "Station_Manager",
-        AUDITOR = "Auditor",
-        HANGAR_TAKE_1 = "Hangar_Take_1",
-        HANGAR_TAKE_2 = "Hangar_Take_2",
-        HANGAR_TAKE_3 = "Hangar_Take_3",
-        HANGAR_TAKE_4 = "Hangar_Take_4",
-        HANGAR_TAKE_5 = "Hangar_Take_5",
-        HANGAR_TAKE_6 = "Hangar_Take_6",
-        HANGAR_TAKE_7 = "Hangar_Take_7",
-        HANGAR_QUERY_1 = "Hangar_Query_1",
-        HANGAR_QUERY_2 = "Hangar_Query_2",
-        HANGAR_QUERY_3 = "Hangar_Query_3",
-        HANGAR_QUERY_4 = "Hangar_Query_4",
-        HANGAR_QUERY_5 = "Hangar_Query_5",
-        HANGAR_QUERY_6 = "Hangar_Query_6",
-        HANGAR_QUERY_7 = "Hangar_Query_7",
         ACCOUNT_TAKE_1 = "Account_Take_1",
         ACCOUNT_TAKE_2 = "Account_Take_2",
         ACCOUNT_TAKE_3 = "Account_Take_3",
@@ -2274,8 +2253,11 @@ export namespace esi {
         ACCOUNT_TAKE_5 = "Account_Take_5",
         ACCOUNT_TAKE_6 = "Account_Take_6",
         ACCOUNT_TAKE_7 = "Account_Take_7",
-        DIPLOMAT = "Diplomat",
+        ACCOUNTANT = "Accountant",
+        AUDITOR = "Auditor",
+        COMMUNICATIONS_OFFICER = "Communications_Officer",
         CONFIG_EQUIPMENT = "Config_Equipment",
+        CONFIG_STARBASE_EQUIPMENT = "Config_Starbase_Equipment",
         CONTAINER_TAKE_1 = "Container_Take_1",
         CONTAINER_TAKE_2 = "Container_Take_2",
         CONTAINER_TAKE_3 = "Container_Take_3",
@@ -2283,19 +2265,37 @@ export namespace esi {
         CONTAINER_TAKE_5 = "Container_Take_5",
         CONTAINER_TAKE_6 = "Container_Take_6",
         CONTAINER_TAKE_7 = "Container_Take_7",
-        RENT_OFFICE = "Rent_Office",
-        RENT_FACTORY_FACILITY = "Rent_Factory_Facility",
-        RENT_RESEARCH_FACILITY = "Rent_Research_Facility",
-        JUNIOR_ACCOUNTANT = "Junior_Accountant",
-        CONFIG_STARBASE_EQUIPMENT = "Config_Starbase_Equipment",
-        TRADER = "Trader",
-        COMMUNICATIONS_OFFICER = "Communications_Officer",
         CONTRACT_MANAGER = "Contract_Manager",
+        DIPLOMAT = "Diplomat",
+        DIRECTOR = "Director",
+        FACTORY_MANAGER = "Factory_Manager",
+        FITTING_MANAGER = "Fitting_Manager",
+        HANGAR_QUERY_1 = "Hangar_Query_1",
+        HANGAR_QUERY_2 = "Hangar_Query_2",
+        HANGAR_QUERY_3 = "Hangar_Query_3",
+        HANGAR_QUERY_4 = "Hangar_Query_4",
+        HANGAR_QUERY_5 = "Hangar_Query_5",
+        HANGAR_QUERY_6 = "Hangar_Query_6",
+        HANGAR_QUERY_7 = "Hangar_Query_7",
+        HANGAR_TAKE_1 = "Hangar_Take_1",
+        HANGAR_TAKE_2 = "Hangar_Take_2",
+        HANGAR_TAKE_3 = "Hangar_Take_3",
+        HANGAR_TAKE_4 = "Hangar_Take_4",
+        HANGAR_TAKE_5 = "Hangar_Take_5",
+        HANGAR_TAKE_6 = "Hangar_Take_6",
+        HANGAR_TAKE_7 = "Hangar_Take_7",
+        JUNIOR_ACCOUNTANT = "Junior_Accountant",
+        PERSONNEL_MANAGER = "Personnel_Manager",
+        RENT_FACTORY_FACILITY = "Rent_Factory_Facility",
+        RENT_OFFICE = "Rent_Office",
+        RENT_RESEARCH_FACILITY = "Rent_Research_Facility",
+        SECURITY_OFFICER = "Security_Officer",
         STARBASE_DEFENSE_OPERATOR = "Starbase_Defense_Operator",
         STARBASE_FUEL_TECHNICIAN = "Starbase_Fuel_Technician",
-        FITTING_MANAGER = "Fitting_Manager",
+        STATION_MANAGER = "Station_Manager",
         TERRESTRIAL_COMBAT_OFFICER = "Terrestrial_Combat_Officer",
-        TERRESTRIAL_LOGISTICS_OFFICER = "Terrestrial_Logistics_Officer"
+        TERRESTRIAL_LOGISTICS_OFFICER = "Terrestrial_Logistics_Officer",
+        TRADER = "Trader"
     }
     /**
      * This is the response type for the route, [`GET /v1/search/`](https://esi.tech.ccp.is//#!/Search/get_search).
@@ -2507,8 +2507,8 @@ export interface Parameters {
      */
     get_characters_character_id_calendar_event_id: {
         path: {
-            event_id: number;
             character_id: number;
+            event_id: number;
         };
     };
     /**
@@ -2516,8 +2516,8 @@ export interface Parameters {
      */
     put_characters_character_id_calendar_event_id: {
         path: {
-            event_id: number;
             character_id: number;
+            event_id: number;
         };
         body: esi.character.calendar.Response;
     };
@@ -2693,8 +2693,8 @@ export interface Parameters {
      */
     get_characters_character_id_contracts_contract_id_bids: {
         path: {
-            contract_id: number;
             character_id: number;
+            contract_id: number;
         };
     };
     /**
@@ -2702,8 +2702,8 @@ export interface Parameters {
      */
     get_characters_character_id_contracts_contract_id_items: {
         path: {
-            contract_id: number;
             character_id: number;
+            contract_id: number;
         };
     };
     /**
@@ -2774,8 +2774,8 @@ export interface Parameters {
      */
     put_corporations_corporation_id_structures_structure_id: {
         path: {
-            structure_id: number;
             corporation_id: number;
+            structure_id: number;
         };
         body: esi.corporation.VulnerabilitySchedule[];
     };
@@ -2808,8 +2808,8 @@ export interface Parameters {
      */
     delete_characters_character_id_fittings_fitting_id: {
         path: {
-            fitting_id: number;
             character_id: number;
+            fitting_id: number;
         };
     };
     /**
@@ -3038,8 +3038,8 @@ export interface Parameters {
      */
     delete_characters_character_id_mail_labels_label_id: {
         path: {
-            label_id: number;
             character_id: number;
+            label_id: number;
         };
     };
     /**
@@ -3047,8 +3047,8 @@ export interface Parameters {
      */
     delete_characters_character_id_mail_mail_id: {
         path: {
-            mail_id: number;
             character_id: number;
+            mail_id: number;
         };
     };
     /**
@@ -3084,8 +3084,8 @@ export interface Parameters {
      */
     get_characters_character_id_mail_mail_id: {
         path: {
-            mail_id: number;
             character_id: number;
+            mail_id: number;
         };
     };
     /**
@@ -3111,8 +3111,8 @@ export interface Parameters {
      */
     put_characters_character_id_mail_mail_id: {
         path: {
-            mail_id: number;
             character_id: number;
+            mail_id: number;
         };
         body: esi.character.mail.MailUpdate;
     };
@@ -3157,8 +3157,8 @@ export interface Parameters {
     get_markets_region_id_orders: {
         query: {
             order_type: "buy" | "sell" | "all";
-            type_id?: number;
             page?: number;
+            type_id?: number;
         };
         path: {
             region_id: number;
@@ -3220,8 +3220,8 @@ export interface Parameters {
      */
     get_characters_character_id_planets_planet_id: {
         path: {
-            planet_id: number;
             character_id: number;
+            planet_id: number;
         };
     };
     /**

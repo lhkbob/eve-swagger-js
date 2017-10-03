@@ -81,7 +81,7 @@ function getTypeDebugLog(type) {
 }
 function getNamespaceDebugLog(namespace) {
     let log = '-----------------\n';
-    log += `Namespace ${namespace.fullName}:\n`;
+    log += `Namespace ${namespace.fullName} (type count = ${namespace.declarationCount}:\n`;
     for (let l of namespace.log) {
         log += `  - ${l}\n`;
     }
