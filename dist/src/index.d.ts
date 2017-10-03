@@ -1,5 +1,5 @@
 import { Configuration } from './internal/esi-agent';
-import { Responses, esi } from '../gen/esi';
+import { Responses, esi } from './internal/esi-types';
 import { Agents } from './api/universe/agents';
 import { Bloodlines } from './api/universe/bloodlines';
 import { Constellations } from './api/universe/constellations';

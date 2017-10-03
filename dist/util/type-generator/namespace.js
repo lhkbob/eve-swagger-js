@@ -120,7 +120,7 @@ class Namespace {
                 this.children_.delete(name);
                 c.parent_ = undefined;
                 this.log.push(...c.log);
-                this.log.push(`Collapsed ${name} into ${this.fullName} (failed declaration limit = ${decCountCheck}, explicit = ${explicitCheck})`);
+                this.log.push(`${name} merged (dec count = ${c.declarationCount}, explicit = ${explicitCheck})`);
             }
         }
         // Now do the sibling filter, which is equivalent to if the number of
@@ -135,16 +135,14 @@ class Namespace {
                     return;
                 }
             }
-            if (this.children_.size > 0) {
-                // All siblings can be collapsed
-                for (let c of this.children) {
-                    this.members.push(...c.members);
-                    this.log.push(...c.log);
-                    c.parent_ = undefined;
-                }
-                this.log.push(`Collapsed all children into ${this.fullName} due to sibling limit.`);
-                this.children_.clear();
+            // All siblings can be collapsed
+            for (let c of this.children) {
+                this.members.push(...c.members);
+                this.log.push(...c.log);
+                this.log.push(`${c.name} merged (sibling limit)`);
+                c.parent_ = undefined;
             }
+            this.children_.clear();
         }
     }
     static parse(namespace) {
@@ -209,6 +207,7 @@ class Namespace {
                 for (let route of routes) {
                     let namespace = routeNamespaces.get(route);
                     if (namespace) {
+                        type.log.push(`Namespace ${namespace[0].fullName}`);
                         if (finalNamespace) {
                             if (namespace[1]) {
                                 // An explicit namespace, so make sure it is not masking another
@@ -303,7 +302,7 @@ function getRouteNamespaces(spec) {
     let names = new Map();
     for (let id of spec.routeIDs) {
         let [namespace, explicit] = Namespace.forRoute(spec.route(id));
-        namespace.log.push(`Route ${id} maps to ${namespace.fullName} (explicit = ${explicit})`);
+        namespace.log.push(`Route ${id} -> ${namespace.fullName} (explicit = ${explicit})`);
         names.set(id, [namespace, explicit]);
     }
     return names;

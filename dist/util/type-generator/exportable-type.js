@@ -14,6 +14,7 @@ const esi = require("../esi-api");
 class ExportableType {
     constructor(title, type) {
         this.type = type;
+        this.log = [];
         this.dependencies_ = new Map();
         this.dependents_ = [];
         this.titles = [title];

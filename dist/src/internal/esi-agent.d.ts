@@ -1,4 +1,4 @@
-import { Responses, Parameters, esi } from '../../gen/esi';
+import { Responses, Parameters, esi } from './esi-types';
 /**
  * Configuration options for the {@link ESIAgent}.
  */

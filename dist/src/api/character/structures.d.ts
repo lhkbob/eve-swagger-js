@@ -1,6 +1,6 @@
 import { Search } from '../../internal/search';
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 /**
  * An api adapter that provides functions for accessing various details for a
  * structure accessible by the character, specified by id, via functions in the

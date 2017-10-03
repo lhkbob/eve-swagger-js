@@ -1,6 +1,6 @@
 import { Search } from '../../internal/search';
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses } from '../../../gen/esi';
+import { Responses } from '../../internal/esi-types';
 /**
  * An api adapter for dealing with a single solar system, currently only
  * supporting fetching simple information and calculating routes between

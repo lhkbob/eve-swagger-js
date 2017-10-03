@@ -1,5 +1,5 @@
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 /**
  * An api adapter over the end points handling a specific squad in a character's
  * fleet via functions in the [fleets](https://esi.tech.ccp.is/latest/#/Fleets)

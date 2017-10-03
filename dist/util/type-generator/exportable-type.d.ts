@@ -41,6 +41,7 @@ export declare type TypeVisitor<T> = (path: {
  */
 export declare class ExportableType {
     readonly type: ts.DeclarationStatement | ts.VariableStatement | ts.TypeNode | string;
+    log: string[];
     readonly titles: string[];
     private dependencies_;
     private dependents_;

@@ -1,5 +1,5 @@
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 /**
  * An api adapter that provides functions for removing a particular fitting of a
  * character, specified by id via functions in the

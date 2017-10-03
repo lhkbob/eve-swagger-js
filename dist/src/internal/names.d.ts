@@ -1,5 +1,5 @@
 import { ESIAgent } from './esi-agent';
-import { esi } from '../../gen/esi';
+import { esi } from './esi-types';
 /**
  * Look up the names of a set of ids, restricted to a particular name category.
  * This utility function automatically splits large arrays of ids into lists of

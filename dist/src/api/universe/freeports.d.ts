@@ -1,5 +1,5 @@
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses } from '../../../gen/esi';
+import { Responses } from '../../internal/esi-types';
 /**
  * An api adapter over the end points handling public structures via functions
  * in the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.

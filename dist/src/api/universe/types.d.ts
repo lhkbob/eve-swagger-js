@@ -1,6 +1,6 @@
 import { Search } from '../../internal/search';
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses } from '../../../gen/esi';
+import { Responses } from '../../internal/esi-types';
 /**
  * An api adapter for dealing with a single item group, currently only
  * supporting fetching simple information.

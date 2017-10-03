@@ -1,5 +1,5 @@
 import { ESIAgent } from './esi-agent';
-import { esi } from '../../gen/esi';
+import { esi } from './esi-types';
 /**
  * An api adapter over the end points handling search and character search via
  * functions in the [search](https://esi.tech.ccp.is/latest/#/Search) ESI

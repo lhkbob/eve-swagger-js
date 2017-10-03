@@ -1,5 +1,5 @@
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 /**
  * An api adapter over the end points handling a specific message in a
  * character's inbox via functions in the

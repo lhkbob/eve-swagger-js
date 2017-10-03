@@ -1,5 +1,5 @@
 import { ESIAgent } from '../internal/esi-agent';
-import { Responses } from '../../gen/esi';
+import { Responses } from '../internal/esi-types';
 /**
  * An api adapter over the end points handling incursions  via functions in the
  * [incursions](https://esi.tech.ccp.is/latest/#/Incursions) ESI endpoints.

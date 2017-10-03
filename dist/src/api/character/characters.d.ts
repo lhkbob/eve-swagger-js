@@ -1,6 +1,6 @@
 import { Search } from '../../internal/search';
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../../gen/esi';
+import { Responses, esi } from '../../internal/esi-types';
 import { Autopilot } from './ui/autopilot';
 import { Bookmarks } from './bookmarks';
 import { Calendar } from './calendar';
