@@ -3,7 +3,7 @@ import * as SuperAgent from 'superagent';
 import * as Moment from 'moment';
 
 import { ROUTE_MAP, Responses, Parameters, esi } from './esi-types';
-import { ESIError, ErrorName } from '../error';
+import { ESIError, ErrorName } from './error';
 import Cache from './cache';
 
 /**
