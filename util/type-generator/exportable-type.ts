@@ -43,7 +43,7 @@ export type TypeVisitor<T> = (path: { node: ExportableType, key: string }[],
  * and what its possible names could be.
  */
 export class ExportableType {
-  public log:string[];
+  public log: string[];
   readonly titles: string[];
 
   // For dependencies and dependents, the keys associated with the type
@@ -563,7 +563,7 @@ export class ExportableType {
       throw new Error('Unsupported enum definition: ' + schema);
     }
 
-    let members: ts.EnumMember[] = [];
+    let members: { name: string, value: ts.EnumMember }[] = [];
 
     // In the swagger spec, the enumeration values can be strings, numbers,
     // booleans or objects (assumed not mixed). This supports string and number
@@ -598,7 +598,10 @@ export class ExportableType {
         // uppercase
         for (let v of schema.enum) {
           let key = camelCaseToEnumName(v as string);
-          members.push(ts.createEnumMember(key, ts.createLiteral(v as string)));
+          members.push({
+            name: key,
+            value: ts.createEnumMember(key, ts.createLiteral(v as string))
+          });
         }
       }
     } else if (schema.type === 'float' || schema.type === 'number'
@@ -615,8 +618,10 @@ export class ExportableType {
         // for each enum value, it just defines a restricted set. Make up enum
         // names as V_<value>.
         for (let v of schema.enum) {
-          members.push(
-              ts.createEnumMember('V_' + v, ts.createLiteral(v as number)));
+          members.push({
+            name: 'V_' + v,
+            value: ts.createEnumMember('V_' + v, ts.createLiteral(v as number))
+          });
         }
       }
     } else {
@@ -625,10 +630,14 @@ export class ExportableType {
 
     // If we've reached here, create a const enum from the list of members
     // and export it (otherwise the enum was inlined).
+    // Sort the enum members as well, since these enumerations are really more
+    // like sets of valid values instead of orderings.
+    members.sort((a, b) => a.name.localeCompare(b.name));
+
     let enumDecl = ts.createEnumDeclaration(undefined, [
       ts.createToken(ts.SyntaxKind.ExportKeyword),
       ts.createToken(ts.SyntaxKind.ConstKeyword)
-    ], title, members);
+    ], title, members.map(m => m.value));
 
     // Create a new ExportableType, note that this will be a leaf type since
     // the enum by construction will not have any children dependencies.
@@ -788,9 +797,9 @@ export class ExportableType {
     // parameters that the agent manages on its own, and separate them into
     // their sources.
     let queryParams = new Map();
-    let queryParamSigs: ts.PropertySignature[] = [];
+    let queryParamSigs: { name: string, sig: ts.PropertySignature }[] = [];
     let pathParams = new Map();
-    let pathParamSigs: ts.PropertySignature[] = [];
+    let pathParamSigs: { name: string, sig: ts.PropertySignature }[] = [];
     let bodyParam;
     let bodyQuestionToken;
     for (let param of route.parameterNames) {
@@ -813,8 +822,11 @@ export class ExportableType {
         let depMap = source === 'query' ? queryParams : pathParams;
         let sigs = source === 'query' ? queryParamSigs : pathParamSigs;
         depMap.set(param, paramType);
-        sigs.push(ts.createPropertySignature(undefined, param, questionToken,
-            paramType.createReferenceType(), undefined));
+        sigs.push({
+          name: param,
+          sig: ts.createPropertySignature(undefined, param, questionToken,
+              paramType.createReferenceType(), undefined)
+        });
       } else if (source === 'body') {
         // There can only be one body parameter
         if (bodyParam) {
@@ -830,13 +842,18 @@ export class ExportableType {
       }
     }
 
+    // Sort property signatures for consistency across version changes
+    queryParamSigs.sort((a, b) => a.name.localeCompare(b.name));
+    pathParamSigs.sort((a, b) => a.name.localeCompare(b.name));
+
     // Group the three sources into their own ExportableTypes as type literals
     let aggregateSigs = [];
     let aggregateDeps = new Map();
     // Include the query parameters as an object literal labeled 'query'
     if (queryParamSigs.length > 0) {
       let queryType = ExportableType.createTypeLiteral(
-          route.id + '_query_params', queryParamSigs, queryParams);
+          route.id + '_query_params', queryParamSigs.map(m => m.sig),
+          queryParams);
       aggregateDeps.set('query', queryType);
       aggregateSigs.push(
           ts.createPropertySignature(undefined, 'query', undefined,
@@ -845,7 +862,7 @@ export class ExportableType {
     // Include the path parameters as an object literal labeled 'path'
     if (pathParamSigs.length > 0) {
       let pathType = ExportableType.createTypeLiteral(route.id + '_path_params',
-          pathParamSigs, pathParams);
+          pathParamSigs.map(m => m.sig), pathParams);
       aggregateDeps.set('path', pathType);
       aggregateSigs.push(
           ts.createPropertySignature(undefined, 'path', undefined,
