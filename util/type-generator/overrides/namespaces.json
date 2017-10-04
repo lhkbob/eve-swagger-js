@@ -1,13 +1,16 @@
 {
   "explicit": {
+    "get_characters_character_id_blueprints": "esi.character.asset",
     "get_characters_character_id_killmails_recent": "esi.killmail",
+    "get_characters_character_id_notifications_contacts": "esi.character.notification",
+    "get_corporations_corporation_id_blueprints": "esi.corporation.asset",
     "get_universe_schematics_schematic_id": "esi.universe",
     "post_ui_openwindow_newmail": "esi.character.mail"
   },
   "collapse": [
+    "esi.character.calendar.event",
     "esi.character.mail.label",
     "esi.character.skill",
-    "esi.corporation.structure",
     "esi.fleet.member",
     "esi.fleet.wing",
     "esi.universe.type"
