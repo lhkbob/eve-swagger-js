@@ -96,16 +96,16 @@ function getTypeDebugLog(type: ExportableType): string {
   for (let t of type.titles) {
     log += `  - ${t}\n`;
   }
-  log += ` Extra:\n`;
+  log += ` Considered namespaces:\n`;
   for (let l of type.log) {
-    log += `  - ${l}`;
+    log += `  - ${l}\n`;
   }
   return log;
 }
 
 function getNamespaceDebugLog(namespace: Namespace): string {
   let log = '-----------------\n';
-  log += `Namespace ${namespace.fullName} (type count = ${namespace.declarationCount}:\n`;
+  log += `Namespace ${namespace.fullName} (type count = ${namespace.declarationCount}):\n`;
   for (let l of namespace.log) {
     log += `  - ${l}\n`;
   }

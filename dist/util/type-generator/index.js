@@ -75,7 +75,7 @@ function getTypeDebugLog(type) {
     }
     log += ` Extra:\n`;
     for (let l of type.log) {
-        log += `  - ${l}`;
+        log += `  - ${l}\n`;
     }
     return log;
 }
