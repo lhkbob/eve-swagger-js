@@ -1,6 +1,6 @@
 // This is a generated file, take caution when editing manually.
 // Run `npm run gen:esi` to regenerate.
-// Generated 164 types in monolithic namespace for ESI v0.5.2.
+// Generated 196 types in monolithic namespace for ESI v0.6.0.
 export namespace esi {
     export namespace alliance {
         /**
@@ -34,11 +34,152 @@ export namespace esi {
         }
     }
     export namespace character {
+        export namespace asset {
+            export interface Asset {
+                is_singleton: boolean;
+                item_id: number;
+                location_flag: esi.character.asset.LocationType;
+                location_id: number;
+                location_type: "station" | "solar_system" | "other";
+                quantity?: number;
+                type_id: number;
+            }
+            export interface Blueprint {
+                /**
+                 * Unique ID for this item. The ID of an item is stable if that item is not repackaged, stacked, detached from a stack, assembled, or otherwise altered. If an item is changed in one of these ways, then the ID will also change.
+                 */
+                item_id: number;
+                location_flag: esi.character.asset.LocationType;
+                /**
+                 * References a solar system, station or item_id if this blueprint is located within a container. If an item_id the Character
+                 *
+                 * - AssetList API must be queried to find the container using the item_id, from which the correct location of the Blueprint can be derived.
+                 */
+                location_id: number;
+                /**
+                 * Material Efficiency Level of the blueprint, can be any integer between 0 and 10.
+                 */
+                material_efficiency: number;
+                /**
+                 * Typically will be -1 or -2 designating a singleton item, where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (no activities performed on them yet).
+                 */
+                quantity: number;
+                /**
+                 * Number of runs remaining if the blueprint is a copy, -1 if it is an original.
+                 */
+                runs: number;
+                /**
+                 * Time Efficiency Level of the blueprint, can be any even integer between 0 and 20.
+                 */
+                time_efficiency: number;
+                type_id: number;
+            }
+            export interface Location {
+                item_id: number;
+                x: number;
+                y: number;
+                z: number;
+            }
+            /**
+             * Indicates something about this item's storage location. The flag is used to differentiate between hangar divisions, drone bay, fitting location, and similar.
+             */
+            export const enum LocationType {
+                ASSET_SAFETY = "AssetSafety",
+                AUTO_FIT = "AutoFit",
+                CARGO = "Cargo",
+                CORPSE_BAY = "CorpseBay",
+                DELIVERIES = "Deliveries",
+                DRONE_BAY = "DroneBay",
+                FIGHTER_BAY = "FighterBay",
+                FIGHTER_TUBE_0 = "FighterTube0",
+                FIGHTER_TUBE_1 = "FighterTube1",
+                FIGHTER_TUBE_2 = "FighterTube2",
+                FIGHTER_TUBE_3 = "FighterTube3",
+                FIGHTER_TUBE_4 = "FighterTube4",
+                FLEET_HANGAR = "FleetHangar",
+                HANGAR = "Hangar",
+                HANGAR_ALL = "HangarAll",
+                HI_SLOT_0 = "HiSlot0",
+                HI_SLOT_1 = "HiSlot1",
+                HI_SLOT_2 = "HiSlot2",
+                HI_SLOT_3 = "HiSlot3",
+                HI_SLOT_4 = "HiSlot4",
+                HI_SLOT_5 = "HiSlot5",
+                HI_SLOT_6 = "HiSlot6",
+                HI_SLOT_7 = "HiSlot7",
+                HIDDEN_MODIFIERS = "HiddenModifiers",
+                IMPLANT = "Implant",
+                LO_SLOT_0 = "LoSlot0",
+                LO_SLOT_1 = "LoSlot1",
+                LO_SLOT_2 = "LoSlot2",
+                LO_SLOT_3 = "LoSlot3",
+                LO_SLOT_4 = "LoSlot4",
+                LO_SLOT_5 = "LoSlot5",
+                LO_SLOT_6 = "LoSlot6",
+                LO_SLOT_7 = "LoSlot7",
+                LOCKED = "Locked",
+                MED_SLOT_0 = "MedSlot0",
+                MED_SLOT_1 = "MedSlot1",
+                MED_SLOT_2 = "MedSlot2",
+                MED_SLOT_3 = "MedSlot3",
+                MED_SLOT_4 = "MedSlot4",
+                MED_SLOT_5 = "MedSlot5",
+                MED_SLOT_6 = "MedSlot6",
+                MED_SLOT_7 = "MedSlot7",
+                MODULE = "Module",
+                QUAFE_BAY = "QuafeBay",
+                RIG_SLOT_0 = "RigSlot0",
+                RIG_SLOT_1 = "RigSlot1",
+                RIG_SLOT_2 = "RigSlot2",
+                RIG_SLOT_3 = "RigSlot3",
+                RIG_SLOT_4 = "RigSlot4",
+                RIG_SLOT_5 = "RigSlot5",
+                RIG_SLOT_6 = "RigSlot6",
+                RIG_SLOT_7 = "RigSlot7",
+                SHIP_HANGAR = "ShipHangar",
+                SPECIALIZED_AMMO_HOLD = "SpecializedAmmoHold",
+                SPECIALIZED_COMMAND_CENTER_HOLD = "SpecializedCommandCenterHold",
+                SPECIALIZED_FUEL_BAY = "SpecializedFuelBay",
+                SPECIALIZED_GAS_HOLD = "SpecializedGasHold",
+                SPECIALIZED_INDUSTRIAL_SHIP_HOLD = "SpecializedIndustrialShipHold",
+                SPECIALIZED_LARGE_SHIP_HOLD = "SpecializedLargeShipHold",
+                SPECIALIZED_MATERIAL_BAY = "SpecializedMaterialBay",
+                SPECIALIZED_MEDIUM_SHIP_HOLD = "SpecializedMediumShipHold",
+                SPECIALIZED_MINERAL_HOLD = "SpecializedMineralHold",
+                SPECIALIZED_ORE_HOLD = "SpecializedOreHold",
+                SPECIALIZED_PLANETARY_COMMODITIES_HOLD = "SpecializedPlanetaryCommoditiesHold",
+                SPECIALIZED_SALVAGE_HOLD = "SpecializedSalvageHold",
+                SPECIALIZED_SHIP_HOLD = "SpecializedShipHold",
+                SPECIALIZED_SMALL_SHIP_HOLD = "SpecializedSmallShipHold",
+                SUB_SYSTEM_BAY = "SubSystemBay",
+                SUB_SYSTEM_SLOT_0 = "SubSystemSlot0",
+                SUB_SYSTEM_SLOT_1 = "SubSystemSlot1",
+                SUB_SYSTEM_SLOT_2 = "SubSystemSlot2",
+                SUB_SYSTEM_SLOT_3 = "SubSystemSlot3",
+                SUB_SYSTEM_SLOT_4 = "SubSystemSlot4",
+                SUB_SYSTEM_SLOT_5 = "SubSystemSlot5",
+                SUB_SYSTEM_SLOT_6 = "SubSystemSlot6",
+                SUB_SYSTEM_SLOT_7 = "SubSystemSlot7",
+                UNLOCKED = "Unlocked",
+                WARDROBE = "Wardrobe"
+            }
+            export interface Name {
+                item_id: number;
+                name: string;
+            }
+        }
         export namespace calendar {
+            /**
+             * Character_id and response of an attendee.
+             */
+            export interface Attendee {
+                character_id?: number;
+                event_response?: esi.character.calendar.ResponseState;
+            }
             export interface Calendar {
                 event_date?: string;
                 event_id?: number;
-                event_response?: esi.character.calendar.EventResponse;
+                event_response?: esi.character.calendar.ResponseState;
                 importance?: number;
                 title?: string;
             }
@@ -57,12 +198,6 @@ export namespace esi {
                 text: string;
                 title: string;
             }
-            export const enum EventResponse {
-                ACCEPTED = "accepted",
-                DECLINED = "declined",
-                NOT_RESPONDED = "not_responded",
-                TENTATIVE = "tentative"
-            }
             export const enum OwnerType {
                 ALLIANCE = "alliance",
                 CHARACTER = "character",
@@ -75,6 +210,12 @@ export namespace esi {
              */
             export interface Response {
                 response: "accepted" | "declined" | "tentative";
+            }
+            export const enum ResponseState {
+                ACCEPTED = "accepted",
+                DECLINED = "declined",
+                NOT_RESPONDED = "not_responded",
+                TENTATIVE = "tentative"
             }
         }
         export namespace channel {
@@ -97,7 +238,7 @@ export namespace esi {
                  */
                 comparison_key: string;
                 /**
-                 * Whether this is a password protected channel.
+                 * If this is a password protected channel.
                  */
                 has_password: boolean;
                 /**
@@ -454,7 +595,212 @@ export namespace esi {
                 MAILING_LIST = "mailing_list"
             }
         }
+        export namespace notification {
+            export interface ContactNotification {
+                message: string;
+                notification_id: number;
+                send_date: string;
+                sender_character_id: number;
+                /**
+                 * A number representing the standing level the receiver has been added at by the sender. The standing levels are as follows: -10 -> Terrible | -5 -> Bad |  0 -> Neutral |  5 -> Good |  10 -> Excellent.
+                 */
+                standing_level: number;
+            }
+            export interface Notification {
+                is_read?: boolean;
+                notification_id: number;
+                sender_id: number;
+                sender_type: esi.character.notification.SenderType;
+                text?: string;
+                timestamp: string;
+                type: esi.character.notification.Type;
+            }
+            export const enum SenderType {
+                ALLIANCE = "alliance",
+                CHARACTER = "character",
+                CORPORATION = "corporation",
+                FACTION = "faction",
+                OTHER = "other"
+            }
+            export const enum Type {
+                ACCEPTED_ALLY = "AcceptedAlly",
+                ACCEPTED_SURRENDER = "AcceptedSurrender",
+                ALL_ANCHORING_MSG = "AllAnchoringMsg",
+                ALL_MAINTENANCE_BILL_MSG = "AllMaintenanceBillMsg",
+                ALL_STRUC_INVULNERABLE_MSG = "AllStrucInvulnerableMsg",
+                ALL_STRUCT_VULNERABLE_MSG = "AllStructVulnerableMsg",
+                ALL_WAR_CORP_JOINED_ALLIANCE_MSG = "AllWarCorpJoinedAllianceMsg",
+                ALL_WAR_DECLARED_MSG = "AllWarDeclaredMsg",
+                ALL_WAR_INVALIDATED_MSG = "AllWarInvalidatedMsg",
+                ALL_WAR_RETRACTED_MSG = "AllWarRetractedMsg",
+                ALL_WAR_SURRENDER_MSG = "AllWarSurrenderMsg",
+                ALLIANCE_CAPITAL_CHANGED = "AllianceCapitalChanged",
+                ALLY_CONTRACT_CANCELLED = "AllyContractCancelled",
+                ALLY_JOINED_WAR_AGGRESSOR_MSG = "AllyJoinedWarAggressorMsg",
+                ALLY_JOINED_WAR_ALLY_MSG = "AllyJoinedWarAllyMsg",
+                ALLY_JOINED_WAR_DEFENDER_MSG = "AllyJoinedWarDefenderMsg",
+                BATTLE_PUNISH_FRIENDLY_FIRE = "BattlePunishFriendlyFire",
+                BILL_OUT_OF_MONEY_MSG = "BillOutOfMoneyMsg",
+                BILL_PAID_CORP_ALL_MSG = "BillPaidCorpAllMsg",
+                BOUNTY_CLAIM_MSG = "BountyClaimMsg",
+                BOUNTY_ESSSHARED = "BountyESSShared",
+                BOUNTY_ESSTAKEN = "BountyESSTaken",
+                BOUNTY_PLACED_ALLIANCE = "BountyPlacedAlliance",
+                BOUNTY_PLACED_CHAR = "BountyPlacedChar",
+                BOUNTY_PLACED_CORP = "BountyPlacedCorp",
+                BOUNTY_YOUR_BOUNTY_CLAIMED = "BountyYourBountyClaimed",
+                BUDDY_CONNECT_CONTACT_ADD = "BuddyConnectContactAdd",
+                CHAR_APP_ACCEPT_MSG = "CharAppAcceptMsg",
+                CHAR_APP_REJECT_MSG = "CharAppRejectMsg",
+                CHAR_APP_WITHDRAW_MSG = "CharAppWithdrawMsg",
+                CHAR_LEFT_CORP_MSG = "CharLeftCorpMsg",
+                CHAR_MEDAL_MSG = "CharMedalMsg",
+                CHAR_TERMINATION_MSG = "CharTerminationMsg",
+                CLONE_ACTIVATION_MSG = "CloneActivationMsg",
+                CLONE_ACTIVATION_MSG_2 = "CloneActivationMsg2",
+                CLONE_MOVED_MSG = "CloneMovedMsg",
+                CLONE_REVOKED_MSG_1 = "CloneRevokedMsg1",
+                CLONE_REVOKED_MSG_2 = "CloneRevokedMsg2",
+                CONTACT_ADD = "ContactAdd",
+                CONTACT_EDIT = "ContactEdit",
+                CONTAINER_PASSWORD_MSG = "ContainerPasswordMsg",
+                CORP_ALL_BILL_MSG = "CorpAllBillMsg",
+                CORP_APP_ACCEPT_MSG = "CorpAppAcceptMsg",
+                CORP_APP_INVITED_MSG = "CorpAppInvitedMsg",
+                CORP_APP_NEW_MSG = "CorpAppNewMsg",
+                CORP_APP_REJECT_CUSTOM_MSG = "CorpAppRejectCustomMsg",
+                CORP_APP_REJECT_MSG = "CorpAppRejectMsg",
+                CORP_DIVIDEND_MSG = "CorpDividendMsg",
+                CORP_FRIENDLY_FIRE_DISABLE_TIMER_COMPLETED = "CorpFriendlyFireDisableTimerCompleted",
+                CORP_FRIENDLY_FIRE_DISABLE_TIMER_STARTED = "CorpFriendlyFireDisableTimerStarted",
+                CORP_FRIENDLY_FIRE_ENABLE_TIMER_COMPLETED = "CorpFriendlyFireEnableTimerCompleted",
+                CORP_FRIENDLY_FIRE_ENABLE_TIMER_STARTED = "CorpFriendlyFireEnableTimerStarted",
+                CORP_KICKED = "CorpKicked",
+                CORP_LIQUIDATION_MSG = "CorpLiquidationMsg",
+                CORP_NEW_CEOMSG = "CorpNewCEOMsg",
+                CORP_NEWS_MSG = "CorpNewsMsg",
+                CORP_OFFICE_EXPIRATION_MSG = "CorpOfficeExpirationMsg",
+                CORP_STRUCT_LOST_MSG = "CorpStructLostMsg",
+                CORP_TAX_CHANGE_MSG = "CorpTaxChangeMsg",
+                CORP_VOTE_CEOREVOKED_MSG = "CorpVoteCEORevokedMsg",
+                CORP_VOTE_MSG = "CorpVoteMsg",
+                CORP_WAR_DECLARED_MSG = "CorpWarDeclaredMsg",
+                CORP_WAR_FIGHTING_LEGAL_MSG = "CorpWarFightingLegalMsg",
+                CORP_WAR_INVALIDATED_MSG = "CorpWarInvalidatedMsg",
+                CORP_WAR_RETRACTED_MSG = "CorpWarRetractedMsg",
+                CORP_WAR_SURRENDER_MSG = "CorpWarSurrenderMsg",
+                CUSTOMS_MSG = "CustomsMsg",
+                DECLARE_WAR = "DeclareWar",
+                DISTRICT_ATTACKED = "DistrictAttacked",
+                DUST_APP_ACCEPTED_MSG = "DustAppAcceptedMsg",
+                ENTOSIS_CAPTURE_STARTED = "EntosisCaptureStarted",
+                FAC_WAR_CORP_JOIN_REQUEST_MSG = "FacWarCorpJoinRequestMsg",
+                FAC_WAR_CORP_JOIN_WITHDRAW_MSG = "FacWarCorpJoinWithdrawMsg",
+                FAC_WAR_CORP_LEAVE_REQUEST_MSG = "FacWarCorpLeaveRequestMsg",
+                FAC_WAR_CORP_LEAVE_WITHDRAW_MSG = "FacWarCorpLeaveWithdrawMsg",
+                FAC_WAR_LPDISQUALIFIED_EVENT = "FacWarLPDisqualifiedEvent",
+                FAC_WAR_LPDISQUALIFIED_KILL = "FacWarLPDisqualifiedKill",
+                FAC_WAR_LPPAYOUT_EVENT = "FacWarLPPayoutEvent",
+                FAC_WAR_LPPAYOUT_KILL = "FacWarLPPayoutKill",
+                FWALLIANCE_KICK_MSG = "FWAllianceKickMsg",
+                FWALLIANCE_WARNING_MSG = "FWAllianceWarningMsg",
+                FWCHAR_KICK_MSG = "FWCharKickMsg",
+                FWCHAR_RANK_GAIN_MSG = "FWCharRankGainMsg",
+                FWCHAR_RANK_LOSS_MSG = "FWCharRankLossMsg",
+                FWCHAR_WARNING_MSG = "FWCharWarningMsg",
+                FWCORP_JOIN_MSG = "FWCorpJoinMsg",
+                FWCORP_KICK_MSG = "FWCorpKickMsg",
+                FWCORP_LEAVE_MSG = "FWCorpLeaveMsg",
+                FWCORP_WARNING_MSG = "FWCorpWarningMsg",
+                GAME_TIME_ADDED = "GameTimeAdded",
+                GAME_TIME_RECEIVED = "GameTimeReceived",
+                GAME_TIME_SENT = "GameTimeSent",
+                GIFT_RECEIVED = "GiftReceived",
+                IHUB_DESTROYED_BY_BILL_FAILURE = "IHubDestroyedByBillFailure",
+                INCURSION_COMPLETED_MSG = "IncursionCompletedMsg",
+                INDUSTRY_TEAM_AUCTION_LOST = "IndustryTeamAuctionLost",
+                INDUSTRY_TEAM_AUCTION_WON = "IndustryTeamAuctionWon",
+                INFRASTRUCTURE_HUB_BILL_ABOUT_TO_EXPIRE = "InfrastructureHubBillAboutToExpire",
+                INSURANCE_EXPIRATION_MSG = "InsuranceExpirationMsg",
+                INSURANCE_FIRST_SHIP_MSG = "InsuranceFirstShipMsg",
+                INSURANCE_INVALIDATED_MSG = "InsuranceInvalidatedMsg",
+                INSURANCE_ISSUED_MSG = "InsuranceIssuedMsg",
+                INSURANCE_PAYOUT_MSG = "InsurancePayoutMsg",
+                JUMP_CLONE_DELETED_MSG_1 = "JumpCloneDeletedMsg1",
+                JUMP_CLONE_DELETED_MSG_2 = "JumpCloneDeletedMsg2",
+                KILL_REPORT_FINAL_BLOW = "KillReportFinalBlow",
+                KILL_REPORT_VICTIM = "KillReportVictim",
+                KILL_RIGHT_AVAILABLE = "KillRightAvailable",
+                KILL_RIGHT_AVAILABLE_OPEN = "KillRightAvailableOpen",
+                KILL_RIGHT_EARNED = "KillRightEarned",
+                KILL_RIGHT_UNAVAILABLE = "KillRightUnavailable",
+                KILL_RIGHT_UNAVAILABLE_OPEN = "KillRightUnavailableOpen",
+                KILL_RIGHT_USED = "KillRightUsed",
+                LOCATE_CHAR_MSG = "LocateCharMsg",
+                MADE_WAR_MUTUAL = "MadeWarMutual",
+                MERC_OFFERED_NEGOTIATION_MSG = "MercOfferedNegotiationMsg",
+                MISSION_OFFER_EXPIRATION_MSG = "MissionOfferExpirationMsg",
+                MISSION_TIMEOUT_MSG = "MissionTimeoutMsg",
+                NPCSTANDINGS_GAINED = "NPCStandingsGained",
+                NPCSTANDINGS_LOST = "NPCStandingsLost",
+                OFFERED_SURRENDER = "OfferedSurrender",
+                OFFERED_TO_ALLY = "OfferedToAlly",
+                OLD_LSC_MESSAGES = "OldLscMessages",
+                OPERATION_FINISHED = "OperationFinished",
+                ORBITAL_ATTACKED = "OrbitalAttacked",
+                ORBITAL_REINFORCED = "OrbitalReinforced",
+                OWNERSHIP_TRANSFERRED = "OwnershipTransferred",
+                REIMBURSEMENT_MSG = "ReimbursementMsg",
+                RESEARCH_MISSION_AVAILABLE_MSG = "ResearchMissionAvailableMsg",
+                RETRACTS_WAR = "RetractsWar",
+                SEASONAL_CHALLENGE_COMPLETED = "SeasonalChallengeCompleted",
+                SOV_ALL_CLAIM_AQUIRED_MSG = "SovAllClaimAquiredMsg",
+                SOV_ALL_CLAIM_LOST_MSG = "SovAllClaimLostMsg",
+                SOV_COMMAND_NODE_EVENT_STARTED = "SovCommandNodeEventStarted",
+                SOV_CORP_BILL_LATE_MSG = "SovCorpBillLateMsg",
+                SOV_CORP_CLAIM_FAIL_MSG = "SovCorpClaimFailMsg",
+                SOV_DISRUPTOR_MSG = "SovDisruptorMsg",
+                SOV_STATION_ENTERED_FREEPORT = "SovStationEnteredFreeport",
+                SOV_STRUCTURE_DESTROYED = "SovStructureDestroyed",
+                SOV_STRUCTURE_REINFORCED = "SovStructureReinforced",
+                SOV_STRUCTURE_SELF_DESTRUCT_CANCEL = "SovStructureSelfDestructCancel",
+                SOV_STRUCTURE_SELF_DESTRUCT_FINISHED = "SovStructureSelfDestructFinished",
+                SOV_STRUCTURE_SELF_DESTRUCT_REQUESTED = "SovStructureSelfDestructRequested",
+                SOVEREIGNTY_IHDAMAGE_MSG = "SovereigntyIHDamageMsg",
+                SOVEREIGNTY_SBUDAMAGE_MSG = "SovereigntySBUDamageMsg",
+                SOVEREIGNTY_TCUDAMAGE_MSG = "SovereigntyTCUDamageMsg",
+                STATION_AGGRESSION_MSG_1 = "StationAggressionMsg1",
+                STATION_AGGRESSION_MSG_2 = "StationAggressionMsg2",
+                STATION_CONQUER_MSG = "StationConquerMsg",
+                STATION_SERVICE_DISABLED = "StationServiceDisabled",
+                STATION_SERVICE_ENABLED = "StationServiceEnabled",
+                STATION_STATE_CHANGE_MSG = "StationStateChangeMsg",
+                STORY_LINE_MISSION_AVAILABLE_MSG = "StoryLineMissionAvailableMsg",
+                STRUCTURE_ANCHORING = "StructureAnchoring",
+                STRUCTURE_COURIER_CONTRACT_CHANGED = "StructureCourierContractChanged",
+                STRUCTURE_DESTROYED = "StructureDestroyed",
+                STRUCTURE_FUEL_ALERT = "StructureFuelAlert",
+                STRUCTURE_ITEMS_DELIVERED = "StructureItemsDelivered",
+                STRUCTURE_LOST_ARMOR = "StructureLostArmor",
+                STRUCTURE_LOST_SHIELDS = "StructureLostShields",
+                STRUCTURE_ONLINE = "StructureOnline",
+                STRUCTURE_SERVICES_OFFLINE = "StructureServicesOffline",
+                STRUCTURE_UNANCHORING = "StructureUnanchoring",
+                STRUCTURE_UNDER_ATTACK = "StructureUnderAttack",
+                TOWER_ALERT_MSG = "TowerAlertMsg",
+                TOWER_RESOURCE_ALERT_MSG = "TowerResourceAlertMsg",
+                TRANSACTION_REVERSAL_MSG = "TransactionReversalMsg",
+                TUTORIAL_MSG = "TutorialMsg",
+                WAR_ALLY_OFFER_DECLINED_MSG = "WarAllyOfferDeclinedMsg",
+                WAR_SURRENDER_DECLINED_MSG = "WarSurrenderDeclinedMsg",
+                WAR_SURRENDER_OFFER_MSG = "WarSurrenderOfferMsg"
+            }
+        }
         export namespace planetaryinteraction {
+            export interface Content {
+                amount: number;
+                type_id: number;
+            }
             export interface ExtractorHead {
                 head_id: number;
                 latitude: number;
@@ -466,6 +812,7 @@ export namespace esi {
                 source_pin_id: number;
             }
             export interface Pin {
+                contents?: esi.character.planetaryinteraction.Content[];
                 expiry_time?: string;
                 extractor_details?: {
                     cycle_time?: number;
@@ -486,7 +833,7 @@ export namespace esi {
                 type_id: number;
             }
             /**
-             * This is the response type for the route, [`GET /v2/characters/{character_id}/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets_planet_id).
+             * This is the response type for the route, [`GET /v3/characters/{character_id}/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets_planet_id).
              */
             export interface Planet {
                 links: esi.character.planetaryinteraction.Link[];
@@ -518,11 +865,116 @@ export namespace esi {
                 quantity: number;
                 route_id: number;
                 source_pin_id: number;
-                waypoints?: esi.character.planetaryinteraction.Waypoint[];
+                /**
+                 * List of pin ID waypoints.
+                 */
+                waypoints?: number[];
             }
-            export interface Waypoint {
-                order: number;
-                pin_id: number;
+        }
+        export namespace wallet {
+            export interface Journal {
+                /**
+                 * Transaction amount. Positive when value transferred to the first party. Negative otherwise.
+                 */
+                amount?: number;
+                /**
+                 * Wallet balance after transaction occurred.
+                 */
+                balance?: number;
+                /**
+                 * Date and time of transaction.
+                 */
+                date: string;
+                /**
+                 * Extra information for different type of transaction.
+                 */
+                extra_info?: {
+                    alliance_id?: number;
+                    character_id?: number;
+                    contract_id?: number;
+                    corporation_id?: number;
+                    destroyed_ship_type_id?: number;
+                    job_id?: number;
+                    location_id?: number;
+                    npc_id?: number;
+                    npc_name?: string;
+                    planet_id?: number;
+                    system_id?: number;
+                    transaction_id?: number;
+                };
+                first_party_id?: number;
+                first_party_type?: esi.EntityType;
+                reason?: string;
+                /**
+                 * Unique journal reference ID.
+                 */
+                ref_id: number;
+                ref_type: esi.character.wallet.TransactionType;
+                second_party_id?: number;
+                second_party_type?: esi.EntityType;
+                /**
+                 * Tax amount received for tax related transactions.
+                 */
+                tax?: number;
+                /**
+                 * The corporation ID receiving any tax paid.
+                 */
+                tax_reciever_id?: number;
+            }
+            export interface Transaction {
+                client_id: number;
+                /**
+                 * Date and time of transaction.
+                 */
+                date: string;
+                is_buy: boolean;
+                is_personal: boolean;
+                journal_ref_id: number;
+                location_id: number;
+                quantity: number;
+                /**
+                 * Unique transaction ID.
+                 */
+                transaction_id: number;
+                type_id: number;
+                /**
+                 * Amount paid per unit.
+                 */
+                unit_price: number;
+            }
+            /**
+             * Transaction type, different type of transaction will populate different fields in `extra_info`.
+             */
+            export const enum TransactionType {
+                ALLIANCE_MAINTENANCE_FEE = "alliance_maintenance_fee",
+                BOUNTY_PRIZE_HISTORICAL = "bounty_prize_historical",
+                BOUNTY_PRIZES = "bounty_prizes",
+                BROKER_FEE = "broker_fee",
+                CONTRACT = "contract",
+                CORP_ACCOUNT_WITHDRAWAL = "corp_account_withdrawal",
+                CORPORATE_REWARD_PAYOUT = "corporate_reward_payout",
+                CSPA = "cspa",
+                CUSTOMS_OFFICE_EXPORT_DUTY = "customs_office_export_duty",
+                CUSTOMS_OFFICE_IMPORT_DUTY = "customs_office_import_duty",
+                INDUSTRY_FACILITY_TAX = "industry_facility_tax",
+                INSURANCE = "insurance",
+                JUMP_CLONE_ACTIVATION_FEE = "jump_clone_activation_fee",
+                JUMP_CLONE_INSTALLATION_FEE = "jump_clone_installation_fee",
+                LOGO_CHANGE_FEE = "logo_change_fee",
+                MANUFACTURING = "manufacturing",
+                MARKET_ESCROW = "market_escrow",
+                MARKET_TRANSACTION = "market_transaction",
+                MEDAL_CREATION_FEE = "medal_creation_fee",
+                MEDAL_ISSUING_FEE = "medal_issuing_fee",
+                MISSION_REWARD = "mission_reward",
+                MISSION_REWARD_BONUS = "mission_reward_bonus",
+                OFFICE_RENTAL_FEE = "office_rental_fee",
+                PLAYER_DONATION = "player_donation",
+                PLAYER_TRADING = "player_trading",
+                PROJECT_DISCOVERY_REWARD = "project_discovery_reward",
+                REPROCESSING_FEE = "reprocessing_fee",
+                SALES_TAX = "sales_tax",
+                UNKNOWN = "unknown"
             }
         }
         export interface Affiliation {
@@ -550,204 +1002,27 @@ export namespace esi {
             skill_type_id: number;
             started_at: string;
         }
-        export interface Asset {
-            is_singleton: boolean;
-            item_id: number;
-            location_flag: esi.character.AssetLocation;
-            location_id: number;
-            location_type: "station" | "solar_system" | "other";
-            quantity?: number;
-            type_id: number;
-        }
-        export const enum AssetLocation {
-            ASSET_SAFETY = "AssetSafety",
-            AUTO_FIT = "AutoFit",
-            CARGO = "Cargo",
-            CORPSE_BAY = "CorpseBay",
-            DELIVERIES = "Deliveries",
-            DRONE_BAY = "DroneBay",
-            FIGHTER_BAY = "FighterBay",
-            FIGHTER_TUBE_0 = "FighterTube0",
-            FIGHTER_TUBE_1 = "FighterTube1",
-            FIGHTER_TUBE_2 = "FighterTube2",
-            FIGHTER_TUBE_3 = "FighterTube3",
-            FIGHTER_TUBE_4 = "FighterTube4",
-            FLEET_HANGAR = "FleetHangar",
-            HANGAR = "Hangar",
-            HANGAR_ALL = "HangarAll",
-            HI_SLOT_0 = "HiSlot0",
-            HI_SLOT_1 = "HiSlot1",
-            HI_SLOT_2 = "HiSlot2",
-            HI_SLOT_3 = "HiSlot3",
-            HI_SLOT_4 = "HiSlot4",
-            HI_SLOT_5 = "HiSlot5",
-            HI_SLOT_6 = "HiSlot6",
-            HI_SLOT_7 = "HiSlot7",
-            HIDDEN_MODIFIERS = "HiddenModifiers",
-            IMPLANT = "Implant",
-            LO_SLOT_0 = "LoSlot0",
-            LO_SLOT_1 = "LoSlot1",
-            LO_SLOT_2 = "LoSlot2",
-            LO_SLOT_3 = "LoSlot3",
-            LO_SLOT_4 = "LoSlot4",
-            LO_SLOT_5 = "LoSlot5",
-            LO_SLOT_6 = "LoSlot6",
-            LO_SLOT_7 = "LoSlot7",
-            LOCKED = "Locked",
-            MED_SLOT_0 = "MedSlot0",
-            MED_SLOT_1 = "MedSlot1",
-            MED_SLOT_2 = "MedSlot2",
-            MED_SLOT_3 = "MedSlot3",
-            MED_SLOT_4 = "MedSlot4",
-            MED_SLOT_5 = "MedSlot5",
-            MED_SLOT_6 = "MedSlot6",
-            MED_SLOT_7 = "MedSlot7",
-            MODULE = "Module",
-            QUAFE_BAY = "QuafeBay",
-            RIG_SLOT_0 = "RigSlot0",
-            RIG_SLOT_1 = "RigSlot1",
-            RIG_SLOT_2 = "RigSlot2",
-            RIG_SLOT_3 = "RigSlot3",
-            RIG_SLOT_4 = "RigSlot4",
-            RIG_SLOT_5 = "RigSlot5",
-            RIG_SLOT_6 = "RigSlot6",
-            RIG_SLOT_7 = "RigSlot7",
-            SHIP_HANGAR = "ShipHangar",
-            SPECIALIZED_AMMO_HOLD = "SpecializedAmmoHold",
-            SPECIALIZED_COMMAND_CENTER_HOLD = "SpecializedCommandCenterHold",
-            SPECIALIZED_FUEL_BAY = "SpecializedFuelBay",
-            SPECIALIZED_GAS_HOLD = "SpecializedGasHold",
-            SPECIALIZED_INDUSTRIAL_SHIP_HOLD = "SpecializedIndustrialShipHold",
-            SPECIALIZED_LARGE_SHIP_HOLD = "SpecializedLargeShipHold",
-            SPECIALIZED_MATERIAL_BAY = "SpecializedMaterialBay",
-            SPECIALIZED_MEDIUM_SHIP_HOLD = "SpecializedMediumShipHold",
-            SPECIALIZED_MINERAL_HOLD = "SpecializedMineralHold",
-            SPECIALIZED_ORE_HOLD = "SpecializedOreHold",
-            SPECIALIZED_PLANETARY_COMMODITIES_HOLD = "SpecializedPlanetaryCommoditiesHold",
-            SPECIALIZED_SALVAGE_HOLD = "SpecializedSalvageHold",
-            SPECIALIZED_SHIP_HOLD = "SpecializedShipHold",
-            SPECIALIZED_SMALL_SHIP_HOLD = "SpecializedSmallShipHold",
-            SUB_SYSTEM_SLOT_0 = "SubSystemSlot0",
-            SUB_SYSTEM_SLOT_1 = "SubSystemSlot1",
-            SUB_SYSTEM_SLOT_2 = "SubSystemSlot2",
-            SUB_SYSTEM_SLOT_3 = "SubSystemSlot3",
-            SUB_SYSTEM_SLOT_4 = "SubSystemSlot4",
-            SUB_SYSTEM_SLOT_5 = "SubSystemSlot5",
-            SUB_SYSTEM_SLOT_6 = "SubSystemSlot6",
-            SUB_SYSTEM_SLOT_7 = "SubSystemSlot7",
-            UNLOCKED = "Unlocked",
-            WARDROBE = "Wardrobe"
-        }
-        export interface Blueprint {
-            /**
-             * Unique ID for this item. The ID of an item is stable if that item is not repackaged, stacked, detached from a stack, assembled, or otherwise altered. If an item is changed in one of these ways, then the ID will also change (see notes below).
-             */
-            item_id: number;
-            location_flag: esi.character.BlueprintLocation;
-            /**
-             * References a solar system, station or itemID if this blueprint is located within a container. If an itemID the Character
-             *
-             * - AssetList API must be queried to find the container using the itemID, from which the correct location of the Blueprint can be derived.
-             */
-            location_id: number;
-            /**
-             * Material Efficiency Level of the blueprint, can be any integer between 0 and 10.
-             */
-            material_efficiency: number;
-            /**
-             * Typically will be -1 or -2 designating a singleton item, where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (no activities performed on them yet).
-             */
-            quantity: number;
-            /**
-             * Number of runs remaining if the blueprint is a copy, -1 if it is an original.
-             */
-            runs: number;
-            /**
-             * Time Efficiency Level of the blueprint, can be any even integer between 0 and 20.
-             */
-            time_efficiency: number;
-            type_id: number;
-        }
         /**
-         * Indicates something about this item's storage location. The flag is used to differentiate between hangar divisions, drone bay, fitting location, and similar.
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/attributes/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_attributes).
          */
-        export const enum BlueprintLocation {
-            ASSET_SAFETY = "AssetSafety",
-            AUTO_FIT = "AutoFit",
-            CARGO = "Cargo",
-            CORPSE_BAY = "CorpseBay",
-            DELIVERIES = "Deliveries",
-            DRONE_BAY = "DroneBay",
-            FIGHTER_BAY = "FighterBay",
-            FIGHTER_TUBE_0 = "FighterTube0",
-            FIGHTER_TUBE_1 = "FighterTube1",
-            FIGHTER_TUBE_2 = "FighterTube2",
-            FIGHTER_TUBE_3 = "FighterTube3",
-            FIGHTER_TUBE_4 = "FighterTube4",
-            FLEET_HANGAR = "FleetHangar",
-            HANGAR = "Hangar",
-            HANGAR_ALL = "HangarAll",
-            HI_SLOT_0 = "HiSlot0",
-            HI_SLOT_1 = "HiSlot1",
-            HI_SLOT_2 = "HiSlot2",
-            HI_SLOT_3 = "HiSlot3",
-            HI_SLOT_4 = "HiSlot4",
-            HI_SLOT_5 = "HiSlot5",
-            HI_SLOT_6 = "HiSlot6",
-            HI_SLOT_7 = "HiSlot7",
-            HIDDEN_MODIFIERS = "HiddenModifiers",
-            IMPLANT = "Implant",
-            LO_SLOT_0 = "LoSlot0",
-            LO_SLOT_1 = "LoSlot1",
-            LO_SLOT_2 = "LoSlot2",
-            LO_SLOT_3 = "LoSlot3",
-            LO_SLOT_4 = "LoSlot4",
-            LO_SLOT_5 = "LoSlot5",
-            LO_SLOT_6 = "LoSlot6",
-            LO_SLOT_7 = "LoSlot7",
-            LOCKED = "Locked",
-            MED_SLOT_0 = "MedSlot0",
-            MED_SLOT_1 = "MedSlot1",
-            MED_SLOT_2 = "MedSlot2",
-            MED_SLOT_3 = "MedSlot3",
-            MED_SLOT_4 = "MedSlot4",
-            MED_SLOT_5 = "MedSlot5",
-            MED_SLOT_6 = "MedSlot6",
-            MED_SLOT_7 = "MedSlot7",
-            MODULE = "Module",
-            QUAFE_BAY = "QuafeBay",
-            RIG_SLOT_0 = "RigSlot0",
-            RIG_SLOT_1 = "RigSlot1",
-            RIG_SLOT_2 = "RigSlot2",
-            RIG_SLOT_3 = "RigSlot3",
-            RIG_SLOT_4 = "RigSlot4",
-            RIG_SLOT_5 = "RigSlot5",
-            RIG_SLOT_6 = "RigSlot6",
-            RIG_SLOT_7 = "RigSlot7",
-            SHIP_HANGAR = "ShipHangar",
-            SPECIALIZED_AMMO_HOLD = "SpecializedAmmoHold",
-            SPECIALIZED_COMMAND_CENTER_HOLD = "SpecializedCommandCenterHold",
-            SPECIALIZED_FUEL_BAY = "SpecializedFuelBay",
-            SPECIALIZED_GAS_HOLD = "SpecializedGasHold",
-            SPECIALIZED_INDUSTRIAL_SHIP_HOLD = "SpecializedIndustrialShipHold",
-            SPECIALIZED_LARGE_SHIP_HOLD = "SpecializedLargeShipHold",
-            SPECIALIZED_MATERIAL_BAY = "SpecializedMaterialBay",
-            SPECIALIZED_MEDIUM_SHIP_HOLD = "SpecializedMediumShipHold",
-            SPECIALIZED_MINERAL_HOLD = "SpecializedMineralHold",
-            SPECIALIZED_ORE_HOLD = "SpecializedOreHold",
-            SPECIALIZED_PLANETARY_COMMODITIES_HOLD = "SpecializedPlanetaryCommoditiesHold",
-            SPECIALIZED_SALVAGE_HOLD = "SpecializedSalvageHold",
-            SPECIALIZED_SHIP_HOLD = "SpecializedShipHold",
-            SPECIALIZED_SMALL_SHIP_HOLD = "SpecializedSmallShipHold",
-            SUB_SYSTEM_SLOT_0 = "SubSystemSlot0",
-            SUB_SYSTEM_SLOT_1 = "SubSystemSlot1",
-            SUB_SYSTEM_SLOT_2 = "SubSystemSlot2",
-            SUB_SYSTEM_SLOT_3 = "SubSystemSlot3",
-            SUB_SYSTEM_SLOT_4 = "SubSystemSlot4",
-            SUB_SYSTEM_SLOT_5 = "SubSystemSlot5",
-            SUB_SYSTEM_SLOT_6 = "SubSystemSlot6",
-            SUB_SYSTEM_SLOT_7 = "SubSystemSlot7",
-            UNLOCKED = "Unlocked"
+        export interface Attributes {
+            /**
+             * Neural remapping cooldown after a character uses remap accrued over time.
+             */
+            accrued_remap_cooldown_date?: string;
+            /**
+             * Number of available bonus character neural remaps.
+             */
+            bonus_remaps?: number;
+            charisma: number;
+            intelligence: number;
+            /**
+             * Datetime of last neural remap, including usage of bonus remaps.
+             */
+            last_remap_date?: string;
+            memory: number;
+            perception: number;
+            willpower: number;
         }
         export interface Bookmark {
             bookmark_id: number;
@@ -812,7 +1087,7 @@ export namespace esi {
         }
         export interface Contact {
             contact_id: number;
-            contact_type: esi.character.ContactType;
+            contact_type: esi.EntityType;
             /**
              * Whether this contact is in the blocked list. Note a missing value denotes unknown, not true or false.
              */
@@ -833,12 +1108,6 @@ export namespace esi {
         export interface ContactLabel {
             label_id: number;
             label_name: string;
-        }
-        export const enum ContactType {
-            ALLIANCE = "alliance",
-            CHARACTER = "character",
-            CORPORATION = "corporation",
-            FACTION = "faction"
         }
         export interface CorporationHistory {
             corporation_id: number;
@@ -863,6 +1132,23 @@ export namespace esi {
          */
         export interface CSPACost {
             cost?: number;
+        }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/fatigue/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_fatigue).
+         */
+        export interface Fatigue {
+            /**
+             * Character's jump fatigue expiry.
+             */
+            jump_fatigue_expire_date?: string;
+            /**
+             * Character's last jump activation.
+             */
+            last_jump_date?: string;
+            /**
+             * Character's last jump update.
+             */
+            last_update_date?: string;
         }
         export interface Graphic {
             color?: number;
@@ -1144,62 +1430,452 @@ export namespace esi {
             from_type: "agent" | "npc_corp" | "faction";
             standing: number;
         }
-        export interface Wallet {
-            /**
-             * Wallet's balance in ISK hundredths.
-             */
-            balance?: number;
-            wallet_id?: number;
-        }
-        export interface WalletJournal {
-            /**
-             * Transaction amount. Positive when value transferred to the first party. Negative otherwise.
-             */
-            amount?: number;
-            argument_name?: string;
-            argument_value?: number;
-            /**
-             * Wallet balance after transaction occurred.
-             */
-            balance?: number;
-            /**
-             * Date and time of transaction.
-             */
-            date: string;
-            first_party_id?: number;
-            first_party_type?: esi.character.ContactType;
-            reason?: string;
-            /**
-             * Unique journal reference ID.
-             */
-            ref_id: number;
-            ref_type_id: number;
-            second_party_id?: number;
-            second_party_type?: esi.character.ContactType;
-            /**
-             * Tax amount received for tax related transactions.
-             */
-            tax_amount?: number;
-            /**
-             * For tax related transactions, gives the corporation ID of the entity receiving the tax.
-             */
-            tax_reciever_id?: number;
-        }
     }
     export namespace corporation {
-        export interface AllianceHistory {
-            alliance?: {
-                alliance_id: number;
+        export namespace asset {
+            export interface Asset {
+                is_singleton: boolean;
+                item_id: number;
+                location_flag: esi.corporation.asset.LocationType;
+                location_id: number;
+                location_type: "station" | "solar_system" | "other";
+                quantity?: number;
+                type_id: number;
+            }
+            export interface Blueprint {
                 /**
-                 * True if the alliance has been deleted.
+                 * Unique ID for this item.
                  */
-                is_deleted: boolean;
-            };
+                item_id: number;
+                location_flag: esi.corporation.asset.LocationType;
+                /**
+                 * References a solar system, station or item_id if this blueprint is located within a container.
+                 */
+                location_id: number;
+                /**
+                 * Material Efficiency Level of the blueprint.
+                 */
+                material_efficiency: number;
+                /**
+                 * A range of numbers with a minimum of -2 and no maximum value where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (e.g. no activities performed on them yet).
+                 */
+                quantity: number;
+                /**
+                 * Number of runs remaining if the blueprint is a copy, -1 if it is an original.
+                 */
+                runs: number;
+                /**
+                 * Time Efficiency Level of the blueprint.
+                 */
+                time_efficiency: number;
+                type_id: number;
+            }
+            /**
+             * Type of the location_id.
+             */
+            export const enum LocationType {
+                ASSET_SAFETY = "AssetSafety",
+                AUTO_FIT = "AutoFit",
+                BONUS = "Bonus",
+                BOOSTER = "Booster",
+                BOOSTER_BAY = "BoosterBay",
+                CAPSULE = "Capsule",
+                CARGO = "Cargo",
+                CORP_DELIVERIES = "CorpDeliveries",
+                CORP_SAG1 = "CorpSAG1",
+                CORP_SAG2 = "CorpSAG2",
+                CORP_SAG3 = "CorpSAG3",
+                CORP_SAG4 = "CorpSAG4",
+                CORP_SAG5 = "CorpSAG5",
+                CORP_SAG6 = "CorpSAG6",
+                CORP_SAG7 = "CorpSAG7",
+                CRATE_LOOT = "CrateLoot",
+                DELIVERIES = "Deliveries",
+                DRONE_BAY = "DroneBay",
+                DUST_BATTLE = "DustBattle",
+                DUST_DATABANK = "DustDatabank",
+                FIGHTER_BAY = "FighterBay",
+                FIGHTER_TUBE_0 = "FighterTube0",
+                FIGHTER_TUBE_1 = "FighterTube1",
+                FIGHTER_TUBE_2 = "FighterTube2",
+                FIGHTER_TUBE_3 = "FighterTube3",
+                FIGHTER_TUBE_4 = "FighterTube4",
+                FLEET_HANGAR = "FleetHangar",
+                HANGAR = "Hangar",
+                HANGAR_ALL = "HangarAll",
+                HI_SLOT_0 = "HiSlot0",
+                HI_SLOT_1 = "HiSlot1",
+                HI_SLOT_2 = "HiSlot2",
+                HI_SLOT_3 = "HiSlot3",
+                HI_SLOT_4 = "HiSlot4",
+                HI_SLOT_5 = "HiSlot5",
+                HI_SLOT_6 = "HiSlot6",
+                HI_SLOT_7 = "HiSlot7",
+                HIDDEN_MODIFERS = "HiddenModifers",
+                IMPLANT = "Implant",
+                IMPOUNDED = "Impounded",
+                JUNKYARD_REPROCESSED = "JunkyardReprocessed",
+                JUNKYARD_TRASHED = "JunkyardTrashed",
+                LO_SLOT_0 = "LoSlot0",
+                LO_SLOT_1 = "LoSlot1",
+                LO_SLOT_2 = "LoSlot2",
+                LO_SLOT_3 = "LoSlot3",
+                LO_SLOT_4 = "LoSlot4",
+                LO_SLOT_5 = "LoSlot5",
+                LO_SLOT_6 = "LoSlot6",
+                LO_SLOT_7 = "LoSlot7",
+                LOCKED = "Locked",
+                MED_SLOT_0 = "MedSlot0",
+                MED_SLOT_1 = "MedSlot1",
+                MED_SLOT_2 = "MedSlot2",
+                MED_SLOT_3 = "MedSlot3",
+                MED_SLOT_4 = "MedSlot4",
+                MED_SLOT_5 = "MedSlot5",
+                MED_SLOT_6 = "MedSlot6",
+                MED_SLOT_7 = "MedSlot7",
+                OFFICE_FOLDER = "OfficeFolder",
+                PILOT = "Pilot",
+                PLANET_SURFACE = "PlanetSurface",
+                QUAFE_BAY = "QuafeBay",
+                REWARD = "Reward",
+                RIG_SLOT_0 = "RigSlot0",
+                RIG_SLOT_1 = "RigSlot1",
+                RIG_SLOT_2 = "RigSlot2",
+                RIG_SLOT_3 = "RigSlot3",
+                RIG_SLOT_4 = "RigSlot4",
+                RIG_SLOT_5 = "RigSlot5",
+                RIG_SLOT_6 = "RigSlot6",
+                RIG_SLOT_7 = "RigSlot7",
+                SECONDARY_STORAGE = "SecondaryStorage",
+                SERVICE_SLOT_0 = "ServiceSlot0",
+                SERVICE_SLOT_1 = "ServiceSlot1",
+                SERVICE_SLOT_2 = "ServiceSlot2",
+                SERVICE_SLOT_3 = "ServiceSlot3",
+                SERVICE_SLOT_4 = "ServiceSlot4",
+                SERVICE_SLOT_5 = "ServiceSlot5",
+                SERVICE_SLOT_6 = "ServiceSlot6",
+                SERVICE_SLOT_7 = "ServiceSlot7",
+                SHIP_HANGAR = "ShipHangar",
+                SHIP_OFFLINE = "ShipOffline",
+                SKILL = "Skill",
+                SKILL_IN_TRAINING = "SkillInTraining",
+                SPECIALIZED_AMMO_HOLD = "SpecializedAmmoHold",
+                SPECIALIZED_COMMAND_CENTER_HOLD = "SpecializedCommandCenterHold",
+                SPECIALIZED_FUEL_BAY = "SpecializedFuelBay",
+                SPECIALIZED_GAS_HOLD = "SpecializedGasHold",
+                SPECIALIZED_INDUSTRIAL_SHIP_HOLD = "SpecializedIndustrialShipHold",
+                SPECIALIZED_LARGE_SHIP_HOLD = "SpecializedLargeShipHold",
+                SPECIALIZED_MATERIAL_BAY = "SpecializedMaterialBay",
+                SPECIALIZED_MEDIUM_SHIP_HOLD = "SpecializedMediumShipHold",
+                SPECIALIZED_MINERAL_HOLD = "SpecializedMineralHold",
+                SPECIALIZED_ORE_HOLD = "SpecializedOreHold",
+                SPECIALIZED_PLANETARY_COMMODITIES_HOLD = "SpecializedPlanetaryCommoditiesHold",
+                SPECIALIZED_SALVAGE_HOLD = "SpecializedSalvageHold",
+                SPECIALIZED_SHIP_HOLD = "SpecializedShipHold",
+                SPECIALIZED_SMALL_SHIP_HOLD = "SpecializedSmallShipHold",
+                STRUCTURE_ACTIVE = "StructureActive",
+                STRUCTURE_FUEL = "StructureFuel",
+                STRUCTURE_INACTIVE = "StructureInactive",
+                STRUCTURE_OFFLINE = "StructureOffline",
+                SUB_SYSTEM_SLOT_0 = "SubSystemSlot0",
+                SUB_SYSTEM_SLOT_1 = "SubSystemSlot1",
+                SUB_SYSTEM_SLOT_2 = "SubSystemSlot2",
+                SUB_SYSTEM_SLOT_3 = "SubSystemSlot3",
+                SUB_SYSTEM_SLOT_4 = "SubSystemSlot4",
+                SUB_SYSTEM_SLOT_5 = "SubSystemSlot5",
+                SUB_SYSTEM_SLOT_6 = "SubSystemSlot6",
+                SUB_SYSTEM_SLOT_7 = "SubSystemSlot7",
+                SUBSYSTEM_BAY = "SubsystemBay",
+                UNLOCKED = "Unlocked",
+                WALLET = "Wallet",
+                WARDROBE = "Wardrobe"
+            }
+        }
+        export namespace structure {
+            export interface Service {
+                name: string;
+                state: "online" | "offline" | "cleanup";
+            }
+            export interface Structure {
+                /**
+                 * ID of the corporation that owns the structure.
+                 */
+                corporation_id: number;
+                /**
+                 * This week's vulnerability windows, Monday is day 0.
+                 */
+                current_vul: esi.corporation.structure.VulnerabilitySchedule[];
+                /**
+                 * Date on which the structure will run out of fuel.
+                 */
+                fuel_expires?: string;
+                /**
+                 * Next week's vulnerability windows, Monday is day 0.
+                 */
+                next_vul: esi.corporation.structure.VulnerabilitySchedule[];
+                /**
+                 * The id of the ACL profile for this citadel.
+                 */
+                profile_id: number;
+                /**
+                 * Contains a list of service upgrades, and their state.
+                 */
+                services?: esi.corporation.structure.Service[];
+                /**
+                 * Date at which the structure will move to it's next state.
+                 */
+                state_timer_end?: string;
+                /**
+                 * Date at which the structure entered it's current state.
+                 */
+                state_timer_start?: string;
+                /**
+                 * The Item ID of the structure.
+                 */
+                structure_id: number;
+                /**
+                 * The solar system the structure is in.
+                 */
+                system_id: number;
+                /**
+                 * The type id of the structure.
+                 */
+                type_id: number;
+                /**
+                 * Date at which the structure will unanchor.
+                 */
+                unanchors_at?: string;
+            }
+            export interface VulnerabilitySchedule {
+                /**
+                 * Day of the week, zero-indexed to Monday.
+                 */
+                day: number;
+                /**
+                 * Hour of the day evetime, zero-indexed to midnight.
+                 */
+                hour: number;
+            }
+        }
+        export namespace wallet {
+            export interface Journal {
+                /**
+                 * Transaction amount. Positive when value transferred to the first party. Negative otherwise.
+                 */
+                amount?: number;
+                /**
+                 * Wallet balance after transaction occurred.
+                 */
+                balance?: number;
+                /**
+                 * Date and time of transaction.
+                 */
+                date: string;
+                /**
+                 * Extra information for different type of transaction.
+                 */
+                extra_info?: {
+                    alliance_id?: number;
+                    character_id?: number;
+                    contract_id?: number;
+                    corporation_id?: number;
+                    destroyed_ship_type_id?: number;
+                    job_id?: number;
+                    location_id?: number;
+                    npc_id?: number;
+                    npc_name?: string;
+                    planet_id?: number;
+                    system_id?: number;
+                    transaction_id?: number;
+                };
+                first_party_id?: number;
+                first_party_type?: esi.EntityType;
+                reason?: string;
+                /**
+                 * Unique journal reference ID.
+                 */
+                ref_id: number;
+                ref_type: esi.corporation.wallet.TransactionType;
+                second_party_id?: number;
+                second_party_type?: esi.EntityType;
+                /**
+                 * Tax amount received for tax related transactions.
+                 */
+                tax?: number;
+                /**
+                 * The corporation ID receiving any tax paid.
+                 */
+                tax_reciever_id?: number;
+            }
+            export interface Transaction {
+                client_id: number;
+                /**
+                 * Date and time of transaction.
+                 */
+                date: string;
+                is_buy: boolean;
+                journal_ref_id: number;
+                location_id: number;
+                quantity: number;
+                /**
+                 * Unique transaction ID.
+                 */
+                transaction_id: number;
+                type_id: number;
+                /**
+                 * Amount paid per unit.
+                 */
+                unit_price: number;
+            }
+            /**
+             * Transaction type, different type of transaction will populate different fields in `extra_info`.
+             */
+            export const enum TransactionType {
+                ACCELERATION_GATE_FEE = "acceleration_gate_fee",
+                ADVERTISEMENT_LISTING_FEE = "advertisement_listing_fee",
+                AGENT_DONATION = "agent_donation",
+                AGENT_LOCATION_SERVICES = "agent_location_services",
+                AGENT_MISCELLANEOUS = "agent_miscellaneous",
+                AGENT_MISSION_COLLATERAL_PAID = "agent_mission_collateral_paid",
+                AGENT_MISSION_COLLATERAL_REFUNDED = "agent_mission_collateral_refunded",
+                AGENT_MISSION_REWARD = "agent_mission_reward",
+                AGENT_MISSION_REWARD_CORPORATION_TAX = "agent_mission_reward_corporation_tax",
+                AGENT_MISSION_TIME_BONUS_REWARD = "agent_mission_time_bonus_reward",
+                AGENT_MISSION_TIME_BONUS_REWARD_CORPORATION_TAX = "agent_mission_time_bonus_reward_corporation_tax",
+                AGENT_SECURITY_SERVICES = "agent_security_services",
+                AGENT_SERVICES_RENDERED = "agent_services_rendered",
+                AGENTS_PREWARD = "agents_preward",
+                ALLIANCE_MAINTAINANCE_FEE = "alliance_maintainance_fee",
+                ALLIANCE_REGISTRATION_FEE = "alliance_registration_fee",
+                ASSET_SAFETY_RECOVERY_TAX = "asset_safety_recovery_tax",
+                BOUNTY = "bounty",
+                BOUNTY_PRIZE = "bounty_prize",
+                BOUNTY_PRIZE_CORPORATION_TAX = "bounty_prize_corporation_tax",
+                BOUNTY_PRIZES = "bounty_prizes",
+                BOUNTY_REIMBURSEMENT = "bounty_reimbursement",
+                BOUNTY_SURCHARGE = "bounty_surcharge",
+                BROKERS_FEE = "brokers_fee",
+                CLONE_ACTIVATION = "clone_activation",
+                CLONE_TRANSFER = "clone_transfer",
+                CONTRABAND_FINE = "contraband_fine",
+                CONTRACT_AUCTION_BID = "contract_auction_bid",
+                CONTRACT_AUCTION_BID_CORP = "contract_auction_bid_corp",
+                CONTRACT_AUCTION_BID_REFUND = "contract_auction_bid_refund",
+                CONTRACT_AUCTION_SOLD = "contract_auction_sold",
+                CONTRACT_BROKERS_FEE = "contract_brokers_fee",
+                CONTRACT_BROKERS_FEE_CORP = "contract_brokers_fee_corp",
+                CONTRACT_COLLATERAL = "contract_collateral",
+                CONTRACT_COLLATERAL_DEPOSITED_CORP = "contract_collateral_deposited_corp",
+                CONTRACT_COLLATERAL_PAYOUT = "contract_collateral_payout",
+                CONTRACT_COLLATERAL_REFUND = "contract_collateral_refund",
+                CONTRACT_DEPOSIT = "contract_deposit",
+                CONTRACT_DEPOSIT_CORP = "contract_deposit_corp",
+                CONTRACT_DEPOSIT_REFUND = "contract_deposit_refund",
+                CONTRACT_DEPOSIT_SALES_TAX = "contract_deposit_sales_tax",
+                CONTRACT_PRICE = "contract_price",
+                CONTRACT_PRICE_PAYMENT_CORP = "contract_price_payment_corp",
+                CONTRACT_REVERSAL = "contract_reversal",
+                CONTRACT_REWARD = "contract_reward",
+                CONTRACT_REWARD_DEPOSITED = "contract_reward_deposited",
+                CONTRACT_REWARD_DEPOSITED_CORP = "contract_reward_deposited_corp",
+                CONTRACT_REWARD_REFUND = "contract_reward_refund",
+                CONTRACT_SALES_TAX = "contract_sales_tax",
+                COPYING = "copying",
+                CORPORATE_REWARD_PAYOUT = "corporate_reward_payout",
+                CORPORATE_REWARD_TAX = "corporate_reward_tax",
+                CORPORATION_ACCOUNT_WITHDRAWAL = "corporation_account_withdrawal",
+                CORPORATION_BULK_PAYMENT = "corporation_bulk_payment",
+                CORPORATION_DIVIDEND_PAYMENT = "corporation_dividend_payment",
+                CORPORATION_LIQUIDATION = "corporation_liquidation",
+                CORPORATION_LOGO_CHANGE_COST = "corporation_logo_change_cost",
+                CORPORATION_PAYMENT = "corporation_payment",
+                CORPORATION_REGISTRATION_FEE = "corporation_registration_fee",
+                COURIER_MISSION_ESCROW = "courier_mission_escrow",
+                CSPA = "cspa",
+                CSPAOFFLINEREFUND = "cspaofflinerefund",
+                DATACORE_FEE = "datacore_fee",
+                DNA_MODIFICATION_FEE = "dna_modification_fee",
+                DOCKING_FEE = "docking_fee",
+                FACTORY_SLOT_RENTAL_FEE = "factory_slot_rental_fee",
+                GM_CASH_TRANSFER = "gm_cash_transfer",
+                INDUSTRY_JOB_TAX = "industry_job_tax",
+                INFRASTRUCTURE_HUB_MAINTENANCE = "infrastructure_hub_maintenance",
+                INHERITANCE = "inheritance",
+                INSURANCE = "insurance",
+                JUMP_CLONE_ACTIVATION_FEE = "jump_clone_activation_fee",
+                JUMP_CLONE_INSTALLATION_FEE = "jump_clone_installation_fee",
+                KILL_RIGHT_FEE = "kill_right_fee",
+                LP_STORE = "lp_store",
+                MANUFACTURING = "manufacturing",
+                MARKET_ESCROW = "market_escrow",
+                MARKET_FINE_PAID = "market_fine_paid",
+                MARKET_TRANSACTION = "market_transaction",
+                MEDAL_CREATION = "medal_creation",
+                MEDAL_ISSUED = "medal_issued",
+                MISSION_COMPLETION = "mission_completion",
+                MISSION_COST = "mission_cost",
+                MISSION_EXPIRATION = "mission_expiration",
+                MISSION_REWARD = "mission_reward",
+                OFFICE_RENTAL_FEE = "office_rental_fee",
+                OPERATION_BONUS = "operation_bonus",
+                OPPORTUNITY_REWARD = "opportunity_reward",
+                PLANETARY_CONSTRUCTION = "planetary_construction",
+                PLANETARY_EXPORT_TAX = "planetary_export_tax",
+                PLANETARY_IMPORT_TAX = "planetary_import_tax",
+                PLAYER_DONATION = "player_donation",
+                PLAYER_TRADING = "player_trading",
+                PROJECT_DISCOVERY_REWARD = "project_discovery_reward",
+                PROJECT_DISCOVERY_TAX = "project_discovery_tax",
+                RELEASE_OF_IMPOUNDED_PROPERTY = "release_of_impounded_property",
+                REPAIR_BILL = "repair_bill",
+                REPROCESSING_TAX = "reprocessing_tax",
+                RESEARCHING_MATERIAL_PRODUCTIVITY = "researching_material_productivity",
+                RESEARCHING_TECHNOLOGY = "researching_technology",
+                RESEARCHING_TIME_PRODUCTIVITY = "researching_time_productivity",
+                REVERSE_ENGINEERING = "reverse_engineering",
+                SECURITY_PROCESSING_FEE = "security_processing_fee",
+                SHARES = "shares",
+                SOVEREIGNITY_BILL = "sovereignity_bill",
+                STORE_PURCHASE = "store_purchase",
+                STORE_PURCHASE_REFUND = "store_purchase_refund",
+                TRANSACTION_TAX = "transaction_tax",
+                UPKEEP_ADJUSTMENT_FEE = "upkeep_adjustment_fee",
+                WAR_ALLY_CONTRACT = "war_ally_contract",
+                WAR_FEE = "war_fee",
+                WAR_FEE_SURRENDER = "war_fee_surrender"
+            }
+            export interface Wallet {
+                balance: number;
+                division: number;
+            }
+        }
+        export interface AllianceHistory {
+            alliance_id?: number;
+            /**
+             * True if the alliance has been closed.
+             */
+            is_deleted?: boolean;
             /**
              * An incrementing ID that can be used to canonically establish order of records in cases where dates may be ambiguous.
              */
             record_id: number;
             start_date: string;
+        }
+        export interface Contact {
+            contact_id: number;
+            contact_type: esi.EntityType;
+            /**
+             * Whether this contact is being watched.
+             */
+            is_watched?: boolean;
+            /**
+             * Custom label of the contact.
+             */
+            label_id?: number;
+            /**
+             * Standing of the contact.
+             */
+            standing: number;
         }
         /**
          * This is the response type for the route, [`GET /v3/corporations/{corporation_id}/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id).
@@ -1225,6 +1901,17 @@ export namespace esi {
              */
             ticker: string;
             url: string;
+        }
+        export interface DivisionName {
+            division?: number;
+            name?: string;
+        }
+        /**
+         * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/divisions/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_divisions).
+         */
+        export interface Divisions {
+            hangar?: esi.corporation.DivisionName[];
+            wallet?: esi.corporation.DivisionName[];
         }
         export const enum Faction {
             AMARR = "Amarr",
@@ -1255,6 +1942,15 @@ export namespace esi {
         export interface Member {
             character_id: number;
         }
+        export interface MemberDetails {
+            base_id?: number;
+            character_id: number;
+            location_id?: number;
+            logoff_date?: string;
+            logon_date?: string;
+            ship_type_id?: number;
+            start_date?: string;
+        }
         export interface MemberRoles {
             character_id: number;
             grantable_roles?: esi.Role[];
@@ -1270,69 +1966,17 @@ export namespace esi {
             corporation_id: number;
             corporation_name: string;
         }
-        export interface Service {
-            name: string;
-            state: "online" | "offline" | "cleanup";
-        }
-        export interface Structure {
-            /**
-             * ID of the corporation that owns the structure.
-             */
-            corporation_id: number;
-            /**
-             * This week's vulnerability windows, Monday is day 0.
-             */
-            current_vul: esi.corporation.VulnerabilitySchedule[];
-            /**
-             * Date on which the structure will run out of fuel.
-             */
-            fuel_expires?: string;
-            /**
-             * Next week's vulnerability windows, Monday is day 0.
-             */
-            next_vul: esi.corporation.VulnerabilitySchedule[];
-            /**
-             * The id of the ACL profile for this citadel.
-             */
-            profile_id: number;
-            /**
-             * Contains a list of service upgrades, and their state.
-             */
-            services?: esi.corporation.Service[];
-            /**
-             * Date at which the structure will move to it's next state.
-             */
-            state_timer_end?: string;
-            /**
-             * Date at which the structure entered it's current state.
-             */
-            state_timer_start?: string;
-            /**
-             * The Item ID of the structure.
-             */
-            structure_id: number;
-            /**
-             * The solar system the structure is in.
-             */
-            system_id: number;
-            /**
-             * The type id of the structure.
-             */
-            type_id: number;
-            /**
-             * Date at which the structure will unanchor.
-             */
-            unanchors_at?: string;
-        }
-        export interface VulnerabilitySchedule {
-            /**
-             * Day of the week, zero-indexed to Monday.
-             */
-            day: number;
-            /**
-             * Hour of the day evetime, zero-indexed to midnight.
-             */
-            hour: number;
+        export interface Title {
+            grantable_roles?: esi.Role[];
+            grantable_roles_at_base?: esi.Role[];
+            grantable_roles_at_hq?: esi.Role[];
+            grantable_roles_at_other?: esi.Role[];
+            name?: string;
+            roles?: esi.Role[];
+            roles_at_base?: esi.Role[];
+            roles_at_hq?: esi.Role[];
+            roles_at_other?: esi.Role[];
+            title_id?: number;
         }
     }
     export namespace dogma {
@@ -1352,7 +1996,7 @@ export namespace esi {
             unit_id?: number;
         }
         /**
-         * This is the response type for the route, [`GET /v1/dogma/effects/{effect_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects_effect_id).
+         * This is the response type for the route, [`GET /v2/dogma/effects/{effect_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects_effect_id).
          */
         export interface Effect {
             description?: string;
@@ -1378,11 +2022,212 @@ export namespace esi {
             tracking_speed_attribute_id?: number;
         }
         export interface Modifier {
-            domain: string;
+            domain?: string;
+            effect_id?: number;
             func: string;
-            modified_attribute_id: number;
-            modifying_attribute_id: number;
-            operator: number;
+            modified_attribute_id?: number;
+            modifying_attribute_id?: number;
+            operator?: number;
+        }
+    }
+    export namespace factionwarfare {
+        /**
+         * This is the response type for the route, [`GET /v1/fw/leaderboards/characters/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_leaderboards_characters).
+         */
+        export interface CharacterLeaderboard {
+            /**
+             * Top 100 rankings of pilots by number of kills from yesterday, last week and in total.
+             */
+            kills: {
+                /**
+                 * Top 100 ranking of pilots active in faction warfare by total kills. A pilot is considered "active" if they have participated in faction warfare in the past 14 days. Top 100 ranking of pilots active in faction warfare by total victory points. A pilot is considered "active" if they have participated in faction warfare in the past 14 days.
+                 */
+                active_total: esi.factionwarfare.CharacterScore[];
+                /**
+                 * Top 100 ranking of pilots by kills in the past week. Top 100 ranking of pilots by victory points in the past week.
+                 */
+                last_week: esi.factionwarfare.CharacterScore[];
+                /**
+                 * Top 100 ranking of pilots by kills in the past day. Top 100 ranking of pilots by victory points in the past day.
+                 */
+                yesterday: esi.factionwarfare.CharacterScore[];
+            };
+            /**
+             * Top 100 rankings of pilots by victory points from yesterday, last week and in total.
+             */
+            victory_points: {
+                /**
+                 * Top 100 ranking of pilots active in faction warfare by total kills. A pilot is considered "active" if they have participated in faction warfare in the past 14 days. Top 100 ranking of pilots active in faction warfare by total victory points. A pilot is considered "active" if they have participated in faction warfare in the past 14 days.
+                 */
+                active_total: esi.factionwarfare.CharacterScore[];
+                /**
+                 * Top 100 ranking of pilots by kills in the past week. Top 100 ranking of pilots by victory points in the past week.
+                 */
+                last_week: esi.factionwarfare.CharacterScore[];
+                /**
+                 * Top 100 ranking of pilots by kills in the past day. Top 100 ranking of pilots by victory points in the past day.
+                 */
+                yesterday: esi.factionwarfare.CharacterScore[];
+            };
+        }
+        export interface CharacterScore {
+            /**
+             * Amount of kills. Amount of victory points.
+             */
+            amount?: number;
+            character_id?: number;
+        }
+        /**
+         * This is the response type for the route, [`GET /v1/fw/leaderboards/corporations/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_leaderboards_corporations).
+         */
+        export interface CorporationLeaderboard {
+            /**
+             * Top 10 rankings of corporations by number of kills from yesterday, last week and in total.
+             */
+            kills: {
+                /**
+                 * Top 10 ranking of corporations active in faction warfare by total kills. A corporation is considered "active" if they have participated in faction warfare in the past 14 days. Top 10 ranking of corporations active in faction warfare by total victory points. A corporation is considered "active" if they have participated in faction warfare in the past 14 days.
+                 */
+                active_total: esi.factionwarfare.CorporationScore[];
+                /**
+                 * Top 10 ranking of corporations by kills in the past week. Top 10 ranking of corporations by victory points in the past week.
+                 */
+                last_week: esi.factionwarfare.CorporationScore[];
+                /**
+                 * Top 10 ranking of corporations by kills in the past day. Top 10 ranking of corporations by victory points in the past day.
+                 */
+                yesterday: esi.factionwarfare.CorporationScore[];
+            };
+            /**
+             * Top 10 rankings of corporations by victory points from yesterday, last week and in total.
+             */
+            victory_points: {
+                /**
+                 * Top 10 ranking of corporations active in faction warfare by total kills. A corporation is considered "active" if they have participated in faction warfare in the past 14 days. Top 10 ranking of corporations active in faction warfare by total victory points. A corporation is considered "active" if they have participated in faction warfare in the past 14 days.
+                 */
+                active_total: esi.factionwarfare.CorporationScore[];
+                /**
+                 * Top 10 ranking of corporations by kills in the past week. Top 10 ranking of corporations by victory points in the past week.
+                 */
+                last_week: esi.factionwarfare.CorporationScore[];
+                /**
+                 * Top 10 ranking of corporations by kills in the past day. Top 10 ranking of corporations by victory points in the past day.
+                 */
+                yesterday: esi.factionwarfare.CorporationScore[];
+            };
+        }
+        export interface CorporationScore {
+            /**
+             * Amount of kills. Amount of victory points.
+             */
+            amount?: number;
+            corporation_id?: number;
+        }
+        /**
+         * This is the response type for the route, [`GET /v1/fw/leaderboards/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_leaderboards).
+         */
+        export interface FactionLeaderboard {
+            /**
+             * Top 4 rankings of factions by number of kills from yesterday, last week and in total.
+             */
+            kills: {
+                /**
+                 * Top 4 ranking of factions active in faction warfare by total kills. A faction is considered "active" if they have participated in faction warfare in the past 14 days. Top 4 ranking of factions active in faction warfare by total victory points. A faction is considered "active" if they have participated in faction warfare in the past 14 days.
+                 */
+                active_total: esi.factionwarfare.FactionScore[];
+                /**
+                 * Top 4 ranking of factions by kills in the past week. Top 4 ranking of factions by victory points in the past week.
+                 */
+                last_week: esi.factionwarfare.FactionScore[];
+                /**
+                 * Top 4 ranking of factions by kills in the past day. Top 4 ranking of factions by victory points in the past day.
+                 */
+                yesterday: esi.factionwarfare.FactionScore[];
+            };
+            /**
+             * Top 4 rankings of factions by victory points from yesterday, last week and in total.
+             */
+            victory_points: {
+                /**
+                 * Top 4 ranking of factions active in faction warfare by total kills. A faction is considered "active" if they have participated in faction warfare in the past 14 days. Top 4 ranking of factions active in faction warfare by total victory points. A faction is considered "active" if they have participated in faction warfare in the past 14 days.
+                 */
+                active_total: esi.factionwarfare.FactionScore[];
+                /**
+                 * Top 4 ranking of factions by kills in the past week. Top 4 ranking of factions by victory points in the past week.
+                 */
+                last_week: esi.factionwarfare.FactionScore[];
+                /**
+                 * Top 4 ranking of factions by kills in the past day. Top 4 ranking of factions by victory points in the past day.
+                 */
+                yesterday: esi.factionwarfare.FactionScore[];
+            };
+        }
+        export interface FactionScore {
+            /**
+             * Amount of kills. Amount of victory points.
+             */
+            amount?: number;
+            faction_id?: number;
+        }
+        export interface FactionStatistics {
+            faction_id: number;
+            /**
+             * Summary of kills against an enemy faction for the given faction.
+             */
+            kills: {
+                /**
+                 * Last week's total number of kills against enemy factions.
+                 */
+                last_week: number;
+                /**
+                 * Total number of kills against enemy factions since faction warfare began.
+                 */
+                total: number;
+                /**
+                 * Yesterday's total number of kills against enemy factions.
+                 */
+                yesterday: number;
+            };
+            /**
+             * How many pilots fight for the given faction.
+             */
+            pilots: number;
+            /**
+             * The number of solar systems controlled by the given faction.
+             */
+            systems_controlled: number;
+            /**
+             * Summary of victory points gained for the given faction.
+             */
+            victory_points: {
+                /**
+                 * Last week's victory points gained.
+                 */
+                last_week: number;
+                /**
+                 * Total victory points gained since faction warfare began.
+                 */
+                total: number;
+                /**
+                 * Yesterday's victory points gained.
+                 */
+                yesterday: number;
+            };
+        }
+        export interface System {
+            contested: boolean;
+            occupier_faction_id: number;
+            owner_faction_id: number;
+            solar_system_id: number;
+            victory_points: number;
+            victory_points_threshold: number;
+        }
+        export interface War {
+            /**
+             * The faction ID of the enemy faction.
+             */
+            against_id: number;
+            faction_id: number;
         }
     }
     export namespace fleet {
@@ -1416,10 +2261,7 @@ export namespace esi {
              */
             character_id: number;
             /**
-             * - If a character is invited with the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified.
-             * - If a character is invited with the `wing_commander` role, only `wing_id` should be specified.
-             * - If a character is invited with the `squad_commander` role, both `wing_id` and `squad_id` should be specified.
-             * - If a character is invited with the `squad_member` role, `wing_id` and `squad_id` should either both be specified or not specified at all. If they aren’t specified, the invited character will join any squad with available positions.
+             * If a character is invited with the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is invited with the `wing_commander` role, only `wing_id` should be specified. If a character is invited with the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is invited with the `squad_member` role, `wing_id` and `squad_id` should either both be specified or not specified at all. If they aren’t specified, the invited character will join any squad with available positions.
              */
             role: esi.fleet.Role;
             squad_id?: number;
@@ -1463,10 +2305,7 @@ export namespace esi {
          */
         export interface Movement {
             /**
-             * - If a character is moved to the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified.
-             * - If a character is moved to the `wing_commander` role, only `wing_id` should be specified.
-             * - If a character is moved to the `squad_commander` role, both `wing_id` and `squad_id` should be specified.
-             * - If a character is moved to the `squad_member` role, both `wing_id` and `squad_id` should be specified.
+             * If a character is moved to the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is moved to the `wing_commander` role, only `wing_id` should be specified. If a character is moved to the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is moved to the `squad_member` role, both `wing_id` and `squad_id` should be specified.
              */
             role: esi.fleet.Role;
             squad_id?: number;
@@ -1999,6 +2838,113 @@ export namespace esi {
             STORAGE = "storage",
             SURGERY = "surgery"
         }
+        export const enum SpectralClass {
+            A0 = "A0",
+            A0IV = "A0IV",
+            A0IV2 = "A0IV2",
+            F0IV = "F0 IV",
+            F0V = "F0 V",
+            F0VI = "F0 VI",
+            F1IV = "F1 IV",
+            F1V = "F1 V",
+            F1VI = "F1 VI",
+            F2IV = "F2 IV",
+            F2V = "F2 V",
+            F2VI = "F2 VI",
+            F3IV = "F3 IV",
+            F3V = "F3 V",
+            F3VI = "F3 VI",
+            F4IV = "F4 IV",
+            F4V = "F4 V",
+            F4VI = "F4 VI",
+            F5IV = "F5 IV",
+            F5V = "F5 V",
+            F5VI = "F5 VI",
+            F6IV = "F6 IV",
+            F6V = "F6 V",
+            F6VI = "F6 VI",
+            F7V = "F7 V",
+            F7VI = "F7 VI",
+            F8V = "F8 V",
+            F8VI = "F8 VI",
+            F9IV = "F9 IV",
+            F9V = "F9 V",
+            F9VI = "F9 VI",
+            G0IV = "G0 IV",
+            G0V = "G0 V",
+            G0VI = "G0 VI",
+            G1IV = "G1 IV",
+            G1V = "G1 V",
+            G1VI = "G1 VI",
+            G2IV = "G2 IV",
+            G2V = "G2 V",
+            G2VI = "G2 VI",
+            G3IV = "G3 IV",
+            G3V = "G3 V",
+            G3VI = "G3 VI",
+            G4IV = "G4 IV",
+            G4V = "G4 V",
+            G4VI = "G4 VI",
+            G5IV = "G5 IV",
+            G5V = "G5 V",
+            G5VI = "G5 VI",
+            G6V = "G6 V",
+            G6VI = "G6 VI",
+            G7IV = "G7 IV",
+            G7V = "G7 V",
+            G7VI = "G7 VI",
+            G8IV = "G8 IV",
+            G8V = "G8 V",
+            G8VI = "G8 VI",
+            G9V = "G9 V",
+            G9VI = "G9 VI",
+            K0IV = "K0 IV",
+            K0V = "K0 V",
+            K1IV = "K1 IV",
+            K1V = "K1 V",
+            K2IV = "K2 IV",
+            K2V = "K2 V",
+            K3IV = "K3 IV",
+            K3V = "K3 V",
+            K4IV = "K4 IV",
+            K4V = "K4 V",
+            K5IV = "K5 IV",
+            K5V = "K5 V",
+            K6IV = "K6 IV",
+            K6V = "K6 V",
+            K7IV = "K7 IV",
+            K7V = "K7 V",
+            K8IV = "K8 IV",
+            K8V = "K8 V",
+            K9IV = "K9 IV",
+            K9V = "K9 V",
+            M0V = "M0 V",
+            M1V = "M1 V",
+            M2V = "M2 V",
+            M3V = "M3 V",
+            M4V = "M4 V",
+            M5V = "M5 V",
+            M6V = "M6 V",
+            M7V = "M7 V",
+            M8V = "M8 V",
+            M9V = "M9 V"
+        }
+        /**
+         * This is the response type for the route, [`GET /v1/universe/stars/{star_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stars_star_id).
+         */
+        export interface Star {
+            /**
+             * Age of star in years.
+             */
+            age: number;
+            luminosity: number;
+            name: string;
+            radius: number;
+            solar_system_id: number;
+            spectral_class: esi.universe.SpectralClass;
+            temperature: number;
+            type_id: number;
+        }
         /**
          * This is the response type for the route, [`GET /v1/universe/stargates/{stargate_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stargates_stargate_id).
          */
@@ -2073,7 +3019,7 @@ export namespace esi {
             type_id?: number;
         }
         /**
-         * This is the response type for the route, [`GET /v2/universe/systems/{system_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems_system_id).
+         * This is the response type for the route, [`GET /v3/universe/systems/{system_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems_system_id).
          */
         export interface System {
             /**
@@ -2089,7 +3035,9 @@ export namespace esi {
             };
             security_class?: string;
             security_status: number;
-            stargates: number[];
+            star_id: number;
+            stargates?: number[];
+            stations?: number[];
             system_id: number;
         }
         export interface SystemJumps {
@@ -2106,7 +3054,7 @@ export namespace esi {
              */
             pod_kills: number;
             /**
-             * Number of player and NPC ships killed in this system.
+             * Number of player ships killed in this system.
              */
             ship_kills: number;
             system_id: number;
@@ -2144,6 +3092,12 @@ export namespace esi {
          * Corporation ID if and only if this ally is a corporation.
          */
         corporation_id?: number;
+    }
+    export const enum EntityType {
+        ALLIANCE = "alliance",
+        CHARACTER = "character",
+        CORPORATION = "corporation",
+        FACTION = "faction"
     }
     export interface Incursion {
         /**
@@ -2471,9 +3425,41 @@ export interface Parameters {
      * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/assets/`](https://esi.tech.ccp.is//#!/Assets/get_characters_character_id_assets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_assets: {
+        query: {
+            page?: number;
+        };
         path: {
             character_id: number;
         };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/assets/`](https://esi.tech.ccp.is//#!/Assets/get_corporations_corporation_id_assets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_assets: {
+        query: {
+            page?: number;
+        };
+        path: {
+            corporation_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/{character_id}/assets/locations/`](https://esi.tech.ccp.is//#!/Assets/post_characters_character_id_assets_locations). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    post_characters_character_id_assets_locations: {
+        path: {
+            character_id: number;
+        };
+        body: number[];
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/{character_id}/assets/names/`](https://esi.tech.ccp.is//#!/Assets/post_characters_character_id_assets_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    post_characters_character_id_assets_names: {
+        path: {
+            character_id: number;
+        };
+        body: number[];
     };
     /**
      * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/bookmarks/`](https://esi.tech.ccp.is//#!/Bookmarks/get_characters_character_id_bookmarks). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
@@ -2506,6 +3492,15 @@ export interface Parameters {
      * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.tech.ccp.is//#!/Calendar/get_characters_character_id_calendar_event_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_calendar_event_id: {
+        path: {
+            character_id: number;
+            event_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/calendar/{event_id}/attendees/`](https://esi.tech.ccp.is//#!/Calendar/get_characters_character_id_calendar_event_id_attendees). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_characters_character_id_calendar_event_id_attendees: {
         path: {
             character_id: number;
             event_id: number;
@@ -2562,9 +3557,33 @@ export interface Parameters {
         };
     };
     /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/fatigue/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_fatigue). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_characters_character_id_fatigue: {
+        path: {
+            character_id: number;
+        };
+    };
+    /**
      * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/medals/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_medals). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_medals: {
+        path: {
+            character_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/notifications/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_notifications). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_characters_character_id_notifications: {
+        path: {
+            character_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/notifications/contacts/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_notifications_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_characters_character_id_notifications_contacts: {
         path: {
             character_id: number;
         };
@@ -2625,6 +3644,14 @@ export interface Parameters {
         };
     };
     /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/implants/`](https://esi.tech.ccp.is//#!/Clones/get_characters_character_id_implants). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_characters_character_id_implants: {
+        path: {
+            character_id: number;
+        };
+    };
+    /**
      * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/delete_characters_character_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     delete_characters_character_id_contacts: {
@@ -2650,6 +3677,17 @@ export interface Parameters {
     get_characters_character_id_contacts_labels: {
         path: {
             character_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/get_corporations_corporation_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_contacts: {
+        query: {
+            page?: number;
+        };
+        path: {
+            corporation_id: number;
         };
     };
     /**
@@ -2715,9 +3753,28 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/alliancehistory/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_alliancehistory). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/corporations/{corporation_id}/alliancehistory/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_alliancehistory). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_corporation_id_alliancehistory: {
+        path: {
+            corporation_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/blueprints/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_blueprints). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_blueprints: {
+        query: {
+            page?: number;
+        };
+        path: {
+            corporation_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/divisions/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_divisions). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_divisions: {
         path: {
             corporation_id: number;
         };
@@ -2734,6 +3791,22 @@ export interface Parameters {
      * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/corporations/{corporation_id}/members/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_members). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_corporation_id_members: {
+        path: {
+            corporation_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/members/limit/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_members_limit). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_members_limit: {
+        path: {
+            corporation_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/membertracking/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_membertracking). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_membertracking: {
         path: {
             corporation_id: number;
         };
@@ -2758,6 +3831,14 @@ export interface Parameters {
         };
     };
     /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/titles/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_titles). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_titles: {
+        path: {
+            corporation_id: number;
+        };
+    };
+    /**
      * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/names/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_names: {
@@ -2777,7 +3858,7 @@ export interface Parameters {
             corporation_id: number;
             structure_id: number;
         };
-        body: esi.corporation.VulnerabilitySchedule[];
+        body: esi.corporation.structure.VulnerabilitySchedule[];
     };
     /**
      * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/attributes/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_attributes). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
@@ -2796,13 +3877,37 @@ export interface Parameters {
      */
     get_dogma_effects: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/effects/{effect_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects_effect_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/dogma/effects/{effect_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects_effect_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_dogma_effects_effect_id: {
         path: {
             effect_id: number;
         };
     };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fw/leaderboards/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_leaderboards). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_fw_leaderboards: undefined;
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fw/leaderboards/characters/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_leaderboards_characters). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_fw_leaderboards_characters: undefined;
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fw/leaderboards/corporations/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_leaderboards_corporations). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_fw_leaderboards_corporations: undefined;
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fw/stats/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_stats). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_fw_stats: undefined;
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fw/systems/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_systems). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_fw_systems: undefined;
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fw/wars/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_wars). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_fw_wars: undefined;
     /**
      * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/fittings/{fitting_id}/`](https://esi.tech.ccp.is//#!/Fittings/delete_characters_character_id_fittings_fitting_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
@@ -2982,6 +4087,17 @@ export interface Parameters {
         };
         path: {
             character_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/killmails/recent/`](https://esi.tech.ccp.is//#!/Killmails/get_corporations_corporation_id_killmails_recent). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_killmails_recent: {
+        query: {
+            max_kill_id?: number;
+        };
+        path: {
+            corporation_id: number;
         };
     };
     /**
@@ -3165,6 +4281,17 @@ export interface Parameters {
         };
     };
     /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/{region_id}/types/`](https://esi.tech.ccp.is//#!/Market/get_markets_region_id_types). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_markets_region_id_types: {
+        query: {
+            page?: number;
+        };
+        path: {
+            region_id: number;
+        };
+    };
+    /**
      * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/structures/{structure_id}/`](https://esi.tech.ccp.is//#!/Market/get_markets_structures_structure_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_markets_structures_structure_id: {
@@ -3216,7 +4343,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets_planet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/characters/{character_id}/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets_planet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_planets_planet_id: {
         path: {
@@ -3267,6 +4394,14 @@ export interface Parameters {
             categories: esi.SearchCategory[];
             search: string;
             strict?: boolean;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/attributes/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_attributes). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_characters_character_id_attributes: {
+        path: {
+            character_id: number;
         };
     };
     /**
@@ -3402,6 +4537,14 @@ export interface Parameters {
         };
     };
     /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/stars/{star_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stars_star_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_universe_stars_star_id: {
+        path: {
+            star_id: number;
+        };
+    };
+    /**
      * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/universe/stations/{station_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stations_station_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_stations_station_id: {
@@ -3426,7 +4569,7 @@ export interface Parameters {
      */
     get_universe_system_jumps: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/system_kills/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_kills). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/universe/system_kills/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_kills). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_system_kills: undefined;
     /**
@@ -3434,7 +4577,7 @@ export interface Parameters {
      */
     get_universe_systems: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/universe/systems/{system_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems_system_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/universe/systems/{system_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems_system_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_systems_system_id: {
         path: {
@@ -3504,22 +4647,65 @@ export interface Parameters {
         body: esi.character.mail.NewMailWindow;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/wallets/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/wallet/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallet). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
-    get_characters_character_id_wallets: {
+    get_characters_character_id_wallet: {
         path: {
             character_id: number;
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/wallets/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallets_journal). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/wallet/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallet_journal). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
-    get_characters_character_id_wallets_journal: {
+    get_characters_character_id_wallet_journal: {
         query: {
             from_id?: number;
         };
         path: {
             character_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/wallet/transactions/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallet_transactions). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_characters_character_id_wallet_transactions: {
+        query: {
+            from_id?: number;
+        };
+        path: {
+            character_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/wallets/`](https://esi.tech.ccp.is//#!/Wallet/get_corporations_corporation_id_wallets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_wallets: {
+        path: {
+            corporation_id: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/wallets/{division}/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_corporations_corporation_id_wallets_division_journal). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_wallets_division_journal: {
+        query: {
+            from_id?: number;
+        };
+        path: {
+            corporation_id: number;
+            division: number;
+        };
+    };
+    /**
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/wallets/{division}/transactions/`](https://esi.tech.ccp.is//#!/Wallet/get_corporations_corporation_id_wallets_division_transactions). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     */
+    get_corporations_corporation_id_wallets_division_transactions: {
+        query: {
+            from_id?: number;
+        };
+        path: {
+            corporation_id: number;
+            division: number;
         };
     };
     /**
@@ -3577,7 +4763,19 @@ export interface Responses {
     /**
      * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/assets/`](https://esi.tech.ccp.is//#!/Assets/get_characters_character_id_assets).
      */
-    get_characters_character_id_assets: esi.character.Asset[];
+    get_characters_character_id_assets: esi.character.asset.Asset[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/assets/`](https://esi.tech.ccp.is//#!/Assets/get_corporations_corporation_id_assets).
+     */
+    get_corporations_corporation_id_assets: esi.corporation.asset.Asset[];
+    /**
+     * The type of this member is the response type of for the route: [`POST /v1/characters/{character_id}/assets/locations/`](https://esi.tech.ccp.is//#!/Assets/post_characters_character_id_assets_locations).
+     */
+    post_characters_character_id_assets_locations: esi.character.asset.Location[];
+    /**
+     * The type of this member is the response type of for the route: [`POST /v1/characters/{character_id}/assets/names/`](https://esi.tech.ccp.is//#!/Assets/post_characters_character_id_assets_names).
+     */
+    post_characters_character_id_assets_names: esi.character.asset.Name[];
     /**
      * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/bookmarks/`](https://esi.tech.ccp.is//#!/Bookmarks/get_characters_character_id_bookmarks).
      */
@@ -3595,6 +4793,10 @@ export interface Responses {
      */
     get_characters_character_id_calendar_event_id: esi.character.calendar.Event;
     /**
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/calendar/{event_id}/attendees/`](https://esi.tech.ccp.is//#!/Calendar/get_characters_character_id_calendar_event_id_attendees).
+     */
+    get_characters_character_id_calendar_event_id_attendees: esi.character.calendar.Attendee[];
+    /**
      * The type of this member is the response type of for the route: [`PUT /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.tech.ccp.is//#!/Calendar/put_characters_character_id_calendar_event_id).
      */
     put_characters_character_id_calendar_event_id: undefined;
@@ -3609,7 +4811,7 @@ export interface Responses {
     /**
      * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/blueprints/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_blueprints).
      */
-    get_characters_character_id_blueprints: esi.character.Blueprint[];
+    get_characters_character_id_blueprints: esi.character.asset.Blueprint[];
     /**
      * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/chat_channels/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_chat_channels).
      */
@@ -3619,9 +4821,21 @@ export interface Responses {
      */
     get_characters_character_id_corporationhistory: esi.character.CorporationHistory[];
     /**
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/fatigue/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_fatigue).
+     */
+    get_characters_character_id_fatigue: esi.character.Fatigue;
+    /**
      * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/medals/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_medals).
      */
     get_characters_character_id_medals: esi.character.Medal[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/notifications/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_notifications).
+     */
+    get_characters_character_id_notifications: esi.character.notification.Notification[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/notifications/contacts/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_notifications_contacts).
+     */
+    get_characters_character_id_notifications_contacts: esi.character.notification.ContactNotification[];
     /**
      * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/portrait/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_portrait).
      */
@@ -3651,6 +4865,10 @@ export interface Responses {
      */
     get_characters_character_id_clones: esi.character.Clones;
     /**
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/implants/`](https://esi.tech.ccp.is//#!/Clones/get_characters_character_id_implants).
+     */
+    get_characters_character_id_implants: number[];
+    /**
      * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/delete_characters_character_id_contacts).
      */
     delete_characters_character_id_contacts: undefined;
@@ -3662,6 +4880,10 @@ export interface Responses {
      * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contacts/labels/`](https://esi.tech.ccp.is//#!/Contacts/get_characters_character_id_contacts_labels).
      */
     get_characters_character_id_contacts_labels: esi.character.ContactLabel[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/get_corporations_corporation_id_contacts).
+     */
+    get_corporations_corporation_id_contacts: esi.corporation.Contact[];
     /**
      * The type of this member is the response type of for the route: [`POST /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/post_characters_character_id_contacts).
      */
@@ -3687,9 +4909,17 @@ export interface Responses {
      */
     get_corporations_corporation_id: esi.corporation.Corporation;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/alliancehistory/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_alliancehistory).
+     * The type of this member is the response type of for the route: [`GET /v2/corporations/{corporation_id}/alliancehistory/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_alliancehistory).
      */
     get_corporations_corporation_id_alliancehistory: esi.corporation.AllianceHistory[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/blueprints/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_blueprints).
+     */
+    get_corporations_corporation_id_blueprints: esi.corporation.asset.Blueprint[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/divisions/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_divisions).
+     */
+    get_corporations_corporation_id_divisions: esi.corporation.Divisions;
     /**
      * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/icons/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_icons).
      */
@@ -3699,13 +4929,25 @@ export interface Responses {
      */
     get_corporations_corporation_id_members: esi.corporation.Member[];
     /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/members/limit/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_members_limit).
+     */
+    get_corporations_corporation_id_members_limit: number;
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/membertracking/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_membertracking).
+     */
+    get_corporations_corporation_id_membertracking: esi.corporation.MemberDetails[];
+    /**
      * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/roles/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_roles).
      */
     get_corporations_corporation_id_roles: esi.corporation.MemberRoles[];
     /**
      * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/structures/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_structures).
      */
-    get_corporations_corporation_id_structures: esi.corporation.Structure[];
+    get_corporations_corporation_id_structures: esi.corporation.structure.Structure[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/titles/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_titles).
+     */
+    get_corporations_corporation_id_titles: esi.corporation.Title[];
     /**
      * The type of this member is the response type of for the route: [`GET /v1/corporations/names/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_names).
      */
@@ -3731,9 +4973,33 @@ export interface Responses {
      */
     get_dogma_effects: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/dogma/effects/{effect_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects_effect_id).
+     * The type of this member is the response type of for the route: [`GET /v2/dogma/effects/{effect_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects_effect_id).
      */
     get_dogma_effects_effect_id: esi.dogma.Effect;
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/fw/leaderboards/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_leaderboards).
+     */
+    get_fw_leaderboards: esi.factionwarfare.FactionLeaderboard;
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/fw/leaderboards/characters/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_leaderboards_characters).
+     */
+    get_fw_leaderboards_characters: esi.factionwarfare.CharacterLeaderboard;
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/fw/leaderboards/corporations/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_leaderboards_corporations).
+     */
+    get_fw_leaderboards_corporations: esi.factionwarfare.CorporationLeaderboard;
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/fw/stats/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_stats).
+     */
+    get_fw_stats: esi.factionwarfare.FactionStatistics[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/fw/systems/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_systems).
+     */
+    get_fw_systems: esi.factionwarfare.System[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/fw/wars/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_wars).
+     */
+    get_fw_wars: esi.factionwarfare.War[];
     /**
      * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/fittings/{fitting_id}/`](https://esi.tech.ccp.is//#!/Fittings/delete_characters_character_id_fittings_fitting_id).
      */
@@ -3823,6 +5089,10 @@ export interface Responses {
      */
     get_characters_character_id_killmails_recent: esi.killmail.KillmailLink[];
     /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/killmails/recent/`](https://esi.tech.ccp.is//#!/Killmails/get_corporations_corporation_id_killmails_recent).
+     */
+    get_corporations_corporation_id_killmails_recent: esi.killmail.KillmailLink[];
+    /**
      * The type of this member is the response type of for the route: [`GET /v1/killmails/{killmail_id}/{killmail_hash}/`](https://esi.tech.ccp.is//#!/Killmails/get_killmails_killmail_id_killmail_hash).
      */
     get_killmails_killmail_id_killmail_hash: esi.killmail.Killmail;
@@ -3907,6 +5177,10 @@ export interface Responses {
      */
     get_markets_region_id_orders: esi.market.Order[];
     /**
+     * The type of this member is the response type of for the route: [`GET /v1/markets/{region_id}/types/`](https://esi.tech.ccp.is//#!/Market/get_markets_region_id_types).
+     */
+    get_markets_region_id_types: number[];
+    /**
      * The type of this member is the response type of for the route: [`GET /v1/markets/structures/{structure_id}/`](https://esi.tech.ccp.is//#!/Market/get_markets_structures_structure_id).
      */
     get_markets_structures_structure_id: esi.market.Order[];
@@ -3935,7 +5209,7 @@ export interface Responses {
      */
     get_characters_character_id_planets: esi.character.planetaryinteraction.PlanetSummary[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets_planet_id).
+     * The type of this member is the response type of for the route: [`GET /v3/characters/{character_id}/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets_planet_id).
      */
     get_characters_character_id_planets_planet_id: esi.character.planetaryinteraction.Planet;
     /**
@@ -3954,6 +5228,10 @@ export interface Responses {
      * The type of this member is the response type of for the route: [`GET /v1/search/`](https://esi.tech.ccp.is//#!/Search/get_search).
      */
     get_search: esi.Search;
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/attributes/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_attributes).
+     */
+    get_characters_character_id_attributes: esi.character.Attributes;
     /**
      * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/skillqueue/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_skillqueue).
      */
@@ -4043,6 +5321,10 @@ export interface Responses {
      */
     get_universe_stargates_stargate_id: esi.universe.Stargate;
     /**
+     * The type of this member is the response type of for the route: [`GET /v1/universe/stars/{star_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stars_star_id).
+     */
+    get_universe_stars_star_id: esi.universe.Star;
+    /**
      * The type of this member is the response type of for the route: [`GET /v2/universe/stations/{station_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stations_station_id).
      */
     get_universe_stations_station_id: esi.universe.Station;
@@ -4059,7 +5341,7 @@ export interface Responses {
      */
     get_universe_system_jumps: esi.universe.SystemJumps[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/system_kills/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_kills).
+     * The type of this member is the response type of for the route: [`GET /v2/universe/system_kills/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_kills).
      */
     get_universe_system_kills: esi.universe.SystemKills[];
     /**
@@ -4067,7 +5349,7 @@ export interface Responses {
      */
     get_universe_systems: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/universe/systems/{system_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems_system_id).
+     * The type of this member is the response type of for the route: [`GET /v3/universe/systems/{system_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems_system_id).
      */
     get_universe_systems_system_id: esi.universe.System;
     /**
@@ -4103,13 +5385,29 @@ export interface Responses {
      */
     post_ui_openwindow_newmail: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/wallets/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallets).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/wallet/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallet).
      */
-    get_characters_character_id_wallets: esi.character.Wallet[];
+    get_characters_character_id_wallet: number;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/wallets/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallets_journal).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/wallet/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallet_journal).
      */
-    get_characters_character_id_wallets_journal: esi.character.WalletJournal[];
+    get_characters_character_id_wallet_journal: esi.character.wallet.Journal[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/wallet/transactions/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallet_transactions).
+     */
+    get_characters_character_id_wallet_transactions: esi.character.wallet.Transaction[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/wallets/`](https://esi.tech.ccp.is//#!/Wallet/get_corporations_corporation_id_wallets).
+     */
+    get_corporations_corporation_id_wallets: esi.corporation.wallet.Wallet[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/wallets/{division}/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_corporations_corporation_id_wallets_division_journal).
+     */
+    get_corporations_corporation_id_wallets_division_journal: esi.corporation.wallet.Journal[];
+    /**
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/wallets/{division}/transactions/`](https://esi.tech.ccp.is//#!/Wallet/get_corporations_corporation_id_wallets_division_transactions).
+     */
+    get_corporations_corporation_id_wallets_division_transactions: esi.corporation.wallet.Transaction[];
     /**
      * The type of this member is the response type of for the route: [`GET /v1/wars/`](https://esi.tech.ccp.is//#!/Wars/get_wars).
      */
@@ -4130,17 +5428,24 @@ export const ROUTE_MAP: RouteMap = {
     get_alliances_alliance_id_icons: { url: "/v1/alliances/{alliance_id}/icons/", method: "GET" },
     get_alliances_names: { url: "/v1/alliances/names/", method: "GET" },
     get_characters_character_id_assets: { url: "/v1/characters/{character_id}/assets/", method: "GET" },
+    get_corporations_corporation_id_assets: { url: "/v1/corporations/{corporation_id}/assets/", method: "GET" },
+    post_characters_character_id_assets_locations: { url: "/v1/characters/{character_id}/assets/locations/", method: "POST" },
+    post_characters_character_id_assets_names: { url: "/v1/characters/{character_id}/assets/names/", method: "POST" },
     get_characters_character_id_bookmarks: { url: "/v1/characters/{character_id}/bookmarks/", method: "GET" },
     get_characters_character_id_bookmarks_folders: { url: "/v1/characters/{character_id}/bookmarks/folders/", method: "GET" },
     get_characters_character_id_calendar: { url: "/v1/characters/{character_id}/calendar/", method: "GET" },
     get_characters_character_id_calendar_event_id: { url: "/v3/characters/{character_id}/calendar/{event_id}/", method: "GET" },
+    get_characters_character_id_calendar_event_id_attendees: { url: "/v1/characters/{character_id}/calendar/{event_id}/attendees/", method: "GET" },
     put_characters_character_id_calendar_event_id: { url: "/v3/characters/{character_id}/calendar/{event_id}/", method: "PUT" },
     get_characters_character_id: { url: "/v4/characters/{character_id}/", method: "GET" },
     get_characters_character_id_agents_research: { url: "/v1/characters/{character_id}/agents_research/", method: "GET" },
     get_characters_character_id_blueprints: { url: "/v1/characters/{character_id}/blueprints/", method: "GET" },
     get_characters_character_id_chat_channels: { url: "/v1/characters/{character_id}/chat_channels/", method: "GET" },
     get_characters_character_id_corporationhistory: { url: "/v1/characters/{character_id}/corporationhistory/", method: "GET" },
+    get_characters_character_id_fatigue: { url: "/v1/characters/{character_id}/fatigue/", method: "GET" },
     get_characters_character_id_medals: { url: "/v1/characters/{character_id}/medals/", method: "GET" },
+    get_characters_character_id_notifications: { url: "/v1/characters/{character_id}/notifications/", method: "GET" },
+    get_characters_character_id_notifications_contacts: { url: "/v1/characters/{character_id}/notifications/contacts/", method: "GET" },
     get_characters_character_id_portrait: { url: "/v2/characters/{character_id}/portrait/", method: "GET" },
     get_characters_character_id_roles: { url: "/v1/characters/{character_id}/roles/", method: "GET" },
     get_characters_character_id_standings: { url: "/v1/characters/{character_id}/standings/", method: "GET" },
@@ -4148,27 +5453,40 @@ export const ROUTE_MAP: RouteMap = {
     post_characters_affiliation: { url: "/v1/characters/affiliation/", method: "POST" },
     post_characters_character_id_cspa: { url: "/v3/characters/{character_id}/cspa/", method: "POST" },
     get_characters_character_id_clones: { url: "/v2/characters/{character_id}/clones/", method: "GET" },
+    get_characters_character_id_implants: { url: "/v1/characters/{character_id}/implants/", method: "GET" },
     delete_characters_character_id_contacts: { url: "/v1/characters/{character_id}/contacts/", method: "DELETE" },
     get_characters_character_id_contacts: { url: "/v1/characters/{character_id}/contacts/", method: "GET" },
     get_characters_character_id_contacts_labels: { url: "/v1/characters/{character_id}/contacts/labels/", method: "GET" },
+    get_corporations_corporation_id_contacts: { url: "/v1/corporations/{corporation_id}/contacts/", method: "GET" },
     post_characters_character_id_contacts: { url: "/v1/characters/{character_id}/contacts/", method: "POST" },
     put_characters_character_id_contacts: { url: "/v1/characters/{character_id}/contacts/", method: "PUT" },
     get_characters_character_id_contracts: { url: "/v1/characters/{character_id}/contracts/", method: "GET" },
     get_characters_character_id_contracts_contract_id_bids: { url: "/v1/characters/{character_id}/contracts/{contract_id}/bids/", method: "GET" },
     get_characters_character_id_contracts_contract_id_items: { url: "/v1/characters/{character_id}/contracts/{contract_id}/items/", method: "GET" },
     get_corporations_corporation_id: { url: "/v3/corporations/{corporation_id}/", method: "GET" },
-    get_corporations_corporation_id_alliancehistory: { url: "/v1/corporations/{corporation_id}/alliancehistory/", method: "GET" },
+    get_corporations_corporation_id_alliancehistory: { url: "/v2/corporations/{corporation_id}/alliancehistory/", method: "GET" },
+    get_corporations_corporation_id_blueprints: { url: "/v1/corporations/{corporation_id}/blueprints/", method: "GET" },
+    get_corporations_corporation_id_divisions: { url: "/v1/corporations/{corporation_id}/divisions/", method: "GET" },
     get_corporations_corporation_id_icons: { url: "/v1/corporations/{corporation_id}/icons/", method: "GET" },
     get_corporations_corporation_id_members: { url: "/v2/corporations/{corporation_id}/members/", method: "GET" },
+    get_corporations_corporation_id_members_limit: { url: "/v1/corporations/{corporation_id}/members/limit/", method: "GET" },
+    get_corporations_corporation_id_membertracking: { url: "/v1/corporations/{corporation_id}/membertracking/", method: "GET" },
     get_corporations_corporation_id_roles: { url: "/v1/corporations/{corporation_id}/roles/", method: "GET" },
     get_corporations_corporation_id_structures: { url: "/v1/corporations/{corporation_id}/structures/", method: "GET" },
+    get_corporations_corporation_id_titles: { url: "/v1/corporations/{corporation_id}/titles/", method: "GET" },
     get_corporations_names: { url: "/v1/corporations/names/", method: "GET" },
     get_corporations_npccorps: { url: "/v1/corporations/npccorps/", method: "GET" },
     put_corporations_corporation_id_structures_structure_id: { url: "/v1/corporations/{corporation_id}/structures/{structure_id}/", method: "PUT" },
     get_dogma_attributes: { url: "/v1/dogma/attributes/", method: "GET" },
     get_dogma_attributes_attribute_id: { url: "/v1/dogma/attributes/{attribute_id}/", method: "GET" },
     get_dogma_effects: { url: "/v1/dogma/effects/", method: "GET" },
-    get_dogma_effects_effect_id: { url: "/v1/dogma/effects/{effect_id}/", method: "GET" },
+    get_dogma_effects_effect_id: { url: "/v2/dogma/effects/{effect_id}/", method: "GET" },
+    get_fw_leaderboards: { url: "/v1/fw/leaderboards/", method: "GET" },
+    get_fw_leaderboards_characters: { url: "/v1/fw/leaderboards/characters/", method: "GET" },
+    get_fw_leaderboards_corporations: { url: "/v1/fw/leaderboards/corporations/", method: "GET" },
+    get_fw_stats: { url: "/v1/fw/stats/", method: "GET" },
+    get_fw_systems: { url: "/v1/fw/systems/", method: "GET" },
+    get_fw_wars: { url: "/v1/fw/wars/", method: "GET" },
     delete_characters_character_id_fittings_fitting_id: { url: "/v1/characters/{character_id}/fittings/{fitting_id}/", method: "DELETE" },
     get_characters_character_id_fittings: { url: "/v1/characters/{character_id}/fittings/", method: "GET" },
     post_characters_character_id_fittings: { url: "/v1/characters/{character_id}/fittings/", method: "POST" },
@@ -4191,6 +5509,7 @@ export const ROUTE_MAP: RouteMap = {
     get_industry_systems: { url: "/v1/industry/systems/", method: "GET" },
     get_insurance_prices: { url: "/v1/insurance/prices/", method: "GET" },
     get_characters_character_id_killmails_recent: { url: "/v1/characters/{character_id}/killmails/recent/", method: "GET" },
+    get_corporations_corporation_id_killmails_recent: { url: "/v1/corporations/{corporation_id}/killmails/recent/", method: "GET" },
     get_killmails_killmail_id_killmail_hash: { url: "/v1/killmails/{killmail_id}/{killmail_hash}/", method: "GET" },
     get_characters_character_id_location: { url: "/v1/characters/{character_id}/location/", method: "GET" },
     get_characters_character_id_online: { url: "/v1/characters/{character_id}/online/", method: "GET" },
@@ -4212,6 +5531,7 @@ export const ROUTE_MAP: RouteMap = {
     get_markets_prices: { url: "/v1/markets/prices/", method: "GET" },
     get_markets_region_id_history: { url: "/v1/markets/{region_id}/history/", method: "GET" },
     get_markets_region_id_orders: { url: "/v1/markets/{region_id}/orders/", method: "GET" },
+    get_markets_region_id_types: { url: "/v1/markets/{region_id}/types/", method: "GET" },
     get_markets_structures_structure_id: { url: "/v1/markets/structures/{structure_id}/", method: "GET" },
     get_characters_character_id_opportunities: { url: "/v1/characters/{character_id}/opportunities/", method: "GET" },
     get_opportunities_groups: { url: "/v1/opportunities/groups/", method: "GET" },
@@ -4219,11 +5539,12 @@ export const ROUTE_MAP: RouteMap = {
     get_opportunities_tasks: { url: "/v1/opportunities/tasks/", method: "GET" },
     get_opportunities_tasks_task_id: { url: "/v1/opportunities/tasks/{task_id}/", method: "GET" },
     get_characters_character_id_planets: { url: "/v1/characters/{character_id}/planets/", method: "GET" },
-    get_characters_character_id_planets_planet_id: { url: "/v2/characters/{character_id}/planets/{planet_id}/", method: "GET" },
+    get_characters_character_id_planets_planet_id: { url: "/v3/characters/{character_id}/planets/{planet_id}/", method: "GET" },
     get_universe_schematics_schematic_id: { url: "/v1/universe/schematics/{schematic_id}/", method: "GET" },
     get_route_origin_destination: { url: "/v1/route/{origin}/{destination}/", method: "GET" },
     get_characters_character_id_search: { url: "/v2/characters/{character_id}/search/", method: "GET" },
     get_search: { url: "/v1/search/", method: "GET" },
+    get_characters_character_id_attributes: { url: "/v1/characters/{character_id}/attributes/", method: "GET" },
     get_characters_character_id_skillqueue: { url: "/v2/characters/{character_id}/skillqueue/", method: "GET" },
     get_characters_character_id_skills: { url: "/v3/characters/{character_id}/skills/", method: "GET" },
     get_sovereignty_campaigns: { url: "/v1/sovereignty/campaigns/", method: "GET" },
@@ -4246,13 +5567,14 @@ export const ROUTE_MAP: RouteMap = {
     get_universe_regions: { url: "/v1/universe/regions/", method: "GET" },
     get_universe_regions_region_id: { url: "/v1/universe/regions/{region_id}/", method: "GET" },
     get_universe_stargates_stargate_id: { url: "/v1/universe/stargates/{stargate_id}/", method: "GET" },
+    get_universe_stars_star_id: { url: "/v1/universe/stars/{star_id}/", method: "GET" },
     get_universe_stations_station_id: { url: "/v2/universe/stations/{station_id}/", method: "GET" },
     get_universe_structures: { url: "/v1/universe/structures/", method: "GET" },
     get_universe_structures_structure_id: { url: "/v1/universe/structures/{structure_id}/", method: "GET" },
     get_universe_system_jumps: { url: "/v1/universe/system_jumps/", method: "GET" },
-    get_universe_system_kills: { url: "/v1/universe/system_kills/", method: "GET" },
+    get_universe_system_kills: { url: "/v2/universe/system_kills/", method: "GET" },
     get_universe_systems: { url: "/v1/universe/systems/", method: "GET" },
-    get_universe_systems_system_id: { url: "/v2/universe/systems/{system_id}/", method: "GET" },
+    get_universe_systems_system_id: { url: "/v3/universe/systems/{system_id}/", method: "GET" },
     get_universe_types: { url: "/v1/universe/types/", method: "GET" },
     get_universe_types_type_id: { url: "/v2/universe/types/{type_id}/", method: "GET" },
     post_universe_names: { url: "/v2/universe/names/", method: "POST" },
@@ -4261,8 +5583,12 @@ export const ROUTE_MAP: RouteMap = {
     post_ui_openwindow_information: { url: "/v1/ui/openwindow/information/", method: "POST" },
     post_ui_openwindow_marketdetails: { url: "/v1/ui/openwindow/marketdetails/", method: "POST" },
     post_ui_openwindow_newmail: { url: "/v1/ui/openwindow/newmail/", method: "POST" },
-    get_characters_character_id_wallets: { url: "/v1/characters/{character_id}/wallets/", method: "GET" },
-    get_characters_character_id_wallets_journal: { url: "/v1/characters/{character_id}/wallets/journal/", method: "GET" },
+    get_characters_character_id_wallet: { url: "/v1/characters/{character_id}/wallet/", method: "GET" },
+    get_characters_character_id_wallet_journal: { url: "/v1/characters/{character_id}/wallet/journal/", method: "GET" },
+    get_characters_character_id_wallet_transactions: { url: "/v1/characters/{character_id}/wallet/transactions/", method: "GET" },
+    get_corporations_corporation_id_wallets: { url: "/v1/corporations/{corporation_id}/wallets/", method: "GET" },
+    get_corporations_corporation_id_wallets_division_journal: { url: "/v1/corporations/{corporation_id}/wallets/{division}/journal/", method: "GET" },
+    get_corporations_corporation_id_wallets_division_transactions: { url: "/v1/corporations/{corporation_id}/wallets/{division}/transactions/", method: "GET" },
     get_wars: { url: "/v1/wars/", method: "GET" },
     get_wars_war_id: { url: "/v1/wars/{war_id}/", method: "GET" },
     get_wars_war_id_killmails: { url: "/v1/wars/{war_id}/killmails/", method: "GET" }
@@ -4274,17 +5600,24 @@ export interface RouteMap {
     get_alliances_alliance_id_icons: URLInfo;
     get_alliances_names: URLInfo;
     get_characters_character_id_assets: URLInfo;
+    get_corporations_corporation_id_assets: URLInfo;
+    post_characters_character_id_assets_locations: URLInfo;
+    post_characters_character_id_assets_names: URLInfo;
     get_characters_character_id_bookmarks: URLInfo;
     get_characters_character_id_bookmarks_folders: URLInfo;
     get_characters_character_id_calendar: URLInfo;
     get_characters_character_id_calendar_event_id: URLInfo;
+    get_characters_character_id_calendar_event_id_attendees: URLInfo;
     put_characters_character_id_calendar_event_id: URLInfo;
     get_characters_character_id: URLInfo;
     get_characters_character_id_agents_research: URLInfo;
     get_characters_character_id_blueprints: URLInfo;
     get_characters_character_id_chat_channels: URLInfo;
     get_characters_character_id_corporationhistory: URLInfo;
+    get_characters_character_id_fatigue: URLInfo;
     get_characters_character_id_medals: URLInfo;
+    get_characters_character_id_notifications: URLInfo;
+    get_characters_character_id_notifications_contacts: URLInfo;
     get_characters_character_id_portrait: URLInfo;
     get_characters_character_id_roles: URLInfo;
     get_characters_character_id_standings: URLInfo;
@@ -4292,9 +5625,11 @@ export interface RouteMap {
     post_characters_affiliation: URLInfo;
     post_characters_character_id_cspa: URLInfo;
     get_characters_character_id_clones: URLInfo;
+    get_characters_character_id_implants: URLInfo;
     delete_characters_character_id_contacts: URLInfo;
     get_characters_character_id_contacts: URLInfo;
     get_characters_character_id_contacts_labels: URLInfo;
+    get_corporations_corporation_id_contacts: URLInfo;
     post_characters_character_id_contacts: URLInfo;
     put_characters_character_id_contacts: URLInfo;
     get_characters_character_id_contracts: URLInfo;
@@ -4302,10 +5637,15 @@ export interface RouteMap {
     get_characters_character_id_contracts_contract_id_items: URLInfo;
     get_corporations_corporation_id: URLInfo;
     get_corporations_corporation_id_alliancehistory: URLInfo;
+    get_corporations_corporation_id_blueprints: URLInfo;
+    get_corporations_corporation_id_divisions: URLInfo;
     get_corporations_corporation_id_icons: URLInfo;
     get_corporations_corporation_id_members: URLInfo;
+    get_corporations_corporation_id_members_limit: URLInfo;
+    get_corporations_corporation_id_membertracking: URLInfo;
     get_corporations_corporation_id_roles: URLInfo;
     get_corporations_corporation_id_structures: URLInfo;
+    get_corporations_corporation_id_titles: URLInfo;
     get_corporations_names: URLInfo;
     get_corporations_npccorps: URLInfo;
     put_corporations_corporation_id_structures_structure_id: URLInfo;
@@ -4313,6 +5653,12 @@ export interface RouteMap {
     get_dogma_attributes_attribute_id: URLInfo;
     get_dogma_effects: URLInfo;
     get_dogma_effects_effect_id: URLInfo;
+    get_fw_leaderboards: URLInfo;
+    get_fw_leaderboards_characters: URLInfo;
+    get_fw_leaderboards_corporations: URLInfo;
+    get_fw_stats: URLInfo;
+    get_fw_systems: URLInfo;
+    get_fw_wars: URLInfo;
     delete_characters_character_id_fittings_fitting_id: URLInfo;
     get_characters_character_id_fittings: URLInfo;
     post_characters_character_id_fittings: URLInfo;
@@ -4335,6 +5681,7 @@ export interface RouteMap {
     get_industry_systems: URLInfo;
     get_insurance_prices: URLInfo;
     get_characters_character_id_killmails_recent: URLInfo;
+    get_corporations_corporation_id_killmails_recent: URLInfo;
     get_killmails_killmail_id_killmail_hash: URLInfo;
     get_characters_character_id_location: URLInfo;
     get_characters_character_id_online: URLInfo;
@@ -4356,6 +5703,7 @@ export interface RouteMap {
     get_markets_prices: URLInfo;
     get_markets_region_id_history: URLInfo;
     get_markets_region_id_orders: URLInfo;
+    get_markets_region_id_types: URLInfo;
     get_markets_structures_structure_id: URLInfo;
     get_characters_character_id_opportunities: URLInfo;
     get_opportunities_groups: URLInfo;
@@ -4368,6 +5716,7 @@ export interface RouteMap {
     get_route_origin_destination: URLInfo;
     get_characters_character_id_search: URLInfo;
     get_search: URLInfo;
+    get_characters_character_id_attributes: URLInfo;
     get_characters_character_id_skillqueue: URLInfo;
     get_characters_character_id_skills: URLInfo;
     get_sovereignty_campaigns: URLInfo;
@@ -4390,6 +5739,7 @@ export interface RouteMap {
     get_universe_regions: URLInfo;
     get_universe_regions_region_id: URLInfo;
     get_universe_stargates_stargate_id: URLInfo;
+    get_universe_stars_star_id: URLInfo;
     get_universe_stations_station_id: URLInfo;
     get_universe_structures: URLInfo;
     get_universe_structures_structure_id: URLInfo;
@@ -4405,8 +5755,12 @@ export interface RouteMap {
     post_ui_openwindow_information: URLInfo;
     post_ui_openwindow_marketdetails: URLInfo;
     post_ui_openwindow_newmail: URLInfo;
-    get_characters_character_id_wallets: URLInfo;
-    get_characters_character_id_wallets_journal: URLInfo;
+    get_characters_character_id_wallet: URLInfo;
+    get_characters_character_id_wallet_journal: URLInfo;
+    get_characters_character_id_wallet_transactions: URLInfo;
+    get_corporations_corporation_id_wallets: URLInfo;
+    get_corporations_corporation_id_wallets_division_journal: URLInfo;
+    get_corporations_corporation_id_wallets_division_transactions: URLInfo;
     get_wars: URLInfo;
     get_wars_war_id: URLInfo;
     get_wars_war_id_killmails: URLInfo;
