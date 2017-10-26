@@ -1,52 +1,212 @@
-import { getNames } from '../internal/names';
-import { makeDefaultSearch, Search } from '../internal/search';
+import { getNames, getIteratedNames } from '../internal/names';
+import { makeDefaultSearch } from '../internal/search';
 import { ESIAgent } from '../internal/esi-agent';
-import { Responses, esi } from '../internal/esi-types';
+import { Responses, esi } from '../esi';
+
+import * as r from '../internal/resource-api';
 
 /**
- * An api adapter that provides functions for accessing various details of an
- * alliance specified by id, via functions in the
- * [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI endpoints.
+ * The API specification for all variants that access information about an
+ * alliance or multiple alliances. This interface will not be used directly, but
+ * will be filtered through some mapper, such as {@link Async} or {@link Mapped}
+ * depending on what types of ids are being accessed. However, this allows for a
+ * concise and consistent specification for all variants: single, multiple, and
+ * all alliances.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's type, or a collection related to
+ * the key's type if multiple alliances are being accessed at once.
+ *
+ * This is an API wrapper over the end points handling alliances via functions
+ * in the [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI endpoints.
  */
-export interface Alliance {
-  /**
-   * @esi_example esi.alliances(id).info()
-   * @returns The public info of the alliance
-   */
-  info(): Promise<Responses['get_alliances_alliance_id']>;
-
-  /**
-   * @esi_example esi.alliances(id).corporations()
-   * @returns The ids of the corporation members of the alliance
-   */
-  corporations(): Promise<Responses['get_alliances_alliance_id_corporations']>;
-
-  /**
-   * @esi_example esi.alliances(id).icon()
-   * @returns URL lookup information for the alliance icon images
-   */
-  icon(): Promise<Responses['get_alliances_alliance_id_icons']>;
-
-  /**
-   * @returns The id of this alliance
-   */
-  id(): Promise<number>;
+export interface AllianceAPI {
+  details: Responses['get_alliances_alliance_id'];
+  corporations: Responses['get_alliances_alliance_id_corporations'];
+  icons: Responses['get_alliances_alliance_id_icons'];
+  names: string;
 }
 
 /**
- * An api adapter over the end points handling multiple alliances via functions
- * in the [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI endpoints.
+ * An api adapter for accessing various details of a single alliance, specified
+ * by a provided id when the api is instantiated.
  */
-export interface Alliances {
-  /**
-   * @esi_example esi.alliances()
-   *
-   * @returns All alliance ids
-   */
-  (): Promise<Responses['get_alliances']>;
+export class Alliance extends r.impl.SimpleResource implements r.Async<AllianceAPI> {
+  constructor(private agent: ESIAgent, id_: number) {
+    super(id_);
+  }
 
   /**
-   * Create a new Alliance end point targeting the particular alliance by `id`.
+   * @esi_example esi.alliances(id).details()
+   *
+   * @returns The public info of the alliance
+   */
+  details() {
+    return getDetails(this.agent, this.id_);
+  }
+
+  /**
+   * @esi_example esi.alliances(id).corporations()
+   *
+   * @returns The ids of the corporation members of the alliance
+   */
+  corporations() {
+    return getCorporations(this.agent, this.id_);
+  }
+
+  /**
+   * @esi_example esi.alliances(id).icons()
+   *
+   * @returns URL lookup information for the alliance icon images
+   */
+  icons() {
+    return getIcons(this.agent, this.id_);
+  }
+
+  /**
+   * @esi_example esi.alliances(id).names()
+   * @esi_route ~get_alliances_alliance_id
+   *
+   * @returns The name of the alliance
+   */
+  names() {
+    return this.details().then(info => info.alliance_name);
+  }
+}
+
+/**
+ * An api adapter for accessing various details of multiple alliance, specified
+ * by a provided an array, set of ids, or search query when the api is
+ * instantiated.
+ *
+ * @esi_route ids get_search [alliance]
+ */
+export class MappedAlliances extends r.impl.SimpleMappedResource implements r.Mapped<AllianceAPI> {
+  constructor(private agent: ESIAgent,
+      ids: number[] | Set<number> | r.impl.IDSetProvider) {
+    super(ids);
+  }
+
+  /**
+   * @esi_example esi.alliances([ids]|'search').details()
+   *
+   * @returns Map from alliance id to their details
+   */
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+
+  /**
+   * @esi_example esi.alliances([ids]|'search').corporations()
+   *
+   * @returns Map from alliance id to their corporation members
+   */
+  corporations() {
+    return this.getResource(id => getCorporations(this.agent, id));
+  }
+
+  /**
+   * @esi_example esi.alliances([ids]|'search').icons()
+   *
+   * @returns Map from alliance id to their icon information
+   */
+  icons() {
+    return this.getResource(id => getIcons(this.agent, id));
+  }
+
+  /**
+   * @esi_example esi.alliances([ids]|'search').names()
+   * @esi_route post_universe_names [alliance]
+   * @esi_route get_alliances_names
+   *
+   * @returns Map from alliance id to their name
+   */
+  names() {
+    return this.arrayIDs().then(ids => {
+      if (ids.length > 100) {
+        return getNames(this.agent, esi.universe.NameCategory.ALLIANCE, ids);
+      } else {
+        return this.agent.request('get_alliances_names',
+            { query: { 'alliance_ids': ids } })
+        .then(result => {
+          let map = new Map();
+          for (let r of result) {
+            map.set(r.alliance_id, r.alliance_name);
+          }
+          return map;
+        });
+      }
+    });
+  }
+}
+
+/**
+ * An api adapter for accessing various details about every alliance in the
+ * game. Even though a route exists to get all alliance ids at once, due to
+ * their quantity, the API provides asynchronous iterators for the rest of their
+ * details.
+ *
+ * @esi_route ids get_alliances
+ */
+export class AllAlliances extends r.impl.ArrayIteratedResource implements r.Iterated<AllianceAPI> {
+  constructor(private agent: ESIAgent) {
+    super(() => this.agent.request('get_alliances', undefined));
+  }
+
+  /**
+   * @esi_example esi.alliances().details()
+   *
+   * @returns Iterator for details of every alliance
+   */
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+
+  /**
+   * @esi_example esi.alliances().corporations()
+   *
+   * @returns Iterator for the member corporations of every alliance
+   */
+  corporations() {
+    return this.getResource(id => getCorporations(this.agent, id));
+  }
+
+  /**
+   * @esi_example esi.alliances().icons()
+   *
+   * @returns Iterator for the icon information of every alliance
+   */
+  icons() {
+    return this.getResource(id => getIcons(this.agent, id));
+  }
+
+  /**
+   * @esi_example esi.alliances().names()
+   * @esi_route post_universe_names [alliance]
+   *
+   * @returns Iterator for the names of every alliance
+   */
+  names() {
+    return getIteratedNames(this.agent, esi.universe.NameCategory.ALLIANCE,
+        this.ids());
+  }
+}
+
+/**
+ * A functional interface for getting APIs for a specific alliance, a known
+ * set of alliance ids, the alliances returned by a search query, or every
+ * alliance in the game.
+ */
+export interface AllianceAPIFactory {
+  /**
+   * Create a new alliance api targeting every single alliance in the game.
+   *
+   * @returns An AllAlliances API wrapper
+   */
+  (): AllAlliances;
+
+  /**
+   * Create a new alliance api targeting the particular alliance by `id`.
    *
    * @param id The alliance id
    * @returns An Alliance API wrapper for the given id
@@ -54,84 +214,68 @@ export interface Alliances {
   (id: number): Alliance;
 
   /**
-   * A Search module instance configured to search over the `'alliance'`
-   * type.
+   * Create a new alliance api targeting the multiple alliance ids. If an
+   * array is provided, duplicates are removed (although the input array
+   * is not modified).
    *
-   * @esi_route get_search [alliance]
-   * @esi_example esi.alliances.search('text')
+   * @param ids The alliance ids
+   * @returns A MappedAlliance API wrapper for the given ids
    */
-  search: Search;
+  (ids: number[] | Set<number>): MappedAlliances;
 
   /**
-   * @esi_route get_alliances_names
-   * @esi_route post_universe_names [alliance]
-   * @esi_example esi.alliances.names(ids)
+   * Create a new alliance api targeting the alliances returned from a
+   * search given the `query` text.
    *
-   * @param ids If not provided then the names of all alliances will be
-   *     returned.
-   * @returns Map from queried id to returned alliance name
+   * @param query The search terms
+   * @param strict Whether or not the search is strict, defaults to false
+   * @returns A MappedAlliance API which accesses alliances based on the
+   *    dynamic search results
    */
-  names(ids?: number[]): Promise<Map<number, string>>;
+  (query: string, strict?: boolean): MappedAlliances;
 }
 
 /**
- * Create a new {@link Alliances} instance that uses the given `agent` to
- * make its HTTP requests to the ESI interface.
+ * Create a new alliances API factory that uses the given `agent` to make its
+ * HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns An Alliances API instance
+ * @returns A new AllianceAPIFactory
  */
-export function makeAlliances(agent: ESIAgent): Alliances {
-  let functor = <Alliances> <any> function (id?: number) {
-    if (id !== undefined) {
-      return new AllianceImpl(agent, id);
-    } else {
-      return agent.request('get_alliances', undefined);
-    }
-  };
+export function makeAlliancesAPIFactory(agent: ESIAgent): AllianceAPIFactory {
+  // First create a search function for alliances using the agent
+  const allianceSearch = makeDefaultSearch(agent, esi.SearchCategory.ALLIANCE);
 
-  functor.search = makeDefaultSearch(agent, esi.SearchCategory.ALLIANCE);
-  functor.names = function (ids?: number[]) {
+  return <AllianceAPIFactory> function (ids: number | number[] | Set<number> | string | undefined,
+      strict: boolean = false) {
     if (ids === undefined) {
-      return functor().then(allIds => functor.names(allIds));
-    } else if (ids.length > 100) {
-      return getNames(agent, esi.universe.NameCategory.ALLIANCE, ids);
+      // No argument
+      return new AllAlliances(agent);
+    } else if (typeof ids === 'number') {
+      // Single id variant
+      return new Alliance(agent, ids);
+    } else if (typeof ids === 'string') {
+      // Search variant that uses the IDSetProvider variant
+      return new MappedAlliances(agent,
+          () => allianceSearch(ids, strict));
     } else {
-      return agent.request('get_alliances_names',
-          { query: { 'alliance_ids': ids } })
-      .then(result => {
-        let map = new Map();
-        for (let r of result) {
-          map.set(r.alliance_id, r.alliance_name);
-        }
-        return map;
-      });
+      // Either a set or an array
+      return new MappedAlliances(agent, ids);
     }
   };
-
-  return functor;
 }
 
-class AllianceImpl implements Alliance {
-  constructor(private agent: ESIAgent, private id_: number) {
-  }
+function getDetails(agent: ESIAgent, id: number) {
+  return agent.request('get_alliances_alliance_id',
+      { path: { 'alliance_id': id } });
+}
 
-  info() {
-    return this.agent.request('get_alliances_alliance_id',
-        { path: { 'alliance_id': this.id_ } });
-  }
+function getCorporations(agent: ESIAgent, id: number) {
+  return agent.request('get_alliances_alliance_id_corporations',
+      { path: { 'alliance_id': id } });
+}
 
-  corporations() {
-    return this.agent.request('get_alliances_alliance_id_corporations',
-        { path: { 'alliance_id': this.id_ } });
-  }
-
-  icon() {
-    return this.agent.request('get_alliances_alliance_id_icons',
-        { path: { 'alliance_id': this.id_ } });
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
+function getIcons(agent: ESIAgent, id: number) {
+  return agent.request('get_alliances_alliance_id_icons',
+      { path: { 'alliance_id': id } });
 }
