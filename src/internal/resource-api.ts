@@ -9,8 +9,8 @@ require('./async-iterator');
  * request.
  */
 export type Async<T> = {
-  [K in keyof T]: () => Promise<T[K]>;
-}
+    [K in keyof T]: () => Promise<T[K]>;
+    }
 
 /**
  * Map the resource definition `T` to a set of functions that return Promises
@@ -21,8 +21,8 @@ export type Async<T> = {
  * possibly using bulk operations if they are available.
  */
 export type Mapped<T> = {
-  [K in keyof T]: () => Promise<Map<number, T[K]>>;
-}
+    [K in keyof T]: () => Promise<Map<number, T[K]>>;
+    }
 
 /**
  * Map the resource definition `T` to a set of functions that return
@@ -36,8 +36,8 @@ export type Mapped<T> = {
  * original id.
  */
 export type Iterated<T extends Object> = {
-  [K in keyof T]: () => AsyncIterableIterator<[number, T[K]]>;
-}
+    [K in keyof T]: () => AsyncIterableIterator<[number, T[K]]>;
+    }
 
 /**
  * A Resource represents any of the core, id-oriented types that the ESI
@@ -79,6 +79,10 @@ export namespace impl {
    */
   export interface ResourceLoader<T> {
     (id: number): Promise<T>;
+  }
+
+  export interface ResourceStreamer<T> {
+    (): AsyncIterableIterator<T>;
   }
 
   /**
@@ -249,19 +253,22 @@ export namespace impl {
 
   /**
    * A helper class that provides the definition of `ids()` and convenience
-   * functions to map a paginated resource to asynchronous iterators of related
+   * functions to map a resource stream to asynchronous iterators of related
    * types: {@link getResource} and {@link getPaginatedResource}.
    *
    * This class does not define the pagination mechanism, and requires the
-   * implementation of a raw paginated resource iterator. Actual APIs should
-   * extend either {@link PaginatedResource} or {@link MaxIDIteratedResource}
-   * based on their pagination style.
+   * implementation of a raw paginated resource iterator. APIs can use either
+   * {@link makePageBasedStreamer} or {@link makeMaxIDStreamer} to conveniently
+   * build a ResourceStreamer based on their pagination style.
    */
-  export abstract class PageBasedIteratedResource<T> implements IteratedResource {
+  export abstract class SimpleIteratedResource<T> implements IteratedResource {
     /**
+     * @param streamer The function that provides streams of the paginated
+     *     resource
      * @param idResolver The function that maps an element to its id
      */
-    constructor(protected idResolver: IDResolver<T>) {
+    constructor(protected streamer: ResourceStreamer<T>,
+        protected idResolver: IDResolver<T>) {
     }
 
     /**
@@ -272,7 +279,7 @@ export namespace impl {
      * @returns Asynchronous iterator over the resolved elements
      */
     protected async * getResource<E>(loader: ResourceLoader<E>): AsyncIterableIterator<[number, E]> {
-      for await (let value of this.getRawPaginatedResource()) {
+      for await (let value of this.streamer()) {
         let id = this.idResolver(value);
         yield loader(id).then(e => <[number, E]> [id, e]);
       }
@@ -286,118 +293,110 @@ export namespace impl {
      * @returns An iterator over the paginated reosurce
      */
     protected async * getPaginatedResource(): AsyncIterableIterator<[number, T]> {
-      for await (let value of this.getRawPaginatedResource()) {
+      for await (let value of this.streamer()) {
         let id = this.idResolver(value);
         yield <[number, T]> [id, value];
       }
     }
 
     async * ids(): AsyncIterableIterator<number> {
-      for await (let value of this.getRawPaginatedResource()) {
+      for await (let value of this.streamer()) {
         yield this.idResolver(value);
       }
     }
-
-    protected abstract getRawPaginatedResource(): AsyncIterableIterator<T>;
   }
 
   /**
-   * A utility base class that implements the IteratedResource API based off of
-   * a function that provides pages of elements.
+   * A utility function that creates a ResourceStreamer based off of a function
+   * that provides pages of elements, and an optional parameter of the number of
+   * elements per full page. This converts the page-based resource into a
+   * more convenient asynchronous iterator over the elements.
+   *
+   * @param pageLoader The function that loads a specific page of elements
+   * @param maxPageSize Optional, the size of a full page. If known, it can
+   *     help reduce excess requests.
+   * @returns A ResourceStreamer factory function for the page-based loader
    */
-  export abstract class PaginatedResource<T> extends PageBasedIteratedResource<T> {
-    /**
-     * Creates a new paginated resource.
-     *
-     * @param pageLoader The function that loads a specific page of elements
-     * @param idResolver The function that turns an element into its id
-     * @param maxPageSize Optional, the size of a full page. If known, it can
-     *     help reduce excess requests.
-     */
-    constructor(private pageLoader: PageLoader<T>, idResolver: IDResolver<T>,
-        private maxPageSize?: number) {
-      super(idResolver);
-    }
-
-    protected async * getRawPaginatedResource(): AsyncIterableIterator<T> {
-      let page = 1;
-      let maxPages: number | undefined = undefined;
-
-      while (maxPages === undefined || page < maxPages) {
-        let pageResults = await this.pageLoader(page);
-
-        // Process the extracted maximum number of pages
-        if (pageResults[1] !== undefined && maxPages === undefined) {
-          maxPages = pageResults[1];
-        }
-
-        // Produce elements of the page with their extracted id
-        let elements = pageResults[0];
-
-        // Early exit for empty page
-        if (elements.length === 0) {
-          break;
-        }
-
-        // Yield the elements
-        yield* elements;
-
-        // Determine stopping criteria in the event that max pages is known
-        if (this.maxPageSize !== undefined && elements.length
-            < this.maxPageSize) {
-          break;
-        }
-
-        // Move on to next page
-        page++;
-      }
-    }
+  export function makePageBasedStreamer<T>(pageLoader: PageLoader<T>,
+      maxPageSize?: number): ResourceStreamer<T> {
+    return () => getPageBasedIterator(pageLoader, maxPageSize);
   }
 
   /**
-   * A utility base class that implements ths IteratedResource API based off of
-   * a function that provides lists of elements, paginated by a maximum id
-   * constraint. See {@link MaxIDLoader} for more details about this pagination
-   * mechanism.
+   * A utility function that creates a ResourceStreamer based off of a function
+   * that provides pages of elements, and an optional parameter of the number of
+   * elements per full page, paginated by a maximum id constraint. This converts
+   * the max-id based resource into a more convenient asynchronous iterator over
+   * the elements.
+   *
+   * @param pageLoader The function that loads a specific page of elements
+   *     with a specific id constraint
+   * @param idResolver The function that turns page elements into their ids
+   * @param maxPageSize Optional, the size of a full page. If known, it can
+   *     help reduce excess requests.
+   * @returns A ResourceStreamer factory function for the max-id based loader
    */
-  export abstract class MaxIDIteratedResource<T> extends PageBasedIteratedResource<T> {
-    /**
-     * Create a new id-based paginated resource.
-     *
-     * @param pageLoader The function that loads a specific page of elements
-     *     with a specific id constraint
-     * @param idResolver The function that turns page elements into their ids
-     * @param maxPageSize Optional, the size of a full page. If known, it can
-     *     help reduce excess requests.
-     */
-    constructor(private pageLoader: MaxIDLoader<T>, idResolver: IDResolver<T>,
-        private maxPageSize?: number) {
-      super(idResolver);
-    }
+  export function makeMaxIDStreamer<T>(pageLoader: MaxIDLoader<T>,
+      idResolver: IDResolver<T>, maxPageSize?: number): ResourceStreamer<T> {
+    return () => getMaxIDIterator(pageLoader, idResolver, maxPageSize);
+  }
 
-    protected async * getRawPaginatedResource(): AsyncIterableIterator<T> {
-      let maxID: number | undefined = undefined;
+  async function* getPageBasedIterator<T>(pageLoader: PageLoader<T>,
+      maxPageSize?: number) {
+    let page = 1;
+    let maxPages: number | undefined = undefined;
 
-      while (true) {
-        let pageResults = await this.pageLoader(maxID);
+    while (maxPages === undefined || page < maxPages) {
+      let pageResults = await pageLoader(page);
 
-        // Early exit for an empty page
-        if (pageResults.length == 0) {
-          break;
-        }
-
-        // Yield all the elements
-        yield* pageResults;
-
-        // Stopping criteria if the max page size is known
-        if (this.maxPageSize !== undefined && pageResults.length
-            < this.maxPageSize) {
-          break;
-        }
-
-        // Advance to next id constraint
-        maxID = this.idResolver(pageResults[pageResults.length - 1]);
+      // Process the extracted maximum number of pages
+      if (pageResults[1] !== undefined && maxPages === undefined) {
+        maxPages = pageResults[1];
       }
+
+      // Produce elements of the page with their extracted id
+      let elements = pageResults[0];
+
+      // Early exit for empty page
+      if (elements.length === 0) {
+        break;
+      }
+
+      // Yield the elements
+      yield* elements;
+
+      // Determine stopping criteria in the event that max pages is known
+      if (maxPageSize !== undefined && elements.length < maxPageSize) {
+        break;
+      }
+
+      // Move on to next page
+      page++;
+    }
+  }
+
+  async function* getMaxIDIterator<T>(pageLoader: MaxIDLoader<T>,
+      idResolver: IDResolver<T>, maxPageSize?: number) {
+    let maxID: number | undefined = undefined;
+
+    while (true) {
+      let pageResults = await pageLoader(maxID);
+
+      // Early exit for an empty page
+      if (pageResults.length == 0) {
+        break;
+      }
+
+      // Yield all the elements
+      yield* pageResults;
+
+      // Stopping criteria if the max page size is known
+      if (maxPageSize !== undefined && pageResults.length < maxPageSize) {
+        break;
+      }
+
+      // Advance to next id constraint
+      maxID = idResolver(pageResults[pageResults.length - 1]);
     }
   }
 }
