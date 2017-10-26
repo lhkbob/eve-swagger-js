@@ -2,8 +2,8 @@ import Bottleneck from 'bottleneck';
 import * as SuperAgent from 'superagent';
 import * as Moment from 'moment';
 
-import { ROUTE_MAP, Responses, Parameters, esi } from './esi-types';
-import { ESIError, ErrorName } from './error';
+import { ROUTE_MAP, Responses, Parameters, esi } from '../esi';
+import { ESIError, ErrorName } from '../error';
 import Cache from './cache';
 
 /**
