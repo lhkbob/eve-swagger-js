@@ -1,5 +1,5 @@
 import { ESIAgent } from './esi-agent';
-import { esi } from './esi-types';
+import { esi } from '../esi';
 
 /**
  * Look up the names of a set of ids, restricted to a particular name category.
@@ -24,6 +24,42 @@ export function getNames(agent: ESIAgent, category: esi.universe.NameCategory,
 }
 
 /**
+ * Look up the names corresponding to a stream of ids. This automatically
+ * batches the names and attempts to remove duplicates, although if they are
+ * sufficiently far apart in the stream an id could show up in the output stream
+ * agian. The guarantee is that requests will not fail due to duplicates in the
+ * batches.
+ *
+ * @param agent The agent making requests
+ * @param category The category of names to look up
+ * @param ids The list of ids to resolve, ideally should not contain duplicates
+ * @returns Iterator resolving to a series of tuples pairing id to name
+ */
+export async function *getIteratedNames(agent: ESIAgent,
+    category: esi.universe.NameCategory,
+    ids: AsyncIterableIterator<number>): AsyncIterableIterator<[number, string]> {
+  // Minimize the requests to post_universe_names so collect ids into a set
+  // up to 500 before yielding those responses
+  let idBatch = new Set();
+  for await (let id of ids) {
+    idBatch.add(id);
+    if (idBatch.size >= 500) {
+      // Time to process the batch
+      let names = await getFilteredNames(agent, Array.from(idBatch), category).then(transformNamesToTuples);
+      idBatch.clear();
+      yield* names;
+    }
+  }
+
+  if (idBatch.size > 0) {
+    // Process the remaining ids
+    let names = await getFilteredNames(agent, Array.from(idBatch), category).then(transformNamesToTuples);
+    idBatch.clear();
+    yield* names;
+  }
+}
+
+/**
  * Look up the names of a set of ids, which can be from any of the categories.
  * Because the response can have ids from multiple categories, it is returned
  * without simplifying into the Map type. Like {@link getNames} it automatically
@@ -36,6 +72,10 @@ export function getNames(agent: ESIAgent, category: esi.universe.NameCategory,
  */
 export function getAllNames(agent: ESIAgent, ids: number[]) {
   return _getNames(agent, 'all', ids);
+}
+
+function transformNamesToTuples(array: esi.universe.Name[]): [number, string][] {
+  return array.map(name => <[number, string]> [name.id, name.name]);
 }
 
 function splitIds(ids: number[]): number[][] {
