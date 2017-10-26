@@ -1,5 +1,5 @@
-import { ESIAgent } from '../../../internal/esi-agent';
-import { Responses } from '../../../internal/esi-types';
+import { ESIAgent } from '../../internal/esi-agent';
+import { Responses } from '../../esi';
 
 /**
  * An api adapter that provides functions for modifying the character's in-game

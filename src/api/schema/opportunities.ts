@@ -1,5 +1,5 @@
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses } from '../../internal/esi-types';
+import { Responses } from '../../esi';
 
 /**
  * An api adapter that provides functions for accessing an opportunity group,
