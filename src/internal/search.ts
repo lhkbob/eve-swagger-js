@@ -1,5 +1,5 @@
 import { ESIAgent } from './esi-agent';
-import { esi } from './esi-types';
+import { esi } from '../esi';
 
 /**
  * An api adapter over the end points handling search and character search via
@@ -15,20 +15,10 @@ export interface Search {
    * the Search instance.
    *
    * @param text The search terms of the query
+   * @param strict Whether or not the search is strict, defaults to false
    * @returns IDs satisfying the search terms for a non-strict search
    */
-  (text: string): Promise<number[]>;
-
-  /**
-   * Search for matching IDs in EVE given the terms in `text`. This is the
-   * strict search variant. The category of the returned IDs and whether or not
-   * the search uses the character end point is dependent on the source of the
-   * Search instance.
-   *
-   * @param text The strict search terms of the query
-   * @returns IDs satisfying the search terms for a strict search
-   */
-  strict(text: string): Promise<number[]>;
+  (text: string, strict?: boolean): Promise<number[]>;
 }
 
 /**
@@ -46,7 +36,7 @@ export interface Search {
 export function makeCharacterSearch(agent: ESIAgent,
     category: esi.character.SearchCategory, character: number,
     token: string): Search {
-  let search = function (text: string, strict: boolean = false) {
+  return function (text: string, strict: boolean = false) {
     return agent.request('get_characters_character_id_search', {
       path: { 'character_id': character },
       query: { 'categories': [category], 'search': text, 'strict': strict }
@@ -55,13 +45,6 @@ export function makeCharacterSearch(agent: ESIAgent,
       return <number[]> ((result as any)[category]);
     });
   };
-
-  let searchFunc = <Search> search;
-  searchFunc.strict = function (text: string) {
-    return search(text, true);
-  };
-
-  return searchFunc;
 }
 
 /**
@@ -74,7 +57,7 @@ export function makeCharacterSearch(agent: ESIAgent,
  */
 export function makeDefaultSearch(agent: ESIAgent,
     category: esi.SearchCategory): Search {
-  let search = function (text: string, strict: boolean = false) {
+  return function (text: string, strict: boolean = false) {
     return agent.request('get_search', {
       query: { 'categories': [category], 'search': text, 'strict': strict }
     })
@@ -82,11 +65,4 @@ export function makeDefaultSearch(agent: ESIAgent,
       return <number[]> ((result as any)[category]);
     });
   };
-
-  let searchFunc = <Search> search;
-  searchFunc.strict = function (text: string) {
-    return search(text, true);
-  };
-
-  return searchFunc;
 }
