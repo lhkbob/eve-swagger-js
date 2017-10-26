@@ -377,6 +377,7 @@ function resolveReferences(spec: swagger.Spec): void {
   resolveReferencesInObject(spec.paths, refs);
 }
 
+// FIXME add support for x-required-roles, at least for documentation generation
 export class Route {
   private params: { [index: string]: swagger.Parameter };
 
