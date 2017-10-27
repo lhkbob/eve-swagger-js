@@ -256,17 +256,8 @@ export interface OpportunityTaskAPIFactory {
  * [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI end
  * points.
  */
-export interface OpportunitiesFactory {
-  /**
-   * An instance of OpportunityGroupAPIFactory using the previously specified
-   * agent.
-   */
+export interface OpportunitiesAPIFactory {
   readonly groups: OpportunityGroupAPIFactory;
-
-  /**
-   * An instance of OpportunityTaskAPIFactory using the previously specified
-   * agent.
-   */
   readonly tasks: OpportunityTaskAPIFactory;
 }
 
@@ -277,7 +268,7 @@ export interface OpportunitiesFactory {
  * @param agent The agent making actual requests
  * @returns An OpportunitiesFactory API instance
  */
-export function makeOpportunitiesFactory(agent: ESIAgent): OpportunitiesFactory {
+export function makeOpportunitiesAPIFactory(agent: ESIAgent): OpportunitiesAPIFactory {
   let groups = <OpportunityGroupAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // No ids so all groups

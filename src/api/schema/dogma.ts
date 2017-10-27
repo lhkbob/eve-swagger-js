@@ -224,15 +224,8 @@ export interface EffectAPIFactory {
  * attributes and effects, both of which utilize the
  * [dogma](https://esi.tech.ccp.is/latest/#/Dogma) ESI end points.
  */
-export interface DogmaFactory {
-  /**
-   * An instance of AttributeAPIFactory using the previously specified agent.
-   */
+export interface DogmaAPIFactory {
   readonly attributes: AttributeAPIFactory;
-
-  /**
-   * An instance of EffectAPIFactory using the previously specified agent.
-   */
   readonly effects: EffectAPIFactory;
 }
 
@@ -243,7 +236,7 @@ export interface DogmaFactory {
  * @param agent The agent making actual requests
  * @returns A Dogma API instance
  */
-export function makeDogmaFactory(agent: ESIAgent): DogmaFactory {
+export function makeDogmaAPIFactory(agent: ESIAgent): DogmaAPIFactory {
   let attributes = <AttributeAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // No ids so all groups
