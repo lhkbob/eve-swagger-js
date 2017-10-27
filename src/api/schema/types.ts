@@ -1,323 +1,230 @@
-import { Search, makeDefaultSearch } from '../../internal/search';
-import { getNames } from '../../internal/names';
-import {
-  PaginatedLoader, makePageBasedLoader
-} from '../../internal/page-loader';
+import { makeDefaultSearch } from '../../internal/search';
+import { getNames, getIteratedNames } from '../../internal/names';
 import { ESIAgent } from '../../internal/esi-agent';
 import { Responses, esi } from '../../esi';
 
-/**
- * An api adapter for dealing with a single item group, currently only
- * supporting fetching simple information.
- */
-export interface Group {
-  /**
-   * @esi_route get_universe_groups_group_id
-   * @esi_example esi.types.groups(id).info()
-   *
-   * @return Information about the item group
-   */
-  info(): Promise<Responses['get_universe_groups_group_id']>;
+import * as r from '../../internal/resource-api';
 
-  /**
-   * @returns The group id
-   */
-  id(): Promise<number>;
+/**
+ * The API specification for all variants that access information about an
+ * in-game type or multiple types. This interface will not be used
+ * directly, but will be filtered through some mapper, such as {@link Async} or
+ * {@link Mapped} depending on what types of ids are being accessed. However,
+ * this allows for a concise and consistent specification for all variants:
+ * single, multiple, and all types.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's type, or a collection related to
+ * the key's type if multiple types are being accessed at once.
+ *
+ * This is an API wrapper over the end points handling types in the
+ * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI
+ * endpoints.
+ */
+export interface TypeAPI {
+  details: Responses['get_universe_types_type_id'];
+  prices: esi.market.Price;
+  names: string;
 }
 
 /**
- * An api adapter that provides functions for accessing item group information
- * via the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI end points.
+ * An api adapter for accessing various details of a single in-game type,
+ * specified by a provided id when the api is instantiated.
  */
-export interface Groups {
-  /**
-   * @esi_example esi.types.groups()
-   *
-   * @return All group ids
-   */
-  (): Promise<Responses['get_universe_groups']>;
+export class Type extends r.impl.SimpleResource implements r.Async<TypeAPI> {
+  constructor(private agent: ESIAgent, id: number) {
+    super(id);
+  }
 
   /**
-   * Create a new Group end point targeting the particular group by `id`.
-   *
-   * @param id The group id
-   * @returns A Group API wrapper
+   * @returns Information about the type
    */
-  (id: number): Group;
+  details() {
+    return getDetails(this.agent, this.id_);
+  }
+
+  /**
+   * @esi_route ~get_markets_prices
+   *
+   * @returns Price data for the type
+   */
+  prices() {
+    return getPrices(this.agent)
+    .then(all => r.impl.filterArray(all, this.id_, p => p.type_id));
+  }
+
+  /**
+   * @esi_route ~get_universe_types_type_id
+   *
+   * @returns The name of the type
+   */
+  names() {
+    return this.details().then(result => result.name);
+  }
 }
 
 /**
- * An api adapter for dealing with a single market group, currently only
- * supporting fetching simple information.
+ * An api adapter for accessing various details of multiple type ids,
+ * specified by a provided an array or set of ids when the api is instantiated.
  */
-export interface MarketGroup {
-  /**
-   * @esi_example esi.types.marketGroups(id).info()
-   *
-   * @return Information about the given market group
-   */
-  info(): Promise<Responses['get_markets_groups_market_group_id']>;
+export class MappedTypes extends r.impl.SimpleMappedResource implements r.Mapped<TypeAPI> {
+  constructor(private agent: ESIAgent,
+      ids: number[] | Set<number> | r.impl.IDSetProvider) {
+    super(ids);
+  }
 
   /**
-   * @returns The market group id
+   * @returns Type details mapped by type id
    */
-  id(): Promise<number>;
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+
+  /**
+   * @esi_route ~get_markets_prices
+   *
+   * @returns Price data for each of the mapped types
+   */
+  prices() {
+    return this.arrayIDs().then(ids => {
+      return getPrices(this.agent)
+      .then(all => r.impl.filterArrayToMap(all, ids, p => p.type_id));
+    });
+  }
+
+  /**
+   * @esi_route post_universe_names [type]
+   *
+   * @returns The names for each of the mapped types
+   */
+  names() {
+    return this.arrayIDs()
+    .then(ids => getNames(this.agent, esi.universe.NameCategory.INVENTORY_TYPE,
+        ids));
+  }
 }
 
 /**
- * An api adapter that provides functions for accessing market group information
- * via the [market](https://esi.tech.ccp.is/latest/#/Market) ESI end points.
+ * An api adapter for accessing various details about every type in the game.
  */
-export interface MarketGroups {
-  /**
-   * @esi_route get_markets_groups
-   * @esi_example esi.types.marketGroups()
-   *
-   * @return All market group ids
-   */
-  (): Promise<Responses['get_markets_groups']>;
+export class AllTypes extends r.impl.SimpleIteratedResource<number> implements r.Iterated<TypeAPI> {
+  constructor(private agent: ESIAgent) {
+    // TODO the types end point supports x-max-pages header so the page-loader
+    // should return that as well.
+    super(r.impl.makePageBasedStreamer(
+        page => agent.request('get_universe_types', { query: { page: page } })
+        .then(result => <[number[], number | undefined]> [result, undefined]),
+        1000), id => id);
+  }
 
   /**
-   * Create a new MarketGroup end point targeting the particular group by `id`.
-   *
-   * @param id The market group id
-   * @returns A MarketGroup API wrapper for the given id
+   * @returns Iterator over details of all in-game types
    */
-  (id: number): MarketGroup;
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+
+  /**
+   * @esi_route get_markets_prices
+   *
+   * @returns An iterator over every price-able item type
+   */
+  async * prices() {
+    let prices = await getPrices(this.agent);
+    for (let p of prices) {
+      yield <[number, esi.market.Price]> [p.type_id, p];
+    }
+  }
+
+  /**
+   * @esi_route post_universe_names [type]
+   *
+   * @returns Iterator over type names
+   */
+  names() {
+    return getIteratedNames(this.agent,
+        esi.universe.NameCategory.INVENTORY_TYPE, this.ids());
+  }
 }
 
 /**
- * An api adapter for dealing with a single item category, currently only
- * supporting fetching simple information.
+ * A functional interface for getting APIs for a specific type, a
+ * known set of type ids, or every type in the game.
  */
-export interface Category {
+export interface TypeAPIFactory {
   /**
-   * @esi_example esi.types.categories(id).info()
+   * Create a new type api targeting every single type in the game.
    *
-   * @return Information about the item type category
-   */
-  info(): Promise<Responses['get_universe_categories_category_id']>;
-
-  /**
-   * @returns The category id
-   */
-  id(): Promise<number>;
-}
-
-/**
- * An api adapter that provides functions for accessing item category
- * information via the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI
- * end points.
- */
-export interface Categories {
-  /**
-   * @esi_route get_universe_categories
-   * @esi_example esi.types.categories()
+   * @esi_route ids get_universe_types
    *
-   * @return All item category ids
+   * @returns An AllTypes API wrapper
    */
-  (): Promise<Responses['get_universe_categories']>;
+  (): AllTypes;
 
   /**
-   * Create a new Category end point targeting the particular category by `id`.
-   *
-   * @param id The category id
-   * @returns A Category API wrapper
-   */
-  (id: number): Category;
-}
-
-/**
- * An api adapter for dealing with a single item type, currently only supporting
- * fetching simple information.
- */
-export interface Type {
-  /**
-   * @esi_example esi.types(id).info()
-   *
-   * @return Information about a specific item type
-   */
-  info(): Promise<Responses['get_universe_types_type_id']>;
-
-  /**
-   * @returns The type id
-   */
-  id(): Promise<number>;
-}
-
-/**
- * An api adapter that provides functions for accessing item type information
- * via the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
- * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.
- */
-export interface Types {
-  /**
-   * @esi_example esi.types()
-   *
-   * @return Get all type ids
-   */
-  (): Promise<Responses['get_universe_types']>;
-
-  /**
-   * Create a new Type end point targeting the particular type by `id`.
+   * Create a new type api targeting the particular type by `id`.
    *
    * @param id The type id
-   * @returns A Type API wrapper for the specific type
+   * @returns An Type API wrapper for the given id
    */
   (id: number): Type;
 
   /**
-   * A Categories API instance.
-   */
-  categories: Categories;
-
-  /**
-   * A Groups API instance.
-   */
-  groups: Groups;
-
-  /**
-   * A MarketGroups API instance.
-   */
-  marketGroups: MarketGroups;
-
-  /**
-   * A Search module instance configured to search over the `'inventorytype'`
-   * type.
+   * Create a new type api targeting the multiple type ids. If an
+   * array is provided, duplicates are removed (although the input array is not
+   * modified).
    *
-   * @esi_route get_search [inventorytype]
-   * @esi_example esi.types.search('text')
+   * @param ids The type ids
+   * @returns A MappedTypes API wrapper for the given ids
    */
-  search: Search;
+  (ids: number[] | Set<number>): MappedTypes;
 
   /**
-   * @esi_example esi.types.prices()
+   * Create a new type api targeting the types returned from a
+   * search given the `query` text.
    *
-   * @return Average price information for all item types
-   */
-  prices(): Promise<Responses['get_markets_prices']>;
-
-  /**
-   * @esi_route post_universe_names [inventory_type]
-   * @esi_example esi.types.names()
+   * @esi_route ids get_search [type]
    *
-   * @param ids If no ids are provided, then all names are  returned
-   * @return A Map from type id to name
+   * @param query The search terms
+   * @param strict Whether or not the search is strict, defaults to false
+   * @returns A MappedTypes API which accesses types based on the
+   *    dynamic search results
    */
-  names(ids?: number[]): Promise<Map<number, string>>;
+  (query: string, strict?: boolean): MappedTypes;
 }
 
 /**
- * Create a new {@link Types} instance that uses the given `agent` to
+ * Create a new TypeAPIFactory instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns An Types API instance
+ * @returns A TypeAPIFactory instance
  */
-export function makeTypes(agent: ESIAgent): Types {
-  const allTypes = makePageBasedLoader(
-      page => agent.request('get_universe_types', { query: { page: page } }));
-  const allGroups = makePageBasedLoader(
-      page => agent.request('get_universe_groups', { query: { page: page } }));
+export function makeTypeAPIFactory(agent: ESIAgent): TypeAPIFactory {
+  const typeSearch = makeDefaultSearch(agent, esi.SearchCategory.INVENTORYTYPE);
 
-  let types = <Types> <any> function (id?: number) {
-    if (id === undefined) {
-      return allTypes.getAll();
-    } else {
-      return new TypeImpl(agent, id);
-    }
-  };
-
-  types.categories = <Categories> <any> function (id?: number) {
-    if (id === undefined) {
-      return agent.request('get_universe_categories', undefined);
-    } else {
-      return new CategoryImpl(agent, id);
-    }
-  };
-  types.marketGroups = <MarketGroups> <any> function (id?: number) {
-    if (id === undefined) {
-      return agent.request('get_markets_groups', undefined);
-    } else {
-      return new MarketGroupImpl(agent, id);
-    }
-  };
-  types.groups = <Groups> <any> function (id?: number) {
-    if (id === undefined) {
-      return allGroups.getAll();
-    } else {
-      return new GroupImpl(agent, id);
-    }
-  };
-
-  types.search = makeDefaultSearch(agent, esi.SearchCategory.INVENTORYTYPE);
-  types.prices = function () {
-    return agent.request('get_markets_prices', undefined);
-  };
-  types.names = function (ids?: number[]) {
+  return <TypeAPIFactory> function (ids: number | number[] | Set<number> | string | undefined,
+      strict: boolean = false) {
     if (ids === undefined) {
-      return types().then(allIds => types.names(allIds));
+      // All types since no id
+      return new AllTypes(agent);
+    } else if (typeof ids === 'number') {
+      // Single id so single API
+      return new Type(agent, ids);
+    } else if (typeof ids === 'string') {
+      // Search query for mapped API
+      return new MappedTypes(agent, () => typeSearch(ids, strict));
     } else {
-      return getNames(agent, esi.universe.NameCategory.INVENTORY_TYPE, ids);
+      // Set or array, so mapped API
+      return new MappedTypes(agent, ids);
     }
   };
-
-  return types;
 }
 
-class GroupImpl implements Group {
-  constructor(private agent: ESIAgent, private id_: number) {
-  }
-
-  info() {
-    return this.agent.request('get_universe_groups_group_id',
-        { path: { group_id: this.id_ } });
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
+function getDetails(agent: ESIAgent, id: number) {
+  return agent.request('get_universe_types_type_id', { path: { type_id: id } });
 }
 
-class MarketGroupImpl implements MarketGroup {
-  constructor(private agent: ESIAgent, private id_: number) {
-  }
-
-  info() {
-    return this.agent.request('get_markets_groups_market_group_id',
-        { path: { market_group_id: this.id_ } });
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
-}
-
-class CategoryImpl implements Category {
-  constructor(private agent: ESIAgent, private id_: number) {
-  }
-
-  info() {
-    return this.agent.request('get_universe_categories_category_id',
-        { path: { category_id: this.id_ } });
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
-}
-
-class TypeImpl implements Type {
-  constructor(private agent: ESIAgent, private id_: number) {
-  }
-
-  info() {
-    return this.agent.request('get_universe_types_type_id',
-        { path: { type_id: this.id_ } });
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
+function getPrices(agent: ESIAgent) {
+  return agent.request('get_markets_prices', undefined);
 }
