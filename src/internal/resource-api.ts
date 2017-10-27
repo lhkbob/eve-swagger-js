@@ -1,4 +1,6 @@
 // Force loading of this library to make sure the types are available at runtime
+import { ErrorName, ESIError } from '../error';
+
 require('./async-iterator');
 
 /**
@@ -138,6 +140,57 @@ export namespace impl {
     ids(): Promise<number> {
       return Promise.resolve(this.id_);
     }
+  }
+
+  /**
+   * Filter an array of values from a request's response to the single element
+   * which has the `id`. The id corresponding to an element is determined by
+   * the `resolver` function.
+   *
+   * @param resources The array of elements returned by the request
+   * @param id The id to search for within the elements
+   * @param resolver The function mapping from element to id
+   * @returns The matching element, or throws a not-found ESIError
+   */
+  export function filterArray<T>(resources:T[], id:number, resolver:IDResolver<T>) : T {
+    for (let value of resources) {
+      if (resolver(value) === id) {
+        return value;
+      }
+    }
+
+    throw new ESIError(ErrorName.NOT_FOUND_ERROR, 'Could not find value for id: %d', id);
+  }
+
+  /**
+   * Filter an array of values from a request's response to a map from id to
+   * element, based on the provided set of `ids`. The id of an element is
+   * determined by the `resolver` function. It is assumed that `ids` conforms to
+   * a set's uniqueness property.
+   *
+   * @param resources The array of elements returned by the request
+   * @param ids The ids to filter from resources
+   * @param resolver The function mapping from element to id
+   * @returns A map from id to matching element, or throws a not-found ESIError
+   */
+  export function filterArrayToMap<T>(resources:T[], ids:number[], resolver:IDResolver<T>) : Map<number, T> {
+    let map = new Map();
+    for (let id of ids) {
+      for (let value of resources) {
+        if (resolver(value) === id) {
+          // Found the value for the key
+          map.set(id, value);
+          break;
+        }
+      }
+
+      if (!map.has(id)) {
+        // Didn't find it
+        throw new ESIError(ErrorName.NOT_FOUND_ERROR, 'Could not find value for id: %d', id);
+      }
+    }
+
+    return map;
   }
 
   /**
