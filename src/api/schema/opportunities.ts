@@ -4,8 +4,18 @@ import { Responses, esi } from '../../esi';
 import * as r from '../../internal/resource-api';
 
 /**
- * An api adapter that provides functions for accessing an opportunity group,
- * specified by id via functions in the
+ * The API specification for all variants that access information about an
+ * opportunity group or multiple groups. This interface will not be used
+ * directly, but will be filtered through some mapper, such as {@link Async} or
+ * {@link Mapped} depending on what types of ids are being accessed. However,
+ * this allows for a concise and consistent specification for all variants:
+ * single, multiple, and all groups.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's type, or a collection related to
+ * the key's type if multiple groups are being accessed at once.
+ *
+ * This is an API wrapper over the end points handling opportunity groups in the
  * [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI
  * endpoints.
  */
@@ -133,8 +143,18 @@ export interface OpportunityGroupAPIFactory {
 }
 
 /**
- * An api adapter that provides functions for accessing an opportunity task,
- * specified by id via functions in the
+ * The API specification for all variants that access information about an
+ * opportunity task or multiple tasks. This interface will not be used directly,
+ * but will be filtered through some mapper, such as {@link Async} or {@link
+    * Mapped} depending on what types of ids are being accessed. However, this
+ * allows for a concise and consistent specification for all variants: single,
+ * multiple, and all tasks.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's type, or a collection related to
+ * the key's type if multiple tasks are being accessed at once.
+ *
+ * This is an API wrapper over the end points handling opportunity tasks in the
  * [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI
  * endpoints.
  */
@@ -232,7 +252,9 @@ export interface OpportunityTaskAPIFactory {
 
 /**
  * A simple wrapper around functional interfaces for getting APIs for
- * opportunity groups and tasks.
+ * opportunity groups and tasks, both of which utilize the
+ * [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI end
+ * points.
  */
 export interface OpportunitiesFactory {
   /**
