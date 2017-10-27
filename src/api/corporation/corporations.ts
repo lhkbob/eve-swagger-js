@@ -38,8 +38,6 @@ export class Corporation extends r.impl.SimpleResource implements r.Async<Corpor
   }
 
   /**
-   * @esi_example esi.corporations(id).details()
-   *
    * @returns The public info of the corporation
    */
   details() {
@@ -47,8 +45,6 @@ export class Corporation extends r.impl.SimpleResource implements r.Async<Corpor
   }
 
   /**
-   * @esi_example esi.corporations(id).history()
-   *
    * @returns The alliance history of the corporation
    */
   history() {
@@ -56,8 +52,6 @@ export class Corporation extends r.impl.SimpleResource implements r.Async<Corpor
   }
 
   /**
-   * @esi_example esi.corporations(id).icons()
-   *
    * @returns URL lookup information for the corporation icon images
    */
   icons() {
@@ -65,8 +59,6 @@ export class Corporation extends r.impl.SimpleResource implements r.Async<Corpor
   }
 
   /**
-   * @esi_example esi.corporations(id).loyaltyOffers()
-   *
    * @returns Loyalty offers available for the NPC corporation
    */
   loyaltyOffers() {
@@ -74,7 +66,6 @@ export class Corporation extends r.impl.SimpleResource implements r.Async<Corpor
   }
 
   /**
-   * @esi_example esi.corporations(id).names()
    * @esi_route ~get_corporations_corporation_id
    *
    * @returns The name of the corporation
@@ -88,9 +79,6 @@ export class Corporation extends r.impl.SimpleResource implements r.Async<Corpor
  * An api adapter for accessing various details of multiple corporations,
  * specified by a provided an array, set of ids, search query, or NPC
  * corporations when the api is instantiated.
- *
- * @esi_route ids get_search [corporation]
- * @esi_route ids get_corporations_npccorps
  */
 export class MappedCorporations extends r.impl.SimpleMappedResource implements r.Mapped<CorporationAPI> {
   constructor(private agent: ESIAgent,
@@ -99,8 +87,6 @@ export class MappedCorporations extends r.impl.SimpleMappedResource implements r
   }
 
   /**
-   * @esi_example esi.corporations([ids]|'search').details()
-   *
    * @returns The public details of the corporations, mapped by their id
    */
   details() {
@@ -108,8 +94,6 @@ export class MappedCorporations extends r.impl.SimpleMappedResource implements r
   }
 
   /**
-   * @esi_example esi.corporations([ids]|'search').history()
-   *
    * @returns The alliance history of the corporations, mapped by their id
    */
   history() {
@@ -117,8 +101,6 @@ export class MappedCorporations extends r.impl.SimpleMappedResource implements r
   }
 
   /**
-   * @esi_example esi.corporations([ids]|'search').icons()
-   *
    * @returns The icons of the corporations, mapped by their id
    */
   icons() {
@@ -126,8 +108,6 @@ export class MappedCorporations extends r.impl.SimpleMappedResource implements r
   }
 
   /**
-   * @esi_example esi.corporations.npcs().loyaltyOffers()
-   *
    * @returns The loyalty offers for the corporations, mapped by their id
    */
   loyaltyOffers() {
@@ -135,7 +115,6 @@ export class MappedCorporations extends r.impl.SimpleMappedResource implements r
   }
 
   /**
-   * @esi_example esi.corporations([ids]|'search').names()
    * @esi_route post_universe_names [corporation]
    * @esi_route get_corporations_names
    *

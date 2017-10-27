@@ -9,8 +9,19 @@ export interface CorporationAPIFactory {
 
   (ids: number[] | Set<number>): MappedCorporations;
 
+  /**
+   * @esi_route ids get_search [corporation]
+   *
+   * @param {string} query
+   * @param {boolean} strict
+   * @returns {MappedCorporations}
+   */
   (query: string, strict?: boolean): MappedCorporations;
 
+  /**
+   * @esi_route ids get_corporations_npccorps
+   * @returns {MappedCorporations}
+   */
   npcs(): MappedCorporations;
 }
 

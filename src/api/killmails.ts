@@ -33,8 +33,6 @@ export class Killmail extends r.impl.SimpleResource implements r.Async<KillmailA
   }
 
   /**
-   * @esi_example esi.killmails(id, hash).details()
-   *
    * @returns Details about this killmail
    */
   details() {
@@ -42,8 +40,6 @@ export class Killmail extends r.impl.SimpleResource implements r.Async<KillmailA
   }
 
   /**
-   * @esi_example esi.killmails(id, hash).links()
-   *
    * @returns The ID and hash link for this killmail
    */
   links() {
@@ -61,8 +57,6 @@ export class MappedKillmails extends r.impl.SimpleMappedResource implements r.Ma
   }
 
   /**
-   * @esi_example esi.killmails([id, hash][]).details()
-   *
    * @returns Details about all of the specified killmails
    */
   details() {
@@ -82,8 +76,6 @@ export class MappedKillmails extends r.impl.SimpleMappedResource implements r.Ma
   }
 
   /**
-   * @esi_example esi.killmails([id, hash][]).links()
-   *
    * @returns ID and hash links for all specified killmails
    */
   links() {
@@ -103,10 +95,6 @@ export class MappedKillmails extends r.impl.SimpleMappedResource implements r.Ma
  * The KillmailAPIFactory does not provide a way to create these instances
  * because it is instead the responsibility of each scope to provide an
  * AllKillmails instance accessing the appropriate mails.
- *
- * @esi_route links get_characters_character_id_killmails_recent
- * @esi_route links get_corporations_corporation_id_killmails_recent
- * @esi_route links get_wars_war_id_killmails
  */
 export class AllKillmails extends r.impl.SimpleIteratedResource<esi.killmail.KillmailLink> implements r.Iterated<KillmailAPI> {
   constructor(private agent: ESIAgent,
@@ -115,8 +103,6 @@ export class AllKillmails extends r.impl.SimpleIteratedResource<esi.killmail.Kil
   }
 
   /**
-   * @esi_example esi.characters(id, token).kills.details()
-   *
    * @returns An asynchronous iterator over all killmails in the scope of this
    *    particular API instance
    */
@@ -130,8 +116,6 @@ export class AllKillmails extends r.impl.SimpleIteratedResource<esi.killmail.Kil
   }
 
   /**
-   * @esi_example esi.corporations(id, token).kills.links()
-   *
    * @returns An asynchronous iterator over all killmail links in the scope of
    *    this particular API instance
    */

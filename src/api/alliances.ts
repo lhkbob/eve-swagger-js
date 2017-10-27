@@ -37,8 +37,6 @@ export class Alliance extends r.impl.SimpleResource implements r.Async<AllianceA
   }
 
   /**
-   * @esi_example esi.alliances(id).details()
-   *
    * @returns The public info of the alliance
    */
   details() {
@@ -46,8 +44,6 @@ export class Alliance extends r.impl.SimpleResource implements r.Async<AllianceA
   }
 
   /**
-   * @esi_example esi.alliances(id).corporations()
-   *
    * @returns The ids of the corporation members of the alliance
    */
   corporations() {
@@ -55,8 +51,6 @@ export class Alliance extends r.impl.SimpleResource implements r.Async<AllianceA
   }
 
   /**
-   * @esi_example esi.alliances(id).icons()
-   *
    * @returns URL lookup information for the alliance icon images
    */
   icons() {
@@ -64,7 +58,6 @@ export class Alliance extends r.impl.SimpleResource implements r.Async<AllianceA
   }
 
   /**
-   * @esi_example esi.alliances(id).names()
    * @esi_route ~get_alliances_alliance_id
    *
    * @returns The name of the alliance
@@ -78,8 +71,6 @@ export class Alliance extends r.impl.SimpleResource implements r.Async<AllianceA
  * An api adapter for accessing various details of multiple alliance, specified
  * by a provided an array, set of ids, or search query when the api is
  * instantiated.
- *
- * @esi_route ids get_search [alliance]
  */
 export class MappedAlliances extends r.impl.SimpleMappedResource implements r.Mapped<AllianceAPI> {
   constructor(private agent: ESIAgent,
@@ -88,8 +79,6 @@ export class MappedAlliances extends r.impl.SimpleMappedResource implements r.Ma
   }
 
   /**
-   * @esi_example esi.alliances([ids]|'search').details()
-   *
    * @returns Map from alliance id to their details
    */
   details() {
@@ -97,8 +86,6 @@ export class MappedAlliances extends r.impl.SimpleMappedResource implements r.Ma
   }
 
   /**
-   * @esi_example esi.alliances([ids]|'search').corporations()
-   *
    * @returns Map from alliance id to their corporation members
    */
   corporations() {
@@ -106,8 +93,6 @@ export class MappedAlliances extends r.impl.SimpleMappedResource implements r.Ma
   }
 
   /**
-   * @esi_example esi.alliances([ids]|'search').icons()
-   *
    * @returns Map from alliance id to their icon information
    */
   icons() {
@@ -115,7 +100,6 @@ export class MappedAlliances extends r.impl.SimpleMappedResource implements r.Ma
   }
 
   /**
-   * @esi_example esi.alliances([ids]|'search').names()
    * @esi_route post_universe_names [alliance]
    * @esi_route get_alliances_names
    *
@@ -145,8 +129,6 @@ export class MappedAlliances extends r.impl.SimpleMappedResource implements r.Ma
  * game. Even though a route exists to get all alliance ids at once, due to
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
- *
- * @esi_route ids get_alliances
  */
 export class AllAlliances extends r.impl.ArrayIteratedResource implements r.Iterated<AllianceAPI> {
   constructor(private agent: ESIAgent) {
@@ -154,8 +136,6 @@ export class AllAlliances extends r.impl.ArrayIteratedResource implements r.Iter
   }
 
   /**
-   * @esi_example esi.alliances().details()
-   *
    * @returns Iterator for details of every alliance
    */
   details() {
@@ -163,8 +143,6 @@ export class AllAlliances extends r.impl.ArrayIteratedResource implements r.Iter
   }
 
   /**
-   * @esi_example esi.alliances().corporations()
-   *
    * @returns Iterator for the member corporations of every alliance
    */
   corporations() {
@@ -172,8 +150,6 @@ export class AllAlliances extends r.impl.ArrayIteratedResource implements r.Iter
   }
 
   /**
-   * @esi_example esi.alliances().icons()
-   *
    * @returns Iterator for the icon information of every alliance
    */
   icons() {
@@ -181,7 +157,6 @@ export class AllAlliances extends r.impl.ArrayIteratedResource implements r.Iter
   }
 
   /**
-   * @esi_example esi.alliances().names()
    * @esi_route post_universe_names [alliance]
    *
    * @returns Iterator for the names of every alliance
@@ -200,6 +175,8 @@ export class AllAlliances extends r.impl.ArrayIteratedResource implements r.Iter
 export interface AllianceAPIFactory {
   /**
    * Create a new alliance api targeting every single alliance in the game.
+   *
+   * @esi_route ids get_alliances
    *
    * @returns An AllAlliances API wrapper
    */
@@ -226,6 +203,8 @@ export interface AllianceAPIFactory {
   /**
    * Create a new alliance api targeting the alliances returned from a
    * search given the `query` text.
+   *
+   * @esi_route ids get_search [alliance]
    *
    * @param query The search terms
    * @param strict Whether or not the search is strict, defaults to false
@@ -256,8 +235,7 @@ export function makeAlliancesAPIFactory(agent: ESIAgent): AllianceAPIFactory {
       return new Alliance(agent, ids);
     } else if (typeof ids === 'string') {
       // Search variant that uses the IDSetProvider variant
-      return new MappedAlliances(agent,
-          () => allianceSearch(ids, strict));
+      return new MappedAlliances(agent, () => allianceSearch(ids, strict));
     } else {
       // Either a set or an array
       return new MappedAlliances(agent, ids);
