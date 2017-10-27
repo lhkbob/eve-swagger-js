@@ -1,79 +1,137 @@
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses } from '../../esi';
+import { Responses, esi } from '../../esi';
+
+import * as r from '../../internal/resource-api';
 
 /**
- * An api adapter that provides functions for accessing various details for a
- * graphic specified by id, via functions in the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
- */
-export interface Graphic {
-  /**
-   * @esi_example esi.graphics(id).info()
-   *
-   * @returns Details about the specific graphic
-   */
-  info() :Promise<Responses['get_universe_graphics_graphic_id']>;
-
-  /**
-   * @returns The ID of the graphic
-   */
-  id() : Promise<number>;
-}
-
-/**
- * An api adapter that provides functions for accessing graphics information via
- * the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI end points. You
- * should not usually instantiate this directly as its constructor requires an
- * internal api instance.
+ * The API specification for all variants that access information about an
+ * in-game graphic or multiple graphics. This interface will not be used
+ * directly, but will be filtered through some mapper, such as {@link Async} or
+ * {@link Mapped} depending on what types of ids are being accessed. However,
+ * this allows for a concise and consistent specification for all variants:
+ * single, multiple, and all tasks.
  *
- * This is a function class so instances of `Graphics` are functions and
- * can be invoked directly, besides accessing its members. Its default function
- * action is equivalent to {@link Graphics#all all} or {@link Graphics#get get}
- * if an id is provided.
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's type, or a collection related to
+ * the key's type if multiple graphics are being accessed at once.
+ *
+ * This is an API wrapper over the end points handling graphics in the
+ * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI
+ * endpoints.
  */
-export interface Graphics {
-  /**
-   * @esi_example esi.graphics()
-   *
-   * @returns List of ids for all graphics in Eve
-   */
-  () :Promise<Responses['get_universe_graphics']>;
-
-  /**
-   * Create a new Graphic end point targeting the particular moon
-   * by `id`.
-   *
-   * @param id The graphic ID
-   * @returns The Graphic API wrapper for the id
-   */
-  (id:number) :Graphic;
+export interface GraphicAPI {
+  details: Responses['get_universe_graphics_graphic_id'];
 }
 
 /**
- * Create a new {@link Graphics} instance that uses the given `agent` to
+ * An api adapter for accessing various details of a single in-game graphic,
+ * specified by a provided id when the api is instantiated.
+ */
+export class Graphic extends r.impl.SimpleResource implements r.Async<GraphicAPI> {
+  constructor(private agent: ESIAgent, id: number) {
+    super(id);
+  }
+
+  /**
+   * @returns Information about the graphic
+   */
+  details() {
+    return getDetails(this.agent, this.id_);
+  }
+}
+
+/**
+ * An api adapter for accessing various details of multiple graphic ids,
+ * specified by a provided an array or set of ids when the api is instantiated.
+ */
+export class MappedGraphics extends r.impl.SimpleMappedResource implements r.Mapped<GraphicAPI> {
+  constructor(private agent: ESIAgent, ids: number[] | Set<number>) {
+    super(ids);
+  }
+
+  /**
+   * @returns Graphic details mapped by graphic id
+   */
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+}
+
+/**
+ * An api adapter for accessing various details about every graphic in
+ * the game. Even though a route exists to get all graphic ids at once, due to
+ * their quantity, the API provides asynchronous iterators for the rest of their
+ * details.
+ */
+export class AllGraphics extends r.impl.ArrayIteratedResource implements r.Iterated<GraphicAPI> {
+  constructor(private agent: ESIAgent) {
+    super(() => agent.request('get_universe_graphics', undefined));
+  }
+
+  /**
+   * @returns Iterator over details of all in-game graphics
+   */
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+}
+
+/**
+ * A functional interface for getting APIs for a specific graphic, a
+ * known set of graphic ids, or every graphic in the game.
+ */
+export interface GraphicAPIFactory {
+  /**
+   * Create a new graphic api targeting every single graphic in the game.
+   *
+   * @esi_route ids get_universe_graphics
+   *
+   * @returns An AllGraphics API wrapper
+   */
+  (): AllGraphics;
+
+  /**
+   * Create a new graphic api targeting the particular graphic by `id`.
+   *
+   * @param id The graphic id
+   * @returns An Graphic API wrapper for the given id
+   */
+  (id: number): Graphic;
+
+  /**
+   * Create a new graphic api targeting the multiple graphic ids. If an
+   * array is provided, duplicates are removed (although the input array is not
+   * modified).
+   *
+   * @param ids The graphic ids
+   * @returns A MappedGraphics API wrapper for the given ids
+   */
+  (ids: number[] | Set<number>): MappedGraphics;
+}
+
+/**
+ * Create a new GraphicAPIFactory instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A Graphics API instance
+ * @returns A GraphicAPIFactory instance
  */
-export function makeGraphics(agent:ESIAgent) :Graphics {
-  return <Graphics> <any> function(id?:number) {
-    if (id === undefined) {
-      return agent.request('get_universe_graphics', undefined);
+export function makeGraphicAPIFactory(agent: ESIAgent): GraphicAPIFactory {
+  return <GraphicAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
+    if (ids === undefined) {
+      // All graphics since no id
+      return new AllGraphics(agent);
+    } else if (typeof ids === 'number') {
+      // Single id so single API
+      return new Graphic(agent, ids);
     } else {
-      return new GraphicImpl(agent, id);
+      // Set or array, so mapped API
+      return new MappedGraphics(agent, ids);
     }
-  }
+  };
 }
 
-class GraphicImpl implements Graphic {
-  constructor(private agent:ESIAgent, private id_:number) { }
-
-  info() {
-    return this.agent.request('get_universe_graphics_graphic_id', {path: {graphic_id: this.id_}});
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
+function getDetails(agent: ESIAgent, id: number) {
+  return agent.request('get_universe_graphics_graphic_id',
+      { path: { graphic_id: id } });
 }

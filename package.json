@@ -1,6 +1,6 @@
 {
   "name": "eve-swagger",
-  "version": "0.3.3",
+  "version": "0.4.0-alpha",
   "description": "Promise-based, fluent API for EVE Online's ESI web interface",
   "license": "BSD-3-Clause",
   "author": "Michael Ludwig <lhkbob@gmail.com>",
