@@ -1,66 +1,114 @@
 import { ESIAgent } from '../internal/esi-agent';
-import { PaginatedLoader, makePageBasedLoader } from '../internal/page-loader';
-import { Responses, esi } from '../internal/esi-types';
-import { Killmail, makeKillmail } from './killmail';
+import { Responses, esi } from '../esi';
+import { AllKillmails } from './killmails';
+
+import * as r from '../internal/resource-api';
 
 /**
- * An api adapter that provides functions for accessing various details for an
- * war specified by id, via functions in the
- * [wars](https://esi.tech.ccp.is/latest/#/Wars) ESI endpoints.
+ * The API specification for all variants that access information about a
+ * war or multiple wars. This interface will not be used directly, but
+ * will be filtered through some mapper, such as {@link Async} or {@link Mapped}
+ * depending on what types of ids are being accessed. However, this allows for a
+ * concise and consistent specification for all variants: single, multiple, and
+ * all wars.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's type, or a collection related to
+ * the key's type if multiple wars are being accessed at once.
+ *
+ * This is an API adapter that provides functions for accessing wars and their
+ * kills, via functions in the [wars](https://esi.tech.ccp.is/latest/#/Wars) ESI
+ * endpoints.
  */
-export interface War {
-  /**
-   * @esi_route get_wars_war_id
-   * @esi_example esi.wars(1).info()
-   *
-   * @return {Promise.<Object>} A Promise that resolves to the response of
-   *   the request
-   */
-  info(): Promise<Responses['get_wars_war_id']>;
-
-  /**
-   * Get the kill details for the war's {@link War#killmails
-   * killmails} and then uses {@link Killmail#get} to map the details.
-   * The request resolves to an array, each containing a killmail detail.
-   *
-   * @esi_route get_wars_war_id_killmails
-   * @esi_example esi.wars(id).kills()
-   *
-   * @param page Optional; the page of killmails to fetch, starting
-   *     with page 1. If not provided then all kills are returned.
-   * @returns {Promise.<Array.<Object>>}
-   */
-  kills(page?: number): Promise<esi.killmail.Killmail[]>;
-
-  /**
-   * @esi_example esi.wars(id).killmails()
-   *
-   * @param page If undefined, then all pages are fetched and concatenated
-   *     together, otherwise the specific page
-   * @returns A page of killmail links from the war
-   */
-  killmails(page?: number): Promise<Responses['get_wars_war_id_killmails']>;
-
-  /**
-   * @returns The war's id
-   */
-  id(): Promise<number>;
+export interface WarAPI {
+  details: Responses['get_wars_war_id'];
 }
 
 /**
- * An api adapter over the end points handling multiple wars via functions in
- * the [wars](https://esi.tech.ccp.is/latest/#/Wars) ESI endpoints.
+ * An api adapter for accessing various details of a single war, specified
+ * by a provided id when the api is instantiated.
  */
-export interface Wars {
+export class War extends r.impl.SimpleResource implements r.Async<WarAPI> {
+  private kills_?: AllKillmails;
+
+  constructor(private agent: ESIAgent, id: number) {
+    super(id);
+  }
+
   /**
-   * Get the most recent wars. This is equivalent to calling {@link #recent()}
-   * without any max ID.
-   *
-   * @esi_example esi.wars()
-   *
-   * @return An array of war IDs ordered chronologically from newest to oldest
+   * @return The details of the specific war
    */
-  (): Promise<Responses['get_wars']>;
+  details() {
+    return getDetails(this.agent, this.id_);
+  }
+
+  /**
+   * Get all of the kills within the war as an iterated API.
+   *
+   * @esi_route links get_wars_war_id_killmails
+   *
+   * @returns An AllKillmails API instance associated with this war
+   */
+  get kills(): AllKillmails {
+    if (this.kills_ === undefined) {
+      this.kills_ = new AllKillmails(this.agent, r.impl.makePageBasedStreamer(
+          page => getKillmails(this.agent, this.id_, page), 2000));
+    }
+    return this.kills_!;
+  }
+}
+
+/**
+ * An api adapter for accessing various details of multiple wars, specified by a
+ * provided an array or set of ids.
+ */
+export class MappedWars extends r.impl.SimpleMappedResource implements r.Mapped<WarAPI> {
+  constructor(private agent: ESIAgent, ids: number[] | Set<number>) {
+    super(ids);
+  }
+
+  /**
+   * @returns The details for the set of wars
+   */
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+}
+
+/**
+ * An api adapter for accessing various details about every war in the game. The
+ * functions are exposed as asynchronous iterators. There are potentially many
+ * wars, so it is recommended to have a specific termination criteria like
+ * amount received, date, or maximum id.
+ */
+export class AllWars extends r.impl.SimpleIteratedResource<number> implements r.Iterated<WarAPI> {
+  constructor(private agent: ESIAgent) {
+    super(r.impl.makeMaxIDStreamer(
+        maxID => agent.request('get_wars', { query: { max_war_id: maxID } }),
+        id => id, 2000), id => id);
+  }
+
+  /**
+   * @returns Iterated details of each war, ordered from highest to lowest id
+   */
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+}
+
+/**
+ * A functional interface for getting APIs for a specific war, a known set of
+ * war ids, or every war in the game.
+ */
+export interface WarAPIFactory {
+  /**
+   * Create a new war api targeting every single war in the game.
+   *
+   * @esi_route ids get_wars
+   *
+   * @returns An AllWars API wrapper
+   */
+  (): AllWars;
 
   /**
    * Create a new War end point targeting the particular war by `id`.
@@ -71,74 +119,44 @@ export interface Wars {
   (id: number): War;
 
   /**
-   * Note that due to the large number of wars in Eve, and its unbounded
-   * nature, there is no utility function provided to fetch all war IDs.
+   * Create a new MappedWars api targeting the multiple wars ids. If an
+   * array is provided, duplicates are removed (although the input array
+   * is not modified).
    *
-   * @esi_example esi.wars.recent()
-   *
-   * @param maxId If not provided, the newest wars are returned
-   * @return An array of war IDs ordered chronologically from newest to oldest
+   * @param ids The war ids
+   * @returns A MappedWars API wrapper for the given ids
    */
-  recent(maxId?: number): Promise<Responses['get_wars']>;
+  (ids: number[] | Set<number>): MappedWars;
 }
 
 /**
- * Create a new {@link Wars} instance that uses the given `agent` to
- * make its HTTP requests to the ESI interface.
+ * Create a new wars API factory that uses the given `agent` to make its
+ * HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A Wars API instance
+ * @returns A new WarAPIFactory
  */
-export function makeWars(agent: ESIAgent): Wars {
-  const killmailApi = makeKillmail(agent);
-  let functor = <Wars> <any> function (id?: number) {
-    if (id !== undefined) {
-      return new WarImpl(agent, id, killmailApi);
+export function makeWarAPIFactory(agent: ESIAgent): WarAPIFactory {
+  return <WarAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
+    if (ids === undefined) {
+      return new AllWars(agent);
+    } else if (typeof ids === 'number') {
+      return new War(agent, ids);
     } else {
-      return functor.recent();
+      return new MappedWars(agent, ids);
     }
   };
-  functor.recent = function (maxId?: number) {
-    return agent.request('get_wars', { query: { max_war_id: maxId } });
-  };
-  return functor;
 }
 
-class WarImpl implements War {
-  private allMails: PaginatedLoader<esi.killmail.KillmailLink>;
-  private allKills: PaginatedLoader<esi.killmail.Killmail>;
+function getKillmails(agent: ESIAgent, warID: number,
+    page: number): Promise<[esi.killmail.KillmailLink[], number | undefined]> {
+  return agent.request('get_wars_war_id_killmails',
+      { path: { war_id: warID }, query: { page: page } })
+  .then(result => <[esi.killmail.KillmailLink[], number | undefined]> [
+    result, undefined
+  ]);
+}
 
-  constructor(private agent: ESIAgent, private id_: number,
-      private killmailAPI: Killmail) {
-    this.allKills = makePageBasedLoader(page => this.kills(page), 2000);
-    this.allMails = makePageBasedLoader(page => this.killmails(page), 2000);
-  }
-
-  info() {
-    return this.agent.request('get_wars_war_id',
-        { path: { war_id: this.id_ } });
-  }
-
-  kills(page?: number) {
-    if (page === undefined) {
-      return this.allKills.getAll();
-    } else {
-      return this.killmails(page)
-      .then(kms => Promise.all(
-          kms.map(km => this.killmailAPI(km.killmail_id, km.killmail_hash))));
-    }
-  }
-
-  killmails(page?: number) {
-    if (page === undefined) {
-      return this.allMails.getAll();
-    } else {
-      return this.agent.request('get_wars_war_id_killmails',
-          { path: { war_id: this.id_ }, query: { page: page } });
-    }
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
+function getDetails(agent: ESIAgent, id: number) {
+  return agent.request('get_wars_war_id', { path: { war_id: id } });
 }
