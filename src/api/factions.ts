@@ -1,7 +1,7 @@
 import { getNames } from '../..//internal/names';
-import { makeDefaultSearch, Search } from '../../internal/search';
-import { ESIAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../internal/esi-types';
+import { makeDefaultSearch, Search } from '../internal/search';
+import { ESIAgent } from '../internal/esi-agent';
+import { Responses, esi } from '../esi';
 
 /**
  * An api adapter over the end points handling factions via functions in the
