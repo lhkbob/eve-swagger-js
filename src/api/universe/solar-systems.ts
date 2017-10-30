@@ -7,19 +7,18 @@ import * as r from '../../internal/resource-api';
 import { Star } from './stars';
 import { MappedStargates } from './stargates';
 import { MappedPlanets, Planet } from './planets';
+import { MappedStations } from './stations';
 
 /**
- * The API specification for all variants that access information about an
- * planetary interaction solar system or multiple solar systems. This interface
- * will not be used directly, but will be filtered through some mapper, such as
- * {@link Async} or {@link Mapped} depending on what types of ids are being
- * accessed. However, this allows for a concise and consistent specification
- * for
- * all variants: single, multiple, and all tasks.
+ * The API specification for all variants that access information about an solar
+ * system or multiple solar systems. This interface will not be used directly,
+ * but will be filtered through some mapper, such as {@link Async} or {@link
+ * Mapped} depending on what types of ids are being accessed. However, this
+ * allows for a concise and consistent specification for all variants: single,
+ * multiple, and all solar systems.
  *
  * When mapped, each key defined in this interface becomes a function that
- * returns a Promise resolving to the key's type, or a collection related to
- * the
+ * returns a Promise resolving to the key's type, or a collection related to the
  * key's type if multiple solar systems are being accessed at once.
  *
  * This is an API wrapper over the end points handling solar systems in the
@@ -42,18 +41,28 @@ export class SolarSystem extends r.impl.SimpleResource implements r.Async<SolarS
   private star_: Star | undefined;
   private gates_: MappedStargates | undefined;
   private planets_: MappedPlanets | undefined;
-
-  // FIXME add stations
+  private stations_: MappedStations | undefined;
 
   constructor(private agent: ESIAgent, id: number) {
     super(id);
   }
 
   /**
+   * @returns A MappedStations instance tied to the stations referenced in the
+   *    details of this solar system
+   */
+  stations() : MappedStations {
+    if (this.stations_ === undefined) {
+      this.stations_ = new MappedStations(this.agent, () => this.details().then(r => r.stations || []));
+    }
+    return this.stations_!;
+  }
+
+  /**
    * @returns A Star API interface tied to the star referenced in the details
    *    of this solar system
    */
-  get star(): Star {
+  star(): Star {
     if (this.star_ === undefined) {
       this.star_ = new Star(this.agent,
           () => this.details().then(r => r.star_id));
@@ -65,7 +74,7 @@ export class SolarSystem extends r.impl.SimpleResource implements r.Async<SolarS
    * @returns A MappedStargates instance tied to the stargates referenced in
    *    the details of this solar system
    */
-  get stargates(): MappedStargates {
+  stargates(): MappedStargates {
     if (this.gates_ === undefined) {
       this.gates_ = new MappedStargates(this.agent,
           () => this.details().then(r => r.stargates || []));
@@ -77,22 +86,25 @@ export class SolarSystem extends r.impl.SimpleResource implements r.Async<SolarS
    * @returns A MappedPlanets instance tied to the planets referenced in the
    *    details of this solar system
    */
-  get planets(): MappedPlanets {
-    if (this.planets_ === undefined) {
-      this.planets_ = new MappedPlanets(this.agent,
-          () => this.details().then(r => r.planets.map(p => p.planet_id)));
-    }
-    return this.planets_!;
-  }
-
+  planets(): MappedPlanets;
   /**
    * @param index The planet's index in the solar system, NOT its id; e.g. an
    *    index of 0 refers to the system's first planet
    * @returns A Planet API instance tied to the `index`th planet of the system
    */
-  planet(index: number): Planet {
-    return new Planet(this.agent,
-        () => this.details().then(r => r.planets[index].planet_id));
+  planets(index: number): Planet;
+
+  planets(index?:number) : Planet | MappedPlanets {
+    if (index === undefined) {
+      if (this.planets_ === undefined) {
+        this.planets_ = new MappedPlanets(this.agent,
+            () => this.details().then(r => r.planets.map(p => p.planet_id)));
+      }
+      return this.planets_!;
+    } else {
+      return new Planet(this.agent,
+          () => this.details().then(r => r.planets[index].planet_id));
+    }
   }
 
   /**
@@ -406,9 +418,9 @@ export interface SolarSystemAPIFactory {
   (id: number): SolarSystem;
 
   /**
-   * Create a new solarSystem api targeting the multiple solarSystem ids. If an
-   * array is provided, duplicates are removed (although the input array is not
-   * modified).
+   * Create a new solar system api targeting the multiple solar system ids. If
+   * an array is provided, duplicates are removed (although the input array is
+   * not modified).
    *
    * @param ids The solar system ids
    * @returns A MappedSolarSystems API wrapper for the given ids
