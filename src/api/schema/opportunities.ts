@@ -48,7 +48,7 @@ export class OpportunityGroup extends r.impl.SimpleResource implements r.Async<O
    * @returns A MappedOpportunityGroups instance that is tied to the connected
    *    group ids referenced in the details of this group
    */
-  get connected(): MappedOpportunityGroups {
+  connected(): MappedOpportunityGroups {
     if (this.connected_ === undefined) {
       this.connected_ = new MappedOpportunityGroups(this.agent,
           () => this.details().then(result => result.connected_groups));
@@ -62,7 +62,7 @@ export class OpportunityGroup extends r.impl.SimpleResource implements r.Async<O
    * @returns A MappedOpportunityTasks instance that is tied to the required
    *    tasks referenced in the details of this group
    */
-  get tasks(): MappedOpportunityTasks {
+  tasks(): MappedOpportunityTasks {
     if (this.tasks_ === undefined) {
       this.tasks_ = new MappedOpportunityTasks(this.agent,
           () => this.details().then(result => result.required_tasks));
