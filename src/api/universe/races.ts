@@ -5,17 +5,17 @@ import * as r from '../../internal/resource-api';
 
 /**
  * The API specification for all variants that access information about an
- * in-game race or multiple types. This interface will not be used
+ * in-game race or multiple races. This interface will not be used
  * directly, but will be filtered through some mapper, such as {@link Async} or
- * {@link Mapped} depending on what types of ids are being accessed. However,
+ * {@link Mapped} depending on what races of ids are being accessed. However,
  * this allows for a concise and consistent specification for all variants:
- * single, multiple, and all types.
+ * single, multiple, and all races.
  *
  * When mapped, each key defined in this interface becomes a function that
  * returns a Promise resolving to the key's race, or a collection related to
- * the key's race if multiple types are being accessed at once.
+ * the key's race if multiple races are being accessed at once.
  *
- * This is an API wrapper over the end points handling types in the
+ * This is an API wrapper over the end points handling races in the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
  */
 export interface RaceAPI {
@@ -76,7 +76,7 @@ export class AllRaces extends r.impl.SimpleIteratedResource<esi.universe.Race> i
   /**
    * @esi_route get_universe_races
    *
-   * @returns Iterator over details of all in-game types
+   * @returns Iterator over details of all in-game races
    */
   details() {
     return this.getPaginatedResource();
@@ -91,7 +91,7 @@ export interface RaceAPIFactory {
   /**
    * Create a new race api targeting every single race in the game.
    *
-   * @esi_route ids get_universe_types
+   * @esi_route ids get_universe_races
    *
    * @returns An AllRaces API wrapper
    */
@@ -126,7 +126,7 @@ export interface RaceAPIFactory {
 export function makeRaceAPIFactory(agent: ESIAgent): RaceAPIFactory {
   return <RaceAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
-      // All types since no id
+      // All races since no id
       return new AllRaces(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API

@@ -4,12 +4,12 @@ import { Responses, esi } from '../../esi';
 import * as r from '../../internal/resource-api';
 
 /**
- * The API specification for all variants that access information about an
- * planetary interaction stargate or multiple stargates. This interface will
- * not be used directly, but will be filtered through some mapper, such as
- * {@link Async} or {@link Mapped} depending on what types of ids are being
- * accessed. However, this allows for a concise and consistent specification for
- * all variants: single, multiple, and all tasks.
+ * The API specification for all variants that access information about a
+ * stargate or multiple stargates. This interface will not be used directly, but
+ * will be filtered through some mapper, such as {@link Async} or {@link Mapped}
+ * depending on what types of ids are being accessed. However, this allows for a
+ * concise and consistent specification for all variants: single, multiple, and
+ * all stargates.
  *
  * When mapped, each key defined in this interface becomes a function that
  * returns a Promise resolving to the key's type, or a collection related to the

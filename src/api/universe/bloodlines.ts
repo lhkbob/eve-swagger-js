@@ -5,15 +5,15 @@ import * as r from '../../internal/resource-api';
 
 /**
  * The API specification for all variants that access information about an
- * in-game bloodline or multiple types. This interface will not be used
+ * in-game bloodline or multiple bloodlines. This interface will not be used
  * directly, but will be filtered through some mapper, such as {@link Async} or
  * {@link Mapped} depending on what types of ids are being accessed. However,
  * this allows for a concise and consistent specification for all variants:
- * single, multiple, and all types.
+ * single, multiple, and all bloodlines.
  *
  * When mapped, each key defined in this interface becomes a function that
  * returns a Promise resolving to the key's bloodline, or a collection related
- * to the key's bloodline if multiple types are being accessed at once.
+ * to the key's bloodline if multiple bloodlines are being accessed at once.
  *
  * This is an API wrapper over the end points handling types in the
  * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
