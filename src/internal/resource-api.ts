@@ -394,6 +394,17 @@ export namespace impl {
     return () => getMaxIDIterator(pageLoader, idResolver, maxPageSize);
   }
 
+  /**
+   * A utility function that creates a ResourceStreamer based off of a function
+   * that asynchronously provides a complete array of elements.
+   *
+   * @param arrayLoader The function which loads all elements at once
+   * @returns A ResourceStreamer over the loaded array
+   */
+  export function makeArrayStreamer<T>(arrayLoader: () => Promise<T[]>) : ResourceStreamer<T> {
+    return () => getArrayIterator(arrayLoader);
+  }
+
   async function* getPageBasedIterator<T>(pageLoader: PageLoader<T>,
       maxPageSize?: number) {
     let page = 1;
@@ -451,5 +462,10 @@ export namespace impl {
       // Advance to next id constraint
       maxID = idResolver(pageResults[pageResults.length - 1]);
     }
+  }
+
+  async function* getArrayIterator<T>(arrayLoader: () => Promise<T[]>) {
+    let array = await arrayLoader();
+    yield* array;
   }
 }
