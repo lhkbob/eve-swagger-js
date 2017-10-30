@@ -53,5 +53,5 @@ export interface Market {
   /**
    * @returns The type ids that have orders in the market
    */
-  types() : Promise<number[]>;
+  types() : AsyncIterableIterator<number>;
 }
