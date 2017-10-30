@@ -1,210 +1,317 @@
-import { Search, makeDefaultSearch } from '../../internal/search';
-import { getNames } from '../../internal/names';
-import {
-  PaginatedLoader,
-  makePageBasedLoader
-} from '../../internal/page-loader';
+import { makeDefaultSearch } from '../../internal/search';
+import { getNames, getIteratedNames } from '../../internal/names';
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../internal/esi-types';
+import { Responses, esi } from '../../esi';
 
+import * as r from '../../internal/resource-api';
+import { MappedConstellations } from './constellations';
+import { Market } from '../market';
 
 /**
- * An api adapter that provides functions for accessing various details for a
- * region specified by id, via functions in the
- * [market](https://esi.tech.ccp.is/latest/#/Market) ESI endpoints.
+ * The API specification for all variants that access information about an
+ * region or multiple regions. This interface will not be used directly, but
+ * will be filtered through some mapper, such as {@link Async} or {@link Mapped}
+ * depending on what regions of ids are being accessed. However, this allows for
+ * a concise and consistent specification for all variants: single, multiple,
+ * and all regions.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's region, or a collection related to
+ * the key's region if multiple regions are being accessed at once.
+ *
+ * This is an API wrapper over the end points handling regions in the
+ * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
  */
-export interface Region {
-
-  /**
-   * @esi_example esi.regions(id).info()
-   *
-   * @returns Information about the region
-   */
-  info(): Promise<Responses['get_universe_regions_region_id']>;
-
-  /**
-   * @esi_example esi.regions(id).history(typeid)
-   *
-   * @param typeId The type whose market history is fetched
-   * @return Price history for the given type in this region
-   */
-  history(typeId: number): Promise<Responses['get_markets_region_id_history']>;
-
-  /**
-   * Get all market orders for the region, possibly paginated. If no page is
-   * provided then all pages are fetched and returned as a single list,
-   * otherwise the specific page is loaded.
-   *
-   * @esi_route get_markets_region_id_orders [all]
-   * @esi_example esi.regions(id).orders()
-   *
-   * @param page The page to load, starting at 1, or undefined for all pages
-   * @return All market orders, regardless of class
-   */
-  orders(page?: number): Promise<Responses['get_markets_region_id_orders']>;
-
-  /**
-   * Get all buy market orders in the region for the given item type id.
-   * Note that this is not paginated, all buy orders for the type are returned.
-   *
-   * @esi_route get_markets_region_id_orders [buy,typeId]
-   * @esi_example esi.regions(id).buyOrdersFor(typeId)
-   *
-   * @param typeId The item type associated with the buy orders
-   * @return Buy orders in this region for the given type
-   */
-  buyOrdersFor(typeId: number): Promise<Responses['get_markets_region_id_orders']>;
-
-  /**
-   * Get all sell market orders in the region for the given item type id.
-   * Note that this is not paginated, all buy orders for the type are returned.
-   *
-   * @esi_route get_markets_region_id_orders [sell,typeId]
-   * @esi_example esi.regions(id).sellOrdersFor(typeId)
-   *
-   * @param typeId The item type associated with the sell orders
-   * @return Sell orders in this region for the given type
-   */
-  sellOrdersFor(typeId: number): Promise<Responses['get_markets_region_id_orders']>;
-
-  /**
-   * Get all buy and sell market orders in the region for the given item type
-   * id. Note that this is not paginated, all buy orders for the type are
-   * returned.
-   *
-   * @esi_route get_markets_region_id_orders [typeId]
-   * @esi_example esi.regions(id).ordersFor(typeId)
-   *
-   * @param typeId The item type associated with the orders
-   * @return Orders in this region for the given type
-   */
-  ordersFor(typeId: number): Promise<Responses['get_markets_region_id_orders']>;
-
-  /**
-   * @returns The region id
-   */
-  id(): Promise<number>;
+export interface RegionAPI {
+  details: Responses['get_universe_regions_region_id'];
+  names: string;
 }
 
 /**
- * An api adapter over the end points handling regions via functions in the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
- * [search](https://esi.tech.ccp.is/latest/#/Search) ESI endpoints.
+ * A {@link Market} implementation for a region. In addition to implementing the
+ * Market interface, it adds a function to get at the market history for an item
+ * type. Note that this history is only available for region markets and not
+ * with structure markets.
  */
-export interface Regions {
+export class RegionMarket implements Market {
+  private orders_: r.impl.ResourceStreamer<esi.market.Order> | undefined;
+  private types_: r.impl.ResourceStreamer<number> | undefined;
+
+  constructor(private agent: ESIAgent, private id: number) {
+  }
+
   /**
-   * Create a new Region end point targeting the particular region by `id`.
+   * @esi_route get_markets_region_id_orders [all]
+   *
+   * @returns All orders in the region
+   */
+  orders() {
+    // FIXME get_markets_region_id_orders supports X-Pages so this should return
+    // the max pages for makePageBasedStreamer instead of undefined
+
+    if (this.orders_ === undefined) {
+      this.orders_ = r.impl.makePageBasedStreamer(
+          page => this.agent.request('get_markets_region_id_orders', {
+            path: { region_id: this.id },
+            query: { page: page, order_type: 'all' }
+          })
+          .then(result => <[esi.market.Order[], number | undefined]> [
+            result, undefined
+          ]));
+    }
+    return this.orders_();
+  }
+
+  /**
+   * @esi_route get_markets_region_id_orders [type, buy]
+   *
+   * @param type The type of buy orders to return
+   * @returns All buy orders for the specified inventory type
+   */
+  buyOrdersFor(type: number) {
+    return this.agent.request('get_markets_region_id_orders', {
+      path: { region_id: this.id }, query: { type_id: type, order_type: 'buy' }
+    });
+  }
+
+  /**
+   * @esi_route get_markets_region_id_orders [type, sell]
+   *
+   * @param type The type of sell orders to return
+   * @returns All sell orders for the specified inventory type
+   */
+  sellOrdersFor(type: number) {
+    return this.agent.request('get_markets_region_id_orders', {
+      path: { region_id: this.id }, query: { type_id: type, order_type: 'sell' }
+    });
+  }
+
+  /**
+   * @esi_route get_markets_region_id_orders [type]
+   *
+   * @param type The type of orders to return
+   * @returns All orders for the specified inventory type
+   */
+  ordersFor(type: number) {
+    return this.agent.request('get_markets_region_id_orders', {
+      path: { region_id: this.id }, query: { type_id: type, order_type: 'all' }
+    });
+  }
+
+  /**
+   * @esi_route get_markets_region_id_types
+   *
+   * @returns The types in the market for the region
+   */
+  types() {
+    // FIXME get_markets_region_id_types supports X-Pages so this should return
+    // the max pages for makePageBasedStreamer instead of undefined
+
+    if (this.types_ === undefined) {
+      this.types_ = r.impl.makePageBasedStreamer(
+          page => this.agent.request('get_markets_region_id_types',
+              { path: { region_id: this.id }, query: { page: page } })
+          .then(
+              result => <[number[], number | undefined]> [result, undefined]));
+    }
+
+    return this.types_();
+  }
+
+  /**
+   * @esi_route get_markets_region_id_history
+   *
+   * @param type The type's whose market history is returned
+   * @returns The market history of the given inventory type for the region
+   */
+  history(type: number) {
+    return this.agent.request('get_markets_region_id_history',
+        { path: { region_id: this.id }, query: { type_id: type } });
+  }
+}
+
+/**
+ * An api adapter for accessing various details of a single in-game region,
+ * specified by a provided id when the api is instantiated.
+ */
+export class Region extends r.impl.SimpleResource implements r.Async<RegionAPI> {
+  private constellations_: MappedConstellations | undefined;
+  private market_: RegionMarket | undefined;
+
+  constructor(private agent: ESIAgent, id: number) {
+    super(id);
+  }
+
+  /**
+   * @returns A MappedConstellations instance tied to the constellations
+   *    referenced by the details of this region
+   */
+  get constellations(): MappedConstellations {
+    if (this.constellations_ === undefined) {
+      this.constellations_ = new MappedConstellations(this.agent,
+          () => this.details().then(r => r.constellations));
+    }
+    return this.constellations_!;
+  }
+
+  /**
+   * @returns An API for accessing the region's market
+   */
+  get market(): RegionMarket {
+    if (this.market_ === undefined) {
+      this.market_ = new RegionMarket(this.agent, this.id_);
+    }
+    return this.market_!;
+  }
+
+  /**
+   * @returns Information about the region
+   */
+  details() {
+    return getDetails(this.agent, this.id_);
+  }
+
+  /**
+   * @esi_route ~get_universe_regions_region_id
+   *
+   * @returns The name of the region
+   */
+  names() {
+    return this.details().then(result => result.name);
+  }
+}
+
+/**
+ * An api adapter for accessing various details of multiple region ids,
+ * specified by a provided an array or set of ids when the api is instantiated.
+ */
+export class MappedRegions extends r.impl.SimpleMappedResource implements r.Mapped<RegionAPI> {
+  constructor(private agent: ESIAgent,
+      ids: number[] | Set<number> | r.impl.IDSetProvider) {
+    super(ids);
+  }
+
+  /**
+   * @returns Region details mapped by region id
+   */
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+
+  /**
+   * @esi_route post_universe_names [region]
+   *
+   * @returns The names for each of the mapped regions
+   */
+  names() {
+    return this.arrayIDs()
+    .then(ids => getNames(this.agent, esi.universe.NameCategory.CONSTELLATION,
+        ids));
+  }
+}
+
+/**
+ * An api adapter for accessing various details about every region in
+ * the game.
+ */
+export class AllRegions extends r.impl.ArrayIteratedResource implements r.Iterated<RegionAPI> {
+  constructor(private agent: ESIAgent) {
+    super(() => agent.request('get_universe_regions', undefined));
+  }
+
+  /**
+   * @returns Iterator over details of all in-game regions
+   */
+  details() {
+    return this.getResource(id => getDetails(this.agent, id));
+  }
+
+  /**
+   * @esi_route post_universe_names [region]
+   *
+   * @returns Iterator over region names
+   */
+  names() {
+    return getIteratedNames(this.agent, esi.universe.NameCategory.REGION,
+        this.ids());
+  }
+}
+
+/**
+ * A functional interface for getting APIs for a specific region, a known
+ * set of region ids, or every region in the game.
+ */
+export interface RegionAPIFactory {
+  /**
+   * Create a new region api targeting every single region in the game.
+   *
+   * @esi_route ids get_universe_regions
+   *
+   * @returns An AllRegions API wrapper
+   */
+  (): AllRegions;
+
+  /**
+   * Create a new region api targeting the particular region by `id`.
    *
    * @param id The region id
-   * @returns Region API wrapper for the given id
+   * @returns An Region API wrapper for the given id
    */
   (id: number): Region;
 
   /**
-   * @esi_example esi.regions()
+   * Create a new region api targeting the multiple region ids. If an array is
+   * provided, duplicates are removed (although the input array is not
+   * modified).
    *
-   * @returns All region ids
+   * @param ids The region ids
+   * @returns A MappedRegions API wrapper for the given ids
    */
-  (): Promise<Responses['get_universe_regions']>;
+  (ids: number[] | Set<number>): MappedRegions;
 
   /**
-   * @esi_route post_universe_names [region]
-   * @esi_example esi.regions.names(ids)
+   * Create a new region api targeting the regions returned from a
+   * search given the `query` text.
    *
-   * @param ids If not provided then the names of all regions will be
-   *     returned.
-   * @returns Map from queried id to returned region name
-   */
-  names(ids?: number[]): Promise<Map<number, string>>;
-
-  /**
-   * A Search module instance configured to search over the `'region'` type.
+   * @esi_route ids get_search [region]
    *
-   * @esi_route get_search [region]
-   * @esi_example esi.regions.search('text')
+   * @param query The search terms
+   * @param strict Whether or not the search is strict, defaults to false
+   * @returns A MappedRegions API which accesses regions based on
+   *    the dynamic search results
    */
-  search: Search;
+  (query: string, strict?: boolean): MappedRegions;
 }
 
 /**
- * Create a new {@link Regions} instance that uses the given `agent` to
+ * Create a new RegionAPIFactory instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns An Regions API instance
+ * @returns A RegionAPIFactory instance
  */
-export function makeRegions(agent: ESIAgent): Regions {
-  let functor = <Regions> <any> function (id?: number) {
-    if (id === undefined) {
-      return agent.request('get_universe_regions', undefined);
-    } else {
-      return new RegionImpl(agent, id);
-    }
-  };
+export function makeRegionAPIFactory(agent: ESIAgent): RegionAPIFactory {
+  const regionSearch = makeDefaultSearch(agent, esi.SearchCategory.REGION);
 
-  functor.search = makeDefaultSearch(agent, esi.SearchCategory.REGION);
-  functor.names = function (ids?: number[]) {
+  return <RegionAPIFactory> function (ids: number | number[] | Set<number> | string | undefined,
+      strict: boolean = false) {
     if (ids === undefined) {
-      return functor().then(allIds => functor.names(allIds));
+      // All regions since no id
+      return new AllRegions(agent);
+    } else if (typeof ids === 'number') {
+      // Single id so single API
+      return new Region(agent, ids);
+    } else if (typeof ids === 'string') {
+      // Search query for mapped API
+      return new MappedRegions(agent, () => regionSearch(ids, strict));
     } else {
-      return getNames(agent, esi.universe.NameCategory.REGION, ids);
+      // Set or array, so mapped API
+      return new MappedRegions(agent, ids);
     }
   };
-
-  return functor;
 }
 
-class RegionImpl implements Region {
-  private allOrders: PaginatedLoader<esi.market.Order>;
-
-  constructor(private agent: ESIAgent, private id_: number) {
-    this.allOrders = makePageBasedLoader(page => this.orders(page));
-  }
-
-  info() {
-    return this.agent.request('get_universe_regions_region_id',
-        { path: { region_id: this.id_ } });
-  }
-
-  history(typeId: number) {
-    return this.agent.request('get_markets_region_id_history',
-        { path: { region_id: this.id_ }, query: { type_id: typeId } });
-  }
-
-  orders(page?: number) {
-    if (page === undefined) {
-      return this.allOrders.getAll();
-    } else {
-      return this.agent.request('get_markets_region_id_orders', {
-        path: { region_id: this.id_ },
-        query: { page: page, order_type: 'all' }
-      });
-    }
-  }
-
-  buyOrdersFor(typeId: number) {
-    return this.agent.request('get_markets_region_id_orders', {
-      path: { region_id: this.id_ },
-      query: { type_id: typeId, order_type: 'buy' }
-    });
-  }
-
-  sellOrdersFor(typeId: number) {
-    return this.agent.request('get_markets_region_id_orders', {
-      path: { region_id: this.id_ },
-      query: { type_id: typeId, order_type: 'sell' }
-    });
-
-  }
-
-  ordersFor(typeId: number) {
-    return this.agent.request('get_markets_region_id_orders', {
-      path: { region_id: this.id_ },
-      query: { type_id: typeId, order_type: 'all' }
-    });
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
+function getDetails(agent: ESIAgent, id: number) {
+  return agent.request('get_universe_regions_region_id',
+      { path: { region_id: id } });
 }
