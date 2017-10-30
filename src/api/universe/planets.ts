@@ -5,12 +5,12 @@ import * as r from '../../internal/resource-api';
 import { MappedMoons, Moon } from './moons';
 
 /**
- * The API specification for all variants that access information about an
- * planetary interaction planet or multiple planets. This interface will
- * not be used directly, but will be filtered through some mapper, such as
- * {@link Async} or {@link Mapped} depending on what types of ids are being
- * accessed. However, this allows for a concise and consistent specification for
- * all variants: single, multiple, and all tasks.
+ * The API specification for all variants that access information about a planet
+ * or multiple planets. This interface will not be used directly, but will be
+ * filtered through some mapper, such as {@link Async} or {@link Mapped}
+ * depending on what types of ids are being accessed. However, this allows for a
+ * concise and consistent specification for all variants: single, multiple, and
+ * all planets.
  *
  * When mapped, each key defined in this interface becomes a function that
  * returns a Promise resolving to the key's type, or a collection related to the
@@ -48,23 +48,26 @@ export class Planet implements r.Async<PlanetAPI>, r.SingleResource {
    *    the planet's first moon.
    * @returns A Moon instance representing the `index`th moon of the planet
    */
-  moon(index: number) :Moon {
-    return new Moon(this.agent, () => this.ids()
-    .then(id => getMoonsForPlanet(this.agent, id))
-    .then(moons => moons[index]));
-  }
-
+  moons(index: number) :Moon;
   /**
    * @esi_route ~get_universe_systems_system_id
    *
    * @returns A MappedMoons instance for all the moons of the planet
    */
-  get moons() :MappedMoons {
-    if (this.moons_ === undefined) {
-      this.moons_ = new MappedMoons(this.agent,
-          () => this.ids().then(id => getMoonsForPlanet(this.agent, id)));
+  moons() :MappedMoons;
+
+  moons(index?:number) : Moon | MappedMoons {
+    if (index === undefined) {
+      if (this.moons_ === undefined) {
+        this.moons_ = new MappedMoons(this.agent,
+            () => this.ids().then(id => getMoonsForPlanet(this.agent, id)));
+      }
+      return this.moons_;
+    } else {
+      return new Moon(this.agent, () => this.ids()
+      .then(id => getMoonsForPlanet(this.agent, id))
+      .then(moons => moons[index]));
     }
-    return this.moons_;
   }
 
   ids() {
