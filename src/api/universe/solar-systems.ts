@@ -51,7 +51,7 @@ export class SolarSystem extends r.impl.SimpleResource implements r.Async<SolarS
    * @returns A MappedStations instance tied to the stations referenced in the
    *    details of this solar system
    */
-  stations() : MappedStations {
+  get stations() : MappedStations {
     if (this.stations_ === undefined) {
       this.stations_ = new MappedStations(this.agent, () => this.details().then(r => r.stations || []));
     }
@@ -62,7 +62,7 @@ export class SolarSystem extends r.impl.SimpleResource implements r.Async<SolarS
    * @returns A Star API interface tied to the star referenced in the details
    *    of this solar system
    */
-  star(): Star {
+  get star(): Star {
     if (this.star_ === undefined) {
       this.star_ = new Star(this.agent,
           () => this.details().then(r => r.star_id));
@@ -74,7 +74,7 @@ export class SolarSystem extends r.impl.SimpleResource implements r.Async<SolarS
    * @returns A MappedStargates instance tied to the stargates referenced in
    *    the details of this solar system
    */
-  stargates(): MappedStargates {
+  get stargates(): MappedStargates {
     if (this.gates_ === undefined) {
       this.gates_ = new MappedStargates(this.agent,
           () => this.details().then(r => r.stargates || []));
@@ -86,25 +86,12 @@ export class SolarSystem extends r.impl.SimpleResource implements r.Async<SolarS
    * @returns A MappedPlanets instance tied to the planets referenced in the
    *    details of this solar system
    */
-  planets(): MappedPlanets;
-  /**
-   * @param index The planet's index in the solar system, NOT its id; e.g. an
-   *    index of 0 refers to the system's first planet
-   * @returns A Planet API instance tied to the `index`th planet of the system
-   */
-  planets(index: number): Planet;
-
-  planets(index?:number) : Planet | MappedPlanets {
-    if (index === undefined) {
-      if (this.planets_ === undefined) {
-        this.planets_ = new MappedPlanets(this.agent,
-            () => this.details().then(r => r.planets.map(p => p.planet_id)));
-      }
-      return this.planets_!;
-    } else {
-      return new Planet(this.agent,
-          () => this.details().then(r => r.planets[index].planet_id));
+  get planets(): MappedPlanets {
+    if (this.planets_ === undefined) {
+      this.planets_ = new MappedPlanets(this.agent,
+          () => this.details().then(r => r.planets.map(p => p.planet_id)));
     }
+    return this.planets_!;
   }
 
   /**

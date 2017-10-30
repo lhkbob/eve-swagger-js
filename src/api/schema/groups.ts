@@ -45,7 +45,7 @@ export class Group extends r.impl.SimpleResource implements r.Async<GroupAPI> {
    * @returns A MappedTypes instance tied to the types defined in the details of
    *    this group
    */
-  members(): MappedTypes {
+  get members(): MappedTypes {
     if (this.members_ === undefined) {
       this.members_ = new MappedTypes(this.agent,
           () => this.details().then(result => result.types));

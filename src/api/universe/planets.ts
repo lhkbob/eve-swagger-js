@@ -2,7 +2,7 @@ import { ESIAgent } from '../../internal/esi-agent';
 import { Responses, esi } from '../../esi';
 
 import * as r from '../../internal/resource-api';
-import { MappedMoons, Moon } from './moons';
+import { MappedMoons } from './moons';
 
 /**
  * The API specification for all variants that access information about a planet
@@ -44,30 +44,14 @@ export class Planet implements r.Async<PlanetAPI>, r.SingleResource {
   /**
    * @esi_route ~get_universe_systems_system_id
    *
-   * @param index The moon's index in the planet, NOT its ID, e.g. 0 represents
-   *    the planet's first moon.
-   * @returns A Moon instance representing the `index`th moon of the planet
-   */
-  moons(index: number) :Moon;
-  /**
-   * @esi_route ~get_universe_systems_system_id
-   *
    * @returns A MappedMoons instance for all the moons of the planet
    */
-  moons() :MappedMoons;
-
-  moons(index?:number) : Moon | MappedMoons {
-    if (index === undefined) {
-      if (this.moons_ === undefined) {
-        this.moons_ = new MappedMoons(this.agent,
-            () => this.ids().then(id => getMoonsForPlanet(this.agent, id)));
-      }
-      return this.moons_;
-    } else {
-      return new Moon(this.agent, () => this.ids()
-      .then(id => getMoonsForPlanet(this.agent, id))
-      .then(moons => moons[index]));
+  get moons() :MappedMoons {
+    if (this.moons_ === undefined) {
+      this.moons_ = new MappedMoons(this.agent,
+          () => this.ids().then(id => getMoonsForPlanet(this.agent, id)));
     }
+    return this.moons_;
   }
 
   ids() {

@@ -45,7 +45,7 @@ export class Category extends r.impl.SimpleResource implements r.Async<CategoryA
    * @returns A MappedGroups instance tied to the groups defined in the details
    *    of this category
    */
-  members(): MappedGroups {
+  get members(): MappedGroups {
     if (this.members_ === undefined) {
       this.members_ = new MappedGroups(this.agent,
           () => this.details().then(result => result.groups));
