@@ -1,6 +1,10 @@
 import { API, Route } from '../esi-api';
 import { ExportableType } from './exportable-type';
-import { NAMESPACE_OVERRIDES, COLLAPSE_NAMESPACE } from './type-overrides';
+import {
+  ROUTE_NAMESPACE_OVERRIDES,
+  TYPE_NAMESPACE_OVERRIDES,
+  COLLAPSE_NAMESPACE
+} from './type-overrides';
 
 const pluralize = require('pluralize'); // No typings associated
 
@@ -170,7 +174,8 @@ export class Namespace {
         c.parent_ = undefined;
 
         this.log.push(...c.log);
-        this.log.push(`${name} merged (dec count = ${c.declarationCount}, explicit = ${explicitCheck})`);
+        this.log.push(
+            `${name} merged (dec count = ${c.declarationCount}, explicit = ${explicitCheck})`);
       }
     }
 
@@ -212,8 +217,8 @@ export class Namespace {
 
   static forRoute(route: Route): [Namespace, boolean] {
     // First look for an override
-    if (NAMESPACE_OVERRIDES[route.id]) {
-      return [Namespace.parse(NAMESPACE_OVERRIDES[route.id]), true];
+    if (ROUTE_NAMESPACE_OVERRIDES[route.id]) {
+      return [Namespace.parse(ROUTE_NAMESPACE_OVERRIDES[route.id]), true];
     }
 
     // Else start at ESI and proceed
@@ -259,7 +264,7 @@ export class Namespace {
   }
 
   // Place each type into a namespace
-  static  assign(spec: API, root: ExportableType): void {
+  static assign(spec: API, root: ExportableType): void {
     let routesUsingType = collectRoutes(spec, root);
     let routeNamespaces = getRouteNamespaces(spec);
 
@@ -267,7 +272,24 @@ export class Namespace {
       let routes = routesUsingType.get(type)!;
       let finalNamespace: [Namespace, boolean] | undefined;
 
-      if (type.hasDeclaration) {
+      // Check for explicit
+      for (let t of type.titles) {
+        if (TYPE_NAMESPACE_OVERRIDES[t]) {
+          let namespace = Namespace.parse(TYPE_NAMESPACE_OVERRIDES[t]);
+
+          if (finalNamespace && finalNamespace[0] !== namespace) {
+            console.error(t + '\'s override to ' + namespace.fullName
+                + ' shadows explicit name ' + finalNamespace[0].fullName);
+            console.error('Triggered by type:', type);
+          }
+
+          finalNamespace = [namespace, true];
+        }
+      }
+
+      // Place type based on its route membership, unless already have a
+      // namespace
+      if (type.hasDeclaration && finalNamespace === undefined) {
         for (let route of routes) {
           let namespace = routeNamespaces.get(route);
           if (namespace) {
@@ -278,9 +300,8 @@ export class Namespace {
                 // explicit namespace that was merged into the type
                 if (finalNamespace[1] && finalNamespace[0] !== namespace[0]) {
                   // Previous explicit namespace from another route is different
-                  console.error(
-                      route + '\'s override to ' + namespace[0].fullName
-                      + ' would shadow explicit name of '
+                  console.error(route + '\'s override to '
+                      + namespace[0].fullName + ' shadows explicit name of '
                       + finalNamespace[0].fullName);
                   console.error('Triggered by type:', type);
                   finalNamespace = [finalNamespace[0].join(namespace[0]), true];
@@ -367,7 +388,8 @@ function getRouteNamespaces(spec: API): Map<string, [Namespace, boolean]> {
   let names = new Map();
   for (let id of spec.routeIDs) {
     let [namespace, explicit] = Namespace.forRoute(spec.route(id)!);
-    namespace.log.push(`Route ${id} -> ${namespace.fullName} (explicit = ${explicit})`);
+    namespace.log.push(
+        `Route ${id} -> ${namespace.fullName} (explicit = ${explicit})`);
     names.set(id, [namespace, explicit]);
   }
   return names;

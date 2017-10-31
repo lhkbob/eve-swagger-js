@@ -15,8 +15,9 @@ export function getTypeName(namespace: Namespace,
         // An explicit type name, so make sure it isn't masking anything
         if (finalName[1] && name[0] !== finalName[0]) {
           // Previous explicit name from another title is different
-          throw new Error(title + '\'s override to ' + name[0]
-              + ' would shadow explicit name of ' + finalName[0]);
+          console.error(title + '\'s override to ' + name[0]
+              + ' shadows explicit name of ' + finalName[0]);
+          console.error('Triggered by type:', type);
         }
         // Otherwise take this name since it either is the same, or overrides
         // a non-explicit name
