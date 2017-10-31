@@ -600,7 +600,11 @@ export class API {
   }
 
   get basePath(): string {
-    return this.spec.basePath || '';
+    if (this.spec.basePath === '/') {
+      return '';
+    } else {
+      return this.spec.basePath || '';
+    }
   }
 
   get url(): string {
