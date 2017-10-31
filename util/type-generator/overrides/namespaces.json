@@ -1,11 +1,24 @@
 {
   "explicit": {
-    "get_characters_character_id_blueprints": "esi.character.asset",
-    "get_characters_character_id_killmails_recent": "esi.killmail",
-    "get_characters_character_id_notifications_contacts": "esi.character.notification",
-    "get_corporations_corporation_id_blueprints": "esi.corporation.asset",
-    "get_universe_schematics_schematic_id": "esi.universe",
-    "post_ui_openwindow_newmail": "esi.character.mail"
+    "routes": {
+      "get_alliances_alliance_id_contacts": "esi.alliance",
+      "get_characters_character_id_blueprints": "esi.character.asset",
+      "get_characters_character_id_fleet": "esi.fleet",
+      "get_characters_character_id_killmails_recent": "esi.killmail",
+      "get_characters_character_id_notifications_contacts": "esi.character.notification",
+      "get_corporations_corporation_id_blueprints": "esi.corporation.asset",
+      "get_corporations_corporation_id_containers_logs": "esi.corporation.asset",
+      "get_corporations_corporation_id_customs_offices": "esi.corporation.structure",
+      "get_corporations_corporation_id_facilities": "esi.corporation.structure",
+      "get_corporations_corporation_id_starbases": "esi.corporation.structure",
+      "get_corporations_corporation_id_starbases_starbase_id": "esi.corporation.structure",
+      "get_universe_schematics_schematic_id": "esi.universe",
+      "post_ui_openwindow_newmail": "esi.character.mail"
+    },
+    "types": {
+      "get_characters_character_id_contacts_element_contact_type": "esi",
+      "get_corporations_corporation_id_starbases_starbase_id_fuels_element": "esi"
+    }
   },
   "collapse": [
     "esi.character.calendar.event",
