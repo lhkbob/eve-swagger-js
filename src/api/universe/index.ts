@@ -1,19 +1,19 @@
 import { ESIAgent } from '../../internal/esi-agent';
-import { makeRaceAPIFactory, RaceAPIFactory } from './races';
-import { BloodlineAPIFactory, makeBloodlineAPIFactory } from './bloodlines';
-import { makeStarAPIFactory, StarAPIFactory } from './stars';
-import { makePlanetAPIFactory, PlanetAPIFactory } from './planets';
-import { makeMoonAPIFactory, MoonAPIFactory } from './moons';
-import { makeStargateAPIFactory, StargateAPIFactory } from './stargates';
-import { makeRegionAPIFactory, RegionAPIFactory } from './regions';
+import { makeRaces, Races } from './races';
+import { Bloodlines, makeBloodlines } from './bloodlines';
+import { makeStars, Stars } from './stars';
+import { makePlanets, Planets } from './planets';
+import { makeMoons, Moons } from './moons';
+import { makeStargates, Stargates } from './stargates';
+import { makeRegions, Regions } from './regions';
 import {
-  ConstellationAPIFactory, makeConstellationAPIFactory
+  Constellations, makeConstellations
 } from './constellations';
 import {
-  makeStationAPIFactory, StationAPIFactory
+  makeStations, Stations
 } from './stations';
 import {
-  makeSolarSystemAPIFactory, SolarSystemAPIFactory
+  makeSolarSystems, SolarSystems
 } from './solar-systems';
 import { esi, Responses } from '../../esi';
 import { makeDefaultSearch, Search } from '../../internal/search';
@@ -29,88 +29,88 @@ import { makeDefaultSearch, Search } from '../../internal/search';
  * - [market](https://esi.tech.ccp.is/latest/#/Market)
  */
 export class Universe {
-  private races_?: RaceAPIFactory;
-  private bloodlines_?: BloodlineAPIFactory;
-  private stars_?: StarAPIFactory;
-  private planets_?: PlanetAPIFactory;
-  private moons_?: MoonAPIFactory;
-  private stargates_?: StargateAPIFactory;
-  private regions_?: RegionAPIFactory;
-  private constellations_?: ConstellationAPIFactory;
-  private stations_?: StationAPIFactory;
-  private solarSystems_?: SolarSystemAPIFactory;
+  private races_?: Races;
+  private bloodlines_?: Bloodlines;
+  private stars_?: Stars;
+  private planets_?: Planets;
+  private moons_?: Moons;
+  private stargates_?: Stargates;
+  private regions_?: Regions;
+  private constellations_?: Constellations;
+  private stations_?: Stations;
+  private solarSystems_?: SolarSystems;
   private agents_?: Search;
   private wormholes_?: Search;
 
   constructor(private agent: ESIAgent) {
   }
 
-  get races(): RaceAPIFactory {
+  get races(): Races {
     if (this.races_ === undefined) {
-      this.races_ = makeRaceAPIFactory(this.agent);
+      this.races_ = makeRaces(this.agent);
     }
     return this.races_;
   }
 
-  get bloodlines(): BloodlineAPIFactory {
+  get bloodlines(): Bloodlines {
     if (this.bloodlines_ === undefined) {
-      this.bloodlines_ = makeBloodlineAPIFactory(this.agent);
+      this.bloodlines_ = makeBloodlines(this.agent);
     }
     return this.bloodlines_;
   }
 
-  get stars(): StarAPIFactory {
+  get stars(): Stars {
     if (this.stars_ === undefined) {
-      this.stars_ = makeStarAPIFactory(this.agent);
+      this.stars_ = makeStars(this.agent);
     }
     return this.stars_;
   }
 
-  get planets(): PlanetAPIFactory {
+  get planets(): Planets {
     if (this.planets_ === undefined) {
-      this.planets_ = makePlanetAPIFactory(this.agent);
+      this.planets_ = makePlanets(this.agent);
     }
     return this.planets_;
   }
 
-  get moons(): MoonAPIFactory {
+  get moons(): Moons {
     if (this.moons_ === undefined) {
-      this.moons_ = makeMoonAPIFactory(this.agent);
+      this.moons_ = makeMoons(this.agent);
     }
     return this.moons_;
   }
 
-  get stargates(): StargateAPIFactory {
+  get stargates(): Stargates {
     if (this.stargates_ === undefined) {
-      this.stargates_ = makeStargateAPIFactory(this.agent);
+      this.stargates_ = makeStargates(this.agent);
     }
     return this.stargates_;
   }
 
-  get regions(): RegionAPIFactory {
+  get regions(): Regions {
     if (this.regions_ === undefined) {
-      this.regions_ = makeRegionAPIFactory(this.agent);
+      this.regions_ = makeRegions(this.agent);
     }
     return this.regions_;
   }
 
-  get constellations(): ConstellationAPIFactory {
+  get constellations(): Constellations {
     if (this.constellations_ === undefined) {
-      this.constellations_ = makeConstellationAPIFactory(this.agent);
+      this.constellations_ = makeConstellations(this.agent);
     }
     return this.constellations_;
   }
 
-  get stations(): StationAPIFactory {
+  get stations(): Stations {
     if (this.stations_ === undefined) {
-      this.stations_ = makeStationAPIFactory(this.agent);
+      this.stations_ = makeStations(this.agent);
     }
     return this.stations_;
   }
 
-  get solarSystems(): SolarSystemAPIFactory {
+  get solarSystems(): SolarSystems {
     if (this.solarSystems_ === undefined) {
-      this.solarSystems_ = makeSolarSystemAPIFactory(this.agent);
+      this.solarSystems_ = makeSolarSystems(this.agent);
     }
     return this.solarSystems_;
   }

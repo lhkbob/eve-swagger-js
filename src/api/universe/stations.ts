@@ -137,7 +137,7 @@ export class MappedStations extends r.impl.SimpleMappedResource implements r.Map
  * An api adapter for accessing various details about every station in the
  * universe.
  */
-export class AllStations extends r.impl.SimpleIteratedResource<esi.industry.Facility> implements r.Iterated<StationAPI> {
+export class IteratedStations extends r.impl.SimpleIteratedResource<esi.industry.Facility> implements r.Iterated<StationAPI> {
   constructor(private agent: ESIAgent) {
     super(r.impl.makeArrayStreamer(() => agent.request('get_industry_facilities', undefined)), e => e.facility_id);
   }
@@ -184,14 +184,16 @@ export class AllStations extends r.impl.SimpleIteratedResource<esi.industry.Faci
  * A functional interface for getting APIs for a specific station or a
  * known set of station ids.
  */
-export interface StationAPIFactory {
+export interface Stations {
   /**
-   * Create a new station api targeting every single station in the game,
+   * Create a new station api targeting every single facility in the game,
    * as reported by the industry facilities ESI route.
    *
-   * @returns An AllStations API wrapper
+   * @esi_route industry get_industry_facilities
+   *
+   * @returns An IteratedStations API wrapper
    */
-  (): AllStations;
+  facilities(): IteratedStations;
 
   /**
    * Create a new station api targeting the particular station by `id`.
@@ -226,21 +228,18 @@ export interface StationAPIFactory {
 }
 
 /**
- * Create a new StationAPIFactory instance that uses the given `agent` to
+ * Create a new Stations instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A StationAPIFactory instance
+ * @returns A Stations instance
  */
-export function makeStationAPIFactory(agent: ESIAgent): StationAPIFactory {
+export function makeStations(agent: ESIAgent): Stations {
   const stationSearch = makeDefaultSearch(agent, esi.SearchCategory.STATION);
 
-  return <StationAPIFactory> function (ids: number | number[] | Set<number> | string | undefined,
+  let stations = <Stations> function (ids: number | number[] | Set<number> | string,
       strict: boolean = false) {
-    if (ids === undefined) {
-      // No id, so all stations
-      return new AllStations(agent);
-    } else if (typeof ids === 'number') {
+    if (typeof ids === 'number') {
       // Single id so single API
       return new Station(agent, ids);
     } else if (typeof ids === 'string') {
@@ -251,6 +250,13 @@ export function makeStationAPIFactory(agent: ESIAgent): StationAPIFactory {
       return new MappedStations(agent, ids);
     }
   };
+
+  // Add facilities() function
+  stations.facilities = function() {
+    return new IteratedStations(agent);
+  };
+
+  return stations;
 }
 
 function getDetails(agent: ESIAgent, id: number) {

@@ -67,7 +67,7 @@ export class MappedMoons extends r.impl.SimpleMappedResource implements r.Mapped
  * known set of moon ids. There is currently no way to iterate over all
  * moons in the game.
  */
-export interface MoonAPIFactory {
+export interface Moons {
   /**
    * Create a new moon api targeting the particular moon by `id`.
    *
@@ -88,14 +88,14 @@ export interface MoonAPIFactory {
 }
 
 /**
- * Create a new MoonAPIFactory instance that uses the given `agent` to
+ * Create a new Moons instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A MoonAPIFactory instance
+ * @returns A Moons instance
  */
-export function makeMoonAPIFactory(agent: ESIAgent): MoonAPIFactory {
-  return <MoonAPIFactory> function (ids: number | number[] | Set<number>) {
+export function makeMoons(agent: ESIAgent): Moons {
+  return <Moons> function (ids: number | number[] | Set<number>) {
     if (typeof ids === 'number') {
       // Single id so single API
       return new Moon(agent, ids);

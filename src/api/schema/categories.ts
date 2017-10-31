@@ -72,9 +72,12 @@ export class MappedCategories extends r.impl.SimpleMappedResource implements r.M
 }
 
 /**
- * An api adapter for accessing various details about every category in the game.
+ * An api adapter for accessing various details about every category in the
+ * game. Even though a route exists to get all category ids at once, due to
+ * their quantity, the API provides asynchronous iterators for the rest of their
+ * details.
  */
-export class AllCategories extends r.impl.ArrayIteratedResource implements r.Iterated<CategoryAPI> {
+export class IteratedCategories extends r.impl.ArrayIteratedResource implements r.Iterated<CategoryAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_universe_categories', undefined));
   }
@@ -91,15 +94,15 @@ export class AllCategories extends r.impl.ArrayIteratedResource implements r.Ite
  * A functional interface for getting APIs for a specific category, a
  * known set of category ids, or every category in the game.
  */
-export interface CategoryAPIFactory {
+export interface Categories {
   /**
    * Create a new category api targeting every single category in the game.
    *
    * @esi_route ids get_universe_categories
    *
-   * @returns An AllCategories API wrapper
+   * @returns An IteratedCategories API wrapper
    */
-  (): AllCategories;
+  (): IteratedCategories;
 
   /**
    * Create a new category api targeting the particular category by `id`.
@@ -121,17 +124,17 @@ export interface CategoryAPIFactory {
 }
 
 /**
- * Create a new CategoryAPIFactory instance that uses the given `agent` to
+ * Create a new Categories instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A CategoryAPIFactory instance
+ * @returns A Categories instance
  */
-export function makeCategoryAPIFactory(agent: ESIAgent): CategoryAPIFactory {
-  return <CategoryAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
+export function makeCategories(agent: ESIAgent): Categories {
+  return <Categories> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // All categories since no id
-      return new AllCategories(agent);
+      return new IteratedCategories(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new Category(agent, ids);

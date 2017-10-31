@@ -63,7 +63,7 @@ export class MappedSchematics extends r.impl.SimpleMappedResource implements r.M
  * known set of schematic ids. There is currently no way to iterate over all
  * schematics in the game.
  */
-export interface SchematicAPIFactory {
+export interface Schematics {
   /**
    * Create a new schematic api targeting the particular schematic by `id`.
    *
@@ -84,14 +84,14 @@ export interface SchematicAPIFactory {
 }
 
 /**
- * Create a new SchematicAPIFactory instance that uses the given `agent` to
+ * Create a new Schematics instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A SchematicAPIFactory instance
+ * @returns A Schematics instance
  */
-export function makeSchematicAPIFactory(agent: ESIAgent): SchematicAPIFactory {
-  return <SchematicAPIFactory> function (ids: number | number[] | Set<number>) {
+export function makeSchematics(agent: ESIAgent): Schematics {
+  return <Schematics> function (ids: number | number[] | Set<number>) {
     if (typeof ids === 'number') {
       // Single id so single API
       return new Schematic(agent, ids);

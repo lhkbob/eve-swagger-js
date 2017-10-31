@@ -68,7 +68,7 @@ export class MappedBloodlines extends r.impl.SimpleMappedResource implements r.M
  * An api adapter for accessing various details about every bloodline in the
  * game.
  */
-export class AllBloodlines extends r.impl.SimpleIteratedResource<esi.universe.Bloodline> implements r.Iterated<BloodlineAPI> {
+export class IteratedBloodlines extends r.impl.SimpleIteratedResource<esi.universe.Bloodline> implements r.Iterated<BloodlineAPI> {
   constructor(private agent: ESIAgent) {
     super(r.impl.makeArrayStreamer(
         () => agent.request('get_universe_bloodlines', undefined)), r => r.bloodline_id);
@@ -88,15 +88,15 @@ export class AllBloodlines extends r.impl.SimpleIteratedResource<esi.universe.Bl
  * A functional interface for getting APIs for a specific bloodline, a
  * known set of bloodline ids, or every bloodline in the game.
  */
-export interface BloodlineAPIFactory {
+export interface Bloodlines {
   /**
    * Create a new bloodline api targeting every single bloodline in the game.
    *
    * @esi_route ids get_universe_types
    *
-   * @returns An AllBloodlines API wrapper
+   * @returns An IteratedBloodlines API wrapper
    */
-  (): AllBloodlines;
+  (): IteratedBloodlines;
 
   /**
    * Create a new bloodline api targeting the particular bloodline by `id`.
@@ -118,17 +118,17 @@ export interface BloodlineAPIFactory {
 }
 
 /**
- * Create a new BloodlineAPIFactory instance that uses the given `agent` to
+ * Create a new Bloodlines instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A BloodlineAPIFactory instance
+ * @returns A Bloodlines instance
  */
-export function makeBloodlineAPIFactory(agent: ESIAgent): BloodlineAPIFactory {
-  return <BloodlineAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
+export function makeBloodlines(agent: ESIAgent): Bloodlines {
+  return <Bloodlines> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // All types since no id
-      return new AllBloodlines(agent);
+      return new IteratedBloodlines(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new Bloodline(agent, ids);

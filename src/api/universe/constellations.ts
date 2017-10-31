@@ -100,7 +100,7 @@ export class MappedConstellations extends r.impl.SimpleMappedResource implements
  * An api adapter for accessing various details about every constellation in
  * the game.
  */
-export class AllConstellations extends r.impl.ArrayIteratedResource implements r.Iterated<ConstellationAPI> {
+export class IteratedConstellations extends r.impl.ArrayIteratedResource implements r.Iterated<ConstellationAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_universe_constellations', undefined));
   }
@@ -127,16 +127,16 @@ export class AllConstellations extends r.impl.ArrayIteratedResource implements r
  * A functional interface for getting APIs for a specific constellation, a known
  * set of constellation ids, or every constellation in the game.
  */
-export interface ConstellationAPIFactory {
+export interface Constellations {
   /**
    * Create a new constellation api targeting every single constellation in the
    * game.
    *
    * @esi_route ids get_universe_constellations
    *
-   * @returns An AllConstellations API wrapper
+   * @returns An IteratedConstellations API wrapper
    */
-  (): AllConstellations;
+  (): IteratedConstellations;
 
   /**
    * Create a new constellation api targeting the particular constellation by
@@ -172,21 +172,21 @@ export interface ConstellationAPIFactory {
 }
 
 /**
- * Create a new ConstellationAPIFactory instance that uses the given `agent` to
+ * Create a new Constellations instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A ConstellationAPIFactory instance
+ * @returns A Constellations instance
  */
-export function makeConstellationAPIFactory(agent: ESIAgent): ConstellationAPIFactory {
+export function makeConstellations(agent: ESIAgent): Constellations {
   const constellationSearch = makeDefaultSearch(agent,
       esi.SearchCategory.CONSTELLATION);
 
-  return <ConstellationAPIFactory> function (ids: number | number[] | Set<number> | string | undefined,
+  return <Constellations> function (ids: number | number[] | Set<number> | string | undefined,
       strict: boolean = false) {
     if (ids === undefined) {
       // All constellations since no id
-      return new AllConstellations(agent);
+      return new IteratedConstellations(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new Constellation(agent, ids);

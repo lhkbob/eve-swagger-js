@@ -68,7 +68,7 @@ export class MappedStars extends r.impl.SimpleMappedResource implements r.Mapped
  * known set of star ids. There is currently no way to iterate over all
  * stars in the game.
  */
-export interface StarAPIFactory {
+export interface Stars {
   /**
    * Create a new star api targeting the particular star by `id`.
    *
@@ -89,14 +89,14 @@ export interface StarAPIFactory {
 }
 
 /**
- * Create a new StarAPIFactory instance that uses the given `agent` to
+ * Create a new Stars instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A StarAPIFactory instance
+ * @returns A Stars instance
  */
-export function makeStarAPIFactory(agent: ESIAgent): StarAPIFactory {
-  return <StarAPIFactory> function (ids: number | number[] | Set<number>) {
+export function makeStars(agent: ESIAgent): Stars {
+  return <Stars> function (ids: number | number[] | Set<number>) {
     if (typeof ids === 'number') {
       // Single id so single API
       return new Star(agent, ids);

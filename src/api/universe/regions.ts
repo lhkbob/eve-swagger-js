@@ -214,7 +214,7 @@ export class MappedRegions extends r.impl.SimpleMappedResource implements r.Mapp
  * An api adapter for accessing various details about every region in
  * the game.
  */
-export class AllRegions extends r.impl.ArrayIteratedResource implements r.Iterated<RegionAPI> {
+export class IteratedRegions extends r.impl.ArrayIteratedResource implements r.Iterated<RegionAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_universe_regions', undefined));
   }
@@ -241,15 +241,15 @@ export class AllRegions extends r.impl.ArrayIteratedResource implements r.Iterat
  * A functional interface for getting APIs for a specific region, a known
  * set of region ids, or every region in the game.
  */
-export interface RegionAPIFactory {
+export interface Regions {
   /**
    * Create a new region api targeting every single region in the game.
    *
    * @esi_route ids get_universe_regions
    *
-   * @returns An AllRegions API wrapper
+   * @returns An IteratedRegions API wrapper
    */
-  (): AllRegions;
+  (): IteratedRegions;
 
   /**
    * Create a new region api targeting the particular region by `id`.
@@ -284,20 +284,20 @@ export interface RegionAPIFactory {
 }
 
 /**
- * Create a new RegionAPIFactory instance that uses the given `agent` to
+ * Create a new Regions instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A RegionAPIFactory instance
+ * @returns A Regions instance
  */
-export function makeRegionAPIFactory(agent: ESIAgent): RegionAPIFactory {
+export function makeRegions(agent: ESIAgent): Regions {
   const regionSearch = makeDefaultSearch(agent, esi.SearchCategory.REGION);
 
-  return <RegionAPIFactory> function (ids: number | number[] | Set<number> | string | undefined,
+  return <Regions> function (ids: number | number[] | Set<number> | string | undefined,
       strict: boolean = false) {
     if (ids === undefined) {
       // All regions since no id
-      return new AllRegions(agent);
+      return new IteratedRegions(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new Region(agent, ids);

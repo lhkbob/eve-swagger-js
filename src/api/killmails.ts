@@ -92,11 +92,11 @@ export class MappedKillmails extends r.impl.SimpleMappedResource implements r.Ma
  * to some dynamic scope. This scope currently is either a character's,
  * corporation's or war's killmails from losses and final blows.
  *
- * The KillmailAPIFactory does not provide a way to create these instances
+ * The Killmails does not provide a way to create these instances
  * because it is instead the responsibility of each scope to provide an
- * AllKillmails instance accessing the appropriate mails.
+ * IteratedKillmails instance accessing the appropriate mails.
  */
-export class AllKillmails extends r.impl.SimpleIteratedResource<esi.killmail.KillmailLink> implements r.Iterated<KillmailAPI> {
+export class IteratedKillmails extends r.impl.SimpleIteratedResource<esi.killmail.KillmailLink> implements r.Iterated<KillmailAPI> {
   constructor(private agent: ESIAgent,
       links: r.impl.ResourceStreamer<esi.killmail.KillmailLink>) {
     super(links, link => link.killmail_id);
@@ -126,10 +126,10 @@ export class AllKillmails extends r.impl.SimpleIteratedResource<esi.killmail.Kil
 
 /**
  * A functional interface for getting APIs for a specific killmail or set of
- * killmails. Note that access to an AllKillmails instance for a character,
+ * killmails. Note that access to an IteratedKillmails instance for a character,
  * corporation, or war is provided within those modules.
  */
-export interface KillmailAPIFactory {
+export interface Killmails {
   /**
    * Create a new killmail api targeting the particular mail by its `id` and
    * authorizing `hash`.
@@ -160,14 +160,14 @@ export interface KillmailAPIFactory {
 }
 
 /**
- * Create a new killmail API factory that uses the given `agent` to make its
+ * Create a new Killmails API that uses the given `agent` to make its
  * HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A new KillmailAPIFactory
+ * @returns A new Killmails
  */
-export function makeKillmailFactory(agent: ESIAgent): KillmailAPIFactory {
-  return <KillmailAPIFactory> function (ids: number | [number, string][] | esi.killmail.KillmailLink[] | Map<number, string>,
+export function makeKillmails(agent: ESIAgent): Killmails {
+  return <Killmails> function (ids: number | [number, string][] | esi.killmail.KillmailLink[] | Map<number, string>,
       hash?: string) {
     if (typeof ids === 'number') {
       // Single killmail variant

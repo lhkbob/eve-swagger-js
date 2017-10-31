@@ -130,7 +130,7 @@ export class MappedAlliances extends r.impl.SimpleMappedResource implements r.Ma
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class AllAlliances extends r.impl.ArrayIteratedResource implements r.Iterated<AllianceAPI> {
+export class IteratedAlliances extends r.impl.ArrayIteratedResource implements r.Iterated<AllianceAPI> {
   constructor(private agent: ESIAgent) {
     super(() => this.agent.request('get_alliances', undefined));
   }
@@ -172,7 +172,7 @@ export class AllAlliances extends r.impl.ArrayIteratedResource implements r.Iter
  * set of alliance ids, the alliances returned by a search query, or every
  * alliance in the game.
  */
-export interface AllianceAPIFactory {
+export interface Alliances {
   /**
    * Create a new alliance api targeting every single alliance in the game.
    *
@@ -180,7 +180,7 @@ export interface AllianceAPIFactory {
    *
    * @returns An AllAlliances API wrapper
    */
-  (): AllAlliances;
+  (): IteratedAlliances;
 
   /**
    * Create a new alliance api targeting the particular alliance by `id`.
@@ -215,21 +215,21 @@ export interface AllianceAPIFactory {
 }
 
 /**
- * Create a new alliances API factory that uses the given `agent` to make its
+ * Create a new alliances API that uses the given `agent` to make its
  * HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A new AllianceAPIFactory
+ * @returns A new Alliances
  */
-export function makeAlliancesAPIFactory(agent: ESIAgent): AllianceAPIFactory {
+export function makeAlliances(agent: ESIAgent): Alliances {
   // First create a search function for alliances using the agent
   const allianceSearch = makeDefaultSearch(agent, esi.SearchCategory.ALLIANCE);
 
-  return <AllianceAPIFactory> function (ids: number | number[] | Set<number> | string | undefined,
+  return <Alliances> function (ids: number | number[] | Set<number> | string | undefined,
       strict: boolean = false) {
     if (ids === undefined) {
       // No argument
-      return new AllAlliances(agent);
+      return new IteratedAlliances(agent);
     } else if (typeof ids === 'number') {
       // Single id variant
       return new Alliance(agent, ids);

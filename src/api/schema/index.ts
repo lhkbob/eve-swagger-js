@@ -1,17 +1,17 @@
 import { ESIAgent } from '../../internal/esi-agent';
 
-import { SchematicAPIFactory, makeSchematicAPIFactory } from './schematics';
+import { Schematics, makeSchematics } from './schematics';
 import {
-  OpportunitiesAPIFactory,
-  makeOpportunitiesAPIFactory
+  Opportunities
 } from './opportunities';
-import { DogmaAPIFactory, makeDogmaAPIFactory } from './dogma';
-import { TypeAPIFactory, makeTypeAPIFactory } from './types';
-import { GroupAPIFactory, makeGroupAPIFactory } from './groups';
-import { CategoryAPIFactory, makeCategoryAPIFactory } from './categories';
+import { Graphics, makeGraphics} from './graphics';
+import { Dogma } from './dogma';
+import { Types, makeTypes} from './types';
+import { Groups, makeGroups } from './groups';
+import { Categories, makeCategories } from './categories';
 import {
-  MarketGroupAPIFactory,
-  makeMarketGroupAPIFactory
+  MarketGroups,
+  makeMarketGroups
 } from './market-groups';
 import { Insurance } from './insurance';
 
@@ -27,33 +27,79 @@ import { Insurance } from './insurance';
  * interaction](https://esi.tech.ccp.is/latest/#/Planetary_Interaction)
  * - [market](https://esi.tech.ccp.is/latest/#/Market)
  */
-export interface SchemaAPIFactory {
-  readonly schematics: SchematicAPIFactory;
-  readonly dogma: DogmaAPIFactory;
-  readonly opportunities: OpportunitiesAPIFactory;
-  readonly types: TypeAPIFactory;
-  readonly groups: GroupAPIFactory;
-  readonly categories: CategoryAPIFactory;
-  readonly marketGroups: MarketGroupAPIFactory;
-  readonly insurance: Insurance;
-}
+export class Schema {
+  private schematics_?:Schematics;
+  private dogma_?:Dogma;
+  private opportunities_?:Opportunities;
+  private types_?:Types;
+  private groups_?:Groups;
+  private categories_?:Categories;
+  private marketGroups_?:MarketGroups;
+  private graphics_?:Graphics;
+  private insurance_?:Insurance;
+  
+  constructor(private agent:ESIAgent) { }
+  
+  get schematics() : Schematics {
+    if (this.schematics_ === undefined) {
+      this.schematics_ = makeSchematics(this.agent);
+    }
+    return this.schematics_;
+  }
 
-/**
- * Create a new SchemaFactory instance that uses the given `agent` to
- * make its HTTP requests to the ESI interface.
- *
- * @param agent The agent making actual requests
- * @returns An SchemaFactory API instance
- */
-export function makeSchemaAPIFactory(agent: ESIAgent) {
-  return {
-    schematics: makeSchematicAPIFactory(agent),
-    dogma: makeDogmaAPIFactory(agent),
-    opportunities: makeOpportunitiesAPIFactory(agent),
-    types: makeTypeAPIFactory(agent),
-    groups: makeGroupAPIFactory(agent),
-    categories: makeCategoryAPIFactory(agent),
-    marketGroups: makeMarketGroupAPIFactory(agent),
-    insurance: new Insurance(agent)
-  };
+  get dogma() : Dogma {
+    if (this.dogma_ === undefined) {
+      this.dogma_ = new Dogma(this.agent);
+    }
+    return this.dogma_;
+  }
+
+  get opportunities() : Opportunities {
+    if (this.opportunities_ === undefined) {
+      this.opportunities_ = new Opportunities(this.agent);
+    }
+    return this.opportunities_;
+  }
+
+  get types() : Types {
+    if (this.types_ === undefined) {
+      this.types_ = makeTypes(this.agent);
+    }
+    return this.types_;
+  }
+
+  get groups() : Groups {
+    if (this.groups_ === undefined) {
+      this.groups_ = makeGroups(this.agent);
+    }
+    return this.groups_;
+  }
+
+  get categories() : Categories {
+    if (this.categories_ === undefined) {
+      this.categories_ = makeCategories(this.agent);
+    }
+    return this.categories_;
+  }
+
+  get marketGroups() : MarketGroups {
+    if (this.marketGroups_ === undefined) {
+      this.marketGroups_ = makeMarketGroups(this.agent);
+    }
+    return this.marketGroups_;
+  }
+
+  get graphics() : Graphics {
+    if (this.graphics_ === undefined) {
+      this.graphics_ = makeGraphics(this.agent);
+    }
+    return this.graphics_;
+  }
+
+  get insurance() : Insurance {
+    if (this.insurance_ === undefined) {
+      this.insurance_ = new Insurance(this.agent);
+    }
+    return this.insurance_;
+  }
 }

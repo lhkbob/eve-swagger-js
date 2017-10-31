@@ -67,7 +67,7 @@ export class MappedRaces extends r.impl.SimpleMappedResource implements r.Mapped
 /**
  * An api adapter for accessing various details about every race in the game.
  */
-export class AllRaces extends r.impl.SimpleIteratedResource<esi.universe.Race> implements r.Iterated<RaceAPI> {
+export class IteratedRaces extends r.impl.SimpleIteratedResource<esi.universe.Race> implements r.Iterated<RaceAPI> {
   constructor(private agent: ESIAgent) {
     super(r.impl.makeArrayStreamer(
         () => agent.request('get_universe_races', undefined)), r => r.race_id);
@@ -87,15 +87,15 @@ export class AllRaces extends r.impl.SimpleIteratedResource<esi.universe.Race> i
  * A functional interface for getting APIs for a specific race, a
  * known set of race ids, or every race in the game.
  */
-export interface RaceAPIFactory {
+export interface Races {
   /**
    * Create a new race api targeting every single race in the game.
    *
    * @esi_route ids get_universe_races
    *
-   * @returns An AllRaces API wrapper
+   * @returns An IteratedRaces API wrapper
    */
-  (): AllRaces;
+  (): IteratedRaces;
 
   /**
    * Create a new race api targeting the particular race by `id`.
@@ -117,17 +117,17 @@ export interface RaceAPIFactory {
 }
 
 /**
- * Create a new RaceAPIFactory instance that uses the given `agent` to
+ * Create a new Races instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A RaceAPIFactory instance
+ * @returns A Races instance
  */
-export function makeRaceAPIFactory(agent: ESIAgent): RaceAPIFactory {
-  return <RaceAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
+export function makeRaces(agent: ESIAgent): Races {
+  return <Races> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // All races since no id
-      return new AllRaces(agent);
+      return new IteratedRaces(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new Race(agent, ids);

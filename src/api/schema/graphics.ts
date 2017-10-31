@@ -63,7 +63,7 @@ export class MappedGraphics extends r.impl.SimpleMappedResource implements r.Map
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class AllGraphics extends r.impl.ArrayIteratedResource implements r.Iterated<GraphicAPI> {
+export class IteratedGraphics extends r.impl.ArrayIteratedResource implements r.Iterated<GraphicAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_universe_graphics', undefined));
   }
@@ -80,15 +80,15 @@ export class AllGraphics extends r.impl.ArrayIteratedResource implements r.Itera
  * A functional interface for getting APIs for a specific graphic, a
  * known set of graphic ids, or every graphic in the game.
  */
-export interface GraphicAPIFactory {
+export interface Graphics {
   /**
    * Create a new graphic api targeting every single graphic in the game.
    *
    * @esi_route ids get_universe_graphics
    *
-   * @returns An AllGraphics API wrapper
+   * @returns An IteratedGraphics API wrapper
    */
-  (): AllGraphics;
+  (): IteratedGraphics;
 
   /**
    * Create a new graphic api targeting the particular graphic by `id`.
@@ -110,17 +110,17 @@ export interface GraphicAPIFactory {
 }
 
 /**
- * Create a new GraphicAPIFactory instance that uses the given `agent` to
+ * Create a new Graphics instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A GraphicAPIFactory instance
+ * @returns A Graphics instance
  */
-export function makeGraphicAPIFactory(agent: ESIAgent): GraphicAPIFactory {
-  return <GraphicAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
+export function makeGraphics(agent: ESIAgent): Graphics {
+  return <Graphics> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // All graphics since no id
-      return new AllGraphics(agent);
+      return new IteratedGraphics(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new Graphic(agent, ids);

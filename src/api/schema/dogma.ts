@@ -63,7 +63,7 @@ export class MappedAttributes extends r.impl.SimpleMappedResource implements r.M
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class AllAttributes extends r.impl.ArrayIteratedResource implements r.Iterated<AttributeAPI> {
+export class IteratedAttributes extends r.impl.ArrayIteratedResource implements r.Iterated<AttributeAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_dogma_attributes', undefined));
   }
@@ -78,25 +78,27 @@ export class AllAttributes extends r.impl.ArrayIteratedResource implements r.Ite
 
 /**
  * A functional interface for getting APIs for a specific dogma attribute, a
- * known set of attribute ids, or every dogma attribute in the game.
+ * known set of attribute ids, or every dogma attribute in the game. Even though
+ * a route exists to get all attribute ids at once, due to their quantity, the
+ * API provides asynchronous iterators for the rest of their details.
  */
-export interface AttributeAPIFactory {
+export interface Attributes {
   /**
    * Create a new dogma attribute api targeting every single attribute in the
    * game.
    *
    * @esi_route ids get_dogma_attributes
    *
-   * @returns An AllDogmaAttributes API wrapper
+   * @returns An IteratedAttributes API wrapper
    */
-  (): AllAttributes;
+  (): IteratedAttributes;
 
   /**
    * Create a new dogma attribute api targeting the particular attribute by
    * `id`.
    *
    * @param id The attribute id
-   * @returns An DogmaAttribute API wrapper for the given id
+   * @returns An Attribute API wrapper for the given id
    */
   (id: number): Attribute;
 
@@ -106,7 +108,7 @@ export interface AttributeAPIFactory {
    * not modified).
    *
    * @param ids The attribute ids
-   * @returns A MappedDogmaAttributes API wrapper for the given ids
+   * @returns A MappedAttributes API wrapper for the given ids
    */
   (ids: number[] | Set<number>): MappedAttributes;
 }
@@ -171,7 +173,7 @@ export class MappedEffects extends r.impl.SimpleMappedResource implements r.Mapp
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class AllEffects extends r.impl.ArrayIteratedResource implements r.Iterated<EffectAPI> {
+export class IteratedEffects extends r.impl.ArrayIteratedResource implements r.Iterated<EffectAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_dogma_effects', undefined));
   }
@@ -188,23 +190,23 @@ export class AllEffects extends r.impl.ArrayIteratedResource implements r.Iterat
  * A functional interface for getting APIs for a specific dogma effect, a
  * known set of effect ids, or every dogma effect in the game.
  */
-export interface EffectAPIFactory {
+export interface Effects {
   /**
    * Create a new dogma effect api targeting every single effect in the
    * game.
    *
    * @esi_route ids get_dogma_effects
    *
-   * @returns An AllDogmaEffects API wrapper
+   * @returns An IteratedEffects API wrapper
    */
-  (): AllEffects;
+  (): IteratedEffects;
 
   /**
    * Create a new dogma attribute api targeting the particular attribute by
    * `id`.
    *
    * @param id The attribute id
-   * @returns An DogmaEffect API wrapper for the given id
+   * @returns An Effect API wrapper for the given id
    */
   (id: number): Effect;
 
@@ -214,7 +216,7 @@ export interface EffectAPIFactory {
    * modified).
    *
    * @param ids The effect ids
-   * @returns A MappedDogmaEffects API wrapper for the given ids
+   * @returns A MappedEffects API wrapper for the given ids
    */
   (ids: number[] | Set<number>): MappedEffects;
 }
@@ -224,46 +226,51 @@ export interface EffectAPIFactory {
  * attributes and effects, both of which utilize the
  * [dogma](https://esi.tech.ccp.is/latest/#/Dogma) ESI end points.
  */
-export interface DogmaAPIFactory {
-  readonly attributes: AttributeAPIFactory;
-  readonly effects: EffectAPIFactory;
+export class Dogma {
+  private attributes_?:Attributes;
+  private effects_?:Effects;
+
+  constructor(private agent:ESIAgent) { }
+
+  get attributes() :Attributes {
+    if (this.attributes_ === undefined) {
+      this.attributes_ = <Attributes> getAttributes.bind(this, this.agent);
+    }
+    return this.attributes_;
+  }
+
+  get effects(): Effects {
+    if (this.effects_ === undefined) {
+      this.effects_ = <Effects> getEffects.bind(this, this.agent);
+    }
+    return this.effects_;
+  }
 }
 
-/**
- * Create a new DogmaFactory instance that uses the given `agent` to make its
- * HTTP requests to the ESI interface.
- *
- * @param agent The agent making actual requests
- * @returns A Dogma API instance
- */
-export function makeDogmaAPIFactory(agent: ESIAgent): DogmaAPIFactory {
-  let attributes = <AttributeAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
-    if (ids === undefined) {
-      // No ids so all groups
-      return new AllAttributes(agent);
-    } else if (typeof ids === 'number') {
-      // Single id for a group
-      return new Attribute(agent, ids);
-    } else {
-      // Mapped groups
-      return new MappedAttributes(agent, ids);
-    }
-  };
+function getAttributes(agent:ESIAgent, ids: number | number[] | Set<number> | undefined) {
+  if (ids === undefined) {
+    // No ids so all groups
+    return new IteratedAttributes(agent);
+  } else if (typeof ids === 'number') {
+    // Single id for a group
+    return new Attribute(agent, ids);
+  } else {
+    // Mapped groups
+    return new MappedAttributes(agent, ids);
+  }
+}
 
-  let effects = <EffectAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
-    if (ids === undefined) {
-      // No ids so all tasks
-      return new AllEffects(agent);
-    } else if (typeof ids === 'number') {
-      // Single id for a task
-      return new Effect(agent, ids);
-    } else {
-      // Mapped tasks
-      return new MappedEffects(agent, ids);
-    }
-  };
-
-  return { attributes, effects };
+function getEffects(agent:ESIAgent, ids: number | number[] | Set<number> | undefined) {
+  if (ids === undefined) {
+    // No ids so all tasks
+    return new IteratedEffects(agent);
+  } else if (typeof ids === 'number') {
+    // Single id for a task
+    return new Effect(agent, ids);
+  } else {
+    // Mapped tasks
+    return new MappedEffects(agent, ids);
+  }
 }
 
 function getAttribute(agent: ESIAgent, id: number) {

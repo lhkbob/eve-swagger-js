@@ -95,7 +95,7 @@ export class MappedOpportunityGroups extends r.impl.SimpleMappedResource impleme
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class AllOpportunityGroups extends r.impl.ArrayIteratedResource implements r.Iterated<OpportunityGroupAPI> {
+export class IteratedOpportunityGroups extends r.impl.ArrayIteratedResource implements r.Iterated<OpportunityGroupAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_opportunities_groups', undefined));
   }
@@ -112,16 +112,16 @@ export class AllOpportunityGroups extends r.impl.ArrayIteratedResource implement
  * A functional interface for getting APIs for a specific opportunity group, a
  * known set of group ids, or every opportunity group in the game.
  */
-export interface OpportunityGroupAPIFactory {
+export interface OpportunityGroups {
   /**
    * Create a new opportunity group api targeting every single group in the
    * game.
    *
    * @esi_route ids get_opportunities_groups
    *
-   * @returns An AllOpportunityGroups API wrapper
+   * @returns An IteratedOpportunityGroups API wrapper
    */
-  (): AllOpportunityGroups;
+  (): IteratedOpportunityGroups;
 
   /**
    * Create a new opportunity group api targeting the particular group by `id`.
@@ -203,7 +203,7 @@ export class MappedOpportunityTasks extends r.impl.SimpleMappedResource implemen
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class AllOpportunityTasks extends r.impl.ArrayIteratedResource implements r.Iterated<OpportunityTaskAPI> {
+export class IteratedOpportunityTasks extends r.impl.ArrayIteratedResource implements r.Iterated<OpportunityTaskAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_opportunities_tasks', undefined));
   }
@@ -220,16 +220,16 @@ export class AllOpportunityTasks extends r.impl.ArrayIteratedResource implements
  * A functional interface for getting APIs for a specific opportunity task, a
  * known set of task ids, or every opportunity task in the game.
  */
-export interface OpportunityTaskAPIFactory {
+export interface OpportunityTasks {
   /**
    * Create a new opportunity group api targeting every single task in the
    * game.
    *
    * @esi_route ids get_opportunities_tasks
    *
-   * @returns An AllOpportunityTasks API wrapper
+   * @returns An IteratedOpportunityTasks API wrapper
    */
-  (): AllOpportunityTasks;
+  (): IteratedOpportunityTasks;
 
   /**
    * Create a new opportunity group api targeting the particular task by `id`.
@@ -256,46 +256,54 @@ export interface OpportunityTaskAPIFactory {
  * [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI end
  * points.
  */
-export interface OpportunitiesAPIFactory {
-  readonly groups: OpportunityGroupAPIFactory;
-  readonly tasks: OpportunityTaskAPIFactory;
+export class Opportunities {
+  private groups_?: OpportunityGroups;
+  private tasks_?: OpportunityTasks;
+
+  constructor(private agent: ESIAgent) {
+  }
+
+  get groups(): OpportunityGroups {
+    if (this.groups_ === undefined) {
+      this.groups_ = <OpportunityGroups> getGroups.bind(this, this.agent);
+    }
+    return this.groups_;
+  }
+
+  get tasks(): OpportunityTasks {
+    if (this.tasks_ === undefined) {
+      this.tasks_ = <OpportunityTasks> getTasks.bind(this, this.agent);
+    }
+    return this.tasks_;
+  }
 }
 
-/**
- * Create a new OpportunitiesFactory instance that uses the given `agent` to
- * make its HTTP requests to the ESI interface.
- *
- * @param agent The agent making actual requests
- * @returns An OpportunitiesFactory API instance
- */
-export function makeOpportunitiesAPIFactory(agent: ESIAgent): OpportunitiesAPIFactory {
-  let groups = <OpportunityGroupAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
-    if (ids === undefined) {
-      // No ids so all groups
-      return new AllOpportunityGroups(agent);
-    } else if (typeof ids === 'number') {
-      // Single id for a group
-      return new OpportunityGroup(agent, ids);
-    } else {
-      // Mapped groups
-      return new MappedOpportunityGroups(agent, ids);
-    }
-  };
+function getGroups(agent: ESIAgent,
+    ids: number | number[] | Set<number> | undefined) {
+  if (ids === undefined) {
+    // No ids so all groups
+    return new IteratedOpportunityGroups(agent);
+  } else if (typeof ids === 'number') {
+    // Single id for a group
+    return new OpportunityGroup(agent, ids);
+  } else {
+    // Mapped groups
+    return new MappedOpportunityGroups(agent, ids);
+  }
+}
 
-  let tasks = <OpportunityTaskAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
-    if (ids === undefined) {
-      // No ids so all tasks
-      return new AllOpportunityTasks(agent);
-    } else if (typeof ids === 'number') {
-      // Single id for a task
-      return new OpportunityTask(agent, ids);
-    } else {
-      // Mapped tasks
-      return new MappedOpportunityTasks(agent, ids);
-    }
-  };
-
-  return { groups, tasks };
+function getTasks(agent: ESIAgent,
+    ids: number | number[] | Set<number> | undefined) {
+  if (ids === undefined) {
+    // No ids so all tasks
+    return new IteratedOpportunityTasks(agent);
+  } else if (typeof ids === 'number') {
+    // Single id for a task
+    return new OpportunityTask(agent, ids);
+  } else {
+    // Mapped tasks
+    return new MappedOpportunityTasks(agent, ids);
+  }
 }
 
 function getGroup(agent: ESIAgent, id: number) {

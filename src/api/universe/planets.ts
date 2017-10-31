@@ -85,7 +85,7 @@ export class MappedPlanets extends r.impl.SimpleMappedResource implements r.Mapp
  * known set of planet ids. There is currently no way to iterate over all
  * planets in the game.
  */
-export interface PlanetAPIFactory {
+export interface Planets {
   /**
    * Create a new planet api targeting the particular planet by `id`.
    *
@@ -106,14 +106,14 @@ export interface PlanetAPIFactory {
 }
 
 /**
- * Create a new PlanetAPIFactory instance that uses the given `agent` to
+ * Create a new Planets instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A PlanetAPIFactory instance
+ * @returns A Planets instance
  */
-export function makePlanetAPIFactory(agent: ESIAgent): PlanetAPIFactory {
-  return <PlanetAPIFactory> function (ids: number | number[] | Set<number>) {
+export function makePlanets(agent: ESIAgent): Planets {
+  return <Planets> function (ids: number | number[] | Set<number>) {
     if (typeof ids === 'number') {
       // Single id so single API
       return new Planet(agent, ids);

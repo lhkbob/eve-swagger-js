@@ -305,7 +305,7 @@ export class MappedSolarSystems extends r.impl.SimpleMappedResource implements r
  * An api adapter for accessing various details about every solar system in the
  * universe.
  */
-export class AllSolarSystems extends r.impl.ArrayIteratedResource implements r.Iterated<SolarSystemAPI> {
+export class IteratedSolarSystems extends r.impl.ArrayIteratedResource implements r.Iterated<SolarSystemAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_universe_systems', undefined));
   }
@@ -385,15 +385,15 @@ export class AllSolarSystems extends r.impl.ArrayIteratedResource implements r.I
  * A functional interface for getting APIs for a specific solar system or a
  * known set of solar system ids.
  */
-export interface SolarSystemAPIFactory {
+export interface SolarSystems {
   /**
    * Create a new solar system api targeting every single system in the game.
    *
    * @esi_route ids get_universe_systems
    *
-   * @returns An AllSolarSystems API wrapper
+   * @returns An IteratedSolarSystems API wrapper
    */
-  (): AllSolarSystems;
+  (): IteratedSolarSystems;
 
   /**
    * Create a new solar system api targeting the particular solar system by
@@ -429,20 +429,20 @@ export interface SolarSystemAPIFactory {
 }
 
 /**
- * Create a new SolarSystemAPIFactory instance that uses the given `agent` to
+ * Create a new SolarSystems instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A SolarSystemAPIFactory instance
+ * @returns A SolarSystems instance
  */
-export function makeSolarSystemAPIFactory(agent: ESIAgent): SolarSystemAPIFactory {
+export function makeSolarSystems(agent: ESIAgent): SolarSystems {
   const systemSearch = makeDefaultSearch(agent, esi.SearchCategory.SOLARSYSTEM);
 
-  return <SolarSystemAPIFactory> function (ids: number | number[] | Set<number> | string | undefined,
+  return <SolarSystems> function (ids: number | number[] | Set<number> | string | undefined,
       strict: boolean = false) {
     if (ids === undefined) {
       // No id, so all solar systems
-      return new AllSolarSystems(agent);
+      return new IteratedSolarSystems(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new SolarSystem(agent, ids);

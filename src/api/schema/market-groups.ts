@@ -72,9 +72,12 @@ export class MappedMarketGroups extends r.impl.SimpleMappedResource implements r
 }
 
 /**
- * An api adapter for accessing various details about every market group in the game.
+ * An api adapter for accessing various details about every market group in the
+ * game. Even though a route exists to get all group ids at once, due to their
+ * quantity, the API provides asynchronous iterators for the rest of their
+ * details.
  */
-export class AllMarketGroups extends r.impl.ArrayIteratedResource implements r.Iterated<MarketGroupAPI> {
+export class IteratedMarketGroups extends r.impl.ArrayIteratedResource implements r.Iterated<MarketGroupAPI> {
   constructor(private agent: ESIAgent) {
     super(() => agent.request('get_markets_groups', undefined));
   }
@@ -91,16 +94,16 @@ export class AllMarketGroups extends r.impl.ArrayIteratedResource implements r.I
  * A functional interface for getting APIs for a specific market group, a
  * known set of market group ids, or every market group in the game.
  */
-export interface MarketGroupAPIFactory {
+export interface MarketGroups {
   /**
    * Create a new market group api targeting every single market group in the
    * game.
    *
    * @esi_route ids get_markets_groups
    *
-   * @returns An AllMarketGroups API wrapper
+   * @returns An IteratedMarketGroups API wrapper
    */
-  (): AllMarketGroups;
+  (): IteratedMarketGroups;
 
   /**
    * Create a new market group api targeting the particular market group by
@@ -123,17 +126,17 @@ export interface MarketGroupAPIFactory {
 }
 
 /**
- * Create a new MarketGroupAPIFactory instance that uses the given `agent` to
+ * Create a new MarketGroups instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A MarketGroupAPIFactory instance
+ * @returns A MarketGroups instance
  */
-export function makeMarketGroupAPIFactory(agent: ESIAgent): MarketGroupAPIFactory {
-  return <MarketGroupAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
+export function makeMarketGroups(agent: ESIAgent): MarketGroups {
+  return <MarketGroups> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // All MarketGroups since no id
-      return new AllMarketGroups(agent);
+      return new IteratedMarketGroups(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new MarketGroup(agent, ids);

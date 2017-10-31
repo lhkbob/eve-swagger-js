@@ -67,7 +67,7 @@ export class MappedStargates extends r.impl.SimpleMappedResource implements r.Ma
  * known set of stargate ids. There is currently no way to iterate over all
  * stargates in the game.
  */
-export interface StargateAPIFactory {
+export interface Stargates {
   /**
    * Create a new stargate api targeting the particular stargate by `id`.
    *
@@ -88,14 +88,14 @@ export interface StargateAPIFactory {
 }
 
 /**
- * Create a new StargateAPIFactory instance that uses the given `agent` to
+ * Create a new Stargates instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A StargateAPIFactory instance
+ * @returns A Stargates instance
  */
-export function makeStargateAPIFactory(agent: ESIAgent): StargateAPIFactory {
-  return <StargateAPIFactory> function (ids: number | number[] | Set<number>) {
+export function makeStargates(agent: ESIAgent): Stargates {
+  return <Stargates> function (ids: number | number[] | Set<number>) {
     if (typeof ids === 'number') {
       // Single id so single API
       return new Stargate(agent, ids);

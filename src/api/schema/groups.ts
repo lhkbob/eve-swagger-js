@@ -73,8 +73,11 @@ export class MappedGroups extends r.impl.SimpleMappedResource implements r.Mappe
 
 /**
  * An api adapter for accessing various details about every group in the game.
+ * Even though a route exists to get all group ids at once, due to their
+ * quantity, the API provides asynchronous iterators for the rest of their
+ * details.
  */
-export class AllGroups extends r.impl.SimpleIteratedResource<number> implements r.Iterated<GroupAPI> {
+export class IteratedGroups extends r.impl.SimpleIteratedResource<number> implements r.Iterated<GroupAPI> {
   constructor(private agent: ESIAgent) {
     super(r.impl.makePageBasedStreamer(
         page => agent.request('get_universe_groups', { query: { page: page } })
@@ -94,15 +97,15 @@ export class AllGroups extends r.impl.SimpleIteratedResource<number> implements 
  * A functional interface for getting APIs for a specific group, a
  * known set of group ids, or every group in the game.
  */
-export interface GroupAPIFactory {
+export interface Groups {
   /**
    * Create a new group api targeting every single group in the game.
    *
    * @esi_route ids get_universe_groups
    *
-   * @returns An AllGroups API wrapper
+   * @returns An IteratedGroups API wrapper
    */
-  (): AllGroups;
+  (): IteratedGroups;
 
   /**
    * Create a new group api targeting the particular group by `id`.
@@ -124,17 +127,17 @@ export interface GroupAPIFactory {
 }
 
 /**
- * Create a new GroupAPIFactory instance that uses the given `agent` to
+ * Create a new Groups instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A GroupAPIFactory instance
+ * @returns A Groups instance
  */
-export function makeGroupAPIFactory(agent: ESIAgent): GroupAPIFactory {
-  return <GroupAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
+export function makeGroups(agent: ESIAgent): Groups {
+  return <Groups> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // All groups since no id
-      return new AllGroups(agent);
+      return new IteratedGroups(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new Group(agent, ids);

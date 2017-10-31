@@ -107,7 +107,7 @@ export class MappedTypes extends r.impl.SimpleMappedResource implements r.Mapped
 /**
  * An api adapter for accessing various details about every type in the game.
  */
-export class AllTypes extends r.impl.SimpleIteratedResource<number> implements r.Iterated<TypeAPI> {
+export class IteratedTypes extends r.impl.SimpleIteratedResource<number> implements r.Iterated<TypeAPI> {
   constructor(private agent: ESIAgent) {
     // TODO the types end point supports x-max-pages header so the page-loader
     // should return that as well.
@@ -151,15 +151,15 @@ export class AllTypes extends r.impl.SimpleIteratedResource<number> implements r
  * A functional interface for getting APIs for a specific type, a
  * known set of type ids, or every type in the game.
  */
-export interface TypeAPIFactory {
+export interface Types {
   /**
    * Create a new type api targeting every single type in the game.
    *
    * @esi_route ids get_universe_types
    *
-   * @returns An AllTypes API wrapper
+   * @returns An IteratedTypes API wrapper
    */
-  (): AllTypes;
+  (): IteratedTypes;
 
   /**
    * Create a new type api targeting the particular type by `id`.
@@ -194,20 +194,20 @@ export interface TypeAPIFactory {
 }
 
 /**
- * Create a new TypeAPIFactory instance that uses the given `agent` to
+ * Create a new Types instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A TypeAPIFactory instance
+ * @returns A Types instance
  */
-export function makeTypeAPIFactory(agent: ESIAgent): TypeAPIFactory {
+export function makeTypes(agent: ESIAgent): Types {
   const typeSearch = makeDefaultSearch(agent, esi.SearchCategory.INVENTORYTYPE);
 
-  return <TypeAPIFactory> function (ids: number | number[] | Set<number> | string | undefined,
+  return <Types> function (ids: number | number[] | Set<number> | string | undefined,
       strict: boolean = false) {
     if (ids === undefined) {
       // All types since no id
-      return new AllTypes(agent);
+      return new IteratedTypes(agent);
     } else if (typeof ids === 'number') {
       // Single id so single API
       return new Type(agent, ids);

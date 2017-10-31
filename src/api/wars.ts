@@ -1,6 +1,6 @@
 import { ESIAgent } from '../internal/esi-agent';
 import { Responses, esi } from '../esi';
-import { AllKillmails } from './killmails';
+import { IteratedKillmails } from './killmails';
 
 import * as r from '../internal/resource-api';
 
@@ -29,7 +29,7 @@ export interface WarAPI {
  * by a provided id when the api is instantiated.
  */
 export class War extends r.impl.SimpleResource implements r.Async<WarAPI> {
-  private kills_?: AllKillmails;
+  private kills_?: IteratedKillmails;
 
   constructor(private agent: ESIAgent, id: number) {
     super(id);
@@ -49,9 +49,9 @@ export class War extends r.impl.SimpleResource implements r.Async<WarAPI> {
    *
    * @returns An AllKillmails API instance associated with this war
    */
-  get kills(): AllKillmails {
+  get kills(): IteratedKillmails {
     if (this.kills_ === undefined) {
-      this.kills_ = new AllKillmails(this.agent, r.impl.makePageBasedStreamer(
+      this.kills_ = new IteratedKillmails(this.agent, r.impl.makePageBasedStreamer(
           page => getKillmails(this.agent, this.id_, page), 2000));
     }
     return this.kills_!;
@@ -81,7 +81,7 @@ export class MappedWars extends r.impl.SimpleMappedResource implements r.Mapped<
  * wars, so it is recommended to have a specific termination criteria like
  * amount received, date, or maximum id.
  */
-export class AllWars extends r.impl.SimpleIteratedResource<number> implements r.Iterated<WarAPI> {
+export class IteratedWars extends r.impl.SimpleIteratedResource<number> implements r.Iterated<WarAPI> {
   constructor(private agent: ESIAgent) {
     super(r.impl.makeMaxIDStreamer(
         maxID => agent.request('get_wars', { query: { max_war_id: maxID } }),
@@ -100,15 +100,15 @@ export class AllWars extends r.impl.SimpleIteratedResource<number> implements r.
  * A functional interface for getting APIs for a specific war, a known set of
  * war ids, or every war in the game.
  */
-export interface WarAPIFactory {
+export interface Wars {
   /**
    * Create a new war api targeting every single war in the game.
    *
    * @esi_route ids get_wars
    *
-   * @returns An AllWars API wrapper
+   * @returns An IteratedWars API wrapper
    */
-  (): AllWars;
+  (): IteratedWars;
 
   /**
    * Create a new War end point targeting the particular war by `id`.
@@ -130,16 +130,16 @@ export interface WarAPIFactory {
 }
 
 /**
- * Create a new wars API factory that uses the given `agent` to make its
+ * Create a new Wars API that uses the given `agent` to make its
  * HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns A new WarAPIFactory
+ * @returns A new Wars
  */
-export function makeWarAPIFactory(agent: ESIAgent): WarAPIFactory {
-  return <WarAPIFactory> function (ids: number | number[] | Set<number> | undefined) {
+export function makeWars(agent: ESIAgent): Wars {
+  return <Wars> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
-      return new AllWars(agent);
+      return new IteratedWars(agent);
     } else if (typeof ids === 'number') {
       return new War(agent, ids);
     } else {
