@@ -5,7 +5,7 @@ import { Responses, esi } from '../../esi';
 
 import * as r from '../../internal/resource-api';
 import { MappedConstellations } from './constellations';
-import { Market } from '../market';
+import { Market, MarketHistory } from '../market';
 
 /**
  * The API specification for all variants that access information about an
@@ -25,109 +25,6 @@ import { Market } from '../market';
 export interface RegionAPI {
   details: Responses['get_universe_regions_region_id'];
   names: string;
-}
-
-/**
- * A {@link Market} implementation for a region. In addition to implementing the
- * Market interface, it adds a function to get at the market history for an item
- * type. Note that this history is only available for region markets and not
- * with structure markets.
- */
-export class RegionMarket implements Market {
-  private orders_: r.impl.ResourceStreamer<esi.market.Order> | undefined;
-  private types_: r.impl.ResourceStreamer<number> | undefined;
-
-  constructor(private agent: ESIAgent, private id: number) {
-  }
-
-  /**
-   * @esi_route get_markets_region_id_orders [all]
-   *
-   * @returns All orders in the region
-   */
-  orders() {
-    // FIXME get_markets_region_id_orders supports X-Pages so this should return
-    // the max pages for makePageBasedStreamer instead of undefined
-
-    if (this.orders_ === undefined) {
-      this.orders_ = r.impl.makePageBasedStreamer(
-          page => this.agent.request('get_markets_region_id_orders', {
-            path: { region_id: this.id },
-            query: { page: page, order_type: 'all' }
-          })
-          .then(result => <[esi.market.Order[], number | undefined]> [
-            result, undefined
-          ]));
-    }
-    return this.orders_();
-  }
-
-  /**
-   * @esi_route get_markets_region_id_orders [type, buy]
-   *
-   * @param type The type of buy orders to return
-   * @returns All buy orders for the specified inventory type
-   */
-  buyOrdersFor(type: number) {
-    return this.agent.request('get_markets_region_id_orders', {
-      path: { region_id: this.id }, query: { type_id: type, order_type: 'buy' }
-    });
-  }
-
-  /**
-   * @esi_route get_markets_region_id_orders [type, sell]
-   *
-   * @param type The type of sell orders to return
-   * @returns All sell orders for the specified inventory type
-   */
-  sellOrdersFor(type: number) {
-    return this.agent.request('get_markets_region_id_orders', {
-      path: { region_id: this.id }, query: { type_id: type, order_type: 'sell' }
-    });
-  }
-
-  /**
-   * @esi_route get_markets_region_id_orders [type]
-   *
-   * @param type The type of orders to return
-   * @returns All orders for the specified inventory type
-   */
-  ordersFor(type: number) {
-    return this.agent.request('get_markets_region_id_orders', {
-      path: { region_id: this.id }, query: { type_id: type, order_type: 'all' }
-    });
-  }
-
-  /**
-   * @esi_route get_markets_region_id_types
-   *
-   * @returns The types in the market for the region
-   */
-  types() {
-    // FIXME get_markets_region_id_types supports X-Pages so this should return
-    // the max pages for makePageBasedStreamer instead of undefined
-
-    if (this.types_ === undefined) {
-      this.types_ = r.impl.makePageBasedStreamer(
-          page => this.agent.request('get_markets_region_id_types',
-              { path: { region_id: this.id }, query: { page: page } })
-          .then(
-              result => <[number[], number | undefined]> [result, undefined]));
-    }
-
-    return this.types_();
-  }
-
-  /**
-   * @esi_route get_markets_region_id_history
-   *
-   * @param type The type's whose market history is returned
-   * @returns The market history of the given inventory type for the region
-   */
-  history(type: number) {
-    return this.agent.request('get_markets_region_id_history',
-        { path: { region_id: this.id }, query: { type_id: type } });
-  }
 }
 
 /**
@@ -155,9 +52,16 @@ export class Region extends r.impl.SimpleResource implements r.Async<RegionAPI> 
   }
 
   /**
+   * @esi_route orders get_markets_region_id_orders [all]
+   * @esi_route buyOrdersFor get_markets_region_id_orders [type, buy]
+   * @esi_route sellOrdersFor get_markets_region_id_orders [type, sell]
+   * @esi_route ordersFor get_markets_region_id_orders [type]
+   * @esi_route types get_markets_region_id_types
+   * @esi_route history get_markets_region_id_history
+   *
    * @returns An API for accessing the region's market
    */
-  get market(): RegionMarket {
+  get market(): Market & MarketHistory {
     if (this.market_ === undefined) {
       this.market_ = new RegionMarket(this.agent, this.id_);
     }
@@ -314,4 +218,67 @@ export function makeRegions(agent: ESIAgent): Regions {
 function getDetails(agent: ESIAgent, id: number) {
   return agent.request('get_universe_regions_region_id',
       { path: { region_id: id } });
+}
+
+class RegionMarket implements Market, MarketHistory {
+  private orders_: r.impl.ResourceStreamer<esi.market.Order> | undefined;
+  private types_: r.impl.ResourceStreamer<number> | undefined;
+
+  constructor(private agent: ESIAgent, private id: number) {
+  }
+
+  orders() {
+    // FIXME get_markets_region_id_orders supports X-Pages so this should return
+    // the max pages for makePageBasedStreamer instead of undefined
+
+    if (this.orders_ === undefined) {
+      this.orders_ = r.impl.makePageBasedStreamer(
+          page => this.agent.request('get_markets_region_id_orders', {
+            path: { region_id: this.id },
+            query: { page: page, order_type: 'all' }
+          })
+          .then(result => <[esi.market.Order[], number | undefined]> [
+            result, undefined
+          ]));
+    }
+    return this.orders_();
+  }
+
+  buyOrdersFor(type: number) {
+    return this.agent.request('get_markets_region_id_orders', {
+      path: { region_id: this.id }, query: { type_id: type, order_type: 'buy' }
+    });
+  }
+
+  sellOrdersFor(type: number) {
+    return this.agent.request('get_markets_region_id_orders', {
+      path: { region_id: this.id }, query: { type_id: type, order_type: 'sell' }
+    });
+  }
+
+  ordersFor(type: number) {
+    return this.agent.request('get_markets_region_id_orders', {
+      path: { region_id: this.id }, query: { type_id: type, order_type: 'all' }
+    });
+  }
+
+  types() {
+    // FIXME get_markets_region_id_types supports X-Pages so this should return
+    // the max pages for makePageBasedStreamer instead of undefined
+
+    if (this.types_ === undefined) {
+      this.types_ = r.impl.makePageBasedStreamer(
+          page => this.agent.request('get_markets_region_id_types',
+              { path: { region_id: this.id }, query: { page: page } })
+          .then(
+              result => <[number[], number | undefined]> [result, undefined]));
+    }
+
+    return this.types_();
+  }
+
+  history(type: number) {
+    return this.agent.request('get_markets_region_id_history',
+        { path: { region_id: this.id }, query: { type_id: type } });
+  }
 }

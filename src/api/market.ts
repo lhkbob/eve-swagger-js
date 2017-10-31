@@ -55,3 +55,16 @@ export interface Market {
    */
   types() : AsyncIterableIterator<number>;
 }
+
+/**
+ * MarketHistory is an additional interface that some market providers may be
+ * able to implement. Currently this is only the regional markets. Structure
+ * markets do not provide history yet.
+ */
+export interface MarketHistory {
+  /**
+   * @param type The type id whose history is fetched
+   * @returns The market history for the type
+   */
+  history(type: number): Promise<esi.market.History[]>;
+}
