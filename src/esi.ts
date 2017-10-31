@@ -28,6 +28,9 @@ export namespace esi {
             px128x128?: string;
             px64x64?: string;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/alliances/names/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_names).
+         */
         export interface Name {
             alliance_id: number;
             alliance_name: string;
@@ -35,6 +38,9 @@ export namespace esi {
     }
     export namespace character {
         export namespace asset {
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/assets/`](https://esi.tech.ccp.is//#!/Assets/get_characters_character_id_assets).
+             */
             export interface Asset {
                 is_singleton: boolean;
                 item_id: number;
@@ -44,6 +50,9 @@ export namespace esi {
                 quantity?: number;
                 type_id: number;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/blueprints/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_blueprints).
+             */
             export interface Blueprint {
                 /**
                  * Unique ID for this item. The ID of an item is stable if that item is not repackaged, stacked, detached from a stack, assembled, or otherwise altered. If an item is changed in one of these ways, then the ID will also change.
@@ -51,9 +60,7 @@ export namespace esi {
                 item_id: number;
                 location_flag: esi.character.asset.LocationType;
                 /**
-                 * References a solar system, station or item_id if this blueprint is located within a container. If an item_id the Character
-                 *
-                 * - AssetList API must be queried to find the container using the item_id, from which the correct location of the Blueprint can be derived.
+                 * References a solar system, station or item_id if this blueprint is located within a container. If an item_id the Character - AssetList API must be queried to find the container using the item_id, from which the correct location of the Blueprint can be derived.
                  */
                 location_id: number;
                 /**
@@ -74,6 +81,9 @@ export namespace esi {
                 time_efficiency: number;
                 type_id: number;
             }
+            /**
+             * This is the response type for the route, [`POST /v1/characters/{character_id}/assets/locations/`](https://esi.tech.ccp.is//#!/Assets/post_characters_character_id_assets_locations).
+             */
             export interface Location {
                 item_id: number;
                 x: number;
@@ -163,19 +173,22 @@ export namespace esi {
                 UNLOCKED = "Unlocked",
                 WARDROBE = "Wardrobe"
             }
+            /**
+             * This is the response type for the route, [`POST /v1/characters/{character_id}/assets/names/`](https://esi.tech.ccp.is//#!/Assets/post_characters_character_id_assets_names).
+             */
             export interface Name {
                 item_id: number;
                 name: string;
             }
         }
         export namespace calendar {
-            /**
-             * Character_id and response of an attendee.
-             */
             export interface Attendee {
                 character_id?: number;
                 event_response?: esi.character.calendar.ResponseState;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/calendar/`](https://esi.tech.ccp.is//#!/Calendar/get_characters_character_id_calendar).
+             */
             export interface Calendar {
                 event_date?: string;
                 event_id?: number;
@@ -226,6 +239,9 @@ export namespace esi {
                 accessor_id: number;
                 accessor_type: "character" | "corporation" | "alliance";
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/chat_channels/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_chat_channels).
+             */
             export interface ChatChannel {
                 allowed: esi.character.channel.AllowedAccessor[];
                 blocked: esi.character.channel.RestrictedAccessor[];
@@ -279,6 +295,9 @@ export namespace esi {
                 PERSONAL = "personal",
                 PUBLIC = "public"
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/contracts/{contract_id}/bids/`](https://esi.tech.ccp.is//#!/Contracts/get_characters_character_id_contracts_contract_id_bids).
+             */
             export interface Bid {
                 /**
                  * The ammount bid.
@@ -297,6 +316,9 @@ export namespace esi {
                  */
                 date_bid: string;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/contracts/`](https://esi.tech.ccp.is//#!/Contracts/get_characters_character_id_contracts).
+             */
             export interface Contract {
                 /**
                  * Who will accept the contract. If assignee_id is same as acceptorID then character ID else corporation ID (The contract accepted by the corporation).
@@ -375,6 +397,9 @@ export namespace esi {
                  */
                 volume?: number;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/contracts/{contract_id}/items/`](https://esi.tech.ccp.is//#!/Contracts/get_characters_character_id_contracts_contract_id_items).
+             */
             export interface Item {
                 /**
                  * True if the contract issuer has submitted this item with the contract, false if the isser is asking for this item in the contract.
@@ -425,6 +450,9 @@ export namespace esi {
             }
         }
         export namespace fitting {
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/fittings/`](https://esi.tech.ccp.is//#!/Fittings/get_characters_character_id_fittings).
+             */
             export interface Fitting {
                 description: string;
                 fitting_id: number;
@@ -490,6 +518,9 @@ export namespace esi {
                 labels?: esi.character.mail.Label[];
                 total_unread_count?: number;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/mail/lists/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail_lists).
+             */
             export interface List {
                 /**
                  * Mailing list ID.
@@ -524,6 +555,9 @@ export namespace esi {
                  */
                 timestamp?: string;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/mail/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail).
+             */
             export interface MailHeader {
                 /**
                  * From whom the mail was sent.
@@ -596,6 +630,9 @@ export namespace esi {
             }
         }
         export namespace notification {
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/notifications/contacts/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_notifications_contacts).
+             */
             export interface ContactNotification {
                 message: string;
                 notification_id: number;
@@ -606,6 +643,9 @@ export namespace esi {
                  */
                 standing_level: number;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/notifications/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_notifications).
+             */
             export interface Notification {
                 is_read?: boolean;
                 notification_id: number;
@@ -840,6 +880,9 @@ export namespace esi {
                 pins: esi.character.planetaryinteraction.Pin[];
                 routes: esi.character.planetaryinteraction.Route[];
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/planets/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets).
+             */
             export interface PlanetSummary {
                 last_update: string;
                 num_pins: number;
@@ -872,6 +915,9 @@ export namespace esi {
             }
         }
         export namespace wallet {
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/wallet/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallet_journal).
+             */
             export interface Journal {
                 /**
                  * Transaction amount. Positive when value transferred to the first party. Negative otherwise.
@@ -921,6 +967,9 @@ export namespace esi {
                  */
                 tax_reciever_id?: number;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/wallet/transactions/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallet_transactions).
+             */
             export interface Transaction {
                 client_id: number;
                 /**
@@ -977,6 +1026,9 @@ export namespace esi {
                 UNKNOWN = "unknown"
             }
         }
+        /**
+         * This is the response type for the route, [`POST /v1/characters/affiliation/`](https://esi.tech.ccp.is//#!/Character/post_characters_affiliation).
+         */
         export interface Affiliation {
             /**
              * The character's alliance ID, if their corporation is in an alliance.
@@ -995,6 +1047,9 @@ export namespace esi {
              */
             faction_id?: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/agents_research/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_agents_research).
+         */
         export interface AgentResearch {
             agent_id: number;
             points_per_day: number;
@@ -1024,6 +1079,9 @@ export namespace esi {
             perception: number;
             willpower: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/bookmarks/`](https://esi.tech.ccp.is//#!/Bookmarks/get_characters_character_id_bookmarks).
+         */
         export interface Bookmark {
             bookmark_id: number;
             create_date: string;
@@ -1045,6 +1103,9 @@ export namespace esi {
                 location_id: number;
             };
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/bookmarks/folders/`](https://esi.tech.ccp.is//#!/Bookmarks/get_characters_character_id_bookmarks_folders).
+         */
         export interface BookmarksFolder {
             folder_id?: number;
             name?: string;
@@ -1085,6 +1146,9 @@ export namespace esi {
             jump_clones: esi.character.JumpClone[];
             last_jump_date?: string;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/get_characters_character_id_contacts).
+         */
         export interface Contact {
             contact_id: number;
             contact_type: esi.EntityType;
@@ -1105,10 +1169,16 @@ export namespace esi {
              */
             standing: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/contacts/labels/`](https://esi.tech.ccp.is//#!/Contacts/get_characters_character_id_contacts_labels).
+         */
         export interface ContactLabel {
             label_id: number;
             label_name: string;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/corporationhistory/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_corporationhistory).
+         */
         export interface CorporationHistory {
             corporation_id: number;
             /**
@@ -1156,6 +1226,9 @@ export namespace esi {
             layer: number;
             part: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/industry/jobs/`](https://esi.tech.ccp.is//#!/Industry/get_characters_character_id_industry_jobs).
+         */
         export interface IndustryJob {
             /**
              * Job activity ID.
@@ -1258,10 +1331,16 @@ export namespace esi {
             station_id?: number;
             structure_id?: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/loyalty/points/`](https://esi.tech.ccp.is//#!/Loyalty/get_characters_character_id_loyalty_points).
+         */
         export interface LoyaltyPoints {
             corporation_id: number;
             loyalty_points: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/medals/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_medals).
+         */
         export interface Medal {
             corporation_id: number;
             date: string;
@@ -1273,14 +1352,23 @@ export namespace esi {
             status: "public" | "private";
             title: string;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/names/`](https://esi.tech.ccp.is//#!/Character/get_characters_names).
+         */
         export interface Name {
             character_id: number;
             character_name: string;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/opportunities/`](https://esi.tech.ccp.is//#!/Opportunities/get_characters_character_id_opportunities).
+         */
         export interface Opportunity {
             completed_at: string;
             task_id: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/orders/`](https://esi.tech.ccp.is//#!/Market/get_characters_character_id_orders).
+         */
         export interface Order {
             /**
              * Wallet division for the buyer or seller of this order. Always 1000 for characters. Currently 1000 through 1006 for corporations.
@@ -1405,6 +1493,9 @@ export namespace esi {
             skill_id?: number;
             skillpoints_in_skill?: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v2/characters/{character_id}/skillqueue/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_skillqueue).
+         */
         export interface Skillqueue {
             finish_date?: string;
             finished_level: number;
@@ -1425,6 +1516,9 @@ export namespace esi {
             skills?: esi.character.Skill[];
             total_sp?: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/standings/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_standings).
+         */
         export interface Standing {
             from_id: number;
             from_type: "agent" | "npc_corp" | "faction";
@@ -1433,6 +1527,9 @@ export namespace esi {
     }
     export namespace corporation {
         export namespace asset {
+            /**
+             * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/assets/`](https://esi.tech.ccp.is//#!/Assets/get_corporations_corporation_id_assets).
+             */
             export interface Asset {
                 is_singleton: boolean;
                 item_id: number;
@@ -1442,6 +1539,9 @@ export namespace esi {
                 quantity?: number;
                 type_id: number;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/blueprints/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_blueprints).
+             */
             export interface Blueprint {
                 /**
                  * Unique ID for this item.
@@ -1596,6 +1696,9 @@ export namespace esi {
                 name: string;
                 state: "online" | "offline" | "cleanup";
             }
+            /**
+             * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/structures/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_structures).
+             */
             export interface Structure {
                 /**
                  * ID of the corporation that owns the structure.
@@ -1658,6 +1761,9 @@ export namespace esi {
             }
         }
         export namespace wallet {
+            /**
+             * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/wallets/{division}/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_corporations_corporation_id_wallets_division_journal).
+             */
             export interface Journal {
                 /**
                  * Transaction amount. Positive when value transferred to the first party. Negative otherwise.
@@ -1707,6 +1813,9 @@ export namespace esi {
                  */
                 tax_reciever_id?: number;
             }
+            /**
+             * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/wallets/{division}/transactions/`](https://esi.tech.ccp.is//#!/Wallet/get_corporations_corporation_id_wallets_division_transactions).
+             */
             export interface Transaction {
                 client_id: number;
                 /**
@@ -1844,11 +1953,17 @@ export namespace esi {
                 WAR_FEE = "war_fee",
                 WAR_FEE_SURRENDER = "war_fee_surrender"
             }
+            /**
+             * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/wallets/`](https://esi.tech.ccp.is//#!/Wallet/get_corporations_corporation_id_wallets).
+             */
             export interface Wallet {
                 balance: number;
                 division: number;
             }
         }
+        /**
+         * This is the response type for the route, [`GET /v2/corporations/{corporation_id}/alliancehistory/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_alliancehistory).
+         */
         export interface AllianceHistory {
             alliance_id?: number;
             /**
@@ -1861,6 +1976,9 @@ export namespace esi {
             record_id: number;
             start_date: string;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/get_corporations_corporation_id_contacts).
+         */
         export interface Contact {
             contact_id: number;
             contact_type: esi.EntityType;
@@ -1927,6 +2045,9 @@ export namespace esi {
             px256x256?: string;
             px64x64?: string;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/loyalty/stores/{corporation_id}/offers/`](https://esi.tech.ccp.is//#!/Loyalty/get_loyalty_stores_corporation_id_offers).
+         */
         export interface LoyaltyStoreOffer {
             isk_cost: number;
             lp_cost: number;
@@ -1939,9 +2060,15 @@ export namespace esi {
             quantity: number;
             type_id: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v2/corporations/{corporation_id}/members/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_members).
+         */
         export interface Member {
             character_id: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/membertracking/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_membertracking).
+         */
         export interface MemberDetails {
             base_id?: number;
             character_id: number;
@@ -1951,6 +2078,9 @@ export namespace esi {
             ship_type_id?: number;
             start_date?: string;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/roles/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_roles).
+         */
         export interface MemberRoles {
             character_id: number;
             grantable_roles?: esi.Role[];
@@ -1962,10 +2092,16 @@ export namespace esi {
             roles_at_hq?: esi.Role[];
             roles_at_other?: esi.Role[];
         }
+        /**
+         * This is the response type for the route, [`GET /v1/corporations/names/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_names).
+         */
         export interface Name {
             corporation_id: number;
             corporation_name: string;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/titles/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_titles).
+         */
         export interface Title {
             grantable_roles?: esi.Role[];
             grantable_roles_at_base?: esi.Role[];
@@ -2169,6 +2305,9 @@ export namespace esi {
             amount?: number;
             faction_id?: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/fw/stats/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_stats).
+         */
         export interface FactionStatistics {
             faction_id: number;
             /**
@@ -2214,6 +2353,9 @@ export namespace esi {
                 yesterday: number;
             };
         }
+        /**
+         * This is the response type for the route, [`GET /v1/fw/systems/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_systems).
+         */
         export interface System {
             contested: boolean;
             occupier_faction_id: number;
@@ -2222,6 +2364,9 @@ export namespace esi {
             victory_points: number;
             victory_points_threshold: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/fw/wars/`](https://esi.tech.ccp.is//#!/Faction Warfare/get_fw_wars).
+         */
         export interface War {
             /**
              * The faction ID of the enemy faction.
@@ -2267,6 +2412,9 @@ export namespace esi {
             squad_id?: number;
             wing_id?: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/fleets/{fleet_id}/members/`](https://esi.tech.ccp.is//#!/Fleets/get_fleets_fleet_id_members).
+         */
         export interface Member {
             character_id: number;
             join_time: string;
@@ -2346,6 +2494,9 @@ export namespace esi {
              */
             squad_id: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/fleets/{fleet_id}/wings/`](https://esi.tech.ccp.is//#!/Fleets/get_fleets_fleet_id_wings).
+         */
         export interface Wing {
             id: number;
             name: string;
@@ -2377,6 +2528,9 @@ export namespace esi {
             activity: esi.industry.Activity;
             cost_index: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/industry/facilities/`](https://esi.tech.ccp.is//#!/Industry/get_industry_facilities).
+         */
         export interface Facility {
             /**
              * ID of the facility.
@@ -2403,6 +2557,9 @@ export namespace esi {
              */
             type_id: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/industry/systems/`](https://esi.tech.ccp.is//#!/Industry/get_industry_systems).
+         */
         export interface System {
             cost_indices: esi.industry.CostIndex[];
             solar_system_id: number;
@@ -2517,6 +2674,9 @@ export namespace esi {
         }
     }
     export namespace market {
+        /**
+         * This is the response type for the route, [`GET /v1/markets/{region_id}/history/`](https://esi.tech.ccp.is//#!/Market/get_markets_region_id_history).
+         */
         export interface History {
             average: number;
             /**
@@ -2554,6 +2714,9 @@ export namespace esi {
             volume_remain: number;
             volume_total: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/markets/prices/`](https://esi.tech.ccp.is//#!/Market/get_markets_prices).
+         */
         export interface Price {
             adjusted_price?: number;
             average_price?: number;
@@ -2561,6 +2724,9 @@ export namespace esi {
         }
     }
     export namespace sovereignty {
+        /**
+         * This is the response type for the route, [`GET /v1/sovereignty/campaigns/`](https://esi.tech.ccp.is//#!/Sovereignty/get_sovereignty_campaigns).
+         */
         export interface Campaign {
             /**
              * Score for all attacking parties, only present in Defense Events.
@@ -2609,6 +2775,9 @@ export namespace esi {
             STATION_FREEPORT = "station_freeport",
             TCU_DEFENSE = "tcu_defense"
         }
+        /**
+         * This is the response type for the route, [`GET /v1/sovereignty/map/`](https://esi.tech.ccp.is//#!/Sovereignty/get_sovereignty_map).
+         */
         export interface Map {
             alliance_id?: number;
             corporation_id?: number;
@@ -2619,6 +2788,9 @@ export namespace esi {
             alliance_id: number;
             score: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/sovereignty/structures/`](https://esi.tech.ccp.is//#!/Sovereignty/get_sovereignty_structures).
+         */
         export interface Structure {
             /**
              * The alliance that owns the structure.
@@ -2651,6 +2823,9 @@ export namespace esi {
         }
     }
     export namespace universe {
+        /**
+         * This is the response type for the route, [`GET /v1/universe/bloodlines/`](https://esi.tech.ccp.is//#!/Universe/get_universe_bloodlines).
+         */
         export interface Bloodline {
             bloodline_id: number;
             charisma: number;
@@ -2698,6 +2873,9 @@ export namespace esi {
             effect_id: number;
             is_default: boolean;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/universe/factions/`](https://esi.tech.ccp.is//#!/Universe/get_universe_factions).
+         */
         export interface Faction {
             corporation_id: number;
             description: string;
@@ -2749,6 +2927,9 @@ export namespace esi {
              */
             system_id: number;
         }
+        /**
+         * This is the response type for the route, [`POST /v2/universe/names/`](https://esi.tech.ccp.is//#!/Universe/post_universe_names).
+         */
         export interface Name {
             category: esi.universe.NameCategory;
             id: number;
@@ -2781,6 +2962,9 @@ export namespace esi {
             system_id: number;
             type_id: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/universe/races/`](https://esi.tech.ccp.is//#!/Universe/get_universe_races).
+         */
         export interface Race {
             /**
              * The alliance generally associated with this race.
@@ -3040,10 +3224,16 @@ export namespace esi {
             stations?: number[];
             system_id: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v1/universe/system_jumps/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_jumps).
+         */
         export interface SystemJumps {
             ship_jumps: number;
             system_id: number;
         }
+        /**
+         * This is the response type for the route, [`GET /v2/universe/system_kills/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_kills).
+         */
         export interface SystemKills {
             /**
              * Number of NPC ships killed in this system.
@@ -3099,6 +3289,9 @@ export namespace esi {
         CORPORATION = "corporation",
         FACTION = "faction"
     }
+    /**
+     * This is the response type for the route, [`GET /v1/incursions/`](https://esi.tech.ccp.is//#!/Incursions/get_incursions).
+     */
     export interface Incursion {
         /**
          * The constellation id in which this incursion takes place.
@@ -3141,6 +3334,9 @@ export namespace esi {
         name: string;
         payout: number;
     }
+    /**
+     * This is the response type for the route, [`GET /v1/insurance/prices/`](https://esi.tech.ccp.is//#!/Insurance/get_insurance_prices).
+     */
     export interface InsurancePrice {
         /**
          * A list of a available insurance levels for this ship type.
@@ -3199,6 +3395,9 @@ export namespace esi {
         V_40 = "40",
         V_5 = "5"
     }
+    /**
+     * This is the response type for the route, [`GET /v1/characters/{character_id}/roles/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_roles).
+     */
     export const enum Role {
         ACCOUNT_TAKE_1 = "Account_Take_1",
         ACCOUNT_TAKE_2 = "Account_Take_2",

@@ -96,12 +96,32 @@ export class Namespace {
       return this;
     }
 
+    let suffixPath: string[] = [];
     let n1: Namespace | undefined = this;
     while (n1) {
       let n2: Namespace | undefined = other;
       while (n2) {
         if (n1 === n2) {
-          // Found a match that was as deep as possible
+          // Found a match that was as deep as possible, add as much of the
+          // suffix that is included in the other namespace.
+          let lastSuffix = -1;
+          n2 = other;
+          for (let i = 0; i < suffixPath.length; i++) {
+            if (n2 === undefined) {
+              break;
+            }
+
+            if (n2.name === suffixPath[i]) {
+              // Keep going
+              lastSuffix = i;
+              n2 = n2.parent_;
+            }
+          }
+
+          // Now ensure everything from lastSuffix to 0 is appended to n1
+          for (let i = lastSuffix; i >= 0; i--) {
+            n1 = n1!.ensure(suffixPath[i]);
+          }
           return n1;
         } else {
           // Move up other's path
@@ -110,6 +130,9 @@ export class Namespace {
       }
 
       // No match at current node in this space, so move up this path
+      if (n1.name) {
+        suffixPath.push(n1.name);
+      }
       n1 = n1.parent;
     }
 
