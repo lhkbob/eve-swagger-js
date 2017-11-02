@@ -1,4 +1,5 @@
 import { ESIAgent } from './esi-agent';
+import { getBatchedValues, getIteratedValues, getRawValues } from './batch';
 import { esi } from '../esi';
 
 /**
@@ -7,6 +8,8 @@ import { esi } from '../esi';
  * 500 elements and then recombines the results. It also maps the response data
  * from the internal ESI representation into a more useful Map from id to name.
  *
+ * @esi_route post_universe_names
+ *
  * @param agent The agent making requests
  * @param category The category of names to look up
  * @param ids The list of ids to resolve, should not contain duplicates
@@ -14,56 +17,40 @@ import { esi } from '../esi';
  */
 export function getNames(agent: ESIAgent, category: esi.universe.NameCategory,
     ids: number[]) {
-  return _getNames(agent, category, ids).then(array => {
-    let map = new Map();
-    for (let n of array) {
-      map.set(n.id, n.name);
-    }
-    return map;
-  });
+  return getBatchedValues(ids,
+      idSet => getFilteredUniverseNames(agent, idSet, category),
+      n => [n.id, n.name], UNIVERSE_NAMES_BATCH_SIZE);
 }
 
 /**
  * Look up the names corresponding to a stream of ids. This automatically
- * batches the names and attempts to remove duplicates, although if they are
+ * batches the ids and attempts to remove duplicates, although if they are
  * sufficiently far apart in the stream an id could show up in the output stream
- * agian. The guarantee is that requests will not fail due to duplicates in the
+ * again. The guarantee is that requests will not fail due to duplicates in the
  * batches.
+ *
+ * @esi_route post_universe_names
  *
  * @param agent The agent making requests
  * @param category The category of names to look up
  * @param ids The list of ids to resolve, ideally should not contain duplicates
  * @returns Iterator resolving to a series of tuples pairing id to name
  */
-export async function *getIteratedNames(agent: ESIAgent,
+export function getIteratedNames(agent: ESIAgent,
     category: esi.universe.NameCategory,
     ids: AsyncIterableIterator<number>): AsyncIterableIterator<[number, string]> {
-  // Minimize the requests to post_universe_names so collect ids into a set
-  // up to 500 before yielding those responses
-  let idBatch = new Set();
-  for await (let id of ids) {
-    idBatch.add(id);
-    if (idBatch.size >= 500) {
-      // Time to process the batch
-      let names = await getFilteredNames(agent, Array.from(idBatch), category).then(transformNamesToTuples);
-      idBatch.clear();
-      yield* names;
-    }
-  }
-
-  if (idBatch.size > 0) {
-    // Process the remaining ids
-    let names = await getFilteredNames(agent, Array.from(idBatch), category).then(transformNamesToTuples);
-    idBatch.clear();
-    yield* names;
-  }
+  return getIteratedValues(ids,
+      idSet => getFilteredUniverseNames(agent, idSet, category),
+      n => [n.id, n.name], UNIVERSE_NAMES_BATCH_SIZE);
 }
 
 /**
  * Look up the names of a set of ids, which can be from any of the categories.
  * Because the response can have ids from multiple categories, it is returned
- * without simplifying into the Map type. Like {@link getNames} it automatically
- * splits large arrays into multiple requests.
+ * without simplifying into the Map type. Like {@link getNames} it
+ * automatically splits large arrays into multiple requests.
+ *
+ * @esi_route post_universe_names
  *
  * @param agent The agent making requests
  * @param ids The names to resolve, from any category, but should not contain
@@ -71,56 +58,19 @@ export async function *getIteratedNames(agent: ESIAgent,
  * @returns Promise resolving to an array of esi.universe.Name instances
  */
 export function getAllNames(agent: ESIAgent, ids: number[]) {
-  return _getNames(agent, 'all', ids);
+  return getRawValues(ids, idSet => postUniverseNames(agent, idSet),
+      UNIVERSE_NAMES_BATCH_SIZE);
 }
 
-function transformNamesToTuples(array: esi.universe.Name[]): [number, string][] {
-  return array.map(name => <[number, string]> [name.id, name.name]);
+const UNIVERSE_NAMES_BATCH_SIZE = 1000;
+
+function postUniverseNames(agent: ESIAgent,
+    ids: number[]): Promise<esi.universe.Name[]> {
+  return agent.request('post_universe_names', { body: ids });
 }
 
-function splitIds(ids: number[]): number[][] {
-  let groups = [];
-
-  for (let i = 0; i < ids.length; i += 500) {
-    let end = i + 500;
-    if (end > ids.length) {
-      end = ids.length;
-    }
-    groups.push(ids.slice(i, end));
-  }
-
-  return groups;
-}
-
-function getFilteredNames(agent: ESIAgent, ids: number[],
-    category: 'all'): Promise<esi.universe.Name[]>;
-function getFilteredNames(agent: ESIAgent, ids: number[],
-    category: esi.universe.NameCategory): Promise<esi.universe.Name[]>;
-function getFilteredNames(agent: ESIAgent, ids: number[], category: any) {
-  return agent.request('post_universe_names', { body: ids })
-  .then(result => {
-    if (category !== 'all') {
-      return result.filter(r => r.category === category);
-    } else {
-      return result;
-    }
-  });
-}
-
-function _getNames(agent: ESIAgent, category: 'all',
-    ids: number[]): Promise<esi.universe.Name[]> ;
-function _getNames(agent: ESIAgent, category: esi.universe.NameCategory,
-    ids: number[]): Promise<esi.universe.Name[]> ;
-function _getNames(agent: ESIAgent, category: any, ids: number[]) {
-  let groups = splitIds(ids);
-  return Promise.all(
-      groups.map(idSet => getFilteredNames(agent, idSet, category)))
-  .then(nameSets => {
-    // Join each group of names into a single array
-    let combined = [];
-    for (let set of nameSets) {
-      combined.push(...set);
-    }
-    return combined;
-  });
+function getFilteredUniverseNames(agent: ESIAgent, ids: number[],
+    category: esi.universe.NameCategory): Promise<esi.universe.Name[]> {
+  return postUniverseNames(agent, ids)
+  .then(result => result.filter(r => r.category === category));
 }
