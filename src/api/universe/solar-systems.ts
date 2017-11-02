@@ -13,7 +13,7 @@ import { MappedStations } from './stations';
  * The API specification for all variants that access information about an solar
  * system or multiple solar systems. This interface will not be used directly,
  * but will be filtered through some mapper, such as {@link Async} or {@link
- * Mapped} depending on what types of ids are being accessed. However, this
+    * Mapped} depending on what types of ids are being accessed. However, this
  * allows for a concise and consistent specification for all variants: single,
  * multiple, and all solar systems.
  *
@@ -51,9 +51,10 @@ export class SolarSystem extends r.impl.SimpleResource implements r.Async<SolarS
    * @returns A MappedStations instance tied to the stations referenced in the
    *    details of this solar system
    */
-  get stations() : MappedStations {
+  get stations(): MappedStations {
     if (this.stations_ === undefined) {
-      this.stations_ = new MappedStations(this.agent, () => this.details().then(r => r.stations || []));
+      this.stations_ = new MappedStations(this.agent,
+          () => this.details().then(r => r.stations || []));
     }
     return this.stations_!;
   }
@@ -305,9 +306,10 @@ export class MappedSolarSystems extends r.impl.SimpleMappedResource implements r
  * An api adapter for accessing various details about every solar system in the
  * universe.
  */
-export class IteratedSolarSystems extends r.impl.ArrayIteratedResource implements r.Iterated<SolarSystemAPI> {
+export class IteratedSolarSystems extends r.impl.SimpleIteratedResource<number> implements r.Iterated<SolarSystemAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_universe_systems', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_universe_systems', undefined)), id => id);
   }
 
   /**
@@ -364,8 +366,7 @@ export class IteratedSolarSystems extends r.impl.ArrayIteratedResource implement
     let costs = await getCostIndices(this.agent);
     for (let c of costs) {
       yield <[number, esi.industry.CostIndex[]]> [
-        c.solar_system_id,
-        c.cost_indices
+        c.solar_system_id, c.cost_indices
       ];
     }
   }

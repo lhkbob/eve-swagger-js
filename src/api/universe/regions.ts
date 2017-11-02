@@ -118,9 +118,10 @@ export class MappedRegions extends r.impl.SimpleMappedResource implements r.Mapp
  * An api adapter for accessing various details about every region in
  * the game.
  */
-export class IteratedRegions extends r.impl.ArrayIteratedResource implements r.Iterated<RegionAPI> {
+export class IteratedRegions extends r.impl.SimpleIteratedResource<number> implements r.Iterated<RegionAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_universe_regions', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_universe_regions', undefined)), id => id);
   }
 
   /**

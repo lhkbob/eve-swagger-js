@@ -8,12 +8,13 @@ import { MappedTypes } from './types';
  * The API specification for all variants that access information about an
  * in-game market group or multiple market groups. This interface will not be
  * used directly, but will be filtered through some mapper, such as {@link
- * Async} or {@link Mapped} depending on what types of ids are being accessed.
- * However, this allows for a concise and consistent specification for all
- * variants: single, multiple, and all market groups.
+    * Async} or {@link Mapped} depending on what types of ids are being
+    * accessed. However, this allows for a concise and consistent specification
+    * for all variants: single, multiple, and all market groups.
  *
  * When mapped, each key defined in this interface becomes a function that
- * returns a Promise resolving to the key's type, or a collection related to the
+ * returns a Promise resolving to the key's type, or a collection related to
+ * the
  * key's type if multiple market groups are being accessed at once.
  *
  * This is an API wrapper over the end points handling market groups in the
@@ -77,9 +78,10 @@ export class MappedMarketGroups extends r.impl.SimpleMappedResource implements r
  * quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class IteratedMarketGroups extends r.impl.ArrayIteratedResource implements r.Iterated<MarketGroupAPI> {
+export class IteratedMarketGroups extends r.impl.SimpleIteratedResource<number> implements r.Iterated<MarketGroupAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_markets_groups', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_markets_groups', undefined)), id => id);
   }
 
   /**

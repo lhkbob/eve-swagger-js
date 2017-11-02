@@ -77,9 +77,10 @@ export class MappedCategories extends r.impl.SimpleMappedResource implements r.M
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class IteratedCategories extends r.impl.ArrayIteratedResource implements r.Iterated<CategoryAPI> {
+export class IteratedCategories extends r.impl.SimpleIteratedResource<number> implements r.Iterated<CategoryAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_universe_categories', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_universe_categories', undefined)), id => id);
   }
 
   /**

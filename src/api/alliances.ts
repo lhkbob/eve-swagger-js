@@ -130,9 +130,10 @@ export class MappedAlliances extends r.impl.SimpleMappedResource implements r.Ma
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class IteratedAlliances extends r.impl.ArrayIteratedResource implements r.Iterated<AllianceAPI> {
+export class IteratedAlliances extends r.impl.SimpleIteratedResource<number> implements r.Iterated<AllianceAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => this.agent.request('get_alliances', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => this.agent.request('get_alliances', undefined)), id => id);
   }
 
   /**

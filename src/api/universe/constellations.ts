@@ -100,9 +100,11 @@ export class MappedConstellations extends r.impl.SimpleMappedResource implements
  * An api adapter for accessing various details about every constellation in
  * the game.
  */
-export class IteratedConstellations extends r.impl.ArrayIteratedResource implements r.Iterated<ConstellationAPI> {
+export class IteratedConstellations extends r.impl.SimpleIteratedResource<number> implements r.Iterated<ConstellationAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_universe_constellations', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_universe_constellations', undefined)),
+        id => id);
   }
 
   /**

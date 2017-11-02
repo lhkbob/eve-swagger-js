@@ -71,7 +71,8 @@ export class MappedBloodlines extends r.impl.SimpleMappedResource implements r.M
 export class IteratedBloodlines extends r.impl.SimpleIteratedResource<esi.universe.Bloodline> implements r.Iterated<BloodlineAPI> {
   constructor(private agent: ESIAgent) {
     super(r.impl.makeArrayStreamer(
-        () => agent.request('get_universe_bloodlines', undefined)), r => r.bloodline_id);
+        () => agent.request('get_universe_bloodlines', undefined)),
+        r => r.bloodline_id);
   }
 
   /**

@@ -83,8 +83,19 @@ export namespace impl {
     (id: number): Promise<T>;
   }
 
+  /**
+   * A function that produces an asynchronous iterator over elements of type
+   * `T`.
+   */
   export interface ResourceStreamer<T> {
     (): AsyncIterableIterator<T>;
+  }
+
+  /**
+   * A function that asynchronously provides an id
+   */
+  export interface IDProvider {
+    (): Promise<number>;
   }
 
   /**
@@ -152,14 +163,16 @@ export namespace impl {
    * @param resolver The function mapping from element to id
    * @returns The matching element, or throws a not-found ESIError
    */
-  export function filterArray<T>(resources:T[], id:number, resolver:IDResolver<T>) : T {
+  export function filterArray<T>(resources: T[], id: number,
+      resolver: IDResolver<T>): T {
     for (let value of resources) {
       if (resolver(value) === id) {
         return value;
       }
     }
 
-    throw new ESIError(ErrorName.NOT_FOUND_ERROR, 'Could not find value for id: %d', id);
+    throw new ESIError(ErrorName.NOT_FOUND_ERROR,
+        'Could not find value for id: %d', id);
   }
 
   /**
@@ -173,7 +186,8 @@ export namespace impl {
    * @param resolver The function mapping from element to id
    * @returns A map from id to matching element, or throws a not-found ESIError
    */
-  export function filterArrayToMap<T>(resources:T[], ids:number[], resolver:IDResolver<T>) : Map<number, T> {
+  export function filterArrayToMap<T>(resources: T[], ids: number[],
+      resolver: IDResolver<T>): Map<number, T> {
     let map = new Map();
     for (let id of ids) {
       for (let value of resources) {
@@ -186,7 +200,75 @@ export namespace impl {
 
       if (!map.has(id)) {
         // Didn't find it
-        throw new ESIError(ErrorName.NOT_FOUND_ERROR, 'Could not find value for id: %d', id);
+        throw new ESIError(ErrorName.NOT_FOUND_ERROR,
+            'Could not find value for id: %d', id);
+      }
+    }
+
+    return map;
+  }
+
+  /**
+   * Filter an iterated collection of values from a request's paginated
+   * response
+   * to the single element which has the `id`. The id corresponding to an
+   * element is determined by the `resolver` function.
+   *
+   * @param resources The iterator over resource elements
+   * @param id The id to search for
+   * @param resolver The function mapping from element to id
+   * @returns The matching element, or throws a not-found ESIError
+   */
+  export async function filterIterated<T>(resources: AsyncIterableIterator<T>,
+      id: number, resolver: IDResolver<T>): Promise<T> {
+    for await (let e of resources) {
+      if (resolver(e) === id) {
+        return e;
+      }
+    }
+
+    throw new ESIError(ErrorName.NOT_FOUND_ERROR,
+        'Could not find value for id: %d', id);
+  }
+
+  /**
+   * Filter an iterated collection of values from a request's paginated response
+   * to a map from id to element, based on the provided set of `ids`. The id of
+   * an elemtn is determined by the `resolver` function. It is assumed that
+   * `ids` conforms to a set's uniqueness property.
+   *
+   * @param resources The iterator over resource elements
+   * @param ids The ids to filter from resources
+   * @param resolver The function mapping from element to id
+   * @returns A map from id to matching element, or throws a not-found ESIError
+   */
+  export async function filterIteratedToMap<T>(resources: AsyncIterableIterator<T>,
+      ids: number[], resolver: IDResolver<T>): Promise<Map<number, T>> {
+    let map = new Map();
+
+    // Unlike filterArrayToMap, iterate over the resources first since it can
+    // only be iterated through once - must check presence of all ids afterwards
+    for await (let e of resources) {
+      let eID = resolver(e);
+      if (ids.indexOf(eID) >= 0) {
+        // One of the requested ones
+        map.set(eID, e);
+      }
+
+      // Early exit if all the ids have been found
+      if (map.size === ids.length) {
+        break;
+      }
+    }
+
+    // Ensure all ids are accounted for
+    if (map.size !== ids.length) {
+      // At least one is missing, throw exception with first missing id
+      for (let id of ids) {
+        if (!map.has(id)) {
+          throw new ESIError(ErrorName.NOT_FOUND_ERROR,
+              'Could not find value for id: %d', id);
+        }
       }
     }
 
@@ -266,41 +348,6 @@ export namespace impl {
       } else {
         return this.ids_().then(ids => new Set(ids));
       }
-    }
-  }
-
-  /**
-   * A utility base class that implements the IteratedResource API based off
-   * of a function that provides a finite set of ids.
-   */
-  export abstract class ArrayIteratedResource implements IteratedResource {
-    /**
-     * Create the resource API that uses the given function as its source of
-     * ids.
-     *
-     * @param ids_ The asynchronous id provider
-     */
-    constructor(private ids_: IDSetProvider) {
-    }
-
-    /**
-     * A helper function to automatically call the resource loader on each of
-     * the ids returned.
-     *
-     * @param loader Function to get individual elements by id
-     * @returns Asynchronous iterator over the resolved elements
-     */
-    protected async * getResource<T>(loader: ResourceLoader<T>): AsyncIterableIterator<[number, T]> {
-      for await (let id of this.ids()) {
-        yield loader(id).then(val => <[number, T]> [id, val]);
-      }
-    }
-
-    async * ids(): AsyncIterableIterator<number> {
-      // Fetch the ids asynchronously
-      let ids = await this.ids_();
-      // Immediately yield each id in the array as needed
-      yield* ids;
     }
   }
 
@@ -401,7 +448,7 @@ export namespace impl {
    * @param arrayLoader The function which loads all elements at once
    * @returns A ResourceStreamer over the loaded array
    */
-  export function makeArrayStreamer<T>(arrayLoader: () => Promise<T[]>) : ResourceStreamer<T> {
+  export function makeArrayStreamer<T>(arrayLoader: () => Promise<T[]>): ResourceStreamer<T> {
     return () => getArrayIterator(arrayLoader);
   }
 

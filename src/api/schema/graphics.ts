@@ -63,9 +63,10 @@ export class MappedGraphics extends r.impl.SimpleMappedResource implements r.Map
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class IteratedGraphics extends r.impl.ArrayIteratedResource implements r.Iterated<GraphicAPI> {
+export class IteratedGraphics extends r.impl.SimpleIteratedResource<number> implements r.Iterated<GraphicAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_universe_graphics', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_universe_graphics', undefined)), id => id);
   }
 
   /**

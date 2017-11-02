@@ -27,18 +27,18 @@ export interface PlanetAPI {
  * An api adapter for accessing various details of a single planet,
  * specified by a provided id when the api is instantiated.
  */
-export class Planet implements r.Async<PlanetAPI>, r.SingleResource {
+export class Planet extends r.impl.SimpleResource implements r.Async<PlanetAPI> {
   private moons_: MappedMoons | undefined;
 
-  constructor(private agent: ESIAgent,
-      private id: number | (() => Promise<number>)) {
+  constructor(private agent: ESIAgent, id: number) {
+    super(id);
   }
 
   /**
    * @returns Information about the planet
    */
   details() {
-    return this.ids().then(id => getDetails(this.agent, id));
+    return getDetails(this.agent, this.id_);
   }
 
   /**
@@ -46,20 +46,12 @@ export class Planet implements r.Async<PlanetAPI>, r.SingleResource {
    *
    * @returns A MappedMoons instance for all the moons of the planet
    */
-  get moons() :MappedMoons {
+  get moons(): MappedMoons {
     if (this.moons_ === undefined) {
       this.moons_ = new MappedMoons(this.agent,
-          () => this.ids().then(id => getMoonsForPlanet(this.agent, id)));
+          () => getMoonsForPlanet(this.agent, this.id_));
     }
     return this.moons_;
-  }
-
-  ids() {
-    if (typeof this.id === 'number') {
-      return Promise.resolve(this.id);
-    } else {
-      return this.id();
-    }
   }
 }
 
@@ -68,7 +60,8 @@ export class Planet implements r.Async<PlanetAPI>, r.SingleResource {
  * specified by a provided an array or set of ids when the api is instantiated.
  */
 export class MappedPlanets extends r.impl.SimpleMappedResource implements r.Mapped<PlanetAPI> {
-  constructor(private agent: ESIAgent, ids: number[] | Set<number> | r.impl.IDSetProvider) {
+  constructor(private agent: ESIAgent,
+      ids: number[] | Set<number> | r.impl.IDSetProvider) {
     super(ids);
   }
 

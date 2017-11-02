@@ -60,7 +60,8 @@ export class Station extends r.impl.SimpleResource implements r.Async<StationAPI
    * @returns The industry information for the station
    */
   industry() {
-    return getFacilities(this.agent).then(all => r.impl.filterArray(all, this.id_, e => e.facility_id));
+    return getFacilities(this.agent)
+    .then(all => r.impl.filterArray(all, this.id_, e => e.facility_id));
   }
 
   /**
@@ -128,8 +129,7 @@ export class MappedStations extends r.impl.SimpleMappedResource implements r.Map
    */
   names() {
     return this.arrayIDs()
-    .then(ids => getNames(this.agent, esi.universe.NameCategory.STATION,
-        ids));
+    .then(ids => getNames(this.agent, esi.universe.NameCategory.STATION, ids));
   }
 }
 
@@ -139,7 +139,9 @@ export class MappedStations extends r.impl.SimpleMappedResource implements r.Map
  */
 export class IteratedStations extends r.impl.SimpleIteratedResource<esi.industry.Facility> implements r.Iterated<StationAPI> {
   constructor(private agent: ESIAgent) {
-    super(r.impl.makeArrayStreamer(() => agent.request('get_industry_facilities', undefined)), e => e.facility_id);
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_industry_facilities', undefined)),
+        e => e.facility_id);
   }
 
   /**
@@ -252,7 +254,7 @@ export function makeStations(agent: ESIAgent): Stations {
   };
 
   // Add facilities() function
-  stations.facilities = function() {
+  stations.facilities = function () {
     return new IteratedStations(agent);
   };
 

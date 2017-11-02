@@ -4,7 +4,7 @@ import { makeDefaultSearch } from '../../internal/search';
 import { esi } from '../../esi';
 
 // TODO add the authenticated corporation
-export interface CorporationAPIFactory {
+export interface Corporations {
   (id: number): Corporation;
 
   (ids: number[] | Set<number>): MappedCorporations;
@@ -25,10 +25,10 @@ export interface CorporationAPIFactory {
   npcs(): MappedCorporations;
 }
 
-export function makeCorporationsAPIFactory(agent: ESIAgent): CorporationAPIFactory {
+export function makeCorporations(agent: ESIAgent): Corporations {
   const corpSearch = makeDefaultSearch(agent, esi.SearchCategory.CORPORATION);
 
-  let factory = <CorporationAPIFactory> function (ids: number | number[] | Set<number> | string,
+  let factory = <Corporations> function (ids: number | number[] | Set<number> | string,
       strict: boolean = false) {
     if (typeof ids === 'number') {
       // Single id variant

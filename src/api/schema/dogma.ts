@@ -44,8 +44,7 @@ export class Attribute extends r.impl.SimpleResource implements r.Async<Attribut
  * specified by a provided an array or set of ids when the api is instantiated.
  */
 export class MappedAttributes extends r.impl.SimpleMappedResource implements r.Mapped<AttributeAPI> {
-  constructor(private agent: ESIAgent,
-      ids: number[] | Set<number>) {
+  constructor(private agent: ESIAgent, ids: number[] | Set<number>) {
     super(ids);
   }
 
@@ -63,9 +62,10 @@ export class MappedAttributes extends r.impl.SimpleMappedResource implements r.M
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class IteratedAttributes extends r.impl.ArrayIteratedResource implements r.Iterated<AttributeAPI> {
+export class IteratedAttributes extends r.impl.SimpleIteratedResource<number> implements r.Iterated<AttributeAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_dogma_attributes', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_dogma_attributes', undefined)), id => id);
   }
 
   /**
@@ -154,8 +154,7 @@ export class Effect extends r.impl.SimpleResource implements r.Async<EffectAPI> 
  * specified by a provided an array or set of ids when the api is instantiated.
  */
 export class MappedEffects extends r.impl.SimpleMappedResource implements r.Mapped<EffectAPI> {
-  constructor(private agent: ESIAgent,
-      ids: number[] | Set<number>) {
+  constructor(private agent: ESIAgent, ids: number[] | Set<number>) {
     super(ids);
   }
 
@@ -173,9 +172,10 @@ export class MappedEffects extends r.impl.SimpleMappedResource implements r.Mapp
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class IteratedEffects extends r.impl.ArrayIteratedResource implements r.Iterated<EffectAPI> {
+export class IteratedEffects extends r.impl.SimpleIteratedResource<number> implements r.Iterated<EffectAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_dogma_effects', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_dogma_effects', undefined)), id => id);
   }
 
   /**
@@ -227,12 +227,13 @@ export interface Effects {
  * [dogma](https://esi.tech.ccp.is/latest/#/Dogma) ESI end points.
  */
 export class Dogma {
-  private attributes_?:Attributes;
-  private effects_?:Effects;
+  private attributes_?: Attributes;
+  private effects_?: Effects;
 
-  constructor(private agent:ESIAgent) { }
+  constructor(private agent: ESIAgent) {
+  }
 
-  get attributes() :Attributes {
+  get attributes(): Attributes {
     if (this.attributes_ === undefined) {
       this.attributes_ = <Attributes> getAttributes.bind(this, this.agent);
     }
@@ -247,7 +248,8 @@ export class Dogma {
   }
 }
 
-function getAttributes(agent:ESIAgent, ids: number | number[] | Set<number> | undefined) {
+function getAttributes(agent: ESIAgent,
+    ids: number | number[] | Set<number> | undefined) {
   if (ids === undefined) {
     // No ids so all groups
     return new IteratedAttributes(agent);
@@ -260,7 +262,8 @@ function getAttributes(agent:ESIAgent, ids: number | number[] | Set<number> | un
   }
 }
 
-function getEffects(agent:ESIAgent, ids: number | number[] | Set<number> | undefined) {
+function getEffects(agent: ESIAgent,
+    ids: number | number[] | Set<number> | undefined) {
   if (ids === undefined) {
     // No ids so all tasks
     return new IteratedEffects(agent);

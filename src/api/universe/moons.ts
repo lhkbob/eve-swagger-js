@@ -26,22 +26,16 @@ export interface MoonAPI {
  * An api adapter for accessing various details of a single moon,
  * specified by a provided id when the api is instantiated.
  */
-export class Moon implements r.Async<MoonAPI>, r.SingleResource {
-  constructor(private agent: ESIAgent, private id: number | (() => Promise<number>)) { }
+export class Moon extends r.impl.SimpleResource implements r.Async<MoonAPI> {
+  constructor(private agent: ESIAgent, id: number) {
+    super(id);
+  }
 
   /**
    * @returns Information about the moon
    */
   details() {
-    return this.ids().then(id => getDetails(this.agent, id));
-  }
-
-  ids() {
-    if (typeof this.id === 'number') {
-      return Promise.resolve(this.id);
-    } else {
-      return this.id();
-    }
+    return getDetails(this.agent, this.id_);
   }
 }
 

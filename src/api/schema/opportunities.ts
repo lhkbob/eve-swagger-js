@@ -95,9 +95,10 @@ export class MappedOpportunityGroups extends r.impl.SimpleMappedResource impleme
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class IteratedOpportunityGroups extends r.impl.ArrayIteratedResource implements r.Iterated<OpportunityGroupAPI> {
+export class IteratedOpportunityGroups extends r.impl.SimpleIteratedResource<number> implements r.Iterated<OpportunityGroupAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_opportunities_groups', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_opportunities_groups', undefined)), id => id);
   }
 
   /**
@@ -203,9 +204,10 @@ export class MappedOpportunityTasks extends r.impl.SimpleMappedResource implemen
  * their quantity, the API provides asynchronous iterators for the rest of their
  * details.
  */
-export class IteratedOpportunityTasks extends r.impl.ArrayIteratedResource implements r.Iterated<OpportunityTaskAPI> {
+export class IteratedOpportunityTasks extends r.impl.SimpleIteratedResource<number> implements r.Iterated<OpportunityTaskAPI> {
   constructor(private agent: ESIAgent) {
-    super(() => agent.request('get_opportunities_tasks', undefined));
+    super(r.impl.makeArrayStreamer(
+        () => agent.request('get_opportunities_tasks', undefined)), id => id);
   }
 
   /**

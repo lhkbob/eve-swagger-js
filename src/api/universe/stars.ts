@@ -27,7 +27,7 @@ export interface StarAPI {
  * specified by a provided id when the api is instantiated.
  */
 export class Star implements r.Async<StarAPI>, r.SingleResource {
-  constructor(private agent: ESIAgent, private id: number | (() => Promise<number>)) {
+  constructor(private agent: ESIAgent, private id: number | r.impl.IDProvider) {
   }
 
   /**
