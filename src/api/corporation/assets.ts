@@ -1,6 +1,6 @@
 import { SSOAgent } from '../../internal/esi-agent';
 import { getBatchedValues, getIteratedValues } from '../../internal/batch';
-import { esi, Responses } from '../../esi';
+import { esi } from '../../esi';
 
 import * as r from '../../internal/resource-api';
 
@@ -28,7 +28,7 @@ export interface AssetAPI {
 }
 
 /**
- * An api adapter for accessing various details of a single in-game asset,
+ * An api adapter for accessing various details of a single corporation asset,
  * specified by a provided id when the api is instantiated.
  */
 export class Asset extends r.impl.SimpleResource implements r.Async<AssetAPI> {
@@ -122,8 +122,8 @@ export class MappedAssets extends r.impl.SimpleMappedResource implements r.Mappe
 }
 
 /**
- * An api adapter for accessing various details about every asset in the
- * game.
+ * An api adapter for accessing various details about every asset of the
+ * corporation.
  */
 export class IteratedAssets extends r.impl.SimpleIteratedResource<esi.corporation.asset.Asset> implements r.Iterated<AssetAPI> {
   constructor(private agent: SSOAgent) {
@@ -131,9 +131,9 @@ export class IteratedAssets extends r.impl.SimpleIteratedResource<esi.corporatio
   }
 
   /**
-   * @esi_route get_universe_assets
+   * @esi_route get_corporations_corporation_id_assets
    *
-   * @returns Iterator over details of all in-game types
+   * @returns Iterator over details of all a corporation's assets
    */
   details() {
     return this.getPaginatedResource();
