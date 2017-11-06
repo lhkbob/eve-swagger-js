@@ -168,7 +168,7 @@ export class IteratedAssets extends r.impl.SimpleIteratedResource<esi.corporatio
  */
 export interface Assets {
   /**
-   * Create a new asset api targeting every single asset of the corporation
+   * Create a new asset api targeting every single asset of the corporation.
    *
    * @returns An IteratedAssets API wrapper
    */

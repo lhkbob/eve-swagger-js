@@ -153,9 +153,9 @@ export class IteratedWalletDivisions extends r.impl.SimpleIteratedResource<esi.c
    * @returns The names of all wallet divisions of the corporation
    */
   async * names() {
-    for await (let name of this.getPaginatedResource()) {
+    for await (let [id, name] of this.getPaginatedResource()) {
       // Restructure the actual name object to be a tuple
-      yield <[number, string]> [name[0], name[1].name || ''];
+      yield <[number, string]> [id, name.name || ''];
     }
   }
 
