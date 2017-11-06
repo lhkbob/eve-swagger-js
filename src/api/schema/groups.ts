@@ -81,7 +81,7 @@ export class IteratedGroups extends r.impl.SimpleIteratedResource<number> implem
   constructor(private agent: ESIAgent) {
     super(r.impl.makePageBasedStreamer(
         page => agent.request('get_universe_groups', { query: { page: page } })
-        .then(result => <[number[], number | undefined]> [result, undefined]),
+        .then(result => ({result, maxPages: undefined})),
         1000), id => id);
   }
 

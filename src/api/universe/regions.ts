@@ -229,18 +229,13 @@ class RegionMarket implements Market, MarketHistory {
   }
 
   orders() {
-    // FIXME get_markets_region_id_orders supports X-Pages so this should return
-    // the max pages for makePageBasedStreamer instead of undefined
-
     if (this.orders_ === undefined) {
       this.orders_ = r.impl.makePageBasedStreamer(
           page => this.agent.request('get_markets_region_id_orders', {
             path: { region_id: this.id },
             query: { page: page, order_type: 'all' }
           })
-          .then(result => <[esi.market.Order[], number | undefined]> [
-            result, undefined
-          ]));
+          .then(result => ({ result, maxPages: undefined })), 10000);
     }
     return this.orders_();
   }
@@ -264,15 +259,12 @@ class RegionMarket implements Market, MarketHistory {
   }
 
   types() {
-    // FIXME get_markets_region_id_types supports X-Pages so this should return
-    // the max pages for makePageBasedStreamer instead of undefined
-
     if (this.types_ === undefined) {
       this.types_ = r.impl.makePageBasedStreamer(
           page => this.agent.request('get_markets_region_id_types',
               { path: { region_id: this.id }, query: { page: page } })
           .then(
-              result => <[number[], number | undefined]> [result, undefined]));
+              result => ({result, maxPages: undefined})), 1000);
     }
 
     return this.types_();

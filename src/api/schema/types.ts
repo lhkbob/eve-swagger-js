@@ -109,12 +109,9 @@ export class MappedTypes extends r.impl.SimpleMappedResource implements r.Mapped
  */
 export class IteratedTypes extends r.impl.SimpleIteratedResource<number> implements r.Iterated<TypeAPI> {
   constructor(private agent: ESIAgent) {
-    // TODO the types end point supports x-max-pages header so the page-loader
-    // should return that as well.
     super(r.impl.makePageBasedStreamer(
         page => agent.request('get_universe_types', { query: { page: page } })
-        .then(result => <[number[], number | undefined]> [result, undefined]),
-        1000), id => id);
+        .then(result => ({ result, maxPages: undefined })), 1000), id => id);
   }
 
   /**

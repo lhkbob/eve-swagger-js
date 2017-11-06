@@ -1,5 +1,5 @@
 import { SSOAgent } from '../../internal/esi-agent';
-import { getBatchedValues, getIteratedValues } from '../../internal/names';
+import { getBatchedValues, getIteratedValues } from '../../internal/batch';
 import { esi, Responses } from '../../esi';
 
 import * as r from '../../internal/resource-api';
@@ -246,10 +246,7 @@ export function makeAssets(agent: SSOAgent): Assets {
           'get_corporations_corporation_id_containers_logs',
           { path: { corporation_id: agent.id }, query: { page: page } },
           agent.ssoToken)
-      .then(
-          result => <[esi.corporation.asset.ContainersLog[], number | undefined]> [
-            result, undefined
-          ]));
+      .then(result => ({ result, maxPages: undefined })), 1000);
     }
     return logStreamer();
   };
@@ -261,11 +258,7 @@ export function makeAssets(agent: SSOAgent): Assets {
           'get_corporations_corporation_id_blueprints',
           { path: { corporation_id: agent.id }, query: { page: page } },
           agent.ssoToken)
-      .then(
-          result => <[esi.corporation.asset.Blueprint[], number | undefined]> [
-            result,
-            undefined
-          ]));
+      .then(result => ({ result, maxPages: undefined })), 1000);
     }
     return bpStreamer();
   };
@@ -274,11 +267,8 @@ export function makeAssets(agent: SSOAgent): Assets {
 }
 
 function getAssets(agent: SSOAgent) {
-  // FIXME assets supports X-Pages
   return r.impl.makePageBasedStreamer(page => getAssetsPage(agent, page)
-  .then(assets => <[esi.corporation.asset.Asset[], number | undefined]> [
-    assets, undefined
-  ]), 5000);
+  .then(result => ({ result, maxPage: undefined })), 5000);
 }
 
 function getAssetsPage(agent: SSOAgent, page: number) {

@@ -51,8 +51,9 @@ export class War extends r.impl.SimpleResource implements r.Async<WarAPI> {
    */
   get kills(): IteratedKillmails {
     if (this.kills_ === undefined) {
-      this.kills_ = new IteratedKillmails(this.agent, r.impl.makePageBasedStreamer(
-          page => getKillmails(this.agent, this.id_, page), 2000));
+      this.kills_ = new IteratedKillmails(this.agent,
+          r.impl.makePageBasedStreamer(
+              page => getKillmails(this.agent, this.id_, page), 2000));
     }
     return this.kills_!;
   }
@@ -148,13 +149,10 @@ export function makeWars(agent: ESIAgent): Wars {
   };
 }
 
-function getKillmails(agent: ESIAgent, warID: number,
-    page: number): Promise<[esi.killmail.KillmailLink[], number | undefined]> {
+function getKillmails(agent: ESIAgent, warID: number, page: number) {
   return agent.request('get_wars_war_id_killmails',
       { path: { war_id: warID }, query: { page: page } })
-  .then(result => <[esi.killmail.KillmailLink[], number | undefined]> [
-    result, undefined
-  ]);
+  .then(result => ({ result, maxPages: undefined }));
 }
 
 function getDetails(agent: ESIAgent, id: number) {

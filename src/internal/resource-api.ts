@@ -117,7 +117,7 @@ export namespace impl {
    * known.
    */
   export interface PageLoader<T> {
-    (page: number): Promise<[T[], number | undefined]>;
+    (page: number): Promise<T[] | { result: T[], maxPages?: number }>;
   }
 
   /**
@@ -357,9 +357,10 @@ export namespace impl {
    * types: {@link getResource} and {@link getPaginatedResource}.
    *
    * This class does not define the pagination mechanism, and requires the
-   * implementation of a raw paginated resource iterator. APIs can use either
-   * {@link makePageBasedStreamer} or {@link makeMaxIDStreamer} to conveniently
-   * build a ResourceStreamer based on their pagination style.
+   * implementation of a raw paginated resource iterator. APIs can use {@link
+      * makeArrayStreamer}, {@link makePageBasedStreamer} or, {@link
+      * makeMaxIDStreamer} to conveniently build a ResourceStreamer based on
+      * their pagination style.
    */
   export abstract class SimpleIteratedResource<T> implements IteratedResource {
     /**
@@ -459,14 +460,19 @@ export namespace impl {
 
     while (maxPages === undefined || page < maxPages) {
       let pageResults = await pageLoader(page);
+      let elements: T[];
 
       // Process the extracted maximum number of pages
-      if (pageResults[1] !== undefined && maxPages === undefined) {
-        maxPages = pageResults[1];
+      if (Array.isArray(pageResults)) {
+        // No maximum provided so use as elements directly
+        elements = pageResults;
+      } else {
+        // Array and max size specification
+        elements = pageResults.result;
+        if (pageResults.maxPages !== undefined && maxPages === undefined) {
+          maxPages = pageResults.maxPages;
+        }
       }
-
-      // Produce elements of the page with their extracted id
-      let elements = pageResults[0];
 
       // Early exit for empty page
       if (elements.length === 0) {
