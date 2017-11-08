@@ -197,7 +197,7 @@ export interface Alliances {
    * is not modified).
    *
    * @param ids The alliance ids
-   * @returns A MappedAlliance API wrapper for the given ids
+   * @returns A MappedAlliances API wrapper for the given ids
    */
   (ids: number[] | Set<number>): MappedAlliances;
 
@@ -209,7 +209,7 @@ export interface Alliances {
    *
    * @param query The search terms
    * @param strict Whether or not the search is strict, defaults to false
-   * @returns A MappedAlliance API which accesses alliances based on the
+   * @returns A MappedAlliances API which accesses alliances based on the
    *    dynamic search results
    */
   (query: string, strict?: boolean): MappedAlliances;
