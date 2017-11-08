@@ -5,6 +5,7 @@ import * as Moment from 'moment';
 import { ROUTE_MAP, Responses, Parameters, esi } from '../esi';
 import { ESIError, ErrorName } from '../error';
 import Cache from './cache';
+import * as r from './resource-api';
 
 /**
  * Configuration options for the {@link ESIAgent}.
@@ -129,8 +130,12 @@ export interface Configuration {
  * object that bundles an ESIAgent, an SSO token, and the id of the resource
  * that is authenticated with the token. The id can refer to a character,
  * corporation, or fleet and is entirely dependent on context.
+ *
+ * If desired, the id type can be asynchronous. This capability can be removed
+ * by an API by requiring the SSOAgent to have `T = number` so that the id
+ * is immediately available.
  */
-export interface SSOAgent {
+export interface SSOAgent<T extends number | r.impl.IDProvider> {
   /**
    * The agent to make requests with.
    */
@@ -142,7 +147,7 @@ export interface SSOAgent {
   /**
    * The ID of the resource accessible with the provided SSO token.
    */
-  readonly id: number;
+  readonly id: T;
 }
 
 /**

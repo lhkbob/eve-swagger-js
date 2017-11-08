@@ -1,4 +1,4 @@
-import { ESIAgent, SSOAgent } from '../../internal/esi-agent';
+import { SSOAgent } from '../../internal/esi-agent';
 import { esi, Responses } from '../../esi';
 import * as r from '../../internal/resource-api';
 
@@ -29,7 +29,8 @@ export interface StarbaseAPI {
 export class Starbase extends r.impl.SimpleResource implements r.Async<StarbaseAPI> {
   private starbases_?: r.impl.ResourceStreamer<esi.corporation.structure.StarbaseSummary>;
 
-  constructor(private agent: SSOAgent, id: number, private systemID?: number) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>, id: number,
+      private systemID?: number) {
     super(id);
   }
 
@@ -67,7 +68,8 @@ export class Starbase extends r.impl.SimpleResource implements r.Async<StarbaseA
 export class MappedStarbases extends r.impl.SimpleMappedResource implements r.Mapped<StarbaseAPI> {
   private starbases_?: r.impl.ResourceStreamer<esi.corporation.structure.StarbaseSummary>;
 
-  constructor(private agent: SSOAgent, ids: number[] | Set<number>) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>,
+      ids: number[] | Set<number>) {
     super(ids);
   }
 
@@ -115,7 +117,7 @@ export class MappedStarbases extends r.impl.SimpleMappedResource implements r.Ma
  * corporation.
  */
 export class IteratedStarbases extends r.impl.SimpleIteratedResource<esi.corporation.structure.StarbaseSummary> implements r.Iterated<StarbaseAPI> {
-  constructor(private agent: SSOAgent) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>) {
     super(getSummaries(agent), e => e.starbase_id);
   }
 
@@ -190,7 +192,7 @@ export interface Starbases {
  * @param agent The agent making actual requests
  * @returns A Starbases instance
  */
-export function makeStarbases(agent: SSOAgent): Starbases {
+export function makeStarbases(agent: SSOAgent<number | r.impl.IDProvider>): Starbases {
   return <Starbases> function (ids: number | number[] | Set<number> | undefined,
       systemID?: number) {
     if (ids === undefined) {
@@ -206,26 +208,41 @@ export function makeStarbases(agent: SSOAgent): Starbases {
   };
 }
 
-function getSummaries(agent: SSOAgent): r.impl.ResourceStreamer<esi.corporation.structure.StarbaseSummary> {
+function getSummaries(agent: SSOAgent<number | r.impl.IDProvider>): r.impl.ResourceStreamer<esi.corporation.structure.StarbaseSummary> {
   return r.impl.makePageBasedStreamer(page => getSummaryPage(agent, page),
       1000);
 }
 
-function getSummaryPage(agent: SSOAgent,
+async function getSummaryPage(agent: SSOAgent<number | r.impl.IDProvider>,
     page: number): Promise<{ result: esi.corporation.structure.StarbaseSummary[], maxPages?: number }> {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
   return agent.agent.request('get_corporations_corporation_id_starbases',
-      { path: { corporation_id: agent.id }, query: { page: page } },
+      { path: { corporation_id: corpID }, query: { page: page } },
       agent.ssoToken).then(result => ({ result, maxPages: undefined }));
 }
 
-function getDetails(agent: SSOAgent, id: number, systemID: number) {
+async function getDetails(agent: SSOAgent<number | r.impl.IDProvider>,
+    id: number, systemID: number) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
   // NOTE: The swagger spec includes the page query parameter and has some
   // language talking about a list of POSes. However, the actual return type is
   // not an array so I think it's an error in the specification. Since page is
   // optional, we ignore it and don't expose it in the API.
   return agent.agent.request(
       'get_corporations_corporation_id_starbases_starbase_id', {
-        path: { corporation_id: agent.id, starbase_id: id },
+        path: { corporation_id: corpID, starbase_id: id },
         query: { system_id: systemID }
       }, agent.ssoToken);
 }

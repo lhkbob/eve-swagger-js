@@ -34,7 +34,7 @@ export interface AssetAPI {
 export class Asset extends r.impl.SimpleResource implements r.Async<AssetAPI> {
   private assets_?: r.impl.ResourceStreamer<esi.corporation.asset.Asset>;
 
-  constructor(private agent: SSOAgent, id: number) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>, id: number) {
     super(id);
   }
 
@@ -78,7 +78,8 @@ export class Asset extends r.impl.SimpleResource implements r.Async<AssetAPI> {
 export class MappedAssets extends r.impl.SimpleMappedResource implements r.Mapped<AssetAPI> {
   private assets_?: r.impl.ResourceStreamer<esi.corporation.asset.Asset>;
 
-  constructor(private agent: SSOAgent, ids: number[] | Set<number>) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>,
+      ids: number[] | Set<number>) {
     super(ids);
   }
 
@@ -126,7 +127,7 @@ export class MappedAssets extends r.impl.SimpleMappedResource implements r.Mappe
  * corporation.
  */
 export class IteratedAssets extends r.impl.SimpleIteratedResource<esi.corporation.asset.Asset> implements r.Iterated<AssetAPI> {
-  constructor(private agent: SSOAgent) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>) {
     super(getAssets(agent), e => e.item_id);
   }
 
@@ -224,7 +225,7 @@ export interface Assets {
  * @param agent The agent making actual requests
  * @returns A Assets instance
  */
-export function makeAssets(agent: SSOAgent): Assets {
+export function makeAssets(agent: SSOAgent<number | r.impl.IDProvider>): Assets {
   let assets = <Assets> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // All types since no id
@@ -242,11 +243,9 @@ export function makeAssets(agent: SSOAgent): Assets {
   let logStreamer: r.impl.ResourceStreamer<esi.corporation.asset.ContainersLog> | undefined;
   assets.containerLogs = function () {
     if (logStreamer === undefined) {
-      logStreamer = r.impl.makePageBasedStreamer(page => agent.agent.request(
-          'get_corporations_corporation_id_containers_logs',
-          { path: { corporation_id: agent.id }, query: { page: page } },
-          agent.ssoToken)
-      .then(result => ({ result, maxPages: undefined })), 1000);
+      logStreamer = r.impl.makePageBasedStreamer(
+          page => getContainerLogs(agent, page)
+          .then(result => ({ result, maxPages: undefined })), 1000);
     }
     return logStreamer();
   };
@@ -254,11 +253,9 @@ export function makeAssets(agent: SSOAgent): Assets {
   let bpStreamer: r.impl.ResourceStreamer<esi.corporation.asset.Blueprint> | undefined;
   assets.blueprints = function () {
     if (bpStreamer === undefined) {
-      bpStreamer = r.impl.makePageBasedStreamer(page => agent.agent.request(
-          'get_corporations_corporation_id_blueprints',
-          { path: { corporation_id: agent.id }, query: { page: page } },
-          agent.ssoToken)
-      .then(result => ({ result, maxPages: undefined })), 1000);
+      bpStreamer = r.impl.makePageBasedStreamer(
+          page => getBlueprints(agent, page)
+          .then(result => ({ result, maxPages: undefined })), 1000);
     }
     return bpStreamer();
   };
@@ -266,24 +263,78 @@ export function makeAssets(agent: SSOAgent): Assets {
   return assets;
 }
 
-function getAssets(agent: SSOAgent) {
+function getAssets(agent: SSOAgent<number | r.impl.IDProvider>) {
   return r.impl.makePageBasedStreamer(page => getAssetsPage(agent, page)
   .then(result => ({ result, maxPage: undefined })), 5000);
 }
 
-function getAssetsPage(agent: SSOAgent, page: number) {
-  return agent.agent.request('get_corporations_corporation_id_assets',
-      { path: { corporation_id: agent.id }, query: { page: page } },
+async function getBlueprints(agent: SSOAgent<number | r.impl.IDProvider>,
+    page: number) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
+  return agent.agent.request('get_corporations_corporation_id_blueprints',
+      { path: { corporation_id: corpID }, query: { page: page } },
       agent.ssoToken);
 }
 
-function getAssetNames(agent: SSOAgent, ids: number[]) {
-  return agent.agent.request('post_corporations_corporation_id_assets_names',
-      { path: { corporation_id: agent.id }, body: ids }, agent.ssoToken);
+async function getContainerLogs(agent: SSOAgent<number | r.impl.IDProvider>,
+    page: number) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
+  return agent.agent.request('get_corporations_corporation_id_containers_logs',
+      { path: { corporation_id: corpID }, query: { page: page } },
+      agent.ssoToken);
 }
 
-function getAssetLocations(agent: SSOAgent, ids: number[]) {
+async function getAssetsPage(agent: SSOAgent<number | r.impl.IDProvider>,
+    page: number) {
+  let corpID: number;
+
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
+  return agent.agent.request('get_corporations_corporation_id_assets',
+      { path: { corporation_id: corpID }, query: { page: page } },
+      agent.ssoToken);
+}
+
+async function getAssetNames(agent: SSOAgent<number | r.impl.IDProvider>,
+    ids: number[]) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
+  return agent.agent.request('post_corporations_corporation_id_assets_names',
+      { path: { corporation_id: corpID }, body: ids }, agent.ssoToken);
+}
+
+async function getAssetLocations(agent: SSOAgent<number | r.impl.IDProvider>,
+    ids: number[]) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
+
   return agent.agent.request(
       'post_corporations_corporation_id_assets_locations',
-      { path: { corporation_id: agent.id }, body: ids }, agent.ssoToken);
+      { path: { corporation_id: corpID }, body: ids }, agent.ssoToken);
 }

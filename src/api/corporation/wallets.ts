@@ -16,8 +16,8 @@ import * as r from '../../internal/resource-api';
  * related to the key's wallet division if multiple wallet divisions are being
  * accessed at once.
  *
- * This is an API wrapper over the end points handling types in the [wallet
- * divisions](https://esi.tech.ccp.is/latest/#/WalletDivisions) ESI endpoints.
+ * This is an API wrapper over the end points handling types in the
+ * [wallet](https://esi.tech.ccp.is/latest/#/Wallet) ESI endpoints.
  */
 export interface WalletDivisionAPI {
   names: string;
@@ -32,7 +32,7 @@ export class WalletDivision extends r.impl.SimpleResource implements r.Async<Wal
   private journal_?: r.impl.ResourceStreamer<esi.WalletJournal>;
   private transactions_?: r.impl.ResourceStreamer<esi.corporation.WalletTransaction>;
 
-  constructor(private agent: SSOAgent, id: number) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>, id: number) {
     super(id);
   }
 
@@ -65,11 +65,7 @@ export class WalletDivision extends r.impl.SimpleResource implements r.Async<Wal
   journal(): AsyncIterableIterator<esi.WalletJournal> {
     if (this.journal_ === undefined) {
       this.journal_ = r.impl.makeMaxIDStreamer(
-          fromID => this.agent.agent.request(
-              'get_corporations_corporation_id_wallets_division_journal', {
-                path: { corporation_id: this.agent.id, division: this.id_ },
-                query: { from_id: fromID }
-              }, this.agent.ssoToken), e => e.ref_id, 2500);
+          fromID => this.getJournal(fromID), e => e.ref_id, 2500);
     }
     return this.journal_();
   }
@@ -82,13 +78,39 @@ export class WalletDivision extends r.impl.SimpleResource implements r.Async<Wal
   transactions(): AsyncIterableIterator<esi.corporation.WalletTransaction> {
     if (this.transactions_ === undefined) {
       this.transactions_ = r.impl.makeMaxIDStreamer(
-          fromID => this.agent.agent.request(
-              'get_corporations_corporation_id_wallets_division_transactions', {
-                path: { corporation_id: this.agent.id, division: this.id_ },
-                query: { from_id: fromID }
-              }, this.agent.ssoToken), e => e.transaction_id, 2500);
+          fromID => this.getTransaction(fromID), e => e.transaction_id, 2500);
     }
     return this.transactions_();
+  }
+
+  private async getJournal(fromID?: number) {
+    let corpID: number;
+    if (typeof this.agent.id === 'number') {
+      corpID = this.agent.id;
+    } else {
+      corpID = await this.agent.id();
+    }
+
+    return this.agent.agent.request(
+        'get_corporations_corporation_id_wallets_division_journal', {
+          path: { corporation_id: corpID, division: this.id_ },
+          query: { from_id: fromID }
+        }, this.agent.ssoToken);
+  }
+
+  private async getTransaction(fromID?: number) {
+    let corpID: number;
+    if (typeof this.agent.id === 'number') {
+      corpID = this.agent.id;
+    } else {
+      corpID = await this.agent.id();
+    }
+
+    return this.agent.agent.request(
+        'get_corporations_corporation_id_wallets_division_transactions', {
+          path: { corporation_id: corpID, division: this.id_ },
+          query: { from_id: fromID }
+        }, this.agent.ssoToken);
   }
 }
 
@@ -97,7 +119,8 @@ export class WalletDivision extends r.impl.SimpleResource implements r.Async<Wal
  * specified by a provided an array or set of ids when the api is instantiated.
  */
 export class MappedWalletDivisions extends r.impl.SimpleMappedResource implements r.Mapped<WalletDivisionAPI> {
-  constructor(private agent: SSOAgent, ids: number[] | Set<number>) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>,
+      ids: number[] | Set<number>) {
     super(ids);
   }
 
@@ -141,7 +164,7 @@ export class MappedWalletDivisions extends r.impl.SimpleMappedResource implement
  * associated with the corporation.
  */
 export class IteratedWalletDivisions extends r.impl.SimpleIteratedResource<esi.corporation.DivisionName> implements r.Iterated <WalletDivisionAPI> {
-  constructor(private agent: SSOAgent) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>) {
     super(r.impl.makeArrayStreamer(
         () => getDivisions(agent).then(divs => divs.wallet || [])),
         e => e.division || 0);
@@ -177,7 +200,7 @@ export class IteratedWalletDivisions extends r.impl.SimpleIteratedResource<esi.c
  * known set of wallet division ids, or every wallet division for a corporation.
  */
 export class Wallets {
-  constructor(private agent: SSOAgent) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>) {
 
   }
 
@@ -237,12 +260,26 @@ export class Wallets {
   }
 }
 
-function getDivisions(agent: SSOAgent) {
+async function getDivisions(agent: SSOAgent<number | r.impl.IDProvider>) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
   return agent.agent.request('get_corporations_corporation_id_divisions',
-      { path: { corporation_id: agent.id } }, agent.ssoToken);
+      { path: { corporation_id: corpID } }, agent.ssoToken);
 }
 
-function getWallets(agent: SSOAgent) {
+async function getWallets(agent: SSOAgent<number | r.impl.IDProvider>) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
   return agent.agent.request('get_corporations_corporation_id_wallets',
-      { path: { corporation_id: agent.id } }, agent.ssoToken);
+      { path: { corporation_id: corpID } }, agent.ssoToken);
 }

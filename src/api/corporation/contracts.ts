@@ -30,7 +30,7 @@ export interface ContractAPI {
 export class Contract extends r.impl.SimpleResource implements r.Async<ContractAPI> {
   private bids_?: r.impl.ResourceStreamer<esi.contract.Bid>;
 
-  constructor(private agent: SSOAgent, id: number) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>, id: number) {
     super(id);
   }
 
@@ -49,7 +49,7 @@ export class Contract extends r.impl.SimpleResource implements r.Async<ContractA
    *
    * @returns The bidding information on the contract
    */
-  bids() {
+  bids(): AsyncIterableIterator<esi.contract.Bid> {
     if (this.bids_ === undefined) {
       this.bids_ = r.impl.makePageBasedStreamer(
           page => getContractBids(this.agent, this.id_, page), 1000);
@@ -72,7 +72,8 @@ export class Contract extends r.impl.SimpleResource implements r.Async<ContractA
  * specified by a provided an array or set of ids when the api is instantiated.
  */
 export class MappedContracts extends r.impl.SimpleMappedResource implements r.Mapped<ContractAPI> {
-  constructor(private agent: SSOAgent, ids: number[] | Set<number>) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>,
+      ids: number[] | Set<number>) {
     super(ids);
   }
 
@@ -102,7 +103,7 @@ export class MappedContracts extends r.impl.SimpleMappedResource implements r.Ma
  * with the corporation.
  */
 export class IteratedContracts extends r.impl.SimpleIteratedResource<esi.contract.Contract> implements r.Iterated<ContractAPI> {
-  constructor(private agent: SSOAgent) {
+  constructor(private agent: SSOAgent<number | r.impl.IDProvider>) {
     super(r.impl.makeArrayStreamer(() => getContracts(agent)),
         e => e.contract_id);
   }
@@ -168,7 +169,7 @@ export interface Contracts {
  * @param agent The agent making actual requests
  * @returns A Contracts instance
  */
-export function makeContracts(agent: SSOAgent): Contracts {
+export function makeContracts(agent: SSOAgent<number | r.impl.IDProvider>): Contracts {
   return <Contracts> function (ids: number | number[] | Set<number> | undefined) {
     if (ids === undefined) {
       // All types since no id
@@ -183,21 +184,43 @@ export function makeContracts(agent: SSOAgent): Contracts {
   };
 }
 
-function getContracts(agent: SSOAgent) {
+async function getContracts(agent: SSOAgent<number | r.impl.IDProvider>) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
   return agent.agent.request('get_corporations_corporation_id_contracts',
-      { path: { corporation_id: agent.id } }, agent.ssoToken);
+      { path: { corporation_id: corpID } }, agent.ssoToken);
 }
 
-function getContractItems(agent: SSOAgent, id: number) {
+async function getContractItems(agent: SSOAgent<number | r.impl.IDProvider>,
+    id: number) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
   return agent.agent.request(
       'get_corporations_corporation_id_contracts_contract_id_items',
-      { path: { corporation_id: agent.id, contract_id: id } }, agent.ssoToken);
+      { path: { corporation_id: corpID, contract_id: id } }, agent.ssoToken);
 }
 
-function getContractBids(agent: SSOAgent, id: number, page: number) {
+async function getContractBids(agent: SSOAgent<number | r.impl.IDProvider>,
+    id: number, page: number) {
+  let corpID: number;
+  if (typeof agent.id === 'number') {
+    corpID = agent.id;
+  } else {
+    corpID = await agent.id();
+  }
+
   return agent.agent.request(
       'get_corporations_corporation_id_contracts_contract_id_bids', {
-        path: { corporation_id: agent.id, contract_id: id },
-        query: { page: page }
+        path: { corporation_id: corpID, contract_id: id }, query: { page: page }
       }, agent.ssoToken).then(result => ({ result, maxPages: undefined }));
 }
