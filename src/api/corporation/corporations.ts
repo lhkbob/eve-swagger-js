@@ -17,7 +17,7 @@ import * as r from '../../internal/resource-api';
  * key's type if multiple corporations are being accessed at once.
  *
  * This is an API wrapper over the end points handling corporations via
- * functions in the [corporation](https://esi.tech.ccp.is/latest/#/Corporations)
+ * functions in the [corporation](https://esi.tech.ccp.is/latest/#/Corporation)
  * ESI endpoints.
  */
 export interface CorporationAPI {
