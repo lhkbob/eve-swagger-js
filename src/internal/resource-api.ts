@@ -284,7 +284,7 @@ export namespace impl {
     // The ESI routes consume bulk ids as an array, but often have set-like
     // requirements on those values. Store the ids as an array since it is
     // likely to be used directly more often than wrapping as a set.
-    private ids_: number[] | IDSetProvider;
+    protected ids_: number[] | IDSetProvider;
 
     /**
      * The `ids` can either be an array of ids, in which case all unique items

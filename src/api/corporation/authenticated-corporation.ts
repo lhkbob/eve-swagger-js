@@ -7,6 +7,7 @@ import { Wallets } from './wallets';
 import { makeStarbases, Starbases } from './starbases';
 import { esi, Responses } from '../../esi';
 import { Mining } from './mining';
+import { makeMembers, Members } from './members';
 
 /**
  * An api adapter for accessing various details of a single corporation,
@@ -26,6 +27,7 @@ export class AuthenticatedCorporation implements r.Async<CorporationAPI>, r.Sing
   private wallets_?: Wallets;
   private starbases_?: Starbases;
   private mining_?: Mining;
+  private members_?: Members;
 
   private industryJobs_?: r.impl.ResourceStreamer<esi.corporation.industry.Job>;
   private industryJobsCompleted_?: r.impl.ResourceStreamer<esi.corporation.industry.Job>;
@@ -43,6 +45,13 @@ export class AuthenticatedCorporation implements r.Async<CorporationAPI>, r.Sing
     this.agent = {
       agent, ssoToken, id
     };
+  }
+
+  get members(): Members {
+    if (this.members_ === undefined) {
+      this.members_ = makeMembers(this.agent);
+    }
+    return this.members_;
   }
 
   get kills(): IteratedKillmails {
