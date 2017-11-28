@@ -1,42 +1,54 @@
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses } from '../../internal/esi-types';
+import { esi } from '../../esi';
+import * as r from '../../internal/resource-api';
 
 /**
- * An api adapter over the end points handling a character's bookmarks via
- * functions in the [bookmarks](https://esi.tech.ccp.is/latest/#/Bookmarks)
- * ESI endpoints.
+ * An api adapter that provides functions for accessing an authenticated
+ * character's bookmarks via the
+ * [bookmark](https://esi.tech.ccp.is/latest/#/Bookmarks) ESI end points.
  */
-export interface Bookmarks {
-  /**
-   * @esi_example esi.characters(id, 'token').bookmarks()
-   *
-   * @returns Details about the character's bookmarks
-   */
-  (): Promise<Responses['get_characters_character_id_bookmarks']>;
+export class Bookmarks {
+  private details_?: r.impl.ResourceStreamer<esi.character.Bookmark>;
+  private folders_?: r.impl.ResourceStreamer<esi.character.BookmarksFolder>;
+
+  constructor(private agent: SSOAgent<number>) {
+  }
 
   /**
-   * @esi_example esi.characters(id, 'token').bookmarks.folders()
+   * @esi_route get_characters_character_id_bookmarks
    *
-   * @returns Information about a character's bookmark folders
+   * @return All bookmark details for the character
    */
-  folders(): Promise<Responses['get_characters_character_id_bookmarks_folders']>;
-}
+  details(): AsyncIterableIterator<esi.character.Bookmark> {
+    if (this.details_ === undefined) {
+      this.details_ = r.impl.makeArrayStreamer(() => this.getDetails());
+    }
 
-/**
- * Create a new {@link Bookmarks} instance that uses the given character agent
- * to make its HTTP requests to the ESI interface.
- *
- * @param char The character access information
- * @returns An Bookmarks API instance
- */
-export function makeBookmarks(char: SSOAgent): Bookmarks {
-  let bookmarks = <Bookmarks> <any> function () {
-    return char.agent.request('get_characters_character_id_bookmarks',
-        { path: { character_id: char.id } }, char.ssoToken);
-  };
-  bookmarks.folders = function () {
-    return char.agent.request('get_characters_character_id_bookmarks_folders',
-        { path: { character_id: char.id } }, char.ssoToken);
-  };
-  return bookmarks;
+    return this.details_();
+  }
+
+  /**
+   * @esi_route get_characters_character_id_bookmarks_folders
+   *
+   * @returns An iterator over the folders for bookmark management
+   */
+  folders(): AsyncIterableIterator<esi.character.BookmarksFolder> {
+    if (this.folders_ === undefined) {
+      this.folders_ = r.impl.makeArrayStreamer(() => this.getFolders());
+    }
+    return this.folders_();
+  }
+
+  private getDetails() {
+    return this.agent.agent.request('get_characters_character_id_bookmarks', {
+      path: { character_id: this.agent.id },
+    }, this.agent.ssoToken);
+  }
+
+  private getFolders() {
+    return this.agent.agent.request(
+        'get_characters_character_id_bookmarks_folders', {
+          path: { character_id: this.agent.id },
+        }, this.agent.ssoToken);
+  }
 }
