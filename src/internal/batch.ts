@@ -13,7 +13,7 @@ export interface BatchRequest<T> {
  * `T` that contains fields representing such information.
  */
 export interface ValueResolver<T, V> {
-  (name: T): [number, V];
+  (element: T, originalID: number): [number, V];
 }
 
 /**
@@ -31,10 +31,10 @@ export interface ValueResolver<T, V> {
 export function getBatchedValues<T, V>(ids: number[],
     requester: BatchRequest<T>, resolver: ValueResolver<T, V>,
     batchSize: number): Promise<Map<number, V>> {
-  return getRawValues(ids, requester, batchSize).then(array => {
+  return getIDMatchedValues(ids, requester, batchSize).then(array => {
     let map = new Map();
     for (let n of array) {
-      let tuple = resolver(n);
+      let tuple = resolver(n.element, n.id);
       map.set(tuple[0], tuple[1]);
     }
     return map;
@@ -72,8 +72,10 @@ export async function* getIteratedValues<T, V>(ids: AsyncIterableIterator<number
     idBatch.add(id);
     if (idBatch.size >= batchSize) {
       // Time to process the batch
-      let values = await requester(Array.from(idBatch))
-      .then(array => array.map(resolver));
+      let idArrays = Array.from(idBatch);
+
+      let values = await requester(idArrays)
+      .then(array => array.map((e, i) => resolver(e, idArrays[i])));
       idBatch.clear();
       yield* values;
     }
@@ -81,8 +83,11 @@ export async function* getIteratedValues<T, V>(ids: AsyncIterableIterator<number
 
   if (idBatch.size > 0) {
     // Process the remaining ids
-    let values = await requester(Array.from(idBatch))
-    .then(array => array.map(resolver));
+    let idArrays = Array.from(idBatch);
+
+    let values = await requester(idArrays)
+    .then(array => array.map((e, i) => resolver(e, idArrays[i])));
+
     idBatch.clear();
     yield* values;
   }
@@ -100,12 +105,20 @@ export async function* getIteratedValues<T, V>(ids: AsyncIterableIterator<number
  */
 export function getRawValues<T>(ids: number[], requester: BatchRequest<T>,
     batchSize: number): Promise<T[]> {
+  return getIDMatchedValues(ids, requester, batchSize)
+  .then(pairs => pairs.map(e => e.element));
+}
+
+function getIDMatchedValues<T>(ids: number[], requester: BatchRequest<T>,
+    batchSize: number): Promise<{ element: T, id: number }[]> {
   let groups = splitIds(ids, batchSize);
-  return Promise.all(groups.map(idSet => requester(idSet))).then(nameSets => {
+  return Promise.all(groups.map(idSet => requester(idSet)
+  .then(valueSet => valueSet.map((e, i) => ({ element: e, id: idSet[i] })))))
+  .then(valueSets => {
     // Join each into a single array
     let combined = [];
-    for (let set of nameSets) {
-      combined.push(...set);
+    for (let valueSet of valueSets) {
+      combined.push(...valueSet);
     }
     return combined;
   });
