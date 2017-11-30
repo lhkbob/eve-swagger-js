@@ -1,24 +1,108 @@
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses } from '../../internal/esi-types';
+import * as r from '../../internal/resource-api';
+import { esi, Responses } from '../../esi';
 
 /**
+ * The API specification for all variants that access information about a
+ * character's planetery interaction colony or colonies. This interface will not
+ * be used directly, but will be filtered through some mapper, such as {@link
+ * Async} or {@link Mapped} depending on what types of ids are being accessed.
+ * However, this allows for a concise and consistent specification for all
+ * variants: single, multiple, and all colonies.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's member, or a collection related
+ * to the key's member if multiple colonies are being accessed at once.
+ *
  * An api adapter over the end points handling a specific colony via functions
  * in the [planetary
  * interaction](https://esi.tech.ccp.is/latest/#Planetary_Interaction) ESI
  * endpoints.
  */
-export interface Colony {
-  /**
-   * @esi_example esi.characters(1, 'token').colonies(2).layout()
-   *
-   * @returns The layout of the colony
-   */
-  layout(): Promise<Responses['get_characters_character_id_planets_planet_id']>;
+export interface ColonyAPI {
+  summary: esi.character.planetaryinteraction.PlanetSummary;
+  details: Responses['get_characters_character_id_planets_planet_id'];
+}
+
+/**
+ * An api adapter for accessing various details of a single planetary colony,
+ * specified by a provided planet id when the api is instantiated.
+ */
+export class Colony extends r.impl.SimpleResource implements r.Async<ColonyAPI> {
+  constructor(private agent: SSOAgent<number>, id: number) {
+    super(id);
+  }
 
   /**
-   * @returns The colony's id.
+   * @esi_route ~get_characters_character_id_planets
+   *
+   * @returns The colony summary for the specific planet id
    */
-  id(): Promise<number>;
+  summary() {
+    return getColonies(this.agent)
+    .then(all => r.impl.filterArray(all, this.id_, e => e.planet_id));
+  }
+
+  /**
+   * @returns The colony factory configuration for the planet
+   */
+  details() {
+    return getPlanet(this.agent, this.id_);
+  }
+}
+
+/**
+ * An api adapter for accessing various details of multiple colony ids,
+ * specified by a provided an array or set of ids when the api is instantiated.
+ */
+export class MappedColonies extends r.impl.SimpleMappedResource implements r.Mapped<ColonyAPI> {
+  constructor(private agent: SSOAgent<number>, ids: number[] | Set<number>) {
+    super(ids);
+  }
+
+  /**
+   * @esi_route ~get_characters_character_id_planets
+   *
+   * @returns The colony summaries for the specified planets, mapped by id
+   */
+  summary() {
+    return this.arrayIDs()
+    .then(ids => getColonies(this.agent)
+    .then(all => r.impl.filterArrayToMap(all, ids, e => e.planet_id)));
+  }
+
+  /**
+   * @returns The colony factory configurations, mapped by id
+   */
+  details() {
+    return this.getResource(id => getPlanet(this.agent, id));
+  }
+}
+
+/**
+ * An api adapter for accessing various details about every colony of the
+ * character.
+ */
+export class IteratedColonies extends r.impl.SimpleIteratedResource<esi.character.planetaryinteraction.PlanetSummary> implements r.Iterated<ColonyAPI> {
+  constructor(private agent: SSOAgent<number>) {
+    super(r.impl.makeArrayStreamer(() => getColonies(agent)), e => e.planet_id);
+  }
+
+  /**
+   * @esi_route get_characters_character_id_planets
+   *
+   * @returns The colony summaries for each of the character's PI planets
+   */
+  summary() {
+    return this.getPaginatedResource();
+  }
+
+  /**
+   * @returns The colony factory configurations for each of the PI colonies
+   */
+  details() {
+    return this.getResource(id => getPlanet(this.agent, id));
+  }
 }
 
 /**
@@ -29,51 +113,59 @@ export interface Colony {
  */
 export interface Colonies {
   /**
-   * @esi_example esi.characters(1, 'token').colonies()
+   * Create a new colonies api targeting every PI planet of the character.
    *
-   * @returns List of the character's PI colony ids.
+   * @returns An IteratedColonies API wrapper
    */
-  (): Promise<Responses['get_characters_character_id_planets']>;
+  (): IteratedColonies;
 
   /**
-   * Create a Colony API wrapper for the colony of the specific planet.
+   * Create a new colony api targeting the particular planet by `id`.
    *
-   * @param planetId The planet's id
-   * @returns A Colony API wrapper for the planet
+   * @param id The planet id
+   * @returns A Colony API wrapper for the given id
    */
-  (planetId: number): Colony;
+  (id: number): Colony;
+
+  /**
+   * Create a new colonies api targeting the multiple planet ids. If an array is
+   * provided, duplicates are removed (although the input array is not
+   * modified).
+   *
+   * @param ids The planet ids
+   * @returns A MappedColonies API wrapper
+   */
+  (ids: number[] | Set<number>): MappedColonies;
 }
 
 /**
  * Create a new {@link Colonies} instance that uses the given character agent to
  * make its HTTP requests to the ESI interface.
  *
- * @param char The character access information
+ * @param agent The character access information
  * @returns An Colonies API instance
  */
-export function makeColonies(char: SSOAgent): Colonies {
-  return <Colonies> <any> function (id?: number) {
-    if (id === undefined) {
-      return char.agent.request('get_characters_character_id_planets',
-          { path: { character_id: char.id } }, char.ssoToken);
+export function makeColonies(agent: SSOAgent<number>): Colonies {
+  return <Colonies> <any> function (ids: number | number[] | Set<number> | undefined) {
+    if (ids === undefined) {
+      // All colonies
+      return new IteratedColonies(agent);
+    } else if (typeof ids === 'number') {
+      // Single colony
+      return new Colony(agent, ids);
     } else {
-      return new ColonyImpl(char, id);
+      // Mapped colonies
+      return new MappedColonies(agent, ids);
     }
   };
 }
 
-class ColonyImpl implements Colony {
-  constructor(private char: SSOAgent, private id_: number) {
-  }
+function getPlanet(agent: SSOAgent<number>, id: number) {
+  return agent.agent.request('get_characters_character_id_planets_planet_id',
+      { path: { character_id: agent.id, planet_id: id } }, agent.ssoToken);
+}
 
-  layout() {
-    return this.char.agent.request(
-        'get_characters_character_id_planets_planet_id',
-        { path: { character_id: this.char.id, planet_id: this.id_ } },
-        this.char.ssoToken);
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
+function getColonies(agent: SSOAgent<number>) {
+  return agent.agent.request('get_characters_character_id_planets',
+      { path: { character_id: agent.id } }, agent.ssoToken);
 }
