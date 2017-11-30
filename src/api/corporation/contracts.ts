@@ -58,8 +58,6 @@ export class Contract extends r.impl.SimpleResource implements r.Async<ContractA
   }
 
   /**
-   * @esi_route get_corporations_corporation_id_contracts_contract_id_items
-   *
    * @returns The items within the contract
    */
   items() {
@@ -89,8 +87,6 @@ export class MappedContracts extends r.impl.SimpleMappedResource implements r.Ma
   }
 
   /**
-   * @esi_route get_corporations_corporation_id_contracts_contract_id_items
-   *
    * @returns The items within the contracts, mapped by contract id
    */
   items() {
@@ -118,9 +114,7 @@ export class IteratedContracts extends r.impl.SimpleIteratedResource<esi.contrac
   }
 
   /**
-   * @esi_route get_corporations_corporation_id_contracts_items
-   *
-   * @returns Item content of all cotnracts for the corporation
+   * @returns Item content of all contracts for the corporation
    */
   items() {
     return this.getResource(id => getContractItems(this.agent, id));

@@ -316,7 +316,7 @@ export interface Members {
   (): IteratedMembers;
 
   /**
-   * Create a new member api targeting the particular base by `id`.
+   * Create a new member api targeting the particular member by `id`.
    *
    * @param id The member id
    * @returns A Member API wrapper for the given id
@@ -324,7 +324,7 @@ export interface Members {
   (id: number): Member;
 
   /**
-   * Create a new asset api targeting the multiple member ids. If an array is
+   * Create a new member api targeting the multiple member ids. If an array is
    * provided, duplicates are removed (although the input array is not
    * modified).
    *
