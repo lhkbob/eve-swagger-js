@@ -7,7 +7,7 @@ import * as r from '../../internal/resource-api';
  * The API specification for all variants that access information about a
  * character's fitting or fittings. This interface will not be used directly,
  * but will be filtered through some mapper, such as {@link Async} or {@link
-    * Mapped} depending on what types of ids are being accessed. However, this
+ * Mapped} depending on what types of ids are being accessed. However, this
  * allows for a concise and consistent specification for all variants: single,
  * multiple, and all fittings.
  *
@@ -15,8 +15,8 @@ import * as r from '../../internal/resource-api';
  * returns a Promise resolving to the key's member, or a collection related to
  * the key's member if multiple fittings are being accessed at once.
  *
- * An api adapter over the end points handling a specific event via functions in
- * the [fittings](https://esi.tech.ccp.is/latest/#Fittings) ESI endpoints.
+ * An api adapter over the end points handling a specific fitting via functions
+ * in the [fittings](https://esi.tech.ccp.is/latest/#Fittings) ESI endpoints.
  */
 export interface FittingAPI {
   details: esi.character.fitting.Fitting;
@@ -115,7 +115,7 @@ export interface Fittings {
   /**
    * Create a new fittings api targeting every fitting of the character.
    *
-   * @returns An IteratedCalendar API wrapper
+   * @returns An IteratedFittings API wrapper
    */
   (): IteratedFittings;
 

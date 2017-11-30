@@ -150,7 +150,7 @@ export class Mining {
 
   /**
    * Create a new mining observer api targeting every single mining observer of
-   * the corporation
+   * the corporation.
    *
    * @returns An IteratedMiningObservers API wrapper
    */
