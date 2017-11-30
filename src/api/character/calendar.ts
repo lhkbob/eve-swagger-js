@@ -156,21 +156,6 @@ export class IteratedEvents extends r.impl.SimpleIteratedResource<esi.character.
   attendees() {
     return this.getResource(id => getAttendees(this.agent, id));
   }
-
-  /**
-   * Sends the same response to every event. Responses will only be sent once
-   * the event is reached by the iterator, so exiting from a for-await loop
-   * will properly stop sending the response to later events.
-   *
-   * @param status The status to send for each event
-   * @returns An iterator over event ids that have had their response sent
-   */
-  async * respond(status: 'accepted' | 'declined' | 'tentative'): AsyncIterableIterator<number> {
-    for await (let id of this.ids()) {
-      await sendResponse(this.agent, id, status);
-      yield id;
-    }
-  }
 }
 
 /**

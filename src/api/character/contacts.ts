@@ -1,6 +1,6 @@
 import { esi, Responses } from '../../esi';
 
-import { getBatchedValues, getIteratedValues } from '../../internal/batch';
+import { getBatchedValues } from '../../internal/batch';
 import { SSOAgent } from '../../internal/esi-agent';
 import * as r from '../../internal/resource-api';
 
@@ -160,86 +160,6 @@ export class IteratedContacts extends r.impl.SimpleIteratedResource<esi.characte
    */
   details() {
     return this.getPaginatedResource();
-  }
-
-  /**
-   * An iterator that progressively deletes every contact of the character.
-   * This does not make use of batched deletes so that for-await loops can
-   * terminate without having deleted contacts not yet seen by the loop.
-   *
-   * The reported number is the contact id that was deleted.
-   *
-   * @esi_route delete_characters_character_id_contacts
-   *
-   * @returns An iterator over contacts that have just been deleted
-   */
-  async * del(): AsyncIterableIterator<number> {
-    for await (let id of this.ids()) {
-      await deleteContacts(this.agent, [id]);
-      yield id;
-    }
-  }
-
-  /**
-   * Delete every contact from the character. Makes use of batched requests to
-   * reduce the number of total requests at the expense of not being able to
-   * terminate at an intermediate point.
-   *
-   * @returns The number of deleted contacts
-   */
-  async deleteAll(): Promise<number> {
-    let count = 0;
-    for await (let id of getIteratedValues(this.ids(),
-        idSet => deleteContacts(this.agent, idSet), id => [id, undefined],
-        DELETE_CONTACTS_BATCH_SIZE)) {
-      count++;
-    }
-    return count;
-  }
-
-  /**
-   * An iterator that progressively updates every contact of the character.
-   * This does not make use of batched updates so that for-await loops can
-   * terminate without having updated contacts not yet seen by the loop.
-   *
-   * The reported number is the contact id that was updated.
-   *
-   * @esi_route put_characters_character_id_contacts
-   *
-   * @param standing The new standing of the contacts
-   * @param label The new label for the contacts, if not provided or 0 the label
-   *     is removed from the contact
-   * @param watched Whether or not the contacts is watched, defaults to false
-   * @returns An iterator over contacts that have just been updated
-   */
-  async * update(standing: number, label: number = 0,
-      watched: boolean = false): AsyncIterableIterator<number> {
-    for await (let id of this.ids()) {
-      await updateContacts(this.agent, [id], standing, label, watched);
-      yield id;
-    }
-  }
-
-  /**
-   * Update every contact from the character. Makes use of batched requests to
-   * reduce the number of total requests at the expense of not being able to
-   * terminate at an intermediate point.
-   *
-   * @param standing The new standing of the contacts
-   * @param label The new label for the contacts, if not provided or 0 the label
-   *     is removed from the contact
-   * @param watched Whether or not the contacts is watched, defaults to false
-   * @returns The number of updated contacts
-   */
-  async updateAll(standing: number, label: number = 0,
-      watched: boolean = false): Promise<number> {
-    let count = 0;
-    for await (let id of getIteratedValues(this.ids(),
-        idSet => updateContacts(this.agent, idSet, standing, label, watched),
-        id => [id, undefined], PUT_CONTACTS_BATCH_SIZE)) {
-      count++;
-    }
-    return count;
   }
 }
 
