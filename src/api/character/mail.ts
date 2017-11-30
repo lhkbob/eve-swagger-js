@@ -1,90 +1,372 @@
-import {
-  PaginatedLoader, makeIDBasedLoader
-} from '../../internal/page-loader';
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../internal/esi-types';
+import * as r from '../../internal/resource-api';
+
+import { Responses, esi } from '../../esi';
 
 /**
- * An api adapter over the end points handling a specific message in a
- * character's inbox via functions in the
- * [mail](https://esi.tech.ccp.is/latest/#/Mail) ESI endpoints.
+ * The API specification for all variants that access information about a
+ * character's in-game mail message or messages. This interface will not be used
+ * directly, but will be filtered through some mapper, such as {@link Async} or
+ * {@link Mapped} depending on what types of ids are being accessed. However,
+ * this allows for a concise and consistent specification for all variants:
+ * single, multiple, and all messages.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's member, or a collection related to
+ * the key's member if multiple messages are being accessed at once.
+ *
+ * An api adapter over the end points handling a specific message via functions
+ * in the [mail](https://esi.tech.ccp.is/latest/#Mail) ESI endpoints.
  */
-export interface Message {
-  /**
-   * @esi_example esi.characters(1, 'token').mail(2).info()
-   *
-   * @returns The full message content
-   */
-  info(): Promise<Responses['get_characters_character_id_mail_mail_id']>;
+export interface MessageAPI {
+  details: Responses['get_characters_character_id_mail_mail_id'];
+  summary: esi.character.mail.MailHeader;
+}
+
+/**
+ * An api adapter for accessing various details of a single message,
+ * specified by a provided mail id when the api is instantiated.
+ */
+export class Message extends r.impl.SimpleResource implements r.Async<MessageAPI> {
+  constructor(private agent: SSOAgent<number>, id: number) {
+    super(id);
+  }
 
   /**
-   * @esi_example esi.characters(1, 'token').mail(2).del()
+   * @returns The full message content
+   */
+  details() {
+    return getMessage(this.agent, this.id_);
+  }
+
+  /**
+   * @esi_route ~get_characters_character_id_mail_mail_id
+   *
+   * @returns The summary header for the message
+   */
+  summary() {
+    return this.details().then(msg => getSummaryFromMessage(this.id_, msg));
+  }
+
+  /**
+   * @esi_route delete_characters_character_id_mail_mail_id
    *
    * @returns An empty promise that resolves after the message has been deleted
    */
-  del(): Promise<Responses['delete_characters_character_id_mail_mail_id']>;
+  del(): Promise<undefined> {
+    return deleteMessage(this.agent, this.id_);
+  }
 
   /**
-   * @esi_example esi.characters(1, 'token').mail(2).update({...})
+   * @esi_route put_characters_character_id_mail_mail_id
    *
-   * @param state The new labels and read status for the message
+   * @param labels The label ids attached to the message
+   * @param read Whether or not the message is marked as read, defaults to true
    * @return An empty promise that resolves after the message has been updated
    */
-  update(state: esi.character.mail.MailUpdate): Promise<Responses['put_characters_character_id_mail_mail_id']>;
-
-  /**
-   * @returns The message id
-   */
-  id(): Promise<number>;
+  update(labels: number[], read: boolean = true): Promise<undefined> {
+    return updateMessage(this.agent, this.id_, labels, read);
+  }
 }
 
 /**
- * An api adapter over the end points handling a specific label in a
- * character's inbox via functions in the
- * [mail](https://esi.tech.ccp.is/latest/#/Mail) ESI endpoints.
+ * An api adapter for accessing various details of a set of messages,
+ * specified by provided mail ids when the api is instantiated.
  */
-export interface Label {
+export class MappedMessages extends r.impl.SimpleMappedResource implements r.Mapped<MessageAPI> {
+  private headers_?: r.impl.ResourceStreamer<esi.character.mail.MailHeader>;
+
+  constructor(private agent: SSOAgent<number>, ids: number[] | Set<number>) {
+    super(ids);
+  }
+
   /**
-   * @esi_example esi.characters(1, 'token').mail.labels(2).del()
+   * @returns The full message content, mapped by id
+   */
+  details() {
+    return this.getResource(id => getMessage(this.agent, id));
+  }
+
+  /**
+   * @esi_route ~get_characters_character_id_mail_mail_id
+   * @esi_route ~get_characters_character_id_mail
+   *
+   * @returns The summary header for the message, mapped by id
+   */
+  summary() {
+    return this.arrayIDs().then(ids => {
+      if (ids.length > 20) {
+        // Instead of making 20+ detail requests, just filter through the
+        // actual header responses
+        if (this.headers_ === undefined) {
+          this.headers_ = getHeaders(this.agent, []);
+        }
+        return r.impl.filterIteratedToMap(this.headers_(), ids,
+            e => e.mail_id || 0);
+      } else {
+        // Make individual details requests and rebuild
+        return this.getResource(id => getMessage(this.agent, id)
+        .then(msg => getSummaryFromMessage(id, msg)));
+      }
+    });
+  }
+
+  /**
+   * @esi_route delete_characters_character_id_mail_mail_id
+   *
+   * @returns An empty promise that resolves after messages have been deleted
+   */
+  del(): Promise<undefined> {
+    // Discard the map afterwards
+    return this.getResource(id => deleteMessage(this.agent, id))
+    .then(map => undefined);
+  }
+
+  /**
+   * @esi_route put_characters_character_id_mail_mail_id
+   *
+   * @param labels The label ids attached to the messages
+   * @param read Whether or not the messages are marked as read, defaults to
+   *     true
+   * @return An empty promise that resolves after the messages have been
+   *     updated
+   */
+  update(labels: number[], read: boolean = true): Promise<undefined> {
+    // Discard the map afterwards
+    return this.getResource(id => updateMessage(this.agent, id, labels, read))
+    .then(map => undefined);
+  }
+}
+
+/**
+ * An api adapter for accessing various details about every mail in the
+ * character's inbox, possibly constrained by a set of labels specified at
+ * construction.
+ */
+export class IteratedMessages extends r.impl.SimpleIteratedResource<esi.character.mail.MailHeader> implements r.Iterated<MessageAPI> {
+  constructor(private agent: SSOAgent<number>,
+      labels: number[] | Set<number> | r.impl.IDSetProvider) {
+    super(getHeaders(agent, labels), e => e.mail_id || 0);
+  }
+
+  /**
+   * @returns The message details for every mail in the character's inbox,
+   *    possibly constrained by a label set
+   */
+  details() {
+    return this.getResource(id => getMessage(this.agent, id));
+  }
+
+  /**
+   * @returns The message summaries for every mail in the character's inbox,
+   *    possibly constrained by a label set
+   */
+  summary() {
+    return this.getPaginatedResource();
+  }
+}
+
+/**
+ * The API specification for all variants that access information about a
+ * character's in-game mail label or labels. This interface will not be used
+ * directly, but will be filtered through some mapper, such as {@link Async} or
+ * {@link Mapped} depending on what types of ids are being accessed. However,
+ * this allows for a concise and consistent specification for all variants:
+ * single, multiple, and all labels.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's member, or a collection related to
+ * the key's member if multiple labels are being accessed at once.
+ *
+ * An api adapter over the end points handling a specific message via functions
+ * in the [mail](https://esi.tech.ccp.is/latest/#Mail) ESI endpoints.
+ */
+export interface LabelAPI {
+  details: esi.character.mail.Label;
+  unreadCount: number;
+}
+
+/**
+ * An api adapter for accessing various details of a single mail label,
+ * specified by a provided label id when the api is instantiated.
+ */
+export class Label extends r.impl.SimpleResource implements r.Async<LabelAPI> {
+  private messages_?: IteratedMessages;
+
+  constructor(private agent: SSOAgent<number>, id: number) {
+    super(id);
+  }
+
+  /**
+   * @returns An IteratedMessages API restricted to this specific label
+   */
+  get messages(): IteratedMessages {
+    if (this.messages_ === undefined) {
+      this.messages_ = new IteratedMessages(this.agent, [this.id_]);
+    }
+    return this.messages_;
+  }
+
+  /**
+   * @esi_route ~get_characters_character_id_mail_labels
+   *
+   * @returns The full label details
+   */
+  details() {
+    return getLabels(this.agent)
+    .then(all => r.impl.filterArray(all.labels || [], this.id_,
+        e => e.label_id || 0));
+  }
+
+  /**
+   * @esi_route ~get_characters_character_id_mail_labels
+   *
+   * @returns The number of unread messages with this label
+   */
+  unreadCount() {
+    return this.details().then(details => details.unread_count || 0);
+  }
+
+  /**
+   * @esi_route delete_characters_character_id_mail_labels_label_id
    *
    * @returns An empty promise that resolves after the label has been deleted
    */
-  del(): Promise<Responses['delete_characters_character_id_mail_labels_label_id']>;
-
-  /**
-   * @returns The label's id
-   */
-  id(): Promise<number>;
+  del(): Promise<undefined> {
+    return deleteLabel(this.agent, this.id_);
+  }
 }
 
 /**
- * An api adapter over the end points handling all labels in the character's
- * inbox via functions in the [mail](https://esi.tech.ccp.is/latest/#/Mail) ESI
- * endpoints.
+ * An api adapter for accessing various details of a set of labels,
+ * specified by provided label ids when the api is instantiated.
+ */
+export class MappedLabels extends r.impl.SimpleMappedResource implements r.Mapped<LabelAPI> {
+  private messages_?: IteratedMessages;
+
+  constructor(private agent: SSOAgent<number>, ids: number[] | Set<number>) {
+    super(ids);
+  }
+
+  /**
+   * @returns An IteratedMessages API restricted to the label set
+   */
+  get messages(): IteratedMessages {
+    if (this.messages_ === undefined) {
+      this.messages_ = new IteratedMessages(this.agent, () => this.arrayIDs());
+    }
+    return this.messages_;
+  }
+
+  /**
+   * @esi_route ~get_characters_character_id_mail_labels
+   *
+   * @returns The full label details, mapped by label id
+   */
+  details() {
+    return this.arrayIDs()
+    .then(ids => getLabels(this.agent)
+    .then(all => r.impl.filterArrayToMap(all.labels || [], ids,
+        e => e.label_id || 0)));
+  }
+
+  /**
+   * @esi_route ~get_characters_character_id_mail_labels
+   *
+   * @returns The number of unread messages for each label, mapped by id
+   */
+  unreadCount() {
+    return this.details().then(map => {
+      let remap = new Map();
+      for (let [k, v] of map.entries()) {
+        remap.set(k, v.unread_count || 0);
+      }
+      return remap;
+    });
+  }
+
+  /**
+   * @esi_route delete_characters_character_id_mail_labels_label_id
+   *
+   * @returns An empty promise that resolves after all specified labels have
+   *     been deleted
+   */
+  del(): Promise<undefined> {
+    // Discard the map
+    return this.getResource(id => deleteLabel(this.agent, id))
+    .then(map => undefined);
+  }
+}
+
+/**
+ * An api adapter for accessing various details about every label in the
+ * character's inbox.
+ */
+export class IteratedLabels extends r.impl.SimpleIteratedResource<esi.character.mail.Label> implements r.Iterated<LabelAPI> {
+  constructor(private agent: SSOAgent<number>) {
+    super(r.impl.makeArrayStreamer(
+        () => getLabels(agent).then(all => all.labels || [])),
+        e => e.label_id || 0);
+  }
+
+  /**
+   * @returns The label details for every defined label defined by the character
+   */
+  details() {
+    return this.getPaginatedResource();
+  }
+
+  /**
+   * @returns The unread message count within each label
+   */
+  async * unreadCount(): AsyncIterableIterator<[number, number]> {
+    for await (let [id, label] of this.details()) {
+      yield <[number, number]> [id, label.unread_count];
+    }
+  }
+}
+
+/**
+ * A functional interface for creating APIs to access a single label, a
+ * specific set of labels, or every label registered to a character. It
+ * additionally has members for adding new labels.
  */
 export interface Labels {
   /**
-   * Get a Label instance corresponding to the given label `id`.
-   * @param id The label id
-   * @returns A Label API wrapper
+   * Create a new labels api targeting every label of the character.
+   *
+   * @returns An IteratedLabels API wrapper
+   */
+  (): IteratedLabels;
+
+  /**
+   * Create a new label end point targeting the particular fitting by `id`.
+   *
+   * @param id The label's id
+   * @returns An Label API wrapper for the id
    */
   (id: number): Label;
 
   /**
-   * @esi_route get_characters_character_id_mail_labels [labels]
-   * @esi_example esi.characters(1, 'token').mail.labels()
+   * Create a new labels api targeting the multiple fittings ids. If an array
+   * is provided, duplicates are removed (although the input array is not
+   * modified).
    *
-   * @returns Details for all of a character's mail labels
+   * @param ids The label ids
+   * @returns A MappedLabels API wrapper
    */
-  (): Promise<esi.character.mail.Label[]>;
+  (ids: number[] | Set<number>): MappedLabels;
 
   /**
-   * @esi_example esi.characters(1, 'token').mail.labels.add({...})
+   * Create a new label based on the specification provided.
    *
-   * @param settings The initial state of the new label
-   * @returns The new label's id
+   * @esi_route post_characters_character_id_mail_labels
+   *
+   * @param label The label specification
+   *
+   * @returns The id of the newly created label
    */
-  add(settings: esi.character.mail.NewLabel): Promise<Responses['post_characters_character_id_mail_labels']>;
+  add(label: esi.character.mail.NewLabel): Promise<number>;
 }
 
 /**
@@ -92,190 +374,180 @@ export interface Labels {
  * via functions in the [mail](https://esi.tech.ccp.is/latest/#/Mail) ESI
  * endpoints.
  */
-export interface Mail {
-  /**
-   * @esi_example esi.characters(1, 'token').mail()
-   *
-   * @param labelIds If empty, no filtering is performed, otherwise the set
-   * of labels the returned message headers are restricted to
-   * @param lastMailId {Number} If not provided, the most recent mails are
-   *     returned, otherwise only messages older than the given id are returned
-   * @returns List of message headers in the character's inbox
-   */
-  (labelIds?: number[],
-      lastMailId?: number): Promise<Responses['get_characters_character_id_mail']>;
+export class Mail {
+  private labels_?: Labels;
+
+  constructor(private agent: SSOAgent<number>) {
+  }
+
+  get labels(): Labels {
+    if (this.labels_ === undefined) {
+      this.labels_ = makeLabels(this.agent);
+    }
+    return this.labels_;
+  }
 
   /**
-   * Get a Message instance for the given message or mail id.
+   * Create a new messages api targeting every single mail of
+   * the character's inbox. This iterator is not constrained by any labels.
    *
-   * @param id The message id
-   * @returns An API wrapper providing access to the given message
+   * @returns An IteratedMessages API wrapper
    */
-  (id: number): Message;
+  messages(): IteratedMessages;
 
   /**
-   * A Labels instance for this character, allowing access to the labels they
-   * have created.
+   * Create a new messages api targeting the multiple mail
+   * ids. If an array is provided, duplicates are removed (although the input
+   * array is not modified).
+   *
+   * @param ids The mail ids
+   * @returns A MappedMessages API wrapper for the given ids
    */
-  labels: Labels;
+  messages(ids: number[] | Set<number>): MappedMessages;
 
   /**
-   * This makes a request to the `labels` route and then filters the result
-   * to just return the total unread count.
+   * Create a new message api targeting the particular mail
+   * by `id`.
    *
-   * @esi_route get_characters_character_id_mail_labels [total_unread_count]
-   * @esi_returns total_unread_count
-   * @esi_example esi.characters(1, 'token').mail.unreadCount()
+   * @param id The mail id
+   * @returns An Message API wrapper for the given id
+   */
+  messages(id: number): Message;
+
+  messages(ids?: number | number[] | Set<number>) {
+    if (ids === undefined) {
+      return new IteratedMessages(this.agent, []);
+    } else if (typeof ids === 'number') {
+      return new Message(this.agent, ids);
+    } else {
+      return new MappedMessages(this.agent, ids);
+    }
+  }
+
+  /**
+   * @esi_route ~get_characters_character_id_mail_labels
    *
    * @returns The total number of unread messages in a character's inbox
    */
-  unreadCount(): Promise<number>;
+  unreadCount(): Promise<number> {
+    return this.agent.agent.request('get_characters_character_id_mail_labels',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken)
+    .then(result => result.total_unread_count || 0);
+  }
 
   /**
    * @esi_route post_characters_character_id_cspa
-   * @esi_example esi.characters(1, 'token').mail.cspaCost()
    *
    * @param toIds Array of entities to potentially send a mail to
    * @returns The cspa cost for sending a message to the given entities
    */
-  cspaCost(toIds: number[]): Promise<number>;
+  cspaCost(toIds: number[]): Promise<number> {
+    return this.agent.agent.request('post_characters_character_id_cspa',
+        { path: { character_id: this.agent.id }, body: { characters: toIds } },
+        this.agent.ssoToken).then(result => result.cost || 0);
+  }
 
   /**
-   * Fetch all mails for the character as a single array. Use with caution as
-   * certain characters could have substantial amounts of mail.
-   *
-   * @returns All message headers in the character's inbox
-   */
-  all(): Promise<Responses['get_characters_character_id_mail']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').mail.send({...})
+   * @esi_route post_characters_character_id_mail
    *
    * @param mail The mail specification
    * @return The sent mail's id
    */
-  send(mail: esi.character.mail.NewMail): Promise<Responses['post_characters_character_id_mail']>;
+  send(mail: esi.character.mail.NewMail): Promise<number> {
+    return this.agent.agent.request('post_characters_character_id_mail',
+        { path: { character_id: this.agent.id }, body: mail },
+        this.agent.ssoToken);
+  }
 
   /**
-   * @esi_example esi.characters(1, 'token').mail.lists()
-   *
    * @returns List of details for a character's mailing list memberships
    */
-  lists(): Promise<Responses['get_characters_character_id_mail_lists']>;
+  lists(): Promise<Responses['get_characters_character_id_mail_lists']> {
+    return this.agent.agent.request('get_characters_character_id_mail_lists',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
+  }
 }
 
-/**
- * Create a new {@link Mail} instance that uses the given character agent to
- * make its HTTP requests to the ESI interface.
- *
- * @param char The character access information
- * @returns An Mail API instance
- */
-export function makeMail(char: SSOAgent): Mail {
-  let mail = <Mail> <any> function (messageIDorLabels?: number | number[],
-      lastMailId?: number) {
-    // Matching to the inbox function when the second argument exists (since
-    // 2nd function only takes 1 argument), or if the first argument is an
-    // array or undefined.
-    if (messageIDorLabels === undefined || Array.isArray(messageIDorLabels)
-        || lastMailId !== undefined) {
-      return char.agent.request('get_characters_character_id_mail', {
-        path: { character_id: char.id },
-        query: { labels: <number[]|undefined> messageIDorLabels, last_mail_id: lastMailId }
-      }, char.ssoToken);
+function makeLabels(agent: SSOAgent<number>): Labels {
+  let labels = <Labels> function (ids: number | number[] | Set<number> | undefined) {
+    if (ids === undefined) {
+      // All labels
+      return new IteratedLabels(agent);
+    } else if (typeof ids === 'number') {
+      // Single label
+      return new Label(agent, ids);
     } else {
-      return new MessageImpl(char, messageIDorLabels);
-    }
-  };
-
-  let allMail: PaginatedLoader<esi.character.mail.MailHeader> = makeIDBasedLoader(
-      maxID => mail(undefined, maxID), item => item.mail_id!, 50);
-  mail.all = function () {
-    return allMail.getAll();
-  };
-
-  mail.labels = makeLabels(char);
-  mail.unreadCount = function () {
-    return char.agent.request('get_characters_character_id_mail_labels',
-        { path: { character_id: char.id } }, char.ssoToken)
-    .then(result => result.total_unread_count || 0);
-  };
-  mail.cspaCost = function (to: number[]) {
-    return char.agent.request('post_characters_character_id_cspa',
-        { path: { character_id: char.id }, body: { characters: to } },
-        char.ssoToken).then(result => result.cost || 0);
-  };
-  mail.send = function (mail: esi.character.mail.NewMail) {
-    return char.agent.request('post_characters_character_id_mail',
-        { path: { character_id: char.id }, body: mail }, char.ssoToken);
-  };
-  mail.lists = function () {
-    return char.agent.request('get_characters_character_id_mail_lists',
-        { path: { character_id: char.id } }, char.ssoToken);
-  };
-
-  return mail;
-}
-
-class MessageImpl implements Message {
-  constructor(private char: SSOAgent, private id_: number) {
-  }
-
-  info() {
-    return this.char.agent.request('get_characters_character_id_mail_mail_id',
-        { path: { character_id: this.char.id, mail_id: this.id_ } },
-        this.char.ssoToken);
-  }
-
-  del() {
-    return this.char.agent.request(
-        'delete_characters_character_id_mail_mail_id',
-        { path: { character_id: this.char.id, mail_id: this.id_ } },
-        this.char.ssoToken);
-  }
-
-  update(state: esi.character.mail.MailUpdate) {
-    return this.char.agent.request('put_characters_character_id_mail_mail_id', {
-      path: { character_id: this.char.id, mail_id: this.id_ },
-      body: state
-    }, this.char.ssoToken);
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
-}
-
-class LabelImpl implements Label {
-  constructor(private char: SSOAgent, private id_: number) {
-  }
-
-  del() {
-    return this.char.agent.request(
-        'delete_characters_character_id_mail_labels_label_id',
-        { path: { character_id: this.char.id, label_id: this.id_ } },
-        this.char.ssoToken);
-  }
-
-  id() {
-    return Promise.resolve(this.id_);
-  }
-}
-
-function makeLabels(char: SSOAgent): Labels {
-  let labels = <Labels> <any> function (id?: number) {
-    if (id === undefined) {
-      return char.agent.request('get_characters_character_id_mail_labels',
-          { path: { character_id: char.id } }, char.ssoToken)
-      .then(result => result.labels);
-    } else {
-      return new LabelImpl(char, id);
+      // Multiple labels
+      return new MappedLabels(agent, ids);
     }
   };
 
   labels.add = function (settings: esi.character.mail.NewLabel) {
-    return char.agent.request('post_characters_character_id_mail_labels',
-        { path: { character_id: char.id }, body: settings }, char.ssoToken);
+    return agent.agent.request('post_characters_character_id_mail_labels',
+        { path: { character_id: agent.id }, body: settings }, agent.ssoToken);
   };
   return labels;
+}
+
+function getLabels(agent: SSOAgent<number>) {
+  return agent.agent.request('get_characters_character_id_mail_labels',
+      { path: { character_id: agent.id } }, agent.ssoToken);
+}
+
+function deleteLabel(agent: SSOAgent<number>, id: number) {
+  return agent.agent.request(
+      'delete_characters_character_id_mail_labels_label_id',
+      { path: { character_id: agent.id, label_id: id } }, agent.ssoToken);
+}
+
+function getSummaryFromMessage(id: number, message: esi.character.mail.Mail) {
+  return {
+    from: message.from,
+    is_read: message.read,
+    labels: message.labels,
+    mail_id: id,
+    recipients: message.recipients,
+    subject: message.subject,
+    timestamp: message.timestamp
+  };
+}
+
+async function getHeaders(agent: SSOAgent<number>,
+    labels: number[] | Set<number> | r.impl.IDSetProvider): r.impl.ResourceStreamer<esi.character.mail.MailHeader> {
+  let labelIDS: number[];
+  if (Array.isArray(labels)) {
+    labelIDS = labels;
+  } else if (labels instanceof Set) {
+    labelIDS = Array.from(labels);
+  } else {
+    labelIDS = await labels();
+  }
+  return r.impl.makeMaxIDStreamer(
+      fromID => getHeaderPage(agent, labelIDS, fromID), e => e.mail_id || 0,
+      50);
+}
+
+function getHeaderPage(agent: SSOAgent<number>, labels: number[],
+    fromID?: number) {
+  return agent.agent.request('get_characters_character_id_mail', {
+    path: { character_id: agent.id },
+    query: { labels: labels, last_mail_id: fromID }
+  }, agent.ssoToken);
+}
+
+function getMessage(agent: SSOAgent<number>, id: number) {
+  return agent.agent.request('get_characters_character_id_mail_mail_id',
+      { path: { character_id: agent.id, mail_id: id } }, agent.ssoToken);
+}
+
+function deleteMessage(agent: SSOAgent<number>, id: number) {
+  return agent.agent.request('delete_characters_character_id_mail_mail_id',
+      { path: { character_id: agent.id, mail_id: id } }, agent.ssoToken);
+}
+
+function updateMessage(agent: SSOAgent<number>, id: number, labels: number[],
+    read: boolean) {
+  return agent.agent.request('put_characters_character_id_mail_mail_id',
+      { path: { character_id: agent.id, mail_id: id }, body: { labels, read } },
+      agent.ssoToken);
 }
