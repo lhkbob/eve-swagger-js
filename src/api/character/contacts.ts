@@ -182,7 +182,7 @@ export interface Contacts {
    * @param id The contact's id
    * @returns An Contact API wrapper for the id
    */
-  (id: number): Event;
+  (id: number): Contact;
 
   /**
    * Create a new contacts api targeting the multiple contacts ids. If an array
