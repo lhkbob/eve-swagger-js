@@ -512,8 +512,15 @@ function getSummaryFromMessage(id: number, message: esi.character.mail.Mail) {
   };
 }
 
-async function getHeaders(agent: SSOAgent<number>,
+function getHeaders(agent: SSOAgent<number>,
     labels: number[] | Set<number> | r.impl.IDSetProvider): r.impl.ResourceStreamer<esi.character.mail.MailHeader> {
+
+  return r.impl.makeMaxIDStreamer(
+      fromID => getHeaderPage(agent, labels, fromID), e => e.mail_id || 0, 50);
+}
+
+async function getHeaderPage(agent: SSOAgent<number>,
+    labels: number[] | Set<number> | r.impl.IDSetProvider, fromID?: number) {
   let labelIDS: number[];
   if (Array.isArray(labels)) {
     labelIDS = labels;
@@ -522,16 +529,10 @@ async function getHeaders(agent: SSOAgent<number>,
   } else {
     labelIDS = await labels();
   }
-  return r.impl.makeMaxIDStreamer(
-      fromID => getHeaderPage(agent, labelIDS, fromID), e => e.mail_id || 0,
-      50);
-}
 
-function getHeaderPage(agent: SSOAgent<number>, labels: number[],
-    fromID?: number) {
   return agent.agent.request('get_characters_character_id_mail', {
     path: { character_id: agent.id },
-    query: { labels: labels, last_mail_id: fromID }
+    query: { labels: labelIDS, last_mail_id: fromID }
   }, agent.ssoToken);
 }
 
