@@ -22,6 +22,7 @@ export class AuthenticatedCorporation implements r.Async<CorporationAPI>, r.Sing
   private agent: SSOAgent<number | r.impl.IDProvider>;
 
   private base_?: Corporation;
+
   private kills_?: IteratedKillmails;
   private assets_?: Assets;
   private wallets_?: Wallets;
@@ -99,7 +100,7 @@ export class AuthenticatedCorporation implements r.Async<CorporationAPI>, r.Sing
     return this.starbases_;
   }
 
-  // FIXME add structures() and members()
+  // FIXME add structures()
 
   /**
    * @esi_route get_corporations_corporation_id_industry_jobs
@@ -328,23 +329,23 @@ export class AuthenticatedCorporation implements r.Async<CorporationAPI>, r.Sing
   // The plain un-authenticated corporation API
 
   details() {
-    return this.base.then(b => b.details());
+    return this.base.details();
   }
 
   history() {
-    return this.base.then(b => b.history());
+    return this.base.history();
   }
 
   icons() {
-    return this.base.then(b => b.icons());
+    return this.base.icons();
   }
 
   loyaltyOffers() {
-    return this.base.then(b => b.loyaltyOffers());
+    return this.base.loyaltyOffers();
   }
 
   names() {
-    return this.base.then(b => b.names());
+    return this.base.names();
   }
 
   ids() {
@@ -360,16 +361,10 @@ export class AuthenticatedCorporation implements r.Async<CorporationAPI>, r.Sing
     }
   }
 
-  private get base() {
+  private get base(): Corporation {
     if (this.base_ === undefined) {
-      return this.ids().then(id => {
-        if (this.base_ === undefined) {
-          this.base_ = new Corporation(this.agent.agent, id);
-        }
-        return this.base_;
-      });
-    } else {
-      return Promise.resolve(this.base_);
+      this.base_ = new Corporation(this.agent.agent, this.agent.id);
     }
+    return this.base_;
   }
 }

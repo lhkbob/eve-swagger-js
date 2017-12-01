@@ -32,37 +32,36 @@ export interface CorporationAPI {
  * An api adapter for accessing various details of a single corporation,
  * specified by a provided id when the api is instantiated.
  */
-export class Corporation extends r.impl.SimpleResource implements r.Async<CorporationAPI> {
-  constructor(private agent: ESIAgent, id_: number) {
-    super(id_);
+export class Corporation implements r.SingleResource, r.Async<CorporationAPI> {
+  constructor(private agent: ESIAgent, private id: number | r.impl.IDProvider) {
   }
 
   /**
    * @returns The public info of the corporation
    */
-  details() {
-    return getDetails(this.agent, this.id_);
+  async details() {
+    return getDetails(this.agent, await this.ids());
   }
 
   /**
    * @returns The alliance history of the corporation
    */
-  history() {
-    return getHistory(this.agent, this.id_);
+  async history() {
+    return getHistory(this.agent, await this.ids());
   }
 
   /**
    * @returns URL lookup information for the corporation icon images
    */
-  icons() {
-    return getIcons(this.agent, this.id_);
+  async icons() {
+    return getIcons(this.agent, await this.ids());
   }
 
   /**
    * @returns Loyalty offers available for the NPC corporation
    */
-  loyaltyOffers() {
-    return getLoyaltyOffers(this.agent, this.id_);
+  async loyaltyOffers() {
+    return getLoyaltyOffers(this.agent, await this.ids());
   }
 
   /**
@@ -72,6 +71,14 @@ export class Corporation extends r.impl.SimpleResource implements r.Async<Corpor
    */
   names() {
     return this.details().then(result => result.corporation_name);
+  }
+
+  ids() {
+    if (typeof this.id === 'number') {
+      return Promise.resolve(this.id);
+    } else {
+      return this.id();
+    }
   }
 }
 
