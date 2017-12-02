@@ -179,7 +179,7 @@ export interface Alliances {
    *
    * @esi_route ids get_alliances
    *
-   * @returns An AllAlliances API wrapper
+   * @returns An IteratedAlliances API wrapper
    */
   (): IteratedAlliances;
 
