@@ -2,6 +2,7 @@ import { ESIAgent, SSOAgent } from '../../internal/esi-agent';
 import * as r from '../../internal/resource-api';
 import { Corporation, CorporationAPI } from './corporations';
 import { IteratedKillmails } from '../killmails';
+import { Structures, makeStructures } from '../structures';
 import { Assets, makeAssets } from './assets';
 import { Wallets } from './wallets';
 import { makeStarbases, Starbases } from './starbases';
@@ -29,6 +30,7 @@ export class AuthenticatedCorporation implements r.Async<CorporationAPI>, r.Sing
   private starbases_?: Starbases;
   private mining_?: Mining;
   private members_?: Members;
+  private structures_?: Structures;
 
   private industryJobs_?: r.impl.ResourceStreamer<esi.corporation.industry.Job>;
   private industryJobsCompleted_?: r.impl.ResourceStreamer<esi.corporation.industry.Job>;
@@ -41,11 +43,19 @@ export class AuthenticatedCorporation implements r.Async<CorporationAPI>, r.Sing
   private medals_?: r.impl.ResourceStreamer<esi.corporation.Medal>;
   private medalsIssued_?: r.impl.ResourceStreamer<esi.corporation.MedalsIssued>;
 
-  constructor(agent: ESIAgent, ssoToken: string,
-      id: number | r.impl.IDProvider) {
+  constructor(agent: ESIAgent, ssoToken: string, id: number | r.impl.IDProvider,
+      private charID?: number) {
     this.agent = {
       agent, ssoToken, id
     };
+  }
+
+  get structures(): Structures {
+    if (this.structures_ === undefined) {
+      this.structures_ = makeStructures(this.agent.agent, this.agent.ssoToken,
+          this.charID, this.agent.id);
+    }
+    return this.structures_;
   }
 
   get members(): Members {
