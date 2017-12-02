@@ -1,5 +1,7 @@
-import { ESIAgent } from './esi-agent';
+import { ESIAgent, SSOAgent } from './esi-agent';
 import { esi } from '../esi';
+
+import * as r from './resource-api';
 
 /**
  * An api adapter over the end points handling search and character search via
@@ -29,21 +31,12 @@ export interface Search {
  *
  * @param agent The agent to execute HTTP requests with
  * @param category The search category results are limited to
- * @param character The character ID defining the search space
- * @param token The SSO access token for the character
  * @returns A Search instance that can be used to run character search queries
  */
-export function makeCharacterSearch(agent: ESIAgent,
-    category: esi.character.SearchCategory, character: number,
-    token: string): Search {
+export function makeCharacterSearch(agent: SSOAgent<number | r.impl.IDProvider>,
+    category: esi.character.SearchCategory): Search {
   return function (text: string, strict: boolean = false) {
-    return agent.request('get_characters_character_id_search', {
-      path: { 'character_id': character },
-      query: { 'categories': [category], 'search': text, 'strict': strict }
-    }, token)
-    .then(result => {
-      return <number[]> ((result as any)[category]);
-    });
+    return getCharacterSearch(agent, category, text, strict);
   };
 }
 
@@ -65,4 +58,22 @@ export function makeDefaultSearch(agent: ESIAgent,
       return <number[]> ((result as any)[category]);
     });
   };
+}
+
+async function getCharacterSearch(agent: SSOAgent<number | r.impl.IDProvider>,
+    category: esi.character.SearchCategory, query: string, strict: boolean) {
+  let character: number;
+  if (typeof agent.id === 'number') {
+    character = agent.id;
+  } else {
+    character = await agent.id();
+  }
+
+  return agent.agent.request('get_characters_character_id_search', {
+    path: { 'character_id': character },
+    query: { 'categories': [category], 'search': query, 'strict': strict }
+  }, agent.ssoToken)
+  .then(result => {
+    return <number[]> ((result as any)[category]);
+  });
 }
