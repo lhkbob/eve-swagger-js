@@ -1,246 +1,191 @@
 import { ESIAgent, Configuration } from './internal/esi-agent';
 import { getAllNames } from './internal/names';
-import { Responses, esi } from './internal/esi-types';
+import { Responses, esi } from './esi';
 
-import { Agents, makeAgents } from './api/universe/agents';
-import { Bloodlines, makeBloodlines } from './api/universe/bloodlines';
-import {
-  Constellations, makeConstellations
-} from './api/universe/constellations';
-import { Dogma, makeDogma } from './api/universe/dogma';
-import { Factions, makeFactions } from './api/universe/factions';
-import { Freeports, makeFreeports } from './api/universe/freeports';
-import { Graphics, makeGraphics } from './api/universe/graphics';
-import { Industry, makeIndustry } from './api/universe/industry';
-import { Insurance, makeInsurance } from './api/universe/insurance';
-import { Moons, makeMoons } from './api/universe/moons';
-import { Opportunities, makeOpportunities } from './api/universe/opportunities';
-import { Planets, makePlanets } from './api/universe/planets';
-import {
-  PlanetaryInteraction, makePlanetaryInteraction
-} from './api/universe/planetary-interaction';
-import { Races, makeRaces } from './api/universe/races';
-import { Regions, makeRegions } from './api/universe/regions';
-import { SolarSystems, makeSolarSystems } from './api/universe/solar-systems';
-import { Stargates, makeStargates } from './api/universe/stargates';
-import { Stations, makeStations } from './api/universe/stations';
-import { Types, makeTypes } from './api/universe/types';
-import { Wormholes, makeWormholes } from './api/universe/wormholes';
-
-import { Alliances, makeAlliances } from './api/alliances';
-import { Corporations, makeCorporations } from './api/corporations';
-import { Incursions, makeIncursions } from './api/incursions';
-import { Killmail, makeKillmail } from './api/killmail';
-import { Sovereignty, makeSovereignty } from './api/sovereignty';
+import { Factions, makeFactions } from './api/factions';
+import { Alliances, makeAlliances } from './api/alliance';
+import { Characters, makeCharacters } from './api/character';
+import { Corporations, makeCorporations } from './api/corporation';
+import { Killmails, makeKillmails } from './api/killmails';
+import { Sovereignty } from './api/sovereignty';
 import { Wars, makeWars } from './api/wars';
 
-import { Characters, makeCharacters } from './api/character/characters';
+import { Schema } from './api/schema';
+import { Universe } from './api/universe';
+import { Fleet, makeFleet } from './api/fleet';
 
-export {esi};
-export * from './internal/error';
+export { esi, Configuration };
+export * from './error';
 
 /**
- * API creates a shared, internal ESIAgent and then lazily instantiates all
- * specific modules as needed. The API instance is also a function that can
- * be invoked to create a new API instance with a different configuration.
+ * ESI creates a shared, internal agent and then lazily instantiates all
+ * specific modules as needed. The internal agent maintains a single cache for
+ * all of the requests to the network interface.
+ *
+ * The ESI instance also provides a function to create new API instances
+ * with an updated configuration.
  *
  * @see https://esi.tech.ccp.is/latest
  */
-export interface API {
-  /**
-   * An instance of Characters using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  characters: Characters;
+export class ESI {
+  private agent: ESIAgent;
+
+  private alliances_?: Alliances;
+  private chars_?: Characters;
+  private corps_?: Corporations;
+  private factions_?: Factions;
+  private kms_?: Killmails;
+  private schema_?: Schema;
+  private sov_?: Sovereignty;
+  private universe_?: Universe;
+  private wars_?: Wars;
+
+  constructor(config: Partial<Configuration> = {}) {
+    let fullConfig = Object.assign({}, DEFAULT_CONFIG, config);
+    this.agent = new ESIAgent(fullConfig);
+  }
+
+  get configuration(): Configuration {
+    return this.agent.configuration;
+  }
+
+  get alliances(): Alliances {
+    if (this.alliances_ === undefined) {
+      this.alliances_ = makeAlliances(this.agent);
+    }
+    return this.alliances_;
+  }
+
+  get characters(): Characters {
+    if (this.chars_ === undefined) {
+      this.chars_ = makeCharacters(this.agent);
+    }
+    return this.chars_;
+  }
+
+  get corporations(): Corporations {
+    if (this.corps_ === undefined) {
+      this.corps_ = makeCorporations(this.agent);
+    }
+    return this.corps_;
+  }
+
+  get wars(): Wars {
+    if (this.wars_ === undefined) {
+      this.wars_ = makeWars(this.agent);
+    }
+    return this.wars_;
+  }
+
+  get factions(): Factions {
+    if (this.factions_ === undefined) {
+      this.factions_ = makeFactions(this.agent);
+    }
+    return this.factions_;
+  }
+
+  get schema(): Schema {
+    if (this.schema_ === undefined) {
+      this.schema_ = new Schema(this.agent);
+    }
+    return this.schema_;
+  }
+
+  get universe(): Universe {
+    if (this.universe_ === undefined) {
+      this.universe_ = new Universe(this.agent);
+    }
+    return this.universe_;
+  }
+
+  get sovereignty(): Sovereignty {
+    if (this.sov_ === undefined) {
+      this.sov_ = new Sovereignty(this.agent);
+    }
+    return this.sov_;
+  }
+
+  get killmails(): Killmails {
+    if (this.kms_ === undefined) {
+      this.kms_ = makeKillmails(this.agent);
+    }
+    return this.kms_;
+  }
 
   /**
-   * An instance of Agents using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  agents: Agents;
-
-  /**
-   * An instance of Bloodlines using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  bloodlines: Bloodlines;
-
-  /**
-   * An instance of Constellations using a shared ESIAgent configured based
-   * on the API's initialization options.
-   */
-  constellations: Constellations;
-
-  /**
-   * An instance of Dogma using a shared ESIAgent configured based
-   * on the API's initialization options.
-   */
-  dogma: Dogma;
-
-  /**
-   * An instance of Factions using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  factions: Factions;
-
-  /**
-   * An instance of Freeports using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  freeports: Freeports;
-
-  /**
-   * An instance of Graphics using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  graphics: Graphics;
-
-  /**
-   * An instance of Industry using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  industry: Industry;
-
-  /**
-   * An instance of Insurance using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  insurance: Insurance;
-
-  /**
-   * An instance of Moons using a shared ESIAgent configured based
-   * on the API's initialization options.
-   */
-  moons: Moons;
-
-  /**
-   * An instance of Opportunities using a shared ESIAgent configured based
-   * on the API's initialization options.
-   */
-  opportunities: Opportunities;
-
-  /**
-   * An instance of Planets using a shared ESIAgent configured based
-   * on the API's initialization options.
-   */
-  planets: Planets;
-
-  /**
-   * An instance of PlanetaryInteraction using a shared ESIAgent configured
-   * based on the API's initialization options.
-   */
-  pi: PlanetaryInteraction;
-
-  /**
-   * An instance of Races using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  races: Races;
-
-  /**
-   * An instance of Regions using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  regions: Regions;
-
-  /**
-   * An instance of SolarSystems using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  solarSystems: SolarSystems;
-
-  /**
-   * An instance of Stargates using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  stargates: Stargates;
-
-  /**
-   * An instance of Stations using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  stations: Stations;
-
-  /**
-   * An instance of Types using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  types: Types;
-
-  /**
-   * An instance of Wormholes using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  wormholes: Wormholes;
-
-  /**
-   * An instance of Alliances using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  alliances: Alliances;
-
-  /**
-   * An instance of Corporations using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  corporations: Corporations;
-
-  /**
-   * An instance of Incursions using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  incursions: Incursions;
-
-  /**
-   * An instance of Killmail using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  killmail: Killmail;
-
-  /**
-   * An instance of Sovereignty using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  sovereignty: Sovereignty;
-
-  /**
-   * An instance of Wars using a shared ESIAgent configured based on
-   * the API's initialization options.
-   */
-  wars: Wars;
-
-  /**
-   * @esi_example esi.search('text')
+   * Create a new ESI interface that uses the updated `config`. The provided
+   * configuration is merged with this ESI's configuration, overriding this
+   * instance's configuration with any keys specified in `config`.
    *
+   * The newly created ESI instance uses its own internal agent with a separate
+   * cache from this instance.
+   *
+   * If `config` is an empty object or not provided at all, the created ESI is a
+   * new instance with the exact same configuration. Because the new instance
+   * has its own cache, this can be a useful way to create multiple instances
+   * that behave the same but are independent.
+   *
+   * @param config New configuration settings to override
+   * @returns A new ESI instance
+   */
+  clone(config: Partial<Configuration> = {}): ESI {
+    let newConfig = Object.assign({}, this.configuration, config);
+    return new ESI(newConfig);
+  }
+
+  /**
+   * Create a new Fleet API associated with the specific `fleetID`. The `token`
+   * must be an SSO authentication token for a character in the fleet. Depending
+   * on the character's role within the fleet, certain features may be
+   * inaccessible.
+   *
+   * @param fleetID The ID of the fleet
+   * @param token The SSO token for a character in the fleet
+   * @returns A Fleet API
+   */
+  fleet(fleetID: number, token: string): Fleet {
+    return makeFleet({ agent: this.agent, ssoToken: token, id: fleetID },
+        'fleet');
+  }
+
+  /**
    * @param text The text to search all entities and types for
    * @param strict Whether or not the search should be strict, defaults to false
    * @returns All matches and their corresponding categories
    */
-  search(text: string, strict?: boolean): Promise<Responses['get_search']>;
+  search(text: string, strict?: boolean): Promise<Responses['get_search']> {
+    return this.agent.request('get_search', {
+      query: {
+        'categories': searchCategories,
+        'search': text,
+        'strict': strict || false
+      }
+    });
+  }
 
   /**
    * If ids is longer than the reported maximum length for ESI, the array will
    * be split into smaller chunks and multiple requests will be made and then
    * concatenated back together.
    *
-   * @esi_example esi.names(ids)
-   *
    * @param ids The ids to lookup
    * @returns The resolved names and detected categories
    */
-  names(ids: number[]): Promise<Responses['post_universe_names']>;
+  names(ids: number[]): Promise<Responses['post_universe_names']> {
+    return getAllNames(this.agent, ids);
+  }
 
   /**
-   * @esi_example esi.status()
-   *
    * @returns The status of the Eve servers
    */
-  status(): Promise<Responses['get_status']>;
+  status(): Promise<Responses['get_status']> {
+    return this.agent.request('get_status', undefined);
+  }
 }
 
 /**
  * The default configuration that specifies values for parameters that aren't
- * explicitly given when {@link makeAPI} is called.
+ * explicitly given.
  */
 export const DEFAULT_CONFIG: Configuration = {
   url: 'https://esi.tech.ccp.is',
@@ -259,273 +204,16 @@ export const DEFAULT_CONFIG: Configuration = {
   accessTokenDelivery: 'header'
 };
 
-/**
- * Create a new API with the given configuration provided in a single
- * object map. Any parameter that is not provided will use the default value
- * in {@link DEFAULT_CONFIG}.
- *
- * It is strongly recommended that a custom user agent be provided.
- *
- * @param config The configuration for the API
- * @returns The API instance
- */
-export function makeAPI(config: Partial<Configuration> = {}): API {
-  let fullConfig: Configuration = Object.assign({}, DEFAULT_CONFIG, config);
-  return new APIImpl(fullConfig);
-}
-
-class APIImpl implements API {
-  private agent: ESIAgent;
-
-  private charsAPI?: Characters;
-
-  private allyAPI?: Alliances;
-  private corpAPI?: Corporations;
-  private incursionAPI?: Incursions;
-  private kmAPI?: Killmail;
-  private sovAPI?: Sovereignty;
-  private warAPI?: Wars;
-
-  private agentsAPI?: Agents;
-  private bloodAPI?: Bloodlines;
-  private constAPI?: Constellations;
-  private dogmaAPI?: Dogma;
-  private factionAPI?: Factions;
-  private freeportAPI?: Freeports;
-  private graphicsAPI?: Graphics;
-  private gateAPI?: Stargates;
-  private indyAPI?: Industry;
-  private insuranceAPI?: Insurance;
-  private moonAPI?: Moons;
-  private opportunityAPI?: Opportunities;
-  private piAPI?: PlanetaryInteraction;
-  private planetAPI?: Planets;
-  private raceAPI?: Races;
-  private regionAPI?: Regions;
-  private systemAPI?: SolarSystems;
-  private stationAPI?: Stations;
-  private typesAPI?: Types;
-  private whsAPI?: Wormholes;
-
-  constructor(config: Configuration) {
-    this.agent = new ESIAgent(config);
-  }
-
-  get characters() {
-    if (this.charsAPI === undefined) {
-      this.charsAPI = makeCharacters(this.agent);
-    }
-    return this.charsAPI;
-  }
-
-  get agents() {
-    if (this.agentsAPI === undefined) {
-      this.agentsAPI = makeAgents(this.agent);
-    }
-    return this.agentsAPI;
-  }
-
-  get bloodlines() {
-    if (this.bloodAPI === undefined) {
-      this.bloodAPI = makeBloodlines(this.agent);
-    }
-    return this.bloodAPI;
-  }
-
-  get constellations() {
-    if (this.constAPI === undefined) {
-      this.constAPI = makeConstellations(this.agent);
-    }
-    return this.constAPI;
-  }
-
-  get dogma() {
-    if (this.dogmaAPI === undefined) {
-      this.dogmaAPI = makeDogma(this.agent);
-    }
-    return this.dogmaAPI;
-  }
-
-  get factions() {
-    if (this.factionAPI === undefined) {
-      this.factionAPI = makeFactions(this.agent);
-    }
-    return this.factionAPI;
-  }
-
-  get freeports() {
-    if (this.freeportAPI === undefined) {
-      this.freeportAPI = makeFreeports(this.agent);
-    }
-    return this.freeportAPI;
-  }
-
-  get graphics() {
-    if (this.graphicsAPI === undefined) {
-      this.graphicsAPI = makeGraphics(this.agent);
-    }
-    return this.graphicsAPI;
-  }
-
-  get industry() {
-    if (this.indyAPI === undefined) {
-      this.indyAPI = makeIndustry(this.agent);
-    }
-    return this.indyAPI;
-  }
-
-  get insurance() {
-    if (this.insuranceAPI === undefined) {
-      this.insuranceAPI = makeInsurance(this.agent);
-    }
-    return this.insuranceAPI;
-  }
-
-  get moons() {
-    if (this.moonAPI === undefined) {
-      this.moonAPI = makeMoons(this.agent);
-    }
-    return this.moonAPI;
-  }
-
-  get opportunities() {
-    if (this.opportunityAPI === undefined) {
-      this.opportunityAPI = makeOpportunities(this.agent);
-    }
-    return this.opportunityAPI;
-  }
-
-  get planets() {
-    if (this.planetAPI === undefined) {
-      this.planetAPI = makePlanets(this.agent);
-    }
-    return this.planetAPI;
-  }
-
-  get pi() {
-    if (this.piAPI === undefined) {
-      this.piAPI = makePlanetaryInteraction(this.agent);
-    }
-    return this.piAPI;
-  }
-
-  get races() {
-    if (this.raceAPI === undefined) {
-      this.raceAPI = makeRaces(this.agent);
-    }
-    return this.raceAPI;
-  }
-
-  get regions() {
-    if (this.regionAPI === undefined) {
-      this.regionAPI = makeRegions(this.agent);
-    }
-    return this.regionAPI;
-  }
-
-  get solarSystems() {
-    if (this.systemAPI === undefined) {
-      this.systemAPI = makeSolarSystems(this.agent);
-    }
-    return this.systemAPI;
-  }
-
-  get stargates() {
-    if (this.gateAPI === undefined) {
-      this.gateAPI = makeStargates(this.agent);
-    }
-    return this.gateAPI;
-  }
-
-  get stations() {
-    if (this.stationAPI === undefined) {
-      this.stationAPI = makeStations(this.agent);
-    }
-    return this.stationAPI;
-  }
-
-  get types() {
-    if (this.typesAPI === undefined) {
-      this.typesAPI = makeTypes(this.agent);
-    }
-    return this.typesAPI;
-  }
-
-  get wormholes() {
-    if (this.whsAPI === undefined) {
-      this.whsAPI = makeWormholes(this.agent);
-    }
-    return this.whsAPI;
-  }
-
-  get alliances() {
-    if (this.allyAPI === undefined) {
-      this.allyAPI = makeAlliances(this.agent);
-    }
-    return this.allyAPI;
-  }
-
-  get corporations() {
-    if (this.corpAPI === undefined) {
-      this.corpAPI = makeCorporations(this.agent);
-    }
-    return this.corpAPI;
-  }
-
-  get incursions() {
-    if (this.incursionAPI === undefined) {
-      this.incursionAPI = makeIncursions(this.agent);
-    }
-    return this.incursionAPI;
-  }
-
-  get killmail() {
-    if (this.kmAPI === undefined) {
-      this.kmAPI = makeKillmail(this.agent);
-    }
-    return this.kmAPI;
-  }
-
-  get sovereignty() {
-    if (this.sovAPI === undefined) {
-      this.sovAPI = makeSovereignty(this.agent);
-    }
-    return this.sovAPI;
-  }
-
-  get wars() {
-    if (this.warAPI === undefined) {
-      this.warAPI = makeWars(this.agent);
-    }
-    return this.warAPI;
-  }
-
-  search(text: string, strict?: boolean) {
-    const categories: esi.SearchCategory[] = [
-      esi.SearchCategory.AGENT,
-      esi.SearchCategory.ALLIANCE,
-      esi.SearchCategory.CHARACTER,
-      esi.SearchCategory.CONSTELLATION,
-      esi.SearchCategory.CORPORATION,
-      esi.SearchCategory.FACTION,
-      esi.SearchCategory.INVENTORYTYPE,
-      esi.SearchCategory.REGION,
-      esi.SearchCategory.SOLARSYSTEM,
-      esi.SearchCategory.STATION,
-      esi.SearchCategory.WORMHOLE
-    ];
-    return this.agent.request('get_search', {
-      query: {
-        'categories': categories, 'search': text, 'strict': strict || false
-      }
-    });
-  }
-
-  names(ids: number[]) {
-    return getAllNames(this.agent, ids);
-  }
-
-  status() {
-    return this.agent.request('get_status', undefined);
-  }
-}
+const searchCategories: esi.SearchCategory[] = [
+  esi.SearchCategory.AGENT,
+  esi.SearchCategory.ALLIANCE,
+  esi.SearchCategory.CHARACTER,
+  esi.SearchCategory.CONSTELLATION,
+  esi.SearchCategory.CORPORATION,
+  esi.SearchCategory.FACTION,
+  esi.SearchCategory.INVENTORYTYPE,
+  esi.SearchCategory.REGION,
+  esi.SearchCategory.SOLARSYSTEM,
+  esi.SearchCategory.STATION,
+  esi.SearchCategory.WORMHOLE
+];
