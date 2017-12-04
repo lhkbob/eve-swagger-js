@@ -155,7 +155,7 @@ export interface Killmails {
    */
   (idHashes: [number, string][] | esi.killmail.KillmailLink[] | Map<number, string>): MappedKillmails;
 
-  // NOTE: don't expose a way to create AllKillmails since that gets
+  // NOTE: don't expose a way to create IteratedKillmails since that gets
   // handled by the specific resource stream providers
 }
 
