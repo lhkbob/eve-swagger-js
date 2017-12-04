@@ -340,7 +340,7 @@ export interface Labels {
   (): IteratedLabels;
 
   /**
-   * Create a new label end point targeting the particular fitting by `id`.
+   * Create a new label end point targeting the particular label by `id`.
    *
    * @param id The label's id
    * @returns An Label API wrapper for the id
@@ -348,7 +348,7 @@ export interface Labels {
   (id: number): Label;
 
   /**
-   * Create a new labels api targeting the multiple fittings ids. If an array
+   * Create a new labels api targeting the multiple label ids. If an array
    * is provided, duplicates are removed (although the input array is not
    * modified).
    *
