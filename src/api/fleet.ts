@@ -1,10 +1,10 @@
-import { ESIAgent, SSOAgent } from '../../internal/esi-agent';
-import { Responses, esi } from '../../esi';
+import { ESIAgent, SSOAgent } from '../internal/esi-agent';
+import { Responses, esi } from '../esi';
 
-import * as r from '../../internal/resource-api';
-import { Character, CharacterAPI, MappedCharacters } from './characters';
-import { getIteratedNames } from '../../internal/names';
-import { getIteratedValues } from '../../internal/batch';
+import * as r from '../internal/resource-api';
+import { Character, CharacterAPI, MappedCharacters } from './character/characters';
+import { getIteratedNames } from '../internal/names';
+import { getIteratedValues } from '../internal/batch';
 
 // FIXME move this into a fleet/ package and split it into multiple files
 // FIXME can probably move it outside the character package as well, since it
