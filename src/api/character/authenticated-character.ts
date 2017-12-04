@@ -1,516 +1,368 @@
-import { ESIAgent, SSOAgent } from '../../internal/esi-agent';
+import { SSOAgent } from '../../internal/esi-agent';
 import { Responses, esi } from '../../esi';
 import * as r from '../../internal/resource-api';
 
-import { Killmail, makeKillmail } from '../killmails';
+import { IteratedKillmails } from '../killmails';
 
-import { Autopilot, makeAutopilot } from './autopilot';
-import { Bookmarks, makeBookmarks } from './bookmarks';
+import { Bookmarks } from './bookmarks';
 import { Calendar, makeCalendar } from './calendar';
 import { Colonies, makeColonies } from './colonies';
 import { Contacts, makeContacts } from './contacts';
 import { Fittings, makeFittings } from './fittings';
-import { Fleet, makeFleet } from './fleet';
-import { Mail, makeMail } from './mail';
-import { Structures, makeStructures } from './structures';
-import { Window, makeWindow } from './window';
+import { CharacterFleet, makeFleet } from '../fleet';
+import { Mail } from './mail';
+import { Structures, makeStructures } from '../structures';
 
-import {AuthenticatedCorporation} from '../corporation/authenticated-corporation';
-import { CharacterAPI } from './characters';
+import { AuthenticatedCorporation } from '../corporation/authenticated-corporation';
+import { Character, CharacterAPI } from './characters';
+import { Contracts, makeContracts } from './contracts';
+import { UI } from './ui';
+import { Assets, makeAssets } from './assets';
+import { Notifications } from './notifications';
+import { Skills } from './skills';
+import { Wallet } from './wallet';
+
+const KILLMAIL_PAGE_SIZE = 500;
 
 /**
- * An extension of {@link CharacterInfo} that adds the remaining
- * character-linked, authenticated from the
- * [character](https://esi.tech.ccp.is/latest/#/Character) and related ESI end
- * points.
+ * An api adapter for accessing various details of a single character,
+ * specified by a provided id when the api is instantiated.
  *
- * @see https://esi.tech.ccp.is/latest/#/Character
- * @see https://esi.tech.cpp.is/latest/#/Assets
- * @see https://esi.tech.cpp.is/latest/#/Bookmarks
- * @see https://esi.tech.cpp.is/latest/#/Clones
- * @see https://esi.tech.cpp.is/latest/#/Fittings
- * @see https://esi.tech.cpp.is/latest/#/Killmails
- * @see https://esi.tech.cpp.is/latest/#/Location
- * @see https://esi.tech.ccp.is/latest/#/Planetary_Interaction
- * @see https://esi.tech.ccp.is/latest/#/Skills
- * @see https://esi.tech.ccp.is/latest/#/Wallet
+ * This API is authenticated by an SSO token provided by the character through
+ * an external process. Some functions that are exposed expect the character to
+ * have specific in-game roles with respect to their corporation or fleet. If
+ * these permissions are not met when a request is made to ESI, then it will
+ * respond with an error.
  */
 export class AuthenticatedCharacter extends r.impl.SimpleResource implements r.Async<CharacterAPI> {
+  private base_?: Character;
 
-  constructor(agent: SSOAgent<number>) {
+  private kms_?: IteratedKillmails;
+  private mining_?: r.impl.ResourceStreamer<esi.character.MiningRecord>;
+
+  private assets_?: Assets;
+  private bookmarks_?: Bookmarks;
+  private calendar_?: Calendar;
+  private colonies_?: Colonies;
+  private contacts_?: Contacts;
+  private contracts_?: Contracts;
+  private corp_?: AuthenticatedCorporation;
+  private fittings_?: Fittings;
+  private fleet_?: CharacterFleet;
+  private mail_?: Mail;
+  private notifications_?: Notifications;
+  private skills_?: Skills;
+  private structures_?: Structures;
+  private ui_?: UI;
+  private wallet_?: Wallet;
+
+  constructor(private agent: SSOAgent<number>) {
     super(agent.id);
   }
 
-  /**
-   * An Autopilot instance linked to this Character.
-   */
-  autopilot: Autopilot;
-
-  /**
-   * A Bookmarks instance linked to this Character.
-   */
-  bookmarks: Bookmarks;
-
-  /**
-   * A Calendar instance linked to this Character.
-   */
-  calendar: Calendar;
-
-  /**
-   * A Colonies instance linked to this Character.
-   */
-  colonies: Colonies;
-
-  /**
-   * A Contacts instance linked to this Character.
-   */
-  contacts: Contacts;
-
-  /**
-   * A CharacterCorporation instance linked to this Character.
-   */
-  corporation: AuthenticatedCorporation;
-
-  /**
-   * A Fittings instance linked to this Character.
-   */
-  fittings: Fittings;
-
-  /**
-   * A Mail instance linked to this Character.
-   */
-  mail: Mail;
-
-  /**
-   * A Structures instance linked to this Character.
-   */
-  structures: Structures;
-
-  /**
-   * A Window instance linked to this Character.
-   */
-  window: Window;
-
-  /**
-   * Get a Fleet instance for the given fleet `id`.
-   *
-   * @param id The fleet id this character belongs to.
-   * @returns Fleet API wrapper
-   */
-  fleet(id: number): Fleet;
-
-  /**
-   * @esi_example esi.characters(1, 'token').assets()
-   *
-   * @returns List of the character's assets
-   */
-  assets(): Promise<Responses['get_characters_character_id_assets']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').clones()
-   *
-   * @returns The character's available jump clones
-   */
-  clones(): Promise<Responses['get_characters_character_id_clones']>;
-
-  /**
-   * Get the kill details for the recent {@link Character#recentKillmails
-   * recentKillmails} and then uses {@link Killmail#get} to map the details.
-   * The request resolves to an array, each containing a killmail detail.
-   *
-   * @esi_route get_characters_character_id_killmails_recent
-   * @esi_example esi.characters(1, 'token').recentKills()
-   *
-   * @param maxKillId  Optional; the mail id that limits which mails
-   *   can be returned. If provided recent mails older than the id are returned,
-   *   otherwise the most recent kills are returned
-   * @returns A page of recent kill details for the character
-   */
-  recentKills(maxKillId?: number): Promise<esi.killmail.Killmail[]>;
-
-  /**
-   * Get all kill, over all of history, for the given character. This makes
-   * multiple calls to {@link Character#recentKills recentKills}. This
-   * should be used with caution as some characters may have a very large number
-   * of kills.
-   *
-   * @esi_route get_characters_character_id_killmails_recent
-   *
-   * @returns All of the details of the character's kills
-   */
-  kills(): Promise<esi.killmail.Killmail[]>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').recentKillmails()
-   *
-   * @param maxKillId If not provided the most recent killmails are returned.
-   * @returns Recent killmail links for the character
-   */
-  recentKillmails(maxKillId?: number): Promise<Responses['get_characters_character_id_killmails_recent']>;
-
-  /**
-   * Get all killmails, over all of history, for the given character. This makes
-   * multiple calls to {@link Character#recentKillmails recentKillmails}. This
-   * should be used with caution as some characters may have a very large number
-   * of kills.
-   *
-   * @esi_route get_characters_character_id_killmails_recent
-   * @returns All killmail links for the character
-   */
-  killmails(): Promise<esi.killmail.KillmailLink[]>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').loyaltyPoints()
-   *
-   * @returns The character's loyalty points with the different NPC groups
-   */
-  loyaltyPoints(): Promise<Responses['get_characters_character_id_loyalty_points']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').ship()
-   *
-   * @returns The character's currently boarded ship
-   */
-  ship(): Promise<Responses['get_characters_character_id_ship']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').location()
-   *
-   * @returns The character's location in Eve
-   */
-  location(): Promise<Responses['get_characters_character_id_location']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').online()
-   *
-   * @returns The character's online status
-   */
-  online(): Promise<Responses['get_characters_character_id_online']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').wallets()
-   *
-   * @returns The character's wallet state
-   */
-  wallets(): Promise<Responses['get_characters_character_id_wallets']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').skills()
-   *
-   * @returns The character's known skills
-   */
-  skills(): Promise<Responses['get_characters_character_id_skills']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').skillqueue()
-   *
-   * @returns The character's current skill queue
-   */
-  skillqueue(): Promise<Responses['get_characters_character_id_skillqueue']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').agentResearch()
-   *
-   * @returns The character's current research progress with known agents
-   */
-  agentResearch(): Promise<Responses['get_characters_character_id_agents_research']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').chatChannels()
-   *
-   * @returns The character's current chat channel memberships
-   */
-  chatChannels(): Promise<Responses['get_characters_character_id_chat_channels']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').medals()
-   *
-   * @returns The character's earned medals
-   */
-  medals(): Promise<Responses['get_characters_character_id_medals']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').standings()
-   *
-   * @returns The character's corporation standings
-   */
-  standings(): Promise<Responses['get_characters_character_id_standings']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').opportunities()
-   *
-   * @returns The character's progress through Eve's opportunities system
-   */
-  opportunities(): Promise<Responses['get_characters_character_id_opportunities']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').orders()
-   *
-   * @returns The character's active buy and sell market orders
-   */
-  orders(): Promise<Responses['get_characters_character_id_orders']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').blueprints()
-   *
-   * @returns The character's owned blueprints
-   */
-  blueprints(): Promise<Responses['get_characters_character_id_blueprints']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').roles()
-   *
-   * @returns The character's assigned roles in their corporation
-   */
-  roles(): Promise<Responses['get_characters_character_id_roles']>;
-
-  /**
-   * @esi_example esi.characters(1, 'token').industryJobs()
-   *
-   * @param includeCompleted Whether or not to include completed jobs, defaults
-   *     to false
-   * @returns List of industry jobs run by the character
-   */
-  industryJobs(includeCompleted?:boolean): Promise<Responses['get_characters_character_id_industry_jobs']>;
-}
-
-
-class CharacterImpl implements Character {
-  private base: CharacterInfo;
-
-  private allKills: PaginatedLoader<esi.killmail.Killmail>;
-  private allMails: PaginatedLoader<esi.killmail.KillmailLink>;
-  private kms_?: Killmail;
-
-  private autopilot_?: Autopilot;
-  private bookmarks_?: Bookmarks;
-  private calendar_?: Calendar;
-  private contacts_?: Contacts;
-  private corp_?: CharacterCorporation;
-  private fittings_?: Fittings;
-  private mail_?: Mail;
-  private colonies_?: Colonies;
-  private structures_?: Structures;
-  private window_?: Window;
-
-  constructor(private char: SSOAgent) {
-    this.base = new CharacterInfoImpl(char.agent, char.id);
-
-    this.allKills = makeIDBasedLoader(id => this.recentKills(id),
-        km => km.killmail_id, 50);
-    this.allMails = makeIDBasedLoader(id => this.recentKillmails(id),
-        km => km.killmail_id, 50);
-  }
-
-  get autopilot() {
-    if (this.autopilot_ === undefined) {
-      this.autopilot_ = makeAutopilot(this.char.agent, this.char.ssoToken);
+  get assets(): Assets {
+    if (this.assets_ === undefined) {
+      this.assets_ = makeAssets(this.agent);
     }
-    return this.autopilot_;
+    return this.assets_;
   }
 
-  get bookmarks() {
+  get bookmarks(): Bookmarks {
     if (this.bookmarks_ === undefined) {
-      this.bookmarks_ = makeBookmarks(this.char);
+      this.bookmarks_ = new Bookmarks(this.agent);
     }
     return this.bookmarks_;
   }
 
-  get calendar() {
+  get calendar(): Calendar {
     if (this.calendar_ === undefined) {
-      this.calendar_ = makeCalendar(this.char);
+      this.calendar_ = makeCalendar(this.agent);
     }
     return this.calendar_;
   }
 
-  get colonies() {
+  get colonies(): Colonies {
     if (this.colonies_ === undefined) {
-      this.colonies_ = makeColonies(this.char);
+      this.colonies_ = makeColonies(this.agent);
     }
     return this.colonies_;
   }
 
-  get contacts() {
+  get contacts(): Contacts {
     if (this.contacts_ === undefined) {
-      this.contacts_ = makeContacts(this.char);
+      this.contacts_ = makeContacts(this.agent);
     }
     return this.contacts_;
   }
 
-  get corporation() {
+  get contracts(): Contracts {
+    if (this.contracts_ === undefined) {
+      this.contracts_ = makeContracts(this.agent);
+    }
+    return this.contracts_;
+  }
+
+  get corporation(): AuthenticatedCorporation {
     if (this.corp_ === undefined) {
-      this.corp_ = makeCharacterCorporation(this.char);
+      this.corp_ = new AuthenticatedCorporation(this.agent.agent,
+          this.agent.ssoToken,
+          () => this.details().then(details => details.corporation_id),
+          this.agent.id);
     }
     return this.corp_;
   }
 
-  get fittings() {
+  get fittings(): Fittings {
     if (this.fittings_ === undefined) {
-      this.fittings_ = makeFittings(this.char);
+      this.fittings_ = makeFittings(this.agent);
     }
     return this.fittings_;
   }
 
-  get mail() {
+  get fleet(): CharacterFleet {
+    if (this.fleet_ === undefined) {
+      this.fleet_ = makeFleet(this.agent, 'character');
+    }
+    return this.fleet_;
+  }
+
+  get mail(): Mail {
     if (this.mail_ === undefined) {
-      this.mail_ = makeMail(this.char);
+      this.mail_ = new Mail(this.agent);
     }
     return this.mail_;
   }
 
-  get structures() {
+  get notifications(): Notifications {
+    if (this.notifications_ === undefined) {
+      this.notifications_ = new Notifications(this.agent);
+    }
+    return this.notifications_;
+  }
+
+  get skills(): Skills {
+    if (this.skills_ === undefined) {
+      this.skills_ = new Skills(this.agent);
+    }
+    return this.skills_;
+  }
+
+  get structures(): Structures {
     if (this.structures_ === undefined) {
-      this.structures_ = makeStructures(this.char);
+      // Do not provide a corporation ID so that it must be determined
+      // dynamically
+      this.structures_ = makeStructures(this.agent.agent, this.agent.ssoToken,
+          this.agent.id, undefined);
     }
     return this.structures_;
   }
 
-  get window() {
-    if (this.window_ === undefined) {
-      this.window_ = makeWindow(this.char.agent, this.char.ssoToken);
+  get ui(): UI {
+    if (this.ui_ === undefined) {
+      this.ui_ = new UI(this.agent);
     }
-    return this.window_;
+    return this.ui_;
   }
 
-  fleet(id: number) {
-    return makeFleet(
-        { agent: this.char.agent, id: id, ssoToken: this.char.ssoToken });
+  get wallet(): Wallet {
+    if (this.wallet_ === undefined) {
+      this.wallet_ = new Wallet(this.agent);
+    }
+    return this.wallet_;
   }
 
-  assets() {
-    return this.char.agent.request('get_characters_character_id_assets',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
-  }
-
-  clones() {
-    return this.char.agent.request('get_characters_character_id_clones',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
-  }
-
-  recentKills(maxKillId?: number) {
+  get kills(): IteratedKillmails {
     if (this.kms_ === undefined) {
-      this.kms_ = makeKillmail(this.char.agent);
+      this.kms_ = new IteratedKillmails(this.agent.agent,
+          r.impl.makeMaxIDStreamer(fromID => this.recentKillmails(fromID),
+              e => e.killmail_id, KILLMAIL_PAGE_SIZE));
+    }
+    return this.kms_;
+  }
+
+  private recentKillmails(maxKillId?: number) {
+    return this.agent.agent.request(
+        'get_characters_character_id_killmails_recent', {
+          path: { character_id: this.agent.id },
+          query: { max_kill_id: maxKillId, max_count: KILLMAIL_PAGE_SIZE }
+        }, this.agent.ssoToken);
+  }
+
+  /**
+   * @returns The character's current jump fatigue
+   */
+  fatigue(): Promise<Responses['get_characters_character_id_fatigue']> {
+    return this.agent.agent.request('get_characters_character_id_fatigue',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
+  }
+
+  /**
+   * @returns The character's titles
+   */
+  titles(): Promise<Responses['get_characters_character_id_titles']> {
+    return this.agent.agent.request('get_characters_character_id_titles',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
+  }
+
+  /**
+   * @esi_route get_characters_character_id_mining
+   *
+   * @returns An iterator over the character's mining ledger
+   */
+  miningLedger(): AsyncIterableIterator<esi.character.MiningRecord> {
+    if (this.mining_ === undefined) {
+      this.mining_ = r.impl.makePageBasedStreamer(
+          page => this.getMiningPage(page), 1000);
     }
 
-    return this.recentKillmails(maxKillId).then(kms => {
-      return Promise.all(
-          kms.map(km => this.kms_!(km.killmail_id, km.killmail_hash)));
-    });
+    return this.mining_();
   }
 
-  kills() {
-    return this.allKills.getAll();
+  private getMiningPage(page: number) {
+    return this.agent.agent.request('get_characters_character_id_mining',
+        { path: { character_id: this.agent.id }, query: { page: page } },
+        this.agent.ssoToken).then(result => ({ result, maxPages: undefined }));
   }
 
-  recentKillmails(maxKillId?: number) {
-    return this.char.agent.request(
-        'get_characters_character_id_killmails_recent', {
-          path: { character_id: this.char.id },
-          query: { max_kill_id: maxKillId, max_count: 50 }
-        }, this.char.ssoToken);
+  /**
+   * @returns The character's available jump clones
+   */
+  clones(): Promise<Responses['get_characters_character_id_clones']> {
+    return this.agent.agent.request('get_characters_character_id_clones',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  killmails() {
-    return this.allMails.getAll();
+  /**
+   * @returns The character's loyalty points with the different NPC groups
+   */
+  loyaltyPoints(): Promise<Responses['get_characters_character_id_loyalty_points']> {
+    return this.agent.agent.request(
+        'get_characters_character_id_loyalty_points',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  loyaltyPoints() {
-    return this.char.agent.request('get_characters_character_id_loyalty_points',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+  /**
+   * @returns The character's currently boarded ship
+   */
+  ship(): Promise<Responses['get_characters_character_id_ship']> {
+    return this.agent.agent.request('get_characters_character_id_ship',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  ship() {
-    return this.char.agent.request('get_characters_character_id_ship',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+  /**
+   * @returns The character's location in Eve
+   */
+  location(): Promise<Responses['get_characters_character_id_location']> {
+    return this.agent.agent.request('get_characters_character_id_location',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  location() {
-    return this.char.agent.request('get_characters_character_id_location',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+  /**
+   * @returns The character's online status
+   */
+  online(): Promise<Responses['get_characters_character_id_online']> {
+    return this.agent.agent.request('get_characters_character_id_online',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  online() {
-    return this.char.agent.request('get_characters_character_id_online',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
-  }
-
-  wallets() {
-    return this.char.agent.request('get_characters_character_id_wallets',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
-  }
-
-  skills() {
-    return this.char.agent.request('get_characters_character_id_skills',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
-  }
-
-  skillqueue() {
-    return this.char.agent.request('get_characters_character_id_skillqueue',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
-  }
-
-  agentResearch() {
-    return this.char.agent.request(
+  /**
+   * @returns The character's current research progress with known agents
+   */
+  research(): Promise<Responses['get_characters_character_id_agents_research']> {
+    return this.agent.agent.request(
         'get_characters_character_id_agents_research',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  chatChannels() {
-    return this.char.agent.request('get_characters_character_id_chat_channels',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+  /**
+   * @returns The character's current chat channel memberships
+   */
+  chatChannels(): Promise<Responses['get_characters_character_id_chat_channels']> {
+    return this.agent.agent.request('get_characters_character_id_chat_channels',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  medals() {
-    return this.char.agent.request('get_characters_character_id_medals',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+  /**
+   * @returns The character's earned medals
+   */
+  medals(): Promise<Responses['get_characters_character_id_medals']> {
+    return this.agent.agent.request('get_characters_character_id_medals',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  standings() {
-    return this.char.agent.request('get_characters_character_id_standings',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+  /**
+   * @returns The character's corporation standings
+   */
+  standings(): Promise<Responses['get_characters_character_id_standings']> {
+    return this.agent.agent.request('get_characters_character_id_standings',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  opportunities() {
-    return this.char.agent.request('get_characters_character_id_opportunities',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+  /**
+   * @returns The character's progress through Eve's opportunities system
+   */
+  opportunities(): Promise<Responses['get_characters_character_id_opportunities']> {
+    return this.agent.agent.request('get_characters_character_id_opportunities',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  orders() {
-    return this.char.agent.request('get_characters_character_id_orders',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+  /**
+   * @returns The character's active buy and sell market orders
+   */
+  orders(): Promise<Responses['get_characters_character_id_orders']> {
+    return this.agent.agent.request('get_characters_character_id_orders',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  blueprints() {
-    return this.char.agent.request('get_characters_character_id_blueprints',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
+  /**
+   * @returns The character's assigned roles in their corporation
+   */
+  roles(): Promise<Responses['get_characters_character_id_roles']> {
+    return this.agent.agent.request('get_characters_character_id_roles',
+        { path: { character_id: this.agent.id } }, this.agent.ssoToken);
   }
 
-  roles() {
-    return this.char.agent.request('get_characters_character_id_roles',
-        { path: { character_id: this.char.id } }, this.char.ssoToken);
-  }
-
-  industryJobs(includeCompleted = false) {
-    return this.char.agent.request('get_characters_character_id_industry_jobs',
+  /**
+   * @param includeCompleted Whether or not to include completed jobs, defaults
+   *     to false
+   * @returns List of industry jobs run by the character
+   */
+  industryJobs(includeCompleted: boolean = false): Promise<Responses['get_characters_character_id_industry_jobs']> {
+    return this.agent.agent.request('get_characters_character_id_industry_jobs',
         {
-          path: { character_id: this.char.id },
+          path: { character_id: this.agent.id },
           query: { include_completed: includeCompleted }
-        }, this.char.ssoToken);
+        }, this.agent.ssoToken);
   }
 
-  info() {
-    return this.base.info();
+  private get base(): Character {
+    if (this.base_ === undefined) {
+      this.base_ = new Character(this.agent.agent, this.id_);
+    }
+    return this.base_;
+  }
+
+  details() {
+    return this.base.details();
+  }
+
+  portraits() {
+    return this.base.portraits();
   }
 
   history() {
     return this.base.history();
   }
 
-  portrait() {
-    return this.base.portrait();
+  affiliations() {
+    return this.base.affiliations();
   }
 
-  id() {
-    return Promise.resolve(this.char.id);
+  names() {
+    return this.base.names();
+  }
+
+  ids() {
+    return Promise.resolve(this.agent.id);
   }
 }
