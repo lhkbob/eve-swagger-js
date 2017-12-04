@@ -331,6 +331,7 @@ function resolveReferences(spec) {
     // interest that might refer to them are the paths.
     resolveReferencesInObject(spec.paths, refs);
 }
+// FIXME add support for x-required-roles, at least for documentation generation
 class Route {
     constructor(api, httpMethod, path, data) {
         this.api = api;
@@ -525,7 +526,12 @@ class API {
         return this.spec.info.description || '';
     }
     get basePath() {
-        return this.spec.basePath || '';
+        if (this.spec.basePath === '/') {
+            return '';
+        }
+        else {
+            return this.spec.basePath || '';
+        }
     }
     get url() {
         return this.schemes[0] + '://' + this.spec.host;

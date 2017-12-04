@@ -1,21 +1,66 @@
-import { Search } from '../../internal/search';
 import { ESIAgent } from '../../internal/esi-agent';
-import { Responses } from '../../internal/esi-types';
+import { Responses, esi } from '../../esi';
+import * as r from '../../internal/resource-api';
+import { Star } from './stars';
+import { MappedStargates } from './stargates';
+import { MappedPlanets } from './planets';
+import { MappedStations } from './stations';
 /**
- * An api adapter for dealing with a single solar system, currently only
- * supporting fetching simple information and calculating routes between
- * systems.
+ * The API specification for all variants that access information about an solar
+ * system or multiple solar systems. This interface will not be used directly,
+ * but will be filtered through some mapper, such as {@link Async} or {@link
+    * Mapped} depending on what types of ids are being accessed. However, this
+ * allows for a concise and consistent specification for all variants: single,
+ * multiple, and all solar systems.
+ *
+ * When mapped, each key defined in this interface becomes a function that
+ * returns a Promise resolving to the key's type, or a collection related to the
+ * key's type if multiple solar systems are being accessed at once.
+ *
+ * This is an API wrapper over the end points handling solar systems in the
+ * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
  */
-export interface SolarSystem {
+export interface SolarSystemAPI {
+    details: Responses['get_universe_systems_system_id'];
+    jumpStats: number;
+    killStats: esi.universe.SystemKills;
+    sovereignty: esi.sovereignty.Map;
+    costIndices: esi.industry.CostIndex[];
+    names: string;
+}
+/**
+ * An api adapter for accessing various details of a single solar system,
+ * specified by a provided id when the api is instantiated.
+ */
+export declare class SolarSystem extends r.impl.SimpleResource implements r.Async<SolarSystemAPI> {
+    private agent;
+    private star_;
+    private gates_;
+    private planets_;
+    private stations_;
+    constructor(agent: ESIAgent, id: number);
     /**
-     * @esi_example esi.solarSystems(id).info()
-     *
-     * @return Information about the specific solar system
+     * @returns A MappedStations instance tied to the stations referenced in the
+     *    details of this solar system
      */
-    info(): Promise<Responses['get_universe_systems_system_id']>;
+    readonly stations: MappedStations;
+    /**
+     * @returns A Star API interface tied to the star referenced in the details
+     *    of this solar system
+     */
+    readonly star: Star;
+    /**
+     * @returns A MappedStargates instance tied to the stargates referenced in
+     *    the details of this solar system
+     */
+    readonly stargates: MappedStargates;
+    /**
+     * @returns A MappedPlanets instance tied to the planets referenced in the
+     *    details of this solar system
+     */
+    readonly planets: MappedPlanets;
     /**
      * @esi_route get_route_origin_destination [shortest]
-     * @esi_example esi.solarSystems(fromId).shortestRoute(toId, ...)
      *
      * @param to Destination solar system id
      * @param avoid Optional list of solar systems to avoid
@@ -25,7 +70,6 @@ export interface SolarSystem {
     shortestRoute(to: number, avoid?: number[], connections?: number[]): Promise<Responses['get_route_origin_destination']>;
     /**
      * @esi_route get_route_origin_destination [secure]
-     * @esi_example esi.solarSystems(fromId).secureRoute(toId, ...)
      *
      * @param to Destination solar system id
      * @param avoid Optional list of solar systems to avoid
@@ -40,67 +84,178 @@ export interface SolarSystem {
      * @param to Destination solar system id
      * @param avoid Optional list of solar systems to avoid
      * @param connections Optional list of solar systems to pass through
-     * @returns Route specified by ordered solar system ids
      */
     insecureRoute(to: number, avoid?: number[], connections?: number[]): Promise<Responses['get_route_origin_destination']>;
+    private getRoute(type, to, avoid?, connections?);
     /**
-     * @returns The solar system id
+     * @returns Information about the solar system
      */
-    id(): Promise<number>;
+    details(): Promise<esi.universe.System>;
+    /**
+     * @esi_route ~get_universe_system_jumps
+     *
+     * @returns The number of recent jumps through the system
+     */
+    jumpStats(): Promise<number>;
+    /**
+     * @esi_route ~get_universe_system_kills
+     *
+     * @returns The number of recent kills through the system
+     */
+    killStats(): Promise<esi.universe.SystemKills>;
+    /**
+     * @esi_route ~get_sovereignty_map
+     *
+     * @returns Sovereignty control information for the system
+     */
+    sovereignty(): Promise<esi.sovereignty.Map>;
+    /**
+     * @esi_route ~get_industry_systems
+     *
+     * @returns Industry cost indices for the system
+     */
+    costIndices(): Promise<esi.industry.CostIndex[]>;
+    /**
+     * @esi_route ~get_universe_systems_system_id
+     *
+     * @returns The name of the solar system
+     */
+    names(): Promise<string>;
 }
 /**
- * An api adapter that provides functions for accessing solar system information
- * via the [universe](https://esi.tech.ccp.is/latest/#/Universe) and
- * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.
+ * An api adapter for accessing various details of multiple solar system ids,
+ * specified by a provided an array or set of ids when the api is instantiated.
+ */
+export declare class MappedSolarSystems extends r.impl.SimpleMappedResource implements r.Mapped<SolarSystemAPI> {
+    private agent;
+    constructor(agent: ESIAgent, ids: number[] | Set<number> | r.impl.IDSetProvider);
+    /**
+     * @returns SolarSystem details mapped by solar system id
+     */
+    details(): Promise<Map<number, esi.universe.System>>;
+    /**
+     * @esi_route ~get_universe_system_jumps
+     *
+     * @returns Jump stats for the specified solar systems
+     */
+    jumpStats(): Promise<Map<any, any>>;
+    /**
+     * @esi_route ~get_universe_system_kills
+     *
+     * @returns Kill statistics for the specified solar systems
+     */
+    killStats(): Promise<Map<number, esi.universe.SystemKills>>;
+    /**
+     * @esi_route ~get_sovereignty_map
+     *
+     * @returns Sovereignty information for the specified solar systems
+     */
+    sovereignty(): Promise<Map<number, esi.sovereignty.Map>>;
+    /**
+     * @esi_route ~get_industry_systems
+     *
+     * @returns Cost indices for the specified solar systems
+     */
+    costIndices(): Promise<Map<any, any>>;
+    /**
+     * @esi_route post_universe_names [system]
+     *
+     * @returns The specified solar systems' names
+     */
+    names(): Promise<Map<number, string>>;
+}
+/**
+ * An api adapter for accessing various details about every solar system in the
+ * universe.
+ */
+export declare class IteratedSolarSystems extends r.impl.SimpleIteratedResource<number> implements r.Iterated<SolarSystemAPI> {
+    private agent;
+    constructor(agent: ESIAgent);
+    /**
+     * @returns The details of every solar system in the universe
+     */
+    details(): AsyncIterableIterator<[number, esi.universe.System]>;
+    /**
+     * @esi_route get_universe_system_jumps
+     *
+     * @returns Jump statistics for every solar system in the universe, besides
+     *    worm hole systems
+     */
+    jumpStats(): AsyncIterableIterator<[number, number]>;
+    /**
+     * @esi_route get_universe_system_kills
+     *
+     * @returns Kill statistics for every solar system in the universe, besides
+     *    worm hole systems
+     */
+    killStats(): AsyncIterableIterator<[number, esi.universe.SystemKills]>;
+    /**
+     * @esi_route get_sovereignty_map
+     *
+     * @returns Sovereignty information for all solar systems
+     */
+    sovereignty(): AsyncIterableIterator<[number, esi.sovereignty.Map]>;
+    /**
+     * @esi_route get_industry_systems
+     *
+     * @returns Industry cost indices for all solar systems
+     */
+    costIndices(): AsyncIterableIterator<[number, esi.industry.CostIndex[]]>;
+    /**
+     * @esi_route post_universe_names [system]
+     *
+     * @returns Names of all solar systems in the universe
+     */
+    names(): AsyncIterableIterator<[number, string]>;
+}
+/**
+ * A functional interface for getting APIs for a specific solar system or a
+ * known set of solar system ids.
  */
 export interface SolarSystems {
     /**
-     * A Search module instance configured to search over the `'solarsystem'`
-     * type.
+     * Create a new solar system api targeting every single system in the game.
      *
-     * @esi_route get_search [solarsystem]
-     * @esi_example esi.solarSystems.search('text')
+     * @esi_route ids get_universe_systems
+     *
+     * @returns An IteratedSolarSystems API wrapper
      */
-    search: Search;
+    (): IteratedSolarSystems;
     /**
-     * Create a new SolarSystem end point targeting the particular system by `id`.
+     * Create a new solar system api targeting the particular solar system by
+     * `id`.
      *
      * @param id The solar system id
-     * @returns SolarSystem API wrapper
+     * @returns An SolarSystem API wrapper for the given id
      */
     (id: number): SolarSystem;
     /**
-     * @esi_example esi.solarSystems()
+     * Create a new solar system api targeting the multiple solar system ids. If
+     * an array is provided, duplicates are removed (although the input array is
+     * not modified).
      *
-     * @returns All solar system ids in Eve
+     * @param ids The solar system ids
+     * @returns A MappedSolarSystems API wrapper for the given ids
      */
-    (): Promise<Responses['get_universe_systems']>;
+    (ids: number[] | Set<number>): MappedSolarSystems;
     /**
-     * @esi_example esi.solarSystems.jumpStats()
+     * Create a new solar system api targeting the systems returned from a
+     * search given the `query` text.
      *
-     * @returns Jump transit statistics for all solar systems for the last hour
-     */
-    jumpStats(): Promise<Responses['get_universe_system_jumps']>;
-    /**
-     * @esi_example esi.solarSystems.killStats()
+     * @esi_route ids get_search [system]
      *
-     * @returns Kill statistics for all solar systems for the last hour
+     * @param query The search terms
+     * @param strict Whether or not the search is strict, defaults to false
+     * @returns A MappedSolarSystems API which accesses systems based on the
+     *    dynamic search results
      */
-    killStats(): Promise<Responses['get_universe_system_kills']>;
-    /**
-     * @esi_route post_universe_names [solar_system]
-     * @esi_example esi.solarSystems.names()
-     *
-     * @param ids If no ids are provided, then all names are returned.
-     * @return Map from solar system id to name
-     */
-    names(ids?: number[]): Promise<Map<number, string>>;
+    (query: string, strict?: boolean): MappedSolarSystems;
 }
 /**
- * Create a new {@link SolarSystems} instance that uses the given `agent` to
+ * Create a new SolarSystems instance that uses the given `agent` to
  * make its HTTP requests to the ESI interface.
  *
  * @param agent The agent making actual requests
- * @returns An SolarSystems API instance
+ * @returns A SolarSystems instance
  */
 export declare function makeSolarSystems(agent: ESIAgent): SolarSystems;

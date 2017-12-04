@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const bottleneck_1 = require("bottleneck");
 const SuperAgent = require("superagent");
 const Moment = require("moment");
-const esi_types_1 = require("./esi-types");
+const esi_1 = require("../esi");
 const error_1 = require("../error");
 const cache_1 = require("./cache");
 /**
@@ -65,7 +65,7 @@ class ESIAgent {
      */
     request(route, parameters, accessToken) {
         return Promise.resolve().then(() => {
-            const config = esi_types_1.ROUTE_MAP[route];
+            const config = esi_1.ROUTE_MAP[route];
             const pathArgs = parameters ? parameters.path : undefined;
             const queryArgs = parameters ? parameters.query : undefined;
             const body = parameters ? parameters.body : undefined;

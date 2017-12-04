@@ -73,12 +73,30 @@ class Namespace {
         if (other === this) {
             return this;
         }
+        let suffixPath = [];
         let n1 = this;
         while (n1) {
             let n2 = other;
             while (n2) {
                 if (n1 === n2) {
-                    // Found a match that was as deep as possible
+                    // Found a match that was as deep as possible, add as much of the
+                    // suffix that is included in the other namespace.
+                    let lastSuffix = -1;
+                    n2 = other;
+                    for (let i = 0; i < suffixPath.length; i++) {
+                        if (n2 === undefined) {
+                            break;
+                        }
+                        if (n2.name === suffixPath[i]) {
+                            // Keep going
+                            lastSuffix = i;
+                            n2 = n2.parent_;
+                        }
+                    }
+                    // Now ensure everything from lastSuffix to 0 is appended to n1
+                    for (let i = lastSuffix; i >= 0; i--) {
+                        n1 = n1.ensure(suffixPath[i]);
+                    }
                     return n1;
                 }
                 else {
@@ -87,6 +105,9 @@ class Namespace {
                 }
             }
             // No match at current node in this space, so move up this path
+            if (n1.name) {
+                suffixPath.push(n1.name);
+            }
             n1 = n1.parent;
         }
         // No match at all so return the empty namespace
@@ -155,8 +176,8 @@ class Namespace {
     }
     static forRoute(route) {
         // First look for an override
-        if (type_overrides_1.NAMESPACE_OVERRIDES[route.id]) {
-            return [Namespace.parse(type_overrides_1.NAMESPACE_OVERRIDES[route.id]), true];
+        if (type_overrides_1.ROUTE_NAMESPACE_OVERRIDES[route.id]) {
+            return [Namespace.parse(type_overrides_1.ROUTE_NAMESPACE_OVERRIDES[route.id]), true];
         }
         // Else start at ESI and proceed
         let root = Namespace.parse('esi');
@@ -203,7 +224,21 @@ class Namespace {
         for (let type of routesUsingType.keys()) {
             let routes = routesUsingType.get(type);
             let finalNamespace;
-            if (type.hasDeclaration) {
+            // Check for explicit
+            for (let t of type.titles) {
+                if (type_overrides_1.TYPE_NAMESPACE_OVERRIDES[t]) {
+                    let namespace = Namespace.parse(type_overrides_1.TYPE_NAMESPACE_OVERRIDES[t]);
+                    if (finalNamespace && finalNamespace[0] !== namespace) {
+                        console.error(t + '\'s override to ' + namespace.fullName
+                            + ' shadows explicit name ' + finalNamespace[0].fullName);
+                        console.error('Triggered by type:', type);
+                    }
+                    finalNamespace = [namespace, true];
+                }
+            }
+            // Place type based on its route membership, unless already have a
+            // namespace
+            if (type.hasDeclaration && finalNamespace === undefined) {
                 for (let route of routes) {
                     let namespace = routeNamespaces.get(route);
                     if (namespace) {
@@ -214,8 +249,8 @@ class Namespace {
                                 // explicit namespace that was merged into the type
                                 if (finalNamespace[1] && finalNamespace[0] !== namespace[0]) {
                                     // Previous explicit namespace from another route is different
-                                    console.error(route + '\'s override to ' + namespace[0].fullName
-                                        + ' would shadow explicit name of '
+                                    console.error(route + '\'s override to '
+                                        + namespace[0].fullName + ' shadows explicit name of '
                                         + finalNamespace[0].fullName);
                                     console.error('Triggered by type:', type);
                                     finalNamespace = [finalNamespace[0].join(namespace[0]), true];

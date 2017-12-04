@@ -1,1 +1,0 @@
-{"version":3,"file":"killmail.js","sourceRoot":"","sources":["../../../src/api/killmail.ts"],"names":[],"mappings":";;AAmBA;;;;;;GAMG;AACH,sBAA6B,KAAe;IAC1C,MAAM,CAAY,UAAU,EAAU,EAAE,IAAY;QAClD,MAAM,CAAC,KAAK,CAAC,OAAO,CAAC,yCAAyC,EAC1D,EAAE,IAAI,EAAE,EAAE,WAAW,EAAE,EAAE,EAAE,aAAa,EAAE,IAAI,EAAE,EAAE,CAAC,CAAC;IAC1D,CAAC,CAAC;AACJ,CAAC;AALD,oCAKC"}

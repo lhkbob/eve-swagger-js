@@ -73,7 +73,7 @@ function getTypeDebugLog(type) {
     for (let t of type.titles) {
         log += `  - ${t}\n`;
     }
-    log += ` Extra:\n`;
+    log += ` Considered namespaces:\n`;
     for (let l of type.log) {
         log += `  - ${l}\n`;
     }
@@ -81,7 +81,7 @@ function getTypeDebugLog(type) {
 }
 function getNamespaceDebugLog(namespace) {
     let log = '-----------------\n';
-    log += `Namespace ${namespace.fullName} (type count = ${namespace.declarationCount}:\n`;
+    log += `Namespace ${namespace.fullName} (type count = ${namespace.declarationCount}):\n`;
     for (let l of namespace.log) {
         log += `  - ${l}\n`;
     }
@@ -228,7 +228,7 @@ function parseArguments() {
     let options = {
         printTypeScript: true,
         verbose: false,
-        outputFile: path_1.join(__dirname, '../../../src/internal/esi-types.ts'),
+        outputFile: path_1.join(__dirname, '../../../src/esi.ts'),
         restrictNamespace: undefined,
         restrictRoute: undefined,
         parameter: undefined,

@@ -1,5 +1,6 @@
-import { ESIAgent } from './esi-agent';
-import { esi } from './esi-types';
+import { ESIAgent, SSOAgent } from './esi-agent';
+import { esi } from '../esi';
+import * as r from './resource-api';
 /**
  * An api adapter over the end points handling search and character search via
  * functions in the [search](https://esi.tech.ccp.is/latest/#/Search) ESI
@@ -14,19 +15,10 @@ export interface Search {
      * the Search instance.
      *
      * @param text The search terms of the query
+     * @param strict Whether or not the search is strict, defaults to false
      * @returns IDs satisfying the search terms for a non-strict search
      */
-    (text: string): Promise<number[]>;
-    /**
-     * Search for matching IDs in EVE given the terms in `text`. This is the
-     * strict search variant. The category of the returned IDs and whether or not
-     * the search uses the character end point is dependent on the source of the
-     * Search instance.
-     *
-     * @param text The strict search terms of the query
-     * @returns IDs satisfying the search terms for a strict search
-     */
-    strict(text: string): Promise<number[]>;
+    (text: string, strict?: boolean): Promise<number[]>;
 }
 /**
  * Create a new {@link Search} instance that makes request with `agent`,
@@ -36,11 +28,9 @@ export interface Search {
  *
  * @param agent The agent to execute HTTP requests with
  * @param category The search category results are limited to
- * @param character The character ID defining the search space
- * @param token The SSO access token for the character
  * @returns A Search instance that can be used to run character search queries
  */
-export declare function makeCharacterSearch(agent: ESIAgent, category: esi.character.SearchCategory, character: number, token: string): Search;
+export declare function makeCharacterSearch(agent: SSOAgent<number | r.impl.IDProvider>, category: esi.character.SearchCategory): Search;
 /**
  * Create a new {@link Search} instance that makes request with `agent`,
  * searches within the given category and uses the default search space.

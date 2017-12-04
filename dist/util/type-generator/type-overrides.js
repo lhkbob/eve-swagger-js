@@ -4,7 +4,10 @@ const path_1 = require("path");
 const fs_1 = require("fs");
 const namespaces = loadNamespaceOverrides();
 // Title refers to a route id, name is a valid namespace path
-exports.NAMESPACE_OVERRIDES = namespaces.explicit;
+exports.ROUTE_NAMESPACE_OVERRIDES = namespaces.explicit.routes;
+// Title refers to the generated title for a type, name is the overridden
+// namespace path
+exports.TYPE_NAMESPACE_OVERRIDES = namespaces.explicit.types;
 // Full namespaces that should be collapsed into their parent, these
 // are spaces that can be consolidated logically but don't match the present
 // set of heuristics for automatic collapse.

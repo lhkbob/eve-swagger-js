@@ -1,0 +1,1 @@
+{"version":3,"file":"insurance.js","sourceRoot":"","sources":["../../../../src/api/schema/insurance.ts"],"names":[],"mappings":";;AAGA;;;GAGG;AACH;IACE,YAAoB,KAAc;QAAd,UAAK,GAAL,KAAK,CAAS;IAAG,CAAC;IAEtC;;OAEG;IACH,MAAM;QACJ,MAAM,CAAC,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC,sBAAsB,EAAE,SAAS,CAAC,CAAC;IAC/D,CAAC;CACF;AATD,8BASC"}

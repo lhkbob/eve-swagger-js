@@ -155,7 +155,7 @@ class ExportableType {
             else {
                 descSet = this.descriptions;
             }
-            descSet.add(toMarkdownList(description));
+            descSet.add(description);
         }
     }
     /*
@@ -862,9 +862,16 @@ class ExportableType {
             if (response instanceof ExportableType) {
                 response.titles[0] = routeID + suffix;
                 routeAggregator.addDependency('__response__', response);
-                response.addDescription('This is the response type for the route, [`'
+                let routeMessage = 'This is the response type for the route, [`'
                     + route.httpMethod.toUpperCase() + ' ' + route.path + '`]('
-                    + route.docURL + ').');
+                    + route.docURL + ').';
+                if (response.isArray) {
+                    // Add the message to the element type
+                    response.dependency('[]').addDescription(routeMessage);
+                }
+                else {
+                    response.addDescription(routeMessage);
+                }
             }
             else {
                 // Explicitly convert it to one, even though it's a simple type so that
@@ -1031,30 +1038,6 @@ function addJSDoc(node, description) {
     }
     comment += ' ';
     return ts.addSyntheticLeadingComment(node, ts.SyntaxKind.MultiLineCommentTrivia, comment, true);
-}
-function toMarkdownList(description) {
-    // If the description contains a list pattern formed by ' - ', it splits it
-    // and moves each to its own line. Text preceeding first ' - ' is included
-    // but not as a list element. It is assumed that there is no closing, non-list
-    // text that should not be on its own line.
-    let listStart = description.indexOf('- ');
-    if (listStart >= 0) {
-        let preList = description.substring(0, listStart);
-        let list = description.substring(listStart).split('- ');
-        description = preList + '\n\n';
-        for (let e of list) {
-            e = e.trim();
-            if (e !== '') {
-                // Force punctuation
-                if (e[e.length - 1] !== '.' && e[e.length - 1] !== '?' && e[e.length
-                    - 1] !== '!') {
-                    e += '.';
-                }
-                description += '- ' + e + '\n';
-            }
-        }
-    }
-    return description;
 }
 function sortByRoute(a, b) {
     // First compare by tag

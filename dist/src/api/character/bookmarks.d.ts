@@ -1,29 +1,27 @@
 import { SSOAgent } from '../../internal/esi-agent';
-import { Responses } from '../../internal/esi-types';
+import { esi } from '../../esi';
 /**
- * An api adapter over the end points handling a character's bookmarks via
- * functions in the [bookmarks](https://esi.tech.ccp.is/latest/#/Bookmarks)
- * ESI endpoints.
+ * An api adapter that provides functions for accessing an authenticated
+ * character's bookmarks via the
+ * [bookmark](https://esi.tech.ccp.is/latest/#/Bookmarks) ESI end points.
  */
-export interface Bookmarks {
+export declare class Bookmarks {
+    private agent;
+    private details_?;
+    private folders_?;
+    constructor(agent: SSOAgent<number>);
     /**
-     * @esi_example esi.characters(id, 'token').bookmarks()
+     * @esi_route get_characters_character_id_bookmarks
      *
-     * @returns Details about the character's bookmarks
+     * @return All bookmark details for the character
      */
-    (): Promise<Responses['get_characters_character_id_bookmarks']>;
+    details(): AsyncIterableIterator<esi.character.Bookmark>;
     /**
-     * @esi_example esi.characters(id, 'token').bookmarks.folders()
+     * @esi_route get_characters_character_id_bookmarks_folders
      *
-     * @returns Information about a character's bookmark folders
+     * @returns An iterator over the folders for bookmark management
      */
-    folders(): Promise<Responses['get_characters_character_id_bookmarks_folders']>;
+    folders(): AsyncIterableIterator<esi.character.BookmarksFolder>;
+    private getDetails();
+    private getFolders();
 }
-/**
- * Create a new {@link Bookmarks} instance that uses the given character agent
- * to make its HTTP requests to the ESI interface.
- *
- * @param char The character access information
- * @returns An Bookmarks API instance
- */
-export declare function makeBookmarks(char: SSOAgent): Bookmarks;
