@@ -6,12 +6,6 @@ import { Character, CharacterAPI, MappedCharacters } from './character/character
 import { getIteratedNames } from '../internal/names';
 import { getIteratedValues } from '../internal/batch';
 
-// FIXME move this into a fleet/ package and split it into multiple files
-// FIXME can probably move it outside the character package as well, since it
-// doesn't use the character id and only requires the token for the fleet boss.
-// This would then mirror the planned changes to have corporation/ get its own
-// package as well
-
 /**
  * The API specification for all variants that access information about a
  * fleet's specific squad or squads. This interface will not be used
