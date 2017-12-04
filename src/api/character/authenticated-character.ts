@@ -21,6 +21,7 @@ import { Assets, makeAssets } from './assets';
 import { Notifications } from './notifications';
 import { Skills } from './skills';
 import { Wallet } from './wallet';
+import { AuthenticatedAlliance } from '../alliance/authenticated-alliance';
 
 const KILLMAIL_PAGE_SIZE = 500;
 
@@ -40,13 +41,15 @@ export class AuthenticatedCharacter extends r.impl.SimpleResource implements r.A
   private kms_?: IteratedKillmails;
   private mining_?: r.impl.ResourceStreamer<esi.character.MiningRecord>;
 
+  private corp_?: AuthenticatedCorporation;
+  private alliance_?: AuthenticatedAlliance;
+
   private assets_?: Assets;
   private bookmarks_?: Bookmarks;
   private calendar_?: Calendar;
   private colonies_?: Colonies;
   private contacts_?: Contacts;
   private contracts_?: Contracts;
-  private corp_?: AuthenticatedCorporation;
   private fittings_?: Fittings;
   private fleet_?: CharacterFleet;
   private mail_?: Mail;
@@ -110,6 +113,15 @@ export class AuthenticatedCharacter extends r.impl.SimpleResource implements r.A
           this.agent.id);
     }
     return this.corp_;
+  }
+
+  get alliance(): AuthenticatedAlliance {
+    if (this.alliance_ === undefined) {
+      this.alliance_ = new AuthenticatedAlliance(this.agent.agent,
+          this.agent.ssoToken,
+          () => this.details().then(details => details.alliance_id || 0));
+    }
+    return this.alliance_;
   }
 
   get fittings(): Fittings {
