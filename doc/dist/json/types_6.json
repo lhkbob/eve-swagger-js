@@ -1,0 +1,437 @@
+[
+    {
+        "key": "esi_industry_CostIndex",
+        "type": {
+            "kind": "interface",
+            "name": "CostIndex",
+            "members": [
+                "activity",
+                "cost_index"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_industry_Facility",
+        "type": {
+            "kind": "interface",
+            "name": "Facility",
+            "members": [
+                "facility_id",
+                "owner_id",
+                "region_id",
+                "solar_system_id",
+                "tax",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_industry_JobStatus",
+        "type": {
+            "kind": "enum",
+            "name": "JobStatus",
+            "members": [
+                "ACTIVE",
+                "CANCELLED",
+                "DELIVERED",
+                "PAUSED",
+                "READY",
+                "REVERTED"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_industry_System",
+        "type": {
+            "kind": "interface",
+            "name": "System",
+            "members": [
+                "cost_indices",
+                "solar_system_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_killmail_Attacker",
+        "type": {
+            "kind": "interface",
+            "name": "Attacker",
+            "members": [
+                "alliance_id",
+                "character_id",
+                "corporation_id",
+                "damage_done",
+                "faction_id",
+                "final_blow",
+                "security_status",
+                "ship_type_id",
+                "weapon_type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_killmail_Charge",
+        "type": {
+            "kind": "interface",
+            "name": "Charge",
+            "members": [
+                "flag",
+                "item_type_id",
+                "quantity_destroyed",
+                "quantity_dropped",
+                "singleton"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_killmail_Item",
+        "type": {
+            "kind": "interface",
+            "name": "Item",
+            "members": [
+                "flag",
+                "item_type_id",
+                "items",
+                "quantity_destroyed",
+                "quantity_dropped",
+                "singleton"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_killmail_Killmail",
+        "type": {
+            "kind": "interface",
+            "name": "Killmail",
+            "members": [
+                "attackers",
+                "killmail_id",
+                "killmail_time",
+                "moon_id",
+                "solar_system_id",
+                "victim",
+                "war_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_killmail_KillmailLink",
+        "type": {
+            "kind": "interface",
+            "name": "KillmailLink",
+            "members": [
+                "killmail_hash",
+                "killmail_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_market_History",
+        "type": {
+            "kind": "interface",
+            "name": "History",
+            "members": [
+                "average",
+                "date",
+                "highest",
+                "lowest",
+                "order_count",
+                "volume"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_market_MarketGroup",
+        "type": {
+            "kind": "interface",
+            "name": "MarketGroup",
+            "members": [
+                "description",
+                "market_group_id",
+                "name",
+                "parent_group_id",
+                "types"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_market_Order",
+        "type": {
+            "kind": "interface",
+            "name": "Order",
+            "members": [
+                "duration",
+                "is_buy_order",
+                "issued",
+                "location_id",
+                "min_volume",
+                "order_id",
+                "price",
+                "range",
+                "type_id",
+                "volume_remain",
+                "volume_total"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_market_OrderRange",
+        "type": {
+            "kind": "enum",
+            "name": "OrderRange",
+            "members": [
+                "REGION",
+                "SOLARSYSTEM",
+                "STATION",
+                "V_1",
+                "V_10",
+                "V_2",
+                "V_20",
+                "V_3",
+                "V_30",
+                "V_4",
+                "V_40",
+                "V_5"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_market_OrderState",
+        "type": {
+            "kind": "enum",
+            "name": "OrderState",
+            "members": [
+                "CANCELLED",
+                "CHARACTER_DELETED",
+                "CLOSED",
+                "EXPIRED",
+                "OPEN",
+                "PENDING"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_market_Price",
+        "type": {
+            "kind": "interface",
+            "name": "Price",
+            "members": [
+                "adjusted_price",
+                "average_price",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_sovereignty_Campaign",
+        "type": {
+            "kind": "interface",
+            "name": "Campaign",
+            "members": [
+                "attackers_score",
+                "campaign_id",
+                "constellation_id",
+                "defender_id",
+                "defender_score",
+                "event_type",
+                "participants",
+                "solar_system_id",
+                "start_time",
+                "structure_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_sovereignty_EventType",
+        "type": {
+            "kind": "enum",
+            "name": "EventType",
+            "members": [
+                "IHUB_DEFENSE",
+                "STATION_DEFENSE",
+                "STATION_FREEPORT",
+                "TCU_DEFENSE"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_sovereignty_Map",
+        "type": {
+            "kind": "interface",
+            "name": "Map",
+            "members": [
+                "alliance_id",
+                "corporation_id",
+                "faction_id",
+                "system_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_sovereignty_Participant",
+        "type": {
+            "kind": "interface",
+            "name": "Participant",
+            "members": [
+                "alliance_id",
+                "score"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_sovereignty_Structure",
+        "type": {
+            "kind": "interface",
+            "name": "Structure",
+            "members": [
+                "alliance_id",
+                "solar_system_id",
+                "structure_id",
+                "structure_type_id",
+                "vulnerability_occupancy_level",
+                "vulnerable_end_time",
+                "vulnerable_start_time"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Bloodline",
+        "type": {
+            "kind": "interface",
+            "name": "Bloodline",
+            "members": [
+                "bloodline_id",
+                "charisma",
+                "corporation_id",
+                "description",
+                "intelligence",
+                "memory",
+                "name",
+                "perception",
+                "race_id",
+                "ship_type_id",
+                "willpower"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Category",
+        "type": {
+            "kind": "interface",
+            "name": "Category",
+            "members": [
+                "category_id",
+                "groups",
+                "name",
+                "published"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Constellation",
+        "type": {
+            "kind": "interface",
+            "name": "Constellation",
+            "members": [
+                "constellation_id",
+                "name",
+                "position",
+                "region_id",
+                "systems"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_DogmaAttribute",
+        "type": {
+            "kind": "interface",
+            "name": "DogmaAttribute",
+            "members": [
+                "attribute_id",
+                "value"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_DogmaEffect",
+        "type": {
+            "kind": "interface",
+            "name": "DogmaEffect",
+            "members": [
+                "effect_id",
+                "is_default"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    }
+]

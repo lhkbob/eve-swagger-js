@@ -1,0 +1,252 @@
+[
+    {
+        "key": "post_characters_character_id_mail",
+        "label": "post /v1/characters/{character_id}/mail/",
+        "tag": "Mail",
+        "apiURL": "/v1/characters/{character_id}/mail/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Mail/post_characters_character_id_mail",
+        "description": "Create and send a new mail.",
+        "usages": []
+    },
+    {
+        "key": "post_characters_character_id_mail_labels",
+        "label": "post /v2/characters/{character_id}/mail/labels/",
+        "tag": "Mail",
+        "apiURL": "/v2/characters/{character_id}/mail/labels/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Mail/post_characters_character_id_mail_labels",
+        "description": "Create a mail label.",
+        "usages": []
+    },
+    {
+        "key": "put_characters_character_id_mail_mail_id",
+        "label": "put /v1/characters/{character_id}/mail/{mail_id}/",
+        "tag": "Mail",
+        "apiURL": "/v1/characters/{character_id}/mail/{mail_id}/",
+        "httpMethod": "put",
+        "docURL": "https://esi.tech.ccp.is/#!/Mail/put_characters_character_id_mail_mail_id",
+        "description": "Update metadata about a mail.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_orders",
+        "label": "get /v1/characters/{character_id}/orders/",
+        "tag": "Market",
+        "apiURL": "/v1/characters/{character_id}/orders/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Market/get_characters_character_id_orders",
+        "description": "List market orders placed by a character.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_orders",
+        "label": "get /v1/corporations/{corporation_id}/orders/",
+        "tag": "Market",
+        "apiURL": "/v1/corporations/{corporation_id}/orders/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Market/get_corporations_corporation_id_orders",
+        "description": "List market orders placed on behalf of a corporation.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_markets_region_id_history",
+        "label": "get /v1/markets/{region_id}/history/",
+        "tag": "Market",
+        "apiURL": "/v1/markets/{region_id}/history/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Market/get_markets_region_id_history",
+        "description": "Return a list of historical market statistics for the specified type in a region.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_markets_region_id_orders",
+        "label": "get /v1/markets/{region_id}/orders/",
+        "tag": "Market",
+        "apiURL": "/v1/markets/{region_id}/orders/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Market/get_markets_region_id_orders",
+        "description": "Return a list of orders in a region.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_markets_region_id_types",
+        "label": "get /v1/markets/{region_id}/types/",
+        "tag": "Market",
+        "apiURL": "/v1/markets/{region_id}/types/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Market/get_markets_region_id_types",
+        "description": "Return a list of type IDs that have active orders in the region, for efficient market indexing.This route is cached for up to 600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_markets_groups",
+        "label": "get /v1/markets/groups/",
+        "tag": "Market",
+        "apiURL": "/v1/markets/groups/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Market/get_markets_groups",
+        "description": "Get a list of item groups.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_markets_groups_market_group_id",
+        "label": "get /v1/markets/groups/{market_group_id}/",
+        "tag": "Market",
+        "apiURL": "/v1/markets/groups/{market_group_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Market/get_markets_groups_market_group_id",
+        "description": "Get information on an item group.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_markets_prices",
+        "label": "get /v1/markets/prices/",
+        "tag": "Market",
+        "apiURL": "/v1/markets/prices/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Market/get_markets_prices",
+        "description": "Return a list of prices.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_markets_structures_structure_id",
+        "label": "get /v1/markets/structures/{structure_id}/",
+        "tag": "Market",
+        "apiURL": "/v1/markets/structures/{structure_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Market/get_markets_structures_structure_id",
+        "description": "Return all orders in a structure.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_opportunities",
+        "label": "get /v1/characters/{character_id}/opportunities/",
+        "tag": "Opportunities",
+        "apiURL": "/v1/characters/{character_id}/opportunities/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Opportunities/get_characters_character_id_opportunities",
+        "description": "Return a list of tasks finished by a character.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_opportunities_groups",
+        "label": "get /v1/opportunities/groups/",
+        "tag": "Opportunities",
+        "apiURL": "/v1/opportunities/groups/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Opportunities/get_opportunities_groups",
+        "description": "Return a list of opportunities groups.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_opportunities_groups_group_id",
+        "label": "get /v1/opportunities/groups/{group_id}/",
+        "tag": "Opportunities",
+        "apiURL": "/v1/opportunities/groups/{group_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Opportunities/get_opportunities_groups_group_id",
+        "description": "Return information of an opportunities group.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_opportunities_tasks",
+        "label": "get /v1/opportunities/tasks/",
+        "tag": "Opportunities",
+        "apiURL": "/v1/opportunities/tasks/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Opportunities/get_opportunities_tasks",
+        "description": "Return a list of opportunities tasks.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_opportunities_tasks_task_id",
+        "label": "get /v1/opportunities/tasks/{task_id}/",
+        "tag": "Opportunities",
+        "apiURL": "/v1/opportunities/tasks/{task_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Opportunities/get_opportunities_tasks_task_id",
+        "description": "Return information of an opportunities task.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_planets",
+        "label": "get /v1/characters/{character_id}/planets/",
+        "tag": "Planetary Interaction",
+        "apiURL": "/v1/characters/{character_id}/planets/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Planetary Interaction/get_characters_character_id_planets",
+        "description": "Returns a list of all planetary colonies owned by a character.This route is cached for up to 600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_planets_planet_id",
+        "label": "get /v3/characters/{character_id}/planets/{planet_id}/",
+        "tag": "Planetary Interaction",
+        "apiURL": "/v3/characters/{character_id}/planets/{planet_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Planetary Interaction/get_characters_character_id_planets_planet_id",
+        "description": "Returns full details on the layout of a single planetary colony, including links, pins and routes. Note: Planetary information is only recalculated when the colony is viewed through the client. Information will not update until this criteria is met.This route is cached for up to 600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_customs_offices",
+        "label": "get /v1/corporations/{corporation_id}/customs_offices/",
+        "tag": "Planetary Interaction",
+        "apiURL": "/v1/corporations/{corporation_id}/customs_offices/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Planetary Interaction/get_corporations_corporation_id_customs_offices",
+        "description": "List customs offices owned by a corporation.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_schematics_schematic_id",
+        "label": "get /v1/universe/schematics/{schematic_id}/",
+        "tag": "Planetary Interaction",
+        "apiURL": "/v1/universe/schematics/{schematic_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Planetary Interaction/get_universe_schematics_schematic_id",
+        "description": "Get information on a planetary factory schematic.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_route_origin_destination",
+        "label": "get /v1/route/{origin}/{destination}/",
+        "tag": "Routes",
+        "apiURL": "/v1/route/{origin}/{destination}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Routes/get_route_origin_destination",
+        "description": "Get the systems between origin and destination.This route is cached for up to 86400 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_search",
+        "label": "get /v2/characters/{character_id}/search/",
+        "tag": "Search",
+        "apiURL": "/v2/characters/{character_id}/search/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Search/get_characters_character_id_search",
+        "description": "Search for entities that match a given sub-string.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_search",
+        "label": "get /v1/search/",
+        "tag": "Search",
+        "apiURL": "/v1/search/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Search/get_search",
+        "description": "Search for entities that match a given sub-string.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_attributes",
+        "label": "get /v1/characters/{character_id}/attributes/",
+        "tag": "Skills",
+        "apiURL": "/v1/characters/{character_id}/attributes/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Skills/get_characters_character_id_attributes",
+        "description": "Return attributes of a character.This route is cached for up to 3600 seconds.",
+        "usages": []
+    }
+]

@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false
+  },
+  "include": [
+    "tools/**/*.ts"
+  ],
+  "exclude": [
+    "tools/doc/vue/**/*"
+  ]
+}

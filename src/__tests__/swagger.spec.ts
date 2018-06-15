@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import {makeAPI} from '../index';
-import * as swagger from '../../util/esi-api';
+import * as swagger from '../../tools/esi-api';
 
 const swaggerImpl = swagger.API.getLocalAPI();
 const swaggerLatest = swagger.API.getRemoteAPI();

@@ -1,0 +1,411 @@
+[
+    {
+        "key": "esi_dogma_Attribute",
+        "type": {
+            "kind": "interface",
+            "name": "Attribute",
+            "members": [
+                "attribute_id",
+                "default_value",
+                "description",
+                "display_name",
+                "high_is_good",
+                "icon_id",
+                "name",
+                "published",
+                "stackable",
+                "unit_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_dogma_Effect",
+        "type": {
+            "kind": "interface",
+            "name": "Effect",
+            "members": [
+                "description",
+                "disallow_auto_repeat",
+                "discharge_attribute_id",
+                "display_name",
+                "duration_attribute_id",
+                "effect_category",
+                "effect_id",
+                "electronic_chance",
+                "falloff_attribute_id",
+                "icon_id",
+                "is_assistance",
+                "is_offensive",
+                "is_warp_safe",
+                "modifiers",
+                "name",
+                "post_expression",
+                "pre_expression",
+                "published",
+                "range_attribute_id",
+                "range_chance",
+                "tracking_speed_attribute_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_dogma_Modifier",
+        "type": {
+            "kind": "interface",
+            "name": "Modifier",
+            "members": [
+                "domain",
+                "effect_id",
+                "func",
+                "modified_attribute_id",
+                "modifying_attribute_id",
+                "operator"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_factionwarfare_CharacterLeaderboard",
+        "type": {
+            "kind": "interface",
+            "name": "CharacterLeaderboard",
+            "members": [
+                "kills",
+                "victory_points"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_factionwarfare_CharacterScore",
+        "type": {
+            "kind": "interface",
+            "name": "CharacterScore",
+            "members": [
+                "amount",
+                "character_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_factionwarfare_CorporationLeaderboard",
+        "type": {
+            "kind": "interface",
+            "name": "CorporationLeaderboard",
+            "members": [
+                "kills",
+                "victory_points"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_factionwarfare_CorporationScore",
+        "type": {
+            "kind": "interface",
+            "name": "CorporationScore",
+            "members": [
+                "amount",
+                "corporation_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_factionwarfare_FactionLeaderboard",
+        "type": {
+            "kind": "interface",
+            "name": "FactionLeaderboard",
+            "members": [
+                "kills",
+                "victory_points"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_factionwarfare_FactionScore",
+        "type": {
+            "kind": "interface",
+            "name": "FactionScore",
+            "members": [
+                "amount",
+                "faction_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_factionwarfare_FactionStatistics",
+        "type": {
+            "kind": "interface",
+            "name": "FactionStatistics",
+            "members": [
+                "faction_id",
+                "kills",
+                "pilots",
+                "systems_controlled",
+                "victory_points"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_factionwarfare_System",
+        "type": {
+            "kind": "interface",
+            "name": "System",
+            "members": [
+                "contested",
+                "occupier_faction_id",
+                "owner_faction_id",
+                "solar_system_id",
+                "victory_points",
+                "victory_points_threshold"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_factionwarfare_War",
+        "type": {
+            "kind": "interface",
+            "name": "War",
+            "members": [
+                "against_id",
+                "faction_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_Fleet",
+        "type": {
+            "kind": "interface",
+            "name": "Fleet",
+            "members": [
+                "is_free_move",
+                "is_registered",
+                "is_voice_enabled",
+                "motd"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_FleetMembership",
+        "type": {
+            "kind": "interface",
+            "name": "FleetMembership",
+            "members": [
+                "fleet_id",
+                "role",
+                "squad_id",
+                "wing_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_Invitation",
+        "type": {
+            "kind": "interface",
+            "name": "Invitation",
+            "members": [
+                "character_id",
+                "role",
+                "squad_id",
+                "wing_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_Member",
+        "type": {
+            "kind": "interface",
+            "name": "Member",
+            "members": [
+                "character_id",
+                "join_time",
+                "role",
+                "role_name",
+                "ship_type_id",
+                "solar_system_id",
+                "squad_id",
+                "station_id",
+                "takes_fleet_warp",
+                "wing_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_Movement",
+        "type": {
+            "kind": "interface",
+            "name": "Movement",
+            "members": [
+                "role",
+                "squad_id",
+                "wing_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_Naming",
+        "type": {
+            "kind": "interface",
+            "name": "Naming",
+            "members": [
+                "name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_NewSettings",
+        "type": {
+            "kind": "interface",
+            "name": "NewSettings",
+            "members": [
+                "is_free_move",
+                "motd"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_Role",
+        "type": {
+            "kind": "enum",
+            "name": "Role",
+            "members": [
+                "FLEET_COMMANDER",
+                "SQUAD_COMMANDER",
+                "SQUAD_MEMBER",
+                "WING_COMMANDER"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_fleet_Squad",
+        "type": {
+            "kind": "interface",
+            "name": "Squad",
+            "members": [
+                "id",
+                "name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_SquadID",
+        "type": {
+            "kind": "interface",
+            "name": "SquadID",
+            "members": [
+                "squad_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_Wing",
+        "type": {
+            "kind": "interface",
+            "name": "Wing",
+            "members": [
+                "id",
+                "name",
+                "squads"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_fleet_WingID",
+        "type": {
+            "kind": "interface",
+            "name": "WingID",
+            "members": [
+                "wing_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_industry_Activity",
+        "type": {
+            "kind": "enum",
+            "name": "Activity",
+            "members": [
+                "COPYING",
+                "DUPLICATING",
+                "INVENTION",
+                "MANUFACTURING",
+                "NONE",
+                "REACTION",
+                "RESEARCHING_MATERIAL_EFFICIENCY",
+                "RESEARCHING_TECHNOLOGY",
+                "RESEARCHING_TIME_EFFICIENCY",
+                "REVERSE_ENGINEERING"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    }
+]

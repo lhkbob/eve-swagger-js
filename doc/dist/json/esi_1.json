@@ -1,0 +1,252 @@
+[
+    {
+        "key": "get_characters_character_id_medals",
+        "label": "get /v1/characters/{character_id}/medals/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/medals/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_medals",
+        "description": "Return a list of medals the character has.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_notifications",
+        "label": "get /v1/characters/{character_id}/notifications/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/notifications/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_notifications",
+        "description": "Return character notifications.This route is cached for up to 600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_notifications_contacts",
+        "label": "get /v1/characters/{character_id}/notifications/contacts/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/notifications/contacts/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_notifications_contacts",
+        "description": "Return notifications about having been added to someone's contact list.This route is cached for up to 600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_portrait",
+        "label": "get /v2/characters/{character_id}/portrait/",
+        "tag": "Character",
+        "apiURL": "/v2/characters/{character_id}/portrait/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_portrait",
+        "description": "Get portrait urls for a character.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_roles",
+        "label": "get /v1/characters/{character_id}/roles/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/roles/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_roles",
+        "description": "Returns a character's corporation roles.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_standings",
+        "label": "get /v1/characters/{character_id}/standings/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/standings/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_standings",
+        "description": "Return character standings from agents, NPC corporations, and factions.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_titles",
+        "label": "get /v1/characters/{character_id}/titles/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/titles/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_titles",
+        "description": "Returns a character's titles.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_names",
+        "label": "get /v1/characters/names/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/names/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_names",
+        "description": "Resolve a set of character IDs to character names.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "post_characters_character_id_cspa",
+        "label": "post /v3/characters/{character_id}/cspa/",
+        "tag": "Character",
+        "apiURL": "/v3/characters/{character_id}/cspa/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/post_characters_character_id_cspa",
+        "description": "Takes a source character ID in the url and a set of target character ID's in the body, returns a CSPA charge cost.",
+        "usages": []
+    },
+    {
+        "key": "post_characters_affiliation",
+        "label": "post /v1/characters/affiliation/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/affiliation/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/post_characters_affiliation",
+        "description": "Bulk lookup of character IDs to corporation, alliance and faction.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_clones",
+        "label": "get /v2/characters/{character_id}/clones/",
+        "tag": "Clones",
+        "apiURL": "/v2/characters/{character_id}/clones/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Clones/get_characters_character_id_clones",
+        "description": "A list of the character's clones.This route is cached for up to 120 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_implants",
+        "label": "get /v1/characters/{character_id}/implants/",
+        "tag": "Clones",
+        "apiURL": "/v1/characters/{character_id}/implants/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Clones/get_characters_character_id_implants",
+        "description": "Return implants on the active clone of a character.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "delete_characters_character_id_contacts",
+        "label": "delete /v1/characters/{character_id}/contacts/",
+        "tag": "Contacts",
+        "apiURL": "/v1/characters/{character_id}/contacts/",
+        "httpMethod": "delete",
+        "docURL": "https://esi.tech.ccp.is/#!/Contacts/delete_characters_character_id_contacts",
+        "description": "Bulk delete contacts.",
+        "usages": []
+    },
+    {
+        "key": "get_alliances_alliance_id_contacts",
+        "label": "get /v1/alliances/{alliance_id}/contacts/",
+        "tag": "Contacts",
+        "apiURL": "/v1/alliances/{alliance_id}/contacts/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contacts/get_alliances_alliance_id_contacts",
+        "description": "Return contacts of an alliance.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_contacts",
+        "label": "get /v1/characters/{character_id}/contacts/",
+        "tag": "Contacts",
+        "apiURL": "/v1/characters/{character_id}/contacts/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contacts/get_characters_character_id_contacts",
+        "description": "Return contacts of a character.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_contacts_labels",
+        "label": "get /v1/characters/{character_id}/contacts/labels/",
+        "tag": "Contacts",
+        "apiURL": "/v1/characters/{character_id}/contacts/labels/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contacts/get_characters_character_id_contacts_labels",
+        "description": "Return custom labels for contacts the character defined.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_contacts",
+        "label": "get /v1/corporations/{corporation_id}/contacts/",
+        "tag": "Contacts",
+        "apiURL": "/v1/corporations/{corporation_id}/contacts/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contacts/get_corporations_corporation_id_contacts",
+        "description": "Return contacts of a corporation.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "post_characters_character_id_contacts",
+        "label": "post /v1/characters/{character_id}/contacts/",
+        "tag": "Contacts",
+        "apiURL": "/v1/characters/{character_id}/contacts/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Contacts/post_characters_character_id_contacts",
+        "description": "Bulk add contacts with same settings.",
+        "usages": []
+    },
+    {
+        "key": "put_characters_character_id_contacts",
+        "label": "put /v1/characters/{character_id}/contacts/",
+        "tag": "Contacts",
+        "apiURL": "/v1/characters/{character_id}/contacts/",
+        "httpMethod": "put",
+        "docURL": "https://esi.tech.ccp.is/#!/Contacts/put_characters_character_id_contacts",
+        "description": "Bulk edit contacts with same settings.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_contracts",
+        "label": "get /v1/characters/{character_id}/contracts/",
+        "tag": "Contracts",
+        "apiURL": "/v1/characters/{character_id}/contracts/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contracts/get_characters_character_id_contracts",
+        "description": "Returns contracts available to a character, only if the character is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is \"in_progress\".This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_contracts_contract_id_bids",
+        "label": "get /v1/characters/{character_id}/contracts/{contract_id}/bids/",
+        "tag": "Contracts",
+        "apiURL": "/v1/characters/{character_id}/contracts/{contract_id}/bids/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contracts/get_characters_character_id_contracts_contract_id_bids",
+        "description": "Lists bids on a particular auction contract.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_contracts_contract_id_items",
+        "label": "get /v1/characters/{character_id}/contracts/{contract_id}/items/",
+        "tag": "Contracts",
+        "apiURL": "/v1/characters/{character_id}/contracts/{contract_id}/items/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contracts/get_characters_character_id_contracts_contract_id_items",
+        "description": "Lists items of a particular contract.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_contracts",
+        "label": "get /v1/corporations/{corporation_id}/contracts/",
+        "tag": "Contracts",
+        "apiURL": "/v1/corporations/{corporation_id}/contracts/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contracts/get_corporations_corporation_id_contracts",
+        "description": "Returns contracts available to a coporation, only if the corporation is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is \"in_progress\".This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_contracts_contract_id_bids",
+        "label": "get /v1/corporations/{corporation_id}/contracts/{contract_id}/bids/",
+        "tag": "Contracts",
+        "apiURL": "/v1/corporations/{corporation_id}/contracts/{contract_id}/bids/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contracts/get_corporations_corporation_id_contracts_contract_id_bids",
+        "description": "Lists bids on a particular auction contract.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_contracts_contract_id_items",
+        "label": "get /v1/corporations/{corporation_id}/contracts/{contract_id}/items/",
+        "tag": "Contracts",
+        "apiURL": "/v1/corporations/{corporation_id}/contracts/{contract_id}/items/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Contracts/get_corporations_corporation_id_contracts_contract_id_items",
+        "description": "Lists items of a particular contract.This route is cached for up to 3600 seconds.",
+        "usages": []
+    }
+]

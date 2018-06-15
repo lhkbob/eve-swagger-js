@@ -1,0 +1,252 @@
+[
+    {
+        "key": "get_dogma_attributes_attribute_id",
+        "label": "get /v1/dogma/attributes/{attribute_id}/",
+        "tag": "Dogma",
+        "apiURL": "/v1/dogma/attributes/{attribute_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Dogma/get_dogma_attributes_attribute_id",
+        "description": "Get information on a dogma attribute.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_dogma_effects",
+        "label": "get /v1/dogma/effects/",
+        "tag": "Dogma",
+        "apiURL": "/v1/dogma/effects/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Dogma/get_dogma_effects",
+        "description": "Get a list of dogma effect ids.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_dogma_effects_effect_id",
+        "label": "get /v2/dogma/effects/{effect_id}/",
+        "tag": "Dogma",
+        "apiURL": "/v2/dogma/effects/{effect_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Dogma/get_dogma_effects_effect_id",
+        "description": "Get information on a dogma effect.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_fw_leaderboards",
+        "label": "get /v1/fw/leaderboards/",
+        "tag": "Faction Warfare",
+        "apiURL": "/v1/fw/leaderboards/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Faction Warfare/get_fw_leaderboards",
+        "description": "Top 4 leaderboard of factions for kills and victory points separated by total, last week and yesterday.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_fw_leaderboards_characters",
+        "label": "get /v1/fw/leaderboards/characters/",
+        "tag": "Faction Warfare",
+        "apiURL": "/v1/fw/leaderboards/characters/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Faction Warfare/get_fw_leaderboards_characters",
+        "description": "Top 100 leaderboard of pilots for kills and victory points separated by total, last week and yesterday.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_fw_leaderboards_corporations",
+        "label": "get /v1/fw/leaderboards/corporations/",
+        "tag": "Faction Warfare",
+        "apiURL": "/v1/fw/leaderboards/corporations/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Faction Warfare/get_fw_leaderboards_corporations",
+        "description": "Top 10 leaderboard of corporations for kills and victory points separated by total, last week and yesterday.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_fw_stats",
+        "label": "get /v1/fw/stats/",
+        "tag": "Faction Warfare",
+        "apiURL": "/v1/fw/stats/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Faction Warfare/get_fw_stats",
+        "description": "Statistical overviews of factions involved in faction warfare.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_fw_systems",
+        "label": "get /v1/fw/systems/",
+        "tag": "Faction Warfare",
+        "apiURL": "/v1/fw/systems/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Faction Warfare/get_fw_systems",
+        "description": "An overview of the current ownership of faction warfare solar systems.This route is cached for up to 1800 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_fw_wars",
+        "label": "get /v1/fw/wars/",
+        "tag": "Faction Warfare",
+        "apiURL": "/v1/fw/wars/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Faction Warfare/get_fw_wars",
+        "description": "Data about which NPC factions are at war.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "delete_characters_character_id_fittings_fitting_id",
+        "label": "delete /v1/characters/{character_id}/fittings/{fitting_id}/",
+        "tag": "Fittings",
+        "apiURL": "/v1/characters/{character_id}/fittings/{fitting_id}/",
+        "httpMethod": "delete",
+        "docURL": "https://esi.tech.ccp.is/#!/Fittings/delete_characters_character_id_fittings_fitting_id",
+        "description": "Delete a fitting from a character.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_fittings",
+        "label": "get /v1/characters/{character_id}/fittings/",
+        "tag": "Fittings",
+        "apiURL": "/v1/characters/{character_id}/fittings/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Fittings/get_characters_character_id_fittings",
+        "description": "Return fittings of a character.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "post_characters_character_id_fittings",
+        "label": "post /v1/characters/{character_id}/fittings/",
+        "tag": "Fittings",
+        "apiURL": "/v1/characters/{character_id}/fittings/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Fittings/post_characters_character_id_fittings",
+        "description": "Save a new fitting for a character.",
+        "usages": []
+    },
+    {
+        "key": "delete_fleets_fleet_id_members_member_id",
+        "label": "delete /v1/fleets/{fleet_id}/members/{member_id}/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/members/{member_id}/",
+        "httpMethod": "delete",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/delete_fleets_fleet_id_members_member_id",
+        "description": "Kick a fleet member.",
+        "usages": []
+    },
+    {
+        "key": "delete_fleets_fleet_id_squads_squad_id",
+        "label": "delete /v1/fleets/{fleet_id}/squads/{squad_id}/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/squads/{squad_id}/",
+        "httpMethod": "delete",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/delete_fleets_fleet_id_squads_squad_id",
+        "description": "Delete a fleet squad, only empty squads can be deleted.",
+        "usages": []
+    },
+    {
+        "key": "delete_fleets_fleet_id_wings_wing_id",
+        "label": "delete /v1/fleets/{fleet_id}/wings/{wing_id}/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/wings/{wing_id}/",
+        "httpMethod": "delete",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/delete_fleets_fleet_id_wings_wing_id",
+        "description": "Delete a fleet wing, only empty wings can be deleted. The wing may contain squads, but the squads must be empty.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_fleet",
+        "label": "get /v1/characters/{character_id}/fleet/",
+        "tag": "Fleets",
+        "apiURL": "/v1/characters/{character_id}/fleet/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/get_characters_character_id_fleet",
+        "description": "Return the fleet ID the character is in, if any.This route is cached for up to 60 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_fleets_fleet_id",
+        "label": "get /v1/fleets/{fleet_id}/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/get_fleets_fleet_id",
+        "description": "Return details about a fleet.This route is cached for up to 5 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_fleets_fleet_id_members",
+        "label": "get /v1/fleets/{fleet_id}/members/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/members/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/get_fleets_fleet_id_members",
+        "description": "Return information about fleet members.This route is cached for up to 5 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_fleets_fleet_id_wings",
+        "label": "get /v1/fleets/{fleet_id}/wings/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/wings/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/get_fleets_fleet_id_wings",
+        "description": "Return information about wings in a fleet.This route is cached for up to 5 seconds.",
+        "usages": []
+    },
+    {
+        "key": "post_fleets_fleet_id_members",
+        "label": "post /v1/fleets/{fleet_id}/members/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/members/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/post_fleets_fleet_id_members",
+        "description": "Invite a character into the fleet. If a character has a CSPA charge set it is not possible to invite them to the fleet using ESI.",
+        "usages": []
+    },
+    {
+        "key": "post_fleets_fleet_id_wings",
+        "label": "post /v1/fleets/{fleet_id}/wings/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/wings/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/post_fleets_fleet_id_wings",
+        "description": "Create a new wing in a fleet.",
+        "usages": []
+    },
+    {
+        "key": "post_fleets_fleet_id_wings_wing_id_squads",
+        "label": "post /v1/fleets/{fleet_id}/wings/{wing_id}/squads/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/wings/{wing_id}/squads/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads",
+        "description": "Create a new squad in a fleet.",
+        "usages": []
+    },
+    {
+        "key": "put_fleets_fleet_id",
+        "label": "put /v1/fleets/{fleet_id}/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/",
+        "httpMethod": "put",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/put_fleets_fleet_id",
+        "description": "Update settings about a fleet.",
+        "usages": []
+    },
+    {
+        "key": "put_fleets_fleet_id_members_member_id",
+        "label": "put /v1/fleets/{fleet_id}/members/{member_id}/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/members/{member_id}/",
+        "httpMethod": "put",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/put_fleets_fleet_id_members_member_id",
+        "description": "Move a fleet member around.",
+        "usages": []
+    },
+    {
+        "key": "put_fleets_fleet_id_squads_squad_id",
+        "label": "put /v1/fleets/{fleet_id}/squads/{squad_id}/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/squads/{squad_id}/",
+        "httpMethod": "put",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/put_fleets_fleet_id_squads_squad_id",
+        "description": "Rename a fleet squad.",
+        "usages": []
+    }
+]

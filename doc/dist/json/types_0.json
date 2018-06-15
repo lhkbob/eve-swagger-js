@@ -1,0 +1,492 @@
+[
+    {
+        "key": "esi_alliance_Alliance",
+        "type": {
+            "kind": "interface",
+            "name": "Alliance",
+            "members": [
+                "alliance_name",
+                "date_founded",
+                "executor_corp",
+                "ticker"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_alliance_Contact",
+        "type": {
+            "kind": "interface",
+            "name": "Contact",
+            "members": [
+                "contact_id",
+                "contact_type",
+                "label_id",
+                "standing"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_alliance_Icons",
+        "type": {
+            "kind": "interface",
+            "name": "Icons",
+            "members": [
+                "px128x128",
+                "px64x64"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_alliance_Name",
+        "type": {
+            "kind": "interface",
+            "name": "Name",
+            "members": [
+                "alliance_id",
+                "alliance_name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_asset_Asset",
+        "type": {
+            "kind": "interface",
+            "name": "Asset",
+            "members": [
+                "is_singleton",
+                "item_id",
+                "location_flag",
+                "location_id",
+                "location_type",
+                "quantity",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_asset_Blueprint",
+        "type": {
+            "kind": "interface",
+            "name": "Blueprint",
+            "members": [
+                "item_id",
+                "location_flag",
+                "location_id",
+                "material_efficiency",
+                "quantity",
+                "runs",
+                "time_efficiency",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_asset_LocationType",
+        "type": {
+            "kind": "enum",
+            "name": "LocationType",
+            "members": [
+                "ASSET_SAFETY",
+                "AUTO_FIT",
+                "CARGO",
+                "CORPSE_BAY",
+                "DELIVERIES",
+                "DRONE_BAY",
+                "FIGHTER_BAY",
+                "FIGHTER_TUBE_0",
+                "FIGHTER_TUBE_1",
+                "FIGHTER_TUBE_2",
+                "FIGHTER_TUBE_3",
+                "FIGHTER_TUBE_4",
+                "FLEET_HANGAR",
+                "HANGAR",
+                "HANGAR_ALL",
+                "HI_SLOT_0",
+                "HI_SLOT_1",
+                "HI_SLOT_2",
+                "HI_SLOT_3",
+                "HI_SLOT_4",
+                "HI_SLOT_5",
+                "HI_SLOT_6",
+                "HI_SLOT_7",
+                "HIDDEN_MODIFIERS",
+                "IMPLANT",
+                "LO_SLOT_0",
+                "LO_SLOT_1",
+                "LO_SLOT_2",
+                "LO_SLOT_3",
+                "LO_SLOT_4",
+                "LO_SLOT_5",
+                "LO_SLOT_6",
+                "LO_SLOT_7",
+                "LOCKED",
+                "MED_SLOT_0",
+                "MED_SLOT_1",
+                "MED_SLOT_2",
+                "MED_SLOT_3",
+                "MED_SLOT_4",
+                "MED_SLOT_5",
+                "MED_SLOT_6",
+                "MED_SLOT_7",
+                "MODULE",
+                "QUAFE_BAY",
+                "RIG_SLOT_0",
+                "RIG_SLOT_1",
+                "RIG_SLOT_2",
+                "RIG_SLOT_3",
+                "RIG_SLOT_4",
+                "RIG_SLOT_5",
+                "RIG_SLOT_6",
+                "RIG_SLOT_7",
+                "SHIP_HANGAR",
+                "SPECIALIZED_AMMO_HOLD",
+                "SPECIALIZED_COMMAND_CENTER_HOLD",
+                "SPECIALIZED_FUEL_BAY",
+                "SPECIALIZED_GAS_HOLD",
+                "SPECIALIZED_INDUSTRIAL_SHIP_HOLD",
+                "SPECIALIZED_LARGE_SHIP_HOLD",
+                "SPECIALIZED_MATERIAL_BAY",
+                "SPECIALIZED_MEDIUM_SHIP_HOLD",
+                "SPECIALIZED_MINERAL_HOLD",
+                "SPECIALIZED_ORE_HOLD",
+                "SPECIALIZED_PLANETARY_COMMODITIES_HOLD",
+                "SPECIALIZED_SALVAGE_HOLD",
+                "SPECIALIZED_SHIP_HOLD",
+                "SPECIALIZED_SMALL_SHIP_HOLD",
+                "SUB_SYSTEM_BAY",
+                "SUB_SYSTEM_SLOT_0",
+                "SUB_SYSTEM_SLOT_1",
+                "SUB_SYSTEM_SLOT_2",
+                "SUB_SYSTEM_SLOT_3",
+                "SUB_SYSTEM_SLOT_4",
+                "SUB_SYSTEM_SLOT_5",
+                "SUB_SYSTEM_SLOT_6",
+                "SUB_SYSTEM_SLOT_7",
+                "UNLOCKED",
+                "WARDROBE"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_character_calendar_Attendee",
+        "type": {
+            "kind": "interface",
+            "name": "Attendee",
+            "members": [
+                "character_id",
+                "event_response"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_calendar_Calendar",
+        "type": {
+            "kind": "interface",
+            "name": "Calendar",
+            "members": [
+                "event_date",
+                "event_id",
+                "event_response",
+                "importance",
+                "title"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_calendar_Event",
+        "type": {
+            "kind": "interface",
+            "name": "Event",
+            "members": [
+                "date",
+                "duration",
+                "event_id",
+                "importance",
+                "owner_id",
+                "owner_name",
+                "owner_type",
+                "response",
+                "text",
+                "title"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_calendar_OwnerType",
+        "type": {
+            "kind": "enum",
+            "name": "OwnerType",
+            "members": [
+                "ALLIANCE",
+                "CHARACTER",
+                "CORPORATION",
+                "EVE_SERVER",
+                "FACTION"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_character_calendar_Response",
+        "type": {
+            "kind": "interface",
+            "name": "Response",
+            "members": [
+                "response"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_calendar_ResponseState",
+        "type": {
+            "kind": "enum",
+            "name": "ResponseState",
+            "members": [
+                "ACCEPTED",
+                "DECLINED",
+                "NOT_RESPONDED",
+                "TENTATIVE"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_character_channel_AllowedAccessor",
+        "type": {
+            "kind": "interface",
+            "name": "AllowedAccessor",
+            "members": [
+                "accessor_id",
+                "accessor_type"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_channel_ChatChannel",
+        "type": {
+            "kind": "interface",
+            "name": "ChatChannel",
+            "members": [
+                "allowed",
+                "blocked",
+                "channel_id",
+                "comparison_key",
+                "has_password",
+                "motd",
+                "muted",
+                "name",
+                "operators",
+                "owner_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_channel_RestrictedAccessor",
+        "type": {
+            "kind": "interface",
+            "name": "RestrictedAccessor",
+            "members": [
+                "accessor_id",
+                "accessor_type",
+                "end_at",
+                "reason"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_fitting_Fitting",
+        "type": {
+            "kind": "interface",
+            "name": "Fitting",
+            "members": [
+                "description",
+                "fitting_id",
+                "items",
+                "name",
+                "ship_type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_fitting_FittingID",
+        "type": {
+            "kind": "interface",
+            "name": "FittingID",
+            "members": [
+                "fitting_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_fitting_Item",
+        "type": {
+            "kind": "interface",
+            "name": "Item",
+            "members": [
+                "flag",
+                "quantity",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_fitting_NewFitting",
+        "type": {
+            "kind": "interface",
+            "name": "NewFitting",
+            "members": [
+                "description",
+                "items",
+                "name",
+                "ship_type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_Color",
+        "type": {
+            "kind": "enum",
+            "name": "Color",
+            "members": [
+                "C_0000FE",
+                "C_006634",
+                "C_0099FF",
+                "C_00FF33",
+                "C_01FFFF",
+                "C_349800",
+                "C_660066",
+                "C_666666",
+                "C_999999",
+                "C_99FFFF",
+                "C_9A0000",
+                "C_CCFF9A",
+                "C_E6E6E6",
+                "C_FE0000",
+                "C_FF6600",
+                "C_FFFF01",
+                "C_FFFFCD",
+                "C_FFFFFF"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_character_mail_Label",
+        "type": {
+            "kind": "interface",
+            "name": "Label",
+            "members": [
+                "color",
+                "label_id",
+                "name",
+                "unread_count"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_Labels",
+        "type": {
+            "kind": "interface",
+            "name": "Labels",
+            "members": [
+                "labels",
+                "total_unread_count"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_List",
+        "type": {
+            "kind": "interface",
+            "name": "List",
+            "members": [
+                "mailing_list_id",
+                "name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_Mail",
+        "type": {
+            "kind": "interface",
+            "name": "Mail",
+            "members": [
+                "body",
+                "from",
+                "labels",
+                "read",
+                "recipients",
+                "subject",
+                "timestamp"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    }
+]

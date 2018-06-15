@@ -1,6 +1,7 @@
-// Force loading of this library to make sure the types are available at runtime
 import { ErrorName, ESIError } from '../error';
 
+// Force loading of this library to make sure the types are available at runtime
+import './async-iterator';
 require('./async-iterator');
 
 /**

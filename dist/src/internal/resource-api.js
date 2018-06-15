@@ -30,8 +30,9 @@ var __asyncDelegator = (this && this.__asyncDelegator) || function (o) {
     function verb(n, f) { if (o[n]) i[n] = function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; }; }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Force loading of this library to make sure the types are available at runtime
 const error_1 = require("../error");
+// Force loading of this library to make sure the types are available at runtime
+require("./async-iterator");
 require('./async-iterator');
 /**
  * The `impl` namespace provides a number of abstract base classes for

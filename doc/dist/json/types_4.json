@@ -1,0 +1,436 @@
+[
+    {
+        "key": "esi_corporation_structure_VulnerabilitySchedule",
+        "type": {
+            "kind": "interface",
+            "name": "VulnerabilitySchedule",
+            "members": [
+                "day",
+                "hour"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_AllianceHistory",
+        "type": {
+            "kind": "interface",
+            "name": "AllianceHistory",
+            "members": [
+                "alliance_id",
+                "is_deleted",
+                "record_id",
+                "start_date"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Bookmark",
+        "type": {
+            "kind": "interface",
+            "name": "Bookmark",
+            "members": [
+                "bookmark_id",
+                "coordinates",
+                "created",
+                "creator_id",
+                "folder_id",
+                "item",
+                "label",
+                "location_id",
+                "notes"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_BookmarksFolder",
+        "type": {
+            "kind": "interface",
+            "name": "BookmarksFolder",
+            "members": [
+                "creator_id",
+                "folder_id",
+                "name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Contact",
+        "type": {
+            "kind": "interface",
+            "name": "Contact",
+            "members": [
+                "contact_id",
+                "contact_type",
+                "is_watched",
+                "label_id",
+                "standing"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Corporation",
+        "type": {
+            "kind": "interface",
+            "name": "Corporation",
+            "members": [
+                "alliance_id",
+                "ceo_id",
+                "corporation_description",
+                "corporation_name",
+                "creation_date",
+                "creator_id",
+                "faction",
+                "member_count",
+                "tax_rate",
+                "ticker",
+                "url"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_DivisionName",
+        "type": {
+            "kind": "interface",
+            "name": "DivisionName",
+            "members": [
+                "division",
+                "name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Divisions",
+        "type": {
+            "kind": "interface",
+            "name": "Divisions",
+            "members": [
+                "hangar",
+                "wallet"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Faction",
+        "type": {
+            "kind": "enum",
+            "name": "Faction",
+            "members": [
+                "AMARR",
+                "CALDARI",
+                "GALLENTE",
+                "MINMATAR"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_corporation_Icons",
+        "type": {
+            "kind": "interface",
+            "name": "Icons",
+            "members": [
+                "px128x128",
+                "px256x256",
+                "px64x64"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_LoyaltyStoreOffer",
+        "type": {
+            "kind": "interface",
+            "name": "LoyaltyStoreOffer",
+            "members": [
+                "isk_cost",
+                "lp_cost",
+                "offer_id",
+                "quantity",
+                "required_items",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Medal",
+        "type": {
+            "kind": "interface",
+            "name": "Medal",
+            "members": [
+                "created_at",
+                "creator_id",
+                "description",
+                "medal_id",
+                "title"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_MedalsIssued",
+        "type": {
+            "kind": "interface",
+            "name": "MedalsIssued",
+            "members": [
+                "character_id",
+                "issued_at",
+                "issuer_id",
+                "medal_id",
+                "reason",
+                "status"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Member",
+        "type": {
+            "kind": "interface",
+            "name": "Member",
+            "members": [
+                "character_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_MemberDetails",
+        "type": {
+            "kind": "interface",
+            "name": "MemberDetails",
+            "members": [
+                "base_id",
+                "character_id",
+                "location_id",
+                "logoff_date",
+                "logon_date",
+                "ship_type_id",
+                "start_date"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_MemberRoles",
+        "type": {
+            "kind": "interface",
+            "name": "MemberRoles",
+            "members": [
+                "character_id",
+                "grantable_roles",
+                "grantable_roles_at_base",
+                "grantable_roles_at_hq",
+                "grantable_roles_at_other",
+                "roles",
+                "roles_at_base",
+                "roles_at_hq",
+                "roles_at_other"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_MemberTitles",
+        "type": {
+            "kind": "interface",
+            "name": "MemberTitles",
+            "members": [
+                "character_id",
+                "titles"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Name",
+        "type": {
+            "kind": "interface",
+            "name": "Name",
+            "members": [
+                "corporation_id",
+                "corporation_name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Order",
+        "type": {
+            "kind": "interface",
+            "name": "Order",
+            "members": [
+                "duration",
+                "escrow",
+                "is_buy_order",
+                "issued",
+                "location_id",
+                "min_volume",
+                "order_id",
+                "price",
+                "range",
+                "region_id",
+                "state",
+                "type_id",
+                "volume_remain",
+                "volume_total",
+                "wallet_division"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_RolesHistory",
+        "type": {
+            "kind": "interface",
+            "name": "RolesHistory",
+            "members": [
+                "changed_at",
+                "character_id",
+                "issuer_id",
+                "new_roles",
+                "old_roles",
+                "role_type"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_RoleType",
+        "type": {
+            "kind": "enum",
+            "name": "RoleType",
+            "members": [
+                "GRANTABLE_ROLES",
+                "GRANTABLE_ROLES_AT_BASE",
+                "GRANTABLE_ROLES_AT_HQ",
+                "GRANTABLE_ROLES_AT_OTHER",
+                "ROLES",
+                "ROLES_AT_BASE",
+                "ROLES_AT_HQ",
+                "ROLES_AT_OTHER"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_corporation_Shareholder",
+        "type": {
+            "kind": "interface",
+            "name": "Shareholder",
+            "members": [
+                "share_count",
+                "shareholder_id",
+                "shareholder_type"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Title",
+        "type": {
+            "kind": "interface",
+            "name": "Title",
+            "members": [
+                "grantable_roles",
+                "grantable_roles_at_base",
+                "grantable_roles_at_hq",
+                "grantable_roles_at_other",
+                "name",
+                "roles",
+                "roles_at_base",
+                "roles_at_hq",
+                "roles_at_other",
+                "title_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_Wallet",
+        "type": {
+            "kind": "interface",
+            "name": "Wallet",
+            "members": [
+                "balance",
+                "division"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_WalletTransaction",
+        "type": {
+            "kind": "interface",
+            "name": "WalletTransaction",
+            "members": [
+                "client_id",
+                "date",
+                "is_buy",
+                "journal_ref_id",
+                "location_id",
+                "quantity",
+                "transaction_id",
+                "type_id",
+                "unit_price"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    }
+]

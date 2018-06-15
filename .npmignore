@@ -4,7 +4,7 @@
 # Typescript source
 /src/
 /gen/
-/util/
+/tools/
 tsconfig.json
 tsconfig.*.json
 

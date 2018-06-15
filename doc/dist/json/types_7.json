@@ -1,0 +1,543 @@
+[
+    {
+        "key": "esi_universe_Faction",
+        "type": {
+            "kind": "interface",
+            "name": "Faction",
+            "members": [
+                "corporation_id",
+                "description",
+                "faction_id",
+                "is_unique",
+                "militia_corporation_id",
+                "name",
+                "size_factor",
+                "solar_system_id",
+                "station_count",
+                "station_system_count"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Graphic",
+        "type": {
+            "kind": "interface",
+            "name": "Graphic",
+            "members": [
+                "collision_file",
+                "graphic_file",
+                "graphic_id",
+                "icon_folder",
+                "sof_dna",
+                "sof_fation_name",
+                "sof_hull_name",
+                "sof_race_name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Group",
+        "type": {
+            "kind": "interface",
+            "name": "Group",
+            "members": [
+                "category_id",
+                "group_id",
+                "name",
+                "published",
+                "types"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Moon",
+        "type": {
+            "kind": "interface",
+            "name": "Moon",
+            "members": [
+                "moon_id",
+                "name",
+                "position",
+                "system_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Name",
+        "type": {
+            "kind": "interface",
+            "name": "Name",
+            "members": [
+                "category",
+                "id",
+                "name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_NameCategory",
+        "type": {
+            "kind": "enum",
+            "name": "NameCategory",
+            "members": [
+                "ALLIANCE",
+                "CHARACTER",
+                "CONSTELLATION",
+                "CORPORATION",
+                "INVENTORY_TYPE",
+                "REGION",
+                "SOLAR_SYSTEM",
+                "STATION"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_universe_Planet",
+        "type": {
+            "kind": "interface",
+            "name": "Planet",
+            "members": [
+                "name",
+                "planet_id",
+                "position",
+                "system_id",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Race",
+        "type": {
+            "kind": "interface",
+            "name": "Race",
+            "members": [
+                "alliance_id",
+                "description",
+                "name",
+                "race_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Region",
+        "type": {
+            "kind": "interface",
+            "name": "Region",
+            "members": [
+                "constellations",
+                "description",
+                "name",
+                "region_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Schematic",
+        "type": {
+            "kind": "interface",
+            "name": "Schematic",
+            "members": [
+                "cycle_time",
+                "schematic_name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Service",
+        "type": {
+            "kind": "enum",
+            "name": "Service",
+            "members": [
+                "ASSASINATION_MISSIONS",
+                "BLACK_MARKET",
+                "BOUNTY_MISSIONS",
+                "CLONING",
+                "COURIER_MISSIONS",
+                "DNA_THERAPY",
+                "DOCKING",
+                "FACTORY",
+                "FITTING",
+                "GAMBLING",
+                "INSURANCE",
+                "INTERBUS",
+                "JUMP_CLONE_FACILITY",
+                "LABRATORY",
+                "LOYALTY_POINT_STORE",
+                "MARKET",
+                "NAVY_OFFICES",
+                "NEWS",
+                "OFFICE_RENTAL",
+                "PAINTSHOP",
+                "REFINERY",
+                "REPAIR_FACILITIES",
+                "REPROCESSING_PLANT",
+                "SECURITY_OFFICES",
+                "STOCK_EXCHANGE",
+                "STORAGE",
+                "SURGERY"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_universe_SpectralClass",
+        "type": {
+            "kind": "enum",
+            "name": "SpectralClass",
+            "members": [
+                "A0",
+                "A0IV",
+                "A0IV2",
+                "F0IV",
+                "F0V",
+                "F0VI",
+                "F1IV",
+                "F1V",
+                "F1VI",
+                "F2IV",
+                "F2V",
+                "F2VI",
+                "F3IV",
+                "F3V",
+                "F3VI",
+                "F4IV",
+                "F4V",
+                "F4VI",
+                "F5IV",
+                "F5V",
+                "F5VI",
+                "F6IV",
+                "F6V",
+                "F6VI",
+                "F7V",
+                "F7VI",
+                "F8V",
+                "F8VI",
+                "F9IV",
+                "F9V",
+                "F9VI",
+                "G0IV",
+                "G0V",
+                "G0VI",
+                "G1IV",
+                "G1V",
+                "G1VI",
+                "G2IV",
+                "G2V",
+                "G2VI",
+                "G3IV",
+                "G3V",
+                "G3VI",
+                "G4IV",
+                "G4V",
+                "G4VI",
+                "G5IV",
+                "G5V",
+                "G5VI",
+                "G6V",
+                "G6VI",
+                "G7IV",
+                "G7V",
+                "G7VI",
+                "G8IV",
+                "G8V",
+                "G8VI",
+                "G9V",
+                "G9VI",
+                "K0IV",
+                "K0V",
+                "K1IV",
+                "K1V",
+                "K2IV",
+                "K2V",
+                "K3IV",
+                "K3V",
+                "K4IV",
+                "K4V",
+                "K5IV",
+                "K5V",
+                "K6IV",
+                "K6V",
+                "K7IV",
+                "K7V",
+                "K8IV",
+                "K8V",
+                "K9IV",
+                "K9V",
+                "M0V",
+                "M1V",
+                "M2V",
+                "M3V",
+                "M4V",
+                "M5V",
+                "M6V",
+                "M7V",
+                "M8V",
+                "M9V"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_universe_Star",
+        "type": {
+            "kind": "interface",
+            "name": "Star",
+            "members": [
+                "age",
+                "luminosity",
+                "name",
+                "radius",
+                "solar_system_id",
+                "spectral_class",
+                "temperature",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Stargate",
+        "type": {
+            "kind": "interface",
+            "name": "Stargate",
+            "members": [
+                "destination",
+                "name",
+                "position",
+                "stargate_id",
+                "system_id",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Station",
+        "type": {
+            "kind": "interface",
+            "name": "Station",
+            "members": [
+                "max_dockable_ship_volume",
+                "name",
+                "office_rental_cost",
+                "owner",
+                "position",
+                "race_id",
+                "reprocessing_efficiency",
+                "reprocessing_stations_take",
+                "services",
+                "station_id",
+                "system_id",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Structure",
+        "type": {
+            "kind": "interface",
+            "name": "Structure",
+            "members": [
+                "name",
+                "position",
+                "solar_system_id",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_System",
+        "type": {
+            "kind": "interface",
+            "name": "System",
+            "members": [
+                "constellation_id",
+                "name",
+                "planets",
+                "position",
+                "security_class",
+                "security_status",
+                "star_id",
+                "stargates",
+                "stations",
+                "system_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_SystemJumps",
+        "type": {
+            "kind": "interface",
+            "name": "SystemJumps",
+            "members": [
+                "ship_jumps",
+                "system_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_SystemKills",
+        "type": {
+            "kind": "interface",
+            "name": "SystemKills",
+            "members": [
+                "npc_kills",
+                "pod_kills",
+                "ship_kills",
+                "system_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_SystemPlanet",
+        "type": {
+            "kind": "interface",
+            "name": "SystemPlanet",
+            "members": [
+                "moons",
+                "planet_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_universe_Type",
+        "type": {
+            "kind": "interface",
+            "name": "Type",
+            "members": [
+                "capacity",
+                "description",
+                "dogma_attributes",
+                "dogma_effects",
+                "graphic_id",
+                "group_id",
+                "icon_id",
+                "market_group_id",
+                "mass",
+                "name",
+                "packaged_volume",
+                "portion_size",
+                "published",
+                "radius",
+                "type_id",
+                "volume"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_Ally",
+        "type": {
+            "kind": "interface",
+            "name": "Ally",
+            "members": [
+                "alliance_id",
+                "corporation_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_AssetLocation",
+        "type": {
+            "kind": "interface",
+            "name": "AssetLocation",
+            "members": [
+                "item_id",
+                "x",
+                "y",
+                "z"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_AssetName",
+        "type": {
+            "kind": "interface",
+            "name": "AssetName",
+            "members": [
+                "item_id",
+                "name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_EntityType",
+        "type": {
+            "kind": "enum",
+            "name": "EntityType",
+            "members": [
+                "ALLIANCE",
+                "CHARACTER",
+                "CORPORATION",
+                "FACTION"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    }
+]

@@ -36,15 +36,7 @@ export declare class Message extends r.impl.SimpleResource implements r.Async<Me
      *
      * @returns The summary header for the message
      */
-    summary(): Promise<{
-        from: number | undefined;
-        is_read: boolean | undefined;
-        labels: number[] | undefined;
-        mail_id: number;
-        recipients: esi.character.mail.Recipient[] | undefined;
-        subject: string | undefined;
-        timestamp: string | undefined;
-    }>;
+    summary(): Promise<esi.character.mail.MailHeader>;
     /**
      * @esi_route delete_characters_character_id_mail_mail_id
      *

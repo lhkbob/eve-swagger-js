@@ -1,0 +1,609 @@
+[
+    {
+        "key": "esi_character_WalletTransaction",
+        "type": {
+            "kind": "interface",
+            "name": "WalletTransaction",
+            "members": [
+                "client_id",
+                "date",
+                "is_buy",
+                "is_personal",
+                "journal_ref_id",
+                "location_id",
+                "quantity",
+                "transaction_id",
+                "type_id",
+                "unit_price"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_contract_Availability",
+        "type": {
+            "kind": "enum",
+            "name": "Availability",
+            "members": [
+                "ALLIANCE",
+                "CORPORATION",
+                "PERSONAL",
+                "PUBLIC"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_contract_Bid",
+        "type": {
+            "kind": "interface",
+            "name": "Bid",
+            "members": [
+                "amount",
+                "bid_id",
+                "bidder_id",
+                "date_bid"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_contract_Contract",
+        "type": {
+            "kind": "interface",
+            "name": "Contract",
+            "members": [
+                "acceptor_id",
+                "assignee_id",
+                "availability",
+                "buyout",
+                "collateral",
+                "contract_id",
+                "date_accepted",
+                "date_completed",
+                "date_expired",
+                "date_issued",
+                "days_to_complete",
+                "end_location_id",
+                "for_corporation",
+                "issuer_corporation_id",
+                "issuer_id",
+                "price",
+                "reward",
+                "start_location_id",
+                "status",
+                "title",
+                "type",
+                "volume"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_contract_Item",
+        "type": {
+            "kind": "interface",
+            "name": "Item",
+            "members": [
+                "is_included",
+                "is_singleton",
+                "quantity",
+                "raw_quantity",
+                "record_id",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_contract_Status",
+        "type": {
+            "kind": "enum",
+            "name": "Status",
+            "members": [
+                "CANCELLED",
+                "DELETED",
+                "FAILED",
+                "FINISHED",
+                "FINISHED_CONTRACTOR",
+                "FINISHED_ISSUER",
+                "IN_PROGRESS",
+                "OUTSTANDING",
+                "REJECTED",
+                "REVERSED"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_contract_Type",
+        "type": {
+            "kind": "enum",
+            "name": "Type",
+            "members": [
+                "AUCTION",
+                "COURIER",
+                "ITEM_EXCHANGE",
+                "LOAN",
+                "UNKNOWN"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_corporation_asset_Action",
+        "type": {
+            "kind": "enum",
+            "name": "Action",
+            "members": [
+                "ADD",
+                "ASSEMBLE",
+                "CONFIGURE",
+                "ENTER_PASSWORD",
+                "LOCK",
+                "MOVE",
+                "REPACKAGE",
+                "SET_NAME",
+                "SET_PASSWORD",
+                "UNLOCK"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_corporation_asset_Asset",
+        "type": {
+            "kind": "interface",
+            "name": "Asset",
+            "members": [
+                "is_singleton",
+                "item_id",
+                "location_flag",
+                "location_id",
+                "location_type",
+                "quantity",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_asset_Blueprint",
+        "type": {
+            "kind": "interface",
+            "name": "Blueprint",
+            "members": [
+                "item_id",
+                "location_flag",
+                "location_id",
+                "material_efficiency",
+                "quantity",
+                "runs",
+                "time_efficiency",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_asset_ContainersLog",
+        "type": {
+            "kind": "interface",
+            "name": "ContainersLog",
+            "members": [
+                "action",
+                "character_id",
+                "container_id",
+                "container_type_id",
+                "location_flag",
+                "location_id",
+                "logged_at",
+                "new_config_bitmask",
+                "old_config_bitmask",
+                "password_type",
+                "quantity",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_asset_LocationType",
+        "type": {
+            "kind": "enum",
+            "name": "LocationType",
+            "members": [
+                "ASSET_SAFETY",
+                "AUTO_FIT",
+                "BONUS",
+                "BOOSTER",
+                "BOOSTER_BAY",
+                "CAPSULE",
+                "CARGO",
+                "CORP_DELIVERIES",
+                "CORP_SAG1",
+                "CORP_SAG2",
+                "CORP_SAG3",
+                "CORP_SAG4",
+                "CORP_SAG5",
+                "CORP_SAG6",
+                "CORP_SAG7",
+                "CRATE_LOOT",
+                "DELIVERIES",
+                "DRONE_BAY",
+                "DUST_BATTLE",
+                "DUST_DATABANK",
+                "FIGHTER_BAY",
+                "FIGHTER_TUBE_0",
+                "FIGHTER_TUBE_1",
+                "FIGHTER_TUBE_2",
+                "FIGHTER_TUBE_3",
+                "FIGHTER_TUBE_4",
+                "FLEET_HANGAR",
+                "HANGAR",
+                "HANGAR_ALL",
+                "HI_SLOT_0",
+                "HI_SLOT_1",
+                "HI_SLOT_2",
+                "HI_SLOT_3",
+                "HI_SLOT_4",
+                "HI_SLOT_5",
+                "HI_SLOT_6",
+                "HI_SLOT_7",
+                "HIDDEN_MODIFERS",
+                "IMPLANT",
+                "IMPOUNDED",
+                "JUNKYARD_REPROCESSED",
+                "JUNKYARD_TRASHED",
+                "LO_SLOT_0",
+                "LO_SLOT_1",
+                "LO_SLOT_2",
+                "LO_SLOT_3",
+                "LO_SLOT_4",
+                "LO_SLOT_5",
+                "LO_SLOT_6",
+                "LO_SLOT_7",
+                "LOCKED",
+                "MED_SLOT_0",
+                "MED_SLOT_1",
+                "MED_SLOT_2",
+                "MED_SLOT_3",
+                "MED_SLOT_4",
+                "MED_SLOT_5",
+                "MED_SLOT_6",
+                "MED_SLOT_7",
+                "OFFICE_FOLDER",
+                "PILOT",
+                "PLANET_SURFACE",
+                "QUAFE_BAY",
+                "REWARD",
+                "RIG_SLOT_0",
+                "RIG_SLOT_1",
+                "RIG_SLOT_2",
+                "RIG_SLOT_3",
+                "RIG_SLOT_4",
+                "RIG_SLOT_5",
+                "RIG_SLOT_6",
+                "RIG_SLOT_7",
+                "SECONDARY_STORAGE",
+                "SERVICE_SLOT_0",
+                "SERVICE_SLOT_1",
+                "SERVICE_SLOT_2",
+                "SERVICE_SLOT_3",
+                "SERVICE_SLOT_4",
+                "SERVICE_SLOT_5",
+                "SERVICE_SLOT_6",
+                "SERVICE_SLOT_7",
+                "SHIP_HANGAR",
+                "SHIP_OFFLINE",
+                "SKILL",
+                "SKILL_IN_TRAINING",
+                "SPECIALIZED_AMMO_HOLD",
+                "SPECIALIZED_COMMAND_CENTER_HOLD",
+                "SPECIALIZED_FUEL_BAY",
+                "SPECIALIZED_GAS_HOLD",
+                "SPECIALIZED_INDUSTRIAL_SHIP_HOLD",
+                "SPECIALIZED_LARGE_SHIP_HOLD",
+                "SPECIALIZED_MATERIAL_BAY",
+                "SPECIALIZED_MEDIUM_SHIP_HOLD",
+                "SPECIALIZED_MINERAL_HOLD",
+                "SPECIALIZED_ORE_HOLD",
+                "SPECIALIZED_PLANETARY_COMMODITIES_HOLD",
+                "SPECIALIZED_SALVAGE_HOLD",
+                "SPECIALIZED_SHIP_HOLD",
+                "SPECIALIZED_SMALL_SHIP_HOLD",
+                "STRUCTURE_ACTIVE",
+                "STRUCTURE_FUEL",
+                "STRUCTURE_INACTIVE",
+                "STRUCTURE_OFFLINE",
+                "SUB_SYSTEM_SLOT_0",
+                "SUB_SYSTEM_SLOT_1",
+                "SUB_SYSTEM_SLOT_2",
+                "SUB_SYSTEM_SLOT_3",
+                "SUB_SYSTEM_SLOT_4",
+                "SUB_SYSTEM_SLOT_5",
+                "SUB_SYSTEM_SLOT_6",
+                "SUB_SYSTEM_SLOT_7",
+                "SUBSYSTEM_BAY",
+                "UNLOCKED",
+                "WALLET",
+                "WARDROBE"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_corporation_industry_Job",
+        "type": {
+            "kind": "interface",
+            "name": "Job",
+            "members": [
+                "activity_id",
+                "blueprint_id",
+                "blueprint_location_id",
+                "blueprint_type_id",
+                "completed_character_id",
+                "completed_date",
+                "cost",
+                "duration",
+                "end_date",
+                "facility_id",
+                "installer_id",
+                "job_id",
+                "licensed_runs",
+                "location_id",
+                "output_location_id",
+                "pause_date",
+                "probability",
+                "product_type_id",
+                "runs",
+                "start_date",
+                "status",
+                "successful_runs"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_industry_MiningExtraction",
+        "type": {
+            "kind": "interface",
+            "name": "MiningExtraction",
+            "members": [
+                "chunk_arrival_time",
+                "extraction_start_time",
+                "moon_id",
+                "natural_decay_time",
+                "structure_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_industry_MiningObserver",
+        "type": {
+            "kind": "interface",
+            "name": "MiningObserver",
+            "members": [
+                "last_updated",
+                "observer_id",
+                "observer_type"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_industry_MiningRecord",
+        "type": {
+            "kind": "interface",
+            "name": "MiningRecord",
+            "members": [
+                "character_id",
+                "last_updated",
+                "quantity",
+                "recorded_corporation_id",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_structure_CustomsOffice",
+        "type": {
+            "kind": "interface",
+            "name": "CustomsOffice",
+            "members": [
+                "alliance_tax_rate",
+                "allow_access_with_standings",
+                "allow_alliance_access",
+                "bad_standing_tax_rate",
+                "corporation_tax_rate",
+                "excellent_standing_tax_rate",
+                "good_standing_tax_rate",
+                "neutral_standing_tax_rate",
+                "office_id",
+                "reinforce_exit_end",
+                "reinforce_exit_start",
+                "standing_level",
+                "system_id",
+                "terrible_standing_tax_rate"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_structure_Facility",
+        "type": {
+            "kind": "interface",
+            "name": "Facility",
+            "members": [
+                "facility_id",
+                "system_id",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_structure_SecurityRole",
+        "type": {
+            "kind": "enum",
+            "name": "SecurityRole",
+            "members": [
+                "ALLIANCE_MEMBER",
+                "CONFIG_STARBASE_EQUIPMENT_ROLE",
+                "CORPORATION_MEMBER",
+                "STARBASE_FUEL_TECHNICIAN_ROLE"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_corporation_structure_Service",
+        "type": {
+            "kind": "interface",
+            "name": "Service",
+            "members": [
+                "name",
+                "state"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_structure_StandingLevel",
+        "type": {
+            "kind": "enum",
+            "name": "StandingLevel",
+            "members": [
+                "BAD",
+                "EXCELLENT",
+                "GOOD",
+                "NEUTRAL",
+                "TERRIBLE"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_corporation_structure_Starbase",
+        "type": {
+            "kind": "interface",
+            "name": "Starbase",
+            "members": [
+                "allow_alliance_members",
+                "allow_corporation_members",
+                "anchor",
+                "attack_if_at_war",
+                "attack_if_other_security_status_dropping",
+                "attack_security_status_threshold",
+                "attack_standing_threshold",
+                "fuel_bay_take",
+                "fuel_bay_view",
+                "fuels",
+                "offline",
+                "online",
+                "unanchor",
+                "use_alliance_standings"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_structure_StarbaseSummary",
+        "type": {
+            "kind": "interface",
+            "name": "StarbaseSummary",
+            "members": [
+                "moon_id",
+                "onlined_since",
+                "reinforced_until",
+                "starbase_id",
+                "state",
+                "system_id",
+                "type_id",
+                "unanchor_at"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_corporation_structure_State",
+        "type": {
+            "kind": "enum",
+            "name": "State",
+            "members": [
+                "OFFLINE",
+                "ONLINE",
+                "ONLINING",
+                "REINFORCED",
+                "UNANCHORING"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_corporation_structure_Structure",
+        "type": {
+            "kind": "interface",
+            "name": "Structure",
+            "members": [
+                "corporation_id",
+                "current_vul",
+                "fuel_expires",
+                "next_vul",
+                "profile_id",
+                "services",
+                "state_timer_end",
+                "state_timer_start",
+                "structure_id",
+                "system_id",
+                "type_id",
+                "unanchors_at"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    }
+]

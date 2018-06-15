@@ -1,0 +1,1147 @@
+[
+    {
+        "label": "Alliance",
+        "children": [
+            {
+                "label": "GET /alliances/",
+                "key": "get_alliances",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /alliances/{alliance_id}/",
+                "key": "get_alliances_alliance_id",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /alliances/{alliance_id}/corporations/",
+                "key": "get_alliances_alliance_id_corporations",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /alliances/{alliance_id}/icons/",
+                "key": "get_alliances_alliance_id_icons",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /alliances/names/",
+                "key": "get_alliances_names",
+                "file": "dist/json/esi_0.json"
+            }
+        ]
+    },
+    {
+        "label": "Assets",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/assets/",
+                "key": "get_characters_character_id_assets",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/assets/",
+                "key": "get_corporations_corporation_id_assets",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "POST /characters/{character_id}/assets/locations/",
+                "key": "post_characters_character_id_assets_locations",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "POST /characters/{character_id}/assets/names/",
+                "key": "post_characters_character_id_assets_names",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "POST /corporations/{corporation_id}/assets/locations/",
+                "key": "post_corporations_corporation_id_assets_locations",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "POST /corporations/{corporation_id}/assets/names/",
+                "key": "post_corporations_corporation_id_assets_names",
+                "file": "dist/json/esi_0.json"
+            }
+        ]
+    },
+    {
+        "label": "Bookmarks",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/bookmarks/",
+                "key": "get_characters_character_id_bookmarks",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/bookmarks/folders/",
+                "key": "get_characters_character_id_bookmarks_folders",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/bookmarks/",
+                "key": "get_corporations_corporation_id_bookmarks",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/bookmarks/folders/",
+                "key": "get_corporations_corporation_id_bookmarks_folders",
+                "file": "dist/json/esi_0.json"
+            }
+        ]
+    },
+    {
+        "label": "Calendar",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/calendar/",
+                "key": "get_characters_character_id_calendar",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/calendar/{event_id}/",
+                "key": "get_characters_character_id_calendar_event_id",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/calendar/{event_id}/attendees/",
+                "key": "get_characters_character_id_calendar_event_id_attendees",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "PUT /characters/{character_id}/calendar/{event_id}/",
+                "key": "put_characters_character_id_calendar_event_id",
+                "file": "dist/json/esi_0.json"
+            }
+        ]
+    },
+    {
+        "label": "Character",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/",
+                "key": "get_characters_character_id",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/agents_research/",
+                "key": "get_characters_character_id_agents_research",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/blueprints/",
+                "key": "get_characters_character_id_blueprints",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/chat_channels/",
+                "key": "get_characters_character_id_chat_channels",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/corporationhistory/",
+                "key": "get_characters_character_id_corporationhistory",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/fatigue/",
+                "key": "get_characters_character_id_fatigue",
+                "file": "dist/json/esi_0.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/medals/",
+                "key": "get_characters_character_id_medals",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/notifications/",
+                "key": "get_characters_character_id_notifications",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/notifications/contacts/",
+                "key": "get_characters_character_id_notifications_contacts",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/portrait/",
+                "key": "get_characters_character_id_portrait",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/roles/",
+                "key": "get_characters_character_id_roles",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/standings/",
+                "key": "get_characters_character_id_standings",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/titles/",
+                "key": "get_characters_character_id_titles",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/names/",
+                "key": "get_characters_names",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "POST /characters/{character_id}/cspa/",
+                "key": "post_characters_character_id_cspa",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "POST /characters/affiliation/",
+                "key": "post_characters_affiliation",
+                "file": "dist/json/esi_1.json"
+            }
+        ]
+    },
+    {
+        "label": "Clones",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/clones/",
+                "key": "get_characters_character_id_clones",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/implants/",
+                "key": "get_characters_character_id_implants",
+                "file": "dist/json/esi_1.json"
+            }
+        ]
+    },
+    {
+        "label": "Contacts",
+        "children": [
+            {
+                "label": "DELETE /characters/{character_id}/contacts/",
+                "key": "delete_characters_character_id_contacts",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /alliances/{alliance_id}/contacts/",
+                "key": "get_alliances_alliance_id_contacts",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/contacts/",
+                "key": "get_characters_character_id_contacts",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/contacts/labels/",
+                "key": "get_characters_character_id_contacts_labels",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/contacts/",
+                "key": "get_corporations_corporation_id_contacts",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "POST /characters/{character_id}/contacts/",
+                "key": "post_characters_character_id_contacts",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "PUT /characters/{character_id}/contacts/",
+                "key": "put_characters_character_id_contacts",
+                "file": "dist/json/esi_1.json"
+            }
+        ]
+    },
+    {
+        "label": "Contracts",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/contracts/",
+                "key": "get_characters_character_id_contracts",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/contracts/{contract_id}/bids/",
+                "key": "get_characters_character_id_contracts_contract_id_bids",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/contracts/{contract_id}/items/",
+                "key": "get_characters_character_id_contracts_contract_id_items",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/contracts/",
+                "key": "get_corporations_corporation_id_contracts",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/contracts/{contract_id}/bids/",
+                "key": "get_corporations_corporation_id_contracts_contract_id_bids",
+                "file": "dist/json/esi_1.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/contracts/{contract_id}/items/",
+                "key": "get_corporations_corporation_id_contracts_contract_id_items",
+                "file": "dist/json/esi_1.json"
+            }
+        ]
+    },
+    {
+        "label": "Corporation",
+        "children": [
+            {
+                "label": "GET /corporations/{corporation_id}/",
+                "key": "get_corporations_corporation_id",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/alliancehistory/",
+                "key": "get_corporations_corporation_id_alliancehistory",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/blueprints/",
+                "key": "get_corporations_corporation_id_blueprints",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/containers/logs/",
+                "key": "get_corporations_corporation_id_containers_logs",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/divisions/",
+                "key": "get_corporations_corporation_id_divisions",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/facilities/",
+                "key": "get_corporations_corporation_id_facilities",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/icons/",
+                "key": "get_corporations_corporation_id_icons",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/medals/",
+                "key": "get_corporations_corporation_id_medals",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/medals/issued/",
+                "key": "get_corporations_corporation_id_medals_issued",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/members/",
+                "key": "get_corporations_corporation_id_members",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/members/limit/",
+                "key": "get_corporations_corporation_id_members_limit",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/members/titles/",
+                "key": "get_corporations_corporation_id_members_titles",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/membertracking/",
+                "key": "get_corporations_corporation_id_membertracking",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/roles/",
+                "key": "get_corporations_corporation_id_roles",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/roles/history/",
+                "key": "get_corporations_corporation_id_roles_history",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/shareholders/",
+                "key": "get_corporations_corporation_id_shareholders",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/standings/",
+                "key": "get_corporations_corporation_id_standings",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/starbases/",
+                "key": "get_corporations_corporation_id_starbases",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/starbases/{starbase_id}/",
+                "key": "get_corporations_corporation_id_starbases_starbase_id",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/structures/",
+                "key": "get_corporations_corporation_id_structures",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/titles/",
+                "key": "get_corporations_corporation_id_titles",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/names/",
+                "key": "get_corporations_names",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /corporations/npccorps/",
+                "key": "get_corporations_npccorps",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "PUT /corporations/{corporation_id}/structures/{structure_id}/",
+                "key": "put_corporations_corporation_id_structures_structure_id",
+                "file": "dist/json/esi_2.json"
+            }
+        ]
+    },
+    {
+        "label": "Dogma",
+        "children": [
+            {
+                "label": "GET /dogma/attributes/",
+                "key": "get_dogma_attributes",
+                "file": "dist/json/esi_2.json"
+            },
+            {
+                "label": "GET /dogma/attributes/{attribute_id}/",
+                "key": "get_dogma_attributes_attribute_id",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /dogma/effects/",
+                "key": "get_dogma_effects",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /dogma/effects/{effect_id}/",
+                "key": "get_dogma_effects_effect_id",
+                "file": "dist/json/esi_3.json"
+            }
+        ]
+    },
+    {
+        "label": "Faction Warfare",
+        "children": [
+            {
+                "label": "GET /fw/leaderboards/",
+                "key": "get_fw_leaderboards",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /fw/leaderboards/characters/",
+                "key": "get_fw_leaderboards_characters",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /fw/leaderboards/corporations/",
+                "key": "get_fw_leaderboards_corporations",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /fw/stats/",
+                "key": "get_fw_stats",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /fw/systems/",
+                "key": "get_fw_systems",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /fw/wars/",
+                "key": "get_fw_wars",
+                "file": "dist/json/esi_3.json"
+            }
+        ]
+    },
+    {
+        "label": "Fittings",
+        "children": [
+            {
+                "label": "DELETE /characters/{character_id}/fittings/{fitting_id}/",
+                "key": "delete_characters_character_id_fittings_fitting_id",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/fittings/",
+                "key": "get_characters_character_id_fittings",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "POST /characters/{character_id}/fittings/",
+                "key": "post_characters_character_id_fittings",
+                "file": "dist/json/esi_3.json"
+            }
+        ]
+    },
+    {
+        "label": "Fleets",
+        "children": [
+            {
+                "label": "DELETE /fleets/{fleet_id}/members/{member_id}/",
+                "key": "delete_fleets_fleet_id_members_member_id",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "DELETE /fleets/{fleet_id}/squads/{squad_id}/",
+                "key": "delete_fleets_fleet_id_squads_squad_id",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "DELETE /fleets/{fleet_id}/wings/{wing_id}/",
+                "key": "delete_fleets_fleet_id_wings_wing_id",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/fleet/",
+                "key": "get_characters_character_id_fleet",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /fleets/{fleet_id}/",
+                "key": "get_fleets_fleet_id",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /fleets/{fleet_id}/members/",
+                "key": "get_fleets_fleet_id_members",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "GET /fleets/{fleet_id}/wings/",
+                "key": "get_fleets_fleet_id_wings",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "POST /fleets/{fleet_id}/members/",
+                "key": "post_fleets_fleet_id_members",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "POST /fleets/{fleet_id}/wings/",
+                "key": "post_fleets_fleet_id_wings",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "POST /fleets/{fleet_id}/wings/{wing_id}/squads/",
+                "key": "post_fleets_fleet_id_wings_wing_id_squads",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "PUT /fleets/{fleet_id}/",
+                "key": "put_fleets_fleet_id",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "PUT /fleets/{fleet_id}/members/{member_id}/",
+                "key": "put_fleets_fleet_id_members_member_id",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "PUT /fleets/{fleet_id}/squads/{squad_id}/",
+                "key": "put_fleets_fleet_id_squads_squad_id",
+                "file": "dist/json/esi_3.json"
+            },
+            {
+                "label": "PUT /fleets/{fleet_id}/wings/{wing_id}/",
+                "key": "put_fleets_fleet_id_wings_wing_id",
+                "file": "dist/json/esi_4.json"
+            }
+        ]
+    },
+    {
+        "label": "Incursions",
+        "children": [
+            {
+                "label": "GET /incursions/",
+                "key": "get_incursions",
+                "file": "dist/json/esi_4.json"
+            }
+        ]
+    },
+    {
+        "label": "Industry",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/industry/jobs/",
+                "key": "get_characters_character_id_industry_jobs",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/mining/",
+                "key": "get_characters_character_id_mining",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /corporation/{corporation_id}/mining/extractions/",
+                "key": "get_corporation_corporation_id_mining_extractions",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /corporation/{corporation_id}/mining/observers/",
+                "key": "get_corporation_corporation_id_mining_observers",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /corporation/{corporation_id}/mining/observers/{observer_id}/",
+                "key": "get_corporation_corporation_id_mining_observers_observer_id",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/industry/jobs/",
+                "key": "get_corporations_corporation_id_industry_jobs",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /industry/facilities/",
+                "key": "get_industry_facilities",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /industry/systems/",
+                "key": "get_industry_systems",
+                "file": "dist/json/esi_4.json"
+            }
+        ]
+    },
+    {
+        "label": "Insurance",
+        "children": [
+            {
+                "label": "GET /insurance/prices/",
+                "key": "get_insurance_prices",
+                "file": "dist/json/esi_4.json"
+            }
+        ]
+    },
+    {
+        "label": "Killmails",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/killmails/recent/",
+                "key": "get_characters_character_id_killmails_recent",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/killmails/recent/",
+                "key": "get_corporations_corporation_id_killmails_recent",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /killmails/{killmail_id}/{killmail_hash}/",
+                "key": "get_killmails_killmail_id_killmail_hash",
+                "file": "dist/json/esi_4.json"
+            }
+        ]
+    },
+    {
+        "label": "Location",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/location/",
+                "key": "get_characters_character_id_location",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/online/",
+                "key": "get_characters_character_id_online",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/ship/",
+                "key": "get_characters_character_id_ship",
+                "file": "dist/json/esi_4.json"
+            }
+        ]
+    },
+    {
+        "label": "Loyalty",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/loyalty/points/",
+                "key": "get_characters_character_id_loyalty_points",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /loyalty/stores/{corporation_id}/offers/",
+                "key": "get_loyalty_stores_corporation_id_offers",
+                "file": "dist/json/esi_4.json"
+            }
+        ]
+    },
+    {
+        "label": "Mail",
+        "children": [
+            {
+                "label": "DELETE /characters/{character_id}/mail/{mail_id}/",
+                "key": "delete_characters_character_id_mail_mail_id",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "DELETE /characters/{character_id}/mail/labels/{label_id}/",
+                "key": "delete_characters_character_id_mail_labels_label_id",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/mail/",
+                "key": "get_characters_character_id_mail",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/mail/{mail_id}/",
+                "key": "get_characters_character_id_mail_mail_id",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/mail/labels/",
+                "key": "get_characters_character_id_mail_labels",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/mail/lists/",
+                "key": "get_characters_character_id_mail_lists",
+                "file": "dist/json/esi_4.json"
+            },
+            {
+                "label": "POST /characters/{character_id}/mail/",
+                "key": "post_characters_character_id_mail",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "POST /characters/{character_id}/mail/labels/",
+                "key": "post_characters_character_id_mail_labels",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "PUT /characters/{character_id}/mail/{mail_id}/",
+                "key": "put_characters_character_id_mail_mail_id",
+                "file": "dist/json/esi_5.json"
+            }
+        ]
+    },
+    {
+        "label": "Market",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/orders/",
+                "key": "get_characters_character_id_orders",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/orders/",
+                "key": "get_corporations_corporation_id_orders",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /markets/{region_id}/history/",
+                "key": "get_markets_region_id_history",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /markets/{region_id}/orders/",
+                "key": "get_markets_region_id_orders",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /markets/{region_id}/types/",
+                "key": "get_markets_region_id_types",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /markets/groups/",
+                "key": "get_markets_groups",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /markets/groups/{market_group_id}/",
+                "key": "get_markets_groups_market_group_id",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /markets/prices/",
+                "key": "get_markets_prices",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /markets/structures/{structure_id}/",
+                "key": "get_markets_structures_structure_id",
+                "file": "dist/json/esi_5.json"
+            }
+        ]
+    },
+    {
+        "label": "Opportunities",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/opportunities/",
+                "key": "get_characters_character_id_opportunities",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /opportunities/groups/",
+                "key": "get_opportunities_groups",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /opportunities/groups/{group_id}/",
+                "key": "get_opportunities_groups_group_id",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /opportunities/tasks/",
+                "key": "get_opportunities_tasks",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /opportunities/tasks/{task_id}/",
+                "key": "get_opportunities_tasks_task_id",
+                "file": "dist/json/esi_5.json"
+            }
+        ]
+    },
+    {
+        "label": "Planetary Interaction",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/planets/",
+                "key": "get_characters_character_id_planets",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/planets/{planet_id}/",
+                "key": "get_characters_character_id_planets_planet_id",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/customs_offices/",
+                "key": "get_corporations_corporation_id_customs_offices",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /universe/schematics/{schematic_id}/",
+                "key": "get_universe_schematics_schematic_id",
+                "file": "dist/json/esi_5.json"
+            }
+        ]
+    },
+    {
+        "label": "Routes",
+        "children": [
+            {
+                "label": "GET /route/{origin}/{destination}/",
+                "key": "get_route_origin_destination",
+                "file": "dist/json/esi_5.json"
+            }
+        ]
+    },
+    {
+        "label": "Search",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/search/",
+                "key": "get_characters_character_id_search",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /search/",
+                "key": "get_search",
+                "file": "dist/json/esi_5.json"
+            }
+        ]
+    },
+    {
+        "label": "Skills",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/attributes/",
+                "key": "get_characters_character_id_attributes",
+                "file": "dist/json/esi_5.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/skillqueue/",
+                "key": "get_characters_character_id_skillqueue",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/skills/",
+                "key": "get_characters_character_id_skills",
+                "file": "dist/json/esi_6.json"
+            }
+        ]
+    },
+    {
+        "label": "Sovereignty",
+        "children": [
+            {
+                "label": "GET /sovereignty/campaigns/",
+                "key": "get_sovereignty_campaigns",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /sovereignty/map/",
+                "key": "get_sovereignty_map",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /sovereignty/structures/",
+                "key": "get_sovereignty_structures",
+                "file": "dist/json/esi_6.json"
+            }
+        ]
+    },
+    {
+        "label": "Status",
+        "children": [
+            {
+                "label": "GET /status/",
+                "key": "get_status",
+                "file": "dist/json/esi_6.json"
+            }
+        ]
+    },
+    {
+        "label": "Universe",
+        "children": [
+            {
+                "label": "GET /universe/bloodlines/",
+                "key": "get_universe_bloodlines",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/categories/",
+                "key": "get_universe_categories",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/categories/{category_id}/",
+                "key": "get_universe_categories_category_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/constellations/",
+                "key": "get_universe_constellations",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/constellations/{constellation_id}/",
+                "key": "get_universe_constellations_constellation_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/factions/",
+                "key": "get_universe_factions",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/graphics/",
+                "key": "get_universe_graphics",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/graphics/{graphic_id}/",
+                "key": "get_universe_graphics_graphic_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/groups/",
+                "key": "get_universe_groups",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/groups/{group_id}/",
+                "key": "get_universe_groups_group_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/moons/{moon_id}/",
+                "key": "get_universe_moons_moon_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/planets/{planet_id}/",
+                "key": "get_universe_planets_planet_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/races/",
+                "key": "get_universe_races",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/regions/",
+                "key": "get_universe_regions",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/regions/{region_id}/",
+                "key": "get_universe_regions_region_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/stargates/{stargate_id}/",
+                "key": "get_universe_stargates_stargate_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/stars/{star_id}/",
+                "key": "get_universe_stars_star_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/stations/{station_id}/",
+                "key": "get_universe_stations_station_id",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/structures/",
+                "key": "get_universe_structures",
+                "file": "dist/json/esi_6.json"
+            },
+            {
+                "label": "GET /universe/structures/{structure_id}/",
+                "key": "get_universe_structures_structure_id",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /universe/system_jumps/",
+                "key": "get_universe_system_jumps",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /universe/system_kills/",
+                "key": "get_universe_system_kills",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /universe/systems/",
+                "key": "get_universe_systems",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /universe/systems/{system_id}/",
+                "key": "get_universe_systems_system_id",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /universe/types/",
+                "key": "get_universe_types",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /universe/types/{type_id}/",
+                "key": "get_universe_types_type_id",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "POST /universe/names/",
+                "key": "post_universe_names",
+                "file": "dist/json/esi_7.json"
+            }
+        ]
+    },
+    {
+        "label": "User Interface",
+        "children": [
+            {
+                "label": "POST /ui/autopilot/waypoint/",
+                "key": "post_ui_autopilot_waypoint",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "POST /ui/openwindow/contract/",
+                "key": "post_ui_openwindow_contract",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "POST /ui/openwindow/information/",
+                "key": "post_ui_openwindow_information",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "POST /ui/openwindow/marketdetails/",
+                "key": "post_ui_openwindow_marketdetails",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "POST /ui/openwindow/newmail/",
+                "key": "post_ui_openwindow_newmail",
+                "file": "dist/json/esi_7.json"
+            }
+        ]
+    },
+    {
+        "label": "Wallet",
+        "children": [
+            {
+                "label": "GET /characters/{character_id}/wallet/",
+                "key": "get_characters_character_id_wallet",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/wallet/journal/",
+                "key": "get_characters_character_id_wallet_journal",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /characters/{character_id}/wallet/transactions/",
+                "key": "get_characters_character_id_wallet_transactions",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/wallets/",
+                "key": "get_corporations_corporation_id_wallets",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/wallets/{division}/journal/",
+                "key": "get_corporations_corporation_id_wallets_division_journal",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /corporations/{corporation_id}/wallets/{division}/transactions/",
+                "key": "get_corporations_corporation_id_wallets_division_transactions",
+                "file": "dist/json/esi_7.json"
+            }
+        ]
+    },
+    {
+        "label": "Wars",
+        "children": [
+            {
+                "label": "GET /wars/",
+                "key": "get_wars",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /wars/{war_id}/",
+                "key": "get_wars_war_id",
+                "file": "dist/json/esi_7.json"
+            },
+            {
+                "label": "GET /wars/{war_id}/killmails/",
+                "key": "get_wars_war_id_killmails",
+                "file": "dist/json/esi_7.json"
+            }
+        ]
+    }
+]

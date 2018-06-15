@@ -37,7 +37,7 @@ export class Star implements r.Async<StarAPI>, r.SingleResource {
     return this.ids().then(id => getDetails(this.agent, id));
   }
 
-  ids() {
+  ids() :Promise<number> {
     if (typeof this.id === 'number') {
       return Promise.resolve(this.id);
     } else {

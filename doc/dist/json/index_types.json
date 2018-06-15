@@ -1,0 +1,1212 @@
+[
+    {
+        "label": "esi",
+        "children": [
+            {
+                "label": "alliance",
+                "children": [
+                    {
+                        "label": "Alliance",
+                        "key": "esi_alliance_Alliance",
+                        "file": "dist/json/types_0.json"
+                    },
+                    {
+                        "label": "Contact",
+                        "key": "esi_alliance_Contact",
+                        "file": "dist/json/types_0.json"
+                    },
+                    {
+                        "label": "Icons",
+                        "key": "esi_alliance_Icons",
+                        "file": "dist/json/types_0.json"
+                    },
+                    {
+                        "label": "Name",
+                        "key": "esi_alliance_Name",
+                        "file": "dist/json/types_0.json"
+                    }
+                ]
+            },
+            {
+                "label": "character",
+                "children": [
+                    {
+                        "label": "asset",
+                        "children": [
+                            {
+                                "label": "Asset",
+                                "key": "esi_character_asset_Asset",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "Blueprint",
+                                "key": "esi_character_asset_Blueprint",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "LocationType",
+                                "key": "esi_character_asset_LocationType",
+                                "file": "dist/json/types_0.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "calendar",
+                        "children": [
+                            {
+                                "label": "Attendee",
+                                "key": "esi_character_calendar_Attendee",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "Calendar",
+                                "key": "esi_character_calendar_Calendar",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "Event",
+                                "key": "esi_character_calendar_Event",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "OwnerType",
+                                "key": "esi_character_calendar_OwnerType",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "Response",
+                                "key": "esi_character_calendar_Response",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "ResponseState",
+                                "key": "esi_character_calendar_ResponseState",
+                                "file": "dist/json/types_0.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "channel",
+                        "children": [
+                            {
+                                "label": "AllowedAccessor",
+                                "key": "esi_character_channel_AllowedAccessor",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "ChatChannel",
+                                "key": "esi_character_channel_ChatChannel",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "RestrictedAccessor",
+                                "key": "esi_character_channel_RestrictedAccessor",
+                                "file": "dist/json/types_0.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "fitting",
+                        "children": [
+                            {
+                                "label": "Fitting",
+                                "key": "esi_character_fitting_Fitting",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "FittingID",
+                                "key": "esi_character_fitting_FittingID",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "Item",
+                                "key": "esi_character_fitting_Item",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "NewFitting",
+                                "key": "esi_character_fitting_NewFitting",
+                                "file": "dist/json/types_0.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "mail",
+                        "children": [
+                            {
+                                "label": "Color",
+                                "key": "esi_character_mail_Color",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "Label",
+                                "key": "esi_character_mail_Label",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "Labels",
+                                "key": "esi_character_mail_Labels",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "List",
+                                "key": "esi_character_mail_List",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "Mail",
+                                "key": "esi_character_mail_Mail",
+                                "file": "dist/json/types_0.json"
+                            },
+                            {
+                                "label": "MailHeader",
+                                "key": "esi_character_mail_MailHeader",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "MailUpdate",
+                                "key": "esi_character_mail_MailUpdate",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "NewLabel",
+                                "key": "esi_character_mail_NewLabel",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "NewMail",
+                                "key": "esi_character_mail_NewMail",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "NewMailWindow",
+                                "key": "esi_character_mail_NewMailWindow",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "Recipient",
+                                "key": "esi_character_mail_Recipient",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "RecipientType",
+                                "key": "esi_character_mail_RecipientType",
+                                "file": "dist/json/types_1.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "notification",
+                        "children": [
+                            {
+                                "label": "ContactNotification",
+                                "key": "esi_character_notification_ContactNotification",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "Notification",
+                                "key": "esi_character_notification_Notification",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "SenderType",
+                                "key": "esi_character_notification_SenderType",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "Type",
+                                "key": "esi_character_notification_Type",
+                                "file": "dist/json/types_1.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "planetaryinteraction",
+                        "children": [
+                            {
+                                "label": "Content",
+                                "key": "esi_character_planetaryinteraction_Content",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "ExtractorHead",
+                                "key": "esi_character_planetaryinteraction_ExtractorHead",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "Link",
+                                "key": "esi_character_planetaryinteraction_Link",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "Pin",
+                                "key": "esi_character_planetaryinteraction_Pin",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "Planet",
+                                "key": "esi_character_planetaryinteraction_Planet",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "PlanetSummary",
+                                "key": "esi_character_planetaryinteraction_PlanetSummary",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "PlanetType",
+                                "key": "esi_character_planetaryinteraction_PlanetType",
+                                "file": "dist/json/types_1.json"
+                            },
+                            {
+                                "label": "Route",
+                                "key": "esi_character_planetaryinteraction_Route",
+                                "file": "dist/json/types_1.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "Affiliation",
+                        "key": "esi_character_Affiliation",
+                        "file": "dist/json/types_1.json"
+                    },
+                    {
+                        "label": "AgentResearch",
+                        "key": "esi_character_AgentResearch",
+                        "file": "dist/json/types_1.json"
+                    },
+                    {
+                        "label": "Attributes",
+                        "key": "esi_character_Attributes",
+                        "file": "dist/json/types_1.json"
+                    },
+                    {
+                        "label": "Bookmark",
+                        "key": "esi_character_Bookmark",
+                        "file": "dist/json/types_1.json"
+                    },
+                    {
+                        "label": "BookmarksFolder",
+                        "key": "esi_character_BookmarksFolder",
+                        "file": "dist/json/types_1.json"
+                    },
+                    {
+                        "label": "Character",
+                        "key": "esi_character_Character",
+                        "file": "dist/json/types_1.json"
+                    },
+                    {
+                        "label": "Clones",
+                        "key": "esi_character_Clones",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Contact",
+                        "key": "esi_character_Contact",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "ContactLabel",
+                        "key": "esi_character_ContactLabel",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "CorporationHistory",
+                        "key": "esi_character_CorporationHistory",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "CSPACharacters",
+                        "key": "esi_character_CSPACharacters",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "CSPACost",
+                        "key": "esi_character_CSPACost",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Fatigue",
+                        "key": "esi_character_Fatigue",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Graphic",
+                        "key": "esi_character_Graphic",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "IndustryJob",
+                        "key": "esi_character_IndustryJob",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "JumpClone",
+                        "key": "esi_character_JumpClone",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Location",
+                        "key": "esi_character_Location",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "LoyaltyPoints",
+                        "key": "esi_character_LoyaltyPoints",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Medal",
+                        "key": "esi_character_Medal",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "MiningRecord",
+                        "key": "esi_character_MiningRecord",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Name",
+                        "key": "esi_character_Name",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Opportunity",
+                        "key": "esi_character_Opportunity",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Order",
+                        "key": "esi_character_Order",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Portrait",
+                        "key": "esi_character_Portrait",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Search",
+                        "key": "esi_character_Search",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "SearchCategory",
+                        "key": "esi_character_SearchCategory",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Ship",
+                        "key": "esi_character_Ship",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Skill",
+                        "key": "esi_character_Skill",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Skillqueue",
+                        "key": "esi_character_Skillqueue",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Skills",
+                        "key": "esi_character_Skills",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "Title",
+                        "key": "esi_character_Title",
+                        "file": "dist/json/types_2.json"
+                    },
+                    {
+                        "label": "WalletTransaction",
+                        "key": "esi_character_WalletTransaction",
+                        "file": "dist/json/types_3.json"
+                    }
+                ]
+            },
+            {
+                "label": "contract",
+                "children": [
+                    {
+                        "label": "Availability",
+                        "key": "esi_contract_Availability",
+                        "file": "dist/json/types_3.json"
+                    },
+                    {
+                        "label": "Bid",
+                        "key": "esi_contract_Bid",
+                        "file": "dist/json/types_3.json"
+                    },
+                    {
+                        "label": "Contract",
+                        "key": "esi_contract_Contract",
+                        "file": "dist/json/types_3.json"
+                    },
+                    {
+                        "label": "Item",
+                        "key": "esi_contract_Item",
+                        "file": "dist/json/types_3.json"
+                    },
+                    {
+                        "label": "Status",
+                        "key": "esi_contract_Status",
+                        "file": "dist/json/types_3.json"
+                    },
+                    {
+                        "label": "Type",
+                        "key": "esi_contract_Type",
+                        "file": "dist/json/types_3.json"
+                    }
+                ]
+            },
+            {
+                "label": "corporation",
+                "children": [
+                    {
+                        "label": "asset",
+                        "children": [
+                            {
+                                "label": "Action",
+                                "key": "esi_corporation_asset_Action",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "Asset",
+                                "key": "esi_corporation_asset_Asset",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "Blueprint",
+                                "key": "esi_corporation_asset_Blueprint",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "ContainersLog",
+                                "key": "esi_corporation_asset_ContainersLog",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "LocationType",
+                                "key": "esi_corporation_asset_LocationType",
+                                "file": "dist/json/types_3.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "industry",
+                        "children": [
+                            {
+                                "label": "Job",
+                                "key": "esi_corporation_industry_Job",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "MiningExtraction",
+                                "key": "esi_corporation_industry_MiningExtraction",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "MiningObserver",
+                                "key": "esi_corporation_industry_MiningObserver",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "MiningRecord",
+                                "key": "esi_corporation_industry_MiningRecord",
+                                "file": "dist/json/types_3.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "structure",
+                        "children": [
+                            {
+                                "label": "CustomsOffice",
+                                "key": "esi_corporation_structure_CustomsOffice",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "Facility",
+                                "key": "esi_corporation_structure_Facility",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "SecurityRole",
+                                "key": "esi_corporation_structure_SecurityRole",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "Service",
+                                "key": "esi_corporation_structure_Service",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "StandingLevel",
+                                "key": "esi_corporation_structure_StandingLevel",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "Starbase",
+                                "key": "esi_corporation_structure_Starbase",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "StarbaseSummary",
+                                "key": "esi_corporation_structure_StarbaseSummary",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "State",
+                                "key": "esi_corporation_structure_State",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "Structure",
+                                "key": "esi_corporation_structure_Structure",
+                                "file": "dist/json/types_3.json"
+                            },
+                            {
+                                "label": "VulnerabilitySchedule",
+                                "key": "esi_corporation_structure_VulnerabilitySchedule",
+                                "file": "dist/json/types_4.json"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "AllianceHistory",
+                        "key": "esi_corporation_AllianceHistory",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Bookmark",
+                        "key": "esi_corporation_Bookmark",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "BookmarksFolder",
+                        "key": "esi_corporation_BookmarksFolder",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Contact",
+                        "key": "esi_corporation_Contact",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Corporation",
+                        "key": "esi_corporation_Corporation",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "DivisionName",
+                        "key": "esi_corporation_DivisionName",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Divisions",
+                        "key": "esi_corporation_Divisions",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Faction",
+                        "key": "esi_corporation_Faction",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Icons",
+                        "key": "esi_corporation_Icons",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "LoyaltyStoreOffer",
+                        "key": "esi_corporation_LoyaltyStoreOffer",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Medal",
+                        "key": "esi_corporation_Medal",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "MedalsIssued",
+                        "key": "esi_corporation_MedalsIssued",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Member",
+                        "key": "esi_corporation_Member",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "MemberDetails",
+                        "key": "esi_corporation_MemberDetails",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "MemberRoles",
+                        "key": "esi_corporation_MemberRoles",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "MemberTitles",
+                        "key": "esi_corporation_MemberTitles",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Name",
+                        "key": "esi_corporation_Name",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Order",
+                        "key": "esi_corporation_Order",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "RolesHistory",
+                        "key": "esi_corporation_RolesHistory",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "RoleType",
+                        "key": "esi_corporation_RoleType",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Shareholder",
+                        "key": "esi_corporation_Shareholder",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Title",
+                        "key": "esi_corporation_Title",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "Wallet",
+                        "key": "esi_corporation_Wallet",
+                        "file": "dist/json/types_4.json"
+                    },
+                    {
+                        "label": "WalletTransaction",
+                        "key": "esi_corporation_WalletTransaction",
+                        "file": "dist/json/types_4.json"
+                    }
+                ]
+            },
+            {
+                "label": "dogma",
+                "children": [
+                    {
+                        "label": "Attribute",
+                        "key": "esi_dogma_Attribute",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "Effect",
+                        "key": "esi_dogma_Effect",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "Modifier",
+                        "key": "esi_dogma_Modifier",
+                        "file": "dist/json/types_5.json"
+                    }
+                ]
+            },
+            {
+                "label": "factionwarfare",
+                "children": [
+                    {
+                        "label": "CharacterLeaderboard",
+                        "key": "esi_factionwarfare_CharacterLeaderboard",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "CharacterScore",
+                        "key": "esi_factionwarfare_CharacterScore",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "CorporationLeaderboard",
+                        "key": "esi_factionwarfare_CorporationLeaderboard",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "CorporationScore",
+                        "key": "esi_factionwarfare_CorporationScore",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "FactionLeaderboard",
+                        "key": "esi_factionwarfare_FactionLeaderboard",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "FactionScore",
+                        "key": "esi_factionwarfare_FactionScore",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "FactionStatistics",
+                        "key": "esi_factionwarfare_FactionStatistics",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "System",
+                        "key": "esi_factionwarfare_System",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "War",
+                        "key": "esi_factionwarfare_War",
+                        "file": "dist/json/types_5.json"
+                    }
+                ]
+            },
+            {
+                "label": "fleet",
+                "children": [
+                    {
+                        "label": "Fleet",
+                        "key": "esi_fleet_Fleet",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "FleetMembership",
+                        "key": "esi_fleet_FleetMembership",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "Invitation",
+                        "key": "esi_fleet_Invitation",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "Member",
+                        "key": "esi_fleet_Member",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "Movement",
+                        "key": "esi_fleet_Movement",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "Naming",
+                        "key": "esi_fleet_Naming",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "NewSettings",
+                        "key": "esi_fleet_NewSettings",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "Role",
+                        "key": "esi_fleet_Role",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "Squad",
+                        "key": "esi_fleet_Squad",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "SquadID",
+                        "key": "esi_fleet_SquadID",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "Wing",
+                        "key": "esi_fleet_Wing",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "WingID",
+                        "key": "esi_fleet_WingID",
+                        "file": "dist/json/types_5.json"
+                    }
+                ]
+            },
+            {
+                "label": "industry",
+                "children": [
+                    {
+                        "label": "Activity",
+                        "key": "esi_industry_Activity",
+                        "file": "dist/json/types_5.json"
+                    },
+                    {
+                        "label": "CostIndex",
+                        "key": "esi_industry_CostIndex",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Facility",
+                        "key": "esi_industry_Facility",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "JobStatus",
+                        "key": "esi_industry_JobStatus",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "System",
+                        "key": "esi_industry_System",
+                        "file": "dist/json/types_6.json"
+                    }
+                ]
+            },
+            {
+                "label": "killmail",
+                "children": [
+                    {
+                        "label": "Attacker",
+                        "key": "esi_killmail_Attacker",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Charge",
+                        "key": "esi_killmail_Charge",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Item",
+                        "key": "esi_killmail_Item",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Killmail",
+                        "key": "esi_killmail_Killmail",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "KillmailLink",
+                        "key": "esi_killmail_KillmailLink",
+                        "file": "dist/json/types_6.json"
+                    }
+                ]
+            },
+            {
+                "label": "market",
+                "children": [
+                    {
+                        "label": "History",
+                        "key": "esi_market_History",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "MarketGroup",
+                        "key": "esi_market_MarketGroup",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Order",
+                        "key": "esi_market_Order",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "OrderRange",
+                        "key": "esi_market_OrderRange",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "OrderState",
+                        "key": "esi_market_OrderState",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Price",
+                        "key": "esi_market_Price",
+                        "file": "dist/json/types_6.json"
+                    }
+                ]
+            },
+            {
+                "label": "sovereignty",
+                "children": [
+                    {
+                        "label": "Campaign",
+                        "key": "esi_sovereignty_Campaign",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "EventType",
+                        "key": "esi_sovereignty_EventType",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Map",
+                        "key": "esi_sovereignty_Map",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Participant",
+                        "key": "esi_sovereignty_Participant",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Structure",
+                        "key": "esi_sovereignty_Structure",
+                        "file": "dist/json/types_6.json"
+                    }
+                ]
+            },
+            {
+                "label": "universe",
+                "children": [
+                    {
+                        "label": "Bloodline",
+                        "key": "esi_universe_Bloodline",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Category",
+                        "key": "esi_universe_Category",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Constellation",
+                        "key": "esi_universe_Constellation",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "DogmaAttribute",
+                        "key": "esi_universe_DogmaAttribute",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "DogmaEffect",
+                        "key": "esi_universe_DogmaEffect",
+                        "file": "dist/json/types_6.json"
+                    },
+                    {
+                        "label": "Faction",
+                        "key": "esi_universe_Faction",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Graphic",
+                        "key": "esi_universe_Graphic",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Group",
+                        "key": "esi_universe_Group",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Moon",
+                        "key": "esi_universe_Moon",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Name",
+                        "key": "esi_universe_Name",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "NameCategory",
+                        "key": "esi_universe_NameCategory",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Planet",
+                        "key": "esi_universe_Planet",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Race",
+                        "key": "esi_universe_Race",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Region",
+                        "key": "esi_universe_Region",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Schematic",
+                        "key": "esi_universe_Schematic",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Service",
+                        "key": "esi_universe_Service",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "SpectralClass",
+                        "key": "esi_universe_SpectralClass",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Star",
+                        "key": "esi_universe_Star",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Stargate",
+                        "key": "esi_universe_Stargate",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Station",
+                        "key": "esi_universe_Station",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Structure",
+                        "key": "esi_universe_Structure",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "System",
+                        "key": "esi_universe_System",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "SystemJumps",
+                        "key": "esi_universe_SystemJumps",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "SystemKills",
+                        "key": "esi_universe_SystemKills",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "SystemPlanet",
+                        "key": "esi_universe_SystemPlanet",
+                        "file": "dist/json/types_7.json"
+                    },
+                    {
+                        "label": "Type",
+                        "key": "esi_universe_Type",
+                        "file": "dist/json/types_7.json"
+                    }
+                ]
+            },
+            {
+                "label": "Ally",
+                "key": "esi_Ally",
+                "file": "dist/json/types_7.json"
+            },
+            {
+                "label": "AssetLocation",
+                "key": "esi_AssetLocation",
+                "file": "dist/json/types_7.json"
+            },
+            {
+                "label": "AssetName",
+                "key": "esi_AssetName",
+                "file": "dist/json/types_7.json"
+            },
+            {
+                "label": "EntityType",
+                "key": "esi_EntityType",
+                "file": "dist/json/types_7.json"
+            },
+            {
+                "label": "Incursion",
+                "key": "esi_Incursion",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "InsuranceLevel",
+                "key": "esi_InsuranceLevel",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "InsurancePrice",
+                "key": "esi_InsurancePrice",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "ItemQuantity",
+                "key": "esi_ItemQuantity",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "Language",
+                "key": "esi_Language",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "OpportunitiesGroup",
+                "key": "esi_OpportunitiesGroup",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "OpportunitiesTask",
+                "key": "esi_OpportunitiesTask",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "Role",
+                "key": "esi_Role",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "Search",
+                "key": "esi_Search",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "SearchCategory",
+                "key": "esi_SearchCategory",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "Standing",
+                "key": "esi_Standing",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "Status",
+                "key": "esi_Status",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "TransactionType",
+                "key": "esi_TransactionType",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "WalletJournal",
+                "key": "esi_WalletJournal",
+                "file": "dist/json/types_8.json"
+            },
+            {
+                "label": "War",
+                "key": "esi_War",
+                "file": "dist/json/types_8.json"
+            }
+        ]
+    },
+    {
+        "label": "Parameters",
+        "key": "Parameters",
+        "file": "dist/json/types_8.json"
+    },
+    {
+        "label": "Responses",
+        "key": "Responses",
+        "file": "dist/json/types_8.json"
+    },
+    {
+        "label": "RouteMap",
+        "key": "RouteMap",
+        "file": "dist/json/types_8.json"
+    },
+    {
+        "label": "URLInfo",
+        "key": "URLInfo",
+        "file": "dist/json/types_8.json"
+    }
+]

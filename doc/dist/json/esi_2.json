@@ -1,0 +1,252 @@
+[
+    {
+        "key": "get_corporations_corporation_id",
+        "label": "get /v3/corporations/{corporation_id}/",
+        "tag": "Corporation",
+        "apiURL": "/v3/corporations/{corporation_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id",
+        "description": "Public information about a corporation.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_alliancehistory",
+        "label": "get /v2/corporations/{corporation_id}/alliancehistory/",
+        "tag": "Corporation",
+        "apiURL": "/v2/corporations/{corporation_id}/alliancehistory/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_alliancehistory",
+        "description": "Get a list of all the alliances a corporation has been a member of.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_blueprints",
+        "label": "get /v1/corporations/{corporation_id}/blueprints/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/blueprints/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_blueprints",
+        "description": "Returns a list of blueprints the corporation owns.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_containers_logs",
+        "label": "get /v1/corporations/{corporation_id}/containers/logs/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/containers/logs/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_containers_logs",
+        "description": "Returns logs recorded in the past seven days from all audit log secure containers (ALSC) owned by a given corporation.This route is cached for up to 600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_divisions",
+        "label": "get /v1/corporations/{corporation_id}/divisions/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/divisions/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_divisions",
+        "description": "Return corporation hangar and wallet division names, only show if a division is not using the default name.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_facilities",
+        "label": "get /v1/corporations/{corporation_id}/facilities/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/facilities/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_facilities",
+        "description": "Return a corporation's facilities.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_icons",
+        "label": "get /v1/corporations/{corporation_id}/icons/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/icons/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_icons",
+        "description": "Get the icon urls for a corporation.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_medals",
+        "label": "get /v1/corporations/{corporation_id}/medals/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/medals/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_medals",
+        "description": "Returns a corporation's medals.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_medals_issued",
+        "label": "get /v1/corporations/{corporation_id}/medals/issued/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/medals/issued/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_medals_issued",
+        "description": "Returns medals issued by a corporation.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_members",
+        "label": "get /v2/corporations/{corporation_id}/members/",
+        "tag": "Corporation",
+        "apiURL": "/v2/corporations/{corporation_id}/members/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_members",
+        "description": "Read the current list of members if the calling character is a member.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_members_limit",
+        "label": "get /v1/corporations/{corporation_id}/members/limit/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/members/limit/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_members_limit",
+        "description": "Return a corporation's member limit, not including CEO himself.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_members_titles",
+        "label": "get /v1/corporations/{corporation_id}/members/titles/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/members/titles/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_members_titles",
+        "description": "Returns a corporation's members' titles.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_membertracking",
+        "label": "get /v1/corporations/{corporation_id}/membertracking/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/membertracking/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_membertracking",
+        "description": "Returns additional information about a corporation's members which helps tracking their activities.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_roles",
+        "label": "get /v1/corporations/{corporation_id}/roles/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/roles/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_roles",
+        "description": "Return the roles of all members if the character has the personnel manager role or any grantable role.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_roles_history",
+        "label": "get /v1/corporations/{corporation_id}/roles/history/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/roles/history/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_roles_history",
+        "description": "Return how roles have changed for a coporation's members, up to a month.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_shareholders",
+        "label": "get /v1/corporations/{corporation_id}/shareholders/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/shareholders/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_shareholders",
+        "description": "Return the current member list of a corporation, the token's character need to be a member of the corporation.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_standings",
+        "label": "get /v1/corporations/{corporation_id}/standings/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/standings/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_standings",
+        "description": "Return corporation standings from agents, NPC corporations, and factions.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_starbases",
+        "label": "get /v1/corporations/{corporation_id}/starbases/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/starbases/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_starbases",
+        "description": "Returns list of corporation starbases (POSes).This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_starbases_starbase_id",
+        "label": "get /v1/corporations/{corporation_id}/starbases/{starbase_id}/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/starbases/{starbase_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_starbases_starbase_id",
+        "description": "Returns various settings and fuels of a starbase (POS).This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_structures",
+        "label": "get /v1/corporations/{corporation_id}/structures/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/structures/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_structures",
+        "description": "Get a list of corporation structures.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_titles",
+        "label": "get /v1/corporations/{corporation_id}/titles/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/titles/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_corporation_id_titles",
+        "description": "Returns a corporation's titles.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_names",
+        "label": "get /v1/corporations/names/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/names/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_names",
+        "description": "Resolve a set of corporation IDs to corporation names.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_npccorps",
+        "label": "get /v1/corporations/npccorps/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/npccorps/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/get_corporations_npccorps",
+        "description": "Get a list of npc corporations.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "put_corporations_corporation_id_structures_structure_id",
+        "label": "put /v1/corporations/{corporation_id}/structures/{structure_id}/",
+        "tag": "Corporation",
+        "apiURL": "/v1/corporations/{corporation_id}/structures/{structure_id}/",
+        "httpMethod": "put",
+        "docURL": "https://esi.tech.ccp.is/#!/Corporation/put_corporations_corporation_id_structures_structure_id",
+        "description": "Update the vulnerability window schedule of a corporation structure.",
+        "usages": []
+    },
+    {
+        "key": "get_dogma_attributes",
+        "label": "get /v1/dogma/attributes/",
+        "tag": "Dogma",
+        "apiURL": "/v1/dogma/attributes/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Dogma/get_dogma_attributes",
+        "description": "Get a list of dogma attribute ids.This route expires daily at 11:05.",
+        "usages": []
+    }
+]

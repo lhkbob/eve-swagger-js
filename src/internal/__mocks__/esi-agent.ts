@@ -8,7 +8,7 @@
  * must match the swagger definition in order to pass.
  */
 
-import * as swagger from '../../../util/esi-api';
+import * as swagger from '../../../tools/esi-api';
 import { Parameters, Responses, ROUTE_MAP, esi  } from '../../esi';
 
 function expectConstructorCall(params: Configuration): void {

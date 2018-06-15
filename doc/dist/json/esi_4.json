@@ -1,0 +1,252 @@
+[
+    {
+        "key": "put_fleets_fleet_id_wings_wing_id",
+        "label": "put /v1/fleets/{fleet_id}/wings/{wing_id}/",
+        "tag": "Fleets",
+        "apiURL": "/v1/fleets/{fleet_id}/wings/{wing_id}/",
+        "httpMethod": "put",
+        "docURL": "https://esi.tech.ccp.is/#!/Fleets/put_fleets_fleet_id_wings_wing_id",
+        "description": "Rename a fleet wing.",
+        "usages": []
+    },
+    {
+        "key": "get_incursions",
+        "label": "get /v1/incursions/",
+        "tag": "Incursions",
+        "apiURL": "/v1/incursions/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Incursions/get_incursions",
+        "description": "Return a list of current incursions.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_industry_jobs",
+        "label": "get /v1/characters/{character_id}/industry/jobs/",
+        "tag": "Industry",
+        "apiURL": "/v1/characters/{character_id}/industry/jobs/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Industry/get_characters_character_id_industry_jobs",
+        "description": "List industry jobs placed by a character.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_mining",
+        "label": "get /v1/characters/{character_id}/mining/",
+        "tag": "Industry",
+        "apiURL": "/v1/characters/{character_id}/mining/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Industry/get_characters_character_id_mining",
+        "description": "Paginated record of all mining done by a character for the past 30 days.This route is cached for up to 600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporation_corporation_id_mining_extractions",
+        "label": "get /v1/corporation/{corporation_id}/mining/extractions/",
+        "tag": "Industry",
+        "apiURL": "/v1/corporation/{corporation_id}/mining/extractions/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Industry/get_corporation_corporation_id_mining_extractions",
+        "description": "Extraction timers for all moon chunks being extracted by refineries belonging to a corporation.This route is cached for up to 1800 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporation_corporation_id_mining_observers",
+        "label": "get /v1/corporation/{corporation_id}/mining/observers/",
+        "tag": "Industry",
+        "apiURL": "/v1/corporation/{corporation_id}/mining/observers/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Industry/get_corporation_corporation_id_mining_observers",
+        "description": "Paginated list of all entities capable of observing and recording mining for a corporation.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporation_corporation_id_mining_observers_observer_id",
+        "label": "get /v1/corporation/{corporation_id}/mining/observers/{observer_id}/",
+        "tag": "Industry",
+        "apiURL": "/v1/corporation/{corporation_id}/mining/observers/{observer_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Industry/get_corporation_corporation_id_mining_observers_observer_id",
+        "description": "Paginated record of all mining seen by an observer.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_industry_jobs",
+        "label": "get /v1/corporations/{corporation_id}/industry/jobs/",
+        "tag": "Industry",
+        "apiURL": "/v1/corporations/{corporation_id}/industry/jobs/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Industry/get_corporations_corporation_id_industry_jobs",
+        "description": "List industry jobs run by a corporation.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_industry_facilities",
+        "label": "get /v1/industry/facilities/",
+        "tag": "Industry",
+        "apiURL": "/v1/industry/facilities/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Industry/get_industry_facilities",
+        "description": "Return a list of industry facilities.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_industry_systems",
+        "label": "get /v1/industry/systems/",
+        "tag": "Industry",
+        "apiURL": "/v1/industry/systems/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Industry/get_industry_systems",
+        "description": "Return cost indices for solar systems.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_insurance_prices",
+        "label": "get /v1/insurance/prices/",
+        "tag": "Insurance",
+        "apiURL": "/v1/insurance/prices/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Insurance/get_insurance_prices",
+        "description": "Return available insurance levels for all ship types.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_killmails_recent",
+        "label": "get /v1/characters/{character_id}/killmails/recent/",
+        "tag": "Killmails",
+        "apiURL": "/v1/characters/{character_id}/killmails/recent/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Killmails/get_characters_character_id_killmails_recent",
+        "description": "Return a list of character's recent kills and losses.This route is cached for up to 120 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_killmails_recent",
+        "label": "get /v1/corporations/{corporation_id}/killmails/recent/",
+        "tag": "Killmails",
+        "apiURL": "/v1/corporations/{corporation_id}/killmails/recent/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Killmails/get_corporations_corporation_id_killmails_recent",
+        "description": "Get a list of corporation's recent kills and losses.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_killmails_killmail_id_killmail_hash",
+        "label": "get /v1/killmails/{killmail_id}/{killmail_hash}/",
+        "tag": "Killmails",
+        "apiURL": "/v1/killmails/{killmail_id}/{killmail_hash}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Killmails/get_killmails_killmail_id_killmail_hash",
+        "description": "Return a single killmail from its ID and hash.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_location",
+        "label": "get /v1/characters/{character_id}/location/",
+        "tag": "Location",
+        "apiURL": "/v1/characters/{character_id}/location/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Location/get_characters_character_id_location",
+        "description": "Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable.This route is cached for up to 5 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_online",
+        "label": "get /v1/characters/{character_id}/online/",
+        "tag": "Location",
+        "apiURL": "/v1/characters/{character_id}/online/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Location/get_characters_character_id_online",
+        "description": "Checks if the character is currently online.This route is cached for up to 60 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_ship",
+        "label": "get /v1/characters/{character_id}/ship/",
+        "tag": "Location",
+        "apiURL": "/v1/characters/{character_id}/ship/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Location/get_characters_character_id_ship",
+        "description": "Get the current ship type, name and id.This route is cached for up to 5 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_loyalty_points",
+        "label": "get /v1/characters/{character_id}/loyalty/points/",
+        "tag": "Loyalty",
+        "apiURL": "/v1/characters/{character_id}/loyalty/points/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Loyalty/get_characters_character_id_loyalty_points",
+        "description": "Return a list of loyalty points for all corporations the character has worked for.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_loyalty_stores_corporation_id_offers",
+        "label": "get /v1/loyalty/stores/{corporation_id}/offers/",
+        "tag": "Loyalty",
+        "apiURL": "/v1/loyalty/stores/{corporation_id}/offers/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Loyalty/get_loyalty_stores_corporation_id_offers",
+        "description": "Return a list of offers from a specific corporation's loyalty store.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "delete_characters_character_id_mail_mail_id",
+        "label": "delete /v1/characters/{character_id}/mail/{mail_id}/",
+        "tag": "Mail",
+        "apiURL": "/v1/characters/{character_id}/mail/{mail_id}/",
+        "httpMethod": "delete",
+        "docURL": "https://esi.tech.ccp.is/#!/Mail/delete_characters_character_id_mail_mail_id",
+        "description": "Delete a mail.",
+        "usages": []
+    },
+    {
+        "key": "delete_characters_character_id_mail_labels_label_id",
+        "label": "delete /v1/characters/{character_id}/mail/labels/{label_id}/",
+        "tag": "Mail",
+        "apiURL": "/v1/characters/{character_id}/mail/labels/{label_id}/",
+        "httpMethod": "delete",
+        "docURL": "https://esi.tech.ccp.is/#!/Mail/delete_characters_character_id_mail_labels_label_id",
+        "description": "Delete a mail label.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_mail",
+        "label": "get /v1/characters/{character_id}/mail/",
+        "tag": "Mail",
+        "apiURL": "/v1/characters/{character_id}/mail/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Mail/get_characters_character_id_mail",
+        "description": "Return the 50 most recent mail headers belonging to the character that match the query criteria. Queries can be filtered by label, and last_mail_id can be used to paginate backwards.This route is cached for up to 30 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_mail_mail_id",
+        "label": "get /v1/characters/{character_id}/mail/{mail_id}/",
+        "tag": "Mail",
+        "apiURL": "/v1/characters/{character_id}/mail/{mail_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Mail/get_characters_character_id_mail_mail_id",
+        "description": "Return the contents of an EVE mail.This route is cached for up to 30 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_mail_labels",
+        "label": "get /v3/characters/{character_id}/mail/labels/",
+        "tag": "Mail",
+        "apiURL": "/v3/characters/{character_id}/mail/labels/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Mail/get_characters_character_id_mail_labels",
+        "description": "Return a list of the users mail labels, unread counts for each label and a total unread count.This route is cached for up to 30 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_mail_lists",
+        "label": "get /v1/characters/{character_id}/mail/lists/",
+        "tag": "Mail",
+        "apiURL": "/v1/characters/{character_id}/mail/lists/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Mail/get_characters_character_id_mail_lists",
+        "description": "Return all mailing lists that the character is subscribed to.This route is cached for up to 120 seconds.",
+        "usages": []
+    }
+]

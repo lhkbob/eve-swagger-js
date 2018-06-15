@@ -1,0 +1,222 @@
+[
+    {
+        "key": "get_universe_structures_structure_id",
+        "label": "get /v1/universe/structures/{structure_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/structures/{structure_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_structures_structure_id",
+        "description": "Returns information on requested structure, if you are on the ACL. Otherwise, returns \"Forbidden\" for all inputs.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_system_jumps",
+        "label": "get /v1/universe/system_jumps/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/system_jumps/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_system_jumps",
+        "description": "Get the number of jumps in solar systems within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with jumps will be listed.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_system_kills",
+        "label": "get /v2/universe/system_kills/",
+        "tag": "Universe",
+        "apiURL": "/v2/universe/system_kills/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_system_kills",
+        "description": "Get the number of ship, pod and NPC kills per solar system within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with kills will be listed.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_systems",
+        "label": "get /v1/universe/systems/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/systems/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_systems",
+        "description": "Get a list of solar systems.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_systems_system_id",
+        "label": "get /v3/universe/systems/{system_id}/",
+        "tag": "Universe",
+        "apiURL": "/v3/universe/systems/{system_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_systems_system_id",
+        "description": "Get information on a solar system.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_types",
+        "label": "get /v1/universe/types/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/types/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_types",
+        "description": "Get a list of type ids.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_types_type_id",
+        "label": "get /v3/universe/types/{type_id}/",
+        "tag": "Universe",
+        "apiURL": "/v3/universe/types/{type_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_types_type_id",
+        "description": "Get information on a type.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "post_universe_names",
+        "label": "post /v2/universe/names/",
+        "tag": "Universe",
+        "apiURL": "/v2/universe/names/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/post_universe_names",
+        "description": "Resolve a set of IDs to names and categories. Supported ID's for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types.",
+        "usages": []
+    },
+    {
+        "key": "post_ui_autopilot_waypoint",
+        "label": "post /v2/ui/autopilot/waypoint/",
+        "tag": "User Interface",
+        "apiURL": "/v2/ui/autopilot/waypoint/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/User Interface/post_ui_autopilot_waypoint",
+        "description": "Set a solar system as autopilot waypoint.",
+        "usages": []
+    },
+    {
+        "key": "post_ui_openwindow_contract",
+        "label": "post /v1/ui/openwindow/contract/",
+        "tag": "User Interface",
+        "apiURL": "/v1/ui/openwindow/contract/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/User Interface/post_ui_openwindow_contract",
+        "description": "Open the contract window inside the client.",
+        "usages": []
+    },
+    {
+        "key": "post_ui_openwindow_information",
+        "label": "post /v1/ui/openwindow/information/",
+        "tag": "User Interface",
+        "apiURL": "/v1/ui/openwindow/information/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/User Interface/post_ui_openwindow_information",
+        "description": "Open the information window for a character, corporation or alliance inside the client.",
+        "usages": []
+    },
+    {
+        "key": "post_ui_openwindow_marketdetails",
+        "label": "post /v1/ui/openwindow/marketdetails/",
+        "tag": "User Interface",
+        "apiURL": "/v1/ui/openwindow/marketdetails/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/User Interface/post_ui_openwindow_marketdetails",
+        "description": "Open the market details window for a specific typeID inside the client.",
+        "usages": []
+    },
+    {
+        "key": "post_ui_openwindow_newmail",
+        "label": "post /v1/ui/openwindow/newmail/",
+        "tag": "User Interface",
+        "apiURL": "/v1/ui/openwindow/newmail/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/User Interface/post_ui_openwindow_newmail",
+        "description": "Open the New Mail window, according to settings from the request if applicable.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_wallet",
+        "label": "get /v1/characters/{character_id}/wallet/",
+        "tag": "Wallet",
+        "apiURL": "/v1/characters/{character_id}/wallet/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Wallet/get_characters_character_id_wallet",
+        "description": "Returns a character's wallet balance.This route is cached for up to 120 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_wallet_journal",
+        "label": "get /v2/characters/{character_id}/wallet/journal/",
+        "tag": "Wallet",
+        "apiURL": "/v2/characters/{character_id}/wallet/journal/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Wallet/get_characters_character_id_wallet_journal",
+        "description": "Retrieve character wallet journal.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_wallet_transactions",
+        "label": "get /v1/characters/{character_id}/wallet/transactions/",
+        "tag": "Wallet",
+        "apiURL": "/v1/characters/{character_id}/wallet/transactions/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Wallet/get_characters_character_id_wallet_transactions",
+        "description": "Get wallet transactions of a character.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_wallets",
+        "label": "get /v1/corporations/{corporation_id}/wallets/",
+        "tag": "Wallet",
+        "apiURL": "/v1/corporations/{corporation_id}/wallets/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Wallet/get_corporations_corporation_id_wallets",
+        "description": "Get a corporation's wallets.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_wallets_division_journal",
+        "label": "get /v1/corporations/{corporation_id}/wallets/{division}/journal/",
+        "tag": "Wallet",
+        "apiURL": "/v1/corporations/{corporation_id}/wallets/{division}/journal/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Wallet/get_corporations_corporation_id_wallets_division_journal",
+        "description": "Retrieve corporation wallet journal.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_wallets_division_transactions",
+        "label": "get /v1/corporations/{corporation_id}/wallets/{division}/transactions/",
+        "tag": "Wallet",
+        "apiURL": "/v1/corporations/{corporation_id}/wallets/{division}/transactions/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Wallet/get_corporations_corporation_id_wallets_division_transactions",
+        "description": "Get wallet transactions of a corporation.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_wars",
+        "label": "get /v1/wars/",
+        "tag": "Wars",
+        "apiURL": "/v1/wars/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Wars/get_wars",
+        "description": "Return a list of wars.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_wars_war_id",
+        "label": "get /v1/wars/{war_id}/",
+        "tag": "Wars",
+        "apiURL": "/v1/wars/{war_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Wars/get_wars_war_id",
+        "description": "Return details about a war.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_wars_war_id_killmails",
+        "label": "get /v1/wars/{war_id}/killmails/",
+        "tag": "Wars",
+        "apiURL": "/v1/wars/{war_id}/killmails/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Wars/get_wars_war_id_killmails",
+        "description": "Return a list of kills related to a war.This route is cached for up to 3600 seconds.",
+        "usages": []
+    }
+]

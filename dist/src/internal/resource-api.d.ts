@@ -1,3 +1,4 @@
+import './async-iterator';
 /**
  * Map the resource definition `T` to a set of functions that return Promises
  * resolving to the responses. This mapping is used when a single element or

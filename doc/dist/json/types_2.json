@@ -1,0 +1,434 @@
+[
+    {
+        "key": "esi_character_Clones",
+        "type": {
+            "kind": "interface",
+            "name": "Clones",
+            "members": [
+                "home_location",
+                "jump_clones",
+                "last_jump_date"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Contact",
+        "type": {
+            "kind": "interface",
+            "name": "Contact",
+            "members": [
+                "contact_id",
+                "contact_type",
+                "is_blocked",
+                "is_watched",
+                "label_id",
+                "standing"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_ContactLabel",
+        "type": {
+            "kind": "interface",
+            "name": "ContactLabel",
+            "members": [
+                "label_id",
+                "label_name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_CorporationHistory",
+        "type": {
+            "kind": "interface",
+            "name": "CorporationHistory",
+            "members": [
+                "corporation_id",
+                "is_deleted",
+                "record_id",
+                "start_date"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_CSPACharacters",
+        "type": {
+            "kind": "interface",
+            "name": "CSPACharacters",
+            "members": [
+                "characters"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_CSPACost",
+        "type": {
+            "kind": "interface",
+            "name": "CSPACost",
+            "members": [
+                "cost"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Fatigue",
+        "type": {
+            "kind": "interface",
+            "name": "Fatigue",
+            "members": [
+                "jump_fatigue_expire_date",
+                "last_jump_date",
+                "last_update_date"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Graphic",
+        "type": {
+            "kind": "interface",
+            "name": "Graphic",
+            "members": [
+                "color",
+                "graphic",
+                "layer",
+                "part"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_IndustryJob",
+        "type": {
+            "kind": "interface",
+            "name": "IndustryJob",
+            "members": [
+                "activity_id",
+                "blueprint_id",
+                "blueprint_location_id",
+                "blueprint_type_id",
+                "completed_character_id",
+                "completed_date",
+                "cost",
+                "duration",
+                "end_date",
+                "facility_id",
+                "installer_id",
+                "job_id",
+                "licensed_runs",
+                "output_location_id",
+                "pause_date",
+                "probability",
+                "product_type_id",
+                "runs",
+                "start_date",
+                "station_id",
+                "status",
+                "successful_runs"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_JumpClone",
+        "type": {
+            "kind": "interface",
+            "name": "JumpClone",
+            "members": [
+                "implants",
+                "location_id",
+                "location_type"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Location",
+        "type": {
+            "kind": "interface",
+            "name": "Location",
+            "members": [
+                "solar_system_id",
+                "station_id",
+                "structure_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_LoyaltyPoints",
+        "type": {
+            "kind": "interface",
+            "name": "LoyaltyPoints",
+            "members": [
+                "corporation_id",
+                "loyalty_points"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Medal",
+        "type": {
+            "kind": "interface",
+            "name": "Medal",
+            "members": [
+                "corporation_id",
+                "date",
+                "description",
+                "graphics",
+                "issuer_id",
+                "medal_id",
+                "reason",
+                "status",
+                "title"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_MiningRecord",
+        "type": {
+            "kind": "interface",
+            "name": "MiningRecord",
+            "members": [
+                "date",
+                "quantity",
+                "solar_system_id",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Name",
+        "type": {
+            "kind": "interface",
+            "name": "Name",
+            "members": [
+                "character_id",
+                "character_name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Opportunity",
+        "type": {
+            "kind": "interface",
+            "name": "Opportunity",
+            "members": [
+                "completed_at",
+                "task_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Order",
+        "type": {
+            "kind": "interface",
+            "name": "Order",
+            "members": [
+                "account_id",
+                "duration",
+                "escrow",
+                "is_buy_order",
+                "is_corp",
+                "issued",
+                "location_id",
+                "min_volume",
+                "order_id",
+                "price",
+                "range",
+                "region_id",
+                "state",
+                "type_id",
+                "volume_remain",
+                "volume_total"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Portrait",
+        "type": {
+            "kind": "interface",
+            "name": "Portrait",
+            "members": [
+                "px128x128",
+                "px256x256",
+                "px512x512",
+                "px64x64"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Search",
+        "type": {
+            "kind": "interface",
+            "name": "Search",
+            "members": [
+                "agent",
+                "alliance",
+                "character",
+                "constellation",
+                "corporation",
+                "faction",
+                "inventorytype",
+                "region",
+                "solarsystem",
+                "station",
+                "structure",
+                "wormhole"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_SearchCategory",
+        "type": {
+            "kind": "enum",
+            "name": "SearchCategory",
+            "members": [
+                "AGENT",
+                "ALLIANCE",
+                "CHARACTER",
+                "CONSTELLATION",
+                "CORPORATION",
+                "FACTION",
+                "INVENTORYTYPE",
+                "REGION",
+                "SOLARSYSTEM",
+                "STATION",
+                "STRUCTURE",
+                "WORMHOLE"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_character_Ship",
+        "type": {
+            "kind": "interface",
+            "name": "Ship",
+            "members": [
+                "ship_item_id",
+                "ship_name",
+                "ship_type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Skill",
+        "type": {
+            "kind": "interface",
+            "name": "Skill",
+            "members": [
+                "current_skill_level",
+                "skill_id",
+                "skillpoints_in_skill"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Skillqueue",
+        "type": {
+            "kind": "interface",
+            "name": "Skillqueue",
+            "members": [
+                "finish_date",
+                "finished_level",
+                "level_end_sp",
+                "level_start_sp",
+                "queue_position",
+                "skill_id",
+                "start_date",
+                "training_start_sp"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Skills",
+        "type": {
+            "kind": "interface",
+            "name": "Skills",
+            "members": [
+                "skills",
+                "total_sp"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Title",
+        "type": {
+            "kind": "interface",
+            "name": "Title",
+            "members": [
+                "name",
+                "title_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    }
+]

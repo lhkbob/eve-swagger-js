@@ -11,27 +11,28 @@
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
-    "prepublish": "npm-run-all clean build test",
+    "prepublishOnly": "npm-run-all clean build test",
     "test": "jest",
-    "clean": "rm -rf ./dist; rm -rf ./node_modules/.jest-cache",
-    "build": "npm-run-all build:util gen:esi build:src",
-    "build:util": "tsc -p ./tsconfig.util.json",
+    "clean": "rm -rf ./dist; rm -rf ./doc/dist; rm -rf ./node_modules/.jest-cache",
+    "build": "npm-run-all build:tools gen:esi build:src gen:doc build:doc",
+    "build:tools": "tsc -p ./tsconfig.tools.json",
     "build:src": "tsc -p ./tsconfig.src.json",
-    "gen:esi": "node dist/util/type-generator",
-    "watch": "npm-run-all --parallel watch:util watch:src",
-    "watch:util": "tsc -w -p ./tsconfig.util.json",
+    "build:doc": "webpack --config tools/doc/vue/webpack.config.js",
+    "gen:esi": "node dist/tools/type-generator",
+    "gen:doc": "node dist/tools/doc",
+    "watch": "npm-run-all --parallel watch:tools watch:src watch:doc",
+    "watch:tools": "tsc -w -p ./tsconfig.tools.json",
     "watch:src": "tsc -w -p ./tsconfig.src.json",
-    "gen:docs": "jsdoc --configure ./jsdoc.json"
+    "watch:doc": "webpack-dev-server --hot --config tools/doc/vue/webpack.config.js --content-base ./doc/"
   },
   "jest": {
     "roots": [
-      "src",
-      "gen"
+      "src"
     ],
     "testPathIgnorePatterns": [
       "node_modules/",
       "dist/",
-      "util/"
+      "tools/"
     ],
     "moduleFileExtensions": [
       "ts",
@@ -51,8 +52,8 @@
     "tag": "dev"
   },
   "dependencies": {
-    "@types/verror": "^1.10.1",
     "@types/superagent": "^3.5.5",
+    "@types/verror": "^1.10.1",
     "bottleneck": "^1.16.0",
     "moment": "^2.18.1",
     "superagent": "^3.6.0",
@@ -62,12 +63,23 @@
     "@types/deep-equal": "^1.0.1",
     "@types/jest": "^21.1.0",
     "@types/swagger-schema-official": "^2.0.6",
+    "ajv": "^6.1.1",
+    "axios": "^0.18.0",
+    "css-loader": "^0.28.9",
     "deep-equal": "^1.0.1",
     "jest": "^21.1.0",
     "npm-run-all": "^4.1.1",
     "pluralize": "^6.0.0",
     "sync-request": "^4.1.0",
     "ts-jest": "^21.0.1",
-    "typescript": "^2.5.2"
+    "ts-loader": "^3.5.0",
+    "typescript": "^2.5.2",
+    "vue": "^2.5.13",
+    "vue-loader": "^14.1.1",
+    "vue-property-decorator": "^6.0.0",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.13",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
   }
 }

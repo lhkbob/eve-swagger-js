@@ -500,7 +500,7 @@ function deleteLabel(agent: SSOAgent<number>, id: number) {
       { path: { character_id: agent.id, label_id: id } }, agent.ssoToken);
 }
 
-function getSummaryFromMessage(id: number, message: esi.character.mail.Mail) {
+function getSummaryFromMessage(id: number, message: esi.character.mail.Mail) : esi.character.mail.MailHeader {
   return {
     from: message.from,
     is_read: message.read,

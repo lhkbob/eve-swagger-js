@@ -1,0 +1,599 @@
+[
+    {
+        "key": "esi_character_mail_MailHeader",
+        "type": {
+            "kind": "interface",
+            "name": "MailHeader",
+            "members": [
+                "from",
+                "is_read",
+                "labels",
+                "mail_id",
+                "recipients",
+                "subject",
+                "timestamp"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_MailUpdate",
+        "type": {
+            "kind": "interface",
+            "name": "MailUpdate",
+            "members": [
+                "labels",
+                "read"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_NewLabel",
+        "type": {
+            "kind": "interface",
+            "name": "NewLabel",
+            "members": [
+                "color",
+                "name"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_NewMail",
+        "type": {
+            "kind": "interface",
+            "name": "NewMail",
+            "members": [
+                "approved_cost",
+                "body",
+                "recipients",
+                "subject"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_NewMailWindow",
+        "type": {
+            "kind": "interface",
+            "name": "NewMailWindow",
+            "members": [
+                "body",
+                "recipients",
+                "subject",
+                "to_corp_or_alliance_id",
+                "to_mailing_list_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_Recipient",
+        "type": {
+            "kind": "interface",
+            "name": "Recipient",
+            "members": [
+                "recipient_id",
+                "recipient_type"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_mail_RecipientType",
+        "type": {
+            "kind": "enum",
+            "name": "RecipientType",
+            "members": [
+                "ALLIANCE",
+                "CHARACTER",
+                "CORPORATION",
+                "MAILING_LIST"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_character_notification_ContactNotification",
+        "type": {
+            "kind": "interface",
+            "name": "ContactNotification",
+            "members": [
+                "message",
+                "notification_id",
+                "send_date",
+                "sender_character_id",
+                "standing_level"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_notification_Notification",
+        "type": {
+            "kind": "interface",
+            "name": "Notification",
+            "members": [
+                "is_read",
+                "notification_id",
+                "sender_id",
+                "sender_type",
+                "text",
+                "timestamp",
+                "type"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_notification_SenderType",
+        "type": {
+            "kind": "enum",
+            "name": "SenderType",
+            "members": [
+                "ALLIANCE",
+                "CHARACTER",
+                "CORPORATION",
+                "FACTION",
+                "OTHER"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_character_notification_Type",
+        "type": {
+            "kind": "enum",
+            "name": "Type",
+            "members": [
+                "ACCEPTED_ALLY",
+                "ACCEPTED_SURRENDER",
+                "ALL_ANCHORING_MSG",
+                "ALL_MAINTENANCE_BILL_MSG",
+                "ALL_STRUC_INVULNERABLE_MSG",
+                "ALL_STRUCT_VULNERABLE_MSG",
+                "ALL_WAR_CORP_JOINED_ALLIANCE_MSG",
+                "ALL_WAR_DECLARED_MSG",
+                "ALL_WAR_INVALIDATED_MSG",
+                "ALL_WAR_RETRACTED_MSG",
+                "ALL_WAR_SURRENDER_MSG",
+                "ALLIANCE_CAPITAL_CHANGED",
+                "ALLY_CONTRACT_CANCELLED",
+                "ALLY_JOINED_WAR_AGGRESSOR_MSG",
+                "ALLY_JOINED_WAR_ALLY_MSG",
+                "ALLY_JOINED_WAR_DEFENDER_MSG",
+                "BATTLE_PUNISH_FRIENDLY_FIRE",
+                "BILL_OUT_OF_MONEY_MSG",
+                "BILL_PAID_CORP_ALL_MSG",
+                "BOUNTY_CLAIM_MSG",
+                "BOUNTY_ESSSHARED",
+                "BOUNTY_ESSTAKEN",
+                "BOUNTY_PLACED_ALLIANCE",
+                "BOUNTY_PLACED_CHAR",
+                "BOUNTY_PLACED_CORP",
+                "BOUNTY_YOUR_BOUNTY_CLAIMED",
+                "BUDDY_CONNECT_CONTACT_ADD",
+                "CHAR_APP_ACCEPT_MSG",
+                "CHAR_APP_REJECT_MSG",
+                "CHAR_APP_WITHDRAW_MSG",
+                "CHAR_LEFT_CORP_MSG",
+                "CHAR_MEDAL_MSG",
+                "CHAR_TERMINATION_MSG",
+                "CLONE_ACTIVATION_MSG",
+                "CLONE_ACTIVATION_MSG_2",
+                "CLONE_MOVED_MSG",
+                "CLONE_REVOKED_MSG_1",
+                "CLONE_REVOKED_MSG_2",
+                "CONTACT_ADD",
+                "CONTACT_EDIT",
+                "CONTAINER_PASSWORD_MSG",
+                "CORP_ALL_BILL_MSG",
+                "CORP_APP_ACCEPT_MSG",
+                "CORP_APP_INVITED_MSG",
+                "CORP_APP_NEW_MSG",
+                "CORP_APP_REJECT_CUSTOM_MSG",
+                "CORP_APP_REJECT_MSG",
+                "CORP_DIVIDEND_MSG",
+                "CORP_FRIENDLY_FIRE_DISABLE_TIMER_COMPLETED",
+                "CORP_FRIENDLY_FIRE_DISABLE_TIMER_STARTED",
+                "CORP_FRIENDLY_FIRE_ENABLE_TIMER_COMPLETED",
+                "CORP_FRIENDLY_FIRE_ENABLE_TIMER_STARTED",
+                "CORP_KICKED",
+                "CORP_LIQUIDATION_MSG",
+                "CORP_NEW_CEOMSG",
+                "CORP_NEWS_MSG",
+                "CORP_OFFICE_EXPIRATION_MSG",
+                "CORP_STRUCT_LOST_MSG",
+                "CORP_TAX_CHANGE_MSG",
+                "CORP_VOTE_CEOREVOKED_MSG",
+                "CORP_VOTE_MSG",
+                "CORP_WAR_DECLARED_MSG",
+                "CORP_WAR_FIGHTING_LEGAL_MSG",
+                "CORP_WAR_INVALIDATED_MSG",
+                "CORP_WAR_RETRACTED_MSG",
+                "CORP_WAR_SURRENDER_MSG",
+                "CUSTOMS_MSG",
+                "DECLARE_WAR",
+                "DISTRICT_ATTACKED",
+                "DUST_APP_ACCEPTED_MSG",
+                "ENTOSIS_CAPTURE_STARTED",
+                "FAC_WAR_CORP_JOIN_REQUEST_MSG",
+                "FAC_WAR_CORP_JOIN_WITHDRAW_MSG",
+                "FAC_WAR_CORP_LEAVE_REQUEST_MSG",
+                "FAC_WAR_CORP_LEAVE_WITHDRAW_MSG",
+                "FAC_WAR_LPDISQUALIFIED_EVENT",
+                "FAC_WAR_LPDISQUALIFIED_KILL",
+                "FAC_WAR_LPPAYOUT_EVENT",
+                "FAC_WAR_LPPAYOUT_KILL",
+                "FWALLIANCE_KICK_MSG",
+                "FWALLIANCE_WARNING_MSG",
+                "FWCHAR_KICK_MSG",
+                "FWCHAR_RANK_GAIN_MSG",
+                "FWCHAR_RANK_LOSS_MSG",
+                "FWCHAR_WARNING_MSG",
+                "FWCORP_JOIN_MSG",
+                "FWCORP_KICK_MSG",
+                "FWCORP_LEAVE_MSG",
+                "FWCORP_WARNING_MSG",
+                "GAME_TIME_ADDED",
+                "GAME_TIME_RECEIVED",
+                "GAME_TIME_SENT",
+                "GIFT_RECEIVED",
+                "IHUB_DESTROYED_BY_BILL_FAILURE",
+                "INCURSION_COMPLETED_MSG",
+                "INDUSTRY_TEAM_AUCTION_LOST",
+                "INDUSTRY_TEAM_AUCTION_WON",
+                "INFRASTRUCTURE_HUB_BILL_ABOUT_TO_EXPIRE",
+                "INSURANCE_EXPIRATION_MSG",
+                "INSURANCE_FIRST_SHIP_MSG",
+                "INSURANCE_INVALIDATED_MSG",
+                "INSURANCE_ISSUED_MSG",
+                "INSURANCE_PAYOUT_MSG",
+                "JUMP_CLONE_DELETED_MSG_1",
+                "JUMP_CLONE_DELETED_MSG_2",
+                "KILL_REPORT_FINAL_BLOW",
+                "KILL_REPORT_VICTIM",
+                "KILL_RIGHT_AVAILABLE",
+                "KILL_RIGHT_AVAILABLE_OPEN",
+                "KILL_RIGHT_EARNED",
+                "KILL_RIGHT_UNAVAILABLE",
+                "KILL_RIGHT_UNAVAILABLE_OPEN",
+                "KILL_RIGHT_USED",
+                "LOCATE_CHAR_MSG",
+                "MADE_WAR_MUTUAL",
+                "MERC_OFFERED_NEGOTIATION_MSG",
+                "MISSION_OFFER_EXPIRATION_MSG",
+                "MISSION_TIMEOUT_MSG",
+                "MOONMINING_AUTOMATIC_FRACTURE",
+                "MOONMINING_EXTRACTION_CANCELLED",
+                "MOONMINING_EXTRACTION_FINISHED",
+                "MOONMINING_LASER_FIRED",
+                "NOTIFICATION_TYPE_MOONMINING_EXTRACTION_STARTED",
+                "NPCSTANDINGS_GAINED",
+                "NPCSTANDINGS_LOST",
+                "OFFERED_SURRENDER",
+                "OFFERED_TO_ALLY",
+                "OLD_LSC_MESSAGES",
+                "OPERATION_FINISHED",
+                "ORBITAL_ATTACKED",
+                "ORBITAL_REINFORCED",
+                "OWNERSHIP_TRANSFERRED",
+                "REIMBURSEMENT_MSG",
+                "RESEARCH_MISSION_AVAILABLE_MSG",
+                "RETRACTS_WAR",
+                "SEASONAL_CHALLENGE_COMPLETED",
+                "SOV_ALL_CLAIM_AQUIRED_MSG",
+                "SOV_ALL_CLAIM_LOST_MSG",
+                "SOV_COMMAND_NODE_EVENT_STARTED",
+                "SOV_CORP_BILL_LATE_MSG",
+                "SOV_CORP_CLAIM_FAIL_MSG",
+                "SOV_DISRUPTOR_MSG",
+                "SOV_STATION_ENTERED_FREEPORT",
+                "SOV_STRUCTURE_DESTROYED",
+                "SOV_STRUCTURE_REINFORCED",
+                "SOV_STRUCTURE_SELF_DESTRUCT_CANCEL",
+                "SOV_STRUCTURE_SELF_DESTRUCT_FINISHED",
+                "SOV_STRUCTURE_SELF_DESTRUCT_REQUESTED",
+                "SOVEREIGNTY_IHDAMAGE_MSG",
+                "SOVEREIGNTY_SBUDAMAGE_MSG",
+                "SOVEREIGNTY_TCUDAMAGE_MSG",
+                "STATION_AGGRESSION_MSG_1",
+                "STATION_AGGRESSION_MSG_2",
+                "STATION_CONQUER_MSG",
+                "STATION_SERVICE_DISABLED",
+                "STATION_SERVICE_ENABLED",
+                "STATION_STATE_CHANGE_MSG",
+                "STORY_LINE_MISSION_AVAILABLE_MSG",
+                "STRUCTURE_ANCHORING",
+                "STRUCTURE_COURIER_CONTRACT_CHANGED",
+                "STRUCTURE_DESTROYED",
+                "STRUCTURE_FUEL_ALERT",
+                "STRUCTURE_ITEMS_DELIVERED",
+                "STRUCTURE_LOST_ARMOR",
+                "STRUCTURE_LOST_SHIELDS",
+                "STRUCTURE_ONLINE",
+                "STRUCTURE_SERVICES_OFFLINE",
+                "STRUCTURE_UNANCHORING",
+                "STRUCTURE_UNDER_ATTACK",
+                "TOWER_ALERT_MSG",
+                "TOWER_RESOURCE_ALERT_MSG",
+                "TRANSACTION_REVERSAL_MSG",
+                "TUTORIAL_MSG",
+                "WAR_ALLY_OFFER_DECLINED_MSG",
+                "WAR_SURRENDER_DECLINED_MSG",
+                "WAR_SURRENDER_OFFER_MSG"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_character_planetaryinteraction_Content",
+        "type": {
+            "kind": "interface",
+            "name": "Content",
+            "members": [
+                "amount",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_planetaryinteraction_ExtractorHead",
+        "type": {
+            "kind": "interface",
+            "name": "ExtractorHead",
+            "members": [
+                "head_id",
+                "latitude",
+                "longitude"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_planetaryinteraction_Link",
+        "type": {
+            "kind": "interface",
+            "name": "Link",
+            "members": [
+                "destination_pin_id",
+                "link_level",
+                "source_pin_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_planetaryinteraction_Pin",
+        "type": {
+            "kind": "interface",
+            "name": "Pin",
+            "members": [
+                "contents",
+                "expiry_time",
+                "extractor_details",
+                "factory_details",
+                "install_time",
+                "last_cycle_start",
+                "latitude",
+                "longitude",
+                "pin_id",
+                "schematic_id",
+                "type_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_planetaryinteraction_Planet",
+        "type": {
+            "kind": "interface",
+            "name": "Planet",
+            "members": [
+                "links",
+                "pins",
+                "routes"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_planetaryinteraction_PlanetSummary",
+        "type": {
+            "kind": "interface",
+            "name": "PlanetSummary",
+            "members": [
+                "last_update",
+                "num_pins",
+                "owner_id",
+                "planet_id",
+                "planet_type",
+                "solar_system_id",
+                "upgrade_level"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_planetaryinteraction_PlanetType",
+        "type": {
+            "kind": "enum",
+            "name": "PlanetType",
+            "members": [
+                "BARREN",
+                "GAS",
+                "ICE",
+                "LAVA",
+                "OCEANIC",
+                "PLASMA",
+                "STORM",
+                "TEMPERATE"
+            ],
+            "values": []
+        },
+        "description": "enum"
+    },
+    {
+        "key": "esi_character_planetaryinteraction_Route",
+        "type": {
+            "kind": "interface",
+            "name": "Route",
+            "members": [
+                "content_type_id",
+                "destination_pin_id",
+                "quantity",
+                "route_id",
+                "source_pin_id",
+                "waypoints"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Affiliation",
+        "type": {
+            "kind": "interface",
+            "name": "Affiliation",
+            "members": [
+                "alliance_id",
+                "character_id",
+                "corporation_id",
+                "faction_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_AgentResearch",
+        "type": {
+            "kind": "interface",
+            "name": "AgentResearch",
+            "members": [
+                "agent_id",
+                "points_per_day",
+                "remainder_points",
+                "skill_type_id",
+                "started_at"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Attributes",
+        "type": {
+            "kind": "interface",
+            "name": "Attributes",
+            "members": [
+                "accrued_remap_cooldown_date",
+                "bonus_remaps",
+                "charisma",
+                "intelligence",
+                "last_remap_date",
+                "memory",
+                "perception",
+                "willpower"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Bookmark",
+        "type": {
+            "kind": "interface",
+            "name": "Bookmark",
+            "members": [
+                "bookmark_id",
+                "create_date",
+                "creator_id",
+                "folder_id",
+                "memo",
+                "note",
+                "owner_id",
+                "target"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_BookmarksFolder",
+        "type": {
+            "kind": "interface",
+            "name": "BookmarksFolder",
+            "members": [
+                "folder_id",
+                "name",
+                "owner_id"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    },
+    {
+        "key": "esi_character_Character",
+        "type": {
+            "kind": "interface",
+            "name": "Character",
+            "members": [
+                "alliance_id",
+                "ancestry_id",
+                "birthday",
+                "bloodline_id",
+                "corporation_id",
+                "description",
+                "faction_id",
+                "gender",
+                "name",
+                "race_id",
+                "security_status"
+            ],
+            "parent": null,
+            "types": []
+        },
+        "description": "interface"
+    }
+]

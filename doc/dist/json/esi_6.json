@@ -1,0 +1,252 @@
+[
+    {
+        "key": "get_characters_character_id_skillqueue",
+        "label": "get /v2/characters/{character_id}/skillqueue/",
+        "tag": "Skills",
+        "apiURL": "/v2/characters/{character_id}/skillqueue/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Skills/get_characters_character_id_skillqueue",
+        "description": "List the configured skill queue for the given character.This route is cached for up to 120 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_skills",
+        "label": "get /v3/characters/{character_id}/skills/",
+        "tag": "Skills",
+        "apiURL": "/v3/characters/{character_id}/skills/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Skills/get_characters_character_id_skills",
+        "description": "List all trained skills for the given character.This route is cached for up to 120 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_sovereignty_campaigns",
+        "label": "get /v1/sovereignty/campaigns/",
+        "tag": "Sovereignty",
+        "apiURL": "/v1/sovereignty/campaigns/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Sovereignty/get_sovereignty_campaigns",
+        "description": "Shows sovereignty data for campaigns.This route is cached for up to 5 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_sovereignty_map",
+        "label": "get /v1/sovereignty/map/",
+        "tag": "Sovereignty",
+        "apiURL": "/v1/sovereignty/map/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Sovereignty/get_sovereignty_map",
+        "description": "Shows sovereignty information for solar systems.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_sovereignty_structures",
+        "label": "get /v1/sovereignty/structures/",
+        "tag": "Sovereignty",
+        "apiURL": "/v1/sovereignty/structures/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Sovereignty/get_sovereignty_structures",
+        "description": "Shows sovereignty data for structures.This route is cached for up to 120 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_status",
+        "label": "get /v1/status/",
+        "tag": "Status",
+        "apiURL": "/v1/status/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Status/get_status",
+        "description": "EVE Server status.This route is cached for up to 30 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_bloodlines",
+        "label": "get /v1/universe/bloodlines/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/bloodlines/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_bloodlines",
+        "description": "Get a list of bloodlines.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_categories",
+        "label": "get /v1/universe/categories/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/categories/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_categories",
+        "description": "Get a list of item categories.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_categories_category_id",
+        "label": "get /v1/universe/categories/{category_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/categories/{category_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_categories_category_id",
+        "description": "Get information of an item category.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_constellations",
+        "label": "get /v1/universe/constellations/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/constellations/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_constellations",
+        "description": "Get a list of constellations.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_constellations_constellation_id",
+        "label": "get /v1/universe/constellations/{constellation_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/constellations/{constellation_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_constellations_constellation_id",
+        "description": "Get information on a constellation.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_factions",
+        "label": "get /v1/universe/factions/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/factions/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_factions",
+        "description": "Get a list of factions.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_graphics",
+        "label": "get /v1/universe/graphics/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/graphics/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_graphics",
+        "description": "Get a list of graphics.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_graphics_graphic_id",
+        "label": "get /v1/universe/graphics/{graphic_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/graphics/{graphic_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_graphics_graphic_id",
+        "description": "Get information on a graphic.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_groups",
+        "label": "get /v1/universe/groups/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/groups/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_groups",
+        "description": "Get a list of item groups.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_groups_group_id",
+        "label": "get /v1/universe/groups/{group_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/groups/{group_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_groups_group_id",
+        "description": "Get information on an item group.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_moons_moon_id",
+        "label": "get /v1/universe/moons/{moon_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/moons/{moon_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_moons_moon_id",
+        "description": "Get information on a moon.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_planets_planet_id",
+        "label": "get /v1/universe/planets/{planet_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/planets/{planet_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_planets_planet_id",
+        "description": "Get information on a planet.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_races",
+        "label": "get /v1/universe/races/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/races/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_races",
+        "description": "Get a list of character races.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_regions",
+        "label": "get /v1/universe/regions/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/regions/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_regions",
+        "description": "Get a list of regions.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_regions_region_id",
+        "label": "get /v1/universe/regions/{region_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/regions/{region_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_regions_region_id",
+        "description": "Get information on a region.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_stargates_stargate_id",
+        "label": "get /v1/universe/stargates/{stargate_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/stargates/{stargate_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_stargates_stargate_id",
+        "description": "Get information on a stargate.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_stars_star_id",
+        "label": "get /v1/universe/stars/{star_id}/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/stars/{star_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_stars_star_id",
+        "description": "Get information on a star.This route expires daily at 11:05.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_stations_station_id",
+        "label": "get /v2/universe/stations/{station_id}/",
+        "tag": "Universe",
+        "apiURL": "/v2/universe/stations/{station_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_stations_station_id",
+        "description": "Get information on a station.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_universe_structures",
+        "label": "get /v1/universe/structures/",
+        "tag": "Universe",
+        "apiURL": "/v1/universe/structures/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Universe/get_universe_structures",
+        "description": "List all public structures.This route is cached for up to 3600 seconds.",
+        "usages": []
+    }
+]

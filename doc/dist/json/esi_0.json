@@ -1,0 +1,252 @@
+[
+    {
+        "key": "get_alliances",
+        "label": "get /v1/alliances/",
+        "tag": "Alliance",
+        "apiURL": "/v1/alliances/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Alliance/get_alliances",
+        "description": "List all active player alliances.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_alliances_alliance_id",
+        "label": "get /v2/alliances/{alliance_id}/",
+        "tag": "Alliance",
+        "apiURL": "/v2/alliances/{alliance_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Alliance/get_alliances_alliance_id",
+        "description": "Public information about an alliance.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_alliances_alliance_id_corporations",
+        "label": "get /v1/alliances/{alliance_id}/corporations/",
+        "tag": "Alliance",
+        "apiURL": "/v1/alliances/{alliance_id}/corporations/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Alliance/get_alliances_alliance_id_corporations",
+        "description": "List all current member corporations of an alliance.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_alliances_alliance_id_icons",
+        "label": "get /v1/alliances/{alliance_id}/icons/",
+        "tag": "Alliance",
+        "apiURL": "/v1/alliances/{alliance_id}/icons/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Alliance/get_alliances_alliance_id_icons",
+        "description": "Get the icon urls for a alliance.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_alliances_names",
+        "label": "get /v1/alliances/names/",
+        "tag": "Alliance",
+        "apiURL": "/v1/alliances/names/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Alliance/get_alliances_names",
+        "description": "Resolve a set of alliance IDs to alliance names.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_assets",
+        "label": "get /v1/characters/{character_id}/assets/",
+        "tag": "Assets",
+        "apiURL": "/v1/characters/{character_id}/assets/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Assets/get_characters_character_id_assets",
+        "description": "Return a list of the characters assets.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_assets",
+        "label": "get /v1/corporations/{corporation_id}/assets/",
+        "tag": "Assets",
+        "apiURL": "/v1/corporations/{corporation_id}/assets/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Assets/get_corporations_corporation_id_assets",
+        "description": "Return a list of the corporation assets.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "post_characters_character_id_assets_locations",
+        "label": "post /v1/characters/{character_id}/assets/locations/",
+        "tag": "Assets",
+        "apiURL": "/v1/characters/{character_id}/assets/locations/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Assets/post_characters_character_id_assets_locations",
+        "description": "Return locations for a set of item ids, which you can get from character assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0).",
+        "usages": []
+    },
+    {
+        "key": "post_characters_character_id_assets_names",
+        "label": "post /v1/characters/{character_id}/assets/names/",
+        "tag": "Assets",
+        "apiURL": "/v1/characters/{character_id}/assets/names/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Assets/post_characters_character_id_assets_names",
+        "description": "Return names for a set of item ids, which you can get from character assets endpoint. Typically used for items that can customize names, like containers or ships.",
+        "usages": []
+    },
+    {
+        "key": "post_corporations_corporation_id_assets_locations",
+        "label": "post /v1/corporations/{corporation_id}/assets/locations/",
+        "tag": "Assets",
+        "apiURL": "/v1/corporations/{corporation_id}/assets/locations/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Assets/post_corporations_corporation_id_assets_locations",
+        "description": "Return locations for a set of item ids, which you can get from corporation assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0).",
+        "usages": []
+    },
+    {
+        "key": "post_corporations_corporation_id_assets_names",
+        "label": "post /v1/corporations/{corporation_id}/assets/names/",
+        "tag": "Assets",
+        "apiURL": "/v1/corporations/{corporation_id}/assets/names/",
+        "httpMethod": "post",
+        "docURL": "https://esi.tech.ccp.is/#!/Assets/post_corporations_corporation_id_assets_names",
+        "description": "Return names for a set of item ids, which you can get from corporation assets endpoint. Only valid for items that can customize names, like containers or ships.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_bookmarks",
+        "label": "get /v1/characters/{character_id}/bookmarks/",
+        "tag": "Bookmarks",
+        "apiURL": "/v1/characters/{character_id}/bookmarks/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Bookmarks/get_characters_character_id_bookmarks",
+        "description": "List your character's personal bookmarks.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_bookmarks_folders",
+        "label": "get /v1/characters/{character_id}/bookmarks/folders/",
+        "tag": "Bookmarks",
+        "apiURL": "/v1/characters/{character_id}/bookmarks/folders/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Bookmarks/get_characters_character_id_bookmarks_folders",
+        "description": "List your character's personal bookmark folders.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_bookmarks",
+        "label": "get /v1/corporations/{corporation_id}/bookmarks/",
+        "tag": "Bookmarks",
+        "apiURL": "/v1/corporations/{corporation_id}/bookmarks/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Bookmarks/get_corporations_corporation_id_bookmarks",
+        "description": "A list of your corporation's bookmarks.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_corporations_corporation_id_bookmarks_folders",
+        "label": "get /v1/corporations/{corporation_id}/bookmarks/folders/",
+        "tag": "Bookmarks",
+        "apiURL": "/v1/corporations/{corporation_id}/bookmarks/folders/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Bookmarks/get_corporations_corporation_id_bookmarks_folders",
+        "description": "A list of your corporation's bookmark folders.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_calendar",
+        "label": "get /v1/characters/{character_id}/calendar/",
+        "tag": "Calendar",
+        "apiURL": "/v1/characters/{character_id}/calendar/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Calendar/get_characters_character_id_calendar",
+        "description": "Get 50 event summaries from the calendar. If no from_event ID is given, the resource will return the next 50 chronological event summaries from now. If a from_event ID is specified, it will return the next 50 chronological event summaries from after that event.This route is cached for up to 5 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_calendar_event_id",
+        "label": "get /v3/characters/{character_id}/calendar/{event_id}/",
+        "tag": "Calendar",
+        "apiURL": "/v3/characters/{character_id}/calendar/{event_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Calendar/get_characters_character_id_calendar_event_id",
+        "description": "Get all the information for a specific event.This route is cached for up to 5 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_calendar_event_id_attendees",
+        "label": "get /v1/characters/{character_id}/calendar/{event_id}/attendees/",
+        "tag": "Calendar",
+        "apiURL": "/v1/characters/{character_id}/calendar/{event_id}/attendees/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Calendar/get_characters_character_id_calendar_event_id_attendees",
+        "description": "Get all invited attendees for a given event.This route is cached for up to 600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "put_characters_character_id_calendar_event_id",
+        "label": "put /v3/characters/{character_id}/calendar/{event_id}/",
+        "tag": "Calendar",
+        "apiURL": "/v3/characters/{character_id}/calendar/{event_id}/",
+        "httpMethod": "put",
+        "docURL": "https://esi.tech.ccp.is/#!/Calendar/put_characters_character_id_calendar_event_id",
+        "description": "Set your response status to an event.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id",
+        "label": "get /v4/characters/{character_id}/",
+        "tag": "Character",
+        "apiURL": "/v4/characters/{character_id}/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id",
+        "description": "Public information about a character.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_agents_research",
+        "label": "get /v1/characters/{character_id}/agents_research/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/agents_research/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_agents_research",
+        "description": "Return a list of agents research information for a character. The formula for finding the current research points with an agent is: currentPoints = remainderPoints + pointsPerDay * days(currentTime - researchStartDate).This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_blueprints",
+        "label": "get /v2/characters/{character_id}/blueprints/",
+        "tag": "Character",
+        "apiURL": "/v2/characters/{character_id}/blueprints/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_blueprints",
+        "description": "Return a list of blueprints the character owns.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_chat_channels",
+        "label": "get /v1/characters/{character_id}/chat_channels/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/chat_channels/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_chat_channels",
+        "description": "Return chat channels that a character is the owner or operator of.This route is cached for up to 300 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_corporationhistory",
+        "label": "get /v1/characters/{character_id}/corporationhistory/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/corporationhistory/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_corporationhistory",
+        "description": "Get a list of all the corporations a character has been a member of.This route is cached for up to 3600 seconds.",
+        "usages": []
+    },
+    {
+        "key": "get_characters_character_id_fatigue",
+        "label": "get /v1/characters/{character_id}/fatigue/",
+        "tag": "Character",
+        "apiURL": "/v1/characters/{character_id}/fatigue/",
+        "httpMethod": "get",
+        "docURL": "https://esi.tech.ccp.is/#!/Character/get_characters_character_id_fatigue",
+        "description": "Return a character's jump activation and fatigue information.This route is cached for up to 300 seconds.",
+        "usages": []
+    }
+]

@@ -1,0 +1,4661 @@
+[
+    {
+        "name": "ESIError",
+        "documentation": "",
+        "type": "typeof ESIError",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "kind",
+                        "documentation": "",
+                        "type": "ErrorName"
+                    },
+                    {
+                        "name": "causeOrInfo",
+                        "documentation": "",
+                        "type": "Error | Info"
+                    },
+                    {
+                        "name": "formatString",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "formatArgs",
+                        "documentation": "",
+                        "type": "any[]"
+                    }
+                ],
+                "returnType": "ESIError",
+                "documentation": ""
+            },
+            {
+                "parameters": [
+                    {
+                        "name": "kind",
+                        "documentation": "",
+                        "type": "ErrorName"
+                    },
+                    {
+                        "name": "info",
+                        "documentation": "",
+                        "type": "Info"
+                    },
+                    {
+                        "name": "cause",
+                        "documentation": "",
+                        "type": "Error"
+                    },
+                    {
+                        "name": "formatString",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "formatArgs",
+                        "documentation": "",
+                        "type": "any[]"
+                    }
+                ],
+                "returnType": "ESIError",
+                "documentation": ""
+            },
+            {
+                "parameters": [
+                    {
+                        "name": "kind",
+                        "documentation": "",
+                        "type": "ErrorName"
+                    },
+                    {
+                        "name": "formatString",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "formatArgs",
+                        "documentation": "",
+                        "type": "any[]"
+                    }
+                ],
+                "returnType": "ESIError",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            },
+            {
+                "name": "VError",
+                "documentation": "",
+                "type": "typeof VError"
+            },
+            {
+                "name": "cause",
+                "documentation": "",
+                "type": "(err: Error) => Error"
+            },
+            {
+                "name": "info",
+                "documentation": "",
+                "type": "(err: Error) => Info"
+            },
+            {
+                "name": "fullStack",
+                "documentation": "",
+                "type": "(err: Error) => string"
+            },
+            {
+                "name": "findCauseByName",
+                "documentation": "",
+                "type": "(err: Error, name: string) => Error"
+            },
+            {
+                "name": "hasCauseWithName",
+                "documentation": "",
+                "type": "(err: Error, name: string) => boolean"
+            },
+            {
+                "name": "errorFromList",
+                "documentation": "",
+                "type": "<T extends Error>(errors: T[]) => T | MultiError"
+            },
+            {
+                "name": "errorForEach",
+                "documentation": "",
+                "type": "(err: Error, func: (err: Error) => void) => void"
+            },
+            {
+                "name": "SError",
+                "documentation": "",
+                "type": "typeof SError"
+            },
+            {
+                "name": "MultiError",
+                "documentation": "",
+                "type": "typeof MultiError"
+            },
+            {
+                "name": "WError",
+                "documentation": "",
+                "type": "typeof WError"
+            },
+            {
+                "name": "captureStackTrace",
+                "documentation": "",
+                "type": "(targetObject: Object, constructorOpt?: Function) => void"
+            },
+            {
+                "name": "stackTraceLimit",
+                "documentation": "",
+                "type": "number"
+            }
+        ]
+    },
+    {
+        "name": "default",
+        "documentation": "Cache is a simple in-memory cache implementation based off wrapping the\nstandard Map type. It supports expiring cache entries based off of fixed\npoints in the future (set via a TTL per entry, or with a default).\n\nEach Cache maintains an internal timer that only runs when the cache contains\nexpiring entries. Thus, it will eventually be automatically cleaned up when\nthe Cache is otherwise eligible for GC: no new entries will be added, the\ncached values expire, it becomes empty, and then no new timer is enqueued.\nHowever, the timers are marked as unref'ed so that the process can be\nterminated early even if entries may expire far into the future.\n\nHowever, if entries have very long expirations they could prevent the\nautomatic GC of the cache for quite some time. If possible it is recommended\nto {@link #clear()} the cache when it is no longer going to be used.\n\nNote that this cache implementation does not impose any limits on the size\nof the cache, size of keys, or size of values.",
+        "type": "typeof Cache",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "defaultTTL",
+                        "documentation": "The TTL to use if no per-key TTL was provided, and\ndefaults to infinity (disabling expiration unless overridden per key)",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Cache<V>",
+                "documentation": "Create a new Cache with given default TTL. The TTL represents the\n\"time-to-live\" for new entries; a new entry's expiration date is the\ncurrent time plus the TTL. If {@link #set()} is called without an explicit\nTTL, it will use the value provided to this constructor."
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            },
+            {
+                "name": "getExpirationTimestamp",
+                "documentation": "",
+                "type": "<V>(e: CacheEntry<V>) => number"
+            },
+            {
+                "name": "isEntryValid",
+                "documentation": "",
+                "type": "<V>(e: CacheEntry<V>, now: number) => boolean"
+            }
+        ]
+    },
+    {
+        "name": "ESIAgent",
+        "documentation": "ESIAgent is a low-level request handler for making HTTP requests to the ESI\nservice. It internally manages a response cache, an access token cache,\ngeneric rate limiting, and can respect the error rate limiting imposed by the\nservice. This should not be used directly, but is called by the higher level\nAPI functions. These functions package up the required route parameters,\nroute ID, and potentially filter the response type to a cleaner\nrepresentation.",
+        "type": "typeof ESIAgent",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "configuration",
+                        "documentation": "The configuration of the agent",
+                        "type": "Configuration"
+                    }
+                ],
+                "returnType": "ESIAgent",
+                "documentation": "Create a new ESIAgent with the given configuration for the service,\nrate limiting, and caching behaviors managed by the agent."
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Corporation",
+        "documentation": "An api adapter for accessing various details of a single corporation,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Corporation",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    }
+                ],
+                "returnType": "Corporation",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedCorporations",
+        "documentation": "An api adapter for accessing various details of multiple corporations,\nspecified by a provided an array, set of ids, search query, or NPC\ncorporations when the api is instantiated.",
+        "type": "typeof MappedCorporations",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedCorporations",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Star",
+        "documentation": "An api adapter for accessing various details of a single PI star,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Star",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    }
+                ],
+                "returnType": "Star",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedStars",
+        "documentation": "An api adapter for accessing various details of multiple star ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedStars",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedStars",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Stargate",
+        "documentation": "An api adapter for accessing various details of a single stargate,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Stargate",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number | (() => Promise<number>)"
+                    }
+                ],
+                "returnType": "Stargate",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedStargates",
+        "documentation": "An api adapter for accessing various details of multiple stargate ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedStargates",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedStargates",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Moon",
+        "documentation": "An api adapter for accessing various details of a single moon,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Moon",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Moon",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedMoons",
+        "documentation": "An api adapter for accessing various details of multiple moon ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedMoons",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedMoons",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Planet",
+        "documentation": "An api adapter for accessing various details of a single planet,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Planet",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Planet",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedPlanets",
+        "documentation": "An api adapter for accessing various details of multiple planet ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedPlanets",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedPlanets",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Station",
+        "documentation": "An api adapter for accessing various details of a single station,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Station",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Station",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedStations",
+        "documentation": "An api adapter for accessing various details of multiple station ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedStations",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedStations",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedStations",
+        "documentation": "An api adapter for accessing various details about every station in the\nuniverse.",
+        "type": "typeof IteratedStations",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedStations",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "SolarSystem",
+        "documentation": "An api adapter for accessing various details of a single solar system,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof SolarSystem",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "SolarSystem",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedSolarSystems",
+        "documentation": "An api adapter for accessing various details of multiple solar system ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedSolarSystems",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedSolarSystems",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedSolarSystems",
+        "documentation": "An api adapter for accessing various details about every solar system in the\nuniverse.",
+        "type": "typeof IteratedSolarSystems",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedSolarSystems",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Faction",
+        "documentation": "An api adapter for accessing various details of a single faction, specified\nby a provided id when the api is instantiated.",
+        "type": "typeof Faction",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id_",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Faction",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedFactions",
+        "documentation": "An api adapter for accessing various details of multiple faction, specified\nby a provided an array, set of ids, or search query when the api is\ninstantiated.",
+        "type": "typeof MappedFactions",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedFactions",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedFactions",
+        "documentation": "An api adapter for accessing various details about every faction in the\ngame. Even though a route exists to get all faction ids at once, due to\ntheir quantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedFactions",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedFactions",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Leaderboard",
+        "documentation": "API wrapper around faction warfare leaderboards, measuring performance\nover the recent past.",
+        "type": "typeof Leaderboard",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "Leaderboard",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Alliance",
+        "documentation": "An api adapter for accessing various details of a single alliance, specified\nby a provided id when the api is instantiated.",
+        "type": "typeof Alliance",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    }
+                ],
+                "returnType": "Alliance",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedAlliances",
+        "documentation": "An api adapter for accessing various details of multiple alliance, specified\nby a provided an array, set of ids, or search query when the api is\ninstantiated.",
+        "type": "typeof MappedAlliances",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedAlliances",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedAlliances",
+        "documentation": "An api adapter for accessing various details about every alliance in the\ngame. Even though a route exists to get all alliance ids at once, due to\ntheir quantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedAlliances",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedAlliances",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "AuthenticatedAlliance",
+        "documentation": "An api adapter for accessing various details of a single alliance,\nspecified by a provided id when the api is instantiated.\n\nThis API is authenticated by an SSO token corresponding to a member. Some\nfunctions that are exposed expect the member to have specific in-game roles.\nIf these permissions are not met when a request is made to ESI, then it will\nrespond with an error.",
+        "type": "typeof AuthenticatedAlliance",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ssoToken",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    }
+                ],
+                "returnType": "AuthenticatedAlliance",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Character",
+        "documentation": "An api adapter that provides functions for viewing public (non-authenticated)\ninformation about a specific character  via functions in the\n[character](https://esi.tech.ccp.is/latest/#/Character) ESI endpoints.",
+        "type": "typeof Character",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Character",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedCharacters",
+        "documentation": "An api adapter for accessing various details of multiple characters,\nspecified by a provided an array, set of ids, or search query when the api is\ninstantiated.",
+        "type": "typeof MappedCharacters",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedCharacters",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Killmail",
+        "documentation": "An api adapter for accessing various details of a single killmail, specified\nby a provided id and hash when the api is instantiated.",
+        "type": "typeof Killmail",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    },
+                    {
+                        "name": "hash",
+                        "documentation": "",
+                        "type": "string"
+                    }
+                ],
+                "returnType": "Killmail",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedKillmails",
+        "documentation": "An api adapter for accessing various details of multiple killmails, specified\nby a provided an mapping of ids and hashes.",
+        "type": "typeof MappedKillmails",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "idHashes",
+                        "documentation": "",
+                        "type": "Map<number, string>"
+                    }
+                ],
+                "returnType": "MappedKillmails",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedKillmails",
+        "documentation": "An api adapter for accessing various details about every killmail restricted\nto some dynamic scope. This scope currently is either a character's,\ncorporation's or war's killmails from losses and final blows.\n\nThe Killmails does not provide a way to create these instances\nbecause it is instead the responsibility of each scope to provide an\nIteratedKillmails instance accessing the appropriate mails.",
+        "type": "typeof IteratedKillmails",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "links",
+                        "documentation": "",
+                        "type": "ResourceStreamer<KillmailLink>"
+                    }
+                ],
+                "returnType": "IteratedKillmails",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Bookmarks",
+        "documentation": "An api adapter that provides functions for accessing an authenticated\ncharacter's bookmarks via the\n[bookmark](https://esi.tech.ccp.is/latest/#/Bookmarks) ESI end points.",
+        "type": "typeof Bookmarks",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "Bookmarks",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Event",
+        "documentation": "An api adapter for accessing various details of a single event,\nspecified by a provided event id when the api is instantiated.",
+        "type": "typeof Event",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Event",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedEvents",
+        "documentation": "An api adapter for accessing various details of multiple event ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedEvents",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedEvents",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedEvents",
+        "documentation": "An api adapter for accessing various details about every event on the\ncharacter's calendar.",
+        "type": "typeof IteratedEvents",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "IteratedEvents",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Colony",
+        "documentation": "An api adapter for accessing various details of a single planetary colony,\nspecified by a provided planet id when the api is instantiated.",
+        "type": "typeof Colony",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Colony",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedColonies",
+        "documentation": "An api adapter for accessing various details of multiple colony ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedColonies",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedColonies",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedColonies",
+        "documentation": "An api adapter for accessing various details about every colony of the\ncharacter.",
+        "type": "typeof IteratedColonies",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "IteratedColonies",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Contact",
+        "documentation": "An api adapter for accessing various details of a single contact,\nspecified by a provided contact id when the api is instantiated.",
+        "type": "typeof Contact",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Contact",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedContacts",
+        "documentation": "An api adapter for accessing various details of multiple contact ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedContacts",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedContacts",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedContacts",
+        "documentation": "An api adapter for accessing various details about every contact registered\nto the character.",
+        "type": "typeof IteratedContacts",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "IteratedContacts",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Fitting",
+        "documentation": "An api adapter for accessing various details of a single fitting,\nspecified by a provided fitting id when the api is instantiated.",
+        "type": "typeof Fitting",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Fitting",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedFittings",
+        "documentation": "An api adapter for accessing various details of multiple fitting ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedFittings",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedFittings",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedFittings",
+        "documentation": "An api adapter for accessing various details about every fitting registered\nto the character.",
+        "type": "typeof IteratedFittings",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "IteratedFittings",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Squad",
+        "documentation": "An api adapter for accessing various details of a single squad,\nspecified by a provided squad id when the api is instantiated.",
+        "type": "typeof Squad",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "squadID",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Squad",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedSquads",
+        "documentation": "An api adapter for accessing various details of a set of squads,\nspecified by provided squad ids when the api is instantiated.",
+        "type": "typeof MappedSquads",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedSquads",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedSquads",
+        "documentation": "An api adapter for accessing various details about every squad in the\nfleet.",
+        "type": "typeof IteratedSquads",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "IteratedSquads",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Wing",
+        "documentation": "An api adapter for accessing various details of a single wing,\nspecified by a provided wing id when the api is instantiated.",
+        "type": "typeof Wing",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "wingID",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Wing",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedWings",
+        "documentation": "An api adapter for accessing various details of a set of wings,\nspecified by provided wing ids when the api is instantiated.",
+        "type": "typeof MappedWings",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedWings",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedWings",
+        "documentation": "An api adapter for accessing various details about every wing in the\nfleet.",
+        "type": "typeof IteratedWings",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "IteratedWings",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Member",
+        "documentation": "An api adapter for accessing various details of a single member,\nspecified by a provided member's character id when the api is instantiated.",
+        "type": "typeof Member",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "charID",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Member",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedMembers",
+        "documentation": "An api adapter for accessing various details of a set of members,\nspecified by provided member character ids when the api is instantiated.",
+        "type": "typeof MappedMembers",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedMembers",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedMembers",
+        "documentation": "An api adapter for accessing various details about every member in the fleet.",
+        "type": "typeof IteratedMembers",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "IteratedMembers",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "FleetImpl",
+        "documentation": "",
+        "type": "typeof FleetImpl",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ssoToken",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "charID",
+                        "documentation": "",
+                        "type": "number"
+                    },
+                    {
+                        "name": "fleetID",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "FleetImpl",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Message",
+        "documentation": "An api adapter for accessing various details of a single message,\nspecified by a provided mail id when the api is instantiated.",
+        "type": "typeof Message",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Message",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedMessages",
+        "documentation": "An api adapter for accessing various details of a set of messages,\nspecified by provided mail ids when the api is instantiated.",
+        "type": "typeof MappedMessages",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedMessages",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedMessages",
+        "documentation": "An api adapter for accessing various details about every mail in the\ncharacter's inbox, possibly constrained by a set of labels specified at\nconstruction.",
+        "type": "typeof IteratedMessages",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "labels",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "IteratedMessages",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Label",
+        "documentation": "An api adapter for accessing various details of a single mail label,\nspecified by a provided label id when the api is instantiated.",
+        "type": "typeof Label",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Label",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedLabels",
+        "documentation": "An api adapter for accessing various details of a set of labels,\nspecified by provided label ids when the api is instantiated.",
+        "type": "typeof MappedLabels",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedLabels",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedLabels",
+        "documentation": "An api adapter for accessing various details about every label in the\ncharacter's inbox.",
+        "type": "typeof IteratedLabels",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "IteratedLabels",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Mail",
+        "documentation": "An api adapter over the end points handling the mail inbox for a character\nvia functions in the [mail](https://esi.tech.ccp.is/latest/#/Mail) ESI\nendpoints.",
+        "type": "typeof Mail",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "Mail",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Structure",
+        "documentation": "An api adapter for accessing various details of a single structure, specified\nby a provided id when the api is instantiated. It must be provided with a\ncharacter id or a corporation id as well. When needed, it will infer the\nother resource id based on information. For example, if a corp id is needed\nfor an ESI request but only the character id is available, then the\ncorporation of the character is used. If the character id is needed, then the\nCEO of the corporation will be used.",
+        "type": "typeof Structure",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ssoToken",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    },
+                    {
+                        "name": "charID",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    },
+                    {
+                        "name": "corpID",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    }
+                ],
+                "returnType": "Structure",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedStructures",
+        "documentation": "An api adapter for accessing various details of multiple structures,\nspecified by a provided an array, set of ids, or search query.",
+        "type": "typeof MappedStructures",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ssoToken",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    },
+                    {
+                        "name": "charID",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    },
+                    {
+                        "name": "corpID",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    }
+                ],
+                "returnType": "MappedStructures",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedStructures",
+        "documentation": "An api adapter for accessing various details of all structures owned by\na corporation (either specified directly, or the dynamic corporation of\na specific character).",
+        "type": "typeof IteratedStructures",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ssoToken",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "charID",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    },
+                    {
+                        "name": "corpID",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    }
+                ],
+                "returnType": "IteratedStructures",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "CharAndCorpAgent",
+        "documentation": "",
+        "type": "typeof CharAndCorpAgent",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ssoToken",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "charID_",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    },
+                    {
+                        "name": "corpID_",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    }
+                ],
+                "returnType": "CharAndCorpAgent",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "StructureMarket",
+        "documentation": "",
+        "type": "typeof StructureMarket",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "StructureMarket",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Asset",
+        "documentation": "An api adapter for accessing various details of a single corporation asset,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Asset",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Asset",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedAssets",
+        "documentation": "An api adapter for accessing various details of multiple asset ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedAssets",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedAssets",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedAssets",
+        "documentation": "An api adapter for accessing various details about every asset of the\ncorporation.",
+        "type": "typeof IteratedAssets",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "IteratedAssets",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "WalletDivision",
+        "documentation": "An api adapter for accessing various details of a single corporation wallet\ndivision, specified by a provided id when the api is instantiated.",
+        "type": "typeof WalletDivision",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "WalletDivision",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedWalletDivisions",
+        "documentation": "An api adapter for accessing various details of multiple wallet division ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedWalletDivisions",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedWalletDivisions",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedWalletDivisions",
+        "documentation": "An api adapter for accessing various details about every wallet division\nassociated with the corporation.",
+        "type": "typeof IteratedWalletDivisions",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "IteratedWalletDivisions",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Wallets",
+        "documentation": "An interface for getting APIs for a specific wallet division, a\nknown set of wallet division ids, or every wallet division for a corporation.",
+        "type": "typeof Wallets",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "Wallets",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Starbase",
+        "documentation": "An api adapter for accessing various details of a single corporation\nstarbase, specified by a provided id when the api is instantiated.",
+        "type": "typeof Starbase",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    },
+                    {
+                        "name": "systemID",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Starbase",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedStarbases",
+        "documentation": "An api adapter for accessing various details of multiple starbase ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedStarbases",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedStarbases",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedStarbases",
+        "documentation": "An api adapter for accessing various details about every starbase of the\ncorporation.",
+        "type": "typeof IteratedStarbases",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "IteratedStarbases",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MiningObserver",
+        "documentation": "An api adapter for accessing various details of a single corporation\nobserver, specified by a provided id when the api is instantiated.",
+        "type": "typeof MiningObserver",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "MiningObserver",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedMiningObservers",
+        "documentation": "An api adapter for accessing various details of multiple mining observer ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedMiningObservers",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedMiningObservers",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedMiningObservers",
+        "documentation": "An api adapter for accessing various details about every mining observer\nassociated with the corporation.",
+        "type": "typeof IteratedMiningObservers",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "IteratedMiningObservers",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Mining",
+        "documentation": "An interface for getting APIs for a specific mining observer, a\nknown set of mining observer ids, or every mining observer for a corporation.",
+        "type": "typeof Mining",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "Mining",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Member",
+        "documentation": "An api adapter for accessing various details of a single corporation\nmember, specified by a provided id when the api is instantiated.",
+        "type": "typeof Member",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Member",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedMembers",
+        "documentation": "An api adapter for accessing various details of multiple member ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedMembers",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedMembers",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedMembers",
+        "documentation": "An api adapter for accessing various details about every member of the\ncorporation.",
+        "type": "typeof IteratedMembers",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number | IDProvider>"
+                    }
+                ],
+                "returnType": "IteratedMembers",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "AuthenticatedCorporation",
+        "documentation": "An api adapter for accessing various details of a single corporation,\nspecified by a provided id when the api is instantiated.\n\nThis API is authenticated by an SSO token corresponding to a member. Some\nfunctions that are exposed expect the member to have specific in-game roles.\nIf these permissions are not met when a request is made to ESI, then it will\nrespond with an error.",
+        "type": "typeof AuthenticatedCorporation",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ssoToken",
+                        "documentation": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number | IDProvider"
+                    },
+                    {
+                        "name": "charID",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "AuthenticatedCorporation",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Contract",
+        "documentation": "An api adapter for accessing various details of a single in-game contract,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Contract",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Contract",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedContracts",
+        "documentation": "An api adapter for accessing various details of multiple contract ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedContracts",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedContracts",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedContracts",
+        "documentation": "An api adapter for accessing various details about every contract associated\nwith the character.",
+        "type": "typeof IteratedContracts",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "IteratedContracts",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Autopilot",
+        "documentation": "An api adapter that provides functions for modifying the character's in-game\nwaypoints and destination via functions in the [user\ninterface](https://esi.tech.ccp.is/latest/#/User_Interface) ESI endpoints.",
+        "type": "typeof Autopilot",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "Autopilot",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "UI",
+        "documentation": "An api adapter that provides functions for modifying the character's in-game\nwindows via functions in the [user\ninterface](https://esi.tech.ccp.is/latest/#/User_Interface) ESI endpoints.",
+        "type": "typeof UI",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "UI",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Asset",
+        "documentation": "An api adapter for accessing various details of a single character asset,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Asset",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Asset",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedAssets",
+        "documentation": "An api adapter for accessing various details of multiple asset ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedAssets",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedAssets",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedAssets",
+        "documentation": "An api adapter for accessing various details about every asset of the\ncharacter.",
+        "type": "typeof IteratedAssets",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "IteratedAssets",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Notifications",
+        "documentation": "An api adapter that provides functions for accessing an authenticated\ncharacter's notifications via the\n[character](https://esi.tech.ccp.is/latest/#/Character) ESI end points.",
+        "type": "typeof Notifications",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "Notifications",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Skills",
+        "documentation": "An api adapter that provides functions for accessing an authenticated\ncharacter's skills via the\n[skills](https://esi.tech.ccp.is/latest/#/Skills) ESI end points.",
+        "type": "typeof Skills",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "Skills",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Wallet",
+        "documentation": "An api adapter that provides functions for accessing an authenticated\ncharacter's wallet via the\n[wallet](https://esi.tech.ccp.is/latest/#/Wallets) ESI end points.",
+        "type": "typeof Wallet",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "Wallet",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "AuthenticatedCharacter",
+        "documentation": "An api adapter for accessing various details of a single character,\nspecified by a provided id when the api is instantiated.\n\nThis API is authenticated by an SSO token provided by the character through\nan external process. Some functions that are exposed expect the character to\nhave specific in-game roles with respect to their corporation or fleet. If\nthese permissions are not met when a request is made to ESI, then it will\nrespond with an error.",
+        "type": "typeof AuthenticatedCharacter",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "SSOAgent<number>"
+                    }
+                ],
+                "returnType": "AuthenticatedCharacter",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Campaign",
+        "documentation": "An api adapter for accessing various details of a single in-game campaign,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Campaign",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Campaign",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedCampaigns",
+        "documentation": "An api adapter for accessing various details of multiple campaign ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedCampaigns",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedCampaigns",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedCampaigns",
+        "documentation": "An api adapter for accessing various details about every campaign in the\ngame.",
+        "type": "typeof IteratedCampaigns",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedCampaigns",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Sovereignty",
+        "documentation": "A simple wrapper around functional interfaces for getting APIs for campaigns,\nsovereignty structures, and the sovereignty map. The sovereignty map is also\naccessible through the solar system apis. These utilize the\n[sovereignty](https://esi.tech.ccp.is/latest/#/Sovereignty) ESI end points.",
+        "type": "typeof Sovereignty",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "Sovereignty",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "War",
+        "documentation": "An api adapter for accessing various details of a single war, specified\nby a provided id when the api is instantiated.",
+        "type": "typeof War",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "War",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedWars",
+        "documentation": "An api adapter for accessing various details of multiple wars, specified by a\nprovided an array or set of ids.",
+        "type": "typeof MappedWars",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedWars",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedWars",
+        "documentation": "An api adapter for accessing various details about every war in the game. The\nfunctions are exposed as asynchronous iterators. There are potentially many\nwars, so it is recommended to have a specific termination criteria like\namount received, date, or maximum id.",
+        "type": "typeof IteratedWars",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedWars",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Schematic",
+        "documentation": "An api adapter for accessing various details of a single PI schematic,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Schematic",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Schematic",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedSchematics",
+        "documentation": "An api adapter for accessing various details of multiple schematic ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedSchematics",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedSchematics",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "OpportunityGroup",
+        "documentation": "An api adapter for accessing various details of a single opportunity group,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof OpportunityGroup",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "OpportunityGroup",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedOpportunityGroups",
+        "documentation": "An api adapter for accessing various details of multiple opportunity groups,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedOpportunityGroups",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedOpportunityGroups",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedOpportunityGroups",
+        "documentation": "An api adapter for accessing various details about every opportunity group in\nthe game. Even though a route exists to get all group ids at once, due to\ntheir quantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedOpportunityGroups",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedOpportunityGroups",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "OpportunityTask",
+        "documentation": "An api adapter for accessing various details of a single opportunity group,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof OpportunityTask",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "OpportunityTask",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedOpportunityTasks",
+        "documentation": "An api adapter for accessing various details of multiple opportunity tasks,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedOpportunityTasks",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedOpportunityTasks",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedOpportunityTasks",
+        "documentation": "An api adapter for accessing various details about every opportunity task in\nthe game. Even though a route exists to get all task ids at once, due to\ntheir quantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedOpportunityTasks",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedOpportunityTasks",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Opportunities",
+        "documentation": "A simple wrapper around functional interfaces for getting APIs for\nopportunity groups and tasks, both of which utilize the\n[opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI end\npoints.",
+        "type": "typeof Opportunities",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "Opportunities",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Graphic",
+        "documentation": "An api adapter for accessing various details of a single in-game graphic,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Graphic",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Graphic",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedGraphics",
+        "documentation": "An api adapter for accessing various details of multiple graphic ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedGraphics",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedGraphics",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedGraphics",
+        "documentation": "An api adapter for accessing various details about every graphic in\nthe game. Even though a route exists to get all graphic ids at once, due to\ntheir quantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedGraphics",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedGraphics",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Attribute",
+        "documentation": "An api adapter for accessing various details of a single dogma attribute,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Attribute",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Attribute",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedAttributes",
+        "documentation": "An api adapter for accessing various details of multiple dogma attributes,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedAttributes",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedAttributes",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedAttributes",
+        "documentation": "An api adapter for accessing various details about every dogma attribute in\nthe game. Even though a route exists to get all attribute ids at once, due to\ntheir quantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedAttributes",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedAttributes",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Effect",
+        "documentation": "An api adapter for accessing various details of a single dogma effect,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Effect",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Effect",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedEffects",
+        "documentation": "An api adapter for accessing various details of multiple dogma effects,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedEffects",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedEffects",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedEffects",
+        "documentation": "An api adapter for accessing various details about every dogma effect in\nthe game. Even though a route exists to get all effect ids at once, due to\ntheir quantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedEffects",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedEffects",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Dogma",
+        "documentation": "A simple wrapper around functional interfaces for getting APIs for dogma\nattributes and effects, both of which utilize the\n[dogma](https://esi.tech.ccp.is/latest/#/Dogma) ESI end points.",
+        "type": "typeof Dogma",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "Dogma",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Type",
+        "documentation": "An api adapter for accessing various details of a single in-game type,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Type",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Type",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedTypes",
+        "documentation": "An api adapter for accessing various details of multiple type ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedTypes",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedTypes",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedTypes",
+        "documentation": "An api adapter for accessing various details about every type in the game.",
+        "type": "typeof IteratedTypes",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedTypes",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Group",
+        "documentation": "An api adapter for accessing various details of a single in-game group,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Group",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Group",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedGroups",
+        "documentation": "An api adapter for accessing various details of multiple group ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedGroups",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedGroups",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedGroups",
+        "documentation": "An api adapter for accessing various details about every group in the game.\nEven though a route exists to get all group ids at once, due to their\nquantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedGroups",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedGroups",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Category",
+        "documentation": "An api adapter for accessing various details of a single in-game category,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Category",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Category",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedCategories",
+        "documentation": "An api adapter for accessing various details of multiple category ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedCategories",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedCategories",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedCategories",
+        "documentation": "An api adapter for accessing various details about every category in the\ngame. Even though a route exists to get all category ids at once, due to\ntheir quantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedCategories",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedCategories",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MarketGroup",
+        "documentation": "An api adapter for accessing various details of a single in-game market\ngroup, specified by a provided id when the api is instantiated.",
+        "type": "typeof MarketGroup",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "MarketGroup",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedMarketGroups",
+        "documentation": "An api adapter for accessing various details of multiple market group ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedMarketGroups",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedMarketGroups",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedMarketGroups",
+        "documentation": "An api adapter for accessing various details about every market group in the\ngame. Even though a route exists to get all group ids at once, due to their\nquantity, the API provides asynchronous iterators for the rest of their\ndetails.",
+        "type": "typeof IteratedMarketGroups",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedMarketGroups",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Insurance",
+        "documentation": "An api adapter that provides functions for accessing the\n[insurance](https://esi.tech.ccp.is/latest/#/Insurance) ESI end points.",
+        "type": "typeof Insurance",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "Insurance",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Schema",
+        "documentation": "A simple wrapper around functional interfaces for getting APIs for types,\ngroups, categories, PI schematics, opportunities, dogma, etc., which use a\nrange of end points in ESI, but mostly in:\n\n- [universe](https://esi.tech.ccp.is/latest/#/Universe)\n- [dogma](https://esi.tech.ccp.is/latest/#/Dogma)\n- [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities)\n- [planetary\ninteraction](https://esi.tech.ccp.is/latest/#/Planetary_Interaction)\n- [market](https://esi.tech.ccp.is/latest/#/Market)",
+        "type": "typeof Schema",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "Schema",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Race",
+        "documentation": "An api adapter for accessing various details of a single in-game race,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Race",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Race",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedRaces",
+        "documentation": "An api adapter for accessing various details of multiple race ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedRaces",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedRaces",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedRaces",
+        "documentation": "An api adapter for accessing various details about every race in the game.",
+        "type": "typeof IteratedRaces",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedRaces",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Bloodline",
+        "documentation": "An api adapter for accessing various details of a single in-game bloodline,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Bloodline",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Bloodline",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedBloodlines",
+        "documentation": "An api adapter for accessing various details of multiple bloodline ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedBloodlines",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number>"
+                    }
+                ],
+                "returnType": "MappedBloodlines",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedBloodlines",
+        "documentation": "An api adapter for accessing various details about every bloodline in the\ngame.",
+        "type": "typeof IteratedBloodlines",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedBloodlines",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Constellation",
+        "documentation": "An api adapter for accessing various details of a single in-game\nconstellation, specified by a provided id when the api is instantiated.",
+        "type": "typeof Constellation",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Constellation",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedConstellations",
+        "documentation": "An api adapter for accessing various details of multiple constellation ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedConstellations",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedConstellations",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedConstellations",
+        "documentation": "An api adapter for accessing various details about every constellation in\nthe game.",
+        "type": "typeof IteratedConstellations",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedConstellations",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Region",
+        "documentation": "An api adapter for accessing various details of a single in-game region,\nspecified by a provided id when the api is instantiated.",
+        "type": "typeof Region",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "Region",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "MappedRegions",
+        "documentation": "An api adapter for accessing various details of multiple region ids,\nspecified by a provided an array or set of ids when the api is instantiated.",
+        "type": "typeof MappedRegions",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "ids",
+                        "documentation": "",
+                        "type": "number[] | Set<number> | IDSetProvider"
+                    }
+                ],
+                "returnType": "MappedRegions",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "IteratedRegions",
+        "documentation": "An api adapter for accessing various details about every region in\nthe game.",
+        "type": "typeof IteratedRegions",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "IteratedRegions",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "RegionMarket",
+        "documentation": "",
+        "type": "typeof RegionMarket",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    },
+                    {
+                        "name": "id",
+                        "documentation": "",
+                        "type": "number"
+                    }
+                ],
+                "returnType": "RegionMarket",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "Universe",
+        "documentation": "A simple wrapper around functional interfaces for getting APIs for regions,\nsolar systems, constellations, races, bloodlines, etc.\n\n- [universe](https://esi.tech.ccp.is/latest/#/Universe)\n- [industry](https://esi.tech.ccp.is/latest/#/Industry)\n- [incursions](https://esi.tech.ccp.is/latest/#/Incursions)\n- [sovereignty](https://esi.tech.ccp.is/latest/#/Sovereignty)\n- [market](https://esi.tech.ccp.is/latest/#/Market)",
+        "type": "typeof Universe",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "agent",
+                        "documentation": "",
+                        "type": "ESIAgent"
+                    }
+                ],
+                "returnType": "Universe",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    },
+    {
+        "name": "ESI",
+        "documentation": "ESI creates a shared, internal agent and then lazily instantiates all\nspecific modules as needed. The internal agent maintains a single cache for\nall of the requests to the network interface.\n\nThe ESI instance also provides a function to create new API instances\nwith an updated configuration.",
+        "type": "typeof ESI",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "config",
+                        "documentation": "",
+                        "type": "Partial<Configuration>"
+                    }
+                ],
+                "returnType": "ESI",
+                "documentation": ""
+            }
+        ],
+        "callSigs": [],
+        "properties": [
+            {
+                "name": "prototype",
+                "documentation": "",
+                "type": "any"
+            }
+        ]
+    }
+]
