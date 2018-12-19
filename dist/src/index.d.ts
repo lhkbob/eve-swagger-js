@@ -34,7 +34,7 @@ export * from './error';
  * specific modules as needed. The API instance is also a function that can
  * be invoked to create a new API instance with a different configuration.
  *
- * @see https://esi.tech.ccp.is/latest
+ * @see https://esi.evetech.net/latest
  */
 export interface API {
     /**

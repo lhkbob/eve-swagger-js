@@ -3,7 +3,7 @@ import { Responses, esi } from '../../../gen/esi';
 /**
  * An api adapter over the end points handling a specific message in a
  * character's inbox via functions in the
- * [mail](https://esi.tech.ccp.is/latest/#/Mail) ESI endpoints.
+ * [mail](https://esi.evetech.net/latest/#/Mail) ESI endpoints.
  */
 export interface Message {
     /**
@@ -33,7 +33,7 @@ export interface Message {
 /**
  * An api adapter over the end points handling a specific label in a
  * character's inbox via functions in the
- * [mail](https://esi.tech.ccp.is/latest/#/Mail) ESI endpoints.
+ * [mail](https://esi.evetech.net/latest/#/Mail) ESI endpoints.
  */
 export interface Label {
     /**
@@ -49,7 +49,7 @@ export interface Label {
 }
 /**
  * An api adapter over the end points handling all labels in the character's
- * inbox via functions in the [mail](https://esi.tech.ccp.is/latest/#/Mail) ESI
+ * inbox via functions in the [mail](https://esi.evetech.net/latest/#/Mail) ESI
  * endpoints.
  */
 export interface Labels {
@@ -76,7 +76,7 @@ export interface Labels {
 }
 /**
  * An api adapter over the end points handling the mail inbox for a character
- * via functions in the [mail](https://esi.tech.ccp.is/latest/#/Mail) ESI
+ * via functions in the [mail](https://esi.evetech.net/latest/#/Mail) ESI
  * endpoints.
  */
 export interface Mail {

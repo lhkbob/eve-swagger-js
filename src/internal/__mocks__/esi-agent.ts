@@ -16,7 +16,7 @@ function expectConstructorCall(params: Configuration): void {
   //  - But ApiProvider should always set everything, so make sure that is true
   expect(Object.keys(params).length).toEqual(14);
 
-  expect(params.url).toBe('https://esi.tech.ccp.is');
+  expect(params.url).toBe('https://esi.evetech.net');
   expect(params.source).toBe('tranquility');
   expect(params.userAgent).toBe('eve-swagger | https://github.com/lhkbob/eve-swagger-js');
   expect(params.language).toBe(esi.Language.EN_US);

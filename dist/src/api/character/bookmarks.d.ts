@@ -2,7 +2,7 @@ import { SSOAgent } from '../../internal/esi-agent';
 import { Responses } from '../../../gen/esi';
 /**
  * An api adapter over the end points handling a character's bookmarks via
- * functions in the [bookmarks](https://esi.tech.ccp.is/latest/#/Bookmarks)
+ * functions in the [bookmarks](https://esi.evetech.net/latest/#/Bookmarks)
  * ESI endpoints.
  */
 export interface Bookmarks {

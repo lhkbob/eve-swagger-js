@@ -4,7 +4,7 @@ import { Responses, esi } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for accessing various details for a
  * structure accessible by the character, specified by id, via functions in the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
+ * [universe](https://esi.evetech.net/latest/#/Universe) ESI endpoints.
  */
 export interface Structure {
     /**
@@ -89,8 +89,8 @@ export interface Structure {
 }
 /**
  * An api adapter over the end points handling structures via functions in the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
- * [search](https://esi.tech.ccp.is/latest/#/Search) ESI endpoints.
+ * [universe](https://esi.evetech.net/latest/#/Universe) and
+ * [search](https://esi.evetech.net/latest/#/Search) ESI endpoints.
  */
 export interface Structures {
     /**

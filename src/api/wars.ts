@@ -6,7 +6,7 @@ import { Killmail, makeKillmail } from './killmail';
 /**
  * An api adapter that provides functions for accessing various details for an
  * war specified by id, via functions in the
- * [wars](https://esi.tech.ccp.is/latest/#/Wars) ESI endpoints.
+ * [wars](https://esi.evetech.net/latest/#/Wars) ESI endpoints.
  */
 export interface War {
   /**
@@ -49,7 +49,7 @@ export interface War {
 
 /**
  * An api adapter over the end points handling multiple wars via functions in
- * the [wars](https://esi.tech.ccp.is/latest/#/Wars) ESI endpoints.
+ * the [wars](https://esi.evetech.net/latest/#/Wars) ESI endpoints.
  */
 export interface Wars {
   /**

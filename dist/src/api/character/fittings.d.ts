@@ -3,7 +3,7 @@ import { Responses, esi } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for removing a particular fitting of a
  * character, specified by id via functions in the
- * [fittings](https://esi.tech.ccp.is/latest/#/Fittings) ESI endpoints.
+ * [fittings](https://esi.evetech.net/latest/#/Fittings) ESI endpoints.
  */
 export interface Fitting {
     /**
@@ -19,7 +19,7 @@ export interface Fitting {
 }
 /**
  * An api adapter over the end points handling a character's fittings via
- * functions in the [fittings](https://esi.tech.ccp.is/latest/#/Fittings) ESI
+ * functions in the [fittings](https://esi.evetech.net/latest/#/Fittings) ESI
  * endpoints.
  */
 export interface Fittings {

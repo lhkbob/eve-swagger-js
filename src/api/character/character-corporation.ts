@@ -8,7 +8,7 @@ import { Corporation, makeCorporation } from '../corporations';
 /**
  * An api adapter that provides functions for accessing various details for a
  * corporation specified by id via functions in the
- * [corporation](https://esi.tech.ccp.is/latest/#/Corporation) ESI endpoints.
+ * [corporation](https://esi.evetech.net/latest/#/Corporation) ESI endpoints.
  * This sub-interface of {@link Corporation} adds all remaining corporation
  * routes that require authentication. Additionally, the corporation id is
  * automatically inferred from the creating character's member corp.

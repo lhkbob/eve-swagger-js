@@ -6,7 +6,7 @@ import { Responses, esi } from '../../gen/esi';
 /**
  * An api adapter that provides functions for accessing various details of an
  * alliance specified by id, via functions in the
- * [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI endpoints.
+ * [alliance](https://esi.evetech.net/latest/#/Alliance) ESI endpoints.
  */
 export interface Alliance {
   /**
@@ -35,7 +35,7 @@ export interface Alliance {
 
 /**
  * An api adapter over the end points handling multiple alliances via functions
- * in the [alliance](https://esi.tech.ccp.is/latest/#/Alliance) ESI endpoints.
+ * in the [alliance](https://esi.evetech.net/latest/#/Alliance) ESI endpoints.
  */
 export interface Alliances {
   /**

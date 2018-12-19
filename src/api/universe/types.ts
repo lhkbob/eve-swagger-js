@@ -27,7 +27,7 @@ export interface Group {
 
 /**
  * An api adapter that provides functions for accessing item group information
- * via the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI end points.
+ * via the [universe](https://esi.evetech.net/latest/#/Universe) ESI end points.
  */
 export interface Groups {
   /**
@@ -66,7 +66,7 @@ export interface MarketGroup {
 
 /**
  * An api adapter that provides functions for accessing market group information
- * via the [market](https://esi.tech.ccp.is/latest/#/Market) ESI end points.
+ * via the [market](https://esi.evetech.net/latest/#/Market) ESI end points.
  */
 export interface MarketGroups {
   /**
@@ -106,7 +106,7 @@ export interface Category {
 
 /**
  * An api adapter that provides functions for accessing item category
- * information via the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI
+ * information via the [universe](https://esi.evetech.net/latest/#/Universe) ESI
  * end points.
  */
 export interface Categories {
@@ -148,8 +148,8 @@ export interface Type {
 /**
  * An api adapter that provides functions for accessing item type information
  * via the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
- * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.
+ * [universe](https://esi.evetech.net/latest/#/Universe) and
+ * [search](https://esi.evetech.net/latest/#/Search) ESI end points.
  */
 export interface Types {
   /**

@@ -3,7 +3,7 @@ import { Responses } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for accessing a particular dogma
  * attribute, specified by id via functions in the
- * [dogma](https://esi.tech.ccp.is/latest/#/Dogma) ESI endpoints.
+ * [dogma](https://esi.evetech.net/latest/#/Dogma) ESI endpoints.
  */
 export interface Attribute {
     /**
@@ -15,7 +15,7 @@ export interface Attribute {
 }
 /**
  * An api adapter over the end points handling multiple dogma attributes via
- * functions in the [dogma](https://esi.tech.ccp.is/latest/#/Dogma)
+ * functions in the [dogma](https://esi.evetech.net/latest/#/Dogma)
  * ESI endpoints.
  */
 export interface Attributes {
@@ -37,7 +37,7 @@ export interface Attributes {
 /**
  * An api adapter that provides functions for accessing a particular dogma
  * effect, specified by id via functions in the
- * [dogma](https://esi.tech.ccp.is/latest/#/Dogma) ESI endpoints.
+ * [dogma](https://esi.evetech.net/latest/#/Dogma) ESI endpoints.
  */
 export interface Effect {
     /**
@@ -49,7 +49,7 @@ export interface Effect {
 }
 /**
  * An api adapter over the end points handling multiple dogma effects via
- * functions in the [dogma](https://esi.tech.ccp.is/latest/#/Dogma)
+ * functions in the [dogma](https://esi.evetech.net/latest/#/Dogma)
  * ESI endpoints.
  */
 export interface Effects {
@@ -69,7 +69,7 @@ export interface Effects {
 }
 /**
  * An api adapter over the end points accessing dogma effects and attributes via
- * functions in the [dogma](https://esi.tech.ccp.is/latest/#/Dogma) ESI
+ * functions in the [dogma](https://esi.evetech.net/latest/#/Dogma) ESI
  * endpoints.
  */
 export interface Dogma {

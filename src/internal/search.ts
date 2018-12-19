@@ -3,7 +3,7 @@ import { esi } from '../../gen/esi';
 
 /**
  * An api adapter over the end points handling search and character search via
- * functions in the [search](https://esi.tech.ccp.is/latest/#/Search) ESI
+ * functions in the [search](https://esi.evetech.net/latest/#/Search) ESI
  * endpoints. Note that the search results are filtered to a specific category
  * chosen when the Search instance was created.
  */

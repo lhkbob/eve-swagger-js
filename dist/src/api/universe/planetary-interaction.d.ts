@@ -3,7 +3,7 @@ import { Responses } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for accessing the non-authenticated
  * [planetary
- * interaction](https://esi.tech.ccp.is/latest/#/Planetary_Interaction) ESI end
+ * interaction](https://esi.evetech.net/latest/#/Planetary_Interaction) ESI end
  *  points.
  */
 export interface PlanetaryInteraction {

@@ -2,7 +2,7 @@ import { ESIAgent } from '../internal/esi-agent';
 import { Responses } from '../../gen/esi';
 /**
  * An api adapter that provides functions for accessing the
- * [sovereignty](https://esi.tech.ccp.is/latest/#/Sovereignty) ESI end points.
+ * [sovereignty](https://esi.evetech.net/latest/#/Sovereignty) ESI end points.
  */
 export interface Sovereignty {
     /**

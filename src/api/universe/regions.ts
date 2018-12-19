@@ -11,7 +11,7 @@ import { Responses, esi } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for accessing various details for a
  * region specified by id, via functions in the
- * [market](https://esi.tech.ccp.is/latest/#/Market) ESI endpoints.
+ * [market](https://esi.evetech.net/latest/#/Market) ESI endpoints.
  */
 export interface Region {
 
@@ -88,8 +88,8 @@ export interface Region {
 
 /**
  * An api adapter over the end points handling regions via functions in the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) and
- * [search](https://esi.tech.ccp.is/latest/#/Search) ESI endpoints.
+ * [universe](https://esi.evetech.net/latest/#/Universe) and
+ * [search](https://esi.evetech.net/latest/#/Search) ESI endpoints.
  */
 export interface Regions {
   /**

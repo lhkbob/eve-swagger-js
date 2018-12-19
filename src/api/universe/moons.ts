@@ -5,7 +5,7 @@ import { Responses, esi } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for accessing various details for a
  * moon specified by id, via functions in the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
+ * [universe](https://esi.evetech.net/latest/#/Universe) ESI endpoints.
  */
 export interface Moon {
   /**
@@ -23,7 +23,7 @@ export interface Moon {
 
 /**
  * An api adapter that provides functions for accessing moon information via the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI end points.
+ * [universe](https://esi.evetech.net/latest/#/Universe) ESI end points.
  */
 export interface Moons {
   /**

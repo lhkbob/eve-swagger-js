@@ -9,7 +9,7 @@ import { Responses, esi } from '../../../gen/esi';
 
 /**
  * An api adapter over the end points handling a specific squad in a character's
- * fleet via functions in the [fleets](https://esi.tech.ccp.is/latest/#/Fleets)
+ * fleet via functions in the [fleets](https://esi.evetech.net/latest/#/Fleets)
  * ESI endpoints.
  */
 export interface Squad {
@@ -48,7 +48,7 @@ export interface Squad {
 /**
  * An api adapter over the end points handling the squads in a wing in the
  * character's fleet via functions in the
- * [fleets](https://esi.tech.ccp.is/latest/#/Fleets) ESI endpoints.
+ * [fleets](https://esi.evetech.net/latest/#/Fleets) ESI endpoints.
  */
 export interface Squads {
   /**
@@ -80,7 +80,7 @@ export interface Squads {
 
 /**
  * An api adapter over the end points handling a specific wing in a character's
- * fleet via functions in the [fleets](https://esi.tech.ccp.is/latest/#/Fleets)
+ * fleet via functions in the [fleets](https://esi.evetech.net/latest/#/Fleets)
  * ESI endpoints.
  */
 export interface Wing {
@@ -118,7 +118,7 @@ export interface Wing {
 
 /**
  * An api adapter over the end points handling the wings in the character's
- * fleet via functions in the [fleets](https://esi.tech.ccp.is/latest/#/Fleets)
+ * fleet via functions in the [fleets](https://esi.evetech.net/latest/#/Fleets)
  * ESI endpoints.
  */
 export interface Wings {
@@ -155,7 +155,7 @@ export interface Wings {
 
 /**
  * An api adapter over the end points handling a character's fleet via
- * functions in the [fleets](https://esi.tech.ccp.is/latest/#/Fleets) ESI
+ * functions in the [fleets](https://esi.evetech.net/latest/#/Fleets) ESI
  * endpoints.
  */
 export interface Fleet {

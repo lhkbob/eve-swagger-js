@@ -38,7 +38,7 @@ __export(require("./error"));
  * explicitly given when {@link makeAPI} is called.
  */
 exports.DEFAULT_CONFIG = {
-    url: 'https://esi.tech.ccp.is',
+    url: 'https://esi.evetech.net',
     source: 'tranquility',
     userAgent: 'eve-swagger | https://github.com/lhkbob/eve-swagger-js',
     language: "en-us" /* EN_US */,

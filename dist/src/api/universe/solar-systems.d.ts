@@ -50,8 +50,8 @@ export interface SolarSystem {
 }
 /**
  * An api adapter that provides functions for accessing solar system information
- * via the [universe](https://esi.tech.ccp.is/latest/#/Universe) and
- * [search](https://esi.tech.ccp.is/latest/#/Search) ESI end points.
+ * via the [universe](https://esi.evetech.net/latest/#/Universe) and
+ * [search](https://esi.evetech.net/latest/#/Search) ESI end points.
  */
 export interface SolarSystems {
     /**

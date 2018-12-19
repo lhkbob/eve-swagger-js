@@ -50,7 +50,7 @@ let esi = require('{package-name}');
 // Creating a new Api instance with a different configuration.
 // All options, with their default values, are shown below.
 let esi2 = esi({
-    service: 'https://esi.tech.ccp.is',
+    service: 'https://esi.evetech.net',
     source: 'tranquility',
     agent: 'eve-swagger | https://github.com/lhkbob/eve-swagger-js',
     language: 'en-us',

@@ -44,7 +44,7 @@ export * from './error';
  * specific modules as needed. The API instance is also a function that can
  * be invoked to create a new API instance with a different configuration.
  *
- * @see https://esi.tech.ccp.is/latest
+ * @see https://esi.evetech.net/latest
  */
 export interface API {
   /**
@@ -243,7 +243,7 @@ export interface API {
  * explicitly given when {@link makeAPI} is called.
  */
 export const DEFAULT_CONFIG: Configuration = {
-  url: 'https://esi.tech.ccp.is',
+  url: 'https://esi.evetech.net',
   source: 'tranquility',
   userAgent: 'eve-swagger | https://github.com/lhkbob/eve-swagger-js',
   language: esi.Language.EN_US,

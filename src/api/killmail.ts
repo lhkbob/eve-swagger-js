@@ -3,7 +3,7 @@ import { Responses } from '../../gen/esi';
 
 /**
  * An api adapter over the end points handling killmail details via functions in
- * the [killmails](https://esi.tech.ccp.is/latest/#/Killmails) ESI endpoints.
+ * the [killmails](https://esi.evetech.net/latest/#/Killmails) ESI endpoints.
  */
 export interface Killmail {
   /**

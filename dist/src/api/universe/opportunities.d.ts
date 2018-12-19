@@ -3,7 +3,7 @@ import { Responses } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for accessing an opportunity group,
  * specified by id via functions in the
- * [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI
+ * [opportunities](https://esi.evetech.net/latest/#/Opportunities) ESI
  * endpoints.
  */
 export interface Group {
@@ -21,7 +21,7 @@ export interface Group {
 /**
  * An api adapter over the end points handling multiple opportunity groups via
  * functions in the
- * [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI
+ * [opportunities](https://esi.evetech.net/latest/#/Opportunities) ESI
  * endpoints.
  */
 export interface Groups {
@@ -43,7 +43,7 @@ export interface Groups {
 /**
  * An api adapter that provides functions for accessing a particular opportunity
  * task, specified by id via functions in the
- * [opportunity](https://esi.tech.ccp.is/latest/#/Opportunities) ESI endpoints.
+ * [opportunity](https://esi.evetech.net/latest/#/Opportunities) ESI endpoints.
  */
 export interface Task {
     /**
@@ -60,7 +60,7 @@ export interface Task {
 /**
  * An api adapter over the end points handling multiple opportunity tasks via
  * functions in the
- * [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI
+ * [opportunities](https://esi.evetech.net/latest/#/Opportunities) ESI
  * endpoints.
  */
 export interface Tasks {
@@ -82,7 +82,7 @@ export interface Tasks {
 /**
  * An api adapter over the end points handling opportunities information via
  * functions in the
- * [opportunities](https://esi.tech.ccp.is/latest/#/Opportunities) ESI
+ * [opportunities](https://esi.evetech.net/latest/#/Opportunities) ESI
  * endpoints.
  */
 export interface Opportunities {

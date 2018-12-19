@@ -27,7 +27,7 @@ import { Window, makeWindow } from './ui/window';
 /**
  * An api adapter that provides functions for viewing public (non-authenticated)
  * information about a specific character  via functions in the
- * [character](https://esi.tech.ccp.is/latest/#/Character) ESI endpoints.
+ * [character](https://esi.evetech.net/latest/#/Character) ESI endpoints.
  */
 export interface CharacterInfo {
   /**
@@ -60,19 +60,19 @@ export interface CharacterInfo {
 /**
  * An extension of {@link CharacterInfo} that adds the remaining
  * character-linked, authenticated from the
- * [character](https://esi.tech.ccp.is/latest/#/Character) and related ESI end
+ * [character](https://esi.evetech.net/latest/#/Character) and related ESI end
  * points.
  *
- * @see https://esi.tech.ccp.is/latest/#/Character
+ * @see https://esi.evetech.net/latest/#/Character
  * @see https://esi.tech.cpp.is/latest/#/Assets
  * @see https://esi.tech.cpp.is/latest/#/Bookmarks
  * @see https://esi.tech.cpp.is/latest/#/Clones
  * @see https://esi.tech.cpp.is/latest/#/Fittings
  * @see https://esi.tech.cpp.is/latest/#/Killmails
  * @see https://esi.tech.cpp.is/latest/#/Location
- * @see https://esi.tech.ccp.is/latest/#/Planetary_Interaction
- * @see https://esi.tech.ccp.is/latest/#/Skills
- * @see https://esi.tech.ccp.is/latest/#/Wallet
+ * @see https://esi.evetech.net/latest/#/Planetary_Interaction
+ * @see https://esi.evetech.net/latest/#/Skills
+ * @see https://esi.evetech.net/latest/#/Wallet
  */
 export interface Character extends CharacterInfo {
   /**
@@ -310,7 +310,7 @@ export interface Character extends CharacterInfo {
 
 /**
  * An api adapter over the end points handling multiple characters via functions
- * in the [character](https://esi.tech.ccp.is/latest/#/Character) ESI
+ * in the [character](https://esi.evetech.net/latest/#/Character) ESI
  * endpoints.
  */
 export interface Characters {

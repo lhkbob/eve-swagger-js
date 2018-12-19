@@ -3,7 +3,7 @@ import { Responses } from '../../gen/esi';
 
 /**
  * An api adapter over the end points handling incursions  via functions in the
- * [incursions](https://esi.tech.ccp.is/latest/#/Incursions) ESI endpoints.
+ * [incursions](https://esi.evetech.net/latest/#/Incursions) ESI endpoints.
  */
 export interface Incursions {
   /**

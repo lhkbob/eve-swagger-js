@@ -3,7 +3,7 @@ import { Responses } from '../../../gen/esi';
 /**
  * An api adapter over the end points handling a specific colony via functions
  * in the [planetary
- * interaction](https://esi.tech.ccp.is/latest/#Planetary_Interaction) ESI
+ * interaction](https://esi.evetech.net/latest/#Planetary_Interaction) ESI
  * endpoints.
  */
 export interface Colony {
@@ -21,7 +21,7 @@ export interface Colony {
 /**
  * An api adapter over the end points handling the planetary interaction
  * colonies for a character via functions in the [planetary
- * interaction](https://esi.tech.ccp.is/latest/#/Planetary_Interaction) ESI
+ * interaction](https://esi.evetech.net/latest/#/Planetary_Interaction) ESI
  * endpoints.
  */
 export interface Colonies {

@@ -4,7 +4,7 @@ import { Responses } from '../../../../gen/esi';
 /**
  * An api adapter that provides functions for modifying the character's in-game
  * waypoints and destination via functions in the [user
- * interface](https://esi.tech.ccp.is/latest/#/User_Interface) ESI endpoints.
+ * interface](https://esi.evetech.net/latest/#/User_Interface) ESI endpoints.
  */
 export interface Autopilot {
   /**

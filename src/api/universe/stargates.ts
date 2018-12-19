@@ -4,7 +4,7 @@ import { Responses } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for accessing various details for a
  * stargate specified by id, via functions in the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
+ * [universe](https://esi.evetech.net/latest/#/Universe) ESI endpoints.
  */
 export interface Stargate {
   /**
@@ -22,7 +22,7 @@ export interface Stargate {
 
 /**
  * An api adapter that provides functions for accessing stargate information via
- * the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI end points.
+ * the [universe](https://esi.evetech.net/latest/#/Universe) ESI end points.
  */
 export interface Stargates {
   /**

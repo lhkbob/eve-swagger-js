@@ -3,7 +3,7 @@ import {Responses} from '../../../gen/esi';
 
 /**
  * An api adapter that provides functions for accessing the
- * [insurance](https://esi.tech.ccp.is/latest/#/Insurance) ESI end points.
+ * [insurance](https://esi.evetech.net/latest/#/Insurance) ESI end points.
  */
 export interface Insurance {
   /**

@@ -4,7 +4,7 @@ import { Responses } from '../../gen/esi';
 /**
  * An api adapter that provides functions for accessing various details for a
  * corporation specified by id via functions in the
- * [corporation](https://esi.tech.ccp.is/latest/#/Corporation) ESI endpoints.
+ * [corporation](https://esi.evetech.net/latest/#/Corporation) ESI endpoints.
  * This only describes the non-authenticated corporation end points.
  */
 export interface Corporation {
@@ -36,7 +36,7 @@ export interface Corporation {
 }
 /**
  * An api adapter over the end points handling multiple corporations  via
- * functions in the [corporation](https://esi.tech.ccp.is/latest/#/Corporation)
+ * functions in the [corporation](https://esi.evetech.net/latest/#/Corporation)
  * ESI endpoints.
  */
 export interface Corporations {

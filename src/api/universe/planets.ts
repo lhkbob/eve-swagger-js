@@ -4,7 +4,7 @@ import { Responses } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for accessing various details for a
  * planet specified by id, via functions in the
- * [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
+ * [universe](https://esi.evetech.net/latest/#/Universe) ESI endpoints.
  */
 export interface Planet {
   /**
@@ -22,7 +22,7 @@ export interface Planet {
 
 /**
  * An api adapter that provides functions for accessing planet information via
- * the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI end points.
+ * the [universe](https://esi.evetech.net/latest/#/Universe) ESI end points.
  */
 export interface Planets {
   /**

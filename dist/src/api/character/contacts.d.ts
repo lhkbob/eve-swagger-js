@@ -3,7 +3,7 @@ import { Responses } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for modifying and removing a
  * particular contact of a character, specified by id via functions in the
- * [contacts](https://esi.tech.ccp.is/latest/#/Contacts) ESI endpoints.
+ * [contacts](https://esi.evetech.net/latest/#/Contacts) ESI endpoints.
  */
 export interface Contact {
     /**
@@ -45,7 +45,7 @@ export interface Contact {
 }
 /**
  * An api adapter over the end points handling a character's contacts via
- * functions in the [contacts](https://esi.tech.ccp.is/latest/#/Contacts)
+ * functions in the [contacts](https://esi.evetech.net/latest/#/Contacts)
  * ESI endpoints.
  */
 export interface Contacts {

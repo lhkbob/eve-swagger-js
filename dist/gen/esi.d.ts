@@ -1,7 +1,7 @@
 export declare namespace esi {
     namespace alliance {
         /**
-         * This is the response type for the route, [`GET /v2/alliances/{alliance_id}/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_alliance_id).
+         * This is the response type for the route, [`GET /v2/alliances/{alliance_id}/`](https://esi.evetech.net//#!/Alliance/get_alliances_alliance_id).
          */
         interface Alliance {
             /**
@@ -19,7 +19,7 @@ export declare namespace esi {
             ticker: string;
         }
         /**
-         * This is the response type for the route, [`GET /v1/alliances/{alliance_id}/icons/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_alliance_id_icons).
+         * This is the response type for the route, [`GET /v1/alliances/{alliance_id}/icons/`](https://esi.evetech.net//#!/Alliance/get_alliances_alliance_id_icons).
          */
         interface Icons {
             px128x128?: string;
@@ -68,7 +68,7 @@ export declare namespace esi {
                 ALLIANCE = "alliance",
             }
             /**
-             * This type is a parameter for the route, [`PUT /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.tech.ccp.is//#!/Calendar/put_characters_character_id_calendar_event_id).
+             * This type is a parameter for the route, [`PUT /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.evetech.net//#!/Calendar/put_characters_character_id_calendar_event_id).
              */
             interface Response {
                 response: "accepted" | "declined" | "tentative";
@@ -289,7 +289,7 @@ export declare namespace esi {
                 ship_type_id: number;
             }
             /**
-             * This is the response type for the route, [`POST /v1/characters/{character_id}/fittings/`](https://esi.tech.ccp.is//#!/Fittings/post_characters_character_id_fittings).
+             * This is the response type for the route, [`POST /v1/characters/{character_id}/fittings/`](https://esi.evetech.net//#!/Fittings/post_characters_character_id_fittings).
              */
             interface FittingID {
                 fitting_id: number;
@@ -300,7 +300,7 @@ export declare namespace esi {
                 type_id: number;
             }
             /**
-             * This type is a parameter for the route, [`POST /v1/characters/{character_id}/fittings/`](https://esi.tech.ccp.is//#!/Fittings/post_characters_character_id_fittings).
+             * This type is a parameter for the route, [`POST /v1/characters/{character_id}/fittings/`](https://esi.evetech.net//#!/Fittings/post_characters_character_id_fittings).
              */
             interface NewFitting {
                 description: string;
@@ -340,7 +340,7 @@ export declare namespace esi {
                 unread_count?: number;
             }
             /**
-             * This is the response type for the route, [`GET /v3/characters/{character_id}/mail/labels/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail_labels).
+             * This is the response type for the route, [`GET /v3/characters/{character_id}/mail/labels/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail_labels).
              */
             interface Labels {
                 labels?: esi.character.mail.Label[];
@@ -354,7 +354,7 @@ export declare namespace esi {
                 name: string;
             }
             /**
-             * This is the response type for the route, [`GET /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail_mail_id).
+             * This is the response type for the route, [`GET /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail_mail_id).
              */
             interface Mail {
                 body?: string;
@@ -399,7 +399,7 @@ export declare namespace esi {
                 timestamp?: string;
             }
             /**
-             * This type is a parameter for the route, [`PUT /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.tech.ccp.is//#!/Mail/put_characters_character_id_mail_mail_id).
+             * This type is a parameter for the route, [`PUT /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.evetech.net//#!/Mail/put_characters_character_id_mail_mail_id).
              */
             interface MailUpdate {
                 /**
@@ -412,14 +412,14 @@ export declare namespace esi {
                 read?: boolean;
             }
             /**
-             * This type is a parameter for the route, [`POST /v2/characters/{character_id}/mail/labels/`](https://esi.tech.ccp.is//#!/Mail/post_characters_character_id_mail_labels).
+             * This type is a parameter for the route, [`POST /v2/characters/{character_id}/mail/labels/`](https://esi.evetech.net//#!/Mail/post_characters_character_id_mail_labels).
              */
             interface NewLabel {
                 color?: esi.character.mail.Color;
                 name: string;
             }
             /**
-             * This type is a parameter for the route, [`POST /v1/characters/{character_id}/mail/`](https://esi.tech.ccp.is//#!/Mail/post_characters_character_id_mail).
+             * This type is a parameter for the route, [`POST /v1/characters/{character_id}/mail/`](https://esi.evetech.net//#!/Mail/post_characters_character_id_mail).
              */
             interface NewMail {
                 approved_cost?: number;
@@ -428,7 +428,7 @@ export declare namespace esi {
                 subject: string;
             }
             /**
-             * This type is a parameter for the route, [`POST /v1/ui/openwindow/newmail/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_openwindow_newmail).
+             * This type is a parameter for the route, [`POST /v1/ui/openwindow/newmail/`](https://esi.evetech.net//#!/User Interface/post_ui_openwindow_newmail).
              */
             interface NewMailWindow {
                 body: string;
@@ -483,7 +483,7 @@ export declare namespace esi {
                 type_id: number;
             }
             /**
-             * This is the response type for the route, [`GET /v2/characters/{character_id}/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets_planet_id).
+             * This is the response type for the route, [`GET /v2/characters/{character_id}/planets/{planet_id}/`](https://esi.evetech.net//#!/Planetary Interaction/get_characters_character_id_planets_planet_id).
              */
             interface Planet {
                 links: esi.character.planetaryinteraction.Link[];
@@ -773,7 +773,7 @@ export declare namespace esi {
             owner_id?: number;
         }
         /**
-         * This is the response type for the route, [`GET /v4/characters/{character_id}/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id).
+         * This is the response type for the route, [`GET /v4/characters/{character_id}/`](https://esi.evetech.net//#!/Character/get_characters_character_id).
          */
         interface Character {
             /**
@@ -797,7 +797,7 @@ export declare namespace esi {
             security_status?: number;
         }
         /**
-         * This is the response type for the route, [`GET /v2/characters/{character_id}/clones/`](https://esi.tech.ccp.is//#!/Clones/get_characters_character_id_clones).
+         * This is the response type for the route, [`GET /v2/characters/{character_id}/clones/`](https://esi.evetech.net//#!/Clones/get_characters_character_id_clones).
          */
         interface Clones {
             home_location?: {
@@ -850,13 +850,13 @@ export declare namespace esi {
             start_date: string;
         }
         /**
-         * This type is a parameter for the route, [`POST /v3/characters/{character_id}/cspa/`](https://esi.tech.ccp.is//#!/Character/post_characters_character_id_cspa).
+         * This type is a parameter for the route, [`POST /v3/characters/{character_id}/cspa/`](https://esi.evetech.net//#!/Character/post_characters_character_id_cspa).
          */
         interface CSPACharacters {
             characters: number[];
         }
         /**
-         * This is the response type for the route, [`POST /v3/characters/{character_id}/cspa/`](https://esi.tech.ccp.is//#!/Character/post_characters_character_id_cspa).
+         * This is the response type for the route, [`POST /v3/characters/{character_id}/cspa/`](https://esi.evetech.net//#!/Character/post_characters_character_id_cspa).
          */
         interface CSPACost {
             cost?: number;
@@ -962,7 +962,7 @@ export declare namespace esi {
             location_type?: "station" | "structure";
         }
         /**
-         * This is the response type for the route, [`GET /v1/characters/{character_id}/location/`](https://esi.tech.ccp.is//#!/Location/get_characters_character_id_location).
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/location/`](https://esi.evetech.net//#!/Location/get_characters_character_id_location).
          */
         interface Location {
             solar_system_id: number;
@@ -1061,7 +1061,7 @@ export declare namespace esi {
             CHARACTER_DELETED = "character_deleted",
         }
         /**
-         * This is the response type for the route, [`GET /v2/characters/{character_id}/portrait/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_portrait).
+         * This is the response type for the route, [`GET /v2/characters/{character_id}/portrait/`](https://esi.evetech.net//#!/Character/get_characters_character_id_portrait).
          */
         interface Portrait {
             px128x128?: string;
@@ -1070,7 +1070,7 @@ export declare namespace esi {
             px64x64?: string;
         }
         /**
-         * This is the response type for the route, [`GET /v2/characters/{character_id}/search/`](https://esi.tech.ccp.is//#!/Search/get_characters_character_id_search).
+         * This is the response type for the route, [`GET /v2/characters/{character_id}/search/`](https://esi.evetech.net//#!/Search/get_characters_character_id_search).
          */
         interface Search {
             agent?: number[];
@@ -1101,7 +1101,7 @@ export declare namespace esi {
             WORMHOLE = "wormhole",
         }
         /**
-         * This is the response type for the route, [`GET /v1/characters/{character_id}/ship/`](https://esi.tech.ccp.is//#!/Location/get_characters_character_id_ship).
+         * This is the response type for the route, [`GET /v1/characters/{character_id}/ship/`](https://esi.evetech.net//#!/Location/get_characters_character_id_ship).
          */
         interface Ship {
             /**
@@ -1130,7 +1130,7 @@ export declare namespace esi {
             training_start_sp?: number;
         }
         /**
-         * This is the response type for the route, [`GET /v3/characters/{character_id}/skills/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_skills).
+         * This is the response type for the route, [`GET /v3/characters/{character_id}/skills/`](https://esi.evetech.net//#!/Skills/get_characters_character_id_skills).
          */
         interface Skills {
             skills?: esi.character.Skill[];
@@ -1199,7 +1199,7 @@ export declare namespace esi {
             start_date: string;
         }
         /**
-         * This is the response type for the route, [`GET /v3/corporations/{corporation_id}/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id).
+         * This is the response type for the route, [`GET /v3/corporations/{corporation_id}/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id).
          */
         interface Corporation {
             /**
@@ -1230,7 +1230,7 @@ export declare namespace esi {
             AMARR = "Amarr",
         }
         /**
-         * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/icons/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_icons).
+         * This is the response type for the route, [`GET /v1/corporations/{corporation_id}/icons/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_icons).
          */
         interface Icons {
             px128x128?: string;
@@ -1334,7 +1334,7 @@ export declare namespace esi {
     }
     namespace dogma {
         /**
-         * This is the response type for the route, [`GET /v1/dogma/attributes/{attribute_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_attributes_attribute_id).
+         * This is the response type for the route, [`GET /v1/dogma/attributes/{attribute_id}/`](https://esi.evetech.net//#!/Dogma/get_dogma_attributes_attribute_id).
          */
         interface Attribute {
             attribute_id: number;
@@ -1349,7 +1349,7 @@ export declare namespace esi {
             unit_id?: number;
         }
         /**
-         * This is the response type for the route, [`GET /v1/dogma/effects/{effect_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects_effect_id).
+         * This is the response type for the route, [`GET /v1/dogma/effects/{effect_id}/`](https://esi.evetech.net//#!/Dogma/get_dogma_effects_effect_id).
          */
         interface Effect {
             description?: string;
@@ -1384,7 +1384,7 @@ export declare namespace esi {
     }
     namespace fleet {
         /**
-         * This is the response type for the route, [`GET /v1/fleets/{fleet_id}/`](https://esi.tech.ccp.is//#!/Fleets/get_fleets_fleet_id).
+         * This is the response type for the route, [`GET /v1/fleets/{fleet_id}/`](https://esi.evetech.net//#!/Fleets/get_fleets_fleet_id).
          */
         interface Fleet {
             /**
@@ -1405,7 +1405,7 @@ export declare namespace esi {
             motd: string;
         }
         /**
-         * This type is a parameter for the route, [`POST /v1/fleets/{fleet_id}/members/`](https://esi.tech.ccp.is//#!/Fleets/post_fleets_fleet_id_members).
+         * This type is a parameter for the route, [`POST /v1/fleets/{fleet_id}/members/`](https://esi.evetech.net//#!/Fleets/post_fleets_fleet_id_members).
          */
         interface Invitation {
             /**
@@ -1456,7 +1456,7 @@ export declare namespace esi {
             wing_id: number;
         }
         /**
-         * This type is a parameter for the route, [`PUT /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id_members_member_id).
+         * This type is a parameter for the route, [`PUT /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id_members_member_id).
          */
         interface Movement {
             /**
@@ -1473,7 +1473,7 @@ export declare namespace esi {
             name: string;
         }
         /**
-         * This type is a parameter for the route, [`PUT /v1/fleets/{fleet_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id).
+         * This type is a parameter for the route, [`PUT /v1/fleets/{fleet_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id).
          */
         interface NewSettings {
             /**
@@ -1496,7 +1496,7 @@ export declare namespace esi {
             name: string;
         }
         /**
-         * This is the response type for the route, [`POST /v1/fleets/{fleet_id}/wings/{wing_id}/squads/`](https://esi.tech.ccp.is//#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads).
+         * This is the response type for the route, [`POST /v1/fleets/{fleet_id}/wings/{wing_id}/squads/`](https://esi.evetech.net//#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads).
          */
         interface SquadID {
             /**
@@ -1510,7 +1510,7 @@ export declare namespace esi {
             squads: esi.fleet.Squad[];
         }
         /**
-         * This is the response type for the route, [`POST /v1/fleets/{fleet_id}/wings/`](https://esi.tech.ccp.is//#!/Fleets/post_fleets_fleet_id_wings).
+         * This is the response type for the route, [`POST /v1/fleets/{fleet_id}/wings/`](https://esi.evetech.net//#!/Fleets/post_fleets_fleet_id_wings).
          */
         interface WingID {
             /**
@@ -1615,7 +1615,7 @@ export declare namespace esi {
             singleton: number;
         }
         /**
-         * This is the response type for the route, [`GET /v1/killmails/{killmail_id}/{killmail_hash}/`](https://esi.tech.ccp.is//#!/Killmails/get_killmails_killmail_id_killmail_hash).
+         * This is the response type for the route, [`GET /v1/killmails/{killmail_id}/{killmail_hash}/`](https://esi.evetech.net//#!/Killmails/get_killmails_killmail_id_killmail_hash).
          */
         interface Killmail {
             attackers: esi.killmail.Attacker[];
@@ -1690,7 +1690,7 @@ export declare namespace esi {
             volume: number;
         }
         /**
-         * This is the response type for the route, [`GET /v1/markets/groups/{market_group_id}/`](https://esi.tech.ccp.is//#!/Market/get_markets_groups_market_group_id).
+         * This is the response type for the route, [`GET /v1/markets/groups/{market_group_id}/`](https://esi.evetech.net//#!/Market/get_markets_groups_market_group_id).
          */
         interface MarketGroup {
             description: string;
@@ -1823,7 +1823,7 @@ export declare namespace esi {
             willpower: number;
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/categories/{category_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_categories_category_id).
+         * This is the response type for the route, [`GET /v1/universe/categories/{category_id}/`](https://esi.evetech.net//#!/Universe/get_universe_categories_category_id).
          */
         interface Category {
             category_id: number;
@@ -1832,7 +1832,7 @@ export declare namespace esi {
             published: boolean;
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/constellations/{constellation_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_constellations_constellation_id).
+         * This is the response type for the route, [`GET /v1/universe/constellations/{constellation_id}/`](https://esi.evetech.net//#!/Universe/get_universe_constellations_constellation_id).
          */
         interface Constellation {
             constellation_id: number;
@@ -1869,7 +1869,7 @@ export declare namespace esi {
             station_system_count: number;
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/graphics/{graphic_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_graphics_graphic_id).
+         * This is the response type for the route, [`GET /v1/universe/graphics/{graphic_id}/`](https://esi.evetech.net//#!/Universe/get_universe_graphics_graphic_id).
          */
         interface Graphic {
             collision_file?: string;
@@ -1882,7 +1882,7 @@ export declare namespace esi {
             sof_race_name?: string;
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/groups/{group_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_groups_group_id).
+         * This is the response type for the route, [`GET /v1/universe/groups/{group_id}/`](https://esi.evetech.net//#!/Universe/get_universe_groups_group_id).
          */
         interface Group {
             category_id: number;
@@ -1892,7 +1892,7 @@ export declare namespace esi {
             types: number[];
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/moons/{moon_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_moons_moon_id).
+         * This is the response type for the route, [`GET /v1/universe/moons/{moon_id}/`](https://esi.evetech.net//#!/Universe/get_universe_moons_moon_id).
          */
         interface Moon {
             moon_id: number;
@@ -1923,7 +1923,7 @@ export declare namespace esi {
             STATION = "station",
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_planets_planet_id).
+         * This is the response type for the route, [`GET /v1/universe/planets/{planet_id}/`](https://esi.evetech.net//#!/Universe/get_universe_planets_planet_id).
          */
         interface Planet {
             name: string;
@@ -1949,7 +1949,7 @@ export declare namespace esi {
             race_id: number;
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/regions/{region_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_regions_region_id).
+         * This is the response type for the route, [`GET /v1/universe/regions/{region_id}/`](https://esi.evetech.net//#!/Universe/get_universe_regions_region_id).
          */
         interface Region {
             constellations: number[];
@@ -1958,7 +1958,7 @@ export declare namespace esi {
             region_id: number;
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/schematics/{schematic_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_universe_schematics_schematic_id).
+         * This is the response type for the route, [`GET /v1/universe/schematics/{schematic_id}/`](https://esi.evetech.net//#!/Planetary Interaction/get_universe_schematics_schematic_id).
          */
         interface Schematic {
             /**
@@ -1997,7 +1997,7 @@ export declare namespace esi {
             SECURITY_OFFICES = "security-offices",
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/stargates/{stargate_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stargates_stargate_id).
+         * This is the response type for the route, [`GET /v1/universe/stargates/{stargate_id}/`](https://esi.evetech.net//#!/Universe/get_universe_stargates_stargate_id).
          */
         interface Stargate {
             destination: {
@@ -2024,7 +2024,7 @@ export declare namespace esi {
             type_id: number;
         }
         /**
-         * This is the response type for the route, [`GET /v2/universe/stations/{station_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stations_station_id).
+         * This is the response type for the route, [`GET /v2/universe/stations/{station_id}/`](https://esi.evetech.net//#!/Universe/get_universe_stations_station_id).
          */
         interface Station {
             max_dockable_ship_volume: number;
@@ -2051,7 +2051,7 @@ export declare namespace esi {
             type_id: number;
         }
         /**
-         * This is the response type for the route, [`GET /v1/universe/structures/{structure_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_structures_structure_id).
+         * This is the response type for the route, [`GET /v1/universe/structures/{structure_id}/`](https://esi.evetech.net//#!/Universe/get_universe_structures_structure_id).
          */
         interface Structure {
             /**
@@ -2070,7 +2070,7 @@ export declare namespace esi {
             type_id?: number;
         }
         /**
-         * This is the response type for the route, [`GET /v2/universe/systems/{system_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems_system_id).
+         * This is the response type for the route, [`GET /v2/universe/systems/{system_id}/`](https://esi.evetech.net//#!/Universe/get_universe_systems_system_id).
          */
         interface System {
             /**
@@ -2113,7 +2113,7 @@ export declare namespace esi {
             planet_id: number;
         }
         /**
-         * This is the response type for the route, [`GET /v2/universe/types/{type_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_types_type_id).
+         * This is the response type for the route, [`GET /v2/universe/types/{type_id}/`](https://esi.evetech.net//#!/Universe/get_universe_types_type_id).
          */
         interface Type {
             capacity?: number;
@@ -2200,7 +2200,7 @@ export declare namespace esi {
         ZH = "zh",
     }
     /**
-     * This is the response type for the route, [`GET /v1/opportunities/groups/{group_id}/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_groups_group_id).
+     * This is the response type for the route, [`GET /v1/opportunities/groups/{group_id}/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_groups_group_id).
      */
     interface OpportunitiesGroup {
         /**
@@ -2217,7 +2217,7 @@ export declare namespace esi {
         required_tasks: number[];
     }
     /**
-     * This is the response type for the route, [`GET /v1/opportunities/tasks/{task_id}/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_tasks_task_id).
+     * This is the response type for the route, [`GET /v1/opportunities/tasks/{task_id}/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_tasks_task_id).
      */
     interface OpportunitiesTask {
         description: string;
@@ -2295,7 +2295,7 @@ export declare namespace esi {
         TERRESTRIAL_LOGISTICS_OFFICER = "Terrestrial_Logistics_Officer",
     }
     /**
-     * This is the response type for the route, [`GET /v1/search/`](https://esi.tech.ccp.is//#!/Search/get_search).
+     * This is the response type for the route, [`GET /v1/search/`](https://esi.evetech.net//#!/Search/get_search).
      */
     interface Search {
         agent?: number[];
@@ -2324,7 +2324,7 @@ export declare namespace esi {
         WORMHOLE = "wormhole",
     }
     /**
-     * This is the response type for the route, [`GET /v1/status/`](https://esi.tech.ccp.is//#!/Status/get_status).
+     * This is the response type for the route, [`GET /v1/status/`](https://esi.evetech.net//#!/Status/get_status).
      */
     interface Status {
         /**
@@ -2345,7 +2345,7 @@ export declare namespace esi {
         vip?: boolean;
     }
     /**
-     * This is the response type for the route, [`GET /v1/wars/{war_id}/`](https://esi.tech.ccp.is//#!/Wars/get_wars_war_id).
+     * This is the response type for the route, [`GET /v1/wars/{war_id}/`](https://esi.evetech.net//#!/Wars/get_wars_war_id).
      */
     interface War {
         /**
@@ -2429,11 +2429,11 @@ export declare namespace esi {
  */
 export interface Parameters {
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/alliances/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/alliances/`](https://esi.evetech.net//#!/Alliance/get_alliances). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_alliances: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/alliances/{alliance_id}/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_alliance_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/alliances/{alliance_id}/`](https://esi.evetech.net//#!/Alliance/get_alliances_alliance_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_alliances_alliance_id: {
         path: {
@@ -2441,7 +2441,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/alliances/{alliance_id}/corporations/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_alliance_id_corporations). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/alliances/{alliance_id}/corporations/`](https://esi.evetech.net//#!/Alliance/get_alliances_alliance_id_corporations). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_alliances_alliance_id_corporations: {
         path: {
@@ -2449,7 +2449,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/alliances/{alliance_id}/icons/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_alliance_id_icons). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/alliances/{alliance_id}/icons/`](https://esi.evetech.net//#!/Alliance/get_alliances_alliance_id_icons). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_alliances_alliance_id_icons: {
         path: {
@@ -2457,7 +2457,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/alliances/names/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/alliances/names/`](https://esi.evetech.net//#!/Alliance/get_alliances_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_alliances_names: {
         query: {
@@ -2465,7 +2465,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/assets/`](https://esi.tech.ccp.is//#!/Assets/get_characters_character_id_assets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/assets/`](https://esi.evetech.net//#!/Assets/get_characters_character_id_assets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_assets: {
         path: {
@@ -2473,7 +2473,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/bookmarks/`](https://esi.tech.ccp.is//#!/Bookmarks/get_characters_character_id_bookmarks). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/bookmarks/`](https://esi.evetech.net//#!/Bookmarks/get_characters_character_id_bookmarks). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_bookmarks: {
         path: {
@@ -2481,7 +2481,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/bookmarks/folders/`](https://esi.tech.ccp.is//#!/Bookmarks/get_characters_character_id_bookmarks_folders). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/bookmarks/folders/`](https://esi.evetech.net//#!/Bookmarks/get_characters_character_id_bookmarks_folders). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_bookmarks_folders: {
         path: {
@@ -2489,7 +2489,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/calendar/`](https://esi.tech.ccp.is//#!/Calendar/get_characters_character_id_calendar). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/calendar/`](https://esi.evetech.net//#!/Calendar/get_characters_character_id_calendar). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_calendar: {
         query: {
@@ -2500,7 +2500,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.tech.ccp.is//#!/Calendar/get_characters_character_id_calendar_event_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.evetech.net//#!/Calendar/get_characters_character_id_calendar_event_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_calendar_event_id: {
         path: {
@@ -2509,7 +2509,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.tech.ccp.is//#!/Calendar/put_characters_character_id_calendar_event_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.evetech.net//#!/Calendar/put_characters_character_id_calendar_event_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     put_characters_character_id_calendar_event_id: {
         path: {
@@ -2519,7 +2519,7 @@ export interface Parameters {
         body: esi.character.calendar.Response;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v4/characters/{character_id}/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v4/characters/{character_id}/`](https://esi.evetech.net//#!/Character/get_characters_character_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id: {
         path: {
@@ -2527,7 +2527,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/agents_research/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_agents_research). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/agents_research/`](https://esi.evetech.net//#!/Character/get_characters_character_id_agents_research). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_agents_research: {
         path: {
@@ -2535,7 +2535,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/blueprints/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_blueprints). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/blueprints/`](https://esi.evetech.net//#!/Character/get_characters_character_id_blueprints). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_blueprints: {
         path: {
@@ -2543,7 +2543,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/chat_channels/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_chat_channels). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/chat_channels/`](https://esi.evetech.net//#!/Character/get_characters_character_id_chat_channels). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_chat_channels: {
         path: {
@@ -2551,7 +2551,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/corporationhistory/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_corporationhistory). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/corporationhistory/`](https://esi.evetech.net//#!/Character/get_characters_character_id_corporationhistory). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_corporationhistory: {
         path: {
@@ -2559,7 +2559,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/medals/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_medals). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/medals/`](https://esi.evetech.net//#!/Character/get_characters_character_id_medals). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_medals: {
         path: {
@@ -2567,7 +2567,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/portrait/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_portrait). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/portrait/`](https://esi.evetech.net//#!/Character/get_characters_character_id_portrait). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_portrait: {
         path: {
@@ -2575,7 +2575,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/roles/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_roles). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/roles/`](https://esi.evetech.net//#!/Character/get_characters_character_id_roles). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_roles: {
         path: {
@@ -2583,7 +2583,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/standings/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_standings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/standings/`](https://esi.evetech.net//#!/Character/get_characters_character_id_standings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_standings: {
         path: {
@@ -2591,7 +2591,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/names/`](https://esi.tech.ccp.is//#!/Character/get_characters_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/names/`](https://esi.evetech.net//#!/Character/get_characters_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_names: {
         query: {
@@ -2599,13 +2599,13 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/affiliation/`](https://esi.tech.ccp.is//#!/Character/post_characters_affiliation). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/affiliation/`](https://esi.evetech.net//#!/Character/post_characters_affiliation). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_characters_affiliation: {
         body: number[];
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v3/characters/{character_id}/cspa/`](https://esi.tech.ccp.is//#!/Character/post_characters_character_id_cspa). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v3/characters/{character_id}/cspa/`](https://esi.evetech.net//#!/Character/post_characters_character_id_cspa). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_characters_character_id_cspa: {
         path: {
@@ -2614,7 +2614,7 @@ export interface Parameters {
         body: esi.character.CSPACharacters;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/clones/`](https://esi.tech.ccp.is//#!/Clones/get_characters_character_id_clones). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/clones/`](https://esi.evetech.net//#!/Clones/get_characters_character_id_clones). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_clones: {
         path: {
@@ -2622,7 +2622,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/delete_characters_character_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/contacts/`](https://esi.evetech.net//#!/Contacts/delete_characters_character_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     delete_characters_character_id_contacts: {
         path: {
@@ -2631,7 +2631,7 @@ export interface Parameters {
         body: number[];
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/get_characters_character_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contacts/`](https://esi.evetech.net//#!/Contacts/get_characters_character_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_contacts: {
         query: {
@@ -2642,7 +2642,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contacts/labels/`](https://esi.tech.ccp.is//#!/Contacts/get_characters_character_id_contacts_labels). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contacts/labels/`](https://esi.evetech.net//#!/Contacts/get_characters_character_id_contacts_labels). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_contacts_labels: {
         path: {
@@ -2650,7 +2650,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/post_characters_character_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/{character_id}/contacts/`](https://esi.evetech.net//#!/Contacts/post_characters_character_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_characters_character_id_contacts: {
         query: {
@@ -2664,7 +2664,7 @@ export interface Parameters {
         body: number[];
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/put_characters_character_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/characters/{character_id}/contacts/`](https://esi.evetech.net//#!/Contacts/put_characters_character_id_contacts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     put_characters_character_id_contacts: {
         query: {
@@ -2678,7 +2678,7 @@ export interface Parameters {
         body: number[];
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contracts/`](https://esi.tech.ccp.is//#!/Contracts/get_characters_character_id_contracts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contracts/`](https://esi.evetech.net//#!/Contracts/get_characters_character_id_contracts). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_contracts: {
         path: {
@@ -2686,7 +2686,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contracts/{contract_id}/bids/`](https://esi.tech.ccp.is//#!/Contracts/get_characters_character_id_contracts_contract_id_bids). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contracts/{contract_id}/bids/`](https://esi.evetech.net//#!/Contracts/get_characters_character_id_contracts_contract_id_bids). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_contracts_contract_id_bids: {
         path: {
@@ -2695,7 +2695,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contracts/{contract_id}/items/`](https://esi.tech.ccp.is//#!/Contracts/get_characters_character_id_contracts_contract_id_items). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/contracts/{contract_id}/items/`](https://esi.evetech.net//#!/Contracts/get_characters_character_id_contracts_contract_id_items). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_contracts_contract_id_items: {
         path: {
@@ -2704,7 +2704,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/corporations/{corporation_id}/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/corporations/{corporation_id}/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_corporation_id: {
         path: {
@@ -2712,7 +2712,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/alliancehistory/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_alliancehistory). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/alliancehistory/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_alliancehistory). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_corporation_id_alliancehistory: {
         path: {
@@ -2720,7 +2720,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/icons/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_icons). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/icons/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_icons). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_corporation_id_icons: {
         path: {
@@ -2728,7 +2728,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/corporations/{corporation_id}/members/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_members). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/corporations/{corporation_id}/members/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_members). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_corporation_id_members: {
         path: {
@@ -2736,7 +2736,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/roles/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_roles). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/roles/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_roles). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_corporation_id_roles: {
         path: {
@@ -2744,7 +2744,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/structures/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_structures). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/{corporation_id}/structures/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_structures). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_corporation_id_structures: {
         query: {
@@ -2755,7 +2755,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/names/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/names/`](https://esi.evetech.net//#!/Corporation/get_corporations_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_names: {
         query: {
@@ -2763,11 +2763,11 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/npccorps/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_npccorps). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/corporations/npccorps/`](https://esi.evetech.net//#!/Corporation/get_corporations_npccorps). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_corporations_npccorps: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/corporations/{corporation_id}/structures/{structure_id}/`](https://esi.tech.ccp.is//#!/Corporation/put_corporations_corporation_id_structures_structure_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/corporations/{corporation_id}/structures/{structure_id}/`](https://esi.evetech.net//#!/Corporation/put_corporations_corporation_id_structures_structure_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     put_corporations_corporation_id_structures_structure_id: {
         path: {
@@ -2777,11 +2777,11 @@ export interface Parameters {
         body: esi.corporation.VulnerabilitySchedule[];
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/attributes/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_attributes). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/attributes/`](https://esi.evetech.net//#!/Dogma/get_dogma_attributes). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_dogma_attributes: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/attributes/{attribute_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_attributes_attribute_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/attributes/{attribute_id}/`](https://esi.evetech.net//#!/Dogma/get_dogma_attributes_attribute_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_dogma_attributes_attribute_id: {
         path: {
@@ -2789,11 +2789,11 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/effects/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/effects/`](https://esi.evetech.net//#!/Dogma/get_dogma_effects). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_dogma_effects: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/effects/{effect_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects_effect_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/dogma/effects/{effect_id}/`](https://esi.evetech.net//#!/Dogma/get_dogma_effects_effect_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_dogma_effects_effect_id: {
         path: {
@@ -2801,7 +2801,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/fittings/{fitting_id}/`](https://esi.tech.ccp.is//#!/Fittings/delete_characters_character_id_fittings_fitting_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/fittings/{fitting_id}/`](https://esi.evetech.net//#!/Fittings/delete_characters_character_id_fittings_fitting_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     delete_characters_character_id_fittings_fitting_id: {
         path: {
@@ -2810,7 +2810,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/fittings/`](https://esi.tech.ccp.is//#!/Fittings/get_characters_character_id_fittings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/fittings/`](https://esi.evetech.net//#!/Fittings/get_characters_character_id_fittings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_fittings: {
         path: {
@@ -2818,7 +2818,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/{character_id}/fittings/`](https://esi.tech.ccp.is//#!/Fittings/post_characters_character_id_fittings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/{character_id}/fittings/`](https://esi.evetech.net//#!/Fittings/post_characters_character_id_fittings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_characters_character_id_fittings: {
         path: {
@@ -2827,7 +2827,7 @@ export interface Parameters {
         body?: esi.character.fitting.NewFitting;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.tech.ccp.is//#!/Fleets/delete_fleets_fleet_id_members_member_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.evetech.net//#!/Fleets/delete_fleets_fleet_id_members_member_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     delete_fleets_fleet_id_members_member_id: {
         path: {
@@ -2836,7 +2836,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/fleets/{fleet_id}/squads/{squad_id}/`](https://esi.tech.ccp.is//#!/Fleets/delete_fleets_fleet_id_squads_squad_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/fleets/{fleet_id}/squads/{squad_id}/`](https://esi.evetech.net//#!/Fleets/delete_fleets_fleet_id_squads_squad_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     delete_fleets_fleet_id_squads_squad_id: {
         path: {
@@ -2845,7 +2845,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/fleets/{fleet_id}/wings/{wing_id}/`](https://esi.tech.ccp.is//#!/Fleets/delete_fleets_fleet_id_wings_wing_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/fleets/{fleet_id}/wings/{wing_id}/`](https://esi.evetech.net//#!/Fleets/delete_fleets_fleet_id_wings_wing_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     delete_fleets_fleet_id_wings_wing_id: {
         path: {
@@ -2854,7 +2854,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fleets/{fleet_id}/`](https://esi.tech.ccp.is//#!/Fleets/get_fleets_fleet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fleets/{fleet_id}/`](https://esi.evetech.net//#!/Fleets/get_fleets_fleet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_fleets_fleet_id: {
         path: {
@@ -2862,7 +2862,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fleets/{fleet_id}/members/`](https://esi.tech.ccp.is//#!/Fleets/get_fleets_fleet_id_members). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fleets/{fleet_id}/members/`](https://esi.evetech.net//#!/Fleets/get_fleets_fleet_id_members). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_fleets_fleet_id_members: {
         path: {
@@ -2870,7 +2870,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fleets/{fleet_id}/wings/`](https://esi.tech.ccp.is//#!/Fleets/get_fleets_fleet_id_wings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/fleets/{fleet_id}/wings/`](https://esi.evetech.net//#!/Fleets/get_fleets_fleet_id_wings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_fleets_fleet_id_wings: {
         path: {
@@ -2878,7 +2878,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/fleets/{fleet_id}/members/`](https://esi.tech.ccp.is//#!/Fleets/post_fleets_fleet_id_members). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/fleets/{fleet_id}/members/`](https://esi.evetech.net//#!/Fleets/post_fleets_fleet_id_members). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_fleets_fleet_id_members: {
         path: {
@@ -2887,7 +2887,7 @@ export interface Parameters {
         body: esi.fleet.Invitation;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/fleets/{fleet_id}/wings/`](https://esi.tech.ccp.is//#!/Fleets/post_fleets_fleet_id_wings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/fleets/{fleet_id}/wings/`](https://esi.evetech.net//#!/Fleets/post_fleets_fleet_id_wings). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_fleets_fleet_id_wings: {
         path: {
@@ -2895,7 +2895,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/fleets/{fleet_id}/wings/{wing_id}/squads/`](https://esi.tech.ccp.is//#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/fleets/{fleet_id}/wings/{wing_id}/squads/`](https://esi.evetech.net//#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_fleets_fleet_id_wings_wing_id_squads: {
         path: {
@@ -2904,7 +2904,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/fleets/{fleet_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/fleets/{fleet_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     put_fleets_fleet_id: {
         path: {
@@ -2913,7 +2913,7 @@ export interface Parameters {
         body: esi.fleet.NewSettings;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id_members_member_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id_members_member_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     put_fleets_fleet_id_members_member_id: {
         path: {
@@ -2923,7 +2923,7 @@ export interface Parameters {
         body: esi.fleet.Movement;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/fleets/{fleet_id}/squads/{squad_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id_squads_squad_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/fleets/{fleet_id}/squads/{squad_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id_squads_squad_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     put_fleets_fleet_id_squads_squad_id: {
         path: {
@@ -2933,7 +2933,7 @@ export interface Parameters {
         body: esi.fleet.Naming;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/fleets/{fleet_id}/wings/{wing_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id_wings_wing_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/fleets/{fleet_id}/wings/{wing_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id_wings_wing_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     put_fleets_fleet_id_wings_wing_id: {
         path: {
@@ -2943,11 +2943,11 @@ export interface Parameters {
         body: esi.fleet.Naming;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/incursions/`](https://esi.tech.ccp.is//#!/Incursions/get_incursions). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/incursions/`](https://esi.evetech.net//#!/Incursions/get_incursions). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_incursions: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/industry/jobs/`](https://esi.tech.ccp.is//#!/Industry/get_characters_character_id_industry_jobs). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/industry/jobs/`](https://esi.evetech.net//#!/Industry/get_characters_character_id_industry_jobs). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_industry_jobs: {
         query: {
@@ -2958,19 +2958,19 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/industry/facilities/`](https://esi.tech.ccp.is//#!/Industry/get_industry_facilities). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/industry/facilities/`](https://esi.evetech.net//#!/Industry/get_industry_facilities). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_industry_facilities: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/industry/systems/`](https://esi.tech.ccp.is//#!/Industry/get_industry_systems). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/industry/systems/`](https://esi.evetech.net//#!/Industry/get_industry_systems). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_industry_systems: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/insurance/prices/`](https://esi.tech.ccp.is//#!/Insurance/get_insurance_prices). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/insurance/prices/`](https://esi.evetech.net//#!/Insurance/get_insurance_prices). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_insurance_prices: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/killmails/recent/`](https://esi.tech.ccp.is//#!/Killmails/get_characters_character_id_killmails_recent). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/killmails/recent/`](https://esi.evetech.net//#!/Killmails/get_characters_character_id_killmails_recent). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_killmails_recent: {
         query: {
@@ -2982,7 +2982,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/killmails/{killmail_id}/{killmail_hash}/`](https://esi.tech.ccp.is//#!/Killmails/get_killmails_killmail_id_killmail_hash). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/killmails/{killmail_id}/{killmail_hash}/`](https://esi.evetech.net//#!/Killmails/get_killmails_killmail_id_killmail_hash). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_killmails_killmail_id_killmail_hash: {
         path: {
@@ -2991,7 +2991,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/location/`](https://esi.tech.ccp.is//#!/Location/get_characters_character_id_location). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/location/`](https://esi.evetech.net//#!/Location/get_characters_character_id_location). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_location: {
         path: {
@@ -2999,7 +2999,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/online/`](https://esi.tech.ccp.is//#!/Location/get_characters_character_id_online). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/online/`](https://esi.evetech.net//#!/Location/get_characters_character_id_online). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_online: {
         path: {
@@ -3007,7 +3007,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/ship/`](https://esi.tech.ccp.is//#!/Location/get_characters_character_id_ship). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/ship/`](https://esi.evetech.net//#!/Location/get_characters_character_id_ship). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_ship: {
         path: {
@@ -3015,7 +3015,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/loyalty/points/`](https://esi.tech.ccp.is//#!/Loyalty/get_characters_character_id_loyalty_points). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/loyalty/points/`](https://esi.evetech.net//#!/Loyalty/get_characters_character_id_loyalty_points). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_loyalty_points: {
         path: {
@@ -3023,7 +3023,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/loyalty/stores/{corporation_id}/offers/`](https://esi.tech.ccp.is//#!/Loyalty/get_loyalty_stores_corporation_id_offers). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/loyalty/stores/{corporation_id}/offers/`](https://esi.evetech.net//#!/Loyalty/get_loyalty_stores_corporation_id_offers). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_loyalty_stores_corporation_id_offers: {
         path: {
@@ -3031,7 +3031,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/mail/labels/{label_id}/`](https://esi.tech.ccp.is//#!/Mail/delete_characters_character_id_mail_labels_label_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/mail/labels/{label_id}/`](https://esi.evetech.net//#!/Mail/delete_characters_character_id_mail_labels_label_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     delete_characters_character_id_mail_labels_label_id: {
         path: {
@@ -3040,7 +3040,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.tech.ccp.is//#!/Mail/delete_characters_character_id_mail_mail_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`DELETE /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.evetech.net//#!/Mail/delete_characters_character_id_mail_mail_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     delete_characters_character_id_mail_mail_id: {
         path: {
@@ -3049,7 +3049,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/mail/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/mail/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_mail: {
         query: {
@@ -3061,7 +3061,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/characters/{character_id}/mail/labels/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail_labels). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/characters/{character_id}/mail/labels/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail_labels). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_mail_labels: {
         path: {
@@ -3069,7 +3069,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/mail/lists/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail_lists). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/mail/lists/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail_lists). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_mail_lists: {
         path: {
@@ -3077,7 +3077,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail_mail_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail_mail_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_mail_mail_id: {
         path: {
@@ -3086,7 +3086,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/{character_id}/mail/`](https://esi.tech.ccp.is//#!/Mail/post_characters_character_id_mail). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/characters/{character_id}/mail/`](https://esi.evetech.net//#!/Mail/post_characters_character_id_mail). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_characters_character_id_mail: {
         path: {
@@ -3095,7 +3095,7 @@ export interface Parameters {
         body: esi.character.mail.NewMail;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v2/characters/{character_id}/mail/labels/`](https://esi.tech.ccp.is//#!/Mail/post_characters_character_id_mail_labels). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v2/characters/{character_id}/mail/labels/`](https://esi.evetech.net//#!/Mail/post_characters_character_id_mail_labels). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_characters_character_id_mail_labels: {
         path: {
@@ -3104,7 +3104,7 @@ export interface Parameters {
         body?: esi.character.mail.NewLabel;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.tech.ccp.is//#!/Mail/put_characters_character_id_mail_mail_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`PUT /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.evetech.net//#!/Mail/put_characters_character_id_mail_mail_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     put_characters_character_id_mail_mail_id: {
         path: {
@@ -3114,7 +3114,7 @@ export interface Parameters {
         body: esi.character.mail.MailUpdate;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/orders/`](https://esi.tech.ccp.is//#!/Market/get_characters_character_id_orders). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/orders/`](https://esi.evetech.net//#!/Market/get_characters_character_id_orders). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_orders: {
         path: {
@@ -3122,11 +3122,11 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/groups/`](https://esi.tech.ccp.is//#!/Market/get_markets_groups). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/groups/`](https://esi.evetech.net//#!/Market/get_markets_groups). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_markets_groups: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/groups/{market_group_id}/`](https://esi.tech.ccp.is//#!/Market/get_markets_groups_market_group_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/groups/{market_group_id}/`](https://esi.evetech.net//#!/Market/get_markets_groups_market_group_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_markets_groups_market_group_id: {
         path: {
@@ -3134,11 +3134,11 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/prices/`](https://esi.tech.ccp.is//#!/Market/get_markets_prices). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/prices/`](https://esi.evetech.net//#!/Market/get_markets_prices). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_markets_prices: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/{region_id}/history/`](https://esi.tech.ccp.is//#!/Market/get_markets_region_id_history). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/{region_id}/history/`](https://esi.evetech.net//#!/Market/get_markets_region_id_history). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_markets_region_id_history: {
         query: {
@@ -3149,7 +3149,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/{region_id}/orders/`](https://esi.tech.ccp.is//#!/Market/get_markets_region_id_orders). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/{region_id}/orders/`](https://esi.evetech.net//#!/Market/get_markets_region_id_orders). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_markets_region_id_orders: {
         query: {
@@ -3162,7 +3162,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/structures/{structure_id}/`](https://esi.tech.ccp.is//#!/Market/get_markets_structures_structure_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/markets/structures/{structure_id}/`](https://esi.evetech.net//#!/Market/get_markets_structures_structure_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_markets_structures_structure_id: {
         query: {
@@ -3173,7 +3173,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/opportunities/`](https://esi.tech.ccp.is//#!/Opportunities/get_characters_character_id_opportunities). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/opportunities/`](https://esi.evetech.net//#!/Opportunities/get_characters_character_id_opportunities). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_opportunities: {
         path: {
@@ -3181,11 +3181,11 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/opportunities/groups/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_groups). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/opportunities/groups/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_groups). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_opportunities_groups: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/opportunities/groups/{group_id}/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_groups_group_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/opportunities/groups/{group_id}/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_groups_group_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_opportunities_groups_group_id: {
         path: {
@@ -3193,11 +3193,11 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/opportunities/tasks/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_tasks). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/opportunities/tasks/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_tasks). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_opportunities_tasks: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/opportunities/tasks/{task_id}/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_tasks_task_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/opportunities/tasks/{task_id}/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_tasks_task_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_opportunities_tasks_task_id: {
         path: {
@@ -3205,7 +3205,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/planets/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/planets/`](https://esi.evetech.net//#!/Planetary Interaction/get_characters_character_id_planets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_planets: {
         path: {
@@ -3213,7 +3213,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets_planet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/planets/{planet_id}/`](https://esi.evetech.net//#!/Planetary Interaction/get_characters_character_id_planets_planet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_planets_planet_id: {
         path: {
@@ -3222,7 +3222,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/schematics/{schematic_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_universe_schematics_schematic_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/schematics/{schematic_id}/`](https://esi.evetech.net//#!/Planetary Interaction/get_universe_schematics_schematic_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_schematics_schematic_id: {
         path: {
@@ -3230,7 +3230,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/route/{origin}/{destination}/`](https://esi.tech.ccp.is//#!/Routes/get_route_origin_destination). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/route/{origin}/{destination}/`](https://esi.evetech.net//#!/Routes/get_route_origin_destination). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_route_origin_destination: {
         query: {
@@ -3244,7 +3244,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/search/`](https://esi.tech.ccp.is//#!/Search/get_characters_character_id_search). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/search/`](https://esi.evetech.net//#!/Search/get_characters_character_id_search). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_search: {
         query: {
@@ -3257,7 +3257,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/search/`](https://esi.tech.ccp.is//#!/Search/get_search). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/search/`](https://esi.evetech.net//#!/Search/get_search). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_search: {
         query: {
@@ -3267,7 +3267,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/skillqueue/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_skillqueue). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/characters/{character_id}/skillqueue/`](https://esi.evetech.net//#!/Skills/get_characters_character_id_skillqueue). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_skillqueue: {
         path: {
@@ -3275,7 +3275,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/characters/{character_id}/skills/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_skills). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v3/characters/{character_id}/skills/`](https://esi.evetech.net//#!/Skills/get_characters_character_id_skills). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_skills: {
         path: {
@@ -3283,31 +3283,31 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/sovereignty/campaigns/`](https://esi.tech.ccp.is//#!/Sovereignty/get_sovereignty_campaigns). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/sovereignty/campaigns/`](https://esi.evetech.net//#!/Sovereignty/get_sovereignty_campaigns). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_sovereignty_campaigns: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/sovereignty/map/`](https://esi.tech.ccp.is//#!/Sovereignty/get_sovereignty_map). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/sovereignty/map/`](https://esi.evetech.net//#!/Sovereignty/get_sovereignty_map). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_sovereignty_map: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/sovereignty/structures/`](https://esi.tech.ccp.is//#!/Sovereignty/get_sovereignty_structures). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/sovereignty/structures/`](https://esi.evetech.net//#!/Sovereignty/get_sovereignty_structures). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_sovereignty_structures: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/status/`](https://esi.tech.ccp.is//#!/Status/get_status). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/status/`](https://esi.evetech.net//#!/Status/get_status). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_status: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/bloodlines/`](https://esi.tech.ccp.is//#!/Universe/get_universe_bloodlines). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/bloodlines/`](https://esi.evetech.net//#!/Universe/get_universe_bloodlines). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_bloodlines: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/categories/`](https://esi.tech.ccp.is//#!/Universe/get_universe_categories). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/categories/`](https://esi.evetech.net//#!/Universe/get_universe_categories). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_categories: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/categories/{category_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_categories_category_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/categories/{category_id}/`](https://esi.evetech.net//#!/Universe/get_universe_categories_category_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_categories_category_id: {
         path: {
@@ -3315,11 +3315,11 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/constellations/`](https://esi.tech.ccp.is//#!/Universe/get_universe_constellations). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/constellations/`](https://esi.evetech.net//#!/Universe/get_universe_constellations). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_constellations: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/constellations/{constellation_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_constellations_constellation_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/constellations/{constellation_id}/`](https://esi.evetech.net//#!/Universe/get_universe_constellations_constellation_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_constellations_constellation_id: {
         path: {
@@ -3327,15 +3327,15 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/factions/`](https://esi.tech.ccp.is//#!/Universe/get_universe_factions). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/factions/`](https://esi.evetech.net//#!/Universe/get_universe_factions). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_factions: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/graphics/`](https://esi.tech.ccp.is//#!/Universe/get_universe_graphics). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/graphics/`](https://esi.evetech.net//#!/Universe/get_universe_graphics). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_graphics: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/graphics/{graphic_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_graphics_graphic_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/graphics/{graphic_id}/`](https://esi.evetech.net//#!/Universe/get_universe_graphics_graphic_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_graphics_graphic_id: {
         path: {
@@ -3343,7 +3343,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/groups/`](https://esi.tech.ccp.is//#!/Universe/get_universe_groups). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/groups/`](https://esi.evetech.net//#!/Universe/get_universe_groups). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_groups: {
         query: {
@@ -3351,7 +3351,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/groups/{group_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_groups_group_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/groups/{group_id}/`](https://esi.evetech.net//#!/Universe/get_universe_groups_group_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_groups_group_id: {
         path: {
@@ -3359,7 +3359,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/moons/{moon_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_moons_moon_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/moons/{moon_id}/`](https://esi.evetech.net//#!/Universe/get_universe_moons_moon_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_moons_moon_id: {
         path: {
@@ -3367,7 +3367,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_planets_planet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/planets/{planet_id}/`](https://esi.evetech.net//#!/Universe/get_universe_planets_planet_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_planets_planet_id: {
         path: {
@@ -3375,15 +3375,15 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/races/`](https://esi.tech.ccp.is//#!/Universe/get_universe_races). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/races/`](https://esi.evetech.net//#!/Universe/get_universe_races). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_races: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/regions/`](https://esi.tech.ccp.is//#!/Universe/get_universe_regions). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/regions/`](https://esi.evetech.net//#!/Universe/get_universe_regions). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_regions: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/regions/{region_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_regions_region_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/regions/{region_id}/`](https://esi.evetech.net//#!/Universe/get_universe_regions_region_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_regions_region_id: {
         path: {
@@ -3391,7 +3391,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/stargates/{stargate_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stargates_stargate_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/stargates/{stargate_id}/`](https://esi.evetech.net//#!/Universe/get_universe_stargates_stargate_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_stargates_stargate_id: {
         path: {
@@ -3399,7 +3399,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/universe/stations/{station_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stations_station_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/universe/stations/{station_id}/`](https://esi.evetech.net//#!/Universe/get_universe_stations_station_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_stations_station_id: {
         path: {
@@ -3407,11 +3407,11 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/structures/`](https://esi.tech.ccp.is//#!/Universe/get_universe_structures). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/structures/`](https://esi.evetech.net//#!/Universe/get_universe_structures). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_structures: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/structures/{structure_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_structures_structure_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/structures/{structure_id}/`](https://esi.evetech.net//#!/Universe/get_universe_structures_structure_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_structures_structure_id: {
         path: {
@@ -3419,19 +3419,19 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/system_jumps/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_jumps). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/system_jumps/`](https://esi.evetech.net//#!/Universe/get_universe_system_jumps). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_system_jumps: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/system_kills/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_kills). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/system_kills/`](https://esi.evetech.net//#!/Universe/get_universe_system_kills). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_system_kills: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/systems/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/systems/`](https://esi.evetech.net//#!/Universe/get_universe_systems). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_systems: undefined;
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/universe/systems/{system_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems_system_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/universe/systems/{system_id}/`](https://esi.evetech.net//#!/Universe/get_universe_systems_system_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_systems_system_id: {
         path: {
@@ -3439,7 +3439,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/types/`](https://esi.tech.ccp.is//#!/Universe/get_universe_types). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/universe/types/`](https://esi.evetech.net//#!/Universe/get_universe_types). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_types: {
         query: {
@@ -3447,7 +3447,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/universe/types/{type_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_types_type_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v2/universe/types/{type_id}/`](https://esi.evetech.net//#!/Universe/get_universe_types_type_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_universe_types_type_id: {
         path: {
@@ -3455,13 +3455,13 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v2/universe/names/`](https://esi.tech.ccp.is//#!/Universe/post_universe_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v2/universe/names/`](https://esi.evetech.net//#!/Universe/post_universe_names). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_universe_names: {
         body: number[];
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v2/ui/autopilot/waypoint/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_autopilot_waypoint). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v2/ui/autopilot/waypoint/`](https://esi.evetech.net//#!/User Interface/post_ui_autopilot_waypoint). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_ui_autopilot_waypoint: {
         query: {
@@ -3471,7 +3471,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/ui/openwindow/contract/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_openwindow_contract). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/ui/openwindow/contract/`](https://esi.evetech.net//#!/User Interface/post_ui_openwindow_contract). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_ui_openwindow_contract: {
         query: {
@@ -3479,7 +3479,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/ui/openwindow/information/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_openwindow_information). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/ui/openwindow/information/`](https://esi.evetech.net//#!/User Interface/post_ui_openwindow_information). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_ui_openwindow_information: {
         query: {
@@ -3487,7 +3487,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/ui/openwindow/marketdetails/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_openwindow_marketdetails). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/ui/openwindow/marketdetails/`](https://esi.evetech.net//#!/User Interface/post_ui_openwindow_marketdetails). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_ui_openwindow_marketdetails: {
         query: {
@@ -3495,13 +3495,13 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/ui/openwindow/newmail/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_openwindow_newmail). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`POST /v1/ui/openwindow/newmail/`](https://esi.evetech.net//#!/User Interface/post_ui_openwindow_newmail). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     post_ui_openwindow_newmail: {
         body: esi.character.mail.NewMailWindow;
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/wallets/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/wallets/`](https://esi.evetech.net//#!/Wallet/get_characters_character_id_wallets). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_wallets: {
         path: {
@@ -3509,7 +3509,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/wallets/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallets_journal). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/characters/{character_id}/wallets/journal/`](https://esi.evetech.net//#!/Wallet/get_characters_character_id_wallets_journal). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_characters_character_id_wallets_journal: {
         query: {
@@ -3520,7 +3520,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/wars/`](https://esi.tech.ccp.is//#!/Wars/get_wars). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/wars/`](https://esi.evetech.net//#!/Wars/get_wars). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_wars: {
         query: {
@@ -3528,7 +3528,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/wars/{war_id}/`](https://esi.tech.ccp.is//#!/Wars/get_wars_war_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/wars/{war_id}/`](https://esi.evetech.net//#!/Wars/get_wars_war_id). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_wars_war_id: {
         path: {
@@ -3536,7 +3536,7 @@ export interface Parameters {
         };
     };
     /**
-     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/wars/{war_id}/killmails/`](https://esi.tech.ccp.is//#!/Wars/get_wars_war_id_killmails). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
+     * The type of this member specifies the path, query, and body parameters for the route: [`GET /v1/wars/{war_id}/killmails/`](https://esi.evetech.net//#!/Wars/get_wars_war_id_killmails). If the type does not have a `query`, `path`, or `body` property, then the route does not define parameters for that source type.
      */
     get_wars_war_id_killmails: {
         query: {
@@ -3552,571 +3552,571 @@ export interface Parameters {
  */
 export interface Responses {
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/alliances/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances).
+     * The type of this member is the response type of for the route: [`GET /v1/alliances/`](https://esi.evetech.net//#!/Alliance/get_alliances).
      */
     get_alliances: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/alliances/{alliance_id}/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_alliance_id).
+     * The type of this member is the response type of for the route: [`GET /v2/alliances/{alliance_id}/`](https://esi.evetech.net//#!/Alliance/get_alliances_alliance_id).
      */
     get_alliances_alliance_id: esi.alliance.Alliance;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/alliances/{alliance_id}/corporations/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_alliance_id_corporations).
+     * The type of this member is the response type of for the route: [`GET /v1/alliances/{alliance_id}/corporations/`](https://esi.evetech.net//#!/Alliance/get_alliances_alliance_id_corporations).
      */
     get_alliances_alliance_id_corporations: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/alliances/{alliance_id}/icons/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_alliance_id_icons).
+     * The type of this member is the response type of for the route: [`GET /v1/alliances/{alliance_id}/icons/`](https://esi.evetech.net//#!/Alliance/get_alliances_alliance_id_icons).
      */
     get_alliances_alliance_id_icons: esi.alliance.Icons;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/alliances/names/`](https://esi.tech.ccp.is//#!/Alliance/get_alliances_names).
+     * The type of this member is the response type of for the route: [`GET /v1/alliances/names/`](https://esi.evetech.net//#!/Alliance/get_alliances_names).
      */
     get_alliances_names: esi.alliance.Name[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/assets/`](https://esi.tech.ccp.is//#!/Assets/get_characters_character_id_assets).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/assets/`](https://esi.evetech.net//#!/Assets/get_characters_character_id_assets).
      */
     get_characters_character_id_assets: esi.character.Asset[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/bookmarks/`](https://esi.tech.ccp.is//#!/Bookmarks/get_characters_character_id_bookmarks).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/bookmarks/`](https://esi.evetech.net//#!/Bookmarks/get_characters_character_id_bookmarks).
      */
     get_characters_character_id_bookmarks: esi.character.Bookmark[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/bookmarks/folders/`](https://esi.tech.ccp.is//#!/Bookmarks/get_characters_character_id_bookmarks_folders).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/bookmarks/folders/`](https://esi.evetech.net//#!/Bookmarks/get_characters_character_id_bookmarks_folders).
      */
     get_characters_character_id_bookmarks_folders: esi.character.BookmarksFolder[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/calendar/`](https://esi.tech.ccp.is//#!/Calendar/get_characters_character_id_calendar).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/calendar/`](https://esi.evetech.net//#!/Calendar/get_characters_character_id_calendar).
      */
     get_characters_character_id_calendar: esi.character.calendar.Calendar[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.tech.ccp.is//#!/Calendar/get_characters_character_id_calendar_event_id).
+     * The type of this member is the response type of for the route: [`GET /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.evetech.net//#!/Calendar/get_characters_character_id_calendar_event_id).
      */
     get_characters_character_id_calendar_event_id: esi.character.calendar.Event;
     /**
-     * The type of this member is the response type of for the route: [`PUT /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.tech.ccp.is//#!/Calendar/put_characters_character_id_calendar_event_id).
+     * The type of this member is the response type of for the route: [`PUT /v3/characters/{character_id}/calendar/{event_id}/`](https://esi.evetech.net//#!/Calendar/put_characters_character_id_calendar_event_id).
      */
     put_characters_character_id_calendar_event_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v4/characters/{character_id}/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id).
+     * The type of this member is the response type of for the route: [`GET /v4/characters/{character_id}/`](https://esi.evetech.net//#!/Character/get_characters_character_id).
      */
     get_characters_character_id: esi.character.Character;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/agents_research/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_agents_research).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/agents_research/`](https://esi.evetech.net//#!/Character/get_characters_character_id_agents_research).
      */
     get_characters_character_id_agents_research: esi.character.AgentResearch[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/blueprints/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_blueprints).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/blueprints/`](https://esi.evetech.net//#!/Character/get_characters_character_id_blueprints).
      */
     get_characters_character_id_blueprints: esi.character.Blueprint[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/chat_channels/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_chat_channels).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/chat_channels/`](https://esi.evetech.net//#!/Character/get_characters_character_id_chat_channels).
      */
     get_characters_character_id_chat_channels: esi.character.channel.ChatChannel[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/corporationhistory/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_corporationhistory).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/corporationhistory/`](https://esi.evetech.net//#!/Character/get_characters_character_id_corporationhistory).
      */
     get_characters_character_id_corporationhistory: esi.character.CorporationHistory[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/medals/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_medals).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/medals/`](https://esi.evetech.net//#!/Character/get_characters_character_id_medals).
      */
     get_characters_character_id_medals: esi.character.Medal[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/portrait/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_portrait).
+     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/portrait/`](https://esi.evetech.net//#!/Character/get_characters_character_id_portrait).
      */
     get_characters_character_id_portrait: esi.character.Portrait;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/roles/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_roles).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/roles/`](https://esi.evetech.net//#!/Character/get_characters_character_id_roles).
      */
     get_characters_character_id_roles: esi.Role[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/standings/`](https://esi.tech.ccp.is//#!/Character/get_characters_character_id_standings).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/standings/`](https://esi.evetech.net//#!/Character/get_characters_character_id_standings).
      */
     get_characters_character_id_standings: esi.character.Standing[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/names/`](https://esi.tech.ccp.is//#!/Character/get_characters_names).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/names/`](https://esi.evetech.net//#!/Character/get_characters_names).
      */
     get_characters_names: esi.character.Name[];
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/characters/affiliation/`](https://esi.tech.ccp.is//#!/Character/post_characters_affiliation).
+     * The type of this member is the response type of for the route: [`POST /v1/characters/affiliation/`](https://esi.evetech.net//#!/Character/post_characters_affiliation).
      */
     post_characters_affiliation: esi.character.Affiliation[];
     /**
-     * The type of this member is the response type of for the route: [`POST /v3/characters/{character_id}/cspa/`](https://esi.tech.ccp.is//#!/Character/post_characters_character_id_cspa).
+     * The type of this member is the response type of for the route: [`POST /v3/characters/{character_id}/cspa/`](https://esi.evetech.net//#!/Character/post_characters_character_id_cspa).
      */
     post_characters_character_id_cspa: esi.character.CSPACost;
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/clones/`](https://esi.tech.ccp.is//#!/Clones/get_characters_character_id_clones).
+     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/clones/`](https://esi.evetech.net//#!/Clones/get_characters_character_id_clones).
      */
     get_characters_character_id_clones: esi.character.Clones;
     /**
-     * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/delete_characters_character_id_contacts).
+     * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/contacts/`](https://esi.evetech.net//#!/Contacts/delete_characters_character_id_contacts).
      */
     delete_characters_character_id_contacts: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/get_characters_character_id_contacts).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contacts/`](https://esi.evetech.net//#!/Contacts/get_characters_character_id_contacts).
      */
     get_characters_character_id_contacts: esi.character.Contact[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contacts/labels/`](https://esi.tech.ccp.is//#!/Contacts/get_characters_character_id_contacts_labels).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contacts/labels/`](https://esi.evetech.net//#!/Contacts/get_characters_character_id_contacts_labels).
      */
     get_characters_character_id_contacts_labels: esi.character.ContactLabel[];
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/post_characters_character_id_contacts).
+     * The type of this member is the response type of for the route: [`POST /v1/characters/{character_id}/contacts/`](https://esi.evetech.net//#!/Contacts/post_characters_character_id_contacts).
      */
     post_characters_character_id_contacts: number[];
     /**
-     * The type of this member is the response type of for the route: [`PUT /v1/characters/{character_id}/contacts/`](https://esi.tech.ccp.is//#!/Contacts/put_characters_character_id_contacts).
+     * The type of this member is the response type of for the route: [`PUT /v1/characters/{character_id}/contacts/`](https://esi.evetech.net//#!/Contacts/put_characters_character_id_contacts).
      */
     put_characters_character_id_contacts: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contracts/`](https://esi.tech.ccp.is//#!/Contracts/get_characters_character_id_contracts).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contracts/`](https://esi.evetech.net//#!/Contracts/get_characters_character_id_contracts).
      */
     get_characters_character_id_contracts: esi.character.contract.Contract[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contracts/{contract_id}/bids/`](https://esi.tech.ccp.is//#!/Contracts/get_characters_character_id_contracts_contract_id_bids).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contracts/{contract_id}/bids/`](https://esi.evetech.net//#!/Contracts/get_characters_character_id_contracts_contract_id_bids).
      */
     get_characters_character_id_contracts_contract_id_bids: esi.character.contract.Bid[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contracts/{contract_id}/items/`](https://esi.tech.ccp.is//#!/Contracts/get_characters_character_id_contracts_contract_id_items).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/contracts/{contract_id}/items/`](https://esi.evetech.net//#!/Contracts/get_characters_character_id_contracts_contract_id_items).
      */
     get_characters_character_id_contracts_contract_id_items: esi.character.contract.Item[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v3/corporations/{corporation_id}/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id).
+     * The type of this member is the response type of for the route: [`GET /v3/corporations/{corporation_id}/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id).
      */
     get_corporations_corporation_id: esi.corporation.Corporation;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/alliancehistory/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_alliancehistory).
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/alliancehistory/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_alliancehistory).
      */
     get_corporations_corporation_id_alliancehistory: esi.corporation.AllianceHistory[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/icons/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_icons).
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/icons/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_icons).
      */
     get_corporations_corporation_id_icons: esi.corporation.Icons;
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/corporations/{corporation_id}/members/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_members).
+     * The type of this member is the response type of for the route: [`GET /v2/corporations/{corporation_id}/members/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_members).
      */
     get_corporations_corporation_id_members: esi.corporation.Member[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/roles/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_roles).
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/roles/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_roles).
      */
     get_corporations_corporation_id_roles: esi.corporation.MemberRoles[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/structures/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_corporation_id_structures).
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/{corporation_id}/structures/`](https://esi.evetech.net//#!/Corporation/get_corporations_corporation_id_structures).
      */
     get_corporations_corporation_id_structures: esi.corporation.Structure[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/corporations/names/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_names).
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/names/`](https://esi.evetech.net//#!/Corporation/get_corporations_names).
      */
     get_corporations_names: esi.corporation.Name[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/corporations/npccorps/`](https://esi.tech.ccp.is//#!/Corporation/get_corporations_npccorps).
+     * The type of this member is the response type of for the route: [`GET /v1/corporations/npccorps/`](https://esi.evetech.net//#!/Corporation/get_corporations_npccorps).
      */
     get_corporations_npccorps: number[];
     /**
-     * The type of this member is the response type of for the route: [`PUT /v1/corporations/{corporation_id}/structures/{structure_id}/`](https://esi.tech.ccp.is//#!/Corporation/put_corporations_corporation_id_structures_structure_id).
+     * The type of this member is the response type of for the route: [`PUT /v1/corporations/{corporation_id}/structures/{structure_id}/`](https://esi.evetech.net//#!/Corporation/put_corporations_corporation_id_structures_structure_id).
      */
     put_corporations_corporation_id_structures_structure_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/dogma/attributes/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_attributes).
+     * The type of this member is the response type of for the route: [`GET /v1/dogma/attributes/`](https://esi.evetech.net//#!/Dogma/get_dogma_attributes).
      */
     get_dogma_attributes: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/dogma/attributes/{attribute_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_attributes_attribute_id).
+     * The type of this member is the response type of for the route: [`GET /v1/dogma/attributes/{attribute_id}/`](https://esi.evetech.net//#!/Dogma/get_dogma_attributes_attribute_id).
      */
     get_dogma_attributes_attribute_id: esi.dogma.Attribute;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/dogma/effects/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects).
+     * The type of this member is the response type of for the route: [`GET /v1/dogma/effects/`](https://esi.evetech.net//#!/Dogma/get_dogma_effects).
      */
     get_dogma_effects: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/dogma/effects/{effect_id}/`](https://esi.tech.ccp.is//#!/Dogma/get_dogma_effects_effect_id).
+     * The type of this member is the response type of for the route: [`GET /v1/dogma/effects/{effect_id}/`](https://esi.evetech.net//#!/Dogma/get_dogma_effects_effect_id).
      */
     get_dogma_effects_effect_id: esi.dogma.Effect;
     /**
-     * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/fittings/{fitting_id}/`](https://esi.tech.ccp.is//#!/Fittings/delete_characters_character_id_fittings_fitting_id).
+     * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/fittings/{fitting_id}/`](https://esi.evetech.net//#!/Fittings/delete_characters_character_id_fittings_fitting_id).
      */
     delete_characters_character_id_fittings_fitting_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/fittings/`](https://esi.tech.ccp.is//#!/Fittings/get_characters_character_id_fittings).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/fittings/`](https://esi.evetech.net//#!/Fittings/get_characters_character_id_fittings).
      */
     get_characters_character_id_fittings: esi.character.fitting.Fitting[];
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/characters/{character_id}/fittings/`](https://esi.tech.ccp.is//#!/Fittings/post_characters_character_id_fittings).
+     * The type of this member is the response type of for the route: [`POST /v1/characters/{character_id}/fittings/`](https://esi.evetech.net//#!/Fittings/post_characters_character_id_fittings).
      */
     post_characters_character_id_fittings: esi.character.fitting.FittingID;
     /**
-     * The type of this member is the response type of for the route: [`DELETE /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.tech.ccp.is//#!/Fleets/delete_fleets_fleet_id_members_member_id).
+     * The type of this member is the response type of for the route: [`DELETE /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.evetech.net//#!/Fleets/delete_fleets_fleet_id_members_member_id).
      */
     delete_fleets_fleet_id_members_member_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`DELETE /v1/fleets/{fleet_id}/squads/{squad_id}/`](https://esi.tech.ccp.is//#!/Fleets/delete_fleets_fleet_id_squads_squad_id).
+     * The type of this member is the response type of for the route: [`DELETE /v1/fleets/{fleet_id}/squads/{squad_id}/`](https://esi.evetech.net//#!/Fleets/delete_fleets_fleet_id_squads_squad_id).
      */
     delete_fleets_fleet_id_squads_squad_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`DELETE /v1/fleets/{fleet_id}/wings/{wing_id}/`](https://esi.tech.ccp.is//#!/Fleets/delete_fleets_fleet_id_wings_wing_id).
+     * The type of this member is the response type of for the route: [`DELETE /v1/fleets/{fleet_id}/wings/{wing_id}/`](https://esi.evetech.net//#!/Fleets/delete_fleets_fleet_id_wings_wing_id).
      */
     delete_fleets_fleet_id_wings_wing_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/fleets/{fleet_id}/`](https://esi.tech.ccp.is//#!/Fleets/get_fleets_fleet_id).
+     * The type of this member is the response type of for the route: [`GET /v1/fleets/{fleet_id}/`](https://esi.evetech.net//#!/Fleets/get_fleets_fleet_id).
      */
     get_fleets_fleet_id: esi.fleet.Fleet;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/fleets/{fleet_id}/members/`](https://esi.tech.ccp.is//#!/Fleets/get_fleets_fleet_id_members).
+     * The type of this member is the response type of for the route: [`GET /v1/fleets/{fleet_id}/members/`](https://esi.evetech.net//#!/Fleets/get_fleets_fleet_id_members).
      */
     get_fleets_fleet_id_members: esi.fleet.Member[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/fleets/{fleet_id}/wings/`](https://esi.tech.ccp.is//#!/Fleets/get_fleets_fleet_id_wings).
+     * The type of this member is the response type of for the route: [`GET /v1/fleets/{fleet_id}/wings/`](https://esi.evetech.net//#!/Fleets/get_fleets_fleet_id_wings).
      */
     get_fleets_fleet_id_wings: esi.fleet.Wing[];
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/fleets/{fleet_id}/members/`](https://esi.tech.ccp.is//#!/Fleets/post_fleets_fleet_id_members).
+     * The type of this member is the response type of for the route: [`POST /v1/fleets/{fleet_id}/members/`](https://esi.evetech.net//#!/Fleets/post_fleets_fleet_id_members).
      */
     post_fleets_fleet_id_members: undefined;
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/fleets/{fleet_id}/wings/`](https://esi.tech.ccp.is//#!/Fleets/post_fleets_fleet_id_wings).
+     * The type of this member is the response type of for the route: [`POST /v1/fleets/{fleet_id}/wings/`](https://esi.evetech.net//#!/Fleets/post_fleets_fleet_id_wings).
      */
     post_fleets_fleet_id_wings: esi.fleet.WingID;
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/fleets/{fleet_id}/wings/{wing_id}/squads/`](https://esi.tech.ccp.is//#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads).
+     * The type of this member is the response type of for the route: [`POST /v1/fleets/{fleet_id}/wings/{wing_id}/squads/`](https://esi.evetech.net//#!/Fleets/post_fleets_fleet_id_wings_wing_id_squads).
      */
     post_fleets_fleet_id_wings_wing_id_squads: esi.fleet.SquadID;
     /**
-     * The type of this member is the response type of for the route: [`PUT /v1/fleets/{fleet_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id).
+     * The type of this member is the response type of for the route: [`PUT /v1/fleets/{fleet_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id).
      */
     put_fleets_fleet_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`PUT /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id_members_member_id).
+     * The type of this member is the response type of for the route: [`PUT /v1/fleets/{fleet_id}/members/{member_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id_members_member_id).
      */
     put_fleets_fleet_id_members_member_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`PUT /v1/fleets/{fleet_id}/squads/{squad_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id_squads_squad_id).
+     * The type of this member is the response type of for the route: [`PUT /v1/fleets/{fleet_id}/squads/{squad_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id_squads_squad_id).
      */
     put_fleets_fleet_id_squads_squad_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`PUT /v1/fleets/{fleet_id}/wings/{wing_id}/`](https://esi.tech.ccp.is//#!/Fleets/put_fleets_fleet_id_wings_wing_id).
+     * The type of this member is the response type of for the route: [`PUT /v1/fleets/{fleet_id}/wings/{wing_id}/`](https://esi.evetech.net//#!/Fleets/put_fleets_fleet_id_wings_wing_id).
      */
     put_fleets_fleet_id_wings_wing_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/incursions/`](https://esi.tech.ccp.is//#!/Incursions/get_incursions).
+     * The type of this member is the response type of for the route: [`GET /v1/incursions/`](https://esi.evetech.net//#!/Incursions/get_incursions).
      */
     get_incursions: esi.Incursion[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/industry/jobs/`](https://esi.tech.ccp.is//#!/Industry/get_characters_character_id_industry_jobs).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/industry/jobs/`](https://esi.evetech.net//#!/Industry/get_characters_character_id_industry_jobs).
      */
     get_characters_character_id_industry_jobs: esi.character.IndustryJob[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/industry/facilities/`](https://esi.tech.ccp.is//#!/Industry/get_industry_facilities).
+     * The type of this member is the response type of for the route: [`GET /v1/industry/facilities/`](https://esi.evetech.net//#!/Industry/get_industry_facilities).
      */
     get_industry_facilities: esi.industry.Facility[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/industry/systems/`](https://esi.tech.ccp.is//#!/Industry/get_industry_systems).
+     * The type of this member is the response type of for the route: [`GET /v1/industry/systems/`](https://esi.evetech.net//#!/Industry/get_industry_systems).
      */
     get_industry_systems: esi.industry.System[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/insurance/prices/`](https://esi.tech.ccp.is//#!/Insurance/get_insurance_prices).
+     * The type of this member is the response type of for the route: [`GET /v1/insurance/prices/`](https://esi.evetech.net//#!/Insurance/get_insurance_prices).
      */
     get_insurance_prices: esi.InsurancePrice[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/killmails/recent/`](https://esi.tech.ccp.is//#!/Killmails/get_characters_character_id_killmails_recent).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/killmails/recent/`](https://esi.evetech.net//#!/Killmails/get_characters_character_id_killmails_recent).
      */
     get_characters_character_id_killmails_recent: esi.killmail.KillmailLink[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/killmails/{killmail_id}/{killmail_hash}/`](https://esi.tech.ccp.is//#!/Killmails/get_killmails_killmail_id_killmail_hash).
+     * The type of this member is the response type of for the route: [`GET /v1/killmails/{killmail_id}/{killmail_hash}/`](https://esi.evetech.net//#!/Killmails/get_killmails_killmail_id_killmail_hash).
      */
     get_killmails_killmail_id_killmail_hash: esi.killmail.Killmail;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/location/`](https://esi.tech.ccp.is//#!/Location/get_characters_character_id_location).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/location/`](https://esi.evetech.net//#!/Location/get_characters_character_id_location).
      */
     get_characters_character_id_location: esi.character.Location;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/online/`](https://esi.tech.ccp.is//#!/Location/get_characters_character_id_online).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/online/`](https://esi.evetech.net//#!/Location/get_characters_character_id_online).
      */
     get_characters_character_id_online: boolean;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/ship/`](https://esi.tech.ccp.is//#!/Location/get_characters_character_id_ship).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/ship/`](https://esi.evetech.net//#!/Location/get_characters_character_id_ship).
      */
     get_characters_character_id_ship: esi.character.Ship;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/loyalty/points/`](https://esi.tech.ccp.is//#!/Loyalty/get_characters_character_id_loyalty_points).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/loyalty/points/`](https://esi.evetech.net//#!/Loyalty/get_characters_character_id_loyalty_points).
      */
     get_characters_character_id_loyalty_points: esi.character.LoyaltyPoints[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/loyalty/stores/{corporation_id}/offers/`](https://esi.tech.ccp.is//#!/Loyalty/get_loyalty_stores_corporation_id_offers).
+     * The type of this member is the response type of for the route: [`GET /v1/loyalty/stores/{corporation_id}/offers/`](https://esi.evetech.net//#!/Loyalty/get_loyalty_stores_corporation_id_offers).
      */
     get_loyalty_stores_corporation_id_offers: esi.corporation.LoyaltyStoreOffer[];
     /**
-     * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/mail/labels/{label_id}/`](https://esi.tech.ccp.is//#!/Mail/delete_characters_character_id_mail_labels_label_id).
+     * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/mail/labels/{label_id}/`](https://esi.evetech.net//#!/Mail/delete_characters_character_id_mail_labels_label_id).
      */
     delete_characters_character_id_mail_labels_label_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.tech.ccp.is//#!/Mail/delete_characters_character_id_mail_mail_id).
+     * The type of this member is the response type of for the route: [`DELETE /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.evetech.net//#!/Mail/delete_characters_character_id_mail_mail_id).
      */
     delete_characters_character_id_mail_mail_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/mail/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/mail/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail).
      */
     get_characters_character_id_mail: esi.character.mail.MailHeader[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v3/characters/{character_id}/mail/labels/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail_labels).
+     * The type of this member is the response type of for the route: [`GET /v3/characters/{character_id}/mail/labels/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail_labels).
      */
     get_characters_character_id_mail_labels: esi.character.mail.Labels;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/mail/lists/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail_lists).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/mail/lists/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail_lists).
      */
     get_characters_character_id_mail_lists: esi.character.mail.List[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.tech.ccp.is//#!/Mail/get_characters_character_id_mail_mail_id).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.evetech.net//#!/Mail/get_characters_character_id_mail_mail_id).
      */
     get_characters_character_id_mail_mail_id: esi.character.mail.Mail;
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/characters/{character_id}/mail/`](https://esi.tech.ccp.is//#!/Mail/post_characters_character_id_mail).
+     * The type of this member is the response type of for the route: [`POST /v1/characters/{character_id}/mail/`](https://esi.evetech.net//#!/Mail/post_characters_character_id_mail).
      */
     post_characters_character_id_mail: number;
     /**
-     * The type of this member is the response type of for the route: [`POST /v2/characters/{character_id}/mail/labels/`](https://esi.tech.ccp.is//#!/Mail/post_characters_character_id_mail_labels).
+     * The type of this member is the response type of for the route: [`POST /v2/characters/{character_id}/mail/labels/`](https://esi.evetech.net//#!/Mail/post_characters_character_id_mail_labels).
      */
     post_characters_character_id_mail_labels: number;
     /**
-     * The type of this member is the response type of for the route: [`PUT /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.tech.ccp.is//#!/Mail/put_characters_character_id_mail_mail_id).
+     * The type of this member is the response type of for the route: [`PUT /v1/characters/{character_id}/mail/{mail_id}/`](https://esi.evetech.net//#!/Mail/put_characters_character_id_mail_mail_id).
      */
     put_characters_character_id_mail_mail_id: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/orders/`](https://esi.tech.ccp.is//#!/Market/get_characters_character_id_orders).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/orders/`](https://esi.evetech.net//#!/Market/get_characters_character_id_orders).
      */
     get_characters_character_id_orders: esi.character.Order[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/markets/groups/`](https://esi.tech.ccp.is//#!/Market/get_markets_groups).
+     * The type of this member is the response type of for the route: [`GET /v1/markets/groups/`](https://esi.evetech.net//#!/Market/get_markets_groups).
      */
     get_markets_groups: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/markets/groups/{market_group_id}/`](https://esi.tech.ccp.is//#!/Market/get_markets_groups_market_group_id).
+     * The type of this member is the response type of for the route: [`GET /v1/markets/groups/{market_group_id}/`](https://esi.evetech.net//#!/Market/get_markets_groups_market_group_id).
      */
     get_markets_groups_market_group_id: esi.market.MarketGroup;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/markets/prices/`](https://esi.tech.ccp.is//#!/Market/get_markets_prices).
+     * The type of this member is the response type of for the route: [`GET /v1/markets/prices/`](https://esi.evetech.net//#!/Market/get_markets_prices).
      */
     get_markets_prices: esi.market.Price[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/markets/{region_id}/history/`](https://esi.tech.ccp.is//#!/Market/get_markets_region_id_history).
+     * The type of this member is the response type of for the route: [`GET /v1/markets/{region_id}/history/`](https://esi.evetech.net//#!/Market/get_markets_region_id_history).
      */
     get_markets_region_id_history: esi.market.History[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/markets/{region_id}/orders/`](https://esi.tech.ccp.is//#!/Market/get_markets_region_id_orders).
+     * The type of this member is the response type of for the route: [`GET /v1/markets/{region_id}/orders/`](https://esi.evetech.net//#!/Market/get_markets_region_id_orders).
      */
     get_markets_region_id_orders: esi.market.Order[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/markets/structures/{structure_id}/`](https://esi.tech.ccp.is//#!/Market/get_markets_structures_structure_id).
+     * The type of this member is the response type of for the route: [`GET /v1/markets/structures/{structure_id}/`](https://esi.evetech.net//#!/Market/get_markets_structures_structure_id).
      */
     get_markets_structures_structure_id: esi.market.Order[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/opportunities/`](https://esi.tech.ccp.is//#!/Opportunities/get_characters_character_id_opportunities).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/opportunities/`](https://esi.evetech.net//#!/Opportunities/get_characters_character_id_opportunities).
      */
     get_characters_character_id_opportunities: esi.character.Opportunity[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/opportunities/groups/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_groups).
+     * The type of this member is the response type of for the route: [`GET /v1/opportunities/groups/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_groups).
      */
     get_opportunities_groups: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/opportunities/groups/{group_id}/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_groups_group_id).
+     * The type of this member is the response type of for the route: [`GET /v1/opportunities/groups/{group_id}/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_groups_group_id).
      */
     get_opportunities_groups_group_id: esi.OpportunitiesGroup;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/opportunities/tasks/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_tasks).
+     * The type of this member is the response type of for the route: [`GET /v1/opportunities/tasks/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_tasks).
      */
     get_opportunities_tasks: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/opportunities/tasks/{task_id}/`](https://esi.tech.ccp.is//#!/Opportunities/get_opportunities_tasks_task_id).
+     * The type of this member is the response type of for the route: [`GET /v1/opportunities/tasks/{task_id}/`](https://esi.evetech.net//#!/Opportunities/get_opportunities_tasks_task_id).
      */
     get_opportunities_tasks_task_id: esi.OpportunitiesTask;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/planets/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/planets/`](https://esi.evetech.net//#!/Planetary Interaction/get_characters_character_id_planets).
      */
     get_characters_character_id_planets: esi.character.planetaryinteraction.PlanetSummary[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_characters_character_id_planets_planet_id).
+     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/planets/{planet_id}/`](https://esi.evetech.net//#!/Planetary Interaction/get_characters_character_id_planets_planet_id).
      */
     get_characters_character_id_planets_planet_id: esi.character.planetaryinteraction.Planet;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/schematics/{schematic_id}/`](https://esi.tech.ccp.is//#!/Planetary Interaction/get_universe_schematics_schematic_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/schematics/{schematic_id}/`](https://esi.evetech.net//#!/Planetary Interaction/get_universe_schematics_schematic_id).
      */
     get_universe_schematics_schematic_id: esi.universe.Schematic;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/route/{origin}/{destination}/`](https://esi.tech.ccp.is//#!/Routes/get_route_origin_destination).
+     * The type of this member is the response type of for the route: [`GET /v1/route/{origin}/{destination}/`](https://esi.evetech.net//#!/Routes/get_route_origin_destination).
      */
     get_route_origin_destination: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/search/`](https://esi.tech.ccp.is//#!/Search/get_characters_character_id_search).
+     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/search/`](https://esi.evetech.net//#!/Search/get_characters_character_id_search).
      */
     get_characters_character_id_search: esi.character.Search;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/search/`](https://esi.tech.ccp.is//#!/Search/get_search).
+     * The type of this member is the response type of for the route: [`GET /v1/search/`](https://esi.evetech.net//#!/Search/get_search).
      */
     get_search: esi.Search;
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/skillqueue/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_skillqueue).
+     * The type of this member is the response type of for the route: [`GET /v2/characters/{character_id}/skillqueue/`](https://esi.evetech.net//#!/Skills/get_characters_character_id_skillqueue).
      */
     get_characters_character_id_skillqueue: esi.character.Skillqueue[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v3/characters/{character_id}/skills/`](https://esi.tech.ccp.is//#!/Skills/get_characters_character_id_skills).
+     * The type of this member is the response type of for the route: [`GET /v3/characters/{character_id}/skills/`](https://esi.evetech.net//#!/Skills/get_characters_character_id_skills).
      */
     get_characters_character_id_skills: esi.character.Skills;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/sovereignty/campaigns/`](https://esi.tech.ccp.is//#!/Sovereignty/get_sovereignty_campaigns).
+     * The type of this member is the response type of for the route: [`GET /v1/sovereignty/campaigns/`](https://esi.evetech.net//#!/Sovereignty/get_sovereignty_campaigns).
      */
     get_sovereignty_campaigns: esi.sovereignty.Campaign[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/sovereignty/map/`](https://esi.tech.ccp.is//#!/Sovereignty/get_sovereignty_map).
+     * The type of this member is the response type of for the route: [`GET /v1/sovereignty/map/`](https://esi.evetech.net//#!/Sovereignty/get_sovereignty_map).
      */
     get_sovereignty_map: esi.sovereignty.Map[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/sovereignty/structures/`](https://esi.tech.ccp.is//#!/Sovereignty/get_sovereignty_structures).
+     * The type of this member is the response type of for the route: [`GET /v1/sovereignty/structures/`](https://esi.evetech.net//#!/Sovereignty/get_sovereignty_structures).
      */
     get_sovereignty_structures: esi.sovereignty.Structure[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/status/`](https://esi.tech.ccp.is//#!/Status/get_status).
+     * The type of this member is the response type of for the route: [`GET /v1/status/`](https://esi.evetech.net//#!/Status/get_status).
      */
     get_status: esi.Status;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/bloodlines/`](https://esi.tech.ccp.is//#!/Universe/get_universe_bloodlines).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/bloodlines/`](https://esi.evetech.net//#!/Universe/get_universe_bloodlines).
      */
     get_universe_bloodlines: esi.universe.Bloodline[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/categories/`](https://esi.tech.ccp.is//#!/Universe/get_universe_categories).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/categories/`](https://esi.evetech.net//#!/Universe/get_universe_categories).
      */
     get_universe_categories: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/categories/{category_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_categories_category_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/categories/{category_id}/`](https://esi.evetech.net//#!/Universe/get_universe_categories_category_id).
      */
     get_universe_categories_category_id: esi.universe.Category;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/constellations/`](https://esi.tech.ccp.is//#!/Universe/get_universe_constellations).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/constellations/`](https://esi.evetech.net//#!/Universe/get_universe_constellations).
      */
     get_universe_constellations: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/constellations/{constellation_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_constellations_constellation_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/constellations/{constellation_id}/`](https://esi.evetech.net//#!/Universe/get_universe_constellations_constellation_id).
      */
     get_universe_constellations_constellation_id: esi.universe.Constellation;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/factions/`](https://esi.tech.ccp.is//#!/Universe/get_universe_factions).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/factions/`](https://esi.evetech.net//#!/Universe/get_universe_factions).
      */
     get_universe_factions: esi.universe.Faction[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/graphics/`](https://esi.tech.ccp.is//#!/Universe/get_universe_graphics).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/graphics/`](https://esi.evetech.net//#!/Universe/get_universe_graphics).
      */
     get_universe_graphics: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/graphics/{graphic_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_graphics_graphic_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/graphics/{graphic_id}/`](https://esi.evetech.net//#!/Universe/get_universe_graphics_graphic_id).
      */
     get_universe_graphics_graphic_id: esi.universe.Graphic;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/groups/`](https://esi.tech.ccp.is//#!/Universe/get_universe_groups).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/groups/`](https://esi.evetech.net//#!/Universe/get_universe_groups).
      */
     get_universe_groups: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/groups/{group_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_groups_group_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/groups/{group_id}/`](https://esi.evetech.net//#!/Universe/get_universe_groups_group_id).
      */
     get_universe_groups_group_id: esi.universe.Group;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/moons/{moon_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_moons_moon_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/moons/{moon_id}/`](https://esi.evetech.net//#!/Universe/get_universe_moons_moon_id).
      */
     get_universe_moons_moon_id: esi.universe.Moon;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/planets/{planet_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_planets_planet_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/planets/{planet_id}/`](https://esi.evetech.net//#!/Universe/get_universe_planets_planet_id).
      */
     get_universe_planets_planet_id: esi.universe.Planet;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/races/`](https://esi.tech.ccp.is//#!/Universe/get_universe_races).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/races/`](https://esi.evetech.net//#!/Universe/get_universe_races).
      */
     get_universe_races: esi.universe.Race[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/regions/`](https://esi.tech.ccp.is//#!/Universe/get_universe_regions).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/regions/`](https://esi.evetech.net//#!/Universe/get_universe_regions).
      */
     get_universe_regions: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/regions/{region_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_regions_region_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/regions/{region_id}/`](https://esi.evetech.net//#!/Universe/get_universe_regions_region_id).
      */
     get_universe_regions_region_id: esi.universe.Region;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/stargates/{stargate_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stargates_stargate_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/stargates/{stargate_id}/`](https://esi.evetech.net//#!/Universe/get_universe_stargates_stargate_id).
      */
     get_universe_stargates_stargate_id: esi.universe.Stargate;
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/universe/stations/{station_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_stations_station_id).
+     * The type of this member is the response type of for the route: [`GET /v2/universe/stations/{station_id}/`](https://esi.evetech.net//#!/Universe/get_universe_stations_station_id).
      */
     get_universe_stations_station_id: esi.universe.Station;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/structures/`](https://esi.tech.ccp.is//#!/Universe/get_universe_structures).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/structures/`](https://esi.evetech.net//#!/Universe/get_universe_structures).
      */
     get_universe_structures: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/structures/{structure_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_structures_structure_id).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/structures/{structure_id}/`](https://esi.evetech.net//#!/Universe/get_universe_structures_structure_id).
      */
     get_universe_structures_structure_id: esi.universe.Structure;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/system_jumps/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_jumps).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/system_jumps/`](https://esi.evetech.net//#!/Universe/get_universe_system_jumps).
      */
     get_universe_system_jumps: esi.universe.SystemJumps[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/system_kills/`](https://esi.tech.ccp.is//#!/Universe/get_universe_system_kills).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/system_kills/`](https://esi.evetech.net//#!/Universe/get_universe_system_kills).
      */
     get_universe_system_kills: esi.universe.SystemKills[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/systems/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/systems/`](https://esi.evetech.net//#!/Universe/get_universe_systems).
      */
     get_universe_systems: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/universe/systems/{system_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_systems_system_id).
+     * The type of this member is the response type of for the route: [`GET /v2/universe/systems/{system_id}/`](https://esi.evetech.net//#!/Universe/get_universe_systems_system_id).
      */
     get_universe_systems_system_id: esi.universe.System;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/universe/types/`](https://esi.tech.ccp.is//#!/Universe/get_universe_types).
+     * The type of this member is the response type of for the route: [`GET /v1/universe/types/`](https://esi.evetech.net//#!/Universe/get_universe_types).
      */
     get_universe_types: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v2/universe/types/{type_id}/`](https://esi.tech.ccp.is//#!/Universe/get_universe_types_type_id).
+     * The type of this member is the response type of for the route: [`GET /v2/universe/types/{type_id}/`](https://esi.evetech.net//#!/Universe/get_universe_types_type_id).
      */
     get_universe_types_type_id: esi.universe.Type;
     /**
-     * The type of this member is the response type of for the route: [`POST /v2/universe/names/`](https://esi.tech.ccp.is//#!/Universe/post_universe_names).
+     * The type of this member is the response type of for the route: [`POST /v2/universe/names/`](https://esi.evetech.net//#!/Universe/post_universe_names).
      */
     post_universe_names: esi.universe.Name[];
     /**
-     * The type of this member is the response type of for the route: [`POST /v2/ui/autopilot/waypoint/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_autopilot_waypoint).
+     * The type of this member is the response type of for the route: [`POST /v2/ui/autopilot/waypoint/`](https://esi.evetech.net//#!/User Interface/post_ui_autopilot_waypoint).
      */
     post_ui_autopilot_waypoint: undefined;
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/ui/openwindow/contract/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_openwindow_contract).
+     * The type of this member is the response type of for the route: [`POST /v1/ui/openwindow/contract/`](https://esi.evetech.net//#!/User Interface/post_ui_openwindow_contract).
      */
     post_ui_openwindow_contract: undefined;
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/ui/openwindow/information/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_openwindow_information).
+     * The type of this member is the response type of for the route: [`POST /v1/ui/openwindow/information/`](https://esi.evetech.net//#!/User Interface/post_ui_openwindow_information).
      */
     post_ui_openwindow_information: undefined;
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/ui/openwindow/marketdetails/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_openwindow_marketdetails).
+     * The type of this member is the response type of for the route: [`POST /v1/ui/openwindow/marketdetails/`](https://esi.evetech.net//#!/User Interface/post_ui_openwindow_marketdetails).
      */
     post_ui_openwindow_marketdetails: undefined;
     /**
-     * The type of this member is the response type of for the route: [`POST /v1/ui/openwindow/newmail/`](https://esi.tech.ccp.is//#!/User Interface/post_ui_openwindow_newmail).
+     * The type of this member is the response type of for the route: [`POST /v1/ui/openwindow/newmail/`](https://esi.evetech.net//#!/User Interface/post_ui_openwindow_newmail).
      */
     post_ui_openwindow_newmail: undefined;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/wallets/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallets).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/wallets/`](https://esi.evetech.net//#!/Wallet/get_characters_character_id_wallets).
      */
     get_characters_character_id_wallets: esi.character.Wallet[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/wallets/journal/`](https://esi.tech.ccp.is//#!/Wallet/get_characters_character_id_wallets_journal).
+     * The type of this member is the response type of for the route: [`GET /v1/characters/{character_id}/wallets/journal/`](https://esi.evetech.net//#!/Wallet/get_characters_character_id_wallets_journal).
      */
     get_characters_character_id_wallets_journal: esi.character.WalletJournal[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/wars/`](https://esi.tech.ccp.is//#!/Wars/get_wars).
+     * The type of this member is the response type of for the route: [`GET /v1/wars/`](https://esi.evetech.net//#!/Wars/get_wars).
      */
     get_wars: number[];
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/wars/{war_id}/`](https://esi.tech.ccp.is//#!/Wars/get_wars_war_id).
+     * The type of this member is the response type of for the route: [`GET /v1/wars/{war_id}/`](https://esi.evetech.net//#!/Wars/get_wars_war_id).
      */
     get_wars_war_id: esi.War;
     /**
-     * The type of this member is the response type of for the route: [`GET /v1/wars/{war_id}/killmails/`](https://esi.tech.ccp.is//#!/Wars/get_wars_war_id_killmails).
+     * The type of this member is the response type of for the route: [`GET /v1/wars/{war_id}/killmails/`](https://esi.evetech.net//#!/Wars/get_wars_war_id_killmails).
      */
     get_wars_war_id_killmails: esi.killmail.KillmailLink[];
 }

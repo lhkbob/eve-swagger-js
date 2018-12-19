@@ -4,7 +4,7 @@ import { Responses } from '../../../gen/esi';
 /**
  * An api adapter that provides functions for accessing various details for a
  * specific event specified by id via functions in the
- * [calendar](https://esi.tech.ccp.is/latest/#/Calendar) ESI endpoints.
+ * [calendar](https://esi.evetech.net/latest/#/Calendar) ESI endpoints.
  */
 export interface Event {
   /**
@@ -33,7 +33,7 @@ export interface Event {
 
 /**
  * An api adapter over the end points handling a character's calendar via
- * functions in the [calendar](https://esi.tech.ccp.is/latest/#/Calendar)
+ * functions in the [calendar](https://esi.evetech.net/latest/#/Calendar)
  * ESI endpoints.
  */
 export interface Calendar {

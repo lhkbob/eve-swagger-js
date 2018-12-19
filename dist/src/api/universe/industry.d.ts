@@ -2,7 +2,7 @@ import { ESIAgent } from '../../internal/esi-agent';
 import { Responses } from '../../../gen/esi';
 /**
  * An api adapter over the end points handling industry  via functions in the
- * [industry](https://esi.tech.ccp.is/latest/#/Industry) ESI endpoints.
+ * [industry](https://esi.evetech.net/latest/#/Industry) ESI endpoints.
  */
 export interface Industry {
     /**

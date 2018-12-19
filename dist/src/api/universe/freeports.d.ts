@@ -2,7 +2,7 @@ import { ESIAgent } from '../../internal/esi-agent';
 import { Responses } from '../../../gen/esi';
 /**
  * An api adapter over the end points handling public structures via functions
- * in the [universe](https://esi.tech.ccp.is/latest/#/Universe) ESI endpoints.
+ * in the [universe](https://esi.evetech.net/latest/#/Universe) ESI endpoints.
  */
 export interface Freeports {
     /**

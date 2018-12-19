@@ -750,7 +750,7 @@ export class API {
 
   static getRemoteAPI() {
     if (!remoteApi) {
-      let json = request('get', 'https://esi.tech.ccp.is/_latest/swagger.json');
+      let json = request('get', 'https://esi.evetech.net/_latest/swagger.json');
       remoteApi = new API(json.getBody().toString('utf8'));
     }
     return remoteApi;
